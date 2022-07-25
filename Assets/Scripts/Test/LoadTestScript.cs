@@ -7,13 +7,21 @@ public class LoadTestScript : MonoBehaviour
 
     public GameObject pos;
     public GameObject pos1;
+  
+
 
     // Start is called before the first frame update
     void Start()
     {
-        GameMG.Instance.Resource.Instantiate("Terrain", pos.transform);
+        GameObject postest = new GameObject();
+        GameObject postest2 = new GameObject();
 
-        GameMG.Instance.Resource.Instantiate("PlayerCharacter", pos1.transform);
+        postest.transform.position = new Vector3(0, 0, 0);
+        postest2.transform.position = new Vector3(10, 0, 0);
+
+        GameMG.Instance.Resource.Instantiate("Terrain", postest.transform);
+
+        GameMG.Instance.Resource.Instantiate("PlayerCharacter", postest2.transform);
 
         // CharacterCreate.Instance.CreateMonster()
     }
