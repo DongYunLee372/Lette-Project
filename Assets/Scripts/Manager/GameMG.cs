@@ -79,10 +79,12 @@ public  class GameMG :Singleton<GameMG>
 
      void Update()
     {
-        if (isEnded)
-            return;
+        //타이머인데 잠시 디버그 할라고 꺼둠
 
-        Check_Timer();
+        //if (isEnded)
+        //    return;
+
+        //Check_Timer();
     }
 
 

@@ -8,7 +8,6 @@ public class CharacterCreate : Singleton<CharacterCreate>
     //  public DataLoad_Save TestDataLoad;
 
 
-
     void Start()
     {
         DataLoad_Save.Instance.Init();
@@ -44,6 +43,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         MonsterInformation data = ScriptableObject.CreateInstance<MonsterInformation>();
         data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
 
+       
         GameObject a = Resources.Load<GameObject>(StaticClass.Prefabs + "Skeleton_Knight");
         //   a.transform.position = trans.position;
         a.GetComponent<Battle_Character>().Stat_Initialize(data);
