@@ -105,7 +105,7 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        if(state == CharacterStateMachine.eCharacterState.Guard||
+        if(/*state == CharacterStateMachine.eCharacterState.Guard||*/
            state == CharacterStateMachine.eCharacterState.GuardStun)
         {
             //movecom.curval.IsMoving = false;
@@ -114,79 +114,124 @@ public class CInputComponent : BaseComponent
 
         Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
 
-        //space 처리
-        //구르기를 먼저 처리하고 움직임은 처리하지 않게 하기 위해서
-        if (Input.GetKey(_key.Rolling))
+        if(state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
-            movecom.Rolling();
-            return;
-        }
+            //space 처리
+            //구르기를 먼저 처리하고 움직임은 처리하지 않게 하기 위해서
+            if (Input.GetKey(_key.Rolling))
+            {
+                movecom.Rolling();
+                return;
+            }
 
-        if (Input.GetKey(_key.skill01))
-        {
-            SkillAttack(0);
-            return;
-        }
-            
+            //스킬1번
+            if (Input.GetKey(_key.skill01))
+            {
+                SkillAttack(0);
+                return;
+            }
 
-        if (Input.GetKey(_key.skill02))
-        {
-            SkillAttack(1);
-            return;
-        }
+            //스킬2번
+            if (Input.GetKey(_key.skill02))
+            {
+                SkillAttack(1);
+                return;
+            }
 
-        if (Input.GetKey(_key.skill03))
-        {
-            SkillAttack(2);
-            return;
+            //스킬3번
+            if (Input.GetKey(_key.skill03))
+            {
+                SkillAttack(2);
+                return;
+            }
         }
 
         //wasd 처리
-        if (Input.GetKey(_key.foward)) v += 1.0f;
-        if (Input.GetKey(_key.back)) v -= 1.0f;
-        if (Input.GetKey(_key.left)) h -= 1.0f;
-        if (Input.GetKey(_key.right)) h += 1.0f;
+        if (Input.GetKey(_key.foward))
+        {
+            if (state == CharacterStateMachine.eCharacterState.Guard)
+            {
+                movecom.GuardMove(CMoveComponent.Direction.Front);
+                return;
+            }
+            else
+                v += 1.0f;
+        }
+        if (Input.GetKey(_key.back))
+        {
+            if (state == CharacterStateMachine.eCharacterState.Guard)
+            {
+                movecom.GuardMove(CMoveComponent.Direction.Back);
+                return;
+            }
+                
+            else
+                v -= 1.0f; 
+        }
+        if (Input.GetKey(_key.left)) 
+        {
+            if (state == CharacterStateMachine.eCharacterState.Guard)
+            {
+                movecom.GuardMove(CMoveComponent.Direction.Left);
+                return;
+            }
+               
+            else
+                h -= 1.0f;
+        }
+        if (Input.GetKey(_key.right)) 
+        {
+            if (state == CharacterStateMachine.eCharacterState.Guard)
+            {
+                movecom.GuardMove(CMoveComponent.Direction.Right);
+                return;
+            }
+                
+            else
+                h += 1.0f;
+        }
 
         movecom.MoveDir = new Vector3(h, 0, v);
 
-        //left shift 처리
-        if (Input.GetKey(_key.Run)) movecom.curval.IsRunning = true;
-        else movecom.curval.IsRunning = false;
-
-        
-
-        //이동값이 조금이라도 있으면 움직이는중으로 판단
-        if (movecom.MoveDir.magnitude > 0 )
+        if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
-            movecom.curval.IsMoving = true;
-            //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Move);
-        }
-        else
-        {
-            CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
-        }
+            //left shift 처리
+            if (Input.GetKey(_key.Run)) movecom.curval.IsRunning = true;
+            else movecom.curval.IsRunning = false;
 
 
-        if (movecom.curval.IsMoving)
-        {
-            if (movecom.curval.IsRunning)
+
+            //이동값이 조금이라도 있으면 움직이는중으로 판단
+            if (movecom.MoveDir.magnitude > 0)
             {
-                //com.animator.SetPlaySpeed(1f);
-                movecom.com.animator.Play("_Dash");
-
+                movecom.curval.IsMoving = true;
+                //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Move);
             }
             else
             {
-                //com.animator.SetPlaySpeed( 1f);
-                movecom.com.animator.Play("_Walk");
+                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+            }
+
+
+            if (movecom.curval.IsMoving)
+            {
+                if (movecom.curval.IsRunning)
+                {
+                    //com.animator.SetPlaySpeed(1f);
+                    movecom.com.animator.Play("_Dash");
+
+                }
+                else
+                {
+                    //com.animator.SetPlaySpeed( 1f);
+                    movecom.com.animator.Play("_Walk");
+                }
+            }
+            else
+            {
+                movecom.com.animator.Play("_Idle");
             }
         }
-        else
-        {
-            movecom.com.animator.Play("_Idle");
-        }
-
-
     }
 
     void LeftMouseDown()
