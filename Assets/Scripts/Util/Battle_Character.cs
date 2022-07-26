@@ -17,6 +17,7 @@ public class Battle_Character : MonoBehaviour
 
     [SerializeField]
     protected State_Handler state_handler;
+
     public EnemyHpbar MyHpbar;
     // 스테이트 처리기를 생성. 캐릭터에 따라서 다른 스테이트 처리기를 받아옴. 
 
@@ -29,6 +30,7 @@ public class Battle_Character : MonoBehaviour
     public float balance_gauge; // 균형 게이지 
     public float move_Speed; // 이동 속도
     [Header("Player Character Stats")]
+    public MonsterInformation monster_Info;
     public float Player_Mana; // 마나
     public float Player_Stamina; // 스테미나
     public float player_Atk_1; // 1단 공격력
@@ -58,9 +60,11 @@ public class Battle_Character : MonoBehaviour
     public GameObject cur_Target;
     public float Attack_Melee_Range; // 사거리
     public float Attack_Long_Range; // 사거리
+    public float Attackable_Range; // 공격 가능한 사거리.
     public int need_Mana; // 스킬 사용시 필요한 마나
     public int next_Skill;
     protected Animator anim;
+    public bool isReturn; // enemy_Area 에서 나갈경우 true 체크해줘서 ai가 판단할 수 있게끔 하는 변수
 
     [Header("=============================")]
     [Header("Attack Related")]
@@ -105,6 +109,8 @@ public class Battle_Character : MonoBehaviour
         state_handler.State_Handler_Initialize(this);
 
         attack_Collider = GetComponentInChildren<Enemy_Weapon>()?.gameObject;
+
+        real_AI.AI_Init(this);
         //anim = GetComponent<Animator>();
     }
 
