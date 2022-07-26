@@ -18,14 +18,14 @@ public class LoadTestScript : MonoBehaviour
         PlayerInitPos.transform.position = new Vector3(10, 0, 0);
 
         //생성 -어드레서블X 실행잘됌
-        //GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform);
-        //GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform);
+        GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform);
+        GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform);
 
         //생성 - 어드레서블 오류뜸
-       // GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform);
-        GameMG.Instance.Resource.Instantiate("susu", PlayerInitPos.transform);
+        // GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform);
+        // GameMG.Instance.Resource.Instantiate("susu", PlayerInitPos.transform);
 
-        //CharacterCreate.Instance.CreateMonster(0, PlayerInitPos.transform);
+        CharacterCreate.Instance.CreateMonster(0, PlayerInitPos.transform);
     }
 
     //1. uiHP바 오류 ->메인 카메라 오류같음, 캐릭터 찾아야댐
