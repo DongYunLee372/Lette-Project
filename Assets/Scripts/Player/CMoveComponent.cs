@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//방어 상태일때 
 public class CMoveComponent : BaseComponent
 {
+    public enum Direction
+    {
+        Front,
+        Right,
+        Left,
+        Back
+    }
 
     CheckAround checkaround;
     public override void InitComtype()
@@ -77,8 +85,16 @@ public class CMoveComponent : BaseComponent
 
         public float KnockBackTime;
 
-        //[Range(0.0f, RollingTime)]
-        
+        [Header("==================가드 중 이동 관련 변수들==================")]
+        public AnimationClip GuardFrontMoveClip;
+        public AnimationClip GuardRightMoveClip;
+        public AnimationClip GuardLeftMoveClip;
+        public AnimationClip GuardBackMoveClip;
+
+        public float GuardMoveSpeed;
+
+
+
     }
 
     public Vector2 MouseMove = Vector2.zero;
@@ -166,7 +182,32 @@ public class CMoveComponent : BaseComponent
     //{
     //    MoveDir = direction;
     //}
+    public void GuardMove(Direction dir)
+    {
+        Vector3 tempmove;
+        Vector3 tempdir;
+        if (dir== Direction.Front)
+        {
+            tempdir = new Vector3(0, 0, 1);
+            
+        }
+        else if(dir == Direction.Left)
+        {
+            tempdir = new Vector3(-1, 0, 0);
+        }
+        else if(dir == Direction.Right)
+        {
+            tempdir = new Vector3(1, 0, 0);
+        }
+        else
+        {
+            tempdir = new Vector3(0, 0, -1);
+        }
+        tempmove = com.FpCamRig.TransformDirection(tempdir);
+        tempmove = tempmove * moveoption.GuardMoveSpeed * Time.deltaTime;
+        com.CharacterRig.velocity = new Vector3(tempmove.x, CurGravity, tempmove.z);
 
+    }
 
     //duration 시간동안 목표위치로 이동한다.
     public void DoMove(Vector3 destpos, float duration)
