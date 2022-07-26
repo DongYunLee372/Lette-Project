@@ -33,10 +33,10 @@ public class State_Attack : State
         switch (judge_logic)
         {
             case Enemy_Attack_Logic.Melee_Attack:
-
+                // 근접 공격이라면 배틀캐릭터 스크립트 내 공격 판정범위 활성화
                 break;
             case Enemy_Attack_Logic.Long_Attack:
-
+                // 원거리라면 원거리 발사체 발사
                 break;
         }
 

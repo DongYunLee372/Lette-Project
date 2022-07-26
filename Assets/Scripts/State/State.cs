@@ -8,4 +8,6 @@ public abstract class State : MonoBehaviour
     public abstract bool Judge(out State _State, Battle_Character b_c);
 
     public abstract void Run(Battle_Character b_c);
+
+    public virtual List<State> State_Initialize() { return null; }
 }
