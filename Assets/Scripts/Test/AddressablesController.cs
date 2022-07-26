@@ -71,9 +71,12 @@ public class AddressablesController : Singleton<AddressablesController>
     //리스트 기다렸다가 실행해주기 위함
     public IEnumerator check_List_routine()
     {
-        yield return new WaitForSeconds(1.0f);
 
         Debug.Log("check_List_routine");
+
+        yield return new WaitForSeconds(1.0f);
+
+        Debug.Log("check_List_routine 1초지남");
         if (Loder_ListCount != AddressablesLoader.tempobj.Count)
         {
             Loder_ListCount = AddressablesLoader.tempobj.Count;
@@ -81,10 +84,13 @@ public class AddressablesController : Singleton<AddressablesController>
             check_List("susu");
             load_Comp = true;
         }
-	}
+
+        yield return new WaitForSeconds(1.0f);
+
+    }
 
 
-	void temp_Show_list()
+    void temp_Show_list()
 	{
 		Debug.Log("이름보기");
 		int c=0;
