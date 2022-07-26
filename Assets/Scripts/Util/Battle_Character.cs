@@ -17,6 +17,7 @@ public class Battle_Character : MonoBehaviour
 
     [SerializeField]
     protected State_Handler state_handler;
+
     public EnemyHpbar MyHpbar;
     // 스테이트 처리기를 생성. 캐릭터에 따라서 다른 스테이트 처리기를 받아옴. 
 
@@ -29,6 +30,7 @@ public class Battle_Character : MonoBehaviour
     public float balance_gauge; // 균형 게이지 
     public float move_Speed; // 이동 속도
     [Header("Player Character Stats")]
+    public MonsterInformation monster_Info;
     public float Player_Mana; // 마나
     public float Player_Stamina; // 스테미나
     public float player_Atk_1; // 1단 공격력
