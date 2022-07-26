@@ -2230,6 +2230,11 @@ MonoBehaviour:
     KnockBackClip: {fileID: 7400000, guid: fb154bb004a47594ea4d6d9afb25d388, type: 2}
     KnockDownTime: 1
     KnockBackTime: 0
+    GuardFrontMoveClip: {fileID: 0}
+    GuardRightMoveClip: {fileID: 0}
+    GuardLeftMoveClip: {fileID: 0}
+    GuardBackMoveClip: {fileID: 0}
+    GuardMoveSpeed: 1000
   inputcom: {fileID: 0}
   RollingStartTime: 0
   eventsystem: {fileID: 0}
@@ -2348,7 +2353,7 @@ MonoBehaviour:
   movecom: {fileID: 0}
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
-  GuardTime: 1
+  GuardTime: 60
   GuardStunTime: 0.2
   MaxGuardGauge: 0
   BalanceDecreaseVal: 0
@@ -2957,6 +2962,9 @@ MonoBehaviour:
   m_clips: []
   currentplayclipname: 
   prespeed: 0
+  currentSpeed: 0
+  currnetPlayTime: 0
+  currentBlending: 0
 --- !u!1 &5912692897059493259
 GameObject:
   m_ObjectHideFlags: 0
