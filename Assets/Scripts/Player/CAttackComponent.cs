@@ -13,6 +13,13 @@ public class CAttackComponent : BaseComponent
     public int AttackNum = 0;
     public CMoveComponent movecom;
 
+    //public BoxCollider AttackCollider;
+    public Transform effectparent;
+
+    public WeaponCollider weaponcollider;
+
+    public string monstertag;
+
     [System.Serializable]
     public class AttackMovementInfo
     {
@@ -118,6 +125,13 @@ public class CAttackComponent : BaseComponent
         
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
+        weaponcollider = GetComponentInChildren<WeaponCollider>();
+        weaponcollider?.SetCollitionFunction(MonsterAttack);
+
+        if(effectparent==null)
+        {
+            effectparent = new GameObject("Effects").transform;
+        }
 
         //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for(int i=0;i<attackinfos.Length;i++)
@@ -135,8 +149,23 @@ public class CAttackComponent : BaseComponent
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
         }
 
+
+
         //eventsystem.AddEvent(null, new KeyValuePair<string, AnimationEventSystem.midCallback>() AttackMove, AttackEnd);
 
+
+    }
+
+    public void MonsterAttack(Collider collision)
+    {
+        
+        if (!curval.IsAttacking)
+            return;
+        
+        if(collision.gameObject.tag == monstertag)
+        {
+            Debug.Log("공격 들어옴");
+        }
 
     }
 
@@ -254,7 +283,7 @@ public class CAttackComponent : BaseComponent
         effectobj.transform.position = attackinfos[AttackNum].EffectPosRot.position;
         effectobj.transform.rotation = attackinfos[AttackNum].EffectPosRot.rotation;
 
-        preparent = effectobj.transform.parent;
+        //preparent = effectobj.transform.parent;
         effectobj.transform.parent = attackinfos[AttackNum].EffectPosRot;
         //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
 
@@ -273,7 +302,8 @@ public class CAttackComponent : BaseComponent
         if(effectobj!=null)
         {
             Debug.Log($"공격 끝 들어옴 -> {s_val}");
-            effectobj.transform.parent = preparent;
+            //effectobj.transform.parent = preparent;
+            effectobj.transform.parent = effectparent;
         }
 
         if (curval.IsAttacking == true)

@@ -71,10 +71,15 @@ public class PlayableCharacter : MonoBehaviour
         components[(int)type].enabled = true;
     }
 
+    public void Init()
+    {
+
+    }
+
 
     /*플레이어 캐릭터 상호작용 메소드*/
 
-    /*플에이어가 공격을 받았을때
+    /*플에이어가 공격을 받았을때 해당 함수를 호출
       현재 플레이어의 상태에 따라서 넉백, 가드넉백, 회피 등등의 동작을 결정한다.*/
     public void BeAttacked(float damage)
     {
