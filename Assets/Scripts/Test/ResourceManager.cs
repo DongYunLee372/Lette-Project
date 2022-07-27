@@ -32,15 +32,26 @@ public class ResourceManager : MonoBehaviour
         {
             //일단 메모리 불러옴 (이름으로)
             Debug.Log("없어서 로드하려는중...");
-            StaticCoroutine.DoCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(path));
+           // StaticCoroutine.DoCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(path));
             //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(path));
             Debug.Log("없어서 로드중...");
 
             //리스트 추가 대기(1초)하다가 추가 되면 리스트에서 찾아봄
-            StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine());
+            StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine(path));
             // StartCoroutine(AddressablesController.Instance.check_List_routine());
 
-         
+            Debug.Log("코루틴 탈출하고 코드 실행...");
+
+            Debug.Log("Loder_ListCount" + AddressablesController.Instance.Loder_ListCount);
+            Debug.Log("tempobj" + AddressablesLoader.tempobj.Count);
+            if (AddressablesController.Instance.Loder_ListCount != AddressablesLoader.tempobj.Count)
+            {
+                AddressablesController.Instance.Loder_ListCount = AddressablesLoader.tempobj.Count;
+                Debug.Log("list수는" + AddressablesLoader.tempobj.Count);
+               // AddressablesController.Instance.check_List("susu");
+                AddressablesController.Instance.load_Comp = true;
+            }
+
             if (AddressablesController.Instance.load_Comp)
             {
                 Debug.Log("load_Comp");
@@ -50,15 +61,19 @@ public class ResourceManager : MonoBehaviour
                 Debug.Log("찾은 거" + original.name);
                 AddressablesController.Instance.load_Comp = false;
             }
-            if (original == null)
-            {
-                Debug.Log($"Failed to load prefab : {path}");
-                return null;
-            }
+
+        }
+
+        if (original == null)
+        {
+            Debug.Log($"Failed to load prefab : {path}");
+            return null;
         }
 
         if (original.GetComponent<Poolable>() != null)
         {
+            Debug.Log("gameObject리턴");
+
             return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
         }
 

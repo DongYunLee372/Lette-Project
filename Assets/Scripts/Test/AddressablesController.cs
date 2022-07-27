@@ -13,7 +13,7 @@ public class AddressablesController : Singleton<AddressablesController>
 //	private List<GameObject> _createdObjs { get; } = new List<GameObject>();
 	private List<GameObject> _createdObjs = new List<GameObject>();
 	GameObject tempob;
-	int Loder_ListCount = 0;
+	public int Loder_ListCount = 0;
 	public bool load_Comp = false;
 
 	private void Start()
@@ -49,7 +49,7 @@ public class AddressablesController : Singleton<AddressablesController>
 			StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
 			Debug.Log("없어서 로드중..." );
 
-            StartCoroutine(check_List_routine());
+            //StartCoroutine(check_List_routine());
 
             if (load_Comp)
             {
@@ -69,23 +69,52 @@ public class AddressablesController : Singleton<AddressablesController>
     }
 
     //리스트 기다렸다가 실행해주기 위함
-    public IEnumerator check_List_routine()
+    //public IEnumerator check_List_routine()
+    //{
+
+    //    Debug.Log("check_List_routine");
+
+    //    //yield return new WaitForSeconds(1f);
+
+    //    Debug.Log("check_List_routine 1초지남");
+    //    Debug.Log("Loder_ListCount" + Loder_ListCount);
+    //    Debug.Log("tempobj" + AddressablesLoader.tempobj.Count);
+
+    //    if (Loder_ListCount != AddressablesLoader.tempobj.Count)
+    //    {
+    //        Loder_ListCount = AddressablesLoader.tempobj.Count;
+    //        Debug.Log("list수는" + AddressablesLoader.tempobj.Count);
+    //        check_List("susu");
+    //        load_Comp = true;
+    //    }
+
+    //    yield return new WaitForSeconds(1.0f);
+
+    //}
+
+    public IEnumerator check_List_routine(string name)
     {
 
-        Debug.Log("check_List_routine");
+        Debug.Log("check_List_routine+LoadGameObjectAndMaterial");
 
-        yield return new WaitForSeconds(1.0f);
+        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
+        //yield return new WaitForSeconds(1f);
 
-        Debug.Log("check_List_routine 1초지남");
+        Debug.Log("check_List_routine+LoadGameObjectAndMaterial내려옴");
+        Debug.Log("Loder_ListCount" + Loder_ListCount);
+        Debug.Log("tempobj" + AddressablesLoader.tempobj.Count);
+
         if (Loder_ListCount != AddressablesLoader.tempobj.Count)
         {
             Loder_ListCount = AddressablesLoader.tempobj.Count;
             Debug.Log("list수는" + AddressablesLoader.tempobj.Count);
-            check_List("susu");
+            //check_List("susu");
             load_Comp = true;
         }
 
-        yield return new WaitForSeconds(1.0f);
+
+        //yield return new WaitForSeconds(1.0f);
+        yield return null;
 
     }
 
@@ -121,7 +150,7 @@ public class AddressablesController : Singleton<AddressablesController>
 
 	}
 
-	void check_List(string name)
+	public void check_List(string name)
     {
 		foreach (var obj in AddressablesLoader.tempobj)
 		{
