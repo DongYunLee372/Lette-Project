@@ -28,11 +28,13 @@ public class CharacterCreate : Singleton<CharacterCreate>
         GameObject a = Resources.Load<GameObject>(StaticClass.Prefabs + "Skeleton_Knight");
         //   a.transform.position = trans.position;
         a.GetComponent<Battle_Character>().Stat_Initialize(data);
-        // trans.position = q;
-
+        // trans.position = q;      
         GameObject b = Instantiate(a, trans);
-        EnemyHpbar.Instance.SetHpBar(data.P_mon_MaxHP, b.transform);
-        b.GetComponent<Battle_Character>().MyHpbar = EnemyHpbar.Instance.MyHpbar;
+        //  b.GetComponent<Battle_Character>().MyHpbar.MyHpbar=
+        b.GetComponent<Battle_Character>().MyHpbar=b.GetComponent<Battle_Character>().MyHpbar.SetHpBar(data.P_mon_MaxHP, b.transform);
+        //b.GetComponent<Battle_Character>().MyHpbar = EnemyHpbar.Instance.MyHpbar;
+        //  EnemyHpbar.Instance.SetHpBar(data.P_mon_MaxHP, b.transform);
+
 
     }
 

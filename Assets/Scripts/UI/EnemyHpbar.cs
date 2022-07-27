@@ -6,6 +6,7 @@ public class EnemyHpbar : Singleton<EnemyHpbar>
 {
     // Start is called before the first frame update
     private Camera uiCamera; //UI 카메라를 담을 변수
+    public Camera main;
     [SerializeField]
     private Canvas canvas; //캔버스를 담을 변수
     private RectTransform rectParent; //부모의 rectTransform 변수를 저장할 변수
@@ -15,62 +16,69 @@ public class EnemyHpbar : Singleton<EnemyHpbar>
     public Vector3 offset = Vector3.zero; //HpBar 위치 조절용, offset은 어디에 HpBar를 위치 출력할지
     public Transform enemyTr; //적 캐릭터의 위치
 
-    public Slider myhp;
+    public Image myhp;
 
     public float Curhp;
     public float Maxhp;
 
-    public Vector3 hpBarOffset = new Vector3(-0.5f, 2.4f, 0);
+    public Vector3 hpBarOffset = new Vector3(-0.5f, 3f, 0);
     public EnemyHpbar MyHpbar;
     void Start()
     {
-        canvas = GetComponentInParent<Canvas>(); //부모가 가지고있는 canvas 가져오기, Enemy HpBar canvas임
+        canvas = GetComponentInParent<Canvas>();
         uiCamera = canvas.worldCamera;
         rectParent = canvas.GetComponent<RectTransform>();
-        rectHp = this.gameObject.GetComponent<RectTransform>();
-
+        rectHp = GetComponent<RectTransform>();
     }
 
-    //LateUpdate는 update 이후 실행함, 적의 움직임은 Update에서 실행되니 움직임 이후에 HpBar를 출력함
     private void LateUpdate()
     {
-        var screenPos = Camera.main.WorldToScreenPoint(enemyTr.position + offset); //월드좌표(3D)를 스크린좌표(2D)로 변경, offset은 오브젝트 머리 위치
-        /*
-        if(screenPos.z < 0.0f)
+        var screenPos = main.WorldToScreenPoint(enemyTr.position + offset); // 몬스터의 월드 3d좌표를 스크린좌표로 변환
+        if (screenPos.z < 0.0f)
         {
             screenPos *= -1.0f;
-            //x, y, (z) 메인카메라에서 XY평면까지의 거리
         }
-        백뷰시점에서는 뒤돌 경우 HpBar가 보이는 문제가 있어서 위의 코드로 안보이게 했지만, 나는 쿼터뷰 시점이라서 필요없음
-        */
 
         var localPos = Vector2.zero;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectParent, screenPos, uiCamera, out localPos); //스크린좌표에서 캔버스에서 사용할 수 있는 좌표로 변경?
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectParent, screenPos, uiCamera, out localPos); // 스크린 좌표를 다시 체력바 UI 캔버스 좌표로 변환
 
-        rectHp.localPosition = localPos; //그 좌표를 localPos에 저장, 거기에 hpbar를 출력
-
-        //    myhp.value=(float)
+        rectHp.localPosition = localPos; // 체력바 위치조정
     }
     public void hit()
     {
-        myhp.value = (float)Curhp / (float)Maxhp;
+
+        myhp.GetComponent<Image>().fillAmount =Curhp/Maxhp; 
+       // myhp.value = (float)Curhp / (float)Maxhp;
     }
 
-    public void SetHpBar(float HP, Transform trans)
+    public EnemyHpbar SetHpBar(float HP, Transform trans)
     {
-        // enemyHpBarCanvas = enemyHpBarCanvas.GetComponent<Canvas>();
-        GameObject hpBar = UIManager.Instance.Prefabsload("Enemy HpBar Slider", UIManager.CANVAS_NUM.ex_skill);
+        // // enemyHpBarCanvas = enemyHpBarCanvas.GetComponent<Canvas>();
+        // GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.ex_skill);
+        // // myhp = hpBar;
+        // myhp = hpBar.GetComponent<Image>();
+        // var _hpbar = hpBar.GetComponent<EnemyHpbar>();
+        // // hpBar.transform.SetParent(enemyHpBarCanvas.transform);
+        // _hpbar.enemyTr = trans;
+        // _hpbar.offset = hpBarOffset;
+        // _hpbar.Maxhp = HP;
+        // _hpbar.Curhp = HP;
+        // var _test = hpBar.GetComponent<Image>();
+        //// _hpbar.myhp = _test;
+        // MyHpbar = _hpbar;
+
+        GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.ex_skill);
 
         var _hpbar = hpBar.GetComponent<EnemyHpbar>();
-        // hpBar.transform.SetParent(enemyHpBarCanvas.transform);
+        //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = trans;
         _hpbar.offset = hpBarOffset;
         _hpbar.Maxhp = HP;
         _hpbar.Curhp = HP;
-        var _test = hpBar.GetComponent<Slider>();
+        var _test = hpBar.GetComponent<Image>();
         _hpbar.myhp = _test;
         MyHpbar = _hpbar;
 
-
+        return MyHpbar;
     }
 }

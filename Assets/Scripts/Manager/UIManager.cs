@@ -31,14 +31,14 @@ public class UIManager : Singleton<UIManager>
         for (int i = 0; i < info.Count; i++)
         {
             //Debug.Log(info[i].path);
-            if (info[i].path == name && info[i].path != "Enemy HpBar Slider")
+            if (info[i].path == name && info[i].path != "Hpbar")
             {
                 same = true;
             }
         }
         if (same)
         {
-            Debug.Log("ÀÌ¹ÌÀÖ½À´Ï´Ù");
+            Debug.Log("ì´ë¯¸ìˆìŠµë‹ˆë‹¤");
         }
         else
         {
@@ -51,14 +51,14 @@ public class UIManager : Singleton<UIManager>
             tmp.active = true;
             info.Add(tmp);
           //   GameObject hpBar = Instantiate<GameObject>(hpBarPrefab, enemyHpBarCanvas.transform);
-            Debug.Log(canvas[(int)x].transform);
+          //  Debug.Log(canvas[(int)x].transform);
             return info[info.Count-1].obj;
         }
             return null;
     }
-    // (¿¹ ¾Æ´Ï¿À ÆË¾÷ ) ¼î¸Ş¼¼Áö .
-    // ¼î¸Ş¼¼Áö¿¡¼­ ÀÎ¼ö¸¦ ¹Ş¾Æ¼­ Äİ¹éÀ»ÇÑ´Ù . 
-    // ¸¶¿ì½ºÄ¿¼­ ÄÁÆ®·Ñ 
+    // (ì˜ˆ ì•„ë‹ˆì˜¤ íŒì—… ) ì‡¼ë©”ì„¸ì§€ .
+    // ì‡¼ë©”ì„¸ì§€ì—ì„œ ì¸ìˆ˜ë¥¼ ë°›ì•„ì„œ ì½œë°±ì„í•œë‹¤ . 
+    // ë§ˆìš°ìŠ¤ì»¤ì„œ ì»¨íŠ¸ë¡¤ 
     public void Show(string path)
     {
         for (int i = 0; i < info.Count; i++)

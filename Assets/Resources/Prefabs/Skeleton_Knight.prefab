@@ -1494,7 +1494,7 @@ MonoBehaviour:
     now_State: 0
     battle_Character: {fileID: 0}
   state_handler: {fileID: 0}
-  MyHpbar: {fileID: 0}
+  MyHpbar: {fileID: 4448133694157859069, guid: a5dcc9ee26d52ef4bafda2e16bf1678e, type: 3}
   index: 0
   Character_Name: "\uC2AC\uB77C\uC784"
   Max_HP: 80
@@ -1502,6 +1502,7 @@ MonoBehaviour:
   Armor: 3
   balance_gauge: 2
   move_Speed: 25
+  monster_Info: {fileID: 0}
   Player_Mana: 0
   Player_Stamina: 0
   player_Atk_1: 0
@@ -1526,15 +1527,24 @@ MonoBehaviour:
   mon_attack_Power: 5
   mon_find_Range: 0
   cur_Target: {fileID: 0}
-  Attack_Range: 2
+  Attack_Melee_Range: 0
+  Attack_Long_Range: 0
+  Attackable_Range: 0
   need_Mana: 50
   next_Skill: 0
+  isReturn: 0
   attack_Collider: {fileID: 0}
   attack_Type: 0
   isAttack_Effect: 0
   enemy_Skill_1_damage: 0
   enemy_Skill_2_damage: 0
   enemy_Skill_3_damage: 0
+  attack_Logic: 00
+  real_AI:
+    b_c: {fileID: 0}
+    now_State: {fileID: 0}
+    pre_State_List: []
+    navMesh: {fileID: 0}
   spawn_Skeleton_Prefab: {fileID: 4585744437083258369, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
   isPassive: 0
 --- !u!1 &5204953240468884467

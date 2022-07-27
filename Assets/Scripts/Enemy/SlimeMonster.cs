@@ -100,25 +100,25 @@ public class SlimeMonster : Enemy
     {
         SkillFsm();
         Enemy_FSM();
-        MyHpbar.hit();
+
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+            Hitdamage();
 
     }
     public void SetHpBar()
     {
-        enemyHpBarCanvas = enemyHpBarCanvas.GetComponent<Canvas>();
-        GameObject hpBar = UIManager.Instance.Prefabsload("Enemy HpBar Slider", UIManager.CANVAS_NUM.ex_skill);
-
+    //    enemyHpBarCanvas = enemyHpBarCanvas.GetComponent<Canvas>();
+        GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.ex_skill);
+      
         var _hpbar = hpBar.GetComponent<EnemyHpbar>();
       //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = this.gameObject.transform;
         _hpbar.offset = hpBarOffset;
         _hpbar.Maxhp = Now_HP;
         _hpbar.Curhp = Now_HP;
-        var _test = hpBar.GetComponent<Slider>();
+        var _test = hpBar.GetComponent<Image>();
         _hpbar.myhp =_test;
         MyHpbar = _hpbar;
-
-        Debug.Log(enemyHpBarCanvas.transform);
          
     }
     public void Hitdamage()
