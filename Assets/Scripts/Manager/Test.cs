@@ -46,7 +46,7 @@ public class Test : MonoBehaviour
             
             UIManager.Instance.Remove("Test2");
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             CharacterCreate.Instance.CreateMonster(EnumScp.MonsterIndex.mon_01_01, spawn);
         }
