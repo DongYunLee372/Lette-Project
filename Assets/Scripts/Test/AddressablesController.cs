@@ -92,7 +92,7 @@ public class AddressablesController : Singleton<AddressablesController>
 
     //}
 
-    public IEnumerator check_List_routine(string name)
+    public IEnumerator check_List_routine(string name, Game_Object_save obj)
     {
 
         Debug.Log("check_List_routine+LoadGameObjectAndMaterial");
@@ -114,8 +114,16 @@ public class AddressablesController : Singleton<AddressablesController>
 
 
         //yield return new WaitForSeconds(1.0f);
-        yield return null;
+        yield return StartCoroutine(Find_List(name, obj));
 
+    }
+
+    public IEnumerator Find_List(string name, Game_Object_save obj)
+    {
+
+        obj.value = AddressablesController.Instance.find_Asset_in_list(name);
+        Debug.Log("찾은거"+obj.value.name);
+        yield break;
     }
 
 

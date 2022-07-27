@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
+public class Game_Object_save
+{
+    public GameObject value;
+}
+
 public class ResourceManager : MonoBehaviour
 {
     public T Load<T>(string path) where T : Object
@@ -21,7 +26,41 @@ public class ResourceManager : MonoBehaviour
         return Resources.Load<T>(path);
     }
 
-    public GameObject Instantiate(string path, Transform parent = null)
+    public IEnumerator Instantiate_(string path, Transform parent = null)
+    {
+        GameObject original = AddressablesController.Instance.find_Asset_in_list(path);
+        var temp = new Game_Object_save();
+        if (original == null)
+        {
+           
+            Debug.Log("없어서 로드하려는중...");
+          //  StartCoroutine(AddressablesController.Instance.check_List_routine(path, original));
+            StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine(path, temp));
+        }
+
+       Debug.Log(temp.value.name+"로드한 네임");
+
+        if (original == null)
+        {
+            Debug.Log($"failed to load prefab : {path}");
+            yield return null;
+        }
+
+        if (original.GetComponent<Poolable>() != null)
+        {
+            Debug.Log("gameobject리턴");
+
+            yield return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
+        }
+
+        Debug.Log("그 외?");
+        GameObject go = Object.Instantiate(original, parent);
+        go.name = original.name;
+        yield return go;
+
+    }
+
+        public GameObject Instantiate(string path, Transform parent = null)
     {
         //일단 네임으로 호출해보고 리스트에 있으면 반환
 
@@ -37,7 +76,7 @@ public class ResourceManager : MonoBehaviour
             Debug.Log("없어서 로드중...");
 
             //리스트 추가 대기(1초)하다가 추가 되면 리스트에서 찾아봄
-            StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine(path));
+           // StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine(path, original));
             // StartCoroutine(AddressablesController.Instance.check_List_routine());
 
             Debug.Log("코루틴 탈출하고 코드 실행...");
@@ -52,27 +91,27 @@ public class ResourceManager : MonoBehaviour
                 AddressablesController.Instance.load_Comp = true;
             }
 
-            if (AddressablesController.Instance.load_Comp)
-            {
-                Debug.Log("load_Comp");
+            //if (AddressablesController.Instance.load_Comp)
+            //{
+            //    Debug.Log("load_Comp");
 
-                original = AddressablesController.Instance.find_Asset_in_list(name);
-                Debug.Log("load_Comp완료" + original.name);
-                Debug.Log("찾은 거" + original.name);
-                AddressablesController.Instance.load_Comp = false;
-            }
+            //    original = AddressablesController.Instance.find_Asset_in_list(name);
+            //    Debug.Log("load_Comp완료" + original.name);
+            //    Debug.Log("찾은 거" + original.name);
+            //    AddressablesController.Instance.load_Comp = false;
+            //}
 
         }
 
         if (original == null)
         {
-            Debug.Log($"Failed to load prefab : {path}");
+            Debug.Log($"failed to load prefab : {path}");
             return null;
         }
 
         if (original.GetComponent<Poolable>() != null)
         {
-            Debug.Log("gameObject리턴");
+            Debug.Log("gameobject리턴");
 
             return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
         }
@@ -83,6 +122,8 @@ public class ResourceManager : MonoBehaviour
         return go;
 
     }
+
+
 
     // 어드레서블로 바꿔야댐
     //public GameObject Instantiate(string path, Transform parent = null)
