@@ -20,6 +20,12 @@ public abstract class BaseComponent : MonoBehaviour
     }
     public abstract void InitComtype();
 
+    public virtual void Init()
+    {
+
+    }
+
+
     public virtual void Awake()
     {
         InitComtype();
