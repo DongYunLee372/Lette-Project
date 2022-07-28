@@ -90,6 +90,7 @@ public class Battle_Character : MonoBehaviour
         enemy_Grade = (Enemy_Grade)info.P_mon_Default;
         // index = int.Parse(info.P_mon_Index);
         Max_HP = info.P_mon_MaxHP;
+        Cur_HP = info.P_mon_MaxHP;
         move_Speed = info.P_mon_moveSpeed;
         Character_Name = info.P_mon_nameKor;
         enemy_Type = (Enemy_Type)info.P_mon_Type;
