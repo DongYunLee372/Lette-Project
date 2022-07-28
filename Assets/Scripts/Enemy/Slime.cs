@@ -28,6 +28,8 @@ public class Slime : Battle_Character
         state_handler.state = ai.AI_Update();
         state_handler.State_Handler_Update();
 
+        real_AI.AI_Update();
+
         //if (cur_Target != null)
         //{
         //    dirvec = cur_Target.transform.position - transform.position;

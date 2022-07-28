@@ -19,7 +19,8 @@ public class Battle_Character : MonoBehaviour
     protected State_Handler state_handler;
 
     public EnemyHpbar MyHpbar;
-    // 스테이트 처리기를 생성. 캐릭터에 따라서 다른 스테이트 처리기를 받아옴. 
+
+    public Skill skill_handler;
 
     [Header("Common Stats")] // 플레이어블 캐릭터, 몬스터 공용 스탯
     public int index; // 식별자

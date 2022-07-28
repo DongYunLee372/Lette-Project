@@ -29,6 +29,7 @@ namespace Enemy_Enum
     {
         Melee_Attack = 0,
         Long_Attack,
+        Skill_Using,
         Attack_Logic_Amount,
     }
 }
