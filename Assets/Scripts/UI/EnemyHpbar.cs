@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class EnemyHpbar : Singleton<EnemyHpbar>
+public class EnemyHpbar : MonoBehaviour
 {
     // Start is called before the first frame update
     private Camera uiCamera; //UI 카메라를 담을 변수
@@ -15,7 +15,7 @@ public class EnemyHpbar : Singleton<EnemyHpbar>
     //HideInInspector는 해당 변수 숨기기, 굳이 보여줄 필요가 없을 때 
     public Vector3 offset = Vector3.zero; //HpBar 위치 조절용, offset은 어디에 HpBar를 위치 출력할지
     public Transform enemyTr; //적 캐릭터의 위치
-
+    
     public Image myhp;
 
     public float Curhp;
@@ -29,10 +29,16 @@ public class EnemyHpbar : Singleton<EnemyHpbar>
         uiCamera = canvas.worldCamera;
         rectParent = canvas.GetComponent<RectTransform>();
         rectHp = GetComponent<RectTransform>();
+     
+           
+        main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
+        
+
     }
 
     private void LateUpdate()
     {
+        main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
         var screenPos = main.WorldToScreenPoint(enemyTr.position + offset); // 몬스터의 월드 3d좌표를 스크린좌표로 변환
         if (screenPos.z < 0.0f)
         {
@@ -41,12 +47,12 @@ public class EnemyHpbar : Singleton<EnemyHpbar>
 
         var localPos = Vector2.zero;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rectParent, screenPos, uiCamera, out localPos); // 스크린 좌표를 다시 체력바 UI 캔버스 좌표로 변환
-
+        
+        Debug.Log(main.name);
         rectHp.localPosition = localPos; // 체력바 위치조정
     }
     public void hit()
     {
-
         myhp.GetComponent<Image>().fillAmount =Curhp/Maxhp; 
        // myhp.value = (float)Curhp / (float)Maxhp;
     }
@@ -78,7 +84,7 @@ public class EnemyHpbar : Singleton<EnemyHpbar>
         var _test = hpBar.GetComponent<Image>();
         _hpbar.myhp = _test;
         MyHpbar = _hpbar;
-
+       // Debug.Log(this.gameObject.name);
         return MyHpbar;
     }
 }

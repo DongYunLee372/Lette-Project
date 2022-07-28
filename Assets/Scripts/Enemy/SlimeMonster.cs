@@ -104,6 +104,7 @@ public class SlimeMonster : Enemy
         if (Input.GetKeyDown(KeyCode.Alpha8))
             Hitdamage();
 
+        UIManager.Instance.Remove(MyHpbar.myhp.gameObject);
     }
     public void SetHpBar()
     {

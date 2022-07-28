@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIInfo
 {
     public GameObject obj;
+    public int index;
     public string path;
     public bool active = false;
     public bool Instance = false;
@@ -50,8 +51,7 @@ public class UIManager : Singleton<UIManager>
             tmp.obj.name = name;
             tmp.active = true;
             info.Add(tmp);
-          //   GameObject hpBar = Instantiate<GameObject>(hpBarPrefab, enemyHpBarCanvas.transform);
-          //  Debug.Log(canvas[(int)x].transform);
+            info[info.Count - 1].index = info.Count - 1;
             return info[info.Count-1].obj;
         }
             return null;
@@ -87,7 +87,21 @@ public class UIManager : Singleton<UIManager>
     {
         for (int i = 0; i < info.Count; i++)
         {
-            if (info[i].path == path && info[i].active==true)
+            if (info[i].path == path && info[i].active == true)
+            {
+                Debug.Log(info.Count);
+                Destroy(info[i].obj);
+                info.Remove(info[i]);
+                i = 0;
+                continue;
+            }
+        }
+    }
+    public void Remove(GameObject obj)
+    {
+        for (int i = 0; i < info.Count; i++)
+        {
+            if (info[i].obj == obj && info[i].active == true)
             {
                 Debug.Log(info.Count);
                 Destroy(info[i].obj);

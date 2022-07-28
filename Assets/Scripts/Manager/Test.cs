@@ -25,14 +25,10 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F3))
         {
             UIManager.Instance.Prefabsload("Test2", UIManager.CANVAS_NUM.ex_skill);
-
-
         }
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            UIManager.Instance.Hide("Fire Demon-Yellow");
-
-            UIManager.Instance.Hide("Test2");
+            CameraManager.Instance.SetPlayerCamera(GameMG.Instance.Resource.Instantiate("PlayerCharacter", null));
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

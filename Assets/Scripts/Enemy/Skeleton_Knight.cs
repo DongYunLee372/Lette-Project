@@ -21,6 +21,8 @@ public class Skeleton_Knight : Battle_Character
     {
          if (Input.GetKeyDown(KeyCode.Space))
             Damaged(5);
+
+       
         state_handler.state = ai.AI_Update();
         state_handler.State_Handler_Update();
 
