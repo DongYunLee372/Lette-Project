@@ -30,7 +30,7 @@ public class EnemyHpbar : MonoBehaviour
         rectParent = canvas.GetComponent<RectTransform>();
         rectHp = GetComponent<RectTransform>();
 
-
+        //asd
         main = PlayableCharacter.Instance.GetCamera();
 
 
