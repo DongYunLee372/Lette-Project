@@ -81,6 +81,7 @@ public class Battle_Character : MonoBehaviour
 
     public void Stat_Initialize(MonsterInformation info) // 몬스터 생성 시 몬스터 정보 초기화
     {
+        monster_Info = info;
         //        st = ScriptableObject.CreateInstance<MonsterInformation>();
         die_Delay = info.P_dieDelay;
         drop_Reward = info.P_drop_Reward;
