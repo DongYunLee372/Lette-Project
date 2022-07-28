@@ -29,10 +29,11 @@ public class EnemyHpbar : MonoBehaviour
         uiCamera = canvas.worldCamera;
         rectParent = canvas.GetComponent<RectTransform>();
         rectHp = GetComponent<RectTransform>();
-     
-           
-        main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
-        
+
+
+        main = PlayableCharacter.Instance.GetCamera();
+
+
 
     }
 
