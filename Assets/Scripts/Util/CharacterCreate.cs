@@ -8,6 +8,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
     //  public DataLoad_Save TestDataLoad;
 
 
+
     void Start()
     {
         DataLoad_Save.Instance.Init();
@@ -19,17 +20,13 @@ public class CharacterCreate : Singleton<CharacterCreate>
     {
 
     }
-    //원본
+
     public void CreateMonster(EnumScp.MonsterIndex p_index, Transform trans)
     {
         MonsterInformation data = ScriptableObject.CreateInstance<MonsterInformation>();
         data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
 
         GameObject a = Resources.Load<GameObject>(StaticClass.Prefabs + "Skeleton_Knight");
-<<<<<<< HEAD
-        //   a.transform.position = trans.position;
-=======
->>>>>>> e5ab8a8c6ae672ceced1e02ae6516d7bf31dec4b
         a.GetComponent<Battle_Character>().Stat_Initialize(data);
 
         GameObject b = Instantiate(a, trans);
@@ -38,24 +35,5 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
 
     }
-
-    ////원본 수정
-    //public void CreateMonster(EnumScp.MonsterIndex p_index, Transform trans)
-    //{
-    //    Vector3 q = new Vector3(7, 0, 0);
-    //    MonsterInformation data = ScriptableObject.CreateInstance<MonsterInformation>();
-    //    data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
-
-
-    //    GameObject a = Resources.Load<GameObject>(StaticClass.Prefabs + "Skeleton_Knight");
-    //    //   a.transform.position = trans.position;
-    //    a.GetComponent<Battle_Character>().Stat_Initialize(data);
-    //    // trans.position = q;
-
-    //    GameObject b = Instantiate(a, trans);
-    //    EnemyHpbar.Instance.SetHpBar(data.P_mon_MaxHP, b.transform);
-    //    b.GetComponent<Battle_Character>().MyHpbar = EnemyHpbar.Instance.MyHpbar;
-
-    //}
 
 }
