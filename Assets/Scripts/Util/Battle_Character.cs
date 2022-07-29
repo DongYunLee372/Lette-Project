@@ -22,6 +22,14 @@ public class Battle_Character : MonoBehaviour
 
     public Skill skill_handler;
 
+    [Header("Real Stats")] // 데이터 정리된 것 밑의 데이터들은 정리해야함
+    public CharacterInformation char_Info;
+    public MonsterInformation mon_Info;
+    public MonsterSkillInformation mon_Skill_Info;
+    public MonsterTargetInformation mon_Target_Info;
+    public Player_aconstant player_Aconstant;
+    public Monster_aconstant mon_Aconstant;
+
     [Header("Common Stats")] // 플레이어블 캐릭터, 몬스터 공용 스탯
     public int index; // 식별자
     public string Character_Name; // 몬스터 또는 플레이어 캐릭터 이름
@@ -31,7 +39,6 @@ public class Battle_Character : MonoBehaviour
     public float balance_gauge; // 균형 게이지 
     public float move_Speed; // 이동 속도
     [Header("Player Character Stats")]
-    public MonsterInformation monster_Info;
     public float Player_Mana; // 마나
     public float Player_Stamina; // 스테미나
     public float player_Atk_1; // 1단 공격력
@@ -82,7 +89,6 @@ public class Battle_Character : MonoBehaviour
 
     public void Stat_Initialize(MonsterInformation info) // 몬스터 생성 시 몬스터 정보 초기화
     {
-        monster_Info = info;
         //        st = ScriptableObject.CreateInstance<MonsterInformation>();
         die_Delay = info.P_dieDelay;
         drop_Reward = info.P_drop_Reward;
