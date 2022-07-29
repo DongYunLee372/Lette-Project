@@ -15,7 +15,7 @@ public class LoadTestScript : MonoBehaviour
        
         MapPos = new GameObject();
         PlayerInitPos = new GameObject();
-        MapPos.transform.position = new Vector3(15, 0, 0);
+        MapPos.transform.position = new Vector3(0, 0, 0);
         PlayerInitPos.transform.position = new Vector3(10, 0, 0);
 
         //생성 -어드레서블X 실행잘됌
@@ -32,7 +32,7 @@ public class LoadTestScript : MonoBehaviour
         StaticCoroutine.DoCoroutine(GameMG.Instance.Resource.Instantiate_("susu", PlayerInitPos.transform));
 
         //처음 호출에서 오류 남...(?)
-        CharacterCreate.Instance.CreateMonster(EnumScp.MonsterIndex.mon_01_01, MapPos.transform);
+        CharacterCreate.Instance.CreateMonster(EnumScp.MonsterIndex.mon_01_01, PlayerInitPos.transform);
         //카메라 오류인거같아서 해봤는데 정상적으로 작동됌.
         // Canvas canvas = gameObject.GetComponent<Canvas>();
         //canvas.renderMode = RenderMode.ScreenSpaceCamera;
