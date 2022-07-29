@@ -15,12 +15,12 @@ public class LoadTestScript : MonoBehaviour
        
         MapPos = new GameObject();
         PlayerInitPos = new GameObject();
-        MapPos.transform.position = new Vector3(0, 0, 0);
+        MapPos.transform.position = new Vector3(15, 0, 0);
         PlayerInitPos.transform.position = new Vector3(10, 0, 0);
 
         //생성 -어드레서블X 실행잘됌
-        //GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform);
-        // GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform);
+        GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform);
+         GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform);
 
         //생성 - 어드레서블 오류뜸
         // GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform);
