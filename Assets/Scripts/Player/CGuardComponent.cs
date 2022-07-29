@@ -27,6 +27,7 @@ public class CGuardComponent : BaseComponent
     public IEnumerator stuncoroutine;
     public delegate void Invoker();
 
+    //가드를 하면 시점이 캐릭터의 정면으로 고정 되어야 한다.
     public void Guard()
     {
         if (movecom == null)
@@ -39,13 +40,12 @@ public class CGuardComponent : BaseComponent
 
         movecom.com.animator.Play(GuardClip.name, 2.0f);
 
+        movecom.LookAtFoward();
+
         if (guardcoroutine != null)
         {
-            //playingCor = false;
-            //Debug.Log("실행중 나감");
             StopCoroutine("Cor_TimeCounter");
             guardcoroutine = null;
-
         }
         guardcoroutine = Cor_TimeCounter(GuardTime, GuardDown);
         StartCoroutine(guardcoroutine);

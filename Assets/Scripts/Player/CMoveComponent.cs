@@ -93,8 +93,14 @@ public class CMoveComponent : BaseComponent
 
         public float GuardMoveSpeed;
 
+        [Header("==================카메라 관련 변수들==================")]
+        public float FPMaxZoomIn = 60.0f;
+        public float FPMaxZoomOut = 90.0f;
 
+        public float TPMaxZoomIn = 60.0f;
+        public float TPMaxZoomOut = 90.0f;
 
+        public float ScrollSpeed = 500.0f;
     }
 
     public Vector2 MouseMove = Vector2.zero;
@@ -194,14 +200,20 @@ public class CMoveComponent : BaseComponent
         else if(dir == Direction.Left)
         {
             tempdir = new Vector3(-1, 0, 0);
+            Debug.Log("guardleft");
+            com.animator.Play(moveoption.GuardLeftMoveClip.name, 1.5f);
         }
         else if(dir == Direction.Right)
         {
             tempdir = new Vector3(1, 0, 0);
+            Debug.Log("guardright");
+            com.animator.Play(moveoption.GuardRightMoveClip.name, 1.5f);
         }
         else
         {
             tempdir = new Vector3(0, 0, -1);
+            Debug.Log("guardback");
+            com.animator.Play(moveoption.GuardBackMoveClip.name, 1.5f);
         }
         tempmove = com.FpCamRig.TransformDirection(tempdir);
         tempmove = tempmove * moveoption.GuardMoveSpeed * Time.deltaTime;
@@ -513,7 +525,7 @@ public class CMoveComponent : BaseComponent
         }
     }
 
-
+    
     public void Rotation()
     {
         //1 인칭 일때
@@ -594,6 +606,92 @@ public class CMoveComponent : BaseComponent
     }
 
 
+    //3인칭 일때 해당 방향을 바라보도록 회전
+    public void LookAt(Vector3 direction)
+    {
+
+    }
+
+    //3인칭 카메라가 정면방향을 바라보도록 회전
+    public void LookAtFoward()
+    {
+        Vector3 foward = com.FpCamRig.forward;
+
+        Vector3 rot = Quaternion.LookRotation(foward, Vector3.up).eulerAngles;
+
+        com.TpCamRig.eulerAngles = rot;
+    }
+
+    //줌인 
+    public void ZoomIn(float scroll)
+    {
+        if (scroll >=0)
+            return;
+        Camera curcam;
+        
+
+        if(curval.IsFPP)
+        {
+            curcam = com.FpCam.GetComponent<Camera>();
+            if (curcam.fieldOfView <= moveoption.FPMaxZoomIn)
+            {
+                curcam.fieldOfView = moveoption.FPMaxZoomIn;
+                return;
+            }
+
+
+
+        }
+        else
+        {
+            curcam = com.TpCam.GetComponent<Camera>();
+
+            if (curcam.fieldOfView <= moveoption.TPMaxZoomIn)
+            {
+                curcam.fieldOfView = moveoption.TPMaxZoomIn;
+                return;
+            }
+
+
+        }
+
+        scroll = scroll * moveoption.ScrollSpeed * Time.deltaTime;
+
+        curcam.fieldOfView += scroll;
+
+    }
+
+    //줌 아웃
+    public void ZoomOut(float scroll)
+    {
+        if (scroll<=0)
+            return;
+
+        Camera curcam;
+        if (curval.IsFPP)
+        {
+            curcam = com.FpCam.GetComponent<Camera>();
+            if (curcam.fieldOfView >= moveoption.FPMaxZoomOut)
+            {
+                curcam.fieldOfView = moveoption.FPMaxZoomOut;
+                return;
+            }
+        }
+        else
+        {
+            curcam = com.TpCam.GetComponent<Camera>();
+            if (curcam.fieldOfView >= moveoption.TPMaxZoomOut)
+            {
+                curcam.fieldOfView = moveoption.TPMaxZoomOut;
+                return;
+            }
+        }
+
+        scroll = scroll * moveoption.ScrollSpeed * Time.deltaTime;
+
+        curcam.fieldOfView += scroll;
+
+    }
 
 
     void ChangePerspective()

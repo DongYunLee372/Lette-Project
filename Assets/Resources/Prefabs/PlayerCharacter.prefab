@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 5912692895305397015}
   m_Layer: 0
   m_Name: TPCam
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2244,10 +2244,15 @@ MonoBehaviour:
     KnockDownTime: 1
     KnockBackTime: 0
     GuardFrontMoveClip: {fileID: 0}
-    GuardRightMoveClip: {fileID: 0}
-    GuardLeftMoveClip: {fileID: 0}
-    GuardBackMoveClip: {fileID: 0}
+    GuardRightMoveClip: {fileID: 7400000, guid: 3807c40e073c3264696d50bb11b85729, type: 2}
+    GuardLeftMoveClip: {fileID: 7400000, guid: fed91820561870646bddcd2a389dbcf8, type: 2}
+    GuardBackMoveClip: {fileID: 7400000, guid: e4e962e0a1c505a4fbdd72119cbe39e0, type: 2}
     GuardMoveSpeed: 1000
+    FPMaxZoomIn: 60
+    FPMaxZoomOut: 90
+    TPMaxZoomIn: 30
+    TPMaxZoomOut: 90
+    ScrollSpeed: 800
   inputcom: {fileID: 0}
   RollingStartTime: 0
   eventsystem: {fileID: 0}

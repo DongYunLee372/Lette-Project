@@ -53,8 +53,8 @@ public class CInputComponent : BaseComponent
     {
         if (movecom == null)
             movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
 
-        
 
         float v = 0;
         float h = 0;
@@ -64,8 +64,26 @@ public class CInputComponent : BaseComponent
         movecom.MouseMove = new Vector2(0, 0);//마우스 움직임
         movecom.MoveDir = new Vector3(0, 0, 0);//wasd 키 입력에 따른 이동 방향
 
-        movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
-        CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
+        //가드 중 일때는 시점은 정면으로 고정
+        if(state != CharacterStateMachine.eCharacterState.Guard&&
+            state != CharacterStateMachine.eCharacterState.GuardStun)
+        {
+            movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
+        }
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel") * -1;
+        
+
+        if (scroll > 0)//줌인 줌아웃에 사용
+        {
+            movecom.ZoomOut(scroll);
+        }
+        else 
+        {
+            movecom.ZoomIn(scroll);
+            
+            
+        }
 
 
 
@@ -112,7 +130,7 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        Input.GetAxisRaw("Mouse ScrollWheel");//줌인 줌아웃에 사용
+        
 
         if(state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
@@ -231,6 +249,10 @@ public class CInputComponent : BaseComponent
             {
                 movecom.com.animator.Play("_Idle");
             }
+        }
+        else
+        {
+            movecom.com.animator.Play("_Guard");
         }
     }
 
