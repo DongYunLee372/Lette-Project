@@ -162,4 +162,9 @@ public class Battle_Character : MonoBehaviour
     {
 
     }
+
+    private void Update()
+    {
+        
+    }
 }

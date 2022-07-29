@@ -10,8 +10,9 @@ public class AI
 
     public State now_State;
     public List<State> pre_State_List;
-
     public NavMeshAgent navMesh;
+
+    public bool isPause = false; // 정지
 
     public void AI_Init(Battle_Character b_c)
     {
@@ -28,6 +29,9 @@ public class AI
 
     public void AI_Update()
     {
+        if (isPause) // BattleCharacter에서 AI를 정지시켰다면 정지
+            return;
+
         foreach (var st in pre_State_List)
         {
             State temp_State = now_State;
