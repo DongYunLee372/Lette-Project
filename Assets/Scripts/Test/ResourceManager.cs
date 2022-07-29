@@ -29,34 +29,34 @@ public class ResourceManager : MonoBehaviour
     public IEnumerator Instantiate_(string path, Transform parent = null)
     {
         GameObject original = AddressablesController.Instance.find_Asset_in_list(path);
-        var temp = new Game_Object_save();
+    
         if (original == null)
         {
            
             Debug.Log("없어서 로드하려는중...");
           //  StartCoroutine(AddressablesController.Instance.check_List_routine(path, original));
-            StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine(path, temp));
+            StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine(path, parent));
         }
 
-       Debug.Log(temp.value.name+"로드한 네임");
+        yield  break;
 
-        if (original == null)
-        {
-            Debug.Log($"failed to load prefab : {path}");
-            yield return null;
-        }
+        //if (original == null)
+        //{
+        //    Debug.Log($"failed to load prefab : {path}");
+        //    yield return null;
+        //}
 
-        if (original.GetComponent<Poolable>() != null)
-        {
-            Debug.Log("gameobject리턴");
+        //if (original.GetComponent<Poolable>() != null)
+        //{
+        //    Debug.Log("gameobject리턴");
 
-            yield return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
-        }
+        //    yield return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
+        //}
 
-        Debug.Log("그 외?");
-        GameObject go = Object.Instantiate(original, parent);
-        go.name = original.name;
-        yield return go;
+        //Debug.Log("그 외?");
+        //GameObject go = Object.Instantiate(original, parent);
+        //go.name = original.name;
+        //yield return go;
 
     }
 

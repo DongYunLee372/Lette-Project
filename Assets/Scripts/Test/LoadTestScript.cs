@@ -28,10 +28,11 @@ public class LoadTestScript : MonoBehaviour
         //코루틴 아닌거
         //GameMG.Instance.Resource.Instantiate("susu", PlayerInitPos.transform);
 
-        //코루틴
+        //코루틴 생성
         StaticCoroutine.DoCoroutine(GameMG.Instance.Resource.Instantiate_("susu", PlayerInitPos.transform));
 
-
+        //처음 호출에서 오류 남...(?)
+        CharacterCreate.Instance.CreateMonster(EnumScp.MonsterIndex.mon_01_01, MapPos.transform);
         //카메라 오류인거같아서 해봤는데 정상적으로 작동됌.
         // Canvas canvas = gameObject.GetComponent<Canvas>();
         //canvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -49,8 +50,7 @@ public class LoadTestScript : MonoBehaviour
 
         // var screenPos = Camera.main.WorldToScreenPoint(enemyTr.position + offset); //월드좌표(3D)를 스크린좌표(2D)로 변경, offset은 오브젝트 머리 위치
 
-        //처음 호출에서 오류 남...(?)
-        //  CharacterCreate.Instance.CreateMonster(0, PlayerInitPos.transform);
+
     }
 
     //1. uiHP바 오류 ->메인 카메라 오류같음, 캐릭터 찾아야댐

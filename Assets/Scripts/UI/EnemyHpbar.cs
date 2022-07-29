@@ -39,7 +39,7 @@ public class EnemyHpbar : MonoBehaviour
 
     private void LateUpdate()
     {
-        main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
+        //main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
         var screenPos = main.WorldToScreenPoint(enemyTr.position + offset); // 몬스터의 월드 3d좌표를 스크린좌표로 변환
         if (screenPos.z < 0.0f)
         {

@@ -92,11 +92,11 @@ public class AddressablesController : Singleton<AddressablesController>
 
     //}
 
-    public IEnumerator check_List_routine(string name, Game_Object_save obj)
+    public IEnumerator check_List_routine(string name, Transform parent)
     {
 
         Debug.Log("check_List_routine+LoadGameObjectAndMaterial");
-
+        //로드되길 기다림
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
         //yield return new WaitForSeconds(1f);
 
@@ -112,18 +112,39 @@ public class AddressablesController : Singleton<AddressablesController>
             load_Comp = true;
         }
 
-
+        //로드 된 후 리스트에서 찾아서 생성
         //yield return new WaitForSeconds(1.0f);
-        yield return StartCoroutine(Find_List(name, obj));
+        yield return StartCoroutine(Find_List(name, parent));
+
+
 
     }
 
-    public IEnumerator Find_List(string name, Game_Object_save obj)
+    public IEnumerator Find_List(string name,Transform parent)
     {
 
-        obj.value = AddressablesController.Instance.find_Asset_in_list(name);
-        Debug.Log("찾은거"+obj.value.name);
-        yield break;
+        GameObject original = AddressablesController.Instance.find_Asset_in_list(name);
+        Debug.Log("찾은거"+ original);
+
+        if (original == null)
+        {
+            Debug.Log($"failed to load prefab : {name}");
+            yield return null;
+        }
+
+        if (original.GetComponent<Poolable>() != null)
+        {
+            Debug.Log("gameobject리턴");
+
+            yield return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
+        }
+
+        //예외처리인데 그냥 뺌
+        //Debug.Log("그 외?");
+        //GameObject go = Object.Instantiate(original, parent);
+        //go.name = original.name;
+        //yield return go;
+
     }
 
 
@@ -354,7 +375,7 @@ public class AddressablesController : Singleton<AddressablesController>
 		}
 	}
 
-	//주의점 -> 메모리 해제 하시기 전에 메모리를 사용하는 오브젝트들을 전부 destroy 하고 함수 호출해주세요!
+	//주의점 -> 메모리 해제 하시기 전에 메모리를 사용하는 오브젝트들을 전부 destroy 하고 함수 호출
 	public void Destroy_Obj(ref GameObject deleteMemory)  //메모리 해제 할 오브젝트.
 	{
 		if (!Addressables.ReleaseInstance(deleteMemory))
