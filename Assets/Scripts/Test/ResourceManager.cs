@@ -60,91 +60,91 @@ public class ResourceManager : MonoBehaviour
 
     }
 
-        public GameObject Instantiate(string path, Transform parent = null)
-    {
-        //일단 네임으로 호출해보고 리스트에 있으면 반환
-
-        GameObject original = AddressablesController.Instance.find_Asset_in_list(path);
-
-        //만약 불러왔는데 없으면 새로 로드
-        if (original == null)
-        {
-            //일단 메모리 불러옴 (이름으로)
-            Debug.Log("없어서 로드하려는중...");
-           // StaticCoroutine.DoCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(path));
-            //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(path));
-            Debug.Log("없어서 로드중...");
-
-            //리스트 추가 대기(1초)하다가 추가 되면 리스트에서 찾아봄
-           // StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine(path, original));
-            // StartCoroutine(AddressablesController.Instance.check_List_routine());
-
-            Debug.Log("코루틴 탈출하고 코드 실행...");
-
-            Debug.Log("Loder_ListCount" + AddressablesController.Instance.Loder_ListCount);
-            Debug.Log("tempobj" + AddressablesLoader.tempobj.Count);
-            if (AddressablesController.Instance.Loder_ListCount != AddressablesLoader.tempobj.Count)
-            {
-                AddressablesController.Instance.Loder_ListCount = AddressablesLoader.tempobj.Count;
-                Debug.Log("list수는" + AddressablesLoader.tempobj.Count);
-               // AddressablesController.Instance.check_List("susu");
-                AddressablesController.Instance.load_Comp = true;
-            }
-
-            //if (AddressablesController.Instance.load_Comp)
-            //{
-            //    Debug.Log("load_Comp");
-
-            //    original = AddressablesController.Instance.find_Asset_in_list(name);
-            //    Debug.Log("load_Comp완료" + original.name);
-            //    Debug.Log("찾은 거" + original.name);
-            //    AddressablesController.Instance.load_Comp = false;
-            //}
-
-        }
-
-        if (original == null)
-        {
-            Debug.Log($"failed to load prefab : {path}");
-            return null;
-        }
-
-        if (original.GetComponent<Poolable>() != null)
-        {
-            Debug.Log("gameobject리턴");
-
-            return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
-        }
-
-        Debug.Log("그 외?");
-        GameObject go = Object.Instantiate(original, parent);
-        go.name = original.name;
-        return go;
-
-    }
-
-
-
-    // 어드레서블로 바꿔야댐
-    //public GameObject Instantiate(string path, Transform parent = null)
+    //    public GameObject Instantiate(string path, Transform parent = null)
     //{
-    //    GameObject original = Load<GameObject>($"Prefabs/{path}");
+    //    //일단 네임으로 호출해보고 리스트에 있으면 반환
+
+    //    GameObject original = AddressablesController.Instance.find_Asset_in_list(path);
+
+    //    //만약 불러왔는데 없으면 새로 로드
+    //    if (original == null)
+    //    {
+    //        //일단 메모리 불러옴 (이름으로)
+    //        Debug.Log("없어서 로드하려는중...");
+    //       // StaticCoroutine.DoCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(path));
+    //        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(path));
+    //        Debug.Log("없어서 로드중...");
+
+    //        //리스트 추가 대기(1초)하다가 추가 되면 리스트에서 찾아봄
+    //       // StaticCoroutine.DoCoroutine(AddressablesController.Instance.check_List_routine(path, original));
+    //        // StartCoroutine(AddressablesController.Instance.check_List_routine());
+
+    //        Debug.Log("코루틴 탈출하고 코드 실행...");
+
+    //        Debug.Log("Loder_ListCount" + AddressablesController.Instance.Loder_ListCount);
+    //        Debug.Log("tempobj" + AddressablesLoader.tempobj.Count);
+    //        if (AddressablesController.Instance.Loder_ListCount != AddressablesLoader.tempobj.Count)
+    //        {
+    //            AddressablesController.Instance.Loder_ListCount = AddressablesLoader.tempobj.Count;
+    //            Debug.Log("list수는" + AddressablesLoader.tempobj.Count);
+    //           // AddressablesController.Instance.check_List("susu");
+    //            AddressablesController.Instance.load_Comp = true;
+    //        }
+
+    //        //if (AddressablesController.Instance.load_Comp)
+    //        //{
+    //        //    Debug.Log("load_Comp");
+
+    //        //    original = AddressablesController.Instance.find_Asset_in_list(name);
+    //        //    Debug.Log("load_Comp완료" + original.name);
+    //        //    Debug.Log("찾은 거" + original.name);
+    //        //    AddressablesController.Instance.load_Comp = false;
+    //        //}
+
+    //    }
 
     //    if (original == null)
     //    {
-    //        Debug.Log($"Failed to load prefab : {path}");
+    //        Debug.Log($"failed to load prefab : {path}");
     //        return null;
     //    }
 
     //    if (original.GetComponent<Poolable>() != null)
     //    {
+    //        Debug.Log("gameobject리턴");
+
     //        return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
     //    }
 
+    //    Debug.Log("그 외?");
     //    GameObject go = Object.Instantiate(original, parent);
     //    go.name = original.name;
     //    return go;
+
     //}
+
+
+
+    // 어드레서블로 바꿔야댐
+    public GameObject Instantiate(string path, Transform parent = null)
+    {
+        GameObject original = Load<GameObject>($"Prefabs/{path}");
+
+        if (original == null)
+        {
+            Debug.Log($"Failed to load prefab : {path}");
+            return null;
+        }
+
+        if (original.GetComponent<Poolable>() != null)
+        {
+            return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
+        }
+
+        GameObject go = Object.Instantiate(original, parent);
+        go.name = original.name;
+        return go;
+    }
 
     public void Destroy(GameObject go)
     {
