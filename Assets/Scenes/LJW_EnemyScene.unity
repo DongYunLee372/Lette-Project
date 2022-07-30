@@ -310,6 +310,63 @@ Transform:
   m_Father: {fileID: 327276014}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &245822084
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_Name
+      value: TestEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400072, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b511a8dfae72e347b56deb4889dc760, type: 3}
 --- !u!1 &327276012
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1384587506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -878,6 +935,13 @@ MonoBehaviour:
     battle_Character: {fileID: 0}
   state_handler: {fileID: 0}
   MyHpbar: {fileID: 0}
+  skill_handler: {fileID: 0}
+  char_Info: {fileID: 0}
+  mon_Info: {fileID: 0}
+  mon_Skill_Info: {fileID: 0}
+  mon_Target_Info: {fileID: 0}
+  player_Aconstant: {fileID: 0}
+  mon_Aconstant: {fileID: 0}
   index: 0
   Character_Name: 
   Max_HP: 0
@@ -885,7 +949,6 @@ MonoBehaviour:
   Armor: 0
   balance_gauge: 0
   move_Speed: 0
-  monster_Info: {fileID: 0}
   Player_Mana: 0
   Player_Stamina: 0
   player_Atk_1: 0
@@ -928,6 +991,7 @@ MonoBehaviour:
     now_State: {fileID: 0}
     pre_State_List: []
     navMesh: {fileID: 0}
+    isPause: 0
 --- !u!4 &1726810992
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,7 +1157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &1949588655
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1133,6 +1197,13 @@ MonoBehaviour:
     battle_Character: {fileID: 0}
   state_handler: {fileID: 0}
   MyHpbar: {fileID: 0}
+  skill_handler: {fileID: 0}
+  char_Info: {fileID: 0}
+  mon_Info: {fileID: 0}
+  mon_Skill_Info: {fileID: 0}
+  mon_Target_Info: {fileID: 0}
+  player_Aconstant: {fileID: 0}
+  mon_Aconstant: {fileID: 0}
   index: 0
   Character_Name: Slime
   Max_HP: 55
@@ -1140,7 +1211,6 @@ MonoBehaviour:
   Armor: 0
   balance_gauge: 0
   move_Speed: 3
-  monster_Info: {fileID: 0}
   Player_Mana: 0
   Player_Stamina: 0
   player_Atk_1: 0
@@ -1183,6 +1253,7 @@ MonoBehaviour:
     now_State: {fileID: 327276013}
     pre_State_List: []
     navMesh: {fileID: 0}
+    isPause: 0
   isDivide: 0
   OnTree: 1
   isJump: 0

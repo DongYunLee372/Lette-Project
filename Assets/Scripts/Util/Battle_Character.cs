@@ -109,13 +109,13 @@ public class Battle_Character : MonoBehaviour
         return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         destination_Pos = transform.position;
 
-        // 여기서 switch 로 종류에 따라 스테이트 처리기 분리
-        if (Character_Name == "Slime")
-            state_handler = gameObject.AddComponent<Slime_State_Handler>();
-        else
-            state_handler = gameObject.AddComponent<General_Monster_State>();
+        //// 여기서 switch 로 종류에 따라 스테이트 처리기 분리
+        //if (Character_Name == "Slime")
+        //    state_handler = gameObject.AddComponent<Slime_State_Handler>();
+        //else
+        //    state_handler = gameObject.AddComponent<General_Monster_State>();
 
-        state_handler.State_Handler_Initialize(this);
+        //state_handler.State_Handler_Initialize(this);
 
         attack_Collider = GetComponentInChildren<Enemy_Weapon>()?.gameObject;
 
@@ -163,8 +163,13 @@ public class Battle_Character : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        real_AI.AI_Init(this);
+    }
+
     private void Update()
     {
-        
+        real_AI.AI_Update();
     }
 }
