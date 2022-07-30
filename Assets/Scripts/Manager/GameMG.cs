@@ -1,29 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public  class GameMG :Singleton<GameMG>
+public enum Scenes_Stage
 {
+    Loding=0,
+    Stage1,
+    Stage2,
+    Stage3,
+    Boss,
+    Menu,
+    Stop
+};
 
-    public  float PlayTime;  //플레이 시간 저장
-    private  float time_start;
-    private  float time_current;
-    private  float time_Max = 5f;
-    private  bool isEnded;
+public class GameMG : Singleton<GameMG>
+{
+    public Scenes_Stage scenes_Stage = Scenes_Stage.Loding;
 
-     ObjectManager  _objManager = new ObjectManager();
-     ResourceManager _resourceManager = new ResourceManager();
+    public float PlayTime;  //플레이 시간 저장
+    private float time_start;
+    private float time_current;
+    private float time_Max = 5f;
+    private bool isEnded;
+    private Vector3 Init_PlayerPos = new Vector3(0, 0, 0);
 
-    public  ObjectManager ObjManager { get { return Instance._objManager; } }
-    public  ResourceManager Resource { get { return Instance._resourceManager; } }
+    ObjectManager _objManager = new ObjectManager();
+    ResourceManager _resourceManager = new ResourceManager();
+    public List<GameObject> tempObj_Manager = new List<GameObject>();
+
+    public ObjectManager ObjManager { get { return Instance._objManager; } }
+    public ResourceManager Resource { get { return Instance._resourceManager; } }
 
     //플레이 시간
-     private void Check_Timer()
+    //일시정지할때 부정확
+    private void Check_Timer()
     {
         time_current = Time.time - time_start;
         if (time_current < time_Max)
         {
-           // text_Timer.text = $"{time_current:N2}";
+            // text_Timer.text = $"{time_current:N2}";
             Debug.Log(time_current);
         }
         else if (!isEnded)
@@ -33,31 +49,93 @@ public  class GameMG :Singleton<GameMG>
 
     }
 
-     private void End_Timer()
+    private void End_Timer()
     {
         Debug.Log("End");
         time_current = time_Max;
-       // text_Timer.text = $"{time_current:N2}";
+        // text_Timer.text = $"{time_current:N2}";
         isEnded = true;
     }
 
 
-     private void Reset_Timer()
+    private void Reset_Timer()
     {
         time_start = Time.time;
         time_current = 0;
-      //  text_Timer.text = $"{time_current:N2}";
+        //  text_Timer.text = $"{time_current:N2}";
         isEnded = false;
         Debug.Log("Start");
     }
 
-     void startGame()
+    //게임 시작
+    public void startGame(string SceneName)//스테이지값)  //플레이어 스탯 고정...
     {
+
+
+        //어드레서블 생성 후 
+
+        StartCoroutine(LoadMyAsyncScene(SceneName));
+
+        GameObject PlayerInitPos = new GameObject();
+        PlayerInitPos.transform.position = Init_PlayerPos;
+
+      
+       // GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform);
+
         // 게임 저장데이터
+
         //게임필드
         //캐릭터 생성
         // UI매니저 호출
     }
+
+    public void startGame(string SceneName, Vector3 PlayerPos)
+    {
+
+        Debug.Log(SceneManager.GetActiveScene().name + " 씬 이름 ");
+        GameObject PlayerInitPos = new GameObject();
+        PlayerInitPos.transform.position = PlayerPos;
+
+        foreach (var obj in tempObj_Manager)
+        {
+            if (obj.name == "PlayerCharacter")
+            {
+                obj.transform.parent.transform.position = PlayerPos;
+            }
+        }
+        //GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform);
+    }
+
+    //public IEnumerator startGame(string SceneName, Vector3 PlayerPos)
+    //{
+    //    yield return StartCoroutine(LoadMyAsyncScene(SceneName));
+
+
+    //    foreach (var obj in tempObj_Manager)
+    //    {
+    //        if (obj.name == "PlayerCharacter")
+    //        {
+    //            obj.transform.parent.transform.position = PlayerPos;
+    //        }
+    //    }
+
+    //}
+
+    //씬 불러오기
+    IEnumerator LoadMyAsyncScene(string SceneName)
+    {
+        // AsyncOperation을 통해 Scene Load 정도를 알 수 있다.
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneName);
+
+        // Scene을 불러오는 것이 완료되면, AsyncOperation은 isDone 상태가 된다.
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        Debug.Log("끝");
+    }
+
 
     //로딩 씬 만들기
     //로딩중 
@@ -72,12 +150,12 @@ public  class GameMG :Singleton<GameMG>
     //스탯 클래스 
     //스킬 데이터 계산
 
-     public  void Damage_calculator()
+    public void Damage_calculator()
     {
         //데미지= (가해)공격력 - (피해)방어력 
     }
 
-     void Update()
+    void Update()
     {
         //타이머인데 잠시 디버그 할라고 꺼둠
 
@@ -88,9 +166,9 @@ public  class GameMG :Singleton<GameMG>
     }
 
 
-     void Start()
+    void Start()
     {
-      //  Reset_Timer();
+        //  Reset_Timer();
     }
 
 }

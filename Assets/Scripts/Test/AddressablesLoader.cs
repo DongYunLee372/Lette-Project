@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
+using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 
 public static class AddressablesLoader
 {
@@ -164,6 +166,49 @@ public static class AddressablesLoader
         return tempobj;
     }
 
+   static SceneInstance m_LoadedScene;
+
+    public static void OnSceneAction(string SceneName)
+    {
+        //if (m_LoadedScene.Scene.name == null)
+       // {
+            Addressables.LoadSceneAsync(SceneName, LoadSceneMode.Additive).Completed += OnSceneLoaded;
+      //  }
+      //  else
+      //  {
+           // Addressables.UnloadSceneAsync(m_LoadedScene).Completed += OnSceneUnloaded;
+        //}
+    }
+
+    private static void OnSceneUnloaded(AsyncOperationHandle<SceneInstance> obj)
+    {
+        switch (obj.Status)
+        {
+            case AsyncOperationStatus.Succeeded:
+                m_LoadedScene = new SceneInstance();
+                break;
+            case AsyncOperationStatus.Failed:
+                Debug.LogError("씬 언로드 실패: " /*+ addSceneReference.AssetGUID*/);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void OnSceneLoaded(AsyncOperationHandle<SceneInstance> obj)
+    {
+        switch (obj.Status)
+        {
+            case AsyncOperationStatus.Succeeded:
+                m_LoadedScene = obj.Result;
+                break;
+            case AsyncOperationStatus.Failed:
+                Debug.LogError("씬 로드 실패: " /*+ addSceneReference.AssetGUID*/);
+                break;
+            default:
+                break;
+        }
+    }
 
 
 
