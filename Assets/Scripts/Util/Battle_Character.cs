@@ -20,7 +20,7 @@ public class Battle_Character : MonoBehaviour
 
     public EnemyHpbar MyHpbar;
 
-    public Skill skill_handler;
+    public Skill skill_handler; // 보유한 스킬에따라 필요한 스킬핸들러를 부여.
 
     [Header("Real Stats")] // 데이터 정리된 것 밑의 데이터들은 정리해야함
     public CharacterInformation char_Info;
