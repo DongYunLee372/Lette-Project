@@ -103,17 +103,12 @@ public class testAttack123 : BaseComponent
 
     public Transform AttackColliderParent;
 
+    public AttackManager att;
     void Start()
     {
-        colliders = GetComponentsInChildren<Collider>();
-
-        //for(int i=0;i<2;i++)
-        //{
-        //    if(colliders[i].name == StaticClass.PlayerAttackCollider)
-        //    {
-        //        colliders[i].
-        //    }
-        //}
+        //colliders = GetComponentsInChildren<Collider>();
+        att = GetComponent<AttackManager>();
+        
 
 
         for (int i = 0; i < Attack_InformationList.Count; i++)
@@ -124,6 +119,7 @@ public class testAttack123 : BaseComponent
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
 
+        //att.AddClipName(this.name, attackinfos[0].aniclip.name, attackinfos[0].movedis, attackinfos[0].movetime);
         for (int i = 0; i < attackinfos.Length; i++)
         {
             eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
@@ -137,7 +133,7 @@ public class testAttack123 : BaseComponent
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
         }
 
-        
+
 
     }
     void Update()
@@ -193,7 +189,8 @@ public class testAttack123 : BaseComponent
 
     public void CreateEffect()
     {
-        testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
+        att.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 10);
+        //testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f , 10);
         //preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
         //preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, Attack_InformationList[AttackNum].P_EffectPosRot, 1.5f);
     }
@@ -227,7 +224,9 @@ public class testAttack123 : BaseComponent
 
         StartCoroutine(Cor_TimeCounter(Attack_InformationList[AttackNum].P_EffectStartTime, CreateEffect));
 
-        testAttckmanager.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
+
+        att.AttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
+        //testAttckmanager.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
 
         
 
@@ -235,11 +234,11 @@ public class testAttack123 : BaseComponent
 
     public void AttackMove(string clipname)
     {
-       
+
         for (int i = 0; i < attackinfos.Length; i++)
         {
             if (attackinfos[i].aniclip.name == clipname)
-            {               
+            {
                 movecom.FowardDoMove(Attack_InformationList[i].P_movedis, Attack_InformationList[i].P_movetime);
 
                 return;
@@ -257,8 +256,8 @@ public class testAttack123 : BaseComponent
 
     }
 
-   
-   
+
+
     public void AttackEnd(string s_val)
     {
         if (effectobj != null)
@@ -266,7 +265,7 @@ public class testAttack123 : BaseComponent
             Debug.Log($"dasdw공격 끝 들어옴 -> {s_val}");
             effectobj.transform.parent = preparent;
         }
-        
+
 
         if (curval.IsAttacking == true)
             curval.IsAttacking = false;
@@ -274,10 +273,10 @@ public class testAttack123 : BaseComponent
         lastAttackTime = Time.time;
 
 
-        
+
     }
 
-   
+
     public override void InitComtype()
     {
         p_comtype = EnumTypes.eComponentTypes.AttackCom;

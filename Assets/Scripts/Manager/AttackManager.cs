@@ -2,112 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackManager : Singleton<AttackManager>
-{
-    [SerializeField]
-    List<BaseComponent> AttackComList = new List<BaseComponent>();
-
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
-    //public void AttackMove(string clipname)
-    //{
-
-    //    for (int i = 0; i < attackinfos.Length; i++)
-    //    {
-    //        if (attackinfos[i].aniclip.name == clipname)
-    //        {
-    //            movecom.FowardDoMove(attackinfos[i].movedis, attackinfos[i].movetime);
-
-    //            return;
-    //        }
-    //    }
-
-    //    for (int i = 0; i < skillinfos.Length; i++)
-    //    {
-    //        if (skillinfos[i].aniclip.name == clipname)
-    //        {
-    //            movecom.FowardDoMove(skillinfos[i].Movedis, skillinfos[i].MoveTime);
-    //            return;
-    //        }
-    //    }
-
-    //}
-    //public void AttackEnd(string s_val)
-    //{
-    //    if (effectobj != null)
-    //    {
-    //        Debug.Log($"dasdw공격 끝 들어옴 -> {s_val}");
-    //        effectobj.transform.parent = preparent;
-    //    }
-
-
-    //    if (curval.IsAttacking == true)
-    //        curval.IsAttacking = false;
-
-    //    lastAttackTime = Time.time;
-    //}
-
-    public void AddComponent(BaseComponent com , string keyname)
-    {
-        //임시
-        AttackComList.Add(com);
-    }
-
-    
-    public void EventAdd(int size , string clipname , string methodname , AnimationEventSystem eventsystem)
-    {
-        
-    }
-         
-
-    public void ComboAttackMana(AnimationController animator  , string AniName , float time)
-    {
-        animator.Play(AniName, time);
-    }
+public class AttackManager : BaseComponent
+{    
     public void AttackMana(AnimationController animator, string AniName, float time)
     {
         animator.Play(AniName, time);
-    }
-
-
-    public Transform CreateEffect(GameObject effect , Transform EffectPosRot , float destroyTime)
+    }    
+    public void CreateEffect(GameObject effect , Transform EffectPosRot , float destroyTime , float damage)
     {
         GameObject effectobj;
-        Transform temp = EffectPosRot;
-
 
         effectobj = GameObject.Instantiate(effect);
-
-        
-
-
         effectobj.transform.position = EffectPosRot.position;
         effectobj.transform.rotation = EffectPosRot.rotation;
         effectobj.transform.parent = this.transform;
-        
-        //Destroy(effectobj, destroyTime);
 
-        //StartCoroutine(Cor_TimeCounter(tempPos));
+        effectobj.GetComponent<ColliderEventDamage>().DamageSetting(damage);
+        StartCoroutine(Cor_TimeCounter(destroyTime , effectobj));
+               
+    }
+    IEnumerator Cor_TimeCounter(float time , GameObject obj)
+    {
+        float starttime = Time.time;
 
-        return effectobj.transform.parent;
+        while (true)
+        {
+            if ((Time.time - starttime) >= time)
+            {
+                Destroy(obj);
+                yield break;
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+    
+    public override void InitComtype()
+    {
+        p_comtype = EnumTypes.eComponentTypes.AttackCom;
     }
 
-
-    IEnumerator Cor_TimeCounter(Vector3 time)
+    void Start()
     {
        
+    }
 
-        
-        yield return new WaitForSeconds(3f);
-        Debug.Log(time);
+
+    void Update()
+    {
 
     }
+
+//    foreach (var item in ComboEffectDic)
+//        {
+//            if (item.Key == Id)
+//            {
+//                RemoveDic(item.Value, Id);
+//}
+//        }
 }

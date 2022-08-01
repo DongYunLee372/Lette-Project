@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ColliderEventDamage : MonoBehaviour
 {
+    public float damage;
+
+
+    public void DamageSetting(float m_damage)
+    {
+        damage = m_damage;
+    }
+
     // 어떤 공격시 생성될 이펙트가 가지고 있을 스크립트
     void Start()
     {
