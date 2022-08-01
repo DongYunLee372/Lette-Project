@@ -3,11 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackManager : BaseComponent
-{    
+{
+    [SerializeField]
+    CurState curval;
+    [SerializeField]
+    List<float> Movedic = new List<float>();
+    [SerializeField]
+    List<float> Movetime = new List<float>();
+    [SerializeField]
+    List<string> nameClip = new List<string>();
+    public CMoveComponent movecom;
+    public AnimationEventSystem eventsystem;
+
+    public bool ComboAttackState;
+    public PlayerAttack PlayerScp;
+    // public 몬스터 scp
+    public void AddAttackInfo(string name , float move , float time)
+    {
+        
+        nameClip.Add(name);
+        Movetime.Add(time);
+        Movedic.Add(move);
+
+        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(name, AttackMove),
+               new KeyValuePair<string, AnimationEventSystem.endCallback>(name, AttackEnd));
+    }
     public void AttackMana(AnimationController animator, string AniName, float time)
     {
+        if (movecom == null)
+        {
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            //testAttckmanager.AddComponent(movecom);
+            curval = movecom.curval;
+        }
+        Debug.Log(AniName);
         animator.Play(AniName, time);
-    }    
+    }
+    public void ComboAttackMana(AnimationController animator, string AniName, float time)
+    {
+        if (movecom == null)
+        {
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            //testAttckmanager.AddComponent(movecom);
+            curval = movecom.curval;
+        }
+        Debug.Log(AniName);
+        ComboAttackState = true;
+        animator.Play(AniName, time);
+    }
     public void CreateEffect(GameObject effect , Transform EffectPosRot , float destroyTime , float damage)
     {
         GameObject effectobj;
@@ -18,8 +62,10 @@ public class AttackManager : BaseComponent
         effectobj.transform.parent = this.transform;
 
         effectobj.GetComponent<ColliderEventDamage>().DamageSetting(damage);
-        StartCoroutine(Cor_TimeCounter(destroyTime , effectobj));
-               
+        Destroy(effectobj, destroyTime);
+
+        //StartCoroutine(Cor_TimeCounter(destroyTime , effectobj));
+
     }
     IEnumerator Cor_TimeCounter(float time , GameObject obj)
     {
@@ -35,15 +81,59 @@ public class AttackManager : BaseComponent
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
+    public void AttackMove(string clipname)
+    {
+        Debug.Log("attackMove");
+
+        for (int i = 0; i < nameClip.Count; i++)
+        {
+            if (nameClip[i] == clipname)
+            {
+                movecom.FowardDoMove(Movedic[i], Movetime[i]);
+                return;
+            }
+        }
+    }
+
+    public void AttackEnd(string s_val)
+    {
+        //if (effectobj != null)
+        //{
+        //    Debug.Log($"dasdw공격 끝 들어옴 -> {s_val}");
+        //    effectobj.transform.parent = preparent;
+        //}
+
+
+        if (curval.IsAttacking == true)
+            curval.IsAttacking = false;
+        if (ComboAttackState)
+            ComboAttackEnd();
+        Debug.Log("AttackEnd");
+
+    }
+
     
+    public void ComboAttackEnd()
+    {        
+        float lastAttackTime = Time.time;
+        PlayerScp.AttackTime(lastAttackTime);
+        ComboAttackState = false;
+    }
     public override void InitComtype()
     {
         p_comtype = EnumTypes.eComponentTypes.AttackCom;
     }
 
+    private void Awake()
+    {
+        eventsystem = GetComponentInChildren<AnimationEventSystem>();       
+    }
+
     void Start()
     {
-       
+        ComboAttackState = false;
+        PlayerScp = GetComponentInChildren<PlayerAttack>();
+
     }
 
 

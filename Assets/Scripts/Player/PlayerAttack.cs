@@ -105,34 +105,15 @@ public class PlayerAttack : BaseComponent
     public AttackManager att;
     void Start()
     {
-        //colliders = GetComponentsInChildren<Collider>();
-        att = GetComponent<AttackManager>();
-
-
-
-        for (int i = 0; i < Attack_InformationList.Count; i++)
-        {
-            Debug.Log(Attack_InformationList[i].P_AttackNum);
-        }
-
+        
+        att = GetComponentInChildren<AttackManager>();
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
 
-        //att.AddClipName(this.name, attackinfos[0].aniclip.name, attackinfos[0].movedis, attackinfos[0].movetime);
-        for (int i = 0; i < attackinfos.Length; i++)
-        {
-            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-                new KeyValuePair<string, AnimationEventSystem.midCallback>(attackinfos[i].aniclip.name, AttackMove),
-                new KeyValuePair<string, AnimationEventSystem.endCallback>(attackinfos[i].aniclip.name, AttackEnd));
+        for (int i = 0; i < Attack_InformationList.Count; i++)
+        {           
+            att.AddAttackInfo(Attack_InformationList[i].P_aniclip.name, Attack_InformationList[i].P_movedis, Attack_InformationList[i].P_movetime);
         }
-        for (int i = 0; i < skillinfos.Length; i++)
-        {
-            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-                new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
-                new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
-        }
-
-
 
     }
     void Update()
@@ -224,56 +205,58 @@ public class PlayerAttack : BaseComponent
         StartCoroutine(Cor_TimeCounter(Attack_InformationList[AttackNum].P_EffectStartTime, CreateEffect));
 
 
-        att.AttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
+        att.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
         //testAttckmanager.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
-
-
-
     }
 
-    public void AttackMove(string clipname)
+    public void AttackTime(float time)
     {
-
-        for (int i = 0; i < attackinfos.Length; i++)
-        {
-            if (attackinfos[i].aniclip.name == clipname)
-            {
-                movecom.FowardDoMove(Attack_InformationList[i].P_movedis, Attack_InformationList[i].P_movetime);
-
-                return;
-            }
-        }
-
-        for (int i = 0; i < skillinfos.Length; i++)
-        {
-            if (skillinfos[i].aniclip.name == clipname)
-            {
-                movecom.FowardDoMove(skillinfos[i].Movedis, skillinfos[i].MoveTime);
-                return;
-            }
-        }
-
+        Debug.Log("아부앙" + time);
+        lastAttackTime = time;
     }
+    //public void AttackMove(string clipname)
+    //{
+
+    //    for (int i = 0; i < attackinfos.Length; i++)
+    //    {
+    //        if (attackinfos[i].aniclip.name == clipname)
+    //        {
+    //            movecom.FowardDoMove(Attack_InformationList[i].P_movedis, Attack_InformationList[i].P_movetime);
+
+    //            return;
+    //        }
+    //    }
+
+    //    for (int i = 0; i < skillinfos.Length; i++)
+    //    {
+    //        if (skillinfos[i].aniclip.name == clipname)
+    //        {
+    //            movecom.FowardDoMove(skillinfos[i].Movedis, skillinfos[i].MoveTime);
+    //            return;
+    //        }
+    //    }
+
+    //}
 
 
 
-    public void AttackEnd(string s_val)
-    {
-        if (effectobj != null)
-        {
-            Debug.Log($"dasdw공격 끝 들어옴 -> {s_val}");
-            effectobj.transform.parent = preparent;
-        }
+    //public void AttackEnd(string s_val)
+    //{
+    //    if (effectobj != null)
+    //    {
+    //        Debug.Log($"dasdw공격 끝 들어옴 -> {s_val}");
+    //        effectobj.transform.parent = preparent;
+    //    }
 
 
-        if (curval.IsAttacking == true)
-            curval.IsAttacking = false;
+    //    if (curval.IsAttacking == true)
+    //        curval.IsAttacking = false;
 
-        lastAttackTime = Time.time;
+    //    lastAttackTime = Time.time;
 
 
 
-    }
+    //}
 
 
     public override void InitComtype()
