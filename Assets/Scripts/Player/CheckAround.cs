@@ -29,6 +29,11 @@ public class CheckAround : MonoBehaviour
 
     public void CheckFront()
     {
+        if (movecom == null)
+        {
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            curval = movecom.curval;
+        }
         RaycastHit hit;
         curval.CurFowardSlopAngle = 0;
         curval.IsFowordBlock = false;
@@ -48,6 +53,11 @@ public class CheckAround : MonoBehaviour
 
     public void CheckGround()
     {
+        if (movecom == null)
+        {
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            curval = movecom.curval;
+        }
         curval.IsGrounded = false;
         curval.IsSlip = false;
         curval.IsOnTheSlop = false;
