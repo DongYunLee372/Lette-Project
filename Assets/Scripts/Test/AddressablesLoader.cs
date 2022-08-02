@@ -170,14 +170,27 @@ public static class AddressablesLoader
 
     public static void OnSceneAction(string SceneName)
     {
-        //if (m_LoadedScene.Scene.name == null)
-       // {
+        if (m_LoadedScene.Scene.name == null)
+        {
             Addressables.LoadSceneAsync(SceneName, LoadSceneMode.Additive).Completed += OnSceneLoaded;
-      //  }
-      //  else
-      //  {
-           // Addressables.UnloadSceneAsync(m_LoadedScene).Completed += OnSceneUnloaded;
-        //}
+        }
+        else
+        {
+            //Addressables.UnloadSceneAsync(m_LoadedScene).Completed += OnSceneUnloaded;
+            Debug.Log("로드 실패");
+        }
+    }
+
+    public static void OnUnloadedAction(string SceneName)
+    {
+        if (m_LoadedScene.Scene.name != null)
+        {
+            Addressables.UnloadSceneAsync(m_LoadedScene).Completed += OnSceneUnloaded;
+        }
+       else
+        {
+            Debug.Log("언로드 실패");
+        }
     }
 
     private static void OnSceneUnloaded(AsyncOperationHandle<SceneInstance> obj)
