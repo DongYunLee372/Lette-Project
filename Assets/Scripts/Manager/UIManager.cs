@@ -16,7 +16,7 @@ public class UIManager : Singleton<UIManager>
     private UIInfo uiinfo = new UIInfo();
 
     public List<UIInfo> info = new List<UIInfo>();
-    public List<Canvas> canvas;
+    public List<GameObject> canvas;
 
 
     public enum CANVAS_NUM
@@ -110,6 +110,14 @@ public class UIManager : Singleton<UIManager>
                 continue;
             }
         }
+    }
+    public void Canvasoff(CANVAS_NUM num)
+    {
+        canvas[(int)num].SetActive(false);
+    }
+    public void Canvason(CANVAS_NUM num)
+    {
+        canvas[(int)num].SetActive(true);
     }
     // Start is called before the first frame update
     void Start()
