@@ -21,7 +21,7 @@ public class EnemyHpbar : MonoBehaviour
     public float Curhp;
     public float Maxhp;
 
-    public Vector3 hpBarOffset = new Vector3(-0.5f, 3f, 0);
+    public Vector3 hpBarOffset = new Vector3(0.5f, 3f, 0);
     public EnemyHpbar MyHpbar;
     void Start()
     {
@@ -37,7 +37,7 @@ public class EnemyHpbar : MonoBehaviour
 
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         //main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
         var screenPos = main.WorldToScreenPoint(enemyTr.position + offset); // 몬스터의 월드 3d좌표를 스크린좌표로 변환
@@ -79,7 +79,7 @@ public class EnemyHpbar : MonoBehaviour
         var _hpbar = hpBar.GetComponent<EnemyHpbar>();
         //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = trans;
-        _hpbar.offset = hpBarOffset;
+        _hpbar.offset = new Vector3(0, 2.3f, 0); ;
         _hpbar.Maxhp = HP;
         _hpbar.Curhp = HP;
         var _test = hpBar.GetComponent<Image>();
