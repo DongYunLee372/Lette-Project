@@ -21,17 +21,28 @@ public class LoadTestScript : MonoBehaviour
         PlayerInitPos.transform.position = new Vector3(10, 0, 0);
 
         //생성 -어드레서블X 실행잘됌
-        GameMG.Instance.tempObj_Manager.Add(GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform));
-        GameMG.Instance.tempObj_Manager.Add(GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform));
-       
+        //GameMG.Instance.tempObj_Manager.Add(GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform));
+        //GameMG.Instance.tempObj_Manager.Add(GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform));
+
         //생성 - 어드레서블 오류뜸
         // GameMG.Instance.Resource.Instantiate("Terrain", MapPos.transform);
 
-        //코루틴 아닌거
+        //코루틴 아닌거 (풀링)
         //GameMG.Instance.Resource.Instantiate("susu", PlayerInitPos.transform);
 
-        //코루틴 생성
+        //어드레서블 (풀링X)
+        StartCoroutine(AddressablesController.Instance.Load_Name("Terrain", MapPos.transform));
+        StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
+
+
+        //코루틴 생성 (풀링)
         StaticCoroutine.DoCoroutine(GameMG.Instance.Resource.Instantiate_("susu", PlayerInitPos.transform));
+
+      
+       
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("PlayerCharacter"));
+
+
 
         //처음 호출에서 오류 남...(?)
         CharacterCreate.Instance.CreateMonster(EnumScp.MonsterIndex.mon_01_01, PlayerInitPos.transform);
@@ -55,14 +66,7 @@ public class LoadTestScript : MonoBehaviour
 
     }
 
-    public void click_Scenes()
-    {
-
-        // StartCoroutine( GameMG.Instance.startGame("Lo",new Vector3(50,0,0)));
-        GameMG.Instance.startGame("Lo");
-
-
-    }
+   
 
     //1. uiHP바 오류 ->메인 카메라 오류같음, 캐릭터 찾아야댐
     //2. 어드레서블 연결
@@ -71,10 +75,6 @@ public class LoadTestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerInitPos.transform.position = new Vector3(50, 0, 0);
-            click_Scenes();
-        }
+       
     }
 }

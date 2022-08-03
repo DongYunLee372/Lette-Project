@@ -31,6 +31,14 @@ MonoBehaviour:
     m_Address: Load_test
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: e9289f49a91d21843baaa311416ffd7f
+    m_Address: PlayerCharacter
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bae9203b94856804188da7ea1cea0bac
+    m_Address: Terrain
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

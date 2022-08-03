@@ -98,7 +98,7 @@ public static class AddressablesLoader
     //	//Addressables.Release(matHandle);
     //}
 
-    //객체 불러오기
+    //객체 불러오기 (1개
     public static IEnumerator LoadGameObjectAndMaterial(string name)
     {
         Debug.Log("LoadGameObjectAndMaterial호출");

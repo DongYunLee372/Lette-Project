@@ -167,7 +167,7 @@ public class GameMG : Singleton<GameMG>
         //Check_Timer();
 
        //임시로 씬 불러오기 로딩씬에서 사용(테스트)
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.F2))
             {
             //startGame("Lo");  //어드레서블 x
 
