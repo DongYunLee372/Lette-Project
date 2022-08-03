@@ -38,14 +38,14 @@ public class LoadTestScript : MonoBehaviour
         //코루틴 생성 (풀링)
         StaticCoroutine.DoCoroutine(GameMG.Instance.Resource.Instantiate_("susu", PlayerInitPos.transform));
 
-      
-       
+
+
         //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("PlayerCharacter"));
 
 
 
         //처음 호출에서 오류 남...(?)
-        CharacterCreate.Instance.CreateMonster(EnumScp.MonsterIndex.mon_01_01, PlayerInitPos.transform);
+        StartCoroutine( CharacterCreate.Instance.CreateMonster_(EnumScp.MonsterIndex.mon_01_01, PlayerInitPos.transform));
         //카메라 오류인거같아서 해봤는데 정상적으로 작동됌.
         // Canvas canvas = gameObject.GetComponent<Canvas>();
         //canvas.renderMode = RenderMode.ScreenSpaceCamera;

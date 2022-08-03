@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 5ae104b482670fb41a3a0717e7b9039a
   m_SerializeEntries:
-  - m_GUID: 6d3c96368e8d3c54f956615b6390466b
-    m_Address: Prefabs/Susu_
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Monster
   - m_GUID: df42f27fec159c34ba416df450d6358b
     m_Address: susu
     m_ReadOnly: 0
