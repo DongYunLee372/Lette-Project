@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CheckAround : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class CheckAround : MonoBehaviour
     public CapsuleCollider CapsuleCol = null;
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + CapsuleCol.height - CapsuleCol.radius, transform.position.z);
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + CapsuleCol.radius, transform.position.z);
+
+    
+    Vector3 temppos;
+
+    GameObject tempcube;
+
+    NavMeshAgent testnavagent;
 
     private void Awake()
     {
@@ -24,7 +32,8 @@ public class CheckAround : MonoBehaviour
             movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
-        
+        tempcube = GameObject.Find("tempcube");
+        testnavagent = GetComponent<NavMeshAgent>();
     }
 
     public void CheckFront()
@@ -39,6 +48,7 @@ public class CheckAround : MonoBehaviour
         curval.IsFowordBlock = false;
         //Vector3 temp = new Vector3(WorldMove.x, 0, WorldMove.z);
         //temp = com.FpRoot.forward /*+ Vector3.down*/;
+        //NavMesh.Raycast()
         bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.2f, movecom.com.FpRoot.forward, out hit, 0.3f);
         if (cast)
         {
@@ -62,19 +72,31 @@ public class CheckAround : MonoBehaviour
         curval.IsSlip = false;
         curval.IsOnTheSlop = false;
         curval.CurGroundSlopAngle = 0;
+
+
         if (Time.time >= curval.LastJump + 0.2f)//점프하고 0.2초 동안은 지면검사를 하지 않는다.
         {
             RaycastHit hit;
 
-            bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius - 0.2f, Vector3.down, out hit, CapsuleCol.radius - 0.1f);
+            NavMeshHit navhit;
+
+
+            temppos = new Vector3(this.transform.position.x, this.transform.position.y  - 10, this.transform.position.z);
+            tempcube.transform.position = temppos;
+
+            bool cast = testnavagent.Raycast(temppos, out navhit);
+            //bool cast = NavMesh.Raycast(this.transform.position + new Vector3(0,2,0), temppos, out navhit, NavMesh.GetAreaFromName("Walkable"));
+            Debug.DrawLine(this.transform.position + new Vector3(0, 2, 0), temppos, cast ? Color.red : Color.blue);
+            //bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius - 0.2f, Vector3.down, out hit, CapsuleCol.radius - 0.1f);
 
             if (cast)
             {
-                curval.IsGrounded = true;
-                curval.CurGroundNomal = hit.normal;
-                curval.CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
 
-                curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, movecom.com.FpRoot.forward) - 90f;
+                curval.IsGrounded = true;
+                curval.CurGroundNomal = navhit.normal;
+                curval.CurGroundSlopAngle = Vector3.Angle(navhit.normal, Vector3.up);
+
+                curval.CurFowardSlopAngle = Vector3.Angle(navhit.normal, movecom.com.FpRoot.forward) - 90f;
 
                 if (curval.CurGroundSlopAngle > 1.0f)
                 {
