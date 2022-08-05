@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+/*캐릭터 주변의 콜라이더들을 검사
+  1. 현재 나의 발 밑에 바닥이 있는지
+  2. 현재 나의 진행 방향 앞에 벽이 있는지
+  3. 내가 가야할 곳의 각도*/
 public class CheckAround : MonoBehaviour
 {
     CurState curval;
@@ -12,6 +17,7 @@ public class CheckAround : MonoBehaviour
     public CapsuleCollider CapsuleCol = null;
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + CapsuleCol.height - CapsuleCol.radius, transform.position.z);
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + CapsuleCol.radius, transform.position.z);
+
 
     
     Vector3 temppos;
@@ -84,19 +90,19 @@ public class CheckAround : MonoBehaviour
             temppos = new Vector3(this.transform.position.x, this.transform.position.y  - 10, this.transform.position.z);
             tempcube.transform.position = temppos;
 
-            bool cast = testnavagent.Raycast(temppos, out navhit);
+            //bool cast = testnavagent.Raycast(temppos, out navhit);
             //bool cast = NavMesh.Raycast(this.transform.position + new Vector3(0,2,0), temppos, out navhit, NavMesh.GetAreaFromName("Walkable"));
-            Debug.DrawLine(this.transform.position + new Vector3(0, 2, 0), temppos, cast ? Color.red : Color.blue);
-            //bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius - 0.2f, Vector3.down, out hit, CapsuleCol.radius - 0.1f);
+            //Debug.DrawLine(this.transform.position + new Vector3(0, 2, 0), temppos, cast ? Color.red : Color.blue);
+            bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius - 0.2f, Vector3.down, out hit, CapsuleCol.radius - 0.1f,LayerMask.GetMask("Ground"));
 
             if (cast)
             {
 
                 curval.IsGrounded = true;
-                curval.CurGroundNomal = navhit.normal;
-                curval.CurGroundSlopAngle = Vector3.Angle(navhit.normal, Vector3.up);
+                curval.CurGroundNomal = hit.normal;
+                curval.CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
 
-                curval.CurFowardSlopAngle = Vector3.Angle(navhit.normal, movecom.com.FpRoot.forward) - 90f;
+                curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, movecom.com.FpRoot.forward) - 90f;
 
                 if (curval.CurGroundSlopAngle > 1.0f)
                 {
