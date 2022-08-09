@@ -48,6 +48,7 @@ public class Skill : MonoBehaviour
         이펙트 등등
          */
     }
+
     //public virtual void 소환();
 
     //public virtual void 투사체발사();
