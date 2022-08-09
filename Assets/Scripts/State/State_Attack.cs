@@ -11,29 +11,29 @@ public class State_Attack : State
     public override bool Judge(out State _State, Battle_Character b_c)
     {
         //  b_c.Attack_Melee_Range 가 스킬 사용범위 변수로 바뀌어야함.
-        if ((Vector3.Distance(b_c.transform.position,
-            b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range) && b_c.char_Info.P_player_MP >= b_c.need_Mana)
-        {
-            judge_logic = Enemy_Attack_Logic.Skill_Using;
-            _State = this;
-            return true;
-        }
+        //if ((Vector3.Distance(b_c.transform.position,
+        //    b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range) && b_c.char_Info.P_player_MP >= b_c.need_Mana)
+        //{
+        //    judge_logic = Enemy_Attack_Logic.Skill_Using;
+        //    _State = this;
+        //    return true;
+        //}
 
-        if ((Vector3.Distance(b_c.transform.position,
-            b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range)) // 사정 거리 내에 있다면 
-        {
-            judge_logic = Enemy_Attack_Logic.Melee_Attack;
-            _State = this;
-            return true;
-        }
+        //if ((Vector3.Distance(b_c.transform.position,
+        //    b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range)) // 사정 거리 내에 있다면 
+        //{
+        //    judge_logic = Enemy_Attack_Logic.Melee_Attack;
+        //    _State = this;
+        //    return true;
+        //}
 
-        if (b_c.attack_Logic[(int)Enemy_Attack_Logic.Long_Attack] == true && (Vector3.Distance(b_c.transform.position,
-            b_c.cur_Target.transform.position) <= b_c.Attack_Long_Range)) // 원거리 공격방식이 존재
-        {
-            judge_logic = Enemy_Attack_Logic.Long_Attack;
-            _State = this;
-            return true;
-        }
+        //if (b_c.attack_Logic[(int)Enemy_Attack_Logic.Long_Attack] == true && (Vector3.Distance(b_c.transform.position,
+        //    b_c.cur_Target.transform.position) <= b_c.Attack_Long_Range)) // 원거리 공격방식이 존재
+        //{
+        //    judge_logic = Enemy_Attack_Logic.Long_Attack;
+        //    _State = this;
+        //    return true;
+        //}
 
         _State = Trans_List[0];
         return false;

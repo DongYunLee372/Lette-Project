@@ -65,18 +65,18 @@ public class FSM_AI
                     }
                 }
                 break;
-            case _State.Trace:
-                if (Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Melee_Range) // 타겟에 닿았다면
-                {
-                    now_State = _State.Attack; // 공격 상태로 변경
-                }
-                break;
-            case _State.Attack:
-                if (!(Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Melee_Range)) // 사정 거리 내에 있다면 
-                {
-                    now_State = _State.Trace;
-                }
-                break;
+            //case _State.Trace:
+            //    if (Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Melee_Range) // 타겟에 닿았다면
+            //    {
+            //        now_State = _State.Attack; // 공격 상태로 변경
+            //    }
+            //    break;
+            //case _State.Attack:
+            //    if (!(Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Melee_Range)) // 사정 거리 내에 있다면 
+            //    {
+            //        now_State = _State.Trace;
+            //    }
+            //    break;
             case _State.Die_Enter:
                 now_State = _State.Die;
                 break;

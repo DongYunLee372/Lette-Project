@@ -14,11 +14,11 @@ public class Enemy_Weapon : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (parent_BC.isAttack_Effect)
-        {
-            parent_BC.Attack_Effect(collision.gameObject);
-            parent_BC.isAttack_Effect = false;
-        }
+        //if (parent_BC.isAttack_Effect)
+        //{
+        //    parent_BC.Attack_Effect(collision.gameObject);
+        //    parent_BC.isAttack_Effect = false;
+        //}
 
         // 맞은 대상의 damaged 함수를 호출해서 데미지를 입혀줌.
         switch (parent_BC.attack_Type) // 공격 타입에 맞게 데미지를 입혀줌.

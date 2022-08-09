@@ -43,12 +43,7 @@ public class Battle_Character : MonoBehaviour
 
     [Header("Etc Stats")]
     public GameObject cur_Target;
-    public float Attack_Melee_Range; // 사거리
-    public float Attack_Long_Range; // 사거리
-    public float Attackable_Range; // 공격 가능한 사거리.
-    public int need_Mana; // 스킬 사용시 필요한 마나
     public int next_Skill;
-    protected Animator anim;
     public bool isReturn; // enemy_Area 에서 나갈경우 true 체크해줘서 ai가 판단할 수 있게끔 하는 변수
 
     [Header("=============================")]
@@ -56,10 +51,6 @@ public class Battle_Character : MonoBehaviour
     [SerializeField]
     protected GameObject attack_Collider; // 공격 판정 충돌 범위 콜라이더 
     public Enemy_Attack_Type attack_Type; // 공격 타입
-    public bool isAttack_Effect; // 공격에 효과가 있는지
-    public float enemy_Skill_1_damage;
-    public float enemy_Skill_2_damage;
-    public float enemy_Skill_3_damage;
     public bool[] attack_Logic = new bool[(int)(Enemy_Attack_Logic.Attack_Logic_Amount) - 1];
 
     public AI real_AI;
@@ -92,10 +83,10 @@ public class Battle_Character : MonoBehaviour
     }
 
 
-    public virtual void Damaged(float damage_Amount) 
+    public virtual void Damaged(float damage_Amount)
     {
-       // Cur_HP -= (damage_Amount - Armor);
-      //  MyHpbar.Curhp = Cur_HP;
+        // Cur_HP -= (damage_Amount - Armor);
+        //  MyHpbar.Curhp = Cur_HP;
         MyHpbar.hit();
 
         Debug.Log("아악");
