@@ -92,10 +92,10 @@ public class FSM_AI
         }
 
         // any state 
-        if (battle_Character.Cur_HP <= 0 && now_State != _State.Wait && now_State != _State.Die)
-        {
-            now_State = _State.Die_Enter;
-        }
+        //if (battle_Character.Cur_HP <= 0 && now_State != _State.Wait && now_State != _State.Die)
+        //{
+        //    now_State = _State.Die_Enter;
+        //}
 
         return now_State;
     }

@@ -12,7 +12,7 @@ public class State_Attack : State
     {
         //  b_c.Attack_Melee_Range 가 스킬 사용범위 변수로 바뀌어야함.
         if ((Vector3.Distance(b_c.transform.position,
-            b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range) && b_c.Player_Mana >= b_c.need_Mana)
+            b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range) && b_c.char_Info.P_player_MP >= b_c.need_Mana)
         {
             judge_logic = Enemy_Attack_Logic.Skill_Using;
             _State = this;
