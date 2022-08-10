@@ -287,33 +287,6 @@ public class CInputComponent : BaseComponent
 
     void Update()
     {
-        ////왼쪽 마우스 클릭
-        //if(Input.GetMouseButtonDown(0))
-        //{
-        //    if (attackcom == null)
-        //        attackcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
-        //    attackcom.Attack();
-        //    //movecom.curval.IsAttacking = true;
-        //}
-
-        ////오른쪽 마우스 클릭
-        //if(Input.GetMouseButtonDown(1))
-        //{
-        //    if (guardcom == null)
-        //        guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
-        //    guardcom.Guard();
-        //    //movecom.curval.IsGuard = true;
-
-        //}
-
-        //if(Input.GetMouseButtonUp(1))
-        //{
-        //    if (guardcom == null)
-        //        guardcom = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
-        //    guardcom.GuardDown();
-        //    //movecom.curval.IsGuard = false;
-        //}
-
         //넉백 테스트
         if(Input.GetKeyDown(KeyCode.U))
         {
