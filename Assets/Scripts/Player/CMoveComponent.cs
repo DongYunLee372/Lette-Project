@@ -491,6 +491,18 @@ public class CMoveComponent : BaseComponent
         RollingStartTime = Time.time;
     }
 
+    public void ActivateNoDamage()
+    {
+
+    }
+
+    public void DeActivateNoDamage()
+    {
+        
+    }
+
+    
+
     IEnumerator Rolling_Coroutine(float time)
     {
         float temptime = time;
@@ -602,7 +614,7 @@ public class CMoveComponent : BaseComponent
         if (nextRotY - curRotY > 180f) nextRotY -= 360f;
         else if (curRotY - nextRotY > 180f) nextRotY += 360f;
 
-        com.FpRoot.eulerAngles = Vector3.up * Mathf.Lerp(curRotY, nextRotY, 0.8f);
+        com.FpRoot.eulerAngles = Vector3.up * Mathf.Lerp(curRotY, nextRotY, 0.1f);
     }
 
 

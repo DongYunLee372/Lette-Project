@@ -58,6 +58,32 @@ public class CheckAround : MonoBehaviour
         bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.2f, movecom.com.FpRoot.forward, out hit, 0.3f);
         if (cast)
         {
+            Debug.DrawLine(Capsulebottomcenter, hit.point,Color.cyan);
+            curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
+            if (curval.CurFowardSlopAngle >= 70.0f)
+            {
+                curval.IsFowordBlock = true;
+            }
+        }
+    }
+
+    public void CheckFoward()
+    {
+        if (movecom == null)
+        {
+            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            curval = movecom.curval;
+        }
+        RaycastHit hit;
+        curval.CurFowardSlopAngle = 0;
+        curval.IsFowordBlock = false;
+        //Vector3 temp = new Vector3(WorldMove.x, 0, WorldMove.z);
+        //temp = com.FpRoot.forward /*+ Vector3.down*/;
+        //NavMesh.Raycast()
+        bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.2f, movecom.com.FpRoot.forward, out hit, 0.3f);
+        if (cast)
+        {
+            Debug.DrawLine(Capsulebottomcenter, hit.point, Color.cyan);
             curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
             if (curval.CurFowardSlopAngle >= 70.0f)
             {
@@ -87,6 +113,7 @@ public class CheckAround : MonoBehaviour
             NavMeshHit navhit;
 
 
+
             temppos = new Vector3(this.transform.position.x, this.transform.position.y  - 10, this.transform.position.z);
             tempcube.transform.position = temppos;
 
@@ -97,6 +124,7 @@ public class CheckAround : MonoBehaviour
 
             if (cast)
             {
+                Debug.DrawLine(Capsulebottomcenter, hit.point, Color.blue);
 
                 curval.IsGrounded = true;
                 curval.CurGroundNomal = hit.normal;

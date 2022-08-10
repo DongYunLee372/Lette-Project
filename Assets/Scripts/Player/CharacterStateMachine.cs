@@ -31,6 +31,7 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
         GuardStun,//그냥 스턴과 가드 중 에서의 스턴을 구분하기 위해(그냥 스턴은 피격 당하지만 가드스턴은 피격당하지 않음)
         OutOfControl,//스턴, 넉다운 등등
 
+        //NoDamage,//무적
 
 
 
