@@ -120,7 +120,7 @@ public class CheckAround : MonoBehaviour
             //bool cast = testnavagent.Raycast(temppos, out navhit);
             //bool cast = NavMesh.Raycast(this.transform.position + new Vector3(0,2,0), temppos, out navhit, NavMesh.GetAreaFromName("Walkable"));
             //Debug.DrawLine(this.transform.position + new Vector3(0, 2, 0), temppos, cast ? Color.red : Color.blue);
-            bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius - 0.2f, Vector3.down, out hit, CapsuleCol.radius - 0.1f,LayerMask.GetMask("Ground"));
+            bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius, Vector3.down, out hit, CapsuleCol.radius,LayerMask.GetMask("Ground"));
 
             if (cast)
             {
@@ -144,6 +144,16 @@ public class CheckAround : MonoBehaviour
 
             }
         }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Capsulebottomcenter, CapsuleCol.radius);
+        Gizmos.DrawWireSphere(Capsuletopcenter, CapsuleCol.radius);
+
+
 
     }
 
