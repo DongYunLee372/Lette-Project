@@ -55,7 +55,7 @@ public class PlayableCharacter : MonoBehaviour
         status.Init(DataLoad_Save.Instance);
     }
 
-    /*Component 관련 메소드*/
+    /*MyComponent 관련 메소드*/
     public BaseComponent GetMyComponent(EnumTypes.eComponentTypes type)
     {
         return components[(int)type];
@@ -85,6 +85,7 @@ public class PlayableCharacter : MonoBehaviour
         else
             return movecom.com.TpCam.GetComponent<Camera>();
     }
+
     /*플레이어 캐릭터 상호작용 메소드*/
 
     /*플에이어가 공격을 받았을때 해당 함수를 호출
@@ -119,7 +120,9 @@ public class PlayableCharacter : MonoBehaviour
         {
             CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
-            movecom.Damaged_Rolling(damage);
+            if(!movecom.curval.IsNoDamage)
+                movecom.Damaged_Rolling(damage);
+
         }
 
         //4. 공격중

@@ -12,12 +12,17 @@ public class EffectManager : MonoBehaviour
     //public List<GameObject> CurEffects;
     public Transform BaseEffect;// 기본 이펙트 생성 위치
 
-    public Dictionary<string, GameObject> CurEffects;
+    public Dictionary<int, GameObject> CurEffects;
+
+    public List<GameObject> Effects = new List<GameObject>();
+
+
 
     public GameObject InstantiateEffect(GameObject effect)
     {
         GameObject copy = GameObject.Instantiate(effect);
         copy.transform.parent = BaseEffect;
+        CurEffects.Add(copy.GetInstanceID(), copy);
         return copy;
     }
 
@@ -36,6 +41,7 @@ public class EffectManager : MonoBehaviour
         return copy;
     }
 
+    //
     public GameObject InstantiateEffect(GameObject effect, Vector3 pos, float DestroyTime, Transform parent)
     {
         GameObject copy = InstantiateEffect(effect);
@@ -45,13 +51,25 @@ public class EffectManager : MonoBehaviour
         return copy;
     }
 
-    public void SetParent(string name, Transform parent)
+    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Vector3 size, Quaternion rotation, float DestroyTime, Transform parent)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = pos;
+        copy.transform.localScale = size;
+        copy.transform.rotation = rotation;
+
+        copy.transform.parent = parent;
+        GameObject.Destroy(copy, DestroyTime);
+        return copy;
+    }
+
+    public void SetParent(GameObject effectobj, Transform parent)
     {
         GameObject effect;
-        CurEffects.TryGetValue(name, out effect);
+        CurEffects.TryGetValue(effectobj.GetInstanceID(), out effect);
         if (effect == null)
         {
-            Debug.Log($"{this.name} not exist effect name");
+            Debug.Log($"{this.name} not exist effect");
             return;
         }
             

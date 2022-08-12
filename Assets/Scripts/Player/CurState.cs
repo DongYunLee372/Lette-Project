@@ -37,6 +37,8 @@ public class CurState
     [SerializeField]
     private bool isKnockDown = false;
 
+    [SerializeField]
+    private bool isNoDamage = false;
 
     //[SerializeField]
     //private bool isAttacked = false;
@@ -161,6 +163,19 @@ public class CurState
             }
         }
     }
+
+    public bool IsNoDamage
+    {
+        get
+        {
+            return IsNoDamage;
+        }
+        set
+        {
+            isNoDamage = value;
+        }
+    }
+
     public float LastJump { 
         get => lastJump; 
         set => lastJump = value;
