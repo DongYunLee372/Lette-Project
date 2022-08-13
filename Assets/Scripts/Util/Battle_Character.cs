@@ -20,12 +20,16 @@ public class Battle_Character : MonoBehaviour
 
     public EnemyHpbar MyHpbar;
 
+    public AnimationController animator;
+    public AnimationEventSystem eventsystem;
+
     public Skill skill_handler; // 보유한 스킬에따라 필요한 스킬핸들러를 부여.
 
     [Header("Real Stats")] // 데이터 정리된 것 밑의 데이터들은 정리해야함
     public CharacterInformation char_Info;
     public MonsterInformation mon_Info;
-    public MonsterSkillInformation mon_Skill_Info;
+    public List<MonsterSkillInformation> mon_Skill_Info = new List<MonsterSkillInformation>();
+    public MonsterSkillInformation now_Skill_Info;
     public MonsterTargetInformation mon_Target_Info;
     public Player_aconstant player_Aconstant;
     public Monster_aconstant mon_Aconstant;
@@ -79,6 +83,10 @@ public class Battle_Character : MonoBehaviour
 
         attack_Collider = GetComponentInChildren<Enemy_Weapon>()?.gameObject;
 
+        animator = GetComponentInChildren<AnimationController>();
+        eventsystem = GetComponentInChildren<AnimationEventSystem>();
+
+        Skill_Rand();
         real_AI.AI_Init(this);
     }
 
@@ -92,29 +100,11 @@ public class Battle_Character : MonoBehaviour
         Debug.Log("아악");
     }
 
-    public virtual void Skill_1()
+    public void Skill_Rand()
     {
+        int rand = Random.Range(0, mon_Skill_Info.Count);
 
-    }
-
-    public virtual void Skill_2()
-    {
-
-    }
-
-    public virtual void Skill_3()
-    {
-
-    }
-
-    public virtual void Die_Process()
-    {
-
-    }
-
-    public virtual void Attack_Process()
-    {
-
+        now_Skill_Info = mon_Skill_Info[rand];
     }
 
     public virtual void Attack_Effect(GameObject obj) // 때릴 시 넉백 등 효과.

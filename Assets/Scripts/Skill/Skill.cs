@@ -9,8 +9,9 @@ Skill_Run함수를 호출하면서 데이터를 넘겨줘서 스킬을 사용하
 
 public class Skill : MonoBehaviour
 {
-    public virtual void Skill_Run(/*스킬 데이터 형태가 들어가야함.*/)
+    public virtual void Skill_Run(Battle_Character b_c, MonsterSkillInformation skill_data)
     {
+        b_c.animator.Play(skill_data.P_skill_Name_En);
         // 애니메이션 재생 ( 애니메이션 클립에 이벤트들을 붙여줌 해당 시간에 판정 
         // 어택매니저로 공격 호출
         // 어택매니저를 통해서 이펙트호출

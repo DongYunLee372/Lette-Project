@@ -19,10 +19,8 @@ namespace Enemy_Enum
 
     public enum Enemy_Attack_Type
     {
-        Skill_1_sel,
-        Skill_2_sel,
-        Skill_3_sel,
         Normal_Attack,
+        Skill_Attack,
     }
 
     public enum Enemy_Attack_Logic

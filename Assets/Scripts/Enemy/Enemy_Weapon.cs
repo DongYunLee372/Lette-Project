@@ -26,14 +26,9 @@ public class Enemy_Weapon : MonoBehaviour
             case Enemy_Enum.Enemy_Attack_Type.Normal_Attack:
 
                 break;
-            case Enemy_Enum.Enemy_Attack_Type.Skill_1_sel:
-
-                break;
-            case Enemy_Enum.Enemy_Attack_Type.Skill_2_sel:
-
-                break;
-            case Enemy_Enum.Enemy_Attack_Type.Skill_3_sel:
-
+            case Enemy_Enum.Enemy_Attack_Type.Skill_Attack:
+                // 캐릭터의 damaged 함수호출
+                //collision.gameObject.GetComponent
                 break;
         }
     }

@@ -78,12 +78,12 @@ public class General_Monster_State : State_Handler
 
     protected override void Attack_Process()
     {
-        battle_Character.Attack_Process();
+        //battle_Character.Attack_Process();
     }
 
     protected override void Die_Process()
     {
-        battle_Character.Die_Process();
+        //battle_Character.Die_Process();
 
         //anim.SetBool("isDie", true);
     }

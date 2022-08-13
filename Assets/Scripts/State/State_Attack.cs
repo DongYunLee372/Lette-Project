@@ -51,7 +51,8 @@ public class State_Attack : State
                 break;
             case Enemy_Attack_Logic.Skill_Using:
                 // 이번에 사용할 순서의 스킬을 사용.
-                b_c.skill_handler.Skill_Run(/*이번에 사용할 스킬데이터를 넣어줌*/);
+                b_c.skill_handler.Skill_Run(b_c, b_c.now_Skill_Info);
+                b_c.Skill_Rand();
                 break;
         }
 
