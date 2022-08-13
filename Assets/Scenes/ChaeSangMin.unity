@@ -1100,7 +1100,7 @@ GameObject:
   - component: {fileID: 574279984}
   - component: {fileID: 574279983}
   - component: {fileID: 574279982}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1852,6 +1852,7 @@ MonoBehaviour:
     isGuard: 0
     isKnockBack: 0
     isKnockDown: 0
+    isNoDamage: 0
     isRolling: 0
     lastJump: 0
     curGroundSlopAngle: 0
@@ -1961,6 +1962,7 @@ MonoBehaviour:
     isGuard: 0
     isKnockBack: 0
     isKnockDown: 0
+    isNoDamage: 0
     isRolling: 0
     lastJump: 0
     curGroundSlopAngle: 0
@@ -2124,7 +2126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780554739}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5227208, y: 0, z: 4.5887036}
+  m_LocalPosition: {x: -2.5227208, y: 0, z: 9.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2161,6 +2163,7 @@ MonoBehaviour:
     isGuard: 0
     isKnockBack: 0
     isKnockDown: 0
+    isNoDamage: 0
     isRolling: 0
     lastJump: 0
     curGroundSlopAngle: 0
@@ -2175,6 +2178,9 @@ MonoBehaviour:
   nameClip: []
   movecom: {fileID: 0}
   eventsystem: {fileID: 0}
+  ComboAttackState: 0
+  PlayerScp: {fileID: 0}
+  enemyScp: {fileID: 0}
 --- !u!114 &780554752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2203,6 +2209,7 @@ MonoBehaviour:
     isGuard: 0
     isKnockBack: 0
     isKnockDown: 0
+    isNoDamage: 0
     isRolling: 0
     lastJump: 0
     curGroundSlopAngle: 0
@@ -5741,6 +5748,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Attack03Effectpos
       objectReference: {fileID: 0}
+    - target: {fileID: 4898261021335738802, guid: 18c1022e566cc754ea2fcb3ad4fdd9c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18c1022e566cc754ea2fcb3ad4fdd9c0, type: 3}
 --- !u!1001 &5686225267107915507
@@ -5753,6 +5764,10 @@ PrefabInstance:
     - target: {fileID: 3899130841683646585, guid: 052d19923ca2a2240906b07b43731c27, type: 3}
       propertyPath: m_Name
       value: Skill01Effectpos
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899130841683646585, guid: 052d19923ca2a2240906b07b43731c27, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8653874251610994441, guid: 052d19923ca2a2240906b07b43731c27, type: 3}
       propertyPath: m_RootOrder
@@ -5855,6 +5870,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Attack01Effectpos
       objectReference: {fileID: 0}
+    - target: {fileID: 6951158457944230513, guid: dedf70d4c324d8248b76c3c5c5d3e5b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dedf70d4c324d8248b76c3c5c5d3e5b3, type: 3}
 --- !u!1001 &8973421443432111328
@@ -5867,6 +5886,10 @@ PrefabInstance:
     - target: {fileID: 8973421443260901436, guid: e9324ad35235bea4383d9abd43c1b650, type: 3}
       propertyPath: m_Name
       value: Attack02Effectpos
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973421443260901436, guid: e9324ad35235bea4383d9abd43c1b650, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8973421443260901437, guid: e9324ad35235bea4383d9abd43c1b650, type: 3}
       propertyPath: m_RootOrder

@@ -17,10 +17,22 @@ public class AttackManager : BaseComponent
 
     public bool ComboAttackState;
     public PlayerAttack PlayerScp;
+    public Battle_Character enemyScp;
     // public 몬스터 scp
-    public void AddAttackInfo(string name , float move , float time)
+    public void PlayerAddAttackInfo(string name , float move , float time)
     {
-        
+        PlayerScp = GetComponentInChildren<PlayerAttack>();
+        nameClip.Add(name);
+        Movetime.Add(time);
+        Movedic.Add(move);
+
+        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(name, AttackMove),
+               new KeyValuePair<string, AnimationEventSystem.endCallback>(name, AttackEnd));
+    }
+    public void MonsterAddAttackInfo(string name, float move, float time)
+    {
+        enemyScp = GetComponentInChildren<Battle_Character>();
         nameClip.Add(name);
         Movetime.Add(time);
         Movedic.Add(move);
@@ -132,7 +144,7 @@ public class AttackManager : BaseComponent
     void Start()
     {
         ComboAttackState = false;
-        PlayerScp = GetComponentInChildren<PlayerAttack>();
+        
 
     }
 

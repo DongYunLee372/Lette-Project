@@ -112,9 +112,12 @@ public class PlayerAttack : BaseComponent
 
         for (int i = 0; i < Attack_InformationList.Count; i++)
         {           
-            att.AddAttackInfo(Attack_InformationList[i].P_aniclip.name, Attack_InformationList[i].P_movedis, Attack_InformationList[i].P_movetime);
+            att.PlayerAddAttackInfo(Attack_InformationList[i].P_aniclip.name, Attack_InformationList[i].P_movedis, Attack_InformationList[i].P_movetime);
         }
-
+        for (int i = 0; i < 1; i++)
+        {
+            att.PlayerAddAttackInfo(SkillData.P_aniclip.name, SkillData.P_movedis, SkillData.P_movetime);
+        }
     }
     void Update()
     {
@@ -124,9 +127,10 @@ public class PlayerAttack : BaseComponent
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SkillAttack();
+            Debug.Log("정답");
             return;
         }
     }
@@ -163,18 +167,24 @@ public class PlayerAttack : BaseComponent
         if (curval.IsAttacking == false)
             curval.IsAttacking = true;
 
+        StartCoroutine(Cor_TimeCounter(SkillData.P_EffectStartTime, SkillCreateEffect));
+        att.ComboAttackMana(animator, SkillData.P_aniclip.name, SkillData.P_animationPlaySpeed);
 
-        testAttckmanager.AttackMana(animator, SkillData.P_aniclip.name, SkillData.P_animationPlaySpeed);
     }
 
     public void CreateEffect()
     {
+        //att.CreateEffect(SkillData.P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 10);
         att.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 10);
+
         //testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f , 10);
         //preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
         //preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, Attack_InformationList[AttackNum].P_EffectPosRot, 1.5f);
     }
-
+    public void SkillCreateEffect()
+    {
+        att.CreateEffect(SkillData.P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 30);             
+    }
     public void Attack()
     {
         if (curval.IsAttacking)
@@ -214,49 +224,7 @@ public class PlayerAttack : BaseComponent
         Debug.Log("아부앙" + time);
         lastAttackTime = time;
     }
-    //public void AttackMove(string clipname)
-    //{
-
-    //    for (int i = 0; i < attackinfos.Length; i++)
-    //    {
-    //        if (attackinfos[i].aniclip.name == clipname)
-    //        {
-    //            movecom.FowardDoMove(Attack_InformationList[i].P_movedis, Attack_InformationList[i].P_movetime);
-
-    //            return;
-    //        }
-    //    }
-
-    //    for (int i = 0; i < skillinfos.Length; i++)
-    //    {
-    //        if (skillinfos[i].aniclip.name == clipname)
-    //        {
-    //            movecom.FowardDoMove(skillinfos[i].Movedis, skillinfos[i].MoveTime);
-    //            return;
-    //        }
-    //    }
-
-    //}
-
-
-
-    //public void AttackEnd(string s_val)
-    //{
-    //    if (effectobj != null)
-    //    {
-    //        Debug.Log($"dasdw공격 끝 들어옴 -> {s_val}");
-    //        effectobj.transform.parent = preparent;
-    //    }
-
-
-    //    if (curval.IsAttacking == true)
-    //        curval.IsAttacking = false;
-
-    //    lastAttackTime = Time.time;
-
-
-
-    //}
+    
 
 
     public override void InitComtype()

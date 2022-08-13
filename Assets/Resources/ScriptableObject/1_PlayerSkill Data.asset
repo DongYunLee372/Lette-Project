@@ -18,8 +18,8 @@ MonoBehaviour:
   MovementDelay: 0
   NextMovementTimeVal: 0.5
   damage: 0
-  EffectStartTime: 0.45
-  Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
+  EffectStartTime: 1.5
+  Effect: {fileID: 1648509489993130, guid: 8a0c2ade089d4c44fbdf861f7bcd7be6, type: 3}
   EffectPosRot: {fileID: 8653874251610994441, guid: 052d19923ca2a2240906b07b43731c27, type: 3}
   movedis: 2
   movetime: 0.2

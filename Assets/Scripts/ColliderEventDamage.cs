@@ -27,5 +27,13 @@ public class ColliderEventDamage : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         Debug.Log("ColliderEventDamage : " + other.name);
+
+        if (other.gameObject.tag == "Enemy")
+        {
+
+            //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Cha"), LayerMask.NameToLayer("EnemyAttack"));
+            //collision.rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            Debug.Log("적군 공격");
+        }
     }
 }

@@ -65,6 +65,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
             C_Mon.Set((int)Monster_db_Dialog[i]["Number"]
                 , Monster_db_Dialog[i]["mon_Index"].ToString()
                 , Monster_db_Dialog[i]["mon_nameKor"].ToString()
+                , Monster_db_Dialog[i]["mon_nameEng"].ToString()
                 , (int)Monster_db_Dialog[i]["mon_Default"]
                 , (int)Monster_db_Dialog[i]["mon_Type"]
                 , (int)Monster_db_Dialog[i]["mon_Position"]
@@ -73,6 +74,8 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , (int)Monster_db_Dialog[i]["mon_Def"]
                 , (int)Monster_db_Dialog[i]["mon_moveSpeed"]
                 , (int)Monster_db_Dialog[i]["mon_Balance"]
+                , (int)Monster_db_Dialog[i]["mon_maxMP"]
+                , (int)Monster_db_Dialog[i]["mon_regenMP"]
                 , (int)Monster_db_Dialog[i]["dieDelay"]
                 );
             MonsterDB_List.Add(C_Mon);
