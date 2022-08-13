@@ -43,28 +43,28 @@ public class AnimationEventSystem : MonoBehaviour
 	}
 
     //애니메이션이벤트에 함수를 등록 하려면 해당 이벤트를 가지고 있는 애니메이션클립의 이름을 같이 넣어 준다.
-  //  public void AddEvent(beginCallback begin, midCallback mid, endCallback end)
-  //  {
-		//if(begin != null)
-		//	_beginCallback += begin;
-		//if (mid != null)
-		//	_midCallback += mid;
-		//if (end != null)
-		//	_endCallback += end;
-  //  }
+    //  public void AddEvent(beginCallback begin, midCallback mid, endCallback end)
+    //  {
+    //if(begin != null)
+    //	_beginCallback += begin;
+    //if (mid != null)
+    //	_midCallback += mid;
+    //if (end != null)
+    //	_endCallback += end;
+    //  }
 
-	public void AddEvent(KeyValuePair<string, beginCallback> begin,KeyValuePair<string, midCallback> mid, KeyValuePair<string, endCallback> end)
-	{
-		if(begin.Key!=null)
-			BeginEventInvokers.Add(begin.Key, begin.Value);
-		if (mid.Key != null)
-			MidEventInvokers.Add(mid.Key, mid.Value);
-		if (end.Key != null)
-			EndEventInvokers.Add(end.Key, end.Value);
-	}
+    public void AddEvent(KeyValuePair<string, beginCallback> begin, KeyValuePair<string, midCallback> mid, KeyValuePair<string, endCallback> end)
+    {
+        if (begin.Key != null)
+            BeginEventInvokers.Add(begin.Key, begin.Value);
+        if (mid.Key != null)
+            MidEventInvokers.Add(mid.Key, mid.Value);
+        if (end.Key != null)
+            EndEventInvokers.Add(end.Key, end.Value);
+    }
 
-	//Animation Event
-	public void OnBeginEventString(string s_val)
+    //Animation Event
+    public void OnBeginEventString(string s_val)
 	{
 		//_beginCallback?.Invoke(s_val);
 		if(BeginEventInvokers.TryGetValue(s_val,out _beginCallback))

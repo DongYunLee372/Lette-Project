@@ -204,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692895305397013}
   m_LocalRotation: {x: 0.17041081, y: -0, z: -0, w: 0.98537314}
-  m_LocalPosition: {x: 0, y: 5.34, z: -5.14}
+  m_LocalPosition: {x: 0, y: 3.45, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2088,10 +2088,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.63
-  m_Height: 4.27
+  m_Radius: 0.23
+  m_Height: 1.83
   m_Direction: 1
-  m_Center: {x: 0, y: 2.12, z: 0}
+  m_Center: {x: 0, y: 0.86, z: 0}
 --- !u!54 &5912692896712387628
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2103,7 +2103,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -2211,6 +2211,7 @@ MonoBehaviour:
     isGuard: 0
     isKnockBack: 0
     isKnockDown: 0
+    isNoDamage: 0
     isRolling: 0
     lastJump: 0
     curGroundSlopAngle: 0
@@ -2222,8 +2223,8 @@ MonoBehaviour:
     moveAccel: 0
   moveoption:
     RotMouseSpeed: 10
-    MoveSpeed: 1500
-    RunSpeed: 3000
+    MoveSpeed: 800
+    RunSpeed: 1500
     MinAngle: 0
     MaxAngle: 0
     Gravity: 0
@@ -2236,7 +2237,7 @@ MonoBehaviour:
     SlopAccel: 0
     RollingClip: {fileID: 0}
     RollingClipPlaySpeed: 2.3
-    RollingDistance: 60
+    RollingDistance: 8
     RollingTime: 0
     RollingFreeDamageTime: 0
     KnockDownClip: {fileID: 7400000, guid: 0c62720761979084caafe70772d508f8, type: 2}
@@ -2247,7 +2248,7 @@ MonoBehaviour:
     GuardRightMoveClip: {fileID: 7400000, guid: 3807c40e073c3264696d50bb11b85729, type: 2}
     GuardLeftMoveClip: {fileID: 7400000, guid: fed91820561870646bddcd2a389dbcf8, type: 2}
     GuardBackMoveClip: {fileID: 7400000, guid: e4e962e0a1c505a4fbdd72119cbe39e0, type: 2}
-    GuardMoveSpeed: 1000
+    GuardMoveSpeed: 500
     FPMaxZoomIn: 60
     FPMaxZoomOut: 90
     TPMaxZoomIn: 30
@@ -2260,7 +2261,7 @@ MonoBehaviour:
   xnext: 0
   rightleft: {x: 0, y: 0, z: 0}
   ynext: 0
-  testtart: {x: 0, y: 0, z: 0}
+  teststart: {x: 0, y: 0, z: 0}
   testend: {x: 0, y: 0, z: 0}
   testcube: {fileID: 0}
 --- !u!114 &5912692896712388560
@@ -2291,6 +2292,7 @@ MonoBehaviour:
     isGuard: 0
     isKnockBack: 0
     isKnockDown: 0
+    isNoDamage: 0
     isRolling: 0
     lastJump: 0
     curGroundSlopAngle: 0
@@ -2318,7 +2320,7 @@ MonoBehaviour:
     EffectStartTime: 0.45
     Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
     EffectPosRot: {fileID: 5912692896680884495}
-    movedis: 3
+    movedis: 5
     movetime: 0.1
   - AttackNum: 1
     animationPlaySpeed: 1.2
@@ -2329,7 +2331,7 @@ MonoBehaviour:
     EffectStartTime: 0
     Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
     EffectPosRot: {fileID: 5912692897135278756}
-    movedis: 5
+    movedis: 10
     movetime: 0.2
   - AttackNum: 2
     animationPlaySpeed: 3
@@ -2340,7 +2342,7 @@ MonoBehaviour:
     EffectStartTime: 0.35
     Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
     EffectPosRot: {fileID: 5912692896014484492}
-    movedis: 5
+    movedis: 10
     movetime: 0.3
   skillinfos:
   - SkillName: Skill01
@@ -2568,7 +2570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896815848211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.87, z: 1.59}
+  m_LocalPosition: {x: 0, y: 1.548, z: 0.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2922,7 +2924,7 @@ Transform:
   m_GameObject: {fileID: 5912692897056710726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5912692897255432831}
