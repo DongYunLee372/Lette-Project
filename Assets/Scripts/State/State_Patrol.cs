@@ -17,6 +17,7 @@ public class State_Patrol : State
                 if (cols[i].tag == "Player")
                 {
                     b_c.cur_Target = cols[i].gameObject;
+                    b_c.real_AI.pre_State = this;
                     _State = Trans_List[0];
                     return false;
                 }

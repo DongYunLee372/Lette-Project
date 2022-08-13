@@ -11,6 +11,7 @@ public class State_Trace : State
         //    <= b_c.Attackable_Range) // 타겟을 공격할 수 있는 사거리 내 진입했다면
         //{
         //    _State = Trans_List[0];
+        //    b_c.real_AI.pre_State = this;
         //    return false;
         //}
 

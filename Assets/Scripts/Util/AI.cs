@@ -8,7 +8,7 @@ public class AI
 {
     public Battle_Character b_c;
 
-    public State init_State;
+    public State pre_State;
     public State now_State;
     public List<State> pre_State_List;
     public NavMeshAgent navMesh;
@@ -26,8 +26,6 @@ public class AI
         // pre_State_List를 넣어줌.
         pre_State_List = new List<State>();
         pre_State_List = now_State.State_Initialize();
-
-        init_State = now_State;
     }
 
     public void AI_Update()

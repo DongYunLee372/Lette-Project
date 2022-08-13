@@ -20,6 +20,7 @@ public class State_Hit : State
     {
         // 피격시 처리.
         b_c.isHit = false;
-        b_c.real_AI.now_State = Trans_List[0];
+        b_c.real_AI.now_State = b_c.real_AI.pre_State;
+        b_c.real_AI.pre_State = this;
     }
 }

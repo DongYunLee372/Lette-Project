@@ -35,6 +35,7 @@ public class State_Attack : State
         //    return true;
         //}
 
+        b_c.real_AI.pre_State = this;
         _State = Trans_List[0];
         return false;
     }

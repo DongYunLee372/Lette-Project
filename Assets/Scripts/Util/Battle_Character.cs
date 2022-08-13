@@ -95,7 +95,7 @@ public class Battle_Character : MonoBehaviour
     {
         // Cur_HP -= (damage_Amount - Armor);
         //  MyHpbar.Curhp = Cur_HP;
-        MyHpbar.hit();
+        //MyHpbar.hit();
         isHit = true;
 
         Debug.Log("아악");
