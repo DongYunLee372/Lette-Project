@@ -139,7 +139,7 @@ public class CMoveComponent : BaseComponent
     public Vector3 rightleft;
     public float ynext;
 
-    public Vector3 testtart;
+    public Vector3 teststart;
     public Vector3 testend;
 
     public Transform testcube;
@@ -246,10 +246,23 @@ public class CMoveComponent : BaseComponent
     public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration, Invoker invoker = null)
     {
         float runtime = 0.0f;
+        //Debug.DrawLine(start, dest, Color.green);
+        teststart = start;
+        testend = dest;
 
-        while(true)
+        Vector3 direction = dest - start;
+
+        //Move(direction * 2);
+
+        while (true)
         {
-            if(CharacterStateMachine.Instance.GetState()==CharacterStateMachine.eCharacterState.OutOfControl)
+            //direction = dest - transform.position;
+            //direction = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * direction;//경사로에 의한 y축 이동방향
+            //dest = transform.position + direction;
+
+            direction = dest - transform.position;
+
+            if (CharacterStateMachine.Instance.GetState()==CharacterStateMachine.eCharacterState.OutOfControl)
             {
                 if (invoker != null)
                     invoker.Invoke("");
@@ -265,8 +278,11 @@ public class CMoveComponent : BaseComponent
             }
             runtime += Time.deltaTime;
 
+            //if (!curval.IsFowordBlock)
+            //    transform.position = Vector3.Lerp(start, dest, runtime / duration);
+
             if (!curval.IsFowordBlock)
-                transform.position = Vector3.Lerp(start, dest, runtime / duration);
+                Move(direction);
 
             //if (!curval.IsFowordBlock)
             //{
@@ -314,10 +330,11 @@ public class CMoveComponent : BaseComponent
 
         WorldMove *= (curval.IsRunning) ? moveoption.RunSpeed * Time.deltaTime : moveoption.MoveSpeed * Time.deltaTime;
 
-        if (curval.IsFowordBlock && !curval.IsGrounded || curval.IsJumping && curval.IsGrounded || curval.IsJumping && curval.IsFowordBlock)
+        if (curval.IsFowordBlock && !curval.IsGrounded || curval.IsJumping && curval.IsGrounded || curval.IsJumping && curval.IsFowordBlock ||curval.IsRolling)
         {
             WorldMove.x = 0;
             WorldMove.z = 0;
+            return;
         }
 
         Move(WorldMove);
@@ -533,9 +550,9 @@ public class CMoveComponent : BaseComponent
 
         //FowardDoMove(10, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed);
         
-        Vector3 tempmove = com.FpRoot.forward * moveoption.RollingDistance;
+        Vector3 tempmove = this.transform.position + com.FpRoot.forward * moveoption.RollingDistance;
 
-        StartCoroutine(CorDoMove(this.transform.position, tempmove, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed, RollingOver));
+        StartCoroutine(CorDoMove(this.transform.position, tempmove, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed -0.2f, RollingOver));
 
         Vector3 moveval = com.FpRoot.forward* moveoption.RollingDistance;
 
@@ -775,7 +792,11 @@ public class CMoveComponent : BaseComponent
 
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(teststart, testend);
+    }
     void ChangePerspective()
     {
         curval.IsFPP = !curval.IsFPP;
