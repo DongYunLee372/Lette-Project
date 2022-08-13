@@ -52,10 +52,10 @@ public class Battle_Character : MonoBehaviour
 
     [Header("=============================")]
     [Header("Attack Related")]
-    [SerializeField]
-    protected GameObject attack_Collider; // 공격 판정 충돌 범위 콜라이더 
+    public GameObject attack_Collider; // 공격 판정 충돌 범위 콜라이더 
     public Enemy_Attack_Type attack_Type; // 공격 타입
     public bool[] attack_Logic = new bool[(int)(Enemy_Attack_Logic.Attack_Logic_Amount) - 1];
+    public bool isHit = false; // 맞았는지 판별 
 
     public AI real_AI;
 
@@ -96,6 +96,7 @@ public class Battle_Character : MonoBehaviour
         // Cur_HP -= (damage_Amount - Armor);
         //  MyHpbar.Curhp = Cur_HP;
         MyHpbar.hit();
+        isHit = true;
 
         Debug.Log("아악");
     }
@@ -120,5 +121,8 @@ public class Battle_Character : MonoBehaviour
     private void Update()
     {
         real_AI.AI_Update();
+
+        if (Input.GetKeyDown(KeyCode.H))
+            Damaged(5);
     }
 }

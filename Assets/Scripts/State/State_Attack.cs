@@ -10,14 +10,14 @@ public class State_Attack : State
 
     public override bool Judge(out State _State, Battle_Character b_c)
     {
-        //  b_c.Attack_Melee_Range 가 스킬 사용범위 변수로 바뀌어야함.
-        //if ((Vector3.Distance(b_c.transform.position,
-        //    b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range) && b_c.char_Info.P_player_MP >= b_c.need_Mana)
-        //{
-        //    judge_logic = Enemy_Attack_Logic.Skill_Using;
-        //    _State = this;
-        //    return true;
-        //}
+        //b_c.Attack_Melee_Range 가 스킬 사용범위 변수로 바뀌어야함.
+        if ((Vector3.Distance(b_c.transform.position,
+            b_c.cur_Target.transform.position) <= b_c.now_Skill_Info.P_skill_Range) && b_c.char_Info.P_player_MP >= b_c.now_Skill_Info.P_skill_MP)
+        {
+            judge_logic = Enemy_Attack_Logic.Skill_Using;
+            _State = this;
+            return true;
+        }
 
         //if ((Vector3.Distance(b_c.transform.position,
         //    b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range)) // 사정 거리 내에 있다면 
@@ -45,12 +45,16 @@ public class State_Attack : State
         {
             case Enemy_Attack_Logic.Melee_Attack:
                 // 근접 공격이라면 배틀캐릭터 스크립트 내 공격 판정범위 활성화
+                b_c.attack_Type = Enemy_Attack_Type.Normal_Attack;
+                b_c.attack_Collider.SetActive(true);
                 break;
             case Enemy_Attack_Logic.Long_Attack:
                 // 원거리라면 원거리 발사체 발사
+                b_c.attack_Type = Enemy_Attack_Type.Normal_Attack;
                 break;
             case Enemy_Attack_Logic.Skill_Using:
                 // 이번에 사용할 순서의 스킬을 사용.
+                b_c.attack_Type = Enemy_Attack_Type.Skill_Attack;
                 b_c.skill_handler.Skill_Run(b_c, b_c.now_Skill_Info);
                 b_c.Skill_Rand();
                 break;

@@ -16,21 +16,21 @@ public class Skill : MonoBehaviour
         // 어택매니저로 공격 호출
         // 어택매니저를 통해서 이펙트호출
 
-        /* 
-        if(투사체 판정 여부가 true라면)
+
+        if (skill_data.P_skill_ThrowObj)
         {
-            StartCoroutine(Spawn_Coroutine(스킬데이터));
+            StartCoroutine(Shoot_Coroutine(skill_data));
         }
 
-        if(소환 여부가 true라면)
+        if (skill_data.P_skill_DiffObj)
         {
-            StartCoroutine(Spawn_Coroutine(스킬데이터));
+            StartCoroutine(Spawn_Coroutine(skill_data));
         }
-        
-        */
+
+
     }
 
-    protected IEnumerator Shoot_Coroutine(/*스킬데이터*/)
+    protected IEnumerator Shoot_Coroutine(MonsterSkillInformation skill_data)
     {
         yield return new WaitForSeconds(1f/*스킬데이터.시간*/);
 
@@ -40,7 +40,7 @@ public class Skill : MonoBehaviour
         */
     }
 
-    protected IEnumerator Spawn_Coroutine(/*스킬데이터*/)
+    protected IEnumerator Spawn_Coroutine(MonsterSkillInformation skill_data)
     {
         yield return new WaitForSeconds(1f/*스킬데이터.시간*/);
 
