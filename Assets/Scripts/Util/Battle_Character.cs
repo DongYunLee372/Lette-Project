@@ -11,6 +11,28 @@ ex ) 원거리, 근거리 처럼 다른 스테이트 프로세스를 수행해�
 시간 값 저장해주는 것도 처리.
  */
 
+[System.Serializable]
+public class Attack_Info // 스킬이나 공격info
+{
+    // 이름
+    public string Name;
+
+    //움직일 거리
+    public float[] Movedis;
+
+    //움직일 시간
+    public float[] MoveTime;
+
+    // 이펙트 있으면 이펙트
+    public GameObject[] effect;
+
+    //이펙트 생성 시간
+    public float[] EffectStartTime;
+
+    // 이펙트 있으면 이펙트 생성 위치
+    public Transform[] effect_Pos;
+}
+
 public class Battle_Character : MonoBehaviour
 {
     public FSM_AI ai = new FSM_AI();
@@ -50,13 +72,17 @@ public class Battle_Character : MonoBehaviour
     public int next_Skill;
     public bool isReturn; // enemy_Area 에서 나갈경우 true 체크해줘서 ai가 판단할 수 있게끔 하는 변수
 
-    [Header("=============================")]
-    [Header("Attack Related")]
+    [Header("=========Attack Related=========")]
     public GameObject attack_Collider; // 공격 판정 충돌 범위 콜라이더 
     public Enemy_Attack_Type attack_Type; // 공격 타입
     public bool[] attack_Logic = new bool[(int)(Enemy_Attack_Logic.Attack_Logic_Amount) - 1];
     public bool isHit = false; // 맞았는지 판별 
 
+    [Header("==========Effect=============")]
+    public Attack_Info[] attack_Info;
+    public CMoveComponent movecom;
+
+    [Header("==========AI=================")]
     public AI real_AI;
 
     public void Stat_Initialize(MonsterInformation info) // 몬스터 생성 시 몬스터 정보 초기화
@@ -85,9 +111,18 @@ public class Battle_Character : MonoBehaviour
 
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
+        //movecom = GetComponentInChildren<CMoveComponent>();
+
+        real_AI.AI_Init(this);
+
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(attack_Info[i].Name, Animation_Begin),
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(attack_Info[i].Name, Animation_Middle),
+                new KeyValuePair<string, AnimationEventSystem.endCallback>(attack_Info[i].Name, Animation_End));
+        }
 
         Skill_Rand();
-        real_AI.AI_Init(this);
     }
 
 
@@ -105,7 +140,7 @@ public class Battle_Character : MonoBehaviour
     {
         int rand = Random.Range(0, mon_Skill_Info.Count);
 
-        now_Skill_Info = mon_Skill_Info[rand];
+        //now_Skill_Info = mon_Skill_Info[rand];
     }
 
     public virtual void Attack_Effect(GameObject obj) // 때릴 시 넉백 등 효과.
@@ -113,9 +148,93 @@ public class Battle_Character : MonoBehaviour
 
     }
 
+    public void Animation_Begin(string clipname)
+    {
+        Debug.Log("ㅋ은ㅁ은맏아");
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
+                //movecom.FowardDoMove(attack_Info[i].Movedis[0], attack_Info[i].MoveTime[0]);
+
+                if (attack_Info[i].effect != null)
+                {
+                    GameObject effectobj = GameObject.Instantiate(attack_Info[i].effect[0]);
+                    effectobj.transform.position = attack_Info[i].effect_Pos[0].position;
+                    effectobj.transform.rotation = attack_Info[i].effect_Pos[0].rotation;
+
+                    //preparent = effectobj.transform.parent;
+                    effectobj.transform.parent = attack_Info[i].effect_Pos[0];
+                    //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
+
+
+                    Destroy(effectobj, 1.5f);
+                }
+
+                return;
+            }
+        }
+    }
+
+    public void Animation_Middle(string clipname)
+    {
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
+                //movecom.FowardDoMove(attack_Info[i].Movedis[1], attack_Info[i].MoveTime[1]);
+
+                if (attack_Info[i].effect != null)
+                {
+                    GameObject effectobj = GameObject.Instantiate(attack_Info[i].effect[1]);
+                    effectobj.transform.position = attack_Info[i].effect_Pos[1].position;
+                    effectobj.transform.rotation = attack_Info[i].effect_Pos[1].rotation;
+
+                    //preparent = effectobj.transform.parent;
+                    effectobj.transform.parent = attack_Info[i].effect_Pos[1];
+                    //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
+
+
+                    Destroy(effectobj, 1.5f);
+                }
+                return;
+            }
+        }
+    }
+
+    public void Animation_End(string clipname)
+    {
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
+                //movecom.FowardDoMove(attack_Info[i].Movedis[2], attack_Info[i].MoveTime[2]);
+
+                if (attack_Info[i].effect != null)
+                {
+                    GameObject effectobj = GameObject.Instantiate(attack_Info[i].effect[2]);
+                    effectobj.transform.position = attack_Info[i].effect_Pos[2].position;
+                    effectobj.transform.rotation = attack_Info[i].effect_Pos[2].rotation;
+
+                    //preparent = effectobj.transform.parent;
+                    effectobj.transform.parent = attack_Info[i].effect_Pos[2];
+                    //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
+
+
+                    Destroy(effectobj, 1.5f);
+                }
+                return;
+            }
+        }
+    }
+
     private void Start()
     {
-        real_AI.AI_Init(this);
+        Initalize();
+        //real_AI.AI_Init(this);
     }
 
     private void Update()
@@ -123,6 +242,6 @@ public class Battle_Character : MonoBehaviour
         real_AI.AI_Update();
 
         if (Input.GetKeyDown(KeyCode.H))
-            Damaged(5);
+            animator.Play("Melee Attack");
     }
 }

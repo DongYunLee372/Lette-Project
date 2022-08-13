@@ -60,6 +60,7 @@ public class State_Attack : State
                 b_c.Skill_Rand();
                 break;
         }
-
     }
+
+
 }
