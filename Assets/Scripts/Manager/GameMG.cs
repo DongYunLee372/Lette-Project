@@ -173,7 +173,9 @@ public class GameMG : Singleton<GameMG>
 
             // ScenesLoadMG.Instance.loadSubSceneFn("Load_test");
             AddressablesLoader.OnSceneAction("Load_test");  //씬 로드 어드레서블
-            }
+           // AddressablesLoader.OnSceneAction("Load_test");  //씬 로드 어드레서블
+                                                            
+        }
         if (Input.GetKeyDown(KeyCode.F1))
         {
             AddressablesLoader.OnUnloadedAction("Load_test");  //씬 언로드  어드레서블 적용

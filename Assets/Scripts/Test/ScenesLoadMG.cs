@@ -37,7 +37,14 @@ public class ScenesLoadMG : Singleton<ScenesLoadMG>
         Menu_Scenes  //혹시 메뉴화면 있을수도 있으니 메뉴 화면   (기타 볼륨이나 이런거 선택하는 메뉴..? 근데 이걸 씬으로 할지는,,,?)
     }
 
+    public void GameStart()
+    {
+        AddressablesLoader.OnUnloadedAction("LoadingScenes");  //씬 언로드  어드레서블 적용
 
+        AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
+
+
+    }
 
 
 }

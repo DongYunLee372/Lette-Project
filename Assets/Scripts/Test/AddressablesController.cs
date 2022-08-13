@@ -93,6 +93,33 @@ public class AddressablesController : Singleton<AddressablesController>
 
     //}
 
+
+    public IEnumerator Load_Name(string name, Transform parent,List<GameObject> Save_list)
+    {
+
+        Debug.Log("check_List_routine+LoadGameObjectAndMaterial");
+        //로드되길 기다림
+        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
+        //yield return new WaitForSeconds(1f);
+
+        Debug.Log("check_List_routine+LoadGameObjectAndMaterial내려옴");
+        Debug.Log("Loder_ListCount" + Loder_ListCount);
+        Debug.Log("tempobj" + AddressablesLoader.tempobj.Count);
+
+        if (Loder_ListCount != AddressablesLoader.tempobj.Count)
+        {
+            Loder_ListCount = AddressablesLoader.tempobj.Count;
+            Debug.Log("list수는" + AddressablesLoader.tempobj.Count);
+            //check_List("susu");
+            load_Comp = true;
+        }
+
+        //로드 된 후 리스트에서 찾아서 생성
+        //yield return new WaitForSeconds(1.0f);
+        yield return StartCoroutine(Find_List_One(name, parent, Save_list));
+
+    }
+
     public IEnumerator Load_Name(string name, Transform parent)
     {
 
@@ -153,6 +180,28 @@ public class AddressablesController : Singleton<AddressablesController>
         Debug.Log("찾은거" + original);
 
         _createdObjs.Add(Instantiate(original, parent.position, Quaternion.identity));
+
+        foreach (var obj in AddressablesLoader.tempobj)
+        {
+            if (name == obj.name)
+            {
+                Debug.Log(obj.name + "리스트안에 있음");
+            }
+
+        }
+
+        yield return null;
+
+    }
+
+    //리스트에 저장
+    public IEnumerator Find_List_One(string name, Transform parent, List<GameObject> Save_list)
+    {
+
+        GameObject original = AddressablesController.Instance.find_Asset_in_list(name);
+        Debug.Log("찾은거" + original);
+
+        Save_list.Add(Instantiate(original, parent.position, Quaternion.identity));
 
         foreach (var obj in AddressablesLoader.tempobj)
         {

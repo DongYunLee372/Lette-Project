@@ -7,6 +7,7 @@ public class LoadTestScript : MonoBehaviour
     GameObject MapPos;
     public GameObject PlayerInitPos;
     public Canvas canvas;
+    List<GameObject> temp;
 
     //게임 스타트 함수
 
@@ -14,8 +15,8 @@ public class LoadTestScript : MonoBehaviour
     void Start()
     {
 
-       
-        MapPos = new GameObject();
+        temp = new List<GameObject>();
+         MapPos = new GameObject();
         PlayerInitPos = new GameObject();
         MapPos.transform.position = new Vector3(0, 0, 0);
         PlayerInitPos.transform.position = new Vector3(10, 0, 0);
@@ -31,8 +32,8 @@ public class LoadTestScript : MonoBehaviour
         //GameMG.Instance.Resource.Instantiate("susu", PlayerInitPos.transform);
 
         //어드레서블 (풀링X)
-        StartCoroutine(AddressablesController.Instance.Load_Name("Terrain", MapPos.transform));
-        StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
+        StartCoroutine(AddressablesController.Instance.Load_Name("Terrain", MapPos.transform, temp));
+        StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform, temp));
 
 
         //코루틴 생성 (풀링)
@@ -42,6 +43,13 @@ public class LoadTestScript : MonoBehaviour
 
         //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("PlayerCharacter"));
 
+
+        foreach (GameObject t in temp)
+        {
+            Debug.Log("temp리스트 확인중");
+
+            Debug.Log(t.name + "temp리스트 확인됌.");
+        }
 
 
         //처음 호출에서 오류 남...(?)
