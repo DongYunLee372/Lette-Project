@@ -11,6 +11,7 @@ public class State_Return : State
             if ((Vector3.Distance(b_c.transform.position, b_c.return_Pos) <= 0.5f))
             {
                 _State = Trans_List[0];
+                b_c.real_AI.pre_State = this;
                 return false;
             }
 

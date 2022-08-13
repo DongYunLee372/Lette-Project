@@ -29,6 +29,7 @@ public class Enemy_Weapon : MonoBehaviour
             case Enemy_Enum.Enemy_Attack_Type.Skill_Attack:
                 // 캐릭터의 damaged 함수호출
                 //collision.gameObject.GetComponent
+                // playerable
                 break;
         }
     }
