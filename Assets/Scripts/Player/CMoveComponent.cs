@@ -266,6 +266,8 @@ public class CMoveComponent : BaseComponent
             {
                 if (invoker != null)
                     invoker.Invoke("");
+
+                Move(new Vector3(0, 0, 0));
                 yield break;
             }
 
@@ -274,6 +276,9 @@ public class CMoveComponent : BaseComponent
                 //this.transform.position = dest;
                 if (invoker != null)
                     invoker.Invoke("");
+
+                Move(new Vector3(0, 0, 0));
+
                 yield break;
             }
             runtime += Time.deltaTime;
@@ -330,7 +335,7 @@ public class CMoveComponent : BaseComponent
 
         WorldMove *= (curval.IsRunning) ? moveoption.RunSpeed * Time.deltaTime : moveoption.MoveSpeed * Time.deltaTime;
 
-        if (curval.IsFowordBlock && !curval.IsGrounded || curval.IsJumping && curval.IsGrounded || curval.IsJumping && curval.IsFowordBlock ||curval.IsRolling)
+        if (curval.IsFowordBlock && !curval.IsGrounded || curval.IsJumping && curval.IsGrounded || curval.IsJumping && curval.IsFowordBlock ||curval.IsRolling || curval.IsAttacking)
         {
             WorldMove.x = 0;
             WorldMove.z = 0;
