@@ -14,6 +14,8 @@ namespace EnumScp
         mon_04_01,
         mon_04_02,
         mon_05_01,
+        mon_06_01,
+
         Max
 
     }
@@ -36,6 +38,16 @@ namespace EnumScp
         mon_05_01,
         mon_05_01_2,
         mon_05_01_3,
+        mon_06_01,
+        mon_06_02,
+        mon_06_03,
+        mon_06_04,
+        mon_06_05,
+        mon_06_06,
+        mon_06_07,
+        mon_06_08,
+        mon_06_09,
+        mon_06_10,
         Max
 
     }

@@ -89,7 +89,16 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , MonsterSkill_db_Dialog[i]["skill_Name_En"].ToString()
                 , (int)MonsterSkill_db_Dialog[i]["skill_ID"]
                 , (int)MonsterSkill_db_Dialog[i]["skill_Type"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_Targetyp"]              
+                , (int)MonsterSkill_db_Dialog[i]["skill_Targetyp"]
+                , (int)MonsterSkill_db_Dialog[i]["skill_Range"]
+                , (int)MonsterSkill_db_Dialog[i]["skill_dmg"]
+                , (int)MonsterSkill_db_Dialog[i]["skill_MP"]
+                , (int)MonsterSkill_db_Dialog[i]["skill_Cool"]
+                , (int)MonsterSkill_db_Dialog[i]["skill_atkTime"]
+                , (int)MonsterSkill_db_Dialog[i]["skill_continueTime"]
+                , (int)MonsterSkill_db_Dialog[i]["skill_AtkCount"]
+                , (bool)MonsterSkill_db_Dialog[i]["skill_DiffObj"]
+                , (bool)MonsterSkill_db_Dialog[i]["skill_ThrowObj"]
                 );
             MonsterSkillDB_List.Add(C_MonSkill);
         }
