@@ -1059,7 +1059,7 @@ BoxCollider:
   m_GameObject: {fileID: 5912692895939636296}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.25, y: 2.577088, z: 0.098494455}
   m_Center: {x: -0.00000016182389, y: -0.9049856, z: -0.00000029012583}
@@ -1197,8 +1197,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896014484491}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 2.31, z: 0.41}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.956, z: 0.41}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5912692895590823227}
@@ -2030,8 +2030,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896680884494}
   m_LocalRotation: {x: 0.3225514, y: 0.946552, z: -0, w: 0}
-  m_LocalPosition: {x: 0.27, y: 2.52, z: 0.41}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.057, y: 0.887, z: 0.854}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5912692895590823227}
@@ -2054,6 +2054,8 @@ GameObject:
   - component: {fileID: 5912692896712387626}
   - component: {fileID: 5912692896712388560}
   - component: {fileID: 5912692896712388561}
+  - component: {fileID: 1121095337}
+  - component: {fileID: 1121095338}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -2271,7 +2273,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896712387625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 071bddc9f34591443975b72312a660a1, type: 3}
   m_Name: 
@@ -2385,6 +2387,142 @@ MonoBehaviour:
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
+--- !u!114 &1121095337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912692896712387625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda2c557dd845a64b908ba8000097049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comtype: 0
+  curval:
+    isCursorActive: 0
+    isFPP: 1
+    isMoving: 0
+    isRunning: 0
+    isGrounded: 0
+    isJumping: 0
+    isFalling: 0
+    isSlip: 0
+    isFowordBlock: 0
+    isOnTheSlop: 0
+    isAttacking: 0
+    isGuard: 0
+    isKnockBack: 0
+    isKnockDown: 0
+    isNoDamage: 0
+    isRolling: 0
+    lastJump: 0
+    curGroundSlopAngle: 0
+    curFowardSlopAngle: 0
+    curGroundNomal: {x: 0, y: 0, z: 0}
+    curGroundCross: {x: 0, y: 0, z: 0}
+    curHorVelocity: {x: 0, y: 0, z: 0}
+    curVirVelocity: {x: 0, y: 0, z: 0}
+    moveAccel: 0
+  Movedic: []
+  Movetime: []
+  nameClip: []
+  movecom: {fileID: 0}
+  eventsystem: {fileID: 0}
+  ComboAttackState: 0
+  PlayerScp: {fileID: 0}
+  enemyScp: {fileID: 0}
+--- !u!114 &1121095338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912692896712387625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f230c1fb59f6c924c9d52f8858a866e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comtype: 4
+  curval:
+    isCursorActive: 0
+    isFPP: 1
+    isMoving: 0
+    isRunning: 0
+    isGrounded: 0
+    isJumping: 0
+    isFalling: 0
+    isSlip: 0
+    isFowordBlock: 0
+    isOnTheSlop: 0
+    isAttacking: 0
+    isGuard: 0
+    isKnockBack: 0
+    isKnockDown: 0
+    isNoDamage: 0
+    isRolling: 0
+    lastJump: 0
+    curGroundSlopAngle: 0
+    curFowardSlopAngle: 0
+    curGroundNomal: {x: 0, y: 0, z: 0}
+    curGroundCross: {x: 0, y: 0, z: 0}
+    curHorVelocity: {x: 0, y: 0, z: 0}
+    curVirVelocity: {x: 0, y: 0, z: 0}
+    moveAccel: 0
+  LastAttackTime: 0
+  AttackNum: 0
+  movecom: {fileID: 0}
+  Attack_InformationList:
+  - {fileID: 11400000, guid: bbc9bad4c9e84224a9ffd811c75c6f56, type: 2}
+  - {fileID: 11400000, guid: f612c1e0e7e4361419e38f51b4f0e324, type: 2}
+  - {fileID: 11400000, guid: f4c2ca71b21f74f4291121a5a69c2a9b, type: 2}
+  SkillData: {fileID: 11400000, guid: 65e4fd3a0d94a7a438c0b36079e9e783, type: 2}
+  colliders: []
+  animator: {fileID: 0}
+  eventsystem: {fileID: 0}
+  attackinfos:
+  - AttackNum: 0
+    animationPlaySpeed: 0
+    aniclip: {fileID: 0}
+    MovementDelay: 0
+    NextMovementTimeVal: 0
+    damage: 0
+    EffectStartTime: 0
+    Effect: {fileID: 0}
+    EffectPosRot: {fileID: 5912692896680884495}
+    movedis: 0
+    movetime: 0
+  - AttackNum: 0
+    animationPlaySpeed: 0
+    aniclip: {fileID: 0}
+    MovementDelay: 0
+    NextMovementTimeVal: 0
+    damage: 0
+    EffectStartTime: 0
+    Effect: {fileID: 0}
+    EffectPosRot: {fileID: 5912692897135278756}
+    movedis: 0
+    movetime: 0
+  - AttackNum: 0
+    animationPlaySpeed: 0
+    aniclip: {fileID: 0}
+    MovementDelay: 0
+    NextMovementTimeVal: 0
+    damage: 0
+    EffectStartTime: 0
+    Effect: {fileID: 0}
+    EffectPosRot: {fileID: 5912692896014484492}
+    movedis: 0
+    movetime: 0
+  skillinfos: []
+  effectobj: {fileID: 0}
+  preparent: {fileID: 0}
+  lastAttackTime: 0
+  testAttckmanager: {fileID: 0}
+  AttackColliderParent: {fileID: 0}
+  att: {fileID: 0}
 --- !u!1 &5912692896735992643
 GameObject:
   m_ObjectHideFlags: 0
@@ -3172,8 +3310,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692897135278755}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 2.51, z: 0.41}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.988, z: 0.41}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5912692895590823227}

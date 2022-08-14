@@ -71,7 +71,8 @@ public class AttackManager : BaseComponent
         effectobj = GameObject.Instantiate(effect);
         effectobj.transform.position = EffectPosRot.position;
         effectobj.transform.rotation = EffectPosRot.rotation;
-        effectobj.transform.parent = this.transform;
+        effectobj.transform.parent = EffectPosRot.transform;
+        effectobj.transform.localScale = EffectPosRot.localScale;
 
         effectobj.GetComponent<ColliderEventDamage>().DamageSetting(damage);
         Destroy(effectobj, destroyTime);

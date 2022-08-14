@@ -56,6 +56,7 @@ public class CheckAround : MonoBehaviour
         //temp = com.FpRoot.forward /*+ Vector3.down*/;
         //NavMesh.Raycast()
         bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.1f, movecom.com.FpRoot.forward, out hit, 0.3f, LayerMask.GetMask("Wall"));
+
         if (cast)
         {
             Debug.DrawLine(Capsulebottomcenter, hit.point,Color.cyan);
