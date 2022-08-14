@@ -44,7 +44,9 @@ public class Test : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            CharacterCreate.Instance.CreateMonster(EnumScp.MonsterIndex.mon_01_01, spawn);
+            Debug.Log("??");
+
+            StartCoroutine(CharacterCreate.Instance.CreateMonster_(EnumScp.MonsterIndex.mon_01_01, spawn));
         }
     }
 }

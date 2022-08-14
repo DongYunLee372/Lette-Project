@@ -43,8 +43,8 @@ public class UIManager : Singleton<UIManager>
         }
         else
         {
-            GameObject obj = Resources.Load<GameObject>("Prefabs/" + name);
             UIInfo tmp = new UIInfo();
+            GameObject obj = AddressablesController.Instance.find_Asset_in_list(name);
             tmp.obj = Instantiate(obj, canvas[(int)x].transform);
             tmp.obj.transform.SetParent(canvas[(int)x].transform);
             tmp.path = name;
@@ -122,6 +122,7 @@ public class UIManager : Singleton<UIManager>
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
     }
 
     // Update is called once per frame
