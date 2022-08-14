@@ -39,8 +39,9 @@ public class Test : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            
-            UIManager.Instance.Remove("Test2");
+
+            GameObject hpBar = UIManager.Instance.Prefabsload("FriendPanel", UIManager.CANVAS_NUM.ex_skill);
+            // UIManager.Instance.Remove("Test2");
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
