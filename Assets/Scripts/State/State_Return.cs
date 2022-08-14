@@ -25,6 +25,7 @@ public class State_Return : State
 
     public override void Run(Battle_Character b_c)
     {
+        b_c.animator.Play("Walk");
         b_c.real_AI.navMesh.SetDestination(b_c.return_Pos);
     }
 }

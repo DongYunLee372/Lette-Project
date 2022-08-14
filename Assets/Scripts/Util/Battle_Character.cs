@@ -31,6 +31,24 @@ public class Attack_Info // 스킬이나 공격info
 
     // 이펙트 있으면 이펙트 생성 위치
     public Transform[] effect_Pos;
+
+    // 오프 메쉬 링크 위치
+    public Transform[] off_Mesh_Pos;
+
+    // 점프 속도
+    public float jump_Speed;
+
+    // 점프 가속도
+    public float jump_Acc;
+
+    // 발사체
+    public GameObject missile;
+
+    // 발사체 개수
+    public int missile_Amount;
+
+    // 발사체 발사 위치
+    public Transform missile_Pos;
 }
 
 public class Battle_Character : MonoBehaviour
@@ -77,6 +95,7 @@ public class Battle_Character : MonoBehaviour
     public Enemy_Attack_Type attack_Type; // 공격 타입
     public bool[] attack_Logic = new bool[(int)(Enemy_Attack_Logic.Attack_Logic_Amount) - 1];
     public bool isHit = false; // 맞았는지 판별 
+    public bool isAttack_Run = false; // 현재 스킬 사용중인지 판별
 
     [Header("==========Effect=============")]
     public Attack_Info[] attack_Info;
@@ -151,27 +170,13 @@ public class Battle_Character : MonoBehaviour
 
     public void Animation_Begin(string clipname)
     {
-        Debug.Log("ㅋ은ㅁ은맏아");
         for (int i = 0; i < attack_Info.Length; i++)
         {
             if (attack_Info[i].Name == clipname)
             {
                 //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
                 //movecom.FowardDoMove(attack_Info[i].Movedis[0], attack_Info[i].MoveTime[0]);
-
-                if (attack_Info[i].effect != null)
-                {
-                    GameObject effectobj = GameObject.Instantiate(attack_Info[i].effect[0]);
-                    effectobj.transform.position = attack_Info[i].effect_Pos[0].position;
-                    effectobj.transform.rotation = attack_Info[i].effect_Pos[0].rotation;
-
-                    //preparent = effectobj.transform.parent;
-                    effectobj.transform.parent = attack_Info[i].effect_Pos[0];
-                    //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
-
-
-                    Destroy(effectobj, 1.5f);
-                }
+                Skill_Process(i, 0);
 
                 return;
             }
@@ -186,20 +191,8 @@ public class Battle_Character : MonoBehaviour
             {
                 //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
                 //movecom.FowardDoMove(attack_Info[i].Movedis[1], attack_Info[i].MoveTime[1]);
+                Skill_Process(i, 1);
 
-                if (attack_Info[i].effect != null)
-                {
-                    GameObject effectobj = GameObject.Instantiate(attack_Info[i].effect[1]);
-                    effectobj.transform.position = attack_Info[i].effect_Pos[1].position;
-                    effectobj.transform.rotation = attack_Info[i].effect_Pos[1].rotation;
-
-                    //preparent = effectobj.transform.parent;
-                    effectobj.transform.parent = attack_Info[i].effect_Pos[1];
-                    //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
-
-
-                    Destroy(effectobj, 1.5f);
-                }
                 return;
             }
         }
@@ -213,23 +206,89 @@ public class Battle_Character : MonoBehaviour
             {
                 //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
                 //movecom.FowardDoMove(attack_Info[i].Movedis[2], attack_Info[i].MoveTime[2]);
+                Skill_Process(i, 2);
 
-                if (attack_Info[i].effect != null)
-                {
-                    GameObject effectobj = GameObject.Instantiate(attack_Info[i].effect[2]);
-                    effectobj.transform.position = attack_Info[i].effect_Pos[2].position;
-                    effectobj.transform.rotation = attack_Info[i].effect_Pos[2].rotation;
-
-                    //preparent = effectobj.transform.parent;
-                    effectobj.transform.parent = attack_Info[i].effect_Pos[2];
-                    //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
-
-
-                    Destroy(effectobj, 1.5f);
-                }
                 return;
             }
         }
+    }
+
+    void Skill_Process(int info_num, int index)
+    {
+        if (attack_Info[info_num].effect[index])
+        {
+            if (attack_Info[info_num].EffectStartTime[index] != 0)
+            {
+                StartCoroutine(eff_Coroutine(attack_Info[info_num].EffectStartTime[index]
+                    , attack_Info[info_num].effect[index], attack_Info[info_num].effect_Pos[index]));
+            }
+            else
+            {
+                GameObject effectobj = GameObject.Instantiate(attack_Info[info_num].effect[index]);
+                effectobj.transform.position = attack_Info[info_num].effect_Pos[index].position;
+                effectobj.transform.rotation = attack_Info[info_num].effect_Pos[index].rotation;
+
+                //preparent = effectobj.transform.parent;
+                //effectobj.transform.parent = attack_Info[i].effect_Pos[2];
+                //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
+
+                Destroy(effectobj, 1.5f);
+            }
+        }
+
+        if (attack_Info[info_num].Movedis[index] != 0)
+        {
+            attack_Info[info_num].off_Mesh_Pos[0].localPosition += new Vector3(0, 0, attack_Info[info_num].Movedis[index]);
+
+            real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
+            real_AI.navMesh.speed = attack_Info[info_num].jump_Speed;
+            real_AI.navMesh.acceleration = attack_Info[info_num].jump_Acc;
+
+            Debug.Log("3번째 : " + attack_Info[info_num].off_Mesh_Pos[0].position);
+            StartCoroutine(nav_Coroutine(3.5f, 8f));
+        }
+
+        if (attack_Info[info_num].missile != null)
+        {
+            for (int i = 0; i < attack_Info[info_num].missile_Amount; i++)
+            {
+                GameObject missileobj = GameObject.Instantiate(attack_Info[info_num].missile);
+                missileobj.transform.position = attack_Info[info_num].missile_Pos.position;
+                missileobj.transform.rotation = attack_Info[info_num].missile_Pos.rotation;
+
+                if (missileobj.GetComponentInChildren<RFX1_TransformMotion>())
+                {
+                    missileobj.GetComponentInChildren<RFX1_TransformMotion>().Target = cur_Target;
+                }
+                else
+                {
+
+                }
+
+                Destroy(missileobj, 5.0f);
+            }
+        }
+
+        isAttack_Run = false;
+    }
+
+    IEnumerator nav_Coroutine(float speed, float acc)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        real_AI.navMesh.speed = speed;
+        real_AI.navMesh.acceleration = acc;
+    }
+
+    IEnumerator eff_Coroutine(float sec, GameObject eff, Transform pos)
+    {
+        yield return new WaitForSeconds(sec);
+
+        GameObject effectobj = GameObject.Instantiate(eff);
+        effectobj.transform.position = pos.position;
+        effectobj.transform.rotation = pos.rotation;
+
+        Destroy(effectobj, 1.5f);
     }
 
     private void Start()
@@ -244,7 +303,11 @@ public class Battle_Character : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            animator.Play("Melee Attack");
+            animator.Play("Guided Magic Bullet2");
+        }
+        else if (Input.GetKeyDown(KeyCode.G))
+        {
+            animator.Play("Magic Beam");
         }
     }
 }

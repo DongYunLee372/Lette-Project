@@ -14,28 +14,28 @@ public class RFX1_AudioVolumeCurves : MonoBehaviour
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        startVolume = audioSource.volume;
-        audioSource.volume = AudioCurve.Evaluate(0);
+        //audioSource = GetComponent<AudioSource>();
+        //startVolume = audioSource.volume;
+        //audioSource.volume = AudioCurve.Evaluate(0);
     }
 
     private void OnEnable()
     {
-        startTime = Time.time;
-        canUpdate = true;
-        if (audioSource != null) audioSource.volume = AudioCurve.Evaluate(0);
+        //startTime = Time.time;
+        //canUpdate = true;
+        //if (audioSource != null) audioSource.volume = AudioCurve.Evaluate(0);
     }
 
     private void Update()
     {
-        var time = Time.time - startTime;
-        if (canUpdate) {
-            var eval = AudioCurve.Evaluate(time / GraphTimeMultiplier) * startVolume;
-            audioSource.volume = eval;
-        }
-        if (time >= GraphTimeMultiplier) {
-            if (IsLoop) startTime = Time.time;
-            else canUpdate = false;
-        }
+        //var time = Time.time - startTime;
+        //if (canUpdate) {
+        //    var eval = AudioCurve.Evaluate(time / GraphTimeMultiplier) * startVolume;
+        //    audioSource.volume = eval;
+        //}
+        //if (time >= GraphTimeMultiplier) {
+        //    if (IsLoop) startTime = Time.time;
+        //    else canUpdate = false;
+        //}
     }
 }

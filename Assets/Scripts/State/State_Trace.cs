@@ -21,6 +21,7 @@ public class State_Trace : State
 
     public override void Run(Battle_Character b_c)
     {
+        b_c.animator.Play("Walk");
         b_c.real_AI.navMesh.SetDestination(b_c.cur_Target.transform.position);
     }
 }

@@ -28,6 +28,7 @@ namespace Enemy_Enum
         Melee_Attack = 0,
         Long_Attack,
         Skill_Using,
+        Skill_Wait,
         Attack_Logic_Amount,
     }
 }

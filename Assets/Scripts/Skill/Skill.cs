@@ -11,6 +11,7 @@ public class Skill : MonoBehaviour
 {
     public virtual void Skill_Run(Battle_Character b_c, MonsterSkillInformation skill_data)
     {
+        b_c.isAttack_Run = true;
         b_c.animator.Play(skill_data.P_skill_Name_En);
         // 애니메이션 재생 ( 애니메이션 클립에 이벤트들을 붙여줌 해당 시간에 판정 
         // 어택매니저로 공격 호출
@@ -26,8 +27,6 @@ public class Skill : MonoBehaviour
         {
             StartCoroutine(Spawn_Coroutine(skill_data));
         }
-
-
     }
 
     protected IEnumerator Shoot_Coroutine(MonsterSkillInformation skill_data)

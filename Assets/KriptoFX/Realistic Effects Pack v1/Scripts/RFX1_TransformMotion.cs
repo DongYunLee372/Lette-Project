@@ -99,7 +99,7 @@ public class RFX1_TransformMotion : MonoBehaviour
         if (effectSettings != null)
         {
             Speed = effectSettings.Speed;
-            Distance = effectSettings.LimitMaxDistance ?  effectSettings.MaxDistnace : 1000;
+            Distance = effectSettings.LimitMaxDistance ? effectSettings.MaxDistnace : 1000;
         }
 
         Vector3 randomOffset = Vector3.zero;
@@ -109,7 +109,7 @@ public class RFX1_TransformMotion : MonoBehaviour
             randomOffset = GetRadiusRandomVector() * RandomMoveRadius;
             if (Target != null)
             {
-                if(targetT==null) targetT = Target.transform;
+                if (targetT == null) targetT = Target.transform;
                 var fade = Vector3.Distance(t.position, targetT.position) / Vector3.Distance(startPosition, targetT.position);
                 randomOffset *= fade;
             }
@@ -122,9 +122,9 @@ public class RFX1_TransformMotion : MonoBehaviour
             //currentSpeed = Mathf.Clamp(currentSpeed - Speed*Dampeen*Time.deltaTime, MinSpeed, Speed);
             if (Target == null)
             {
-                var currentForwardVector = (Vector3.forward + randomOffset)* Speed * Time.deltaTime;
-                frameMoveOffset = t.localRotation*currentForwardVector;
-                frameMoveOffsetWorld = startQuaternion*currentForwardVector;
+                var currentForwardVector = (Vector3.forward + randomOffset) * Speed * Time.deltaTime;
+                frameMoveOffset = t.localRotation * currentForwardVector;
+                frameMoveOffsetWorld = startQuaternion * currentForwardVector;
             }
             else
             {
@@ -157,7 +157,7 @@ public class RFX1_TransformMotion : MonoBehaviour
             OnCollisionDeactivateBehaviour(false);
 
             if (Target == null)
-                t.localPosition = startPositionLocal + t.localRotation*(Vector3.forward + randomOffset)*Distance;
+                t.localPosition = startPositionLocal + t.localRotation * (Vector3.forward + randomOffset) * Distance;
             else
             {
                 var forwardVec = (targetT.position - t.position).normalized;
@@ -190,7 +190,7 @@ public class RFX1_TransformMotion : MonoBehaviour
     {
         var handler = CollisionEnter;
         if (handler != null)
-            handler(this, new RFX1_CollisionInfo {Hit = hit});
+            handler(this, new RFX1_CollisionInfo { Hit = hit });
         CollidedInstances.Clear();
         foreach (var effect in EffectsOnCollision)
         {
@@ -207,13 +207,15 @@ public class RFX1_TransformMotion : MonoBehaviour
             if (!CollisionEffectInWorldSpace) instance.transform.parent = transform;
             Destroy(instance, DestroyTimeDelay);
         }
+
+        hit.collider.GetComponentInChildren<PlayableCharacter>()?.BeAttacked(80);
     }
 
     void OnCollisionDeactivateBehaviour(bool active)
     {
         foreach (var effect in DeactivatedObjectsOnCollision)
         {
-           if(effect!=null) effect.SetActive(active);
+            if (effect != null) effect.SetActive(active);
         }
     }
 
@@ -224,7 +226,7 @@ public class RFX1_TransformMotion : MonoBehaviour
 
         t = transform;
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(t.position, t.position + t.forward*Distance);
+        Gizmos.DrawLine(t.position, t.position + t.forward * Distance);
 
     }
 

@@ -30,6 +30,8 @@ public class State_Patrol : State
 
     public override void Run(Battle_Character b_c)
     {
+        b_c.animator.Play("Walk");
+
         Vector3 charPos = new Vector3(b_c.transform.position.x,
             0, b_c.transform.position.z);
         Vector3 desPos = new Vector3(b_c.destination_Pos.x
