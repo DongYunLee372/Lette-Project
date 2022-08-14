@@ -527,7 +527,7 @@ public class CMoveComponent : BaseComponent
         }
     }
 
-    public void Damaged_Rolling(float damage)
+    public void Damaged_Rolling(float damage,Vector3 hitpoint)
     {
         if(curval.IsRolling&&Time.time-RollingStartTime<=moveoption.RollingFreeDamageTime)
         {
@@ -535,7 +535,7 @@ public class CMoveComponent : BaseComponent
         }
         else
         {
-            PlayableCharacter.Instance.Damaged(damage);
+            PlayableCharacter.Instance.Damaged(damage, hitpoint);
         }
     }
 

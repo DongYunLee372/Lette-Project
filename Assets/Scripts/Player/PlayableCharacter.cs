@@ -18,6 +18,17 @@ public class PlayableCharacter : MonoBehaviour
 
     public BaseStatus status;
 
+
+    [Header("================캐릭터 UI================")]
+    public UICharacterInfoPanel CharacterInfoPanel;
+    //public SlideBar HPBar;
+    //public SlideBar MPBar;
+    //public SlideBar STMBar;
+    //public SlideBar BalanceBar;
+    [Header("================피격 이펙트================")]
+    public GameObject HitEffect;
+
+
     /*싱글톤*/
     static PlayableCharacter _instance;
     public static PlayableCharacter Instance
@@ -52,7 +63,12 @@ public class PlayableCharacter : MonoBehaviour
         }
 
         status = new BaseStatus();
-        status.Init(DataLoad_Save.Instance);
+        status.Init(DataLoad_Save.Instance,CharacterInfoPanel);
+
+
+        
+        //CharacterInfoPanel = UIManager.Instance.Prefabsload("FriendPanel", UIManager.CANVAS_NUM.player_cavas);
+
     }
 
     /*MyComponent 관련 메소드*/
@@ -89,8 +105,9 @@ public class PlayableCharacter : MonoBehaviour
     /*플레이어 캐릭터 상호작용 메소드*/
 
     /*플에이어가 공격을 받았을때 해당 함수를 호출
-      현재 플레이어의 상태에 따라서 넉백, 가드넉백, 회피 등등의 동작을 결정한다.*/
-    public void BeAttacked(float damage)
+      현재 플레이어의 상태에 따라서 넉백, 가드넉백, 회피 등등의 동작을 결정한다.
+      공격을 당했을때 공격을 당한 위치(충돌한 위치)도 함께 넘겨준다.(피격 이펙트를 출력하기 위해)*/
+    public void BeAttacked(float damage, Vector3 hitpoint)
     {
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
         
@@ -100,7 +117,7 @@ public class PlayableCharacter : MonoBehaviour
             state == CharacterStateMachine.eCharacterState.Move ||
             state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
-            Damaged(damage);
+            Damaged(damage, hitpoint);
         }
 
         //2. 가드중 
@@ -110,7 +127,7 @@ public class PlayableCharacter : MonoBehaviour
         {
             CGuardComponent guardcom = GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
 
-            guardcom.Damaged_Guard(damage);
+            guardcom.Damaged_Guard(damage, hitpoint);
         }
 
         //3. 회피중
@@ -121,7 +138,7 @@ public class PlayableCharacter : MonoBehaviour
             CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
             if(!movecom.curval.IsNoDamage)
-                movecom.Damaged_Rolling(damage);
+                movecom.Damaged_Rolling(damage, hitpoint);
 
         }
 
@@ -130,13 +147,13 @@ public class PlayableCharacter : MonoBehaviour
         {
             CAttackComponent attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
             attackcom.AttackCutOff();
-            Damaged(damage);
+            Damaged(damage, hitpoint);
         }
 
     }
 
     
-    public void Damaged(float damage)
+    public void Damaged(float damage,Vector3 hitpoint)
     {
         CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막

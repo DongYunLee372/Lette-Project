@@ -290,14 +290,14 @@ public class CInputComponent : BaseComponent
         //넉백 테스트
         if(Input.GetKeyDown(KeyCode.U))
         {
-            PlayableCharacter.Instance.BeAttacked(10);
+            PlayableCharacter.Instance.BeAttacked(10,this.transform.position);
             //movecom.KnockBack();
         }
 
         //넉다운 테스트
         if (Input.GetKeyDown(KeyCode.I))
         {
-            PlayableCharacter.Instance.BeAttacked(90);
+            PlayableCharacter.Instance.BeAttacked(90,this.transform.position);
             //movecom.KnockDown();
         }
 

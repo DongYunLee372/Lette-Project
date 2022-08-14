@@ -39,10 +39,10 @@ public class BaseStatus
     public CharacterInformation CharacterDBInfo;
     [SerializeField]
     private DataLoad_Save DBController;
+    private UICharacterInfoPanel uiPanel;
 
-
-    public int CurLevel 
-    { 
+    public int CurLevel
+    {
         get
         {
             return curLevel;
@@ -50,7 +50,7 @@ public class BaseStatus
         set
         {
             curLevel = value;
-            if(curLevel==1)
+            if (curLevel == 1)
             {
                 CharacterDBInfo = DBController.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
                 MaxHP = CharacterDBInfo.P_player_HP;
@@ -61,39 +61,50 @@ public class BaseStatus
             }
         }
     }
-    public float MaxHP 
-    { 
-        get => maxHP; 
+    public float MaxHP
+    {
+        get => maxHP;
         set
         {
             maxHP = value;
+            uiPanel.HPBar.SetMaxValue(value);
             CurHP = maxHP;
         }
     }
 
-    public float CurHP 
-    { 
-        get => curHP; 
+    public float CurHP
+    {
+        get => curHP;
         set
         {
             curHP = value;
+            uiPanel.HPBar.SetCurValue(value);
             Debug.Log($"현재 HP 변화 {curHP}");
         }
     }
-    
-    public float MaxStamina 
-    { 
-        get => maxStamina; 
+
+    public float MaxStamina
+    {
+        get => maxStamina;
         set
         {
             maxStamina = value;
+            uiPanel.Staminabar.SetMaxValue(value);
             CurStamina = maxStamina;
         }
     }
-    public float CurStamina 
-    { 
-        get => curStamina; 
-        set => curStamina = value; 
+    public float CurStamina
+    {
+        get => curStamina;
+        
+        set
+        {
+            
+            curStamina = value;
+            uiPanel.Staminabar.SetCurValue(value);
+            Debug.Log($"현재 stamina 변화 {curStamina}");
+        }
+        
     }
     public float MaxBalance 
     { 
@@ -101,13 +112,20 @@ public class BaseStatus
         set
         {
             maxBalance = value;
+            uiPanel.Balancebar.SetMaxValue(value);
             CurBalance = maxBalance;
         }
     }
     public float CurBalance 
     { 
-        get => curBalance; 
-        set => curBalance = value; 
+        get => curBalance;
+        set
+        {
+            curBalance = value;
+            uiPanel.Balancebar.SetCurValue(value);
+            Debug.Log($"현재 Balance 변화 {curBalance}");
+        }
+
     }
     public float MaxMP 
     { 
@@ -115,13 +133,20 @@ public class BaseStatus
         set
         {
             maxMP = value;
+            uiPanel.MPBar.SetMaxValue(value);
             CurMP = maxMP;
         }
     }
     public float CurMP 
     { 
-        get => curMP; 
-        set => curMP = value; 
+        get => curMP;
+        set
+        {
+            curMP = value;
+            uiPanel.MPBar.SetCurValue(value);
+            Debug.Log($"현재 MP 변화 {curMP}");
+        }
+
     }
     public int CurExp 
     { 
@@ -144,9 +169,10 @@ public class BaseStatus
         set => defense = value; 
     }
 
-    public void Init(DataLoad_Save DBController)
+    public void Init(DataLoad_Save DBController, UICharacterInfoPanel uipanel)
     {
         this.DBController = DBController;
+        this.uiPanel = uipanel;
         CurLevel = 1;
     }
 }

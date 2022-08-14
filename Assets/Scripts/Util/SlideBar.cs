@@ -79,12 +79,18 @@ public class SlideBar : MonoBehaviour
         valueChangeEvent.RemoveListener(action);
     }
 
+    public void SetMaxValue(float value)
+    {
+        MaxValue = value;
+        FrontImage.rectTransform.sizeDelta = new Vector2(BackImage.rectTransform.sizeDelta.x * (CurValue / MaxValue), BackImage.rectTransform.sizeDelta.y);
+    }
+
     //현재 값을 변화시킨다.
     public void SetCurValue(float value)
     {
         CurValue = value;
         FrontImage.rectTransform.sizeDelta = new Vector2(BackImage.rectTransform.sizeDelta.x * (CurValue / MaxValue), BackImage.rectTransform.sizeDelta.y);
-        Debug.Log($"frontsize{FrontImage.rectTransform.sizeDelta.x},{FrontImage.rectTransform.sizeDelta.y} / backsize{BackImage.rectTransform.sizeDelta.x},{BackImage.rectTransform.sizeDelta.y}");
+        //Debug.Log($"frontsize{FrontImage.rectTransform.sizeDelta.x},{FrontImage.rectTransform.sizeDelta.y} / backsize{BackImage.rectTransform.sizeDelta.x},{BackImage.rectTransform.sizeDelta.y}");
         valueChangeEvent.Invoke();
     }
 
