@@ -104,6 +104,7 @@ public class Battle_Character : MonoBehaviour
     [Header("==========Effect=============")]
     public Attack_Info[] attack_Info;
     public CMoveComponent movecom;
+    public GameObject damaged_Effect; // 피격 이펙트
 
     [Header("==========AI=================")]
     public AI real_AI;
@@ -167,7 +168,15 @@ public class Battle_Character : MonoBehaviour
         isHit = true;
         cur_HP -= damage_Amount - mon_Info.P_mon_Def;
 
-        Debug.Log("아악");
+        GameObject effectobj = GameObject.Instantiate(damaged_Effect);
+        effectobj.transform.position = transform.position;
+        effectobj.transform.rotation = transform.rotation;
+
+        //preparent = effectobj.transform.parent;
+        //effectobj.transform.parent = attack_Info[i].effect_Pos[2];
+        //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
+
+        Destroy(effectobj, 0.25f);
     }
 
     public void Skill_Rand()
@@ -325,6 +334,8 @@ public class Battle_Character : MonoBehaviour
         {
             animator.Play("Magic Beam");
         }
+        else if (Input.GetKeyDown(KeyCode.D))
+            Damaged(1);
 
         //if (Time.time > nextTime)
         //{

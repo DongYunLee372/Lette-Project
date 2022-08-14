@@ -1524,6 +1524,7 @@ MonoBehaviour:
   mon_Target_Info: {fileID: 0}
   player_Aconstant: {fileID: 0}
   mon_Aconstant: {fileID: 0}
+  cur_HP: 0
   enemy_Grade: 0
   enemy_Type: 0
   return_Pos: {x: 0, y: 0, z: 0}
@@ -1780,6 +1781,7 @@ MonoBehaviour:
     missile_Pos: {fileID: 5847035042674421376}
     spawn_Animation: 0
   movecom: {fileID: 0}
+  damaged_Effect: {fileID: 152628, guid: 4e42a2081531c814fa4774bd0d6b45df, type: 3}
   real_AI:
     b_c: {fileID: 0}
     pre_State: {fileID: 0}
