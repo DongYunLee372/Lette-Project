@@ -27,6 +27,9 @@ public class Skill : MonoBehaviour
         {
             StartCoroutine(Spawn_Coroutine(skill_data));
         }
+
+        // 캐릭터 현재 마나 - 스킬의 마나
+        // //b_c.mon_Info
     }
 
     protected IEnumerator Shoot_Coroutine(MonsterSkillInformation skill_data)

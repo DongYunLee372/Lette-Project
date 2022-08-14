@@ -49,6 +49,9 @@ public class Attack_Info // 스킬이나 공격info
 
     // 발사체 발사 위치
     public Transform missile_Pos;
+
+    // Spawn 애니메이션 판별
+    public bool spawn_Animation;
 }
 
 public class Battle_Character : MonoBehaviour
@@ -75,6 +78,7 @@ public class Battle_Character : MonoBehaviour
     public Monster_aconstant mon_Aconstant;
 
     [Header("Monster Stats")]
+    public int cur_HP;
     public Enemy_Grade enemy_Grade; // 몬스터 등급
     public Enemy_Type enemy_Type; // 몬스터 타입
     public Vector3 return_Pos; // 초기 좌표
@@ -103,9 +107,12 @@ public class Battle_Character : MonoBehaviour
 
     [Header("==========AI=================")]
     public AI real_AI;
+    public bool is_Boss = false; // 보스 몬스터 판별
+
 
     public void Stat_Initialize(MonsterInformation info) // 몬스터 생성 시 몬스터 정보 초기화
     {
+        cur_HP = mon_Info.P_mon_MaxHP;
         //        st = ScriptableObject.CreateInstance<MonsterInformation>();
         //die_Delay = info.P_dieDelay;
         //drop_Reward = info.P_drop_Reward;
@@ -143,15 +150,22 @@ public class Battle_Character : MonoBehaviour
         }
 
         Skill_Rand();
+
+        if (is_Boss)
+        {
+            real_AI.isPause = true;
+            cur_Target = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
 
-    public virtual void Damaged(float damage_Amount)
+    public virtual void Damaged(int damage_Amount)
     {
         // Cur_HP -= (damage_Amount - Armor);
         //  MyHpbar.Curhp = Cur_HP;
         //MyHpbar.hit();
         isHit = true;
+        cur_HP -= damage_Amount - mon_Info.P_mon_Def;
 
         Debug.Log("아악");
     }
@@ -174,8 +188,6 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
-                //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
-                //movecom.FowardDoMove(attack_Info[i].Movedis[0], attack_Info[i].MoveTime[0]);
                 Skill_Process(i, 0);
 
                 return;
@@ -189,8 +201,6 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
-                //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
-                //movecom.FowardDoMove(attack_Info[i].Movedis[1], attack_Info[i].MoveTime[1]);
                 Skill_Process(i, 1);
 
                 return;
@@ -204,9 +214,12 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
-                //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
-                //movecom.FowardDoMove(attack_Info[i].Movedis[2], attack_Info[i].MoveTime[2]);
                 Skill_Process(i, 2);
+
+                if (attack_Info[i].spawn_Animation)
+                {
+                    real_AI.isPause = false;
+                }
 
                 return;
             }
@@ -297,6 +310,9 @@ public class Battle_Character : MonoBehaviour
         //real_AI.AI_Init(this);
     }
 
+    //private float TimeLeft = 2.0f;
+    //private float nextTime = 0.0f;
+    //private Transform pre_Pos;
     private void Update()
     {
         real_AI.AI_Update();
@@ -309,5 +325,16 @@ public class Battle_Character : MonoBehaviour
         {
             animator.Play("Magic Beam");
         }
+
+        //if (Time.time > nextTime)
+        //{
+        //    if(Vector3.Distance(transform.position,pre_Pos.position) <= 0.5f)
+        //    { 
+
+        //    }
+        //    pre_Pos = transform;
+        //    nextTime = Time.time + TimeLeft;
+        //    //MoveMoles();
+        //}
     }
 }

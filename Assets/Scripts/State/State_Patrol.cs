@@ -7,7 +7,7 @@ public class State_Patrol : State
     public override bool Judge(out State _State, Battle_Character b_c)
     {
         Collider[] cols = Physics.OverlapSphere(b_c.transform.position,
-            b_c.mon_find_Range);
+            b_c.mon_Target_Info.P_mon_Range);
         //, 1 << 8); // 비트 연산자로 8번째 레이어
 
         if (cols.Length > 0)

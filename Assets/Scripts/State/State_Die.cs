@@ -6,11 +6,12 @@ public class State_Die : State
 {
     public override bool Judge(out State _State, Battle_Character b_c)
     {
-        //if (b_c.char_Info.P_player_HP <= 0) // 사망
-        //{
-        //    _State = this;
-        //    return true;
-        //}
+        // 0으로 바꿔야함
+        if (b_c.cur_HP <= -100) // 사망
+        {
+            _State = this;
+            return true;
+        }
 
         _State = null;
         return false;

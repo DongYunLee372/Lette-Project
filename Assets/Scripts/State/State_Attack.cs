@@ -16,14 +16,15 @@ public class State_Attack : State
             _State = this;
             return true;
         }
+
         //b_c.Attack_Melee_Range 가 스킬 사용범위 변수로 바뀌어야함.
-        //if ((Vector3.Distance(b_c.transform.position,
-        //    b_c.cur_Target.transform.position) <= b_c.now_Skill_Info.P_skill_Range) && b_c.char_Info.P_player_MP >= b_c.now_Skill_Info.P_skill_MP)
-        //{
-        //    judge_logic = Enemy_Attack_Logic.Skill_Using;
-        //    _State = this;
-        //    return true;
-        //}
+        if ((Vector3.Distance(b_c.transform.position,
+            b_c.cur_Target.transform.position) <= b_c.now_Skill_Info.P_skill_Range) && b_c.mon_Info.P_dieDelay >= b_c.now_Skill_Info.P_skill_MP)
+        {
+            judge_logic = Enemy_Attack_Logic.Skill_Using;
+            _State = this;
+            return true;
+        }
 
         //if ((Vector3.Distance(b_c.transform.position,
         //    b_c.cur_Target.transform.position) <= b_c.Attack_Melee_Range)) // 사정 거리 내에 있다면 
