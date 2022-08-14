@@ -21,8 +21,8 @@ public class UIManager : Singleton<UIManager>
 
     public enum CANVAS_NUM
     {
-        ex_skill = 0,
-        ex_Icon,
+        player_cavas = 0,
+        enemy_canvas,
         sdf
     }
 
