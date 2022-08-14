@@ -74,13 +74,17 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , (int)Monster_db_Dialog[i]["mon_Def"]
                 , (int)Monster_db_Dialog[i]["mon_moveSpeed"]
                 , (int)Monster_db_Dialog[i]["mon_Balance"]
+                , (int)Monster_db_Dialog[i]["mon_ShortRange"]
+                , (int)Monster_db_Dialog[i]["mon_LongRange"]
                 , (int)Monster_db_Dialog[i]["mon_maxMP"]
+                , (int)Monster_db_Dialog[i]["mon_haveMP"]
                 , (int)Monster_db_Dialog[i]["mon_regenMP"]
                 , (int)Monster_db_Dialog[i]["dieDelay"]
                 );
             MonsterDB_List.Add(C_Mon);
 
         }
+        
 
         Debug.Log("뭐지 " + MonsterSkill_db_Dialog.Count);
         for (int i = 0; i < MonsterSkill_db_Dialog.Count; i++)

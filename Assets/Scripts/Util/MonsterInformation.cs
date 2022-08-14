@@ -49,6 +49,14 @@ public class MonsterInformation : ScriptableObject
     public int P_mon_Balance { get { return mon_Balance; } }
 
     [SerializeField]
+    private int mon_LongRange; //몬스터 균형게이지
+    public int P_mon_LongRange { get { return mon_LongRange; } }
+
+    [SerializeField]
+    private int mon_ShortRange; //몬스터 균형게이지
+    public int P_mon_ShortRange { get { return mon_ShortRange; } }
+    
+    [SerializeField]
     private int mon_moveSpeed; //몬스터 스피드
     public int P_mon_moveSpeed { get { return mon_moveSpeed; } }
 
@@ -61,13 +69,18 @@ public class MonsterInformation : ScriptableObject
     public int P_mon_regenMP { get { return mon_regenMP; } }
 
     [SerializeField]
+    private int mon_haveMP; //몬스터 마나 회복량
+    public int P_mon_haveMP { get { return mon_haveMP; } }
+
+    [SerializeField]
     private int dieDelay; //몬스터 사망딜레이
     public int P_dieDelay { get { return dieDelay; } }
     [SerializeField]
     private int drop_Reward; //몬스터 보상
     public int P_drop_Reward{ get { return drop_Reward; } }
 
-    public void Set(int num, string mon_index, string mon_namekor, string mon_nameeng, int mon_default, int mon_type, int mon_position, int mon_hp, int mon_atk, int mon_def, int mon_balance, int mon_movespeed, int mon_maxmp , int mon_regenmP ,int diedelay)
+    public void Set(int num, string mon_index, string mon_namekor, string mon_nameeng, int mon_default, int mon_type, int mon_position, int mon_hp,
+        int mon_atk, int mon_def, int mon_balance, int mon_shortrange, int mon_longrange, int mon_movespeed, int mon_maxmp , int mon_havemP, int mon_regenmP ,int diedelay)
     {
         Number = num;
         mon_Index = mon_index;
@@ -81,8 +94,10 @@ public class MonsterInformation : ScriptableObject
         mon_Def = mon_def;
         mon_Balance = mon_balance;
         mon_moveSpeed = mon_movespeed;
-
+        mon_ShortRange = mon_longrange;
+        mon_LongRange = 
         mon_MaxMp = mon_maxmp;
+        mon_haveMP = mon_havemP;
         mon_regenMP = mon_regenmP;
 
         dieDelay = diedelay;

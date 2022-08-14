@@ -1976,12 +1976,12 @@ MonoBehaviour:
   WorldMove: {x: 0, y: 0, z: 0}
   CurGravity: 0
   com:
-    CharacterRoot: {fileID: 0}
-    TpCamRig: {fileID: 0}
-    TpCam: {fileID: 0}
-    FpRoot: {fileID: 0}
-    FpCamRig: {fileID: 0}
-    FpCam: {fileID: 0}
+    CharacterRoot: {fileID: 780554750}
+    TpCamRig: {fileID: 789677623}
+    TpCam: {fileID: 148239116}
+    FpRoot: {fileID: 2076685242}
+    FpCamRig: {fileID: 1040166918}
+    FpCam: {fileID: 212319919}
     CharacterRig: {fileID: 0}
     CapsuleCol: {fileID: 0}
     animator: {fileID: 0}
@@ -2050,7 +2050,7 @@ MonoBehaviour:
   xnext: 0
   rightleft: {x: 0, y: 0, z: 0}
   ynext: 0
-  testtart: {x: 0, y: 0, z: 0}
+  teststart: {x: 0, y: 0, z: 0}
   testend: {x: 0, y: 0, z: 0}
   testcube: {fileID: 0}
 --- !u!114 &780554744
@@ -2164,7 +2164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780554739}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5227208, y: 0, z: 9.29}
+  m_LocalPosition: {x: -2.5227208, y: 0, z: 14.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
