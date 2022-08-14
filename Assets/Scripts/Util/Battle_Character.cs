@@ -50,6 +50,9 @@ public class Attack_Info // 스킬이나 공격info
     // 발사체 발사 위치
     public Transform missile_Pos;
 
+    // 발사체 발사 이벤트 번호
+    public int missile_Index;
+
     // Spawn 애니메이션 판별
     public bool spawn_Animation;
 }
@@ -160,21 +163,17 @@ public class Battle_Character : MonoBehaviour
     }
 
 
-    public virtual void Damaged(int damage_Amount)
+    public virtual void Damaged(int damage_Amount, Vector3 point)
     {
         // Cur_HP -= (damage_Amount - Armor);
         //  MyHpbar.Curhp = Cur_HP;
         //MyHpbar.hit();
         isHit = true;
-        cur_HP -= damage_Amount - mon_Info.P_mon_Def;
+        //cur_HP -= damage_Amount - mon_Info.P_mon_Def;
 
         GameObject effectobj = GameObject.Instantiate(damaged_Effect);
-        effectobj.transform.position = transform.position;
+        effectobj.transform.position = point;
         effectobj.transform.rotation = transform.rotation;
-
-        //preparent = effectobj.transform.parent;
-        //effectobj.transform.parent = attack_Info[i].effect_Pos[2];
-        //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
 
         Destroy(effectobj, 0.25f);
     }
@@ -191,12 +190,17 @@ public class Battle_Character : MonoBehaviour
 
     }
 
+    private Vector3 begin_Pos = new Vector3();
+
     public void Animation_Begin(string clipname)
     {
         for (int i = 0; i < attack_Info.Length; i++)
         {
             if (attack_Info[i].Name == clipname)
             {
+                if (attack_Info[i].off_Mesh_Pos[0])
+                    begin_Pos = attack_Info[i].off_Mesh_Pos[0].localPosition;
+
                 Skill_Process(i, 0);
 
                 return;
@@ -229,6 +233,9 @@ public class Battle_Character : MonoBehaviour
                 {
                     real_AI.isPause = false;
                 }
+
+                if (attack_Info[i].off_Mesh_Pos[0])
+                    attack_Info[i].off_Mesh_Pos[0].localPosition = begin_Pos;
 
                 return;
             }
@@ -270,7 +277,7 @@ public class Battle_Character : MonoBehaviour
             StartCoroutine(nav_Coroutine(3.5f, 8f));
         }
 
-        if (attack_Info[info_num].missile != null)
+        if (attack_Info[info_num].missile != null && attack_Info[info_num].missile_Index == index)
         {
             for (int i = 0; i < attack_Info[info_num].missile_Amount; i++)
             {
@@ -316,36 +323,24 @@ public class Battle_Character : MonoBehaviour
     private void Start()
     {
         Initalize();
-        //real_AI.AI_Init(this);
     }
 
-    //private float TimeLeft = 2.0f;
-    //private float nextTime = 0.0f;
-    //private Transform pre_Pos;
     private void Update()
     {
         real_AI.AI_Update();
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            animator.Play("Guided Magic Bullet2");
+            animator.Play("Double Attack");
         }
         else if (Input.GetKeyDown(KeyCode.G))
         {
-            animator.Play("Magic Beam");
+            animator.Play("The Great Sword Slap");
         }
-        else if (Input.GetKeyDown(KeyCode.D))
-            Damaged(1);
-
-        //if (Time.time > nextTime)
-        //{
-        //    if(Vector3.Distance(transform.position,pre_Pos.position) <= 0.5f)
-        //    { 
-
-        //    }
-        //    pre_Pos = transform;
-        //    nextTime = Time.time + TimeLeft;
-        //    //MoveMoles();
-        //}
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            Vector3 vec = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
+            Damaged(1, vec);
+        }
     }
 }

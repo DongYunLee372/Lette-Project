@@ -8,11 +8,16 @@ public class State_Hit : State
     {
         if (b_c.isHit) // 방금 맞았다면
         {
+            b_c.real_AI.pre_State = b_c.real_AI.now_State;
             _State = this;
             return true;
         }
 
-        _State = null;
+        if (b_c.real_AI.pre_State == this)
+            _State = b_c.real_AI.now_State;
+        else
+            _State = null;
+
         return false;
     }
 
@@ -20,6 +25,7 @@ public class State_Hit : State
     {
         // 피격시 처리.
         b_c.isHit = false;
+
         b_c.real_AI.now_State = b_c.real_AI.pre_State;
         b_c.real_AI.pre_State = this;
     }
