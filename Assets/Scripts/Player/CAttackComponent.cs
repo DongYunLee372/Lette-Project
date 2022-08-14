@@ -225,7 +225,11 @@ public class CAttackComponent : BaseComponent
 
         //공격중으로 바꿈
         if (curval.IsAttacking == false)
+        {
+            movecom.Stop();
             curval.IsAttacking = true;
+        }
+            
 
         //Debug.Log("공격 들어옴");
         float tempval = Time.time - lastAttackTime;

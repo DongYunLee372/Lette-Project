@@ -191,6 +191,11 @@ public class CMoveComponent : BaseComponent
     //{
     //    MoveDir = direction;
     //}
+    public void Stop()
+    {
+        com.CharacterRig.velocity = new Vector3(0, 0, 0);
+    }
+
     public void GuardMove(Direction dir)
     {
         Vector3 tempmove;
