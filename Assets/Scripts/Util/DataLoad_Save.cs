@@ -58,7 +58,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 );
             PlayerDB_List.Add(C_test);    
         }
-
+        Debug.Log("뭐지 " + Monster_db_Dialog.Count);
         for (int i = 0; i < Monster_db_Dialog.Count; i++)
         {
             MonsterInformation C_Mon = new MonsterInformation();
@@ -81,10 +81,12 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
             MonsterDB_List.Add(C_Mon);
         }
 
+        Debug.Log("뭐지 " + MonsterSkill_db_Dialog.Count);
         for (int i = 0; i < MonsterSkill_db_Dialog.Count; i++)
         {
             MonsterSkillInformation C_MonSkill = new MonsterSkillInformation();
-            C_MonSkill.Set(MonsterSkill_db_Dialog[i]["mon_Index"].ToString()
+            C_MonSkill.Set((int)MonsterSkill_db_Dialog[i]["Number"]
+                , MonsterSkill_db_Dialog[i]["mon_Index"].ToString()
                 , MonsterSkill_db_Dialog[i]["skill_Name_Kor"].ToString()
                 , MonsterSkill_db_Dialog[i]["skill_Name_En"].ToString()
                 , (int)MonsterSkill_db_Dialog[i]["skill_ID"]
@@ -187,8 +189,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
 
     void Start()
     {
-       // Init();
-        //TestScp();
+       
     }
 
     

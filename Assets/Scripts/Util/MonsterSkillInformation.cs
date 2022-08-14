@@ -6,6 +6,9 @@ using UnityEngine;
 public class MonsterSkillInformation : ScriptableObject
 {
     [SerializeField]
+    private int Number;
+    public int P_Number { get { return Number; } set { Number = value; } }
+    [SerializeField]
     private string mon_Index; //몬스터 번호
     public string P_mon_Index { get { return mon_Index; } set { mon_Index = value; } }
     [SerializeField]
@@ -60,11 +63,11 @@ public class MonsterSkillInformation : ScriptableObject
     private bool skill_ThrowObj; //몬스터 스킬 투사체 생성여부
     public bool P_skill_ThrowObj { get { return skill_ThrowObj; } set { skill_ThrowObj = value; } }
 
-    public void Set(string mon_index, string skill_name_kor, string skill_name_en, int skill_iD, int skill_type, int skill_targetyp , int skill_range ,int skill_dmg , int skill_mP , int skill_cool , int skill_atktime , int skill_continuetime 
+    public void Set(int number ,string mon_index, string skill_name_kor, string skill_name_en, int skill_iD, int skill_type, int skill_targetyp , int skill_range ,int skill_dmg , int skill_mP , int skill_cool , int skill_atktime , int skill_continuetime 
         , int skill_atkCount,
        bool skill_diffObj , bool skill_throwObj)
     {
-        
+        Number = number;
         mon_Index = mon_index;
         skill_Name_Kor = skill_name_kor;
         skill_Name_En = skill_name_en;
