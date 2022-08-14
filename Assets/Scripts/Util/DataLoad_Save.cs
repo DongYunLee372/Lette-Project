@@ -79,6 +79,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , (int)Monster_db_Dialog[i]["dieDelay"]
                 );
             MonsterDB_List.Add(C_Mon);
+
         }
 
         Debug.Log("뭐지 " + MonsterSkill_db_Dialog.Count);
