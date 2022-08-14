@@ -30,6 +30,7 @@ public class Skill : MonoBehaviour
 
         // 캐릭터 현재 마나 - 스킬의 마나
         // //b_c.mon_Info
+        b_c.mon_Info.P_mon_haveMP -= skill_data.P_skill_MP;
     }
 
     protected IEnumerator Shoot_Coroutine(MonsterSkillInformation skill_data)
