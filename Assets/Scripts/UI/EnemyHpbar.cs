@@ -74,7 +74,7 @@ public class EnemyHpbar : MonoBehaviour
         //// _hpbar.myhp = _test;
         // MyHpbar = _hpbar;
 
-        GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.ex_skill);
+        GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.player_cavas);
 
         var _hpbar = hpBar.GetComponent<EnemyHpbar>();
         //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
