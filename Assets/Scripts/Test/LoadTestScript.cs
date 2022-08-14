@@ -32,8 +32,8 @@ public class LoadTestScript : MonoBehaviour
         //GameMG.Instance.Resource.Instantiate("susu", PlayerInitPos.transform);
 
         //어드레서블 (풀링X)
-        StartCoroutine(AddressablesController.Instance.Load_Name("Terrain", MapPos.transform, temp));
-        StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform, temp));
+        StartCoroutine(AddressablesController.Instance.Load_Name("Terrain", MapPos.transform));
+        StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
 
 
         //코루틴 생성 (풀링)

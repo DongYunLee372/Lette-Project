@@ -8,7 +8,18 @@ using UnityEngine.SceneManagement;
 
 public class ScenesLoadMG : Singleton<ScenesLoadMG>
 {
+    GameObject MapPos;
+    public GameObject PlayerInitPos;
 
+    void Start()
+    {
+
+        MapPos = new GameObject();
+        PlayerInitPos = new GameObject();
+        MapPos.transform.position = new Vector3(0, 0, 0);
+        PlayerInitPos.transform.position = new Vector3(10, 0, 0);
+
+    }
     public enum Scenes_State  //씬 상태에 따라 어드레서블을 언로드, 로드 하기 위해 명시함.
     {
          Load=0,  //로딩중일때
@@ -39,10 +50,23 @@ public class ScenesLoadMG : Singleton<ScenesLoadMG>
 
     public void GameStart()
     {
-        AddressablesLoader.OnUnloadedAction("LoadingScenes");  //씬 언로드  어드레서블 적용
+
+       AddressablesLoader.OnUnloadedAction("LoadingScenes");  //씬 언로드  어드레서블 적용
+
 
         AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
+    }
 
+    public IEnumerator BossRoomScene()
+    {
+
+
+        //필요한거 다 로드.
+        yield return null;
+        StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
+        //  yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
+        AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
+        Debug.Log("로드중");
 
     }
 
