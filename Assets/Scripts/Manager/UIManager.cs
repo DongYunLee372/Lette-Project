@@ -123,6 +123,7 @@ public class UIManager : Singleton<UIManager>
     void Start()
     {
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
     }
 
     // Update is called once per frame
