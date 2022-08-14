@@ -117,7 +117,8 @@ public class Battle_Character : MonoBehaviour
 
         for (int i = 0; i < attack_Info.Length; i++)
         {
-            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(attack_Info[i].Name, Animation_Begin),
+            eventsystem.AddEvent
+                (new KeyValuePair<string, AnimationEventSystem.beginCallback>(attack_Info[i].Name, Animation_Begin),
                 new KeyValuePair<string, AnimationEventSystem.midCallback>(attack_Info[i].Name, Animation_Middle),
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(attack_Info[i].Name, Animation_End));
         }
@@ -242,6 +243,8 @@ public class Battle_Character : MonoBehaviour
         real_AI.AI_Update();
 
         if (Input.GetKeyDown(KeyCode.H))
+        {
             animator.Play("Melee Attack");
+        }
     }
 }
