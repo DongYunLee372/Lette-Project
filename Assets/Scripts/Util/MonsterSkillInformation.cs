@@ -56,16 +56,16 @@ public class MonsterSkillInformation : ScriptableObject
     public int P_skill_AtkCount { get { return skill_AtkCount; } set { skill_AtkCount = value; } }
 
     [SerializeField]
-    private bool skill_DiffObj; //몬스터 스킬 다른 객체 생성여부
-    public bool P_skill_DiffObj { get { return skill_DiffObj; } set { skill_DiffObj = value; } }
+    private int skill_DiffObj; //몬스터 스킬 다른 객체 생성여부
+    public int P_skill_DiffObj { get { return skill_DiffObj; } set { skill_DiffObj = value; } }
 
     [SerializeField]
-    private bool skill_ThrowObj; //몬스터 스킬 투사체 생성여부
-    public bool P_skill_ThrowObj { get { return skill_ThrowObj; } set { skill_ThrowObj = value; } }
+    private int skill_ThrowObj; //몬스터 스킬 투사체 생성여부
+    public int P_skill_ThrowObj { get { return skill_ThrowObj; } set { skill_ThrowObj = value; } }
 
     public void Set(int number ,string mon_index, string skill_name_kor, string skill_name_en, int skill_iD, int skill_type, int skill_targetyp , int skill_range ,int skill_dmg , int skill_mP , int skill_cool , int skill_atktime , int skill_continuetime 
-        , int skill_atkCount,
-       bool skill_diffObj , bool skill_throwObj)
+        , int skill_atkCount
+        , int skill_diffObj , int skill_throwObj)
     {
         Number = number;
         mon_Index = mon_index;

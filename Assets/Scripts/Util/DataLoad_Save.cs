@@ -85,32 +85,6 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
             MonsterDB_List.Add(C_Mon);
 
         }
-        
-
-        Debug.Log("뭐지 " + MonsterSkill_db_Dialog.Count);
-        for (int i = 0; i < MonsterSkill_db_Dialog.Count; i++)
-        {
-            MonsterSkillInformation C_MonSkill = new MonsterSkillInformation();
-            C_MonSkill.Set((int)MonsterSkill_db_Dialog[i]["Number"]
-                , MonsterSkill_db_Dialog[i]["mon_Index"].ToString()
-                , MonsterSkill_db_Dialog[i]["skill_Name_Kor"].ToString()
-                , MonsterSkill_db_Dialog[i]["skill_Name_En"].ToString()
-                , (int)MonsterSkill_db_Dialog[i]["skill_ID"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_Type"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_Targetyp"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_Range"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_dmg"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_MP"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_Cool"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_atkTime"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_continueTime"]
-                , (int)MonsterSkill_db_Dialog[i]["skill_AtkCount"]
-                , (bool)MonsterSkill_db_Dialog[i]["skill_DiffObj"]
-                , (bool)MonsterSkill_db_Dialog[i]["skill_ThrowObj"]
-                );
-            MonsterSkillDB_List.Add(C_MonSkill);
-        }
-        
         for (int i = 0; i < MonsterTarget_db_Dialog.Count; i++)
         {
             MonsterTargetInformation C_MonTarget = new MonsterTargetInformation();
@@ -127,6 +101,31 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 );
             MonsterTargetDB_List.Add(C_MonTarget);
         }
+       
+        for (int i = 0; i < MonsterSkill_db_Dialog.Count; i++)
+        {
+            MonsterSkillInformation C_MonSkill = new MonsterSkillInformation();
+            C_MonSkill.Set(Convert.ToInt32(MonsterSkill_db_Dialog[i]["Number"])
+                , MonsterSkill_db_Dialog[i]["mon_Index"].ToString()
+                , MonsterSkill_db_Dialog[i]["skill_Name_Kor"].ToString()
+                , MonsterSkill_db_Dialog[i]["skill_Name_En"].ToString()
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_ID"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_Type"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_Targetyp"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_Range"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_dmg"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_MP"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_Cool"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_atkTime"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_continueTime"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_AtkCount"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_DiffObj"])
+                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_ThrowObj"])
+                );
+            MonsterSkillDB_List.Add(C_MonSkill);
+        }
+        
+        
 
         for (int i = 0; i < Player_A_constant_db_Dialog.Count; i++)
         {
