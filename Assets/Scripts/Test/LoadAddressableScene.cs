@@ -23,6 +23,7 @@ public class LoadAddressableScene : MonoBehaviour
 
     public GameObject PlayerInitPos;
     public GameObject BossPos;
+    public GameObject MapPos;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -34,6 +35,8 @@ public class LoadAddressableScene : MonoBehaviour
         BossPos.transform.position = new Vector3(2.5f, -3f, 80f);  //보스위치임.
         PlayerInitPos = new GameObject();
         PlayerInitPos.transform.position = new Vector3(1.21f, -4.572893f, 56.09f);  //캐릭터위치.
+        MapPos = new GameObject();
+        MapPos.transform.position = new Vector3(0f, -5f, 0f);  //맵.
 
         //BOSSROOM();
         // StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
@@ -54,10 +57,12 @@ public class LoadAddressableScene : MonoBehaviour
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
         //yield return StartCoroutine(AddressablesController.Instance.Load_Name("Boss", PlayerInitPos.transform));
 
-       // yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
+        yield return StartCoroutine(AddressablesController.Instance.Load_Name("Long_Hall", MapPos.transform));
+
         yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, BossPos.transform));
+     //   yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
         //씬을 로드하고
-        AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
+       // AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
 
         //연출같은거 필요하면 하고, 캔버스 ,카메라 비활성화
 
