@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: HP 1000/1000
 --- !u!1 &4004420796584442045
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ RectTransform:
   m_GameObject: {fileID: 4004420796584442045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4004420797007984575}
@@ -122,7 +122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 184, y: 232}
+  m_AnchoredPosition: {x: 184, y: 460}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4004420796584442040
@@ -178,8 +178,9 @@ MonoBehaviour:
   Bosshp: {fileID: 4004420798490929210}
   t_Bosshp: {fileID: 733212724131816012}
   t_Bossname: {fileID: 8535739780825400007}
-  Maxhp: 0
-  Curhp: 0
+  Maxhp: 1000
+  Curhp: 1000
+  myhpbar: {fileID: 0}
 --- !u!1 &4004420797007984574
 GameObject:
   m_ObjectHideFlags: 0

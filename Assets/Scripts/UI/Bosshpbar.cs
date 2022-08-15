@@ -25,8 +25,9 @@ public class Bosshpbar : MonoBehaviour
 
     }
 
-    public void SetHpbar(float p_hp)
+    public void SetHpbar(float p_hp,string bossname)
     {
+        t_Bossname.text = bossname;
         t_Bosshp.text = "HP " + p_hp.ToString() + "/" + p_hp.ToString();
         Maxhp = p_hp;
         Curhp = p_hp;
