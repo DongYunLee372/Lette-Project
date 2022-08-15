@@ -1393,6 +1393,7 @@ GameObject:
   - component: {fileID: 3833193269907886469}
   - component: {fileID: 919132149503474216}
   - component: {fileID: 919132149503474217}
+  - component: {fileID: 4159858536896330229}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
@@ -1516,7 +1517,7 @@ MonoBehaviour:
   MyHpbar: {fileID: 0}
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
-  skill_handler: {fileID: 0}
+  skill_handler: {fileID: 4159858536896330229}
   char_Info: {fileID: 0}
   mon_Info: {fileID: 0}
   mon_Skill_Info: []
@@ -1569,6 +1570,7 @@ MonoBehaviour:
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
+    missile_Index: 0
     spawn_Animation: 1
   - Name: Melee Attack
     Movedis:
@@ -1597,6 +1599,7 @@ MonoBehaviour:
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
+    missile_Index: 0
     spawn_Animation: 0
   - Name: The Great Sword Slap
     Movedis:
@@ -1624,6 +1627,7 @@ MonoBehaviour:
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
+    missile_Index: 0
     spawn_Animation: 0
   - Name: Double Attack
     Movedis:
@@ -1651,6 +1655,7 @@ MonoBehaviour:
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
+    missile_Index: 0
     spawn_Animation: 0
   - Name: Monster Recall
     Movedis:
@@ -1674,6 +1679,7 @@ MonoBehaviour:
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
+    missile_Index: 0
     spawn_Animation: 0
   - Name: Rush
     Movedis:
@@ -1698,6 +1704,7 @@ MonoBehaviour:
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
+    missile_Index: 0
     spawn_Animation: 0
   - Name: Rush Sword Attack
     Movedis:
@@ -1725,6 +1732,7 @@ MonoBehaviour:
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
+    missile_Index: 0
     spawn_Animation: 0
   - Name: Magic Beam
     Movedis:
@@ -1752,6 +1760,7 @@ MonoBehaviour:
     missile: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
     missile_Amount: 1
     missile_Pos: {fileID: 5847035042674421376}
+    missile_Index: 0
     spawn_Animation: 0
   - Name: Guided Magic Bullet2
     Movedis:
@@ -1779,6 +1788,7 @@ MonoBehaviour:
     missile: {fileID: 1053960701893122, guid: 0684650dd5655514ea7f3df35dc70ceb, type: 3}
     missile_Amount: 4
     missile_Pos: {fileID: 5847035042674421376}
+    missile_Index: 0
     spawn_Animation: 0
   movecom: {fileID: 0}
   damaged_Effect: {fileID: 152628, guid: 4e42a2081531c814fa4774bd0d6b45df, type: 3}
@@ -1826,6 +1836,18 @@ MonoBehaviour:
   currentSpeed: 0
   currnetPlayTime: 0
   currentBlending: 0
+--- !u!114 &4159858536896330229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175774917437551041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dde595b9cfa5294c91fdcb2b546eb93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4187469490169526420
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,14 @@ public class State_Attack : State
     {
         if (b_c.isAttack_Run)
         {
+            if (b_c.isStop)
+            {
+                b_c.isAttack_Run = false;
+                b_c.real_AI.pre_State = this;
+                _State = Trans_List[0];
+                return false;
+            }
+
             judge_logic = Enemy_Attack_Logic.Skill_Wait;
             _State = this;
             return true;
@@ -27,7 +35,7 @@ public class State_Attack : State
         }
 
         if ((Vector3.Distance(b_c.transform.position,
-            b_c.cur_Target.transform.position) <= b_c.mon_Info.P_mon_ShortRange)) // 사정 거리 내에 있다면 
+            b_c.cur_Target.transform.position) <= b_c.mon_Info.P_mon_ShortRange) && !b_c.isAttack_Run) // 사정 거리 내에 있다면 
         {
             judge_logic = Enemy_Attack_Logic.Melee_Attack;
             _State = this;
@@ -43,7 +51,7 @@ public class State_Attack : State
         }
 
         b_c.real_AI.pre_State = this;
-        _State = this; // Trans_List[0];
+        _State = Trans_List[0];
         return false;
     }
 
@@ -58,8 +66,9 @@ public class State_Attack : State
                 // 근접 공격이라면 배틀캐릭터 스크립트 내 공격 판정범위 활성화
                 b_c.attack_Type = Enemy_Attack_Type.Normal_Attack;
                 b_c.attack_Collider.SetActive(true);
-                b_c.animator.Play("Melee Attack");
                 b_c.isAttack_Run = true;
+                b_c.isStop = false;
+                b_c.animator.Play("Melee Attack");
                 break;
             case Enemy_Attack_Logic.Long_Attack:
                 // 원거리라면 원거리 발사체 발사

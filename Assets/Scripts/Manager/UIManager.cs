@@ -23,8 +23,10 @@ public class UIManager : Singleton<UIManager>
     {
         player_cavas = 0,
         enemy_canvas,
+        test,
         sdf
     }
+
 
     public GameObject Prefabsload(string name, CANVAS_NUM x , Transform a = null)
     {
@@ -120,12 +122,15 @@ public class UIManager : Singleton<UIManager>
         canvas[(int)num].SetActive(true);
     }
     // Start is called before the first frame update
-    void Start()
+  
+    private void Awake()
     {
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
-    }
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
 
+    }
     // Update is called once per frame
     void Update()
     {

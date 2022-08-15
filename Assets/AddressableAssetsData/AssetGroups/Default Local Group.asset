@@ -107,10 +107,29 @@ MonoBehaviour:
     m_Address: FriendPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
+<<<<<<< HEAD
   - m_GUID: 5ece94ad8da3684468f4a2887d64bb04
     m_Address: Boss
     m_ReadOnly: 0
     m_SerializedLabels: []
+=======
+  - m_GUID: d2d49758f8b0e1a4dbd265b469f5c8c7
+    m_Address: Boss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bf1dc5f18c9584f479a1439400583b7f
+    m_Address: Inven
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 19df7f83c6a3aeb4abb68ed39a295f25
+    m_Address: Bosshpbar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9c114528bf8834f4db8611873e471125
+    m_Address: 123
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+>>>>>>> fcd21124b5d7a3052ad3219aa7cb20b1946e96ad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
