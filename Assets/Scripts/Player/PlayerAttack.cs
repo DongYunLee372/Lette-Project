@@ -126,18 +126,18 @@ public class PlayerAttack : BaseComponent
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Attack();
-            return;
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Attack();
+        //    return;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SkillAttack();
-            Debug.Log("정답");
-            return;
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    SkillAttack();
+        //    Debug.Log("정답");
+        //    return;
+        //}
     }
     public void PlayerHit()
     {
@@ -181,8 +181,11 @@ public class PlayerAttack : BaseComponent
         if (curval.IsAttacking)
             return;
 
+        
         if (curval.IsAttacking == false)
             curval.IsAttacking = true;
+
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
         coroutine = Cor_TimeCounter(SkillData.P_EffectStartTime, SkillCreateEffect);
         StartCoroutine(coroutine);
@@ -221,6 +224,8 @@ public class PlayerAttack : BaseComponent
 
         if (curval.IsAttacking == false)
             curval.IsAttacking = true;
+
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
         float tempval = Time.time - lastAttackTime;
 

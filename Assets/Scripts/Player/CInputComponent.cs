@@ -43,7 +43,8 @@ public class CInputComponent : BaseComponent
     //1. move 컴포넌트
     public CMoveComponent movecom;
     //2. Attack 컴포넌트
-    public CAttackComponent attackcom;
+    //public CAttackComponent attackcom;
+    public PlayerAttack attackcom;
     //3. Defence 컴포넌트
     public CGuardComponent guardcom;
     
@@ -260,7 +261,8 @@ public class CInputComponent : BaseComponent
     void LeftMouseDown()
     {
         if (attackcom == null)
-            attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+            attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
+        //attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
         attackcom.Attack();
     }
 
@@ -282,8 +284,9 @@ public class CInputComponent : BaseComponent
     void SkillAttack(int num)
     {
         if (attackcom == null)
-            attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
-        attackcom.SkillAttack(num);
+            attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
+        //attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+        attackcom.SkillAttack();
     }
 
     void Update()

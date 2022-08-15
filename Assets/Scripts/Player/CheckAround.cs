@@ -22,9 +22,9 @@ public class CheckAround : MonoBehaviour
     
     Vector3 temppos;
 
-    GameObject tempcube;
+    //GameObject tempcube;
 
-    NavMeshAgent testnavagent;
+    //NavMeshAgent testnavagent;
 
     private void Awake()
     {
@@ -38,8 +38,8 @@ public class CheckAround : MonoBehaviour
             movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
-        tempcube = GameObject.Find("tempcube");
-        testnavagent = GetComponent<NavMeshAgent>();
+        //tempcube = GameObject.Find("tempcube");
+        //testnavagent = GetComponent<NavMeshAgent>();
     }
 
     public void CheckFront()

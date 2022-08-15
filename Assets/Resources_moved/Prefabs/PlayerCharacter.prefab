@@ -2262,8 +2262,8 @@ MonoBehaviour:
     moveAccel: 0
   moveoption:
     RotMouseSpeed: 1
-    MoveSpeed: 500
-    RunSpeed: 800
+    MoveSpeed: 300
+    RunSpeed: 500
     MinAngle: 0
     MaxAngle: 0
     Gravity: 0
@@ -2566,6 +2566,7 @@ MonoBehaviour:
   testAttckmanager: {fileID: 0}
   AttackColliderParent: {fileID: 0}
   att: {fileID: 0}
+  Player: {fileID: 0}
 --- !u!195 &836511858
 NavMeshAgent:
   m_ObjectHideFlags: 0
