@@ -5,6 +5,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadAddressableScene : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class LoadAddressableScene : MonoBehaviour
     public GameObject uiGameObject;
     long Downloadsize = 0;
 
+    public Slider slider;  //로딩 슬라이더 바 (임시,,?)
+    public int slider_show;  //다운로드 얼마나 됐는지
+
+
     public GameObject PlayerInitPos;
 
     private void Awake()
@@ -26,7 +31,7 @@ public class LoadAddressableScene : MonoBehaviour
     private void Start()
     {
         PlayerInitPos = new GameObject();
-        PlayerInitPos.transform.position = new Vector3(10, 0, 0);
+        PlayerInitPos.transform.position = new Vector3(2.5f, -3f, 80f);  //보스위치임.
 
         //BOSSROOM();
       // StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
@@ -40,14 +45,18 @@ public class LoadAddressableScene : MonoBehaviour
     IEnumerator BOSSROOM()
     {
         //v필요한 거 다 로드 시킨다음에
-        yield return new WaitForSeconds(3);
+     
 
-        yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
+        yield return StartCoroutine(AddressablesController.Instance.Load_Name("Boss", PlayerInitPos.transform));
 
         //씬을 로드하고
        AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
 
-       //연출같은거 필요하면 하고, 캔버스 ,카메라 비활성화
+        //연출같은거 필요하면 하고, 캔버스 ,카메라 비활성화
+
+        yield return new WaitForSeconds(3);
+        camera.SetActive(false);
+        uiGameObject.SetActive(false);
 
         yield return null;
     }
