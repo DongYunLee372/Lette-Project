@@ -16,7 +16,12 @@ public class InvenTory : MySingleton<InvenTory>
     public GameObject Player;
     public void UseItem(EnumScp.Key key , int num) 
     {
-        slots[(int)key].MinusItem(1);
+        if (slots[(int)key].MinusItem(1))
+        {
+            float tempHp = Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.HPBar.GetCurValue();
+
+            Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.HPBar.SetCurValue(tempHp + 50);
+        }
     }
     public void DropItem(Sprite image, int count, string dropitemname)
     {
@@ -64,7 +69,7 @@ public class InvenTory : MySingleton<InvenTory>
         //DropItem(Estus.sprite, 10, "Est");
         StartCoroutine(Cor_TimeCounter());        
         Player = AddressablesController.Instance.find_Asset_in_list("PlayerCharacter(Clone)");
-        //Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.HPBar.SetCurValue(30);
+        
         
 
     }

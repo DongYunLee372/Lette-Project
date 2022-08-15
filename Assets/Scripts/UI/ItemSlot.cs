@@ -39,12 +39,14 @@ public class ItemSlot : MonoBehaviour
 
    
 
-    public void MinusItem(int i)
+    public bool MinusItem(int i)
     {
         if (ItemCount == 0)
-            return;
+            return false;
         ItemCount -= i;
         ItemCountText.text = ItemCount.ToString();
+
+        return true;
     }
 
     public void PlusItem(int i)
