@@ -208,7 +208,7 @@ public class RFX1_TransformMotion : MonoBehaviour
             Destroy(instance, DestroyTimeDelay);
         }
 
-        //hit.collider.GetComponentInChildren<PlayableCharacter>()?.BeAttacked(80);
+        hit.collider.GetComponentInChildren<PlayableCharacter>()?.BeAttacked(80, hit.point);
     }
 
     void OnCollisionDeactivateBehaviour(bool active)
