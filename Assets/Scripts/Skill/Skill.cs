@@ -18,15 +18,15 @@ public class Skill : MonoBehaviour
         // 어택매니저를 통해서 이펙트호출
 
 
-        if (skill_data.P_skill_ThrowObj)
-        {
-            StartCoroutine(Shoot_Coroutine(skill_data));
-        }
+        //if (skill_data.P_skill_ThrowObj)
+        //{
+        //    StartCoroutine(Shoot_Coroutine(skill_data));
+        //}
 
-        if (skill_data.P_skill_DiffObj)
-        {
-            StartCoroutine(Spawn_Coroutine(skill_data));
-        }
+        //if (skill_data.P_skill_DiffObj)
+        //{
+        //    StartCoroutine(Spawn_Coroutine(skill_data));
+        //}
 
         // 캐릭터 현재 마나 - 스킬의 마나
         // //b_c.mon_Info
