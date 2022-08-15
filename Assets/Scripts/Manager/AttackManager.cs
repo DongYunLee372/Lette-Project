@@ -71,18 +71,10 @@ public class AttackManager : MonoBehaviour
     public void CreateEffect(GameObject effect , Transform EffectPosRot , float destroyTime , float damage)
     {
         GameObject effectobj;
-
-        effectobj = GameObject.Instantiate(effect);
-        effectobj.transform.position = EffectPosRot.position;
-        effectobj.transform.rotation = EffectPosRot.rotation;
-
-        //effectobj.transform.parent = EffectPosRot.transform;
-        effectobj.transform.parent = effectManagerTest.transform;
-        effectobj.transform.localScale = EffectPosRot.localScale;
-
+       
+        effectobj = EffectManager.Instance.InstantiateEffect(effect, EffectPosRot.position, EffectPosRot.rotation, destroyTime);
         effectobj.GetComponent<ColliderEventDamage>().DamageSetting(damage);
-        Destroy(effectobj, destroyTime);
-
+       
         //StartCoroutine(Cor_TimeCounter(destroyTime , effectobj));
 
     }
