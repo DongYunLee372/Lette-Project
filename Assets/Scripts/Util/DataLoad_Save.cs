@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -109,20 +110,20 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 );
             MonsterSkillDB_List.Add(C_MonSkill);
         }
-
+        
         for (int i = 0; i < MonsterTarget_db_Dialog.Count; i++)
         {
             MonsterTargetInformation C_MonTarget = new MonsterTargetInformation();
-            C_MonTarget.Set((int)MonsterTarget_db_Dialog[i]["Target_Rank"]
-                , (int)MonsterTarget_db_Dialog[i]["Number"]
-                , (int)MonsterTarget_db_Dialog[i]["Character_ID"]
-                , (int)MonsterTarget_db_Dialog[i]["target_Location1"]
-                , (int)MonsterTarget_db_Dialog[i]["target_Location2"]
-                , (int)MonsterTarget_db_Dialog[i]["target_Location3"]
-                , (int)MonsterTarget_db_Dialog[i]["mon_Location1"]
-                , (int)MonsterTarget_db_Dialog[i]["mon_Location2"]
-                , (int)MonsterTarget_db_Dialog[i]["mon_Location3"]
-                , (int)MonsterTarget_db_Dialog[i]["mon_Range"]
+            C_MonTarget.Set(Convert.ToInt32(MonsterTarget_db_Dialog[i]["Target_Rank"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["Number"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["Character_ID"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["target_Location1"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["target_Location2"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["target_Location3"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Location1"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Location2"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Location3"])
+                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Range"])
                 );
             MonsterTargetDB_List.Add(C_MonTarget);
         }
