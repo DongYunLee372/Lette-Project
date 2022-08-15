@@ -18,6 +18,10 @@ public class AttackManager : MonoBehaviour
     public bool ComboAttackState;
     public PlayerAttack PlayerScp;
     public Battle_Character enemyScp;
+
+
+
+    public GameObject effectManagerTest;
     // public 몬스터 scp
     public void PlayerAddAttackInfo(string name , float move , float time)
     {
@@ -71,7 +75,9 @@ public class AttackManager : MonoBehaviour
         effectobj = GameObject.Instantiate(effect);
         effectobj.transform.position = EffectPosRot.position;
         effectobj.transform.rotation = EffectPosRot.rotation;
-        effectobj.transform.parent = EffectPosRot.transform;
+
+        //effectobj.transform.parent = EffectPosRot.transform;
+        effectobj.transform.parent = effectManagerTest.transform;
         effectobj.transform.localScale = EffectPosRot.localScale;
 
         effectobj.GetComponent<ColliderEventDamage>().DamageSetting(damage);
