@@ -104,11 +104,12 @@ public class PlayerAttack : BaseComponent
 
     public AttackManager att;
 
-   
+    public GameObject Player;
 
     IEnumerator coroutine;
     void Start()
     {
+        Player = AddressablesController.Instance.find_Asset_in_list("PlayerCharacter(Clone)");
         UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
         att = GetComponentInChildren<AttackManager>();
         animator = GetComponentInChildren<AnimationController>();
@@ -187,6 +188,10 @@ public class PlayerAttack : BaseComponent
         StartCoroutine(coroutine);
         att.ComboAttackMana(animator, SkillData.P_aniclip.name, SkillData.P_animationPlaySpeed);
 
+
+        float tempMp = Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.MPBar.GetCurValue();
+
+        Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.HPBar.SetCurValue(tempMp - 10);
     }
 
     public void CreateEffect()
