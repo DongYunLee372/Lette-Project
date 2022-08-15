@@ -45,28 +45,45 @@ public class InvenTory : MySingleton<InvenTory>
             }
         }
     }
-    void Start()
+    public void Init()
     {
         slots = SlotsParent.GetComponentsInChildren<ItemSlot>(true);
-        
-
         for (int i = 0; i < slots.Length; i++) //인벤토리 슬롯들에게 각자 몇번 슬롯인지 저장하기 위해 코드를 부여합니다 
         {
             slots[i].P_Code = i;
         }
 
-        DropItem(Estus.sprite, 10, "Est");
+    }
+    private void Awake()
+    {
+        Init();
+    }
+    void Start()
+    {
+       
+        //DropItem(Estus.sprite, 10, "Est");
+        StartCoroutine(Cor_TimeCounter());        
         //Player = AddressablesController.Instance.find_Asset_in_list("PlayerCharacter");
-        
+
+    }
+    IEnumerator Cor_TimeCounter()
+    {        
+        yield return new WaitForSeconds(1f);
+        DropItem(Estus.sprite, 10, "Est");
     }
 
-    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
             Debug.Log("F1 ");
             UseItem(EnumScp.Key.F1, 1);
+        }
+       
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Debug.Log("F1 ");
+            //DropItem(Estus.sprite, 10, "Est");
         }
     }
 }
