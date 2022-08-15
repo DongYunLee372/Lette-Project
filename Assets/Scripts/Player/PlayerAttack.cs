@@ -222,8 +222,11 @@ public class PlayerAttack : BaseComponent
             AttackNum = 0;
         }
 
-        StartCoroutine(Cor_TimeCounter(Attack_InformationList[AttackNum].P_EffectStartTime, CreateEffect));
+        //StartCoroutine(Cor_TimeCounter(Attack_InformationList[AttackNum].P_EffectStartTime, CreateEffect));
 
+
+        coroutine = Cor_TimeCounter(Attack_InformationList[AttackNum].P_EffectStartTime, CreateEffect);
+        StartCoroutine(coroutine);
 
         att.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
         //testAttckmanager.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
