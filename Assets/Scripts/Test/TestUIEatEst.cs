@@ -8,7 +8,7 @@ public class TestUIEatEst : MonoBehaviour
 
     void Start()
     {
-       
+        //UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
     }
 
     // Update is called once per frame
@@ -16,7 +16,7 @@ public class TestUIEatEst : MonoBehaviour
     {
        if(Input.GetKeyDown(KeyCode.Alpha0))
         {
-            UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.player_cavas);
+            UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
         }
     }
 }

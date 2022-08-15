@@ -916,7 +916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotsParent: {fileID: 8173248275163434616}
   slots: []
-  Estus: {fileID: 0}
+  Estus: {fileID: 7599636157153034965, guid: 6f95e6b4d87912f4caa1a02676746b2a, type: 3}
   Player: {fileID: 0}
 --- !u!1 &8173248276138940744
 GameObject:
