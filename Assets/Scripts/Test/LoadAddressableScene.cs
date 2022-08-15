@@ -15,6 +15,9 @@ public class LoadAddressableScene : MonoBehaviour
     public GameObject camera;
     public DownloadProgress downloadProgressScript;
     public GameObject uiGameObject;
+    public GameObject PlayerCanvas;
+    public GameObject EnemyCanvas;
+
     float Downloadsize = 0;
 
     public Slider slider;  //로딩 슬라이더 바 (임시,,?)
@@ -36,7 +39,10 @@ public class LoadAddressableScene : MonoBehaviour
         PlayerInitPos = new GameObject();
         PlayerInitPos.transform.position = new Vector3(1.21f, -4.572893f, 56.09f);  //캐릭터위치.
         MapPos = new GameObject();
-        MapPos.transform.position = new Vector3(0f, -5f, 0f);  //맵.
+        MapPos.transform.position = new Vector3(0f, -10f, 0f);  //맵.
+
+        PlayerCanvas.SetActive(false);
+        EnemyCanvas.SetActive(false);
 
         //BOSSROOM();
         // StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
@@ -62,10 +68,9 @@ public class LoadAddressableScene : MonoBehaviour
         //yield return StartCoroutine(AddressablesController.Instance.Load_Name("Boss", PlayerInitPos.transform));
 
 
-       // yield return StartCoroutine(AddressablesController.Instance.Load_Name("Long_Hall", MapPos.transform));
-        slider_show = 0.6f;
+      // yield return StartCoroutine(AddressablesController.Instance.Load_Name("Long_Hall", MapPos.transform));
 
-        yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, BossPos.transform));
+
         slider_show = 0.7f;
 
         //   yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
@@ -74,16 +79,19 @@ public class LoadAddressableScene : MonoBehaviour
 
         //연출같은거 필요하면 하고, 캔버스 ,카메라 비활성화
 
-        yield return new WaitForSeconds(3);
+       // yield return new WaitForSeconds(3);
         slider_show = 1f;
         yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
-        
+        yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, BossPos.transform));
+
 
 
         camera.SetActive(false);
         uiGameObject.SetActive(false);
 
-     
+        PlayerCanvas.SetActive(true);
+        EnemyCanvas.SetActive(true);
+
 
         yield return null;
     }
