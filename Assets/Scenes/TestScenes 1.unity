@@ -307,6 +307,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &357786662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 357786664}
+  - component: {fileID: 357786663}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &357786663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357786662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a49f41d12efde9a48bae9315d2cc6e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseEffect: {fileID: 0}
+  Effects: []
+--- !u!4 &357786664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357786662}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1054.5966, y: 525.0981, z: -7.664818}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &547406346
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +380,7 @@ RectTransform:
   m_GameObject: {fileID: 547406346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.7919414, y: 2.38337, z: 2.1667}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2056814312}
@@ -460,7 +506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655883157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3014798, y: -17.012554, z: 84.63343}
+  m_LocalPosition: {x: 975, y: 527, z: 84.63343}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -761,7 +807,7 @@ RectTransform:
   m_GameObject: {fileID: 1049026314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.4743, y: 4.4743, z: 4.4743}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2140485039}
@@ -880,6 +926,8 @@ MonoBehaviour:
   camera: {fileID: 655883157}
   downloadProgressScript: {fileID: 0}
   uiGameObject: {fileID: 2056814307}
+  PlayerCanvas: {fileID: 18958984}
+  EnemyCanvas: {fileID: 1727597595}
   slider: {fileID: 1049026315}
   slider_show: 0
   PlayerInitPos: {fileID: 0}

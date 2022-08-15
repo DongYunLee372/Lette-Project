@@ -84,7 +84,7 @@ public class LoadAddressableScene : MonoBehaviour
         yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
         yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, BossPos.transform));
 
-
+        yield return new WaitForSeconds(1);
 
         camera.SetActive(false);
         uiGameObject.SetActive(false);
