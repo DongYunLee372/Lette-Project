@@ -1515,6 +1515,7 @@ MonoBehaviour:
     battle_Character: {fileID: 0}
   state_handler: {fileID: 0}
   MyHpbar: {fileID: 0}
+  bosshpbar: {fileID: 2388182015351633143, guid: 19df7f83c6a3aeb4abb68ed39a295f25, type: 3}
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
   skill_handler: {fileID: 8871239851297796846}

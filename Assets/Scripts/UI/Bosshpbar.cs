@@ -25,11 +25,13 @@ public class Bosshpbar : MonoBehaviour
 
     public void SetHpbar(float p_hp)
     {
-        GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.player_cavas);
-
-        Maxhp = p_hp;
-        Curhp = p_hp;
-
+        t_Bosshp.text = "HP " + p_hp.ToString() + "/" + p_hp.ToString();
+        GameObject hpBar = UIManager.Instance.Prefabsload("Bosshpbar", UIManager.CANVAS_NUM.player_cavas);
+        var _hpbar = hpBar.GetComponent<Bosshpbar>();
+        _hpbar.Maxhp = p_hp;
+        _hpbar.Curhp = p_hp;
+        
+        Bosshp.fillAmount = _hpbar.Maxhp / _hpbar.Maxhp;
 
     }
 

@@ -23,7 +23,8 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             GameObject a=UIManager.Instance.Findobj("Bosshpbar");
-            a.GetComponent<Bosshpbar>().Curhp=10;
+
+            a.GetComponent<Bosshpbar>().HitDamage(100);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
