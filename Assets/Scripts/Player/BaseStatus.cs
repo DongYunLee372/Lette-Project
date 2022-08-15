@@ -41,7 +41,16 @@ public class BaseStatus:MonoBehaviour
     private DataLoad_Save DBController;
     private UICharacterInfoPanel uiPanel;
 
-    //IEnumerator [] cor
+    CorTimeCounter timecounter = new CorTimeCounter();
+    delegate bool invoker(float val);
+    IEnumerator CorMPCount;
+    IEnumerator CorMPRecover;
+
+    IEnumerator CorSTMCount;
+    IEnumerator CorSTMRecover;
+
+    IEnumerator CorBALCount;
+    IEnumerator CorBALRecover;
 
     public int CurLevel
     {
@@ -80,11 +89,23 @@ public class BaseStatus:MonoBehaviour
         set
         {
             curHP = value;
+            if (curHP > MaxHP)
+            {
+                curHP = MaxHP;
+            }
             uiPanel.HPBar.SetCurValue(value);
-            Debug.Log($"현재 HP 변화 {curHP}");
         }
     }
 
+    public bool HPUp(float val)
+    {
+        CurHP = CurHP + val;
+        if (CurHP == MaxHP)
+        {
+            return false;
+        }
+        return true;
+    }
     
 
     public float MaxStamina
@@ -103,13 +124,48 @@ public class BaseStatus:MonoBehaviour
         
         set
         {
+            if(curStamina>value)
+            {
+                if (CorSTMCount != null)
+                {
+                    StopCoroutine(CorSTMCount);
+                    CorSTMCount = null;
+                }
+                if (CorSTMRecover != null)
+                {
+                    StopCoroutine(CorSTMRecover);
+                    CorSTMRecover = null;
+                }
+
+            }
             
+
             curStamina = value;
-            uiPanel.Staminabar.SetCurValue(value);
-            Debug.Log($"현재 stamina 변화 {curStamina}");
+
+            if (curStamina > MaxStamina)
+            {
+                curStamina = MaxStamina;
+            }
+            uiPanel.Staminabar.SetCurValue(curStamina);
+
+            if (curStamina != MaxStamina && CorSTMCount == null)
+            {
+                CorSTMCount = timecounter.Cor_TimeCounter(3.0f, STMRecoveryStart);
+                StartCoroutine(CorSTMCount);
+            }
+                
         }
-        
     }
+    public bool StaminaUp(float val)
+    {
+        CurStamina = CurStamina + val;
+        if (CurStamina == MaxStamina)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public float MaxBalance 
     { 
         get => maxBalance;
@@ -125,12 +181,48 @@ public class BaseStatus:MonoBehaviour
         get => curBalance;
         set
         {
+            if (value > curBalance)
+            {
+                if (CorBALCount != null)
+                {
+                    StopCoroutine(CorBALCount);
+                    CorBALCount = null;
+                }
+                if (CorBALRecover != null)
+                {
+                    StopCoroutine(CorBALRecover);
+                    CorBALRecover = null;
+                }
+            }
+
+
             curBalance = value;
-            uiPanel.Balancebar.SetCurValue(value);
-            Debug.Log($"현재 Balance 변화 {curBalance}");
+            if(curBalance>MaxBalance)
+            {
+                curBalance = MaxBalance;
+            }
+            uiPanel.Balancebar.SetCurValue(curBalance);
+
+            if (curBalance != MaxBalance && CorBALCount == null)
+            {
+                CorBALCount = timecounter.Cor_TimeCounter(3.0f, BALRecoveryStart);
+                StartCoroutine(CorBALCount);
+            }
         }
 
     }
+
+    public bool BalanceUp(float val)
+    {
+        CurBalance = CurBalance + val;
+        if(CurBalance==MaxBalance)
+        {
+            return false;
+        }
+        return true;
+    }
+
+
     public float MaxMP 
     { 
         get => maxMP;
@@ -146,11 +238,44 @@ public class BaseStatus:MonoBehaviour
         get => curMP;
         set
         {
+            if(value> curMP)
+            {
+                if (CorMPCount != null)
+                {
+                    StopCoroutine(CorMPCount);
+                    CorMPCount = null;
+                }
+                if (CorMPRecover != null)
+                {
+                    StopCoroutine(CorMPRecover);
+                    CorMPRecover = null;
+                }
+            }
+
             curMP = value;
-            uiPanel.MPBar.SetCurValue(value);
-            Debug.Log($"현재 MP 변화 {curMP}");
+            if(curMP>=MaxMP)
+            {
+                curMP = MaxMP;
+            }
+            uiPanel.MPBar.SetCurValue(curMP);
+
+            if (curMP != MaxMP && CorMPCount == null)
+            {
+                CorMPCount = timecounter.Cor_TimeCounter(3.0f, MPRecoveryStart);
+                StartCoroutine(CorMPCount);
+            }
         }
 
+    }
+
+    public bool MPUp(float val)
+    {
+        CurMP = CurMP + val;
+        if (CurMP >= MaxMP)
+        {
+            return false;
+        }
+        return true;
     }
     public int CurExp 
     { 
@@ -180,14 +305,52 @@ public class BaseStatus:MonoBehaviour
         CurLevel = 1;
     }
 
-    IEnumerator Recovery()
+
+    public void MPRecoveryStart()
     {
+        Debug.Log("MPrecover 시작");
+        StopCoroutine(CorMPCount);
+        CorMPCount = null;
+        
+        CorMPRecover = Recovery(MPUp);
+        StartCoroutine(CorMPRecover);
+    }
+
+    public void STMRecoveryStart()
+    {
+        Debug.Log("Staminarecover 시작");
+        StopCoroutine(CorSTMCount);
+        CorSTMCount = null;
+
+        CorSTMRecover = Recovery(StaminaUp);
+        StartCoroutine(CorSTMRecover);
+    }
+
+    public void BALRecoveryStart()
+    {
+        Debug.Log("Balancerecover 시작");
+        StopCoroutine(CorBALCount);
+        CorBALCount = null;
+
+        CorBALRecover = Recovery(BalanceUp);
+        StartCoroutine(CorBALRecover);
+    }
+
+    IEnumerator Recovery(invoker _invoker)
+    {
+
         while(true)
         {
+            Debug.Log("10회복");
 
+            if (!_invoker(10))
+            {
+                Debug.Log("10회복 종료");
+                yield break;
+            }
+                
 
-
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForSeconds(1.0f);
         }
     }
 

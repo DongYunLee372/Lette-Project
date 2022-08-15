@@ -556,6 +556,8 @@ public class CMoveComponent : BaseComponent
 
         curval.IsRolling = true;
 
+        PlayableCharacter.Instance.status.CurStamina = PlayableCharacter.Instance.status.CurStamina - 20;
+
         //AnimationManager.Instance.Play(com.animator, "_Rolling");
         //Debug.Log($"{AnimationManager.Instance.GetClipLength(com.animator,"_Rolling")}");
 

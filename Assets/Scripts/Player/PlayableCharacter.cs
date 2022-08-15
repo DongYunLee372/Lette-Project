@@ -64,7 +64,7 @@ public class PlayableCharacter : MonoBehaviour
         }
 
 
-        CharacterInfoPanel = UIManager.Instance.Prefabsload("FriendPanel", UIManager.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+        //CharacterInfoPanel = UIManager.Instance.Prefabsload("FriendPanel", UIManager.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
 
 
         status = this.gameObject.AddComponent<BaseStatus>();
