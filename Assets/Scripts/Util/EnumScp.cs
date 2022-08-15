@@ -5,6 +5,16 @@ using UnityEditor;
 
 namespace EnumScp
 {
+    public enum Key
+    {
+        F1 = 0,
+        F2,
+        F3,
+        F4,
+        Max
+
+    }
+
     public enum MonsterIndex
     {
         mon_01_01 = 0,
