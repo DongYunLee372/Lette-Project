@@ -111,6 +111,14 @@ MonoBehaviour:
     m_Address: Long_Hall
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 63deea9db8ab27a45b7b53ac78c832cf
+    m_Address: SwordHitRed.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 14f18984a3742944aabf5ed777a2fad3
+    m_Address: SwordHitRedLegacy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

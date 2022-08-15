@@ -75,6 +75,9 @@ public class CMoveComponent : BaseComponent
 
         public float RollingFreeDamageTime;
 
+        public float NextRollingTime = 0.1f;
+
+        
 
         [Header("==================피격 관련 변수들==================")]
         public AnimationClip KnockDownClip;
@@ -125,7 +128,7 @@ public class CMoveComponent : BaseComponent
 
     public CorTimeCounter timecounter = new CorTimeCounter();
     //public delegate void invoke();
-
+    public float lastRollingTime;
 
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius, transform.position.z);
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius, transform.position.z);
@@ -545,7 +548,7 @@ public class CMoveComponent : BaseComponent
     public void Rolling()
     {
         //이미 구르고 있으면 구르지 못한다.
-        if (curval.IsRolling)
+        if (curval.IsRolling || Time.time - lastRollingTime <= moveoption.NextRollingTime) 
             return;
         //땅에 있어야 구르기 가능
         if (!curval.IsGrounded)
@@ -573,6 +576,7 @@ public class CMoveComponent : BaseComponent
 
     public void RollingOver(string s)
     {
+        lastRollingTime = Time.time;
         curval.IsRolling = false;
     }
 

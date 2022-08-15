@@ -2135,7 +2135,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896712387625}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 800
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -2294,6 +2294,7 @@ MonoBehaviour:
     RollingDistance: 8
     RollingTime: 0
     RollingFreeDamageTime: 0
+    NextRollingTime: 0.1
     KnockDownClip: {fileID: 7400000, guid: 0c62720761979084caafe70772d508f8, type: 2}
     KnockBackClip: {fileID: 7400000, guid: fb154bb004a47594ea4d6d9afb25d388, type: 2}
     KnockDownTime: 1
@@ -2311,6 +2312,7 @@ MonoBehaviour:
   inputcom: {fileID: 0}
   RollingStartTime: 0
   eventsystem: {fileID: 0}
+  lastRollingTime: 0
   updown: {x: 0, y: 0, z: 0}
   xnext: 0
   rightleft: {x: 0, y: 0, z: 0}

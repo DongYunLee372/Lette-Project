@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 //레벨이 변할때마다 캐릭터 스탯 정보들을 받아와서 초기화 해준다.
-public class BaseStatus
+public class BaseStatus:MonoBehaviour
 {
     [Header("=========================")]
     [Header("Status")]
@@ -41,6 +40,8 @@ public class BaseStatus
     [SerializeField]
     private DataLoad_Save DBController;
     private UICharacterInfoPanel uiPanel;
+
+    //IEnumerator [] cor
 
     public int CurLevel
     {
@@ -83,6 +84,8 @@ public class BaseStatus
             Debug.Log($"현재 HP 변화 {curHP}");
         }
     }
+
+    
 
     public float MaxStamina
     {
@@ -176,4 +179,23 @@ public class BaseStatus
         this.uiPanel = uipanel;
         CurLevel = 1;
     }
+
+    IEnumerator Recovery()
+    {
+        while(true)
+        {
+
+
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+
+    private void Update()
+    {
+        
+    }
+
+
 }
