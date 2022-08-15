@@ -160,6 +160,11 @@ public class PlayerAttack : BaseComponent
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
     //스킬을 재생해준다.
     public void SkillAttack()
     {

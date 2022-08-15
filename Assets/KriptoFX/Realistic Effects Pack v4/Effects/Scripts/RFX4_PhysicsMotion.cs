@@ -87,7 +87,7 @@ public class RFX4_PhysicsMotion : MonoBehaviour
     {
         if (isCollided && !effectSettings.UseCollisionDetection) return;
 
-        //collision.gameObject.GetComponentInChildren<PlayableCharacter>()?.BeAttacked(70);
+        collision.gameObject.GetComponentInChildren<PlayableCharacter>()?.BeAttacked(70, collision.contacts[0].point);
 
         foreach (ContactPoint contact in collision.contacts)
         {

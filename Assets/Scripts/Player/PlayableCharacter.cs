@@ -146,9 +146,9 @@ public class PlayableCharacter : MonoBehaviour
         //4. 공격중
         else if(state == CharacterStateMachine.eCharacterState.Attack)
         {
-            //PlayerAttack arr
-            CAttackComponent attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
-            attackcom.AttackCutOff();
+            PlayerAttack attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
+            //CAttackComponent attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+            attackcom.PlayerHit();
             Damaged(damage, hitpoint);
         }
 

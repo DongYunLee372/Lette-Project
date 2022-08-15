@@ -2418,7 +2418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda2c557dd845a64b908ba8000097049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comtype: 2
   curval:
     isCursorActive: 0
     isFPP: 1
