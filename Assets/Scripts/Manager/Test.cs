@@ -29,7 +29,7 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
 
-             UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
+             UIManager.Instance.Prefabsload("Bosshpbar", UIManager.CANVAS_NUM.player_cavas);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {

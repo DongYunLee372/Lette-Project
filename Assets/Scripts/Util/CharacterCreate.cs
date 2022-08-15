@@ -62,11 +62,8 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
         skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_01));
         skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_02));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_03));
         skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_04));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_05));
         skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_06));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_07));
         skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_08));
         skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_09));
         skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_10));
