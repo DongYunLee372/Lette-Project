@@ -139,6 +139,8 @@ public class PlayerAttack : BaseComponent
     public void PlayerHit()
     {
         curval.IsAttacking = false;
+
+        if (coroutine != null)
         StopCoroutine(coroutine);
         
     }

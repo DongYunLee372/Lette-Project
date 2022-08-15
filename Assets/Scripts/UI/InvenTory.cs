@@ -63,7 +63,9 @@ public class InvenTory : MySingleton<InvenTory>
        
         //DropItem(Estus.sprite, 10, "Est");
         StartCoroutine(Cor_TimeCounter());        
-        //Player = AddressablesController.Instance.find_Asset_in_list("PlayerCharacter");
+        Player = AddressablesController.Instance.find_Asset_in_list("PlayerCharacter(Clone)");
+        //Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.HPBar.SetCurValue(30);
+        
 
     }
     IEnumerator Cor_TimeCounter()
