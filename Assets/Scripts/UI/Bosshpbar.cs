@@ -14,12 +14,28 @@ public class Bosshpbar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Bosshp.fillAmount = 0;
+
+    }
+
+    public void SetHpbar(float p_hp)
+    {
+        Maxhp = p_hp;
+        Curhp = p_hp;
+
+
+    }
+
+    public void HitDamage(float curhp)
+    {
+        Curhp = curhp;
+
+        t_Bosshp.text = "HP " + Curhp.ToString() + "/" + Maxhp.ToString();
+        Bosshp.fillAmount = Curhp / Maxhp;
     }
 }

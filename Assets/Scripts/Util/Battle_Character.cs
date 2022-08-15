@@ -65,6 +65,7 @@ public class Battle_Character : MonoBehaviour
     protected State_Handler state_handler;
 
     public EnemyHpbar MyHpbar;
+    public Bosshpbar bosshpbar;
 
     public AnimationController animator;
     public AnimationEventSystem eventsystem;
@@ -173,13 +174,18 @@ public class Battle_Character : MonoBehaviour
         //  MyHpbar.Curhp = Cur_HP;
         //MyHpbar.hit();
         isHit = true;
-        //cur_HP -= damage_Amount - mon_Info.P_mon_Def;
+        cur_HP -= damage_Amount - mon_Info.P_mon_Def;
 
         GameObject effectobj = GameObject.Instantiate(damaged_Effect);
         effectobj.transform.position = point;
         effectobj.transform.rotation = transform.rotation;
 
         Destroy(effectobj, 0.25f);
+
+        if(is_Boss)
+        {
+            bosshpbar.HitDamage(cur_HP);
+        }
     }
 
     public void Skill_Rand()
