@@ -41,8 +41,8 @@ public class LoadAddressableScene : MonoBehaviour
         MapPos = new GameObject();
         MapPos.transform.position = new Vector3(0f, -10f, 0f);  //맵.
 
-     //   PlayerCanvas.SetActive(false);
-        //EnemyCanvas.SetActive(false);
+       PlayerCanvas.SetActive(false);
+        EnemyCanvas.SetActive(false);
 
         //BOSSROOM();
         // StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
@@ -88,12 +88,11 @@ public class LoadAddressableScene : MonoBehaviour
 
         //SceneManager.LoadScene("Demo");
 
-        camera.SetActive(false);
-       // uiGameObject.SetActive(false);
-
         PlayerCanvas.SetActive(true);
         EnemyCanvas.SetActive(true);
 
+        camera.SetActive(false);
+        uiGameObject.SetActive(false);
 
         yield return null;
     }
