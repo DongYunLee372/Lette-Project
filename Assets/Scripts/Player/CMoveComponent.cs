@@ -160,11 +160,6 @@ public class CMoveComponent : BaseComponent
 
         //com.CharacterRoot = GameObject.Find("CharacterRoot").transform;
         com.CharacterRig = GetComponent<Rigidbody>();
-        //com.TpCamRig = GameObject.Find("TPCamRig").transform;
-        //com.TpCam = GameObject.Find("TPCam").transform;
-        //com.FpRoot = GameObject.Find("FPRoot").transform;
-        //com.FpCamRig = GameObject.Find("FPCamRig").transform;
-        //com.FpCam = GameObject.Find("FPCam").transform;
         com.CapsuleCol = GetComponent<CapsuleCollider>();
 
         com.animator = GetComponentInChildren<AnimationController>();
