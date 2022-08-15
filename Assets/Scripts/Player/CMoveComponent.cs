@@ -123,6 +123,7 @@ public class CMoveComponent : BaseComponent
 
     public AnimationEventSystem eventsystem;
 
+    public CorTimeCounter timecounter = new CorTimeCounter();
     //public delegate void invoke();
 
 
@@ -177,7 +178,11 @@ public class CMoveComponent : BaseComponent
 
         eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
                              new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockBackClip.name, KnockBakcEnd));
+                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockBackClip.name, KnockBackEnd));
+
+        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(moveoption.RollingClip.name, ActivateNoDamage),
+                             new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.RollingClip.name, DeActivateNoDamage));
 
 
         ChangePerspective();
@@ -473,7 +478,7 @@ public class CMoveComponent : BaseComponent
         {
             Debug.Log("멈춤");
             com.animator.Pause();
-            StartCoroutine(Cor_TimeCounter(moveoption.KnockDownTime, KnockDownPause));
+            StartCoroutine(timecounter.Cor_TimeCounter(moveoption.KnockDownTime, KnockDownPause));
         }
         else
         {
@@ -496,40 +501,41 @@ public class CMoveComponent : BaseComponent
         //이미 넉백 중 일때 해당 함수가 다시 들어오면 다시 넉백 실행
         if(curval.IsKnockBack)
         {
-            //curval.IsKnockBack = false;
+            com.animator.Play(moveoption.KnockBackClip.name);
             return;
         }
 
         curval.IsKnockBack = true;
 
+        Debug.Log($"넉백실행");
         com.animator.Play(moveoption.KnockBackClip.name);
     }
 
-    public void KnockBakcEnd(string s_val)
+    public void KnockBackEnd(string s_val)
     {
         Debug.Log($"{s_val} 들어옴");
         curval.IsKnockBack = false;
     }
 
-    //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
-    IEnumerator Cor_TimeCounter(float time, Invoker invoker)
-    {
-        float starttime = Time.time;
+    ////공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
+    //IEnumerator Cor_TimeCounter(float time, Invoker invoker)
+    //{
+    //    float starttime = Time.time;
 
-        while (true)
-        {
-            if ((Time.time - starttime) >= time)
-            {
-                invoker.Invoke("");
-                yield break;
-            }
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
+    //    while (true)
+    //    {
+    //        if ((Time.time - starttime) >= time)
+    //        {
+    //            invoker.Invoke("");
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //}
 
     public void Damaged_Rolling(float damage,Vector3 hitpoint)
     {
-        if(curval.IsRolling&&Time.time-RollingStartTime<=moveoption.RollingFreeDamageTime)
+        if (curval.IsRolling && curval.IsNoDamage)
         {
             return;
         }
@@ -576,13 +582,13 @@ public class CMoveComponent : BaseComponent
         curval.IsRolling = false;
     }
 
-    public void ActivateNoDamage()
+    public void ActivateNoDamage(string s)
     {
         //moveoption.NowIsNoDamege = true;
         curval.IsNoDamage = true;
     }
 
-    public void DeActivateNoDamage()
+    public void DeActivateNoDamage(string s)
     {
         curval.IsNoDamage = false;
     }

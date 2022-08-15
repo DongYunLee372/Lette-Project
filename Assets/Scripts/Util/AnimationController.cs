@@ -39,27 +39,31 @@ public class AnimationController : MonoBehaviour
     
 
     //클립이름, 재생속도 (기본이 1배속), 재생 시간 (재생시간이 0이면 계속 반복), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
-    public void Play(string pname, float PlaySpeed = 1.0f, float PlayTime = 0, float blendingtime = 0.1f,bool replay = false)
+    public void Play(string pname, float PlaySpeed = 1.0f, float PlayTime = 0, float blendingtime = 0.1f)
     {
-        //해당 변수가 true면 이미 재생중인 클립을 다시 재상하는게 가능
-        if(!replay)
+        //이미 재생중인 클입을 다시 재생 시키려면 Replay를 호출한다.
+        if (pname == currentplayclipname)
         {
-            if (pname == currentplayclipname)
-            {
-                return;
-            }
+            return;
         }
 
-        if(PlayTime!=0)
+        if (PlayTime!=0)
         {
             StartCoroutine(Cor_TimeCounter(PlayTime, Stop));
         }
+
+        currentBlending = blendingtime;
 
         SetPlaySpeed(PlaySpeed);
 
         currentplayclipname = pname;
 
         animator.CrossFade(pname, blendingtime);
+    }
+
+    public void RePlay()
+    {
+        animator.CrossFade(currentplayclipname, currentBlending);
     }
 
     ////클립이름, 재생속도 (기본이 1배속), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 

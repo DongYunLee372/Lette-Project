@@ -59,7 +59,8 @@ public class PlayableCharacter : MonoBehaviour
 
         foreach (BaseComponent a in temp)
         {
-            components[(int)a.p_comtype] = a;
+            if(a.gameObject.activeSelf)
+                components[(int)a.p_comtype] = a;
         }
 
         status = new BaseStatus();
@@ -145,6 +146,7 @@ public class PlayableCharacter : MonoBehaviour
         //4. 공격중
         else if(state == CharacterStateMachine.eCharacterState.Attack)
         {
+            //PlayerAttack arr
             CAttackComponent attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
             attackcom.AttackCutOff();
             Damaged(damage, hitpoint);
