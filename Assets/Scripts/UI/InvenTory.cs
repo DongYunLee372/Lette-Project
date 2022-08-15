@@ -57,6 +57,7 @@ public class InvenTory : MySingleton<InvenTory>
 
         DropItem(Estus.sprite, 10, "Est");
         Player = AddressablesController.Instance.find_Asset_in_list("PlayerCharacter");
+        
     }
 
     

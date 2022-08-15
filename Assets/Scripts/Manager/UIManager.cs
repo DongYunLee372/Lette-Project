@@ -124,6 +124,7 @@ public class UIManager : Singleton<UIManager>
     {
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
     }
 
     // Update is called once per frame

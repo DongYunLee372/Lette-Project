@@ -111,6 +111,10 @@ MonoBehaviour:
     m_Address: Boss
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: bf1dc5f18c9584f479a1439400583b7f
+    m_Address: Inven
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
