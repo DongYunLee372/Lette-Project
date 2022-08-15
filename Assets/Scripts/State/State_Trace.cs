@@ -16,6 +16,23 @@ public class State_Trace : State
             return false;
         }
 
+        if ((Vector3.Distance(b_c.transform.position,
+            b_c.cur_Target.transform.position) <= b_c.now_Skill_Info.P_skill_Range)
+            && b_c.mon_Info.P_mon_haveMP >= b_c.now_Skill_Info.P_skill_MP)
+        {
+            _State = Trans_List[0];
+            b_c.real_AI.pre_State = this;
+            return false;
+        }
+
+        if (b_c.now_Skill_Info.P_skill_Range == 0
+            && b_c.mon_Info.P_mon_haveMP >= b_c.now_Skill_Info.P_skill_MP)
+        {
+            _State = Trans_List[0];
+            b_c.real_AI.pre_State = this;
+            return false;
+        }
+
         if (b_c.attack_Logic[(int)Enemy_Attack_Logic.Long_Attack] == true && (Vector3.Distance(b_c.transform.position,
             b_c.cur_Target.transform.position) <= b_c.mon_Info.P_mon_LongRange)) // 원거리 공격방식이 존재
         {

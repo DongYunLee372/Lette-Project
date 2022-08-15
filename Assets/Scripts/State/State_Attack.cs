@@ -14,6 +14,8 @@ public class State_Attack : State
         {
             if (b_c.isStop)
             {
+                if (b_c.attack_Info[b_c.ani_Index].off_Mesh_Pos[0])
+                    b_c.attack_Info[b_c.ani_Index].off_Mesh_Pos[0].position = b_c.begin_Pos;
                 b_c.isAttack_Run = false;
                 b_c.real_AI.pre_State = this;
                 b_c.attack_Collider.SetActive(false);
@@ -75,9 +77,11 @@ public class State_Attack : State
             case Enemy_Attack_Logic.Melee_Attack:
                 // 근접 공격이라면 배틀캐릭터 스크립트 내 공격 판정범위 활성화
                 b_c.attack_Type = Enemy_Attack_Type.Normal_Attack;
-                b_c.attack_Collider.SetActive(true);
-                b_c.isAttack_Run = true;
+                b_c.checkTime = 0f;
                 b_c.isStop = false;
+                b_c.attack_Collider.SetActive(true);
+                Debug.Log("밀리");
+                b_c.isAttack_Run = true;
                 b_c.animator.Play("Melee Attack");
                 break;
             case Enemy_Attack_Logic.Long_Attack:

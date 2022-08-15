@@ -36,6 +36,7 @@ public class Enemy_Weapon : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
+            Debug.Log("플레이어 맞음");
             Vector3 pos = new Vector3();
             pos.z += 1f;
 

@@ -12,6 +12,7 @@ public class Skill : MonoBehaviour
     public virtual void Skill_Run(Battle_Character b_c, MonsterSkillInformation skill_data)
     {
         b_c.isAttack_Run = true;
+        b_c.checkTime = 0f;
         b_c.isStop = false;
         b_c.animator.Play(skill_data.P_skill_Name_En);
 

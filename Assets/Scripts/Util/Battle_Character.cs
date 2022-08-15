@@ -55,6 +55,9 @@ public class Attack_Info // 스킬이나 공격info
 
     // Spawn 애니메이션 판별
     public bool spawn_Animation;
+
+    // 애니메이션 꺼지는 추가 시간이 필요한 경우 ( 4개 이상의 이벤트가 필요할 때 )
+    public float add_Time;
 }
 
 public class Battle_Character : MonoBehaviour
@@ -165,6 +168,8 @@ public class Battle_Character : MonoBehaviour
             real_AI.isPause = true;
             cur_Target = GameObject.FindGameObjectWithTag("Player");
         }
+
+        StartCoroutine(Mana_Regen());
     }
 
 
@@ -182,7 +187,7 @@ public class Battle_Character : MonoBehaviour
 
         Destroy(effectobj, 0.25f);
 
-        if(is_Boss)
+        if (is_Boss)
         {
             GameObject a = UIManager.Instance.Findobj("Bosshpbar");
             a.GetComponent<Bosshpbar>().HitDamage(cur_HP);
@@ -203,14 +208,15 @@ public class Battle_Character : MonoBehaviour
 
     }
 
-    private Vector3 begin_Pos = new Vector3();
-
+    public Vector3 begin_Pos = new Vector3();
+    public int ani_Index; // 애니메이션 어택인포 인덱스
     public void Animation_Begin(string clipname)
     {
         for (int i = 0; i < attack_Info.Length; i++)
         {
             if (attack_Info[i].Name == clipname)
             {
+                ani_Index = i;
                 if (attack_Info[i].off_Mesh_Pos[0])
                     begin_Pos = attack_Info[i].off_Mesh_Pos[0].localPosition;
 
@@ -311,10 +317,14 @@ public class Battle_Character : MonoBehaviour
             }
         }
 
-        if (index == 2)
+        if (index == 2 && attack_Info[info_num].add_Time == 0)
         {
             attack_Collider.SetActive(false);
             isAttack_Run = false;
+        }
+        else if (index == 2 && attack_Info[info_num].add_Time != 0)
+        {
+            StartCoroutine(ani_Add_Time_Coroutine(attack_Info[info_num].add_Time));
         }
     }
 
@@ -337,13 +347,32 @@ public class Battle_Character : MonoBehaviour
         Destroy(effectobj, 1.5f);
     }
 
+    IEnumerator Mana_Regen()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (mon_Info.P_mon_haveMP < mon_Info.P_mon_MaxMp)
+            mon_Info.P_mon_haveMP += mon_Info.P_mon_regenMP;
+
+        StartCoroutine(Mana_Regen());
+    }
+
+    IEnumerator ani_Add_Time_Coroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        attack_Collider.SetActive(false);
+        isAttack_Run = false;
+    }
+
     private void Start()
     {
         Initalize();
     }
 
-    private float TimeLeft = 2.0f;
-    private float nextTime = 0.0f;
+    public float TimeLeft = 4.0f;
+    public float nextTime = 4.0f;
+    public float checkTime = 0.0f;
     public bool isStop; // 멈춰있는지
 
     private void Update()
@@ -352,16 +381,18 @@ public class Battle_Character : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            animator.Play("Double Attack");
+            animator.Play("Rush");
         }
         else if (Input.GetKeyDown(KeyCode.G))
         {
-            animator.Play("The Great Sword Slap");
+            animator.Play("Rush Sword Attack");
         }
 
-        if (Time.time > nextTime)
+        checkTime += Time.deltaTime;
+        if (checkTime > nextTime)
         {
-            nextTime = Time.time + TimeLeft;
+            //nextTime = Time.time + TimeLeft;
+            checkTime = 0f;
             isStop = true;
         }
     }
