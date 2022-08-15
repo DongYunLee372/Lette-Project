@@ -35,7 +35,7 @@ public class LoadAddressableScene : MonoBehaviour
     private void Start()
     {
         BossPos = new GameObject();
-        BossPos.transform.position = new Vector3(2.5f, -3f, 80f);  //보스위치임.
+        BossPos.transform.position = new Vector3(2.5f, -3.29f, 80.0f);  //보스위치임.
         PlayerInitPos = new GameObject();
         PlayerInitPos.transform.position = new Vector3(1.21f, -4.572893f, 56.09f);  //캐릭터위치.
         MapPos = new GameObject();
