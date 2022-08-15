@@ -335,7 +335,6 @@ public class CAttackComponent : BaseComponent
     }
 
 
-
     public override void InitComtype()
     {
         p_comtype = EnumTypes.eComponentTypes.AttackCom;
