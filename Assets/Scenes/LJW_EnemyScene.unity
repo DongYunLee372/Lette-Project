@@ -30306,6 +30306,7 @@ MonoBehaviour:
     battle_Character: {fileID: 0}
   state_handler: {fileID: 0}
   MyHpbar: {fileID: 0}
+  bosshpbar: {fileID: 0}
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
   skill_handler: {fileID: 0}
@@ -38926,6 +38927,7 @@ MonoBehaviour:
     battle_Character: {fileID: 0}
   state_handler: {fileID: 0}
   MyHpbar: {fileID: 0}
+  bosshpbar: {fileID: 0}
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
   skill_handler: {fileID: 0}
@@ -42722,9 +42724,13 @@ MonoBehaviour:
   camera: {fileID: 0}
   downloadProgressScript: {fileID: 0}
   uiGameObject: {fileID: 0}
+  PlayerCanvas: {fileID: 0}
+  EnemyCanvas: {fileID: 0}
   slider: {fileID: 0}
   slider_show: 0
   PlayerInitPos: {fileID: 0}
+  BossPos: {fileID: 0}
+  MapPos: {fileID: 0}
 --- !u!4 &1862765027
 Transform:
   m_ObjectHideFlags: 0

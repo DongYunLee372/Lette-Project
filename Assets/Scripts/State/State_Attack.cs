@@ -16,6 +16,7 @@ public class State_Attack : State
             {
                 b_c.isAttack_Run = false;
                 b_c.real_AI.pre_State = this;
+                b_c.attack_Collider.SetActive(false);
                 _State = Trans_List[0];
                 return false;
             }

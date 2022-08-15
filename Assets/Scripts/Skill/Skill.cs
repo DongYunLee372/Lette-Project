@@ -14,6 +14,11 @@ public class Skill : MonoBehaviour
         b_c.isAttack_Run = true;
         b_c.isStop = false;
         b_c.animator.Play(skill_data.P_skill_Name_En);
+
+        if (skill_data.P_skill_ThrowObj != 1 && skill_data.P_skill_DiffObj != 1)
+        {
+            b_c.attack_Collider.SetActive(true);
+        }
         // 애니메이션 재생 ( 애니메이션 클립에 이벤트들을 붙여줌 해당 시간에 판정 
         // 어택매니저로 공격 호출
         // 어택매니저를 통해서 이펙트호출
