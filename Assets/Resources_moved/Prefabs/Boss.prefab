@@ -1455,7 +1455,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 5.7579474, z: 1.3356698}
-  m_Center: {x: 0, y: 2.8789737, z: -0.64610684}
+  m_Center: {x: 0, y: 2.8789737, z: 0}
 --- !u!95 &3833193269907886470
 Animator:
   serializedVersion: 4
@@ -1521,9 +1521,6 @@ MonoBehaviour:
   char_Info: {fileID: 0}
   mon_Info: {fileID: 0}
   mon_Skill_Info:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1811,6 +1808,7 @@ MonoBehaviour:
     navMesh: {fileID: 0}
     isPause: 0
   is_Boss: 1
+  isStop: 0
 --- !u!114 &919132149503474216
 MonoBehaviour:
   m_ObjectHideFlags: 0

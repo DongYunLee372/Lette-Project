@@ -1659,7 +1659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &63591703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19958,54 +19958,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Info
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Target_Info
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[6]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[7]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[8]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[9]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -30393,6 +30345,7 @@ MonoBehaviour:
     navMesh: {fileID: 0}
     isPause: 0
   is_Boss: 0
+  isStop: 0
 --- !u!65 &1292960880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39012,6 +38965,7 @@ MonoBehaviour:
     navMesh: {fileID: 0}
     isPause: 0
   is_Boss: 0
+  isStop: 0
 --- !u!4 &1726810992
 Transform:
   m_ObjectHideFlags: 0
@@ -42747,7 +42701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1862765026
 MonoBehaviour:
   m_ObjectHideFlags: 0

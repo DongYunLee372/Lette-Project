@@ -303,7 +303,10 @@ public class Battle_Character : MonoBehaviour
         }
 
         if (index == 2)
+        {
+            attack_Collider.SetActive(false);
             isAttack_Run = false;
+        }
     }
 
     IEnumerator nav_Coroutine(float speed, float acc)

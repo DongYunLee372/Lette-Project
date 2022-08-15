@@ -27,7 +27,16 @@ public class State_Attack : State
 
         //b_c.Attack_Melee_Range 가 스킬 사용범위 변수로 바뀌어야함.
         if ((Vector3.Distance(b_c.transform.position,
-            b_c.cur_Target.transform.position) <= b_c.now_Skill_Info.P_skill_Range) && b_c.mon_Info.P_mon_haveMP >= b_c.now_Skill_Info.P_skill_MP)
+            b_c.cur_Target.transform.position) <= b_c.now_Skill_Info.P_skill_Range)
+            && b_c.mon_Info.P_mon_haveMP >= b_c.now_Skill_Info.P_skill_MP)
+        {
+            judge_logic = Enemy_Attack_Logic.Skill_Using;
+            _State = this;
+            return true;
+        }
+
+        if (b_c.now_Skill_Info.P_skill_Range == 0
+            && b_c.mon_Info.P_mon_haveMP >= b_c.now_Skill_Info.P_skill_MP)
         {
             judge_logic = Enemy_Attack_Logic.Skill_Using;
             _State = this;
@@ -35,7 +44,7 @@ public class State_Attack : State
         }
 
         if ((Vector3.Distance(b_c.transform.position,
-            b_c.cur_Target.transform.position) <= b_c.mon_Info.P_mon_ShortRange) && !b_c.isAttack_Run) // 사정 거리 내에 있다면 
+                b_c.cur_Target.transform.position) <= b_c.mon_Info.P_mon_ShortRange) && !b_c.isAttack_Run) // 사정 거리 내에 있다면 
         {
             judge_logic = Enemy_Attack_Logic.Melee_Attack;
             _State = this;
