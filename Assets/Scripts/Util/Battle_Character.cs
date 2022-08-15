@@ -185,7 +185,7 @@ public class Battle_Character : MonoBehaviour
     {
         int rand = Random.Range(0, mon_Skill_Info.Count);
 
-        //now_Skill_Info = mon_Skill_Info[rand];
+        now_Skill_Info = mon_Skill_Info[rand];
     }
 
     public virtual void Attack_Effect(GameObject obj) // 때릴 시 넉백 등 효과.
