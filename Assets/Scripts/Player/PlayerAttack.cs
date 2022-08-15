@@ -103,6 +103,8 @@ public class PlayerAttack : BaseComponent
     public Transform AttackColliderParent;
 
     public AttackManager att;
+
+    IEnumerator coroutine;
     void Start()
     {
         
@@ -134,7 +136,12 @@ public class PlayerAttack : BaseComponent
             return;
         }
     }
-
+    public void PlayerHit()
+    {
+        curval.IsAttacking = false;
+        StopCoroutine(coroutine);
+        
+    }
     //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
     IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
@@ -167,7 +174,8 @@ public class PlayerAttack : BaseComponent
         if (curval.IsAttacking == false)
             curval.IsAttacking = true;
 
-        StartCoroutine(Cor_TimeCounter(SkillData.P_EffectStartTime, SkillCreateEffect));
+        coroutine = Cor_TimeCounter(SkillData.P_EffectStartTime, SkillCreateEffect);
+        StartCoroutine(coroutine);
         att.ComboAttackMana(animator, SkillData.P_aniclip.name, SkillData.P_animationPlaySpeed);
 
     }

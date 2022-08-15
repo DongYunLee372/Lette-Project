@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackManager : BaseComponent
+public class AttackManager : MonoBehaviour
 {
     [SerializeField]
     CurState curval;
@@ -132,10 +132,7 @@ public class AttackManager : BaseComponent
         PlayerScp.AttackTime(lastAttackTime);
         ComboAttackState = false;
     }
-    public override void InitComtype()
-    {
-        p_comtype = EnumTypes.eComponentTypes.AttackCom;
-    }
+    
 
     private void Awake()
     {
