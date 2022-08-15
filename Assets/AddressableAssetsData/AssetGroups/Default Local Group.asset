@@ -107,6 +107,10 @@ MonoBehaviour:
     m_Address: FriendPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5ece94ad8da3684468f4a2887d64bb04
+    m_Address: Boss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
