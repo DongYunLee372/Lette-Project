@@ -7,16 +7,14 @@ using UnityEngine;
 //이펙트의 부모를 설정해주면 이펙트가 따라다니도록
 //리소스의 모든 이펙트들을 받아와서 가지고 있는다
 
-public class EffectManager : MonoBehaviour
+public class EffectManager : MySingleton<EffectManager>
 {
     //public List<GameObject> CurEffects;
     public Transform BaseEffect;// 기본 이펙트 생성 위치
 
-    public Dictionary<int, GameObject> CurEffects;
+    public Dictionary<int, GameObject> CurEffects = new Dictionary<int, GameObject>();
 
     public List<GameObject> Effects = new List<GameObject>();
-
-
 
     public GameObject InstantiateEffect(GameObject effect)
     {
@@ -33,10 +31,11 @@ public class EffectManager : MonoBehaviour
         return copy;
     }
 
-    public GameObject InstantiateEffect(GameObject effect, Vector3 pos,float DestroyTime)
+    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime=1.0f)
     {
         GameObject copy = InstantiateEffect(effect);
         copy.transform.position = pos;
+        copy.transform.rotation = rotation;
         GameObject.Destroy(copy, DestroyTime);
         return copy;
     }
@@ -47,6 +46,16 @@ public class EffectManager : MonoBehaviour
         GameObject copy = InstantiateEffect(effect);
         copy.transform.position = pos;
         copy.transform.parent = parent;
+        GameObject.Destroy(copy, DestroyTime);
+        return copy;
+    }
+
+    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime, Transform parent)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = pos;
+        copy.transform.parent = parent;
+        copy.transform.rotation = rotation;
         GameObject.Destroy(copy, DestroyTime);
         return copy;
     }

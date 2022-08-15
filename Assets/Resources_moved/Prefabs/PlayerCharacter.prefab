@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &489346841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489346842}
+  m_Layer: 0
+  m_Name: GuardEffectpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489346842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489346841}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.072, z: 0.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5912692895590823227}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5912692895156706169
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692895305397013}
   m_LocalRotation: {x: 0.17041081, y: -0, z: -0, w: 0.98537314}
-  m_LocalPosition: {x: 0, y: 3.45, z: -3.5}
+  m_LocalPosition: {x: 0, y: 3.02, z: -3.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -486,6 +517,7 @@ Transform:
   - {fileID: 5912692896680884495}
   - {fileID: 5912692897135278756}
   - {fileID: 5912692896014484492}
+  - {fileID: 489346842}
   m_Father: {fileID: 5912692896712387631}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2147,7 +2179,8 @@ MonoBehaviour:
     CharacterDBInfo: {fileID: 0}
     DBController: {fileID: 0}
   CharacterInfoPanel: {fileID: 0}
-  HitEffect: {fileID: 0}
+  HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
+  effectmanager: {fileID: 0}
   CharacterDBInfo: {fileID: 0}
 --- !u!114 &5912692896712388562
 MonoBehaviour:
@@ -2403,6 +2436,8 @@ MonoBehaviour:
   BalanceDecreaseVal: 0
   GuardStunClip: {fileID: 7400000, guid: a9fa651f83be0e7448e1823843611419, type: 2}
   GuardClip: {fileID: 7400000, guid: a2ce05986eb5d08499f73d9ba82bc759, type: 2}
+  GuardEffect: {fileID: 167046, guid: 6062cf74dd326b146b31d28120ade333, type: 3}
+  guardeffectpos: {fileID: 489346842}
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
@@ -2451,6 +2486,7 @@ MonoBehaviour:
   ComboAttackState: 0
   PlayerScp: {fileID: 0}
   enemyScp: {fileID: 0}
+  effectManagerTest: {fileID: 0}
 --- !u!114 &1121095338
 MonoBehaviour:
   m_ObjectHideFlags: 0

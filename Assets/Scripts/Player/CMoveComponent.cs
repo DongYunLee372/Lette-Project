@@ -497,7 +497,6 @@ public class CMoveComponent : BaseComponent
 
     public void KnockBack()
     {
-
         //이미 넉백 중 일때 해당 함수가 다시 들어오면 다시 넉백 실행
         if(curval.IsKnockBack)
         {

@@ -17,6 +17,8 @@ public class CGuardComponent : BaseComponent
     public int BalanceDecreaseVal;
     public AnimationClip GuardStunClip;
     public AnimationClip GuardClip;
+    public GameObject GuardEffect;
+    public Transform guardeffectpos;
 
     [Header("============Cur Values============")]
     public int CurGuardGauge;
@@ -35,6 +37,8 @@ public class CGuardComponent : BaseComponent
 
         if (movecom.curval.IsGuard)
             return;
+
+        
 
         movecom.curval.IsGuard = true;
 
@@ -101,6 +105,7 @@ public class CGuardComponent : BaseComponent
     {
         if (PlayableCharacter.Instance.status.CurBalance >= BalanceDecreaseVal)
         {
+            EffectManager.Instance.InstantiateEffect(GuardEffect, guardeffectpos.position, guardeffectpos.rotation);
             PlayableCharacter.Instance.status.CurBalance -= BalanceDecreaseVal;
             GuardStun();
         }

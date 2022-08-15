@@ -27,7 +27,7 @@ public class PlayableCharacter : MonoBehaviour
     //public SlideBar BalanceBar;
     [Header("================피격 이펙트================")]
     public GameObject HitEffect;
-
+    public EffectManager effectmanager;
 
     /*싱글톤*/
     static PlayableCharacter _instance;
@@ -158,6 +158,7 @@ public class PlayableCharacter : MonoBehaviour
     public void Damaged(float damage,Vector3 hitpoint)
     {
         CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        EffectManager.Instance.InstantiateEffect(HitEffect, hitpoint);
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;
         status.CurHP -= finaldamage;
