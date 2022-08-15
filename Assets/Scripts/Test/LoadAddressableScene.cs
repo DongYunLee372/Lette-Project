@@ -15,10 +15,10 @@ public class LoadAddressableScene : MonoBehaviour
     public GameObject camera;
     public DownloadProgress downloadProgressScript;
     public GameObject uiGameObject;
-    long Downloadsize = 0;
+    float Downloadsize = 0;
 
     public Slider slider;  //로딩 슬라이더 바 (임시,,?)
-    public int slider_show;  //다운로드 얼마나 됐는지
+    public float slider_show;  //다운로드 얼마나 됐는지
 
 
     public GameObject PlayerInitPos;
@@ -52,23 +52,33 @@ public class LoadAddressableScene : MonoBehaviour
         //v필요한 거 다 로드 시킨다음에
 
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
+        slider_show = 0.1f;
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
+        slider_show = 0.2f;
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
+        slider_show = 0.3f;
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
+        slider_show = 0.5f;
         //yield return StartCoroutine(AddressablesController.Instance.Load_Name("Boss", PlayerInitPos.transform));
 
-        yield return StartCoroutine(AddressablesController.Instance.Load_Name("Long_Hall", MapPos.transform));
+
+       // yield return StartCoroutine(AddressablesController.Instance.Load_Name("Long_Hall", MapPos.transform));
+        slider_show = 0.6f;
 
         yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, BossPos.transform));
-     //   yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
+        slider_show = 0.7f;
+
+        //   yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
         //씬을 로드하고
-       // AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
+         AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
 
         //연출같은거 필요하면 하고, 캔버스 ,카메라 비활성화
 
         yield return new WaitForSeconds(3);
-
+        slider_show = 1f;
         yield return StartCoroutine(AddressablesController.Instance.Load_Name("PlayerCharacter", PlayerInitPos.transform));
+        
+
 
         camera.SetActive(false);
         uiGameObject.SetActive(false);
@@ -78,6 +88,14 @@ public class LoadAddressableScene : MonoBehaviour
         yield return null;
     }
 
+    private void Update()
+    {
+        if(Downloadsize!= slider_show)
+        {
+            slider.value = slider_show;
+            Downloadsize = slider_show;
+        }
+    }
 
     IEnumerator DownloadScene()
     {
