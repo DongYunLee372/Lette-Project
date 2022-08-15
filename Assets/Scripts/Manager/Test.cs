@@ -29,13 +29,14 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
 
-            // UIManager.Instance.Remove("Test2");
+             UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Debug.Log("??");
 
             StartCoroutine(CharacterCreate.Instance.CreateMonster_(EnumScp.MonsterIndex.mon_01_01, spawn));
+            //GameObject a=   UIManager.Instance.Prefabsload("Bosshpbar", UIManager.CANVAS_NUM.player_cavas);
         }
     }
 }
