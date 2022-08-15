@@ -46,10 +46,10 @@ public class LoadAddressableScene : MonoBehaviour
     {
         //v필요한 거 다 로드 시킨다음에
 
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
+        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
+        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
+        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
+        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
         //yield return StartCoroutine(AddressablesController.Instance.Load_Name("Boss", PlayerInitPos.transform));
         yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, PlayerInitPos.transform));
         //씬을 로드하고

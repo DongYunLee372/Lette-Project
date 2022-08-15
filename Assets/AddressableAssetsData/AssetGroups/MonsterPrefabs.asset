@@ -20,8 +20,111 @@ MonoBehaviour:
   - m_GUID: df42f27fec159c34ba416df450d6358b
     m_Address: susu
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Monster
+    m_SerializedLabels: []
+  - m_GUID: d2d49758f8b0e1a4dbd265b469f5c8c7
+    m_Address: Boss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9c114528bf8834f4db8611873e471125
+    m_Address: 123
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d1469fb3fd6cfb84e9fcaad9c9adcfdb
+    m_Address: Appoint
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dedf70d4c324d8248b76c3c5c5d3e5b3
+    m_Address: Attack01Effectpos
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e9324ad35235bea4383d9abd43c1b650
+    m_Address: Attack02Effectpos
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 18c1022e566cc754ea2fcb3ad4fdd9c0
+    m_Address: Attack03Effectpos
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 19df7f83c6a3aeb4abb68ed39a295f25
+    m_Address: Bosshpbar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f2c73200962aea749bf4beaa8acf288a
+    m_Address: Enemy HpBar Slider
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f95e6b4d87912f4caa1a02676746b2a
+    m_Address: Estust
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6d278439ed71ae94e8b878b6f4618df3
+    m_Address: Fire Demon-Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 16e50229ff23d7840b95134739f65244
+    m_Address: FriendPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a5dcc9ee26d52ef4bafda2e16bf1678e
+    m_Address: Hpbar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bf1dc5f18c9584f479a1439400583b7f
+    m_Address: Inven
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e9289f49a91d21843baaa311416ffd7f
+    m_Address: PlayerCharacter
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ac63b7585ae01764297ce3f72b06fba7
+    m_Address: ShootingTempPre
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 691b2ca38e8422d4b9bde536b5547af9
+    m_Address: Skeleton_Knight
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1ca5bacb9c97c934c8da9d3b8b37e611
+    m_Address: Skeleton_Warrior
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 052d19923ca2a2240906b07b43731c27
+    m_Address: Skill01Effectpos
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 62e1ff5d09df09648adf38360a4295ee
+    m_Address: Slime
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 62f219c83dfa2fa4ca4235e907af4c34
+    m_Address: summoner_
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6d3c96368e8d3c54f956615b6390466b
+    m_Address: Susu_
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bae9203b94856804188da7ea1cea0bac
+    m_Address: Terrain
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d237983f4cea9fc4b929c344bbbd49d0
+    m_Address: Test1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 78ae9ce701cf49942b9ed055c5d82b9d
+    m_Address: Test2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5e452b9fd9cc1884ca2d1fe458df33d9
+    m_Address: UIBar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8d2f792ccf19db7438ed338f1f5f7f02
+    m_Address: Demo
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
