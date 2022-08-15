@@ -114,7 +114,7 @@ public class Battle_Character : MonoBehaviour
     public bool is_Boss = false; // 보스 몬스터 판별
 
 
-    public void Stat_Initialize(MonsterInformation info , List<MonsterSkillInformation> skill, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
+    public void Stat_Initialize(MonsterInformation info, List<MonsterSkillInformation> skill, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
     {
         mon_Skill_Info = skill;
         mon_Info = info;
@@ -145,7 +145,8 @@ public class Battle_Character : MonoBehaviour
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
         //movecom = GetComponentInChildren<CMoveComponent>();
-
+        //skill_handler = 
+        attack_Collider.SetActive(false);
         real_AI.AI_Init(this);
 
         for (int i = 0; i < attack_Info.Length; i++)
@@ -301,7 +302,8 @@ public class Battle_Character : MonoBehaviour
             }
         }
 
-        isAttack_Run = false;
+        if (index == 2)
+            isAttack_Run = false;
     }
 
     IEnumerator nav_Coroutine(float speed, float acc)
@@ -328,6 +330,10 @@ public class Battle_Character : MonoBehaviour
         Initalize();
     }
 
+    private float TimeLeft = 2.0f;
+    private float nextTime = 0.0f;
+    public bool isStop; // 멈춰있는지
+
     private void Update()
     {
         real_AI.AI_Update();
@@ -340,10 +346,11 @@ public class Battle_Character : MonoBehaviour
         {
             animator.Play("The Great Sword Slap");
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+
+        if (Time.time > nextTime)
         {
-            Vector3 vec = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
-            Damaged(1, vec);
+            nextTime = Time.time + TimeLeft;
+            isStop = true;
         }
     }
 }
