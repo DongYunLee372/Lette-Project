@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,15 +25,24 @@ public class ColliderEventDamage : MonoBehaviour
         
     }
     // 데미지 적용
-    public void OnTriggerEnter(Collider other)
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("ColliderEventDamage : " + other.name);
+
+    //    if (other.gameObject.tag == "Enemy")
+    //    {
+    //        other.GetComponent<Battle_Character>().Damaged(damage, );    
+            
+    //        Debug.Log("적군 공격");
+    //    }
+    //}
+
+    public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("ColliderEventDamage : " + other.name);
-
-        if (other.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
+            collision.gameObject.GetComponent<Battle_Character>().Damaged(Convert.ToInt32(damage), collision.contacts[0].point);
 
-            //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Cha"), LayerMask.NameToLayer("EnemyAttack"));
-            //collision.rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             Debug.Log("적군 공격");
         }
     }
