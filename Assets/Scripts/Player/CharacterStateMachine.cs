@@ -67,6 +67,17 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
         }
     }
 
+    ////이전 상태로 돌아간다.
+    //public void SetPreState()
+    //{
+    //    if (CurState != state)
+    //    {
+    //        //Debug.Log($"{state} 들어옴");
+    //        PreState = CurState;
+    //        CurState = state;
+    //    }
+    //}
+
     public eCharacterState GetState()
     {
         return CurState;

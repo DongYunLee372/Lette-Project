@@ -159,7 +159,8 @@ public class CurState
             }
             else
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                if(CharacterStateMachine.Instance.GetState()!= CharacterStateMachine.eCharacterState.OutOfControl)
+                    CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
             }
         }
     }
@@ -168,7 +169,7 @@ public class CurState
     {
         get
         {
-            return IsNoDamage;
+            return isNoDamage;
         }
         set
         {
@@ -228,7 +229,8 @@ public class CurState
             }
             else
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                if (CharacterStateMachine.Instance.GetState() != CharacterStateMachine.eCharacterState.OutOfControl)
+                    CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
             }
         }  
     }

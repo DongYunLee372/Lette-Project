@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 //레벨이 변할때마다 캐릭터 스탯 정보들을 받아와서 초기화 해준다.
 public class BaseStatus
 {
