@@ -2262,8 +2262,8 @@ MonoBehaviour:
     moveAccel: 0
   moveoption:
     RotMouseSpeed: 1
-    MoveSpeed: 400
-    RunSpeed: 500
+    MoveSpeed: 500
+    RunSpeed: 800
     MinAngle: 0
     MaxAngle: 0
     Gravity: 0
@@ -2274,6 +2274,7 @@ MonoBehaviour:
       m_Bits: 0
     MaxSlop: 70
     SlopAccel: 0
+    RunningStaminaVal: 4
     RollingClip: {fileID: 7400000, guid: 207adbd2d547d7f408adcac0b17f4e44, type: 2}
     RollingClipPlaySpeed: 2.3
     RollingDistance: 8
@@ -2298,6 +2299,7 @@ MonoBehaviour:
   RollingStartTime: 0
   eventsystem: {fileID: 0}
   lastRollingTime: 0
+  lastRunningTime: 0
   updown: {x: 0, y: 0, z: 0}
   xnext: 0
   rightleft: {x: 0, y: 0, z: 0}
@@ -2420,7 +2422,7 @@ MonoBehaviour:
   GuardTime: 60
   GuardStunTime: 0.2
   MaxGuardGauge: 0
-  BalanceDecreaseVal: 0
+  BalanceDecreaseVal: 10
   GuardStunClip: {fileID: 7400000, guid: a9fa651f83be0e7448e1823843611419, type: 2}
   GuardClip: {fileID: 7400000, guid: a2ce05986eb5d08499f73d9ba82bc759, type: 2}
   GuardEffect: {fileID: 167046, guid: 6062cf74dd326b146b31d28120ade333, type: 3}

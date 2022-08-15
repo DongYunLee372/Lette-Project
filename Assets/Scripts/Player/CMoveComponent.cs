@@ -64,6 +64,8 @@ public class CMoveComponent : BaseComponent
         public float MaxSlop = 70;
         [SerializeField]
         public float SlopAccel;//(중력값과 같이 미끌어질때 점점증가될 값)
+
+        public float RunningStaminaVal;
         [Header("==================회피 관련 변수들==================")]
         public AnimationClip RollingClip;
 
@@ -129,6 +131,8 @@ public class CMoveComponent : BaseComponent
     public CorTimeCounter timecounter = new CorTimeCounter();
     //public delegate void invoke();
     public float lastRollingTime;
+
+    public float lastRunningTime;
 
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius, transform.position.z);
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius, transform.position.z);
@@ -341,7 +345,12 @@ public class CMoveComponent : BaseComponent
     {
         MoveDir.Normalize();
 
-        WorldMove *= (curval.IsRunning) ? moveoption.RunSpeed * Time.deltaTime : moveoption.MoveSpeed * Time.deltaTime;
+        WorldMove *= (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed * Time.deltaTime : moveoption.MoveSpeed * Time.deltaTime;
+
+        //if ()
+        //{
+        //    //WorldMove *=
+        //}
 
         if (curval.IsFowordBlock && !curval.IsGrounded || curval.IsJumping && curval.IsGrounded || curval.IsJumping && curval.IsFowordBlock ||curval.IsRolling || curval.IsAttacking)
         {
@@ -554,9 +563,19 @@ public class CMoveComponent : BaseComponent
         if (!curval.IsGrounded)
             return;
 
+        if (PlayableCharacter.Instance.status.CurStamina - 20 >= 0)
+        {
+            PlayableCharacter.Instance.status.CurStamina = PlayableCharacter.Instance.status.CurStamina - 20;
+        }
+        else
+        {
+            return;
+        }
+
         curval.IsRolling = true;
 
-        PlayableCharacter.Instance.status.CurStamina = PlayableCharacter.Instance.status.CurStamina - 20;
+        
+        
 
         //AnimationManager.Instance.Play(com.animator, "_Rolling");
         //Debug.Log($"{AnimationManager.Instance.GetClipLength(com.animator,"_Rolling")}");
@@ -828,5 +847,14 @@ public class CMoveComponent : BaseComponent
         Rotation();
         HorVelocity();
         MoveCalculate();
+        if(curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)
+        {
+            if (Time.time - lastRunningTime >= 1.0f)
+            {
+                lastRunningTime = Time.time;
+                PlayableCharacter.Instance.status.CurStamina -= moveoption.RunningStaminaVal;
+            }
+            
+        }
     }
 }

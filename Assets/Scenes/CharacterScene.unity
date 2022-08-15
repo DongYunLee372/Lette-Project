@@ -52620,6 +52620,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712387626, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: moveoption.RunSpeed
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712387626, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: moveoption.MoveSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712387626, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: moveoption.RunningStaminaVal
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712387631, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: m_RootOrder
       value: 21

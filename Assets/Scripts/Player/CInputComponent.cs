@@ -64,13 +64,14 @@ public class CInputComponent : BaseComponent
         movecom.MouseMove = new Vector2(0, 0);//마우스 움직임
         movecom.MoveDir = new Vector3(0, 0, 0);//wasd 키 입력에 따른 이동 방향
 
-        //가드 중 일때는 시점은 정면으로 고정
-        if(state != CharacterStateMachine.eCharacterState.Guard&&
-            state != CharacterStateMachine.eCharacterState.GuardStun)
-        {
-            movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
-        }
+        ////가드 중 일때는 시점은 정면으로 고정
+        //if(state != CharacterStateMachine.eCharacterState.Guard&&
+        //    state != CharacterStateMachine.eCharacterState.GuardStun)
+        //{
+            
+        //}
 
+        movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
         float scroll = Input.GetAxis("Mouse ScrollWheel") * -1;
         
 

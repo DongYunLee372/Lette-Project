@@ -44,7 +44,7 @@ public class CGuardComponent : BaseComponent
 
         movecom.com.animator.Play(GuardClip.name, 2.0f);
 
-        movecom.LookAtFoward();
+        //movecom.LookAtFoward();
 
         if (guardcoroutine != null)
         {
