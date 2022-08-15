@@ -191,7 +191,7 @@ public class PlayerAttack : BaseComponent
 
         float tempMp = Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.MPBar.GetCurValue();
 
-        Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.HPBar.SetCurValue(tempMp - 10);
+        Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.MPBar.SetCurValue(tempMp - 10);
     }
 
     public void CreateEffect()
