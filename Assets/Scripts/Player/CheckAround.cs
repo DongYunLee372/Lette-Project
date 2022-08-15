@@ -116,7 +116,7 @@ public class CheckAround : MonoBehaviour
 
 
             temppos = new Vector3(this.transform.position.x, this.transform.position.y  - 10, this.transform.position.z);
-            tempcube.transform.position = temppos;
+            //tempcube.transform.position = temppos;
 
             //bool cast = testnavagent.Raycast(temppos, out navhit);
             //bool cast = NavMesh.Raycast(this.transform.position + new Vector3(0,2,0), temppos, out navhit, NavMesh.GetAreaFromName("Walkable"));

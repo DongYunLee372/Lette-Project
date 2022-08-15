@@ -63,12 +63,11 @@ public class PlayableCharacter : MonoBehaviour
                 components[(int)a.p_comtype] = a;
         }
 
+        CharacterInfoPanel = UIManager.Instance.Prefabsload("FriendPanel", UIManager.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+
         status = new BaseStatus();
         status.Init(DataLoad_Save.Instance,CharacterInfoPanel);
 
-
-        
-        //CharacterInfoPanel = UIManager.Instance.Prefabsload("FriendPanel", UIManager.CANVAS_NUM.player_cavas);
 
     }
 
