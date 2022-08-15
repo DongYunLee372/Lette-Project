@@ -184,7 +184,10 @@ public class Battle_Character : MonoBehaviour
 
         if(is_Boss)
         {
-            bosshpbar.HitDamage(cur_HP);
+            GameObject a = UIManager.Instance.Findobj("Bosshpbar");
+            a.GetComponent<Bosshpbar>().HitDamage(cur_HP);
+
+
         }
     }
 
