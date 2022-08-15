@@ -81,6 +81,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         GameObject b = Instantiate(temp, trans);
         b.GetComponent<Battle_Character>().bosshpbar.SetHpbar(data.P_mon_MaxHP);
 
+        Debug.Log("보스생성");
         yield return null;
 
     }

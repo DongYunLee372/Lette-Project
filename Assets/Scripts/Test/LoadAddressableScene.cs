@@ -52,7 +52,7 @@ public class LoadAddressableScene : MonoBehaviour
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
         //yield return StartCoroutine(AddressablesController.Instance.Load_Name("Boss", PlayerInitPos.transform));
 
-      //  yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, PlayerInitPos.transform));
+        yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, PlayerInitPos.transform));
         //씬을 로드하고
         AddressablesLoader.OnSceneAction("Demo");  //씬 로드 어드레서블
 
