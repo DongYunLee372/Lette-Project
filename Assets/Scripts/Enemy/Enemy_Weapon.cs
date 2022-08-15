@@ -24,11 +24,11 @@ public class Enemy_Weapon : MonoBehaviour
         switch (parent_BC.attack_Type) // 공격 타입에 맞게 데미지를 입혀줌.
         {
             case Enemy_Enum.Enemy_Attack_Type.Normal_Attack:
-                collision.gameObject.GetComponent<PlayableCharacter>().BeAttacked(parent_BC.mon_Info.P_mon_Atk);
+                //collision.gameObject.GetComponent<PlayableCharacter>().BeAttacked(parent_BC.mon_Info.P_mon_Atk);
                 break;
             case Enemy_Enum.Enemy_Attack_Type.Skill_Attack:
                 // 캐릭터의 damaged 함수호출
-                collision.gameObject.GetComponent<PlayableCharacter>().BeAttacked(parent_BC.now_Skill_Info.P_skill_dmg);
+                //collision.gameObject.GetComponent<PlayableCharacter>().BeAttacked(parent_BC.now_Skill_Info.P_skill_dmg);
                 break;
         }
     }
