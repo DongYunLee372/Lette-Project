@@ -104,10 +104,12 @@ public class PlayerAttack : BaseComponent
 
     public AttackManager att;
 
+   
+
     IEnumerator coroutine;
     void Start()
     {
-        
+        UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
         att = GetComponentInChildren<AttackManager>();
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
