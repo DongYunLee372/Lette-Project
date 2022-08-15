@@ -25,25 +25,25 @@ public class ColliderEventDamage : MonoBehaviour
         
     }
     // 데미지 적용
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log("ColliderEventDamage : " + other.name);
-
-    //    if (other.gameObject.tag == "Enemy")
-    //    {
-    //        other.GetComponent<Battle_Character>().Damaged(damage, );    
-            
-    //        Debug.Log("적군 공격");
-    //    }
-    //}
-
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy")
+        Debug.Log("ColliderEventDamage : " + other.name);
+
+        if (other.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<Battle_Character>().Damaged(Convert.ToInt32(damage), collision.contacts[0].point);
+            other.GetComponent<Battle_Character>().Damaged(Convert.ToInt32(damage), this.transform.position);
 
             Debug.Log("적군 공격");
         }
     }
+
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Enemy")
+    //    {
+    //        collision.gameObject.GetComponent<Battle_Character>().Damaged(Convert.ToInt32(damage), collision.contacts[0].point);
+
+    //        Debug.Log("적군 공격");
+    //    }
+    //}
 }
