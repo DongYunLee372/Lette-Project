@@ -27,7 +27,19 @@ public class UIManager : Singleton<UIManager>
         sdf
     }
 
+    public GameObject Findobj(string path)
+    {
+   
+        for (int i = 0; i < info.Count; i++)
+        {
+            if (info[i].path == path && info[i].active)
+            {
+                return info[i].obj;
+            }
+        }
 
+        return null;
+    }
     public GameObject Prefabsload(string name, CANVAS_NUM x , Transform a = null)
     {
         bool same = false;
