@@ -22,9 +22,9 @@ public class Test : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            UIManager.Instance.Show("Fire Demon-Yellow");
+            GameObject a=UIManager.Instance.Findobj("Bosshpbar");
 
-            UIManager.Instance.Show("Test2");
+            a.GetComponent<Bosshpbar>().HitDamage(100);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
