@@ -79,6 +79,7 @@ public class State_Attack : State
                 b_c.attack_Type = Enemy_Attack_Type.Normal_Attack;
                 b_c.checkTime = 0f;
                 b_c.isStop = false;
+                b_c.gameObject.transform.LookAt(b_c.cur_Target.transform);
                 b_c.attack_Collider.SetActive(true);
                 Debug.Log("밀리");
                 b_c.isAttack_Run = true;

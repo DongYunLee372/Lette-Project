@@ -110,8 +110,8 @@ public class Battle_Character : MonoBehaviour
 
     [Header("==========Effect=============")]
     public Attack_Info[] attack_Info;
-    public CMoveComponent movecom;
     public GameObject damaged_Effect; // 피격 이펙트
+    public GameObject phase_Effect; // 페이즈 이펙트
 
     [Header("==========AI=================")]
     public AI real_AI;

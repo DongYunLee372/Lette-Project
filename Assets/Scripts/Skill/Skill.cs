@@ -14,6 +14,7 @@ public class Skill : MonoBehaviour
         b_c.isAttack_Run = true;
         b_c.checkTime = 0f;
         b_c.isStop = false;
+        b_c.gameObject.transform.LookAt(b_c.cur_Target.transform);
         b_c.animator.Play(skill_data.P_skill_Name_En);
 
         if (skill_data.P_skill_ThrowObj != 1 && skill_data.P_skill_DiffObj != 1)

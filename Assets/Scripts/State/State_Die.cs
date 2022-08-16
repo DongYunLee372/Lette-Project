@@ -7,7 +7,7 @@ public class State_Die : State
     public override bool Judge(out State _State, Battle_Character b_c)
     {
         // 0으로 바꿔야함
-        if (b_c.cur_HP <= -100) // 사망
+        if (b_c.cur_HP <= 0) // 사망
         {
             _State = this;
             return true;
@@ -21,7 +21,30 @@ public class State_Die : State
     {
         // 사망 애니메이션 등 사망 시 부활하고 소환하는 등등의 효과(스킬)을 호출. 
         // 스킬 구조 구현 시 추가해줘야함.
+        if (b_c.phase_Effect != null && !first_Start)
+        {
+            b_c.animator.Play("Monster Recall");
+
+            StartCoroutine(death_Coroutine(b_c.phase_Effect, b_c.transform));
+
+            this.first_Start = true;
+        }
 
         b_c.real_AI.now_State = Trans_List[0];
+    }
+
+    IEnumerator death_Coroutine(GameObject eff, Transform transform)
+    {
+        yield return new WaitForSeconds(3f);
+
+        GameObject effectobj = GameObject.Instantiate(eff);
+        effectobj.transform.position = transform.position;
+        effectobj.transform.rotation = transform.rotation;
+
+        //preparent = effectobj.transform.parent;
+        //effectobj.transform.parent = attack_Info[i].effect_Pos[2];
+        //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
+
+        Destroy(effectobj, 8.0f);
     }
 }
