@@ -107,8 +107,11 @@ public class PlayerAttack : BaseComponent
     public GameObject Player;
 
     IEnumerator coroutine;
+
+    public Rigidbody rigidbody;
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         Player = AddressablesController.Instance.find_Asset_in_list("PlayerCharacter(Clone)");
         UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
         att = GetComponentInChildren<AttackManager>();
@@ -247,6 +250,8 @@ public class PlayerAttack : BaseComponent
 
         att.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
         //testAttckmanager.ComboAttackMana(animator, Attack_InformationList[AttackNum].P_aniclip.name, Attack_InformationList[AttackNum].P_animationPlaySpeed);
+
+        rigidbody.velocity = Vector3.zero;
     }
 
     public void AttackTime(float time)
