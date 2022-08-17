@@ -235,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692895305397013}
   m_LocalRotation: {x: 0.17041081, y: -0, z: -0, w: 0.98537314}
-  m_LocalPosition: {x: 0, y: 3.02, z: -3.65}
+  m_LocalPosition: {x: 0, y: 2.44, z: -2.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2567,6 +2567,7 @@ MonoBehaviour:
   AttackColliderParent: {fileID: 0}
   att: {fileID: 0}
   Player: {fileID: 0}
+  rigidbody: {fileID: 0}
 --- !u!195 &836511858
 NavMeshAgent:
   m_ObjectHideFlags: 0
