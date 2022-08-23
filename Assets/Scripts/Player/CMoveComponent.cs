@@ -129,7 +129,7 @@ public class CMoveComponent : BaseComponent
     public AnimationEventSystem eventsystem;
 
     public CorTimeCounter timecounter = new CorTimeCounter();
-    //public delegate void invoke();
+
     public float lastRollingTime;
 
     public float lastRunningTime;
@@ -193,11 +193,6 @@ public class CMoveComponent : BaseComponent
 
     }
 
-
-    //public void CharacterDirectionMove(Vector3 direction)
-    //{
-    //    MoveDir = direction;
-    //}
     public void Stop()
     {
         com.CharacterRig.velocity = new Vector3(0, 0, 0);
@@ -341,26 +336,28 @@ public class CMoveComponent : BaseComponent
 
     }
 
+    //움직임값을 계산해준다.
     public void MoveCalculate()
     {
-        MoveDir.Normalize();
-
-        WorldMove *= (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed * Time.deltaTime : moveoption.MoveSpeed * Time.deltaTime;
-
-        //if ()
-        //{
-        //    //WorldMove *=
-        //}
-
-        if (curval.IsFowordBlock && !curval.IsGrounded || curval.IsJumping && curval.IsGrounded || curval.IsJumping && curval.IsFowordBlock ||curval.IsRolling || curval.IsAttacking)
+        //이동이 가능한지 판단
+        if (curval.IsRolling || curval.IsAttacking)
         {
             WorldMove.x = 0;
             WorldMove.z = 0;
             return;
         }
 
+        MoveDir.Normalize();
+
+        WorldMove = com.TpCamRig.TransformDirection(MoveDir);
+
+        float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
+
+        WorldMove *= speed * Time.deltaTime;
+
         Move(WorldMove);
     }
+
 
     //움직일 방향과 거리를 넣어주면 현재 지형에 따라서 움직여 준다.
     public void Move(Vector3 MoveVal)
@@ -460,9 +457,6 @@ public class CMoveComponent : BaseComponent
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
-    
-
-
     public void KnockDown()
     {
         //이미 넉다운 중일때 해당 함수가 다시 들어오면 그냥 리턴
@@ -476,7 +470,6 @@ public class CMoveComponent : BaseComponent
 
         com.animator.Play(moveoption.KnockDownClip.name);
     }
-
 
     public void KnockDownPause(string s_val)
     {
@@ -723,11 +716,12 @@ public class CMoveComponent : BaseComponent
     public void RotateTPFP()
     {
         float nextRotY = 0;
-        WorldMove = com.TpCamRig.TransformDirection(MoveDir);
+        Vector3 tempworldmove = com.TpCamRig.TransformDirection(MoveDir);
+        
         float curRotY = com.FpRoot.localEulerAngles.y;
 
-        if (WorldMove.sqrMagnitude != 0)
-            nextRotY = Quaternion.LookRotation(WorldMove, Vector3.up).eulerAngles.y;
+        if (tempworldmove.sqrMagnitude != 0)
+            nextRotY = Quaternion.LookRotation(tempworldmove, Vector3.up).eulerAngles.y;
 
         if (!curval.IsMoving) nextRotY = curRotY;
 
@@ -737,12 +731,6 @@ public class CMoveComponent : BaseComponent
         com.FpRoot.eulerAngles = Vector3.up * Mathf.Lerp(curRotY, nextRotY, 0.1f);
     }
 
-
-    //3인칭 일때 해당 방향을 바라보도록 회전
-    public void LookAt(Vector3 direction)
-    {
-
-    }
 
     //3인칭 카메라가 정면방향을 바라보도록 회전
     public void LookAtFoward()
@@ -839,7 +827,11 @@ public class CMoveComponent : BaseComponent
         com.TpCam.gameObject.SetActive(!curval.IsFPP);
     }
 
-    
+    public override void Awake()
+    {
+        base.Awake();
+        //Application.targetFrameRate = 40;
+    }
 
     void Update()
     {
@@ -847,6 +839,7 @@ public class CMoveComponent : BaseComponent
         Rotation();
         HorVelocity();
         MoveCalculate();
+
         if(curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)
         {
             if (Time.time - lastRunningTime >= 1.0f)

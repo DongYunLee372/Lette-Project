@@ -314,11 +314,6 @@ public class CAttackComponent : BaseComponent
             curval.IsAttacking = false;
 
         lastAttackTime = Time.time;
-        //animator.SetBool(EnumTypes.eAnimationState.Attack, false);
-        //animator.SetBool(EnumTypes.eAnimationState.Idle, true);
-        //LastAttackTime = Time.time;
-        ////NowAttack = false;
-        //StartCoroutine(Cor_AttackTimeCounter());
 
     }
 

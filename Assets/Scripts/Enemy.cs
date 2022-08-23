@@ -8,26 +8,26 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
     [SerializeField]
-    protected float Attack_Range; // ±âº» °ø°İ »ç°Å¸®
+    protected float Attack_Range; // ê¸°ë³¸ ê³µê²© ì‚¬ê±°ë¦¬
     [SerializeField]
-    protected int Mana; // ÇöÀç ¸¶³ª
+    protected int Mana; // í˜„ì¬ ë§ˆë‚˜
     [SerializeField]
-    protected int need_Mana; // ½ºÅ³ »ç¿ë½Ã ÇÊ¿äÇÑ ¸¶³ª
+    protected int need_Mana; // ìŠ¤í‚¬ ì‚¬ìš©ì‹œ í•„ìš”í•œ ë§ˆë‚˜
     [Header("Enemy Now State")]
     [SerializeField]
-    protected bool is_Target_Set; // Å¸°ÙÀÌ ¹üÀ§³»·Î µé¾î¿Í¼­ Á¤ÇØÁ®ÀÖ´Ù¸é
+    protected bool is_Target_Set; // íƒ€ê²Ÿì´ ë²”ìœ„ë‚´ë¡œ ë“¤ì–´ì™€ì„œ ì •í•´ì ¸ìˆë‹¤ë©´
     [SerializeField]
-    protected Vector3 return_Pos; // º¹±ÍÇÒ À§Ä¡
+    protected Vector3 return_Pos; // ë³µê·€í•  ìœ„ì¹˜
     [SerializeField]
-    protected int cur_State; // ÇöÀç »óÅÂ 1 : ¼øÂû 2 : ÃßÀû 3 : °ø°İ 4 : º¹±Í
+    protected int cur_State; // í˜„ì¬ ìƒíƒœ 1 : ìˆœì°° 2 : ì¶”ì  3 : ê³µê²© 4 : ë³µê·€
     [SerializeField]
     protected GameObject cur_Target;
     [SerializeField]
     protected int next_Skill;
     [SerializeField]
-    protected bool enemy_isDie = false;  // ¸ó½ºÅÍ°¡ Á×¾îÀÖ´ÂÁö 
+    protected bool enemy_isDie = false;  // ëª¬ìŠ¤í„°ê°€ ì£½ì–´ìˆëŠ”ì§€ 
     [SerializeField]
-    protected float defense; // ¹æ¾î·Â
+    protected float defense; // ë°©ì–´ë ¥
 
     protected Animator anim;
 
@@ -41,7 +41,7 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField]
     protected Vector3 destination_Pos;
-    protected bool patrol_Start = false; // Å½»ö ½ÃÀÛ
+    protected bool patrol_Start = false; // íƒìƒ‰ ì‹œì‘
     protected void Enemy_Patrol()
     {
         if (Vector3.Distance(transform.position, destination_Pos) == 0f)
@@ -57,7 +57,7 @@ public abstract class Enemy : MonoBehaviour
             Destination_Move(destination_Pos);
         }
 
-        Collider[] cols = Physics.OverlapSphere(transform.position, 10f);  //, 1 << 8); // ºñÆ® ¿¬»êÀÚ·Î 8¹øÂ° ·¹ÀÌ¾î
+        Collider[] cols = Physics.OverlapSphere(transform.position, 10f);  //, 1 << 8); // ë¹„íŠ¸ ì—°ì‚°ìë¡œ 8ë²ˆì§¸ ë ˆì´ì–´
 
         if (cols.Length > 0)
         {
@@ -66,13 +66,13 @@ public abstract class Enemy : MonoBehaviour
                 if (cols[i].tag == "Player")
                 {
                     cur_Target = cols[i].gameObject;
-                    cur_State = 2; // ÃßÀû »óÅÂ·Î µ¹ÀÔ
+                    cur_State = 2; // ì¶”ì  ìƒíƒœë¡œ ëŒì…
                 }
             }
         }
     }
 
-    IEnumerator patrol_Think_Coroutine()  // ´ÙÀ½ ¸ñÀûÁö »ı°¢ÇÏ´Â ÄÚ·çÆ¾
+    IEnumerator patrol_Think_Coroutine()  // ë‹¤ìŒ ëª©ì ì§€ ìƒê°í•˜ëŠ” ì½”ë£¨í‹´
     {
         yield return new WaitForSeconds(1f);
 
@@ -111,11 +111,11 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    protected void Enemy_Trace() // ÃßÀû ÇÔ¼ö
+    protected void Enemy_Trace() // ì¶”ì  í•¨ìˆ˜
     {
-        if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // Å¸°Ù¿¡ ´ê¾Ò´Ù¸é
+        if (Vector3.Distance(transform.position, cur_Target.transform.position) <= Attack_Range) // íƒ€ê²Ÿì— ë‹¿ì•˜ë‹¤ë©´
         {
-            cur_State = 3; // °ø°İ »óÅÂ·Î º¯°æ
+            cur_State = 3; // ê³µê²© ìƒíƒœë¡œ ë³€ê²½
         }
         else
         {
@@ -128,16 +128,16 @@ public abstract class Enemy : MonoBehaviour
         cur_State = 4;
     }
 
-    public virtual void Enemy_Attacked(float damage) // ÇÃ·¹ÀÌ¾î°¡ ¸ó½ºÅÍ¸¦ °ø°İ ½Ã È£ÃâÇÒ ÇÔ¼ö
+    public virtual void Enemy_Attacked(float damage) // í”Œë ˆì´ì–´ê°€ ëª¬ìŠ¤í„°ë¥¼ ê³µê²© ì‹œ í˜¸ì¶œí•  í•¨ìˆ˜
     {
-        // ¹æ¾î·Â °è»ê ÈÄ Ã¼·Â±ğ±â
+        // ë°©ì–´ë ¥ ê³„ì‚° í›„ ì²´ë ¥ê¹ê¸°
     }
 
     protected void Enemy_Return()
     {
         if (Vector3.Distance(transform.position, return_Pos) == 0)
         {
-            cur_State = 1; // º¹±Í ¿Ï·á ÈÄ ´Ù½Ã ¼øÂû½ÃÀÛ
+            cur_State = 1; // ë³µê·€ ì™„ë£Œ í›„ ë‹¤ì‹œ ìˆœì°°ì‹œì‘
             StartCoroutine(patrol_Think_Coroutine());
             patrol_Start = true;
         }
@@ -149,15 +149,15 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Enemy_Die()
     {
-        // »ç¸Á ÇÔ¼ö ±¸Çö ÇÏ±â
+        // ì‚¬ë§ í•¨ìˆ˜ êµ¬í˜„ í•˜ê¸°
     }
 
     protected virtual void Enemy_Skill_Rand()
     {
-        // ´ÙÀ½ ½ºÅ³ ·£´ıÀ¸·Î Á¤ÇØÁÖ±â
+        // ë‹¤ìŒ ìŠ¤í‚¬ ëœë¤ìœ¼ë¡œ ì •í•´ì£¼ê¸°
     }
 
-    protected virtual IEnumerator Mana_Regen() // ¸¶³ª Àç»ı ÇÔ¼ö. virtual ÀÌ¹Ç·Î ¸ó½ºÅÍ¿¡ µû¶ó ¸¶³ª È¹µæ·® ´Ù¸£°Ô ÇÒ ¼öµµ ÀÖÀ½. ¾ÆÁ÷Àº ¸ó½ºÅÍº° ¸¶³ª È¹µæ·® ¸ğ¸£´Ï±î ÅëÀÏ
+    protected virtual IEnumerator Mana_Regen() // ë§ˆë‚˜ ì¬ìƒ í•¨ìˆ˜. virtual ì´ë¯€ë¡œ ëª¬ìŠ¤í„°ì— ë”°ë¼ ë§ˆë‚˜ íšë“ëŸ‰ ë‹¤ë¥´ê²Œ í•  ìˆ˜ë„ ìˆìŒ. ì•„ì§ì€ ëª¬ìŠ¤í„°ë³„ ë§ˆë‚˜ íšë“ëŸ‰ ëª¨ë¥´ë‹ˆê¹Œ í†µì¼
     {
         yield return new WaitForSeconds(1f);
 
@@ -168,7 +168,7 @@ public abstract class Enemy : MonoBehaviour
 
     abstract protected void Enemy_FSM();
 
-    abstract protected void Enemy_Attack(); // ¾È¿¡¼­ ¸¶³ª°¡ ´ÙÃ¡À¸¸é ÀúÀåµÈ ½ºÅ³À» ¹ßµ¿.
+    abstract protected void Enemy_Attack(); // ì•ˆì—ì„œ ë§ˆë‚˜ê°€ ë‹¤ì°¼ìœ¼ë©´ ì €ì¥ëœ ìŠ¤í‚¬ì„ ë°œë™.
 
     private void OnDrawGizmos()
     {
