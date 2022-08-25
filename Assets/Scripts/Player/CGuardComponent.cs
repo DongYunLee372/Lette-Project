@@ -33,7 +33,7 @@ public class CGuardComponent : BaseComponent
     public void Guard()
     {
         if (movecom == null)
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
         if (movecom.curval.IsGuard)
             return;
@@ -140,7 +140,7 @@ public class CGuardComponent : BaseComponent
 
     public override void InitComtype()
     {
-        p_comtype = EnumTypes.eComponentTypes.GuardCom;
+        p_comtype = CharEnumTypes.eComponentTypes.GuardCom;
     }
 
     // Start is called before the first frame update

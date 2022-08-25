@@ -35,7 +35,7 @@ public class CheckAround : MonoBehaviour
     {
         if(movecom==null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
         //tempcube = GameObject.Find("tempcube");
@@ -46,7 +46,7 @@ public class CheckAround : MonoBehaviour
     {
         if (movecom == null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
         RaycastHit hit;
@@ -72,7 +72,7 @@ public class CheckAround : MonoBehaviour
     {
         if (movecom == null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
         RaycastHit hit;
@@ -98,7 +98,7 @@ public class CheckAround : MonoBehaviour
     {
         if (movecom == null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
         curval.IsGrounded = false;

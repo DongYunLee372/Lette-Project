@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//방어 상태일때 
+//해야할 일 
+//상수화 할 상수들을 관리할 크래스 제작
+//curval 에서 확인
+//컬링 알아보기
+
+
 public class CMoveComponent : BaseComponent
 {
     public enum Direction
@@ -16,7 +21,7 @@ public class CMoveComponent : BaseComponent
     CheckAround checkaround;
     public override void InitComtype()
     {
-        p_comtype = EnumTypes.eComponentTypes.MoveCom;
+        p_comtype = CharEnumTypes.eComponentTypes.MoveCom;
     }
 
     [System.Serializable]
@@ -161,7 +166,7 @@ public class CMoveComponent : BaseComponent
         }
 
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
-        inputcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.InputCom) as CInputComponent;
+        inputcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.InputCom) as CInputComponent;
         //if (inputcom == null)
         //    Debug.Log("MoveCom 오류 inputcom = null");
 
@@ -350,6 +355,7 @@ public class CMoveComponent : BaseComponent
         MoveDir.Normalize();
 
         WorldMove = com.TpCamRig.TransformDirection(MoveDir);
+        WorldMove = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * WorldMove;//경사로에 의한 y축 이동방향
 
         float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
 
@@ -370,20 +376,20 @@ public class CMoveComponent : BaseComponent
             //CurVirVelocity = new Vector3(0, 0, 0);
             if (curval.IsSlip)
             {
-                curval.CurHorVelocity = new Vector3(MoveVal.x, 0.0f, MoveVal.z);
-                Vector3 temp = -curval.CurGroundCross;
+                curval.CurHorVelocity = MoveVal;
+                //Vector3 temp = -curval.CurGroundCross;
                 //CurHorVelocity = new Vector3(WorldMove.x, 0, WorldMove.z);
-                temp = com.FpRoot.forward;
-                curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//경사로에 의한 y축 이동방향
-                curval.CurHorVelocity *= moveoption.MoveSpeed;
-                curval.CurHorVelocity *= -1.0f;
+                //temp = com.FpRoot.forward;
+                //curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//경사로에 의한 y축 이동방향
+                //curval.CurHorVelocity *= moveoption.MoveSpeed;
+                //curval.CurHorVelocity *= -1.0f;
                 //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x, CurGravity, CurHorVelocity.z);
                 //com.CharacterRig.velocity = CurHorVelocity + CurVirVelocity;
             }
             else
             {
-                curval.CurHorVelocity = new Vector3(MoveVal.x, 0.0f, MoveVal.z);
-                curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//경사로에 의한 y축 이동방향
+                curval.CurHorVelocity = MoveVal;
+                //curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//경사로에 의한 y축 이동방향
                 //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//이전에 사용했던 무브
                 //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//이건 슬립상태일때만 이용하도록
             }
@@ -416,14 +422,18 @@ public class CMoveComponent : BaseComponent
 
     }
 
+    //땅 위에 없음면 땅을 만날때까지 떨어진다.
+    //CurGravity를 누적된 증가값에 따라 증가시켜 준다. 해당 중력값은 Move함수에서 y축 방향 움직임으로 사용된다.
     public void Falling()
     {
         float deltacof = Time.deltaTime * 10f;
+
 
         if (curval.IsGrounded)
         {
             if (curval.IsJumping)
                 curval.IsJumping = false;
+
             CurGravity = 0;
             moveoption.Gravity = 1;
         }
@@ -830,7 +840,7 @@ public class CMoveComponent : BaseComponent
     public override void Awake()
     {
         base.Awake();
-        //Application.targetFrameRate = 40;
+        Application.targetFrameRate = 10;
     }
 
     void Update()
@@ -840,6 +850,7 @@ public class CMoveComponent : BaseComponent
         HorVelocity();
         MoveCalculate();
 
+        //달리는 중일떄 1초마다 스테미나를 줄여준다.
         if(curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)
         {
             if (Time.time - lastRunningTime >= 1.0f)

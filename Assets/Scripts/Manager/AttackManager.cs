@@ -49,7 +49,7 @@ public class AttackManager : MonoBehaviour
     {
         if (movecom == null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             //testAttckmanager.AddComponent(movecom);
             curval = movecom.curval;
         }
@@ -60,7 +60,7 @@ public class AttackManager : MonoBehaviour
     {
         if (movecom == null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             //testAttckmanager.AddComponent(movecom);
             curval = movecom.curval;
         }

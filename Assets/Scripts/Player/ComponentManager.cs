@@ -18,7 +18,7 @@ using UnityEngine;
 
 
 //    [SerializeField]
-//    BaseComponent[] comlist = new BaseComponent[(int)EnumTypes.eComponentTypes.comMax];
+//    BaseComponent[] comlist = new BaseComponent[(int)CharEnumTypes.eComponentTypes.comMax];
 
 //    private void Awake()
 //    {
@@ -38,17 +38,17 @@ using UnityEngine;
 //        }
 //    }
 
-//    public BaseComponent GetMyComponent(EnumTypes.eComponentTypes type)
+//    public BaseComponent GetMyComponent(CharEnumTypes.eComponentTypes type)
 //    {
 //        return comlist[(int)type];
 //    }
 
-//    public void InActiveMyComponent(EnumTypes.eComponentTypes type)
+//    public void InActiveMyComponent(CharEnumTypes.eComponentTypes type)
 //    {
 //        comlist[(int)type].enabled = false;
 //    }
 
-//    public void ActiveMyComponent(EnumTypes.eComponentTypes type)
+//    public void ActiveMyComponent(CharEnumTypes.eComponentTypes type)
 //    {
 //        comlist[(int)type].enabled = true;
 //    }

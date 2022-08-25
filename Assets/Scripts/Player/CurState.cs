@@ -5,29 +5,51 @@ using UnityEngine;
 
 //move에서 사용하는 변수들
 //해당 값이 변경되면 해당되는 state 변경이 필요
+//여기에서 판단할 경우들
+//1. 현재 움직일 수 있는지 없는지
+//2. 현재 달릴 수 있는지 없는지
+//3. 회피가 가능한지
+//4. 회피중, 공격중에 피격을 당한건지 아니면 그냥 움직이거나 서있을때 피격을 당한건지 확인
+//
 [System.Serializable]
 public class CurState
 {
+    public bool CheckRunAble()
+    {
+
+        return false;
+    }
+
+    public bool CheckMoveAble()
+    {
+        if (IsRolling || IsAttacking)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
     [SerializeField]
-    private bool isCursorActive = false;
+    public bool IsCursorActive = false;
     [SerializeField]
-    private bool isFPP = true;
+    public bool IsFPP = true;
     [SerializeField]
     private bool isMoving = false;
     [SerializeField]
-    private bool isRunning = false;
+    public bool IsRunning = false;
     [SerializeField]
-    private bool isGrounded = false;
+    public bool IsGrounded = false;
     [SerializeField]
-    private bool isJumping = false;
+    public bool IsJumping = false;
     [SerializeField]
-    private bool isFalling = false;
+    public bool IsFalling = false;
     [SerializeField]
-    private bool isSlip = false;
+    public bool IsSlip = false;
     [SerializeField]
-    private bool isFowordBlock = false;
+    public bool IsFowordBlock = false;
     [SerializeField]
-    private bool isOnTheSlop = false;
+    public bool IsOnTheSlop = false;
     [SerializeField]
     private bool isAttacking = false;
     [SerializeField]
@@ -38,7 +60,7 @@ public class CurState
     private bool isKnockDown = false;
 
     [SerializeField]
-    private bool isNoDamage = false;
+    public bool IsNoDamage = false;
 
     //[SerializeField]
     //private bool isAttacked = false;
@@ -47,33 +69,23 @@ public class CurState
     [SerializeField]
     private bool isRolling = false;
     [SerializeField]
-    private float lastJump;
+    public float LastJump;
     [SerializeField]
-    private float curGroundSlopAngle;
+    public float CurGroundSlopAngle;
     [SerializeField]
-    private float curFowardSlopAngle;
+    public float CurFowardSlopAngle;
     [SerializeField]
-    private Vector3 curGroundNomal;
+    public Vector3 CurGroundNomal;
     [SerializeField]
-    private Vector3 curGroundCross;
+    public Vector3 CurGroundCross;
     [SerializeField]
-    private Vector3 curHorVelocity;
+    public Vector3 CurHorVelocity;
     [SerializeField]
-    private Vector3 curVirVelocity;
+    public Vector3 CurVirVelocity;
     [SerializeField]
-    private float moveAccel;
+    public float MoveAccel;
 
-    //public Vector2 MouseMove { get => mouseMove; set => mouseMove = value; }
-    //public Vector3 MoveDir { get => moveDir; set => moveDir = value; }
-    //public Vector3 WorldMove { get => worldMove; set => worldMove = value; }
-    public bool IsCursorActive { 
-        get => isCursorActive; 
-        set => isCursorActive = value; 
-    }
-    public bool IsFPP { 
-        get => isFPP; 
-        set => isFPP = value; 
-    }
+   
     public bool IsMoving { 
         get
         {
@@ -88,52 +100,10 @@ public class CurState
             //    CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
         }
     }
-    public bool IsRunning { 
-        get
-        {
-            return isRunning;
-        }
-        set
-        {
-            isRunning = value;
-        }
-    }
-    public bool IsGrounded { 
-        get => isGrounded;
-        set => isGrounded = value; 
-    }
-    public bool IsJumping { 
-        get => isJumping; 
-        set => isJumping = value; 
-    }
-    public bool IsFalling { 
-        get
-        {
-            return isFalling;
-        }
-        set
-        {
-            isFalling = value;
-        } 
-    }
-    public bool IsSlip { 
-        get
-        {
-            return isSlip;
-        }
-        set
-        {
-            isSlip = value;
-        }
-    }
-    public bool IsFowordBlock { 
-        get => isFowordBlock; 
-        set => isFowordBlock = value;
-    }
-    public bool IsOnTheSlop { 
-        get => isOnTheSlop; 
-        set => isOnTheSlop = value; 
-    }
+    
+    
+    
+    
     //public bool IsAttacked { get => isAttacked; set => isAttacked = value; }
     //public bool IsOutofControl { 
     //    get
@@ -165,56 +135,9 @@ public class CurState
         }
     }
 
-    public bool IsNoDamage
-    {
-        get
-        {
-            return isNoDamage;
-        }
-        set
-        {
-            isNoDamage = value;
-        }
-    }
+    
 
-    public float LastJump { 
-        get => lastJump; 
-        set => lastJump = value;
-    }
-    public float CurGroundSlopAngle { 
-        get => curGroundSlopAngle; 
-        set => curGroundSlopAngle = value; 
-    }
-    public float CurFowardSlopAngle { 
-        get => curFowardSlopAngle; 
-        set => curFowardSlopAngle = value; 
-    }
-    public Vector3 CurGroundNomal { 
-        get => curGroundNomal; 
-        set => curGroundNomal = value; 
-    }
-    public Vector3 CurGroundCross { 
-        get => curGroundCross; 
-        set => curGroundCross = value; 
-    }
-    public Vector3 CurHorVelocity { 
-        get => curHorVelocity; 
-        set => curHorVelocity = value; 
-    }
-    public Vector3 CurVirVelocity { 
-        get => curVirVelocity; 
-        set => curVirVelocity = value;
-    }
-    public float MoveAccel { 
-        get
-        {
-            return moveAccel;
-        }
-        set
-        {
-            moveAccel = value;
-        }
-    }
+    
     public bool IsAttacking { 
         get
         {

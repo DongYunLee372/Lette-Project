@@ -176,7 +176,7 @@ public class PlayerAttack : BaseComponent
     {
         if (movecom == null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             //testAttckmanager.AddComponent(movecom);
             curval = movecom.curval;
         }
@@ -220,7 +220,7 @@ public class PlayerAttack : BaseComponent
 
         if (movecom == null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             //testAttckmanager.AddComponent(movecom);
             curval = movecom.curval;
         }
@@ -234,7 +234,7 @@ public class PlayerAttack : BaseComponent
 
         if (tempval <= Attack_InformationList[AttackNum].P_NextMovementTimeVal)
         {
-            AttackNum = (AttackNum + 1) % (int)EnumTypes.eAniAttack.AttackMax;
+            AttackNum = (AttackNum + 1) % (int)CharEnumTypes.eAniAttack.AttackMax;
 
         }
         else
@@ -264,6 +264,6 @@ public class PlayerAttack : BaseComponent
 
     public override void InitComtype()
     {
-        p_comtype = EnumTypes.eComponentTypes.AttackCom;
+        p_comtype = CharEnumTypes.eComponentTypes.AttackCom;
     }
 }

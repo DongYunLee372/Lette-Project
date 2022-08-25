@@ -162,7 +162,7 @@ public class Character3DMove: MonoBehaviour
         }
         //if (com.animator == null)
         //{
-        //    com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom);
+        //    com.animator = (CAnimationComponent)ComponentManager.GetI.GetMyComponent(CharEnumTypes.eComponentTypes.AnimatorCom);
         //}
 
         MouseMove = new Vector2(0, 0);
@@ -206,7 +206,7 @@ public class Character3DMove: MonoBehaviour
         }
 
         ////공격 중일 때는 움직일 수 없다.
-        //if (!com.animator.GetBool(EnumTypes.eAnimationState.Attack))
+        //if (!com.animator.GetBool(CharEnumTypes.eAnimationState.Attack))
         //{
 
         //}
@@ -537,7 +537,7 @@ public class Character3DMove: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        com.animator = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
+        com.animator = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
     }
 
     // Update is called once per frame

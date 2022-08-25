@@ -9,7 +9,7 @@ public class CInputComponent : BaseComponent
     //캐릭터의 모든 컴포넌트를 관리하기 쉽게 하기 위해 basecomponent를 상속받은 스크립트들을 componentmanager에서 관리한다.
     public override void InitComtype()
     {
-        p_comtype = EnumTypes.eComponentTypes.InputCom;
+        p_comtype = CharEnumTypes.eComponentTypes.InputCom;
     }
     
     //사용할 키 지정
@@ -53,7 +53,7 @@ public class CInputComponent : BaseComponent
     void KeyInput()
     {
         if (movecom == null)
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
 
 
@@ -261,8 +261,8 @@ public class CInputComponent : BaseComponent
     void LeftMouseDown()
     {
         if (attackcom == null)
-            attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
-        //attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+            attackcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
+        //attackcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
         attackcom.Attack();
     }
 
@@ -270,22 +270,22 @@ public class CInputComponent : BaseComponent
     void RightMouseDown()
     {
         if (guardcom == null)
-            guardcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+            guardcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
         guardcom.Guard();
     }
 
     void RightMouseUp()
     {
         if (guardcom == null)
-            guardcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+            guardcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
         guardcom.GuardDown();
     }
     
     void SkillAttack(int num)
     {
         if (attackcom == null)
-            attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
-        //attackcom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+            attackcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
+        //attackcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
         attackcom.SkillAttack();
     }
 

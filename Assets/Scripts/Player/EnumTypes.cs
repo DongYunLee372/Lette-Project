@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnumTypes
+namespace CharEnumTypes
 {
     public enum eComponentTypes
     {
@@ -63,7 +63,7 @@ namespace EnumTypes
         AttackMax
     }
 
-    
+
 
     //public enum eAnimationClips
     //{

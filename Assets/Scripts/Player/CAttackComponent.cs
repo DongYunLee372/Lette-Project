@@ -121,7 +121,7 @@ public class CAttackComponent : BaseComponent
 
     void Start()
     {
-        //animator = ComponentManager.GetI.GetMyComponent(EnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
+        //animator = ComponentManager.GetI.GetMyComponent(CharEnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
         
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
@@ -195,7 +195,7 @@ public class CAttackComponent : BaseComponent
 
         if (movecom == null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
 
@@ -215,7 +215,7 @@ public class CAttackComponent : BaseComponent
         //필요한 컴포넌트를 받아온다.
         if(movecom==null)
         {
-            movecom = PlayableCharacter.Instance.GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
 
@@ -237,7 +237,7 @@ public class CAttackComponent : BaseComponent
 
         if (tempval <= attackinfos[AttackNum].NextMovementTimeVal)
         {
-            AttackNum = (AttackNum + 1) % (int)EnumTypes.eAniAttack.AttackMax;
+            AttackNum = (AttackNum + 1) % (int)CharEnumTypes.eAniAttack.AttackMax;
 
         }
         else
@@ -332,7 +332,7 @@ public class CAttackComponent : BaseComponent
 
     public override void InitComtype()
     {
-        p_comtype = EnumTypes.eComponentTypes.AttackCom;
+        p_comtype = CharEnumTypes.eComponentTypes.AttackCom;
     }
 
 }

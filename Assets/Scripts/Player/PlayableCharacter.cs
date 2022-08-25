@@ -14,7 +14,7 @@ public class PlayableCharacter : MonoBehaviour
 
 
     [Header("================BaseComponent================")]
-    public BaseComponent[] components = new BaseComponent[(int)EnumTypes.eComponentTypes.comMax];
+    public BaseComponent[] components = new BaseComponent[(int)CharEnumTypes.eComponentTypes.comMax];
 
     public BaseStatus status;
 
@@ -64,7 +64,7 @@ public class PlayableCharacter : MonoBehaviour
         }
 
 
-        CharacterInfoPanel = UIManager.Instance.Prefabsload("FriendPanel", UIManager.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+        CharacterInfoPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUIPanel, UIManager.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
 
 
         status = this.gameObject.AddComponent<BaseStatus>();
@@ -75,17 +75,17 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     /*MyComponent 관련 메소드*/
-    public BaseComponent GetMyComponent(EnumTypes.eComponentTypes type)
+    public BaseComponent GetMyComponent(CharEnumTypes.eComponentTypes type)
     {
         return components[(int)type];
     }
 
-    public void InActiveMyComponent(EnumTypes.eComponentTypes type)
+    public void InActiveMyComponent(CharEnumTypes.eComponentTypes type)
     {
         components[(int)type].enabled = false;
     }
 
-    public void ActiveMyComponent(EnumTypes.eComponentTypes type)
+    public void ActiveMyComponent(CharEnumTypes.eComponentTypes type)
     {
         components[(int)type].enabled = true;
     }
@@ -97,7 +97,7 @@ public class PlayableCharacter : MonoBehaviour
 
     public Camera GetCamera()
     {
-        CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
         if (movecom.curval.IsFPP)
             return movecom.com.FpCam.GetComponent<Camera>();
@@ -128,7 +128,7 @@ public class PlayableCharacter : MonoBehaviour
         //밸런스 게이지가 충분히 남아 있지 않으면 가드에 실패하고 데미지를 입는다.
         else if(state == CharacterStateMachine.eCharacterState.Guard)
         {
-            CGuardComponent guardcom = GetMyComponent(EnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
+            CGuardComponent guardcom = GetMyComponent(CharEnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
 
             guardcom.Damaged_Guard(damage, hitpoint);
         }
@@ -138,7 +138,7 @@ public class PlayableCharacter : MonoBehaviour
         //캐릭터가 회피중이지만 무적시간이 아닐때는 회피에 실패하고 데미지를 입는다.
         else if(state == CharacterStateMachine.eCharacterState.Rolling)
         {
-            CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
             if(!movecom.curval.IsNoDamage)
                 movecom.Damaged_Rolling(damage, hitpoint);
@@ -148,8 +148,8 @@ public class PlayableCharacter : MonoBehaviour
         //4. 공격중
         else if(state == CharacterStateMachine.eCharacterState.Attack)
         {
-            PlayerAttack attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
-            //CAttackComponent attackcom = GetMyComponent(EnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
+            PlayerAttack attackcom = GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
+            //CAttackComponent attackcom = GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
             attackcom.PlayerHit();
             Damaged(damage, hitpoint);
         }
@@ -159,7 +159,7 @@ public class PlayableCharacter : MonoBehaviour
     
     public void Damaged(float damage,Vector3 hitpoint)
     {
-        CMoveComponent movecom = GetMyComponent(EnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         EffectManager.Instance.InstantiateEffect(HitEffect, hitpoint);
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;

@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class BaseComponent : MonoBehaviour
 {
     [SerializeField]
-    EnumTypes.eComponentTypes comtype;
+    CharEnumTypes.eComponentTypes comtype;
 
-    public EnumTypes.eComponentTypes p_comtype
+    public CharEnumTypes.eComponentTypes p_comtype
     {
         get
         {
