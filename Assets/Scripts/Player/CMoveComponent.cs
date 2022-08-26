@@ -345,7 +345,7 @@ public class CMoveComponent : BaseComponent
     public void MoveCalculate()
     {
         //이동이 가능한지 판단
-        if (curval.IsRolling || curval.IsAttacking)
+        if (!curval.CheckMoveAble())
         {
             WorldMove.x = 0;
             WorldMove.z = 0;
@@ -544,7 +544,8 @@ public class CMoveComponent : BaseComponent
 
     public void Damaged_Rolling(float damage,Vector3 hitpoint)
     {
-        if (curval.IsRolling && curval.IsNoDamage)
+        //회피 중 피격 당했을때 무적상태인지 아닌지 판단
+        if (/*curval.IsRolling && */curval.IsNoDamage)
         {
             return;
         }
@@ -559,12 +560,13 @@ public class CMoveComponent : BaseComponent
     //무적시간은 처음 구르기가 시작된 시점부터 카운트한다.
     public void Rolling()
     {
+        if (!curval.CheckRollingAble())
+            return;
+
         //이미 구르고 있으면 구르지 못한다.
-        if (curval.IsRolling || Time.time - lastRollingTime <= moveoption.NextRollingTime) 
+        if (Time.time - lastRollingTime <= moveoption.NextRollingTime) 
             return;
-        //땅에 있어야 구르기 가능
-        if (!curval.IsGrounded)
-            return;
+        
 
         if (PlayableCharacter.Instance.status.CurStamina - 20 >= 0)
         {
@@ -840,7 +842,7 @@ public class CMoveComponent : BaseComponent
     public override void Awake()
     {
         base.Awake();
-        Application.targetFrameRate = 10;
+        //Application.targetFrameRate = 10;
     }
 
     void Update()

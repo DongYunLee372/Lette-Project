@@ -9,11 +9,20 @@ using UnityEngine;
 //1. 현재 움직일 수 있는지 없는지
 //2. 현재 달릴 수 있는지 없는지
 //3. 회피가 가능한지
-//4. 회피중, 공격중에 피격을 당한건지 아니면 그냥 움직이거나 서있을때 피격을 당한건지 확인
 //
 [System.Serializable]
 public class CurState
 {
+    public bool CheckRollingAble()
+    {
+        //이미 구르는 중이 아니고 땅에 있어야지 회피 가능
+        if(!IsRolling&& IsGrounded)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public bool CheckRunAble()
     {
 
@@ -22,7 +31,8 @@ public class CurState
 
     public bool CheckMoveAble()
     {
-        if (IsRolling || IsAttacking)
+        //회피중이거나 공격중이 아닐때 움직임 가능
+        if (!IsRolling && !IsAttacking)
         {
             return true;
         }
