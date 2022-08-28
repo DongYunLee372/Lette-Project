@@ -113,7 +113,7 @@ public class PlayerAttack : BaseComponent
     {
         rigidbody = GetComponent<Rigidbody>();
         Player = AddressablesController.Instance.find_Asset_in_list("PlayerCharacter(Clone)");
-        UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
+        //UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
         att = GetComponentInChildren<AttackManager>();
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();

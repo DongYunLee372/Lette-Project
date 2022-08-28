@@ -194,7 +194,7 @@ public class CMoveComponent : BaseComponent
 
         ChangePerspective();
         ShowCursor(false);
-
+        LookAtFoward();
 
     }
 
@@ -341,6 +341,8 @@ public class CMoveComponent : BaseComponent
 
     }
 
+    bool temptrigger = false;
+
     //움직임값을 계산해준다.
     public void MoveCalculate()
     {
@@ -354,12 +356,36 @@ public class CMoveComponent : BaseComponent
 
         MoveDir.Normalize();
 
+        if (MoveDir.magnitude > 0)
+        {
+            int a = 0;
+            a = 10;
+        }
+
+        if(curval.IsOnTheSlop)
+        {
+
+        }
+        else
+        {
+
+        }
+
         WorldMove = com.TpCamRig.TransformDirection(MoveDir);
+        //WorldMove = com.FpCamRig.TransformDirection(MoveDir);
         WorldMove = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * WorldMove;//경사로에 의한 y축 이동방향
 
         float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
 
-        WorldMove *= speed * Time.deltaTime;
+        if(WorldMove.magnitude > 0)
+        {
+            int a = 0;
+            a = 10;
+            temptrigger = true;
+        }
+
+
+        WorldMove = WorldMove * speed * Time.deltaTime;
 
         Move(WorldMove);
     }
@@ -393,11 +419,21 @@ public class CMoveComponent : BaseComponent
                 //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);//이전에 사용했던 무브
                 //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x*MoveAccel, CurGravity, CurHorVelocity.z* MoveAccel);//이건 슬립상태일때만 이용하도록
             }
+
+            if(temptrigger)
+            {
+                int a = 0;
+            }
+
             Debug.DrawLine(this.transform.position, this.transform.position + (curval.CurHorVelocity + curval.CurVirVelocity));
             com.CharacterRig.velocity = curval.CurHorVelocity + curval.CurVirVelocity;
         }
         else
         {
+            if (temptrigger)
+            {
+                int a = 0;
+            }
             com.CharacterRig.velocity = new Vector3(MoveVal.x, CurGravity, MoveVal.z);
         }
         //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
@@ -720,6 +756,8 @@ public class CMoveComponent : BaseComponent
         //TpCamRig.localEulerAngles = Vector3.up * xRotNext;
 
         //TpCamRig.localEulerAngles = Vector3.right * yRotNext;
+        if (yRotNext == 0 && xRotNext == 0)
+            return;
 
         com.TpCamRig.localEulerAngles = new Vector3(yRotNext, xRotNext, 0);
     }
@@ -753,7 +791,7 @@ public class CMoveComponent : BaseComponent
 
         Vector3 temp = com.TpCamRig.eulerAngles;
 
-        com.TpCamRig.eulerAngles = new Vector3(temp.x, rot.y, temp.z);
+        com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
     }
 
     //줌인 
@@ -842,7 +880,7 @@ public class CMoveComponent : BaseComponent
     public override void Awake()
     {
         base.Awake();
-        //Application.targetFrameRate = 10;
+        Application.targetFrameRate = 80;
     }
 
     void Update()
@@ -851,9 +889,9 @@ public class CMoveComponent : BaseComponent
         Rotation();
         HorVelocity();
         MoveCalculate();
-
+        //LookAtFoward();
         //달리는 중일떄 1초마다 스테미나를 줄여준다.
-        if(curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)
+        if (curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)
         {
             if (Time.time - lastRunningTime >= 1.0f)
             {
