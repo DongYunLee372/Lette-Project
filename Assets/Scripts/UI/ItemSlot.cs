@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//인벤토리의 ui적 역할과 데이터 관리의 역할 
+//기능 . 정렬 방식을 함수로 받아 사용, 특정 종류 파악 , 인벤토리 내의 변화에 반응하는 이벤트 
+//슬롯
+//mvc 
 public class ItemSlot : MonoBehaviour
 {
     [SerializeField]
