@@ -106,14 +106,14 @@ public class CAttackComponent : BaseComponent
 
     }
 
+    public SkillInfo[] skillinfos;
+
+
+
 
     public AnimationController animator;
 
     public AnimationEventSystem eventsystem;
-
-    
-
-    public SkillInfo[] skillinfos;
 
     public GameObject effectobj;
 
@@ -128,8 +128,6 @@ public class CAttackComponent : BaseComponent
 
     void Start()
     {
-        //animator = ComponentManager.GetI.GetMyComponent(CharEnumTypes.eComponentTypes.AnimatorCom) as CAnimationComponent;
-        
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
         weaponcollider = GetComponentInChildren<WeaponCollider>();

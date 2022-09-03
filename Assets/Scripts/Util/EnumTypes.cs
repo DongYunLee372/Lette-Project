@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace CharEnumTypes
 {
+    public enum eAttackType
+    {
+        Normal,//일반
+        AreaOfEffect,//장판, 광역
+        Projectile,//투사체
+        Targeting,//타겟팅
+    }
+
     public enum eComponentTypes
     {
         InputCom,
