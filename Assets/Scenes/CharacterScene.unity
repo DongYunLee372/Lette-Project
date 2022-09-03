@@ -52668,6 +52668,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[0].aniclip
+      value: 
+      objectReference: {fileID: 7400000, guid: d1e750001102c4d44a993077e1cf25d2, type: 2}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[0].AttackNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[1].AttackNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[2].AttackNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[1].AttackType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[2].AttackType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[0].animationPlaySpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[1].animationPlaySpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[2].animationPlaySpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfoList.Array.data[0].NextMovementTimeVal
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388563, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: effectmanager
       value: 

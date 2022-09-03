@@ -10,12 +10,10 @@ public class CAttackComponent : BaseComponent
     [SerializeField]
     CurState curval;
 
-    public float LastAttackTime;
-
     public int CurAttackNum = 0;
+
     public CMoveComponent movecom;
 
-    //public BoxCollider AttackCollider;
     public Transform effectparent;
 
     public WeaponCollider weaponcollider;
@@ -26,43 +24,64 @@ public class CAttackComponent : BaseComponent
     [System.Serializable]
     public class AttackMovementInfo
     {
+        [Tooltip("해당 공격의 타입을 설정한다 (노말, 광역, 투사체, 타겟팅)")]
+        public CharEnumTypes.eAttackType AttackType;
+        
+        [Tooltip("공격번호")]
         public int AttackNum;
 
         //애니메이션 배속
+        [Tooltip("해당 공격의 애니메이션 재생 속도")]
         [Range(0.0f, 10.0f)]
         public float animationPlaySpeed;
         
         //해당 매니메이션 클립
+        [Tooltip("해당 공격의 애니메이션 클립")]
         public AnimationClip aniclip;
 
         //후딜레이
+        [Tooltip("해당 공격의 후딜레이 후딜레이는 공격이 끝나고 다시 다음 동작으로 돌아가는데 까지 걸리는 시간")]
         [Range(0.0f,1.0f)]
         public float MovementDelay;
 
         //다음동작으로 넘어가기 위한 시간
         //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
+        [Tooltip("연속동작이 있을때 다음 동작으로 들어가기 위한 입력 시간")]
         public float NextMovementTimeVal;
 
         //데미지
+        [Tooltip("공격 데미지")]
         public float damage;
 
         //이펙트 생성 타이밍
+        [Tooltip("공격 이펙트 생성 타이밍")]
         public float EffectStartTime;
 
         //공격 이펙트
+        [Tooltip("공격 이펙트")]
         public GameObject Effect;
 
         //공격 이펙트의 위치
+        [Tooltip("공격 이펙트 생성 위치")]
         public Transform EffectPosRot;
 
         //공격 중 움직일 거리
+        [Tooltip("공격할때 움직일 거리")]
         public float movedis;
 
         //움직일 시간
+        [Tooltip("공격할때 움직일 시간")]
         public float movetime;
+
+        [Tooltip("투사체가 있는 공격일때 투사체의 게임 오브젝트")]
+        public GameObject ProjectileObj;
+
+        [Tooltip("타겟팅공격일때 타겟오브젝트")]
+        public GameObject TargetObj;
     }
 
     public AttackMovementInfo[] attackinfos;
+    public List<AttackMovementInfo> attackinfoList;
 
     //스킬도 여기서 한번에 처리
     [System.Serializable]
@@ -107,9 +126,6 @@ public class CAttackComponent : BaseComponent
     }
 
     public SkillInfo[] skillinfos;
-
-
-
 
     public AnimationController animator;
 
