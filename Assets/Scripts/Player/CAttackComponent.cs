@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //jo
+/*스킬과 공격을 데이터를 입력해 간단하게 조작 할 수 있도록
+  또한 이펙트 매니저와도 매끄럽게 연결 되도록 수정*/
 public class CAttackComponent : BaseComponent
 {
     [SerializeField]
@@ -10,7 +12,7 @@ public class CAttackComponent : BaseComponent
 
     public float LastAttackTime;
 
-    public int AttackNum = 0;
+    public int CurAttackNum = 0;
     public CMoveComponent movecom;
 
     //public BoxCollider AttackCollider;
@@ -20,18 +22,21 @@ public class CAttackComponent : BaseComponent
 
     public string monstertag;
 
+    //기본 공격 정보 해당 정보를 3개 만들면 기본 공격이 설정값들에 따라 3가지 동작으로 이어진다.
     [System.Serializable]
     public class AttackMovementInfo
     {
         public int AttackNum;
 
         //애니메이션 배속
+        [Range(0.0f, 10.0f)]
         public float animationPlaySpeed;
         
         //해당 매니메이션 클립
         public AnimationClip aniclip;
 
         //후딜레이
+        [Range(0.0f,1.0f)]
         public float MovementDelay;
 
         //다음동작으로 넘어가기 위한 시간
@@ -56,6 +61,8 @@ public class CAttackComponent : BaseComponent
         //움직일 시간
         public float movetime;
     }
+
+    public AttackMovementInfo[] attackinfos;
 
     //스킬도 여기서 한번에 처리
     [System.Serializable]
@@ -104,7 +111,7 @@ public class CAttackComponent : BaseComponent
 
     public AnimationEventSystem eventsystem;
 
-    public AttackMovementInfo[] attackinfos;
+    
 
     public SkillInfo[] skillinfos;
 
@@ -148,10 +155,6 @@ public class CAttackComponent : BaseComponent
                 new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
         }
-
-
-
-        //eventsystem.AddEvent(null, new KeyValuePair<string, AnimationEventSystem.midCallback>() AttackMove, AttackEnd);
 
 
     }
@@ -229,30 +232,27 @@ public class CAttackComponent : BaseComponent
             movecom.Stop();
             curval.IsAttacking = true;
         }
-            
-
-        //Debug.Log("공격 들어옴");
+        
+        //이전에 공격했던 시간과 현재 공격이 시작된 시간의 차이를 구한다.
         float tempval = Time.time - lastAttackTime;
-        //Debug.Log($"경과된 시간{tempval}, 연결시간{attackinfos[AttackNum].NextMovementTimeVal}");
 
-        if (tempval <= attackinfos[AttackNum].NextMovementTimeVal)
+
+        //다음 동작으로 넘어가기 위한
+        if (tempval <= attackinfos[CurAttackNum].NextMovementTimeVal)
         {
-            AttackNum = (AttackNum + 1) % (int)CharEnumTypes.eAniAttack.AttackMax;
+            CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/attackinfos.Length;
 
         }
         else
         {
-            AttackNum = 0;
+            CurAttackNum = 0;
         }
 
-        coroutine = Cor_TimeCounter(attackinfos[AttackNum].EffectStartTime, CreateEffect);
+        coroutine = Cor_TimeCounter(attackinfos[CurAttackNum].EffectStartTime, CreateEffect);
         StartCoroutine(coroutine);
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
-        animator.Play(attackinfos[AttackNum].aniclip.name, attackinfos[AttackNum].animationPlaySpeed);
-
-        
-
+        animator.Play(attackinfos[CurAttackNum].aniclip.name, attackinfos[CurAttackNum].animationPlaySpeed);
     }
 
     //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨
@@ -283,12 +283,12 @@ public class CAttackComponent : BaseComponent
     //공격 이펙트를 생성
     public void CreateEffect()
     {
-        effectobj = GameObject.Instantiate(attackinfos[AttackNum].Effect);
-        effectobj.transform.position = attackinfos[AttackNum].EffectPosRot.position;
-        effectobj.transform.rotation = attackinfos[AttackNum].EffectPosRot.rotation;
+        effectobj = GameObject.Instantiate(attackinfos[CurAttackNum].Effect);
+        effectobj.transform.position = attackinfos[CurAttackNum].EffectPosRot.position;
+        effectobj.transform.rotation = attackinfos[CurAttackNum].EffectPosRot.rotation;
 
         //preparent = effectobj.transform.parent;
-        effectobj.transform.parent = attackinfos[AttackNum].EffectPosRot;
+        effectobj.transform.parent = attackinfos[CurAttackNum].EffectPosRot;
         //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
 
 
