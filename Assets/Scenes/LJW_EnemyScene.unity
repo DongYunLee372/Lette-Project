@@ -4274,6 +4274,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 456254, guid: f65b497ff807d95439b38e7da2fab667, type: 3}
   m_PrefabInstance: {fileID: 173396246}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &175954216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3833193270115246063, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &177363276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15597,6 +15602,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 412966, guid: f18318a9de51f9b4f993559b01c40e15, type: 3}
   m_PrefabInstance: {fileID: 638841227}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &639484525 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1480112878, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &642569442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19969,6 +19979,10 @@ PrefabInstance:
     - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
@@ -24573,6 +24587,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 419168, guid: a9c41660a8948154890e05e9b6a4026e, type: 3}
   m_PrefabInstance: {fileID: 1036544515}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1043190471 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3833193269985802263, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1044036411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28306,6 +28325,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 404526, guid: c78cd7eb80565634c9127229d650a564, type: 3}
   m_PrefabInstance: {fileID: 1171139459}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1173432524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5257283632548353445, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e705ce5a771702d409652cac39d17d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1176236825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30326,15 +30356,9 @@ MonoBehaviour:
   player_Aconstant: {fileID: 0}
   mon_Aconstant: {fileID: 0}
   cur_HP: 0
-  enemy_Grade: 0
-  enemy_Type: 0
   return_Pos: {x: 0, y: 0, z: 0}
   destination_Pos: {x: 0, y: 0, z: 0}
-  die_Delay: 0
-  drop_Reward: 0
   patrol_Start: 0
-  mon_attack_Power: 0
-  mon_find_Range: 5
   cur_Target: {fileID: 0}
   next_Skill: 0
   isReturn: 0
@@ -30343,6 +30367,7 @@ MonoBehaviour:
   attack_Logic: 0100
   isHit: 0
   isAttack_Run: 0
+  isDelay: 0
   attack_Info: []
   damaged_Effect: {fileID: 0}
   phase_Effect: {fileID: 0}
@@ -34208,6 +34233,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 465230, guid: 1d8a9d4bcbe4aeb488cb292d11c7c48d, type: 3}
   m_PrefabInstance: {fileID: 1508134038}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1509204991 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7040977794710254203, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1509531839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37011,6 +37041,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 409580, guid: fd479d726efdf3d4da9cb024a97137e4, type: 3}
   m_PrefabInstance: {fileID: 1629718774}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1635790657 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5847035042674421376, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1637910364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37978,6 +38013,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 435388, guid: df71eb9ba610fdf4087431bd6adab96b, type: 3}
   m_PrefabInstance: {fileID: 1683308061}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1687751334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7370479286679070385, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1689096106
 PrefabInstance:
@@ -39025,15 +39065,9 @@ MonoBehaviour:
   player_Aconstant: {fileID: 0}
   mon_Aconstant: {fileID: 0}
   cur_HP: 0
-  enemy_Grade: 0
-  enemy_Type: 0
   return_Pos: {x: 0, y: 0, z: 0}
   destination_Pos: {x: 0, y: 0, z: 0}
-  die_Delay: 0
-  drop_Reward: 0
   patrol_Start: 0
-  mon_attack_Power: 0
-  mon_find_Range: 0
   cur_Target: {fileID: 0}
   next_Skill: 0
   isReturn: 0
@@ -39042,6 +39076,7 @@ MonoBehaviour:
   attack_Logic: 00
   isHit: 0
   isAttack_Run: 0
+  isDelay: 0
   attack_Info: []
   damaged_Effect: {fileID: 0}
   phase_Effect: {fileID: 0}
@@ -40214,6 +40249,362 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 450008, guid: 9830f561f80768b4f92139c1c15bc835, type: 3}
   m_PrefabInstance: {fileID: 1765362669}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1773208746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4585744437083258369, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
+  m_PrefabInstance: {fileID: 2094588809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1773208753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773208746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13c4cc9ec90d8c48a17b007506e3324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai:
+    now_State: 0
+    battle_Character: {fileID: 0}
+  state_handler: {fileID: 0}
+  MyHpbar: {fileID: 0}
+  bosshpbar: {fileID: 0}
+  animator: {fileID: 0}
+  eventsystem: {fileID: 0}
+  skill_handler: {fileID: 0}
+  char_Info: {fileID: 0}
+  mon_Info: {fileID: 0}
+  mon_Skill_Info: []
+  now_Skill_Info: {fileID: 0}
+  mon_Target_Info: {fileID: 0}
+  player_Aconstant: {fileID: 0}
+  mon_Aconstant: {fileID: 0}
+  cur_HP: 1000
+  return_Pos: {x: 0, y: 0, z: 0}
+  destination_Pos: {x: 0, y: 0, z: 0}
+  patrol_Start: 0
+  cur_Target: {fileID: 0}
+  next_Skill: 0
+  isReturn: 0
+  attack_Collider: {fileID: 1687751334}
+  attack_Type: 0
+  attack_Logic: 0100
+  isHit: 0
+  isAttack_Run: 0
+  isDelay: 0
+  attack_Info:
+  - Name: Spawn
+    Movedis:
+    - 0
+    - 0
+    - 0
+    MoveTime:
+    - 0
+    effect:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    EffectStartTime:
+    - 0
+    - 0
+    - 0
+    effect_Pos:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    off_Mesh_Pos:
+    - {fileID: 0}
+    jump_Speed: 0
+    jump_Acc: 0
+    missile: {fileID: 0}
+    missile_Amount: 0
+    missile_Pos: {fileID: 0}
+    missile_Index: 0
+    spawn_Animation: 1
+    add_Time: 0
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  - Name: Melee Attack
+    Movedis:
+    - 0
+    - 0
+    - 0
+    MoveTime:
+    - 0
+    - 0
+    - 0
+    effect:
+    - {fileID: 1935082409722074, guid: d2910e4d9472c8843a387bdd9a51d879, type: 3}
+    - {fileID: 1935082409722074, guid: 73c5905a45ba2d841a54b3c5468d23a6, type: 3}
+    - {fileID: 1115641076847360, guid: 9a16638939e243d4d9f9c0ee07466c8b, type: 3}
+    EffectStartTime:
+    - 0
+    - 0
+    - 0
+    effect_Pos:
+    - {fileID: 1043190471}
+    - {fileID: 1986752710}
+    - {fileID: 175954216}
+    off_Mesh_Pos:
+    - {fileID: 0}
+    jump_Speed: 0
+    jump_Acc: 0
+    missile: {fileID: 0}
+    missile_Amount: 0
+    missile_Pos: {fileID: 0}
+    missile_Index: 0
+    spawn_Animation: 0
+    add_Time: 0.85
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  - Name: The Great Sword Slap
+    Movedis:
+    - 0
+    - 11
+    - 0
+    MoveTime:
+    - 0
+    effect:
+    - {fileID: 1115641076847360, guid: 9a16638939e243d4d9f9c0ee07466c8b, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    EffectStartTime:
+    - 0
+    - 0
+    - 0
+    effect_Pos:
+    - {fileID: 175954216}
+    - {fileID: 0}
+    - {fileID: 0}
+    off_Mesh_Pos:
+    - {fileID: 1793462549}
+    jump_Speed: 320
+    jump_Acc: 160
+    missile: {fileID: 0}
+    missile_Amount: 0
+    missile_Pos: {fileID: 0}
+    missile_Index: 0
+    spawn_Animation: 0
+    add_Time: 0
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  - Name: Double Attack
+    Movedis:
+    - -0.5
+    - -0.25
+    - 0
+    MoveTime:
+    - 0
+    effect:
+    - {fileID: 1935082409722074, guid: d2910e4d9472c8843a387bdd9a51d879, type: 3}
+    - {fileID: 1935082409722074, guid: 73c5905a45ba2d841a54b3c5468d23a6, type: 3}
+    - {fileID: 0}
+    EffectStartTime:
+    - 0
+    - 0
+    - 0
+    effect_Pos:
+    - {fileID: 1043190471}
+    - {fileID: 1986752710}
+    - {fileID: 0}
+    off_Mesh_Pos:
+    - {fileID: 639484525}
+    jump_Speed: 200
+    jump_Acc: 20
+    missile: {fileID: 0}
+    missile_Amount: 0
+    missile_Pos: {fileID: 0}
+    missile_Index: 0
+    spawn_Animation: 0
+    add_Time: 0
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  - Name: Monster Recall
+    Movedis:
+    - 0
+    - 0
+    - 0
+    MoveTime:
+    - 0
+    effect:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    EffectStartTime: []
+    effect_Pos:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    off_Mesh_Pos:
+    - {fileID: 0}
+    jump_Speed: 0
+    jump_Acc: 0
+    missile: {fileID: 0}
+    missile_Amount: 0
+    missile_Pos: {fileID: 0}
+    missile_Index: 0
+    spawn_Animation: 0
+    add_Time: 0
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  - Name: Rush
+    Movedis:
+    - 1
+    - 1
+    - 0.5
+    MoveTime:
+    - 0
+    effect:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    EffectStartTime: []
+    effect_Pos:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    off_Mesh_Pos:
+    - {fileID: 639484525}
+    jump_Speed: 125
+    jump_Acc: 10
+    missile: {fileID: 0}
+    missile_Amount: 0
+    missile_Pos: {fileID: 0}
+    missile_Index: 0
+    spawn_Animation: 0
+    add_Time: 1.05
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  - Name: Rush Sword Attack
+    Movedis:
+    - 1
+    - 0
+    - 0.25
+    MoveTime:
+    - 0
+    effect:
+    - {fileID: 0}
+    - {fileID: 1115641076847360, guid: 9a16638939e243d4d9f9c0ee07466c8b, type: 3}
+    - {fileID: 1935082409722074, guid: d2910e4d9472c8843a387bdd9a51d879, type: 3}
+    EffectStartTime:
+    - 0
+    - 0
+    - 0.5
+    effect_Pos:
+    - {fileID: 0}
+    - {fileID: 175954216}
+    - {fileID: 1509204991}
+    off_Mesh_Pos:
+    - {fileID: 639484525}
+    jump_Speed: 140
+    jump_Acc: 15
+    missile: {fileID: 0}
+    missile_Amount: 0
+    missile_Pos: {fileID: 0}
+    missile_Index: 0
+    spawn_Animation: 0
+    add_Time: 1
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  - Name: Magic Beam
+    Movedis:
+    - 0
+    - 0
+    - 0
+    MoveTime:
+    - 0
+    effect:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    EffectStartTime:
+    - 0
+    - 0
+    - 0
+    effect_Pos:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    off_Mesh_Pos:
+    - {fileID: 0}
+    jump_Speed: 0
+    jump_Acc: 0
+    missile: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
+    missile_Amount: 1
+    missile_Pos: {fileID: 1635790657}
+    missile_Index: 0
+    spawn_Animation: 0
+    add_Time: 0
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  - Name: Guided Magic Bullet2
+    Movedis:
+    - 0
+    - 0
+    - 0
+    MoveTime:
+    - 0
+    effect:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    EffectStartTime:
+    - 0
+    - 0
+    - 0
+    effect_Pos:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    off_Mesh_Pos:
+    - {fileID: 0}
+    jump_Speed: 0
+    jump_Acc: 0
+    missile: {fileID: 1053960701893122, guid: 0684650dd5655514ea7f3df35dc70ceb, type: 3}
+    missile_Amount: 4
+    missile_Pos: {fileID: 1635790657}
+    missile_Index: 0
+    spawn_Animation: 0
+    add_Time: 0
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+  damaged_Effect: {fileID: 152628, guid: 4e42a2081531c814fa4774bd0d6b45df, type: 3}
+  phase_Effect: {fileID: 1436447386774278, guid: b36e5394bf3902b41877ecba9aa55b8d, type: 3}
+  real_AI:
+    b_c: {fileID: 0}
+    pre_State: {fileID: 0}
+    now_State: {fileID: 1173432524}
+    pre_State_List: []
+    navMesh: {fileID: 0}
+    isPause: 0
+  is_Boss: 1
+  begin_Pos: {x: 0, y: 0, z: 0}
+  ani_Index: 0
+  TimeLeft: 4
+  nextTime: 4
+  checkTime: 0
+  isStop: 0
 --- !u!1001 &1776479698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40527,6 +40918,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 454530, guid: 79bc9246d82833f41a623e9e01fd5e0a, type: 3}
   m_PrefabInstance: {fileID: 1792461680}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1793462549 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 181053414, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1803241772
 PrefabInstance:
@@ -42576,7 +42972,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858183703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 1.5, z: 65.5}
+  m_LocalPosition: {x: 0.6, y: 1.5, z: 23.9}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46020,6 +46416,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 418722, guid: 8dcfd4337d879154cb96b9e52b53d06f, type: 3}
   m_PrefabInstance: {fileID: 1982343320}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1986752710 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3833193269993327172, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1988395506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47848,7 +48249,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4585744435875142265, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1ca5bacb9c97c934c8da9d3b8b37e611, type: 3}
 --- !u!1001 &2097294145
 PrefabInstance:

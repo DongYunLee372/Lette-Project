@@ -50,21 +50,21 @@ public class FSM_AI
                 now_State = _State.Patrol;
                 break;
             case _State.Patrol:
-                Collider[] cols = Physics.OverlapSphere(battle_Character.transform.position, battle_Character.mon_find_Range);
-                //, 1 << 8); // 비트 연산자로 8번째 레이어
+                //Collider[] cols = Physics.OverlapSphere(battle_Character.transform.position, battle_Character.mon_find_Range);
+                ////, 1 << 8); // 비트 연산자로 8번째 레이어
 
-                if (cols.Length > 0)
-                {
-                    for (int i = 0; i < cols.Length; i++)
-                    {
-                        if (cols[i].tag == "Player")
-                        {
-                            battle_Character.cur_Target = cols[i].gameObject;
-                            now_State = _State.Trace;
-                        }
-                    }
-                }
-                break;
+                //if (cols.Length > 0)
+                //{
+                //    for (int i = 0; i < cols.Length; i++)
+                //    {
+                //        if (cols[i].tag == "Player")
+                //        {
+                //            battle_Character.cur_Target = cols[i].gameObject;
+                //            now_State = _State.Trace;
+                //        }
+                //    }
+                //}
+                //break;
             //case _State.Trace:
             //    if (Vector3.Distance(battle_Character.transform.position, battle_Character.cur_Target.transform.position) <= battle_Character.Attack_Melee_Range) // 타겟에 닿았다면
             //    {

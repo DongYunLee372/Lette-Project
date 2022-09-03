@@ -28,6 +28,13 @@ public class State_Attack : State
             return true;
         }
 
+        if (b_c.isDelay)
+        {
+            judge_logic = Enemy_Attack_Logic.Skill_Wait;
+            _State = this;
+            return true;
+        }
+
         //b_c.Attack_Melee_Range 가 스킬 사용범위 변수로 바뀌어야함.
         if ((Vector3.Distance(b_c.transform.position,
             b_c.cur_Target.transform.position) <= b_c.now_Skill_Info.P_skill_Range)

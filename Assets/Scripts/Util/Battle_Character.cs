@@ -58,6 +58,11 @@ public class Attack_Info // 스킬이나 공격info
 
     // 애니메이션 꺼지는 추가 시간이 필요한 경우 ( 4개 이상의 이벤트가 필요할 때 )
     public float add_Time;
+
+    // 선딜 지속 시간, 선딜 스피드
+    public float pre_Delay, pre_Delay_speed;
+    // 후딜 지속 시간, 선딜 스피드
+    public float post_Delay, post_Delay_speed;
 }
 
 public class Battle_Character : MonoBehaviour
@@ -86,15 +91,9 @@ public class Battle_Character : MonoBehaviour
 
     [Header("Monster Stats")]
     public int cur_HP;
-    public Enemy_Grade enemy_Grade; // 몬스터 등급
-    public Enemy_Type enemy_Type; // 몬스터 타입
     public Vector3 return_Pos; // 초기 좌표
     public Vector3 destination_Pos; // 순찰 좌표
-    public int die_Delay; // 사망 딜레이
-    public int drop_Reward; // 몬스터의 보상
     public bool patrol_Start = false; // 탐색 시작
-    public float mon_attack_Power; // 몬스터 공격력
-    public float mon_find_Range; // 탐지범위
 
     [Header("Etc Stats")]
     public GameObject cur_Target;
@@ -107,6 +106,7 @@ public class Battle_Character : MonoBehaviour
     public bool[] attack_Logic = new bool[(int)(Enemy_Attack_Logic.Attack_Logic_Amount) - 1];
     public bool isHit = false; // 맞았는지 판별 
     public bool isAttack_Run = false; // 현재 스킬 사용중인지 판별
+    public bool isDelay = false;
 
     [Header("==========Effect=============")]
     public Attack_Info[] attack_Info;
@@ -210,6 +210,62 @@ public class Battle_Character : MonoBehaviour
 
     public Vector3 begin_Pos = new Vector3();
     public int ani_Index; // 애니메이션 어택인포 인덱스
+
+    public void Animation_Awake(string clipname)
+    {
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                // 선딜이 있다면
+                if (attack_Info[i].pre_Delay != 0)
+                {
+                    float original_Speed = animator.GetPlaySpeed();
+
+                    animator.SetPlaySpeed(attack_Info[i].pre_Delay_speed);
+
+                    StartCoroutine(pre_Delay_Coroutine(attack_Info[i].pre_Delay, original_Speed));
+                }
+
+                return;
+            }
+        }
+    }
+
+    public IEnumerator pre_Delay_Coroutine(float sec, float speed)
+    {
+        yield return new WaitForSeconds(sec);
+
+        animator.SetPlaySpeed(speed);
+    }
+
+    public void Animation_Final(string clipname)
+    {
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                // 후딜이 있다면
+                if (attack_Info[i].post_Delay != 0)
+                {
+                    isDelay = true;
+
+                    StartCoroutine(post_Delay_Coroutine(attack_Info[i].post_Delay));
+                }
+
+                return;
+            }
+        }
+    }
+
+    public IEnumerator post_Delay_Coroutine(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+
+        isDelay = false;
+    }
+
+
     public void Animation_Begin(string clipname)
     {
         for (int i = 0; i < attack_Info.Length; i++)
