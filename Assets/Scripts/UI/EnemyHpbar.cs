@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Canvas_Enum;
+
 public class EnemyHpbar : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -74,7 +76,7 @@ public class EnemyHpbar : MonoBehaviour
         //// _hpbar.myhp = _test;
         // MyHpbar = _hpbar;
 
-        GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.player_cavas);
+        GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", CANVAS_NUM.enemy_canvas);
 
         var _hpbar = hpBar.GetComponent<EnemyHpbar>();
         //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);

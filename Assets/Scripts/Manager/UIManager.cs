@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Canvas_Enum;
 public class UIInfo
 {
     public GameObject obj;
@@ -19,13 +19,12 @@ public class UIManager : Singleton<UIManager>
     public List<GameObject> canvas;
 
 
-    public enum CANVAS_NUM
-    {
-        player_cavas = 0,
-        enemy_canvas,
-        test,
-        sdf
-    }
+    //public enum CANVAS_NUM
+    //{
+    //    player_cavas = 0,
+    //    enemy_canvas,
+    //    start_canvas
+    //}
 
     public GameObject Findobj(string path)
     {

@@ -123,4 +123,14 @@ namespace Enemy_Enum
         Skill_Wait,
         Attack_Logic_Amount,
     }
+
+}
+namespace Canvas_Enum
+{
+    public enum CANVAS_NUM
+    {
+        player_cavas = 0,
+        enemy_canvas,
+        start_canvas
+    }
 }

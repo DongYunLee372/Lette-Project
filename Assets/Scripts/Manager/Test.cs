@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Canvas_Enum;
 
 public class Test : MonoBehaviour
 {
@@ -29,7 +28,7 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
 
-             UIManager.Instance.Prefabsload("Bosshpbar", UIManager.CANVAS_NUM.player_cavas);
+             UIManager.Instance.Prefabsload("Bosshpbar", CANVAS_NUM.player_cavas);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {

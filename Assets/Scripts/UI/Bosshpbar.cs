@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Canvas_Enum;
 public class Bosshpbar : MonoBehaviour
 {
 
@@ -31,7 +31,7 @@ public class Bosshpbar : MonoBehaviour
         t_Bosshp.text = "HP " + p_hp.ToString() + "/" + p_hp.ToString();
         Maxhp = p_hp;
         Curhp = p_hp;
-       UIManager.Instance.Prefabsload("Bosshpbar", UIManager.CANVAS_NUM.player_cavas);
+       UIManager.Instance.Prefabsload("Bosshpbar", CANVAS_NUM.enemy_canvas);
 
 
         

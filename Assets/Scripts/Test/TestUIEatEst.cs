@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Canvas_Enum;
 public class TestUIEatEst : MonoBehaviour
 {
    
@@ -16,7 +16,7 @@ public class TestUIEatEst : MonoBehaviour
     {
        if(Input.GetKeyDown(KeyCode.Alpha0))
         {
-            UIManager.Instance.Prefabsload("Inven", UIManager.CANVAS_NUM.player_cavas);
+            UIManager.Instance.Prefabsload("Inven", CANVAS_NUM.player_cavas);
         }
     }
 }
