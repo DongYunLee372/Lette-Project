@@ -220,8 +220,9 @@ public class Battle_Character : MonoBehaviour
                 // 선딜이 있다면
                 if (attack_Info[i].pre_Delay != 0)
                 {
+                    Debug.Log("느려져져져져져져져져");
                     float original_Speed = animator.GetPlaySpeed();
-
+                    Debug.Log("느려져져져져져져져져");
                     animator.SetPlaySpeed(attack_Info[i].pre_Delay_speed);
 
                     StartCoroutine(pre_Delay_Coroutine(attack_Info[i].pre_Delay, original_Speed));
@@ -441,7 +442,7 @@ public class Battle_Character : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.G))
         {
-            animator.Play("Rush Sword Attack");
+            animator.Play("Magic Beam");
         }
 
         checkTime += Time.deltaTime;

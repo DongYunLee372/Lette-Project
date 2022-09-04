@@ -19924,10 +19924,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2768759759256917436, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 07d61e03e40f25a49af4daf35ce72d08, type: 2}
     - target: {fileID: 3654817905455508347, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -19973,16 +19969,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Target_Info
+      propertyPath: mon_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Skill_Info.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Skill_Info.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Skill_Info.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Skill_Info.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Skill_Info.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Skill_Info.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Skill_Info.Array.data[6]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_Name
       value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
