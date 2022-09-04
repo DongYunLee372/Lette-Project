@@ -155,6 +155,7 @@ MonoBehaviour:
   canvas:
   - {fileID: 439596366}
   - {fileID: 832958759}
+  - {fileID: 427436704}
 --- !u!4 &42208279
 Transform:
   m_ObjectHideFlags: 0
@@ -296,7 +297,7 @@ GameObject:
   - component: {fileID: 366753506}
   - component: {fileID: 366753505}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Option
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +620,7 @@ GameObject:
   - component: {fileID: 511267314}
   - component: {fileID: 511267313}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Gameexit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1479,7 +1480,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93574fb980e4c8048886f4854d1872d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1569697561}
+  B_GameStart: {fileID: 1569697561}
+  B_Option: {fileID: 366753505}
+  B_Restart: {fileID: 2045391198}
+  B_Exitgame: {fileID: 511267313}
 --- !u!4 &1445386487
 Transform:
   m_ObjectHideFlags: 0
@@ -1588,7 +1592,7 @@ GameObject:
   - component: {fileID: 1569697562}
   - component: {fileID: 1569697561}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Gamestart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2031,7 +2035,7 @@ GameObject:
   - component: {fileID: 2045391199}
   - component: {fileID: 2045391198}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
