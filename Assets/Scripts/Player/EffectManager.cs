@@ -16,6 +16,10 @@ public class EffectManager : MySingleton<EffectManager>
 
     public List<GameObject> Effects = new List<GameObject>();
 
+    public CorTimeCounter timer = new CorTimeCounter();
+
+    public IEnumerator cor;
+
     public GameObject InstantiateEffect(GameObject effect)
     {
         GameObject copy = GameObject.Instantiate(effect);
@@ -36,8 +40,31 @@ public class EffectManager : MySingleton<EffectManager>
         GameObject copy = InstantiateEffect(effect);
         copy.transform.position = pos;
         copy.transform.rotation = rotation;
-        GameObject.Destroy(copy, DestroyTime);
+        cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+        StartCoroutine(cor);
         return copy;
+    }
+
+    //public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime = 1.0f)
+    //{
+    //    GameObject copy = InstantiateEffect(effect);
+    //    copy.transform.position = pos;
+    //    copy.transform.rotation = rotation;
+
+    //    //if(Loop)
+    //    //{
+    //    //    //copy.GetComponentInChildren<ParticleSystem>().loop = Loop;
+    //    //    //copy.GetComponentInChildren<ParticleSystem>().duration;
+    //    //}
+
+    //    cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+    //    StartCoroutine(cor);
+    //    return copy;
+    //}
+
+    public void DestroyEffect(Object obj)
+    {
+        GameObject.Destroy(obj);
     }
 
     //
@@ -46,7 +73,8 @@ public class EffectManager : MySingleton<EffectManager>
         GameObject copy = InstantiateEffect(effect);
         copy.transform.position = pos;
         copy.transform.parent = parent;
-        GameObject.Destroy(copy, DestroyTime);
+        cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+        StartCoroutine(cor);
         return copy;
     }
 
@@ -56,7 +84,8 @@ public class EffectManager : MySingleton<EffectManager>
         copy.transform.position = pos;
         copy.transform.parent = parent;
         copy.transform.rotation = rotation;
-        GameObject.Destroy(copy, DestroyTime);
+        cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+        StartCoroutine(cor);
         return copy;
     }
 
@@ -68,9 +97,11 @@ public class EffectManager : MySingleton<EffectManager>
         copy.transform.rotation = rotation;
 
         copy.transform.parent = parent;
-        GameObject.Destroy(copy, DestroyTime);
+        cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+        StartCoroutine(cor);
         return copy;
     }
+
 
     public void SetParent(GameObject effectobj, Transform parent)
     {
