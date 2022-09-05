@@ -10,15 +10,13 @@ using UnityEngine;
 public class DataLoad_Save : MySingleton<DataLoad_Save>
 {
     [SerializeField]
-    Dictionary<string, List<Information>> Dic_Data_Test = new Dictionary<string, List<Information>>();
-    [SerializeField]
     List<CharacterInformation> PlayerDB_List = new List<CharacterInformation>();
-    [SerializeField]
-    public List<MonsterInformation> MonsterDB_List = new List<MonsterInformation>();
-    [SerializeField]
-    List<MonsterSkillInformation> MonsterSkillDB_List = new List<MonsterSkillInformation>();
-    [SerializeField]
-    List<MonsterTargetInformation> MonsterTargetDB_List = new List<MonsterTargetInformation>();
+
+    Dictionary<string, MonsterInformation> MonsterDB_List = new Dictionary<string, MonsterInformation>();
+    Dictionary<string, MonsterSkillInformation> MonsterSkillDB_List = new Dictionary<string, MonsterSkillInformation>();
+    Dictionary<string, MonsterTargetInformation> MonsterTargetDB_List = new Dictionary<string, MonsterTargetInformation>();
+
+   
     [SerializeField]
     List<Player_aconstant> Player_A_constantDB_List = new List<Player_aconstant>();
     [SerializeField]
@@ -86,7 +84,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , (int)Monster_db_Dialog[i]["mon_regenMP"]
                 , (int)Monster_db_Dialog[i]["dieDelay"]
                 );
-            MonsterDB_List.Add(C_Mon);
+            MonsterDB_List.Add(Monster_db_Dialog[i]["mon_Index"].ToString(), C_Mon);
 
         }
         for (int i = 0; i < MonsterTarget_db_Dialog.Count; i++)
@@ -103,7 +101,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Location3"])
                 , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Range"])
                 );
-            MonsterTargetDB_List.Add(C_MonTarget);
+            MonsterTargetDB_List.Add(MonsterTarget_db_Dialog[i]["Character_ID"].ToString() , C_MonTarget);
         }
        
         for (int i = 0; i < MonsterSkill_db_Dialog.Count; i++)
@@ -126,7 +124,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_DiffObj"])
                 , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_ThrowObj"])
                 );
-            MonsterSkillDB_List.Add(C_MonSkill);
+            MonsterSkillDB_List.Add(MonsterSkill_db_Dialog[i]["mon_Index"].ToString() , C_MonSkill);
         }
         
         
@@ -158,10 +156,10 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
 
     }
 
-    public MonsterInformation Get_MonsterDB(EnumScp.MonsterIndex testenum)
+    public MonsterInformation Get_MonsterDB(string index)
     {
         MonsterInformation testData = ScriptableObject.CreateInstance<MonsterInformation>();
-        testData = MonsterDB_List[(int)testenum];
+        testData = MonsterDB_List[index];
         return testData;
         
     }
@@ -171,16 +169,16 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
         testData = PlayerDB_List[(int)testenum];
         return testData;
     }
-    public MonsterSkillInformation Get_MonsterSkillDB(EnumScp.MonsterSkill testenum)
+    public MonsterSkillInformation Get_MonsterSkillDB(string index)
     {
         MonsterSkillInformation testData = ScriptableObject.CreateInstance<MonsterSkillInformation>();
-        testData = MonsterSkillDB_List[(int)testenum];
+        testData = MonsterSkillDB_List[index];
         return testData;
     }
-    public MonsterTargetInformation Get_MonsterTargetDB(EnumScp.MonsterTarget testenum)
+    public MonsterTargetInformation Get_MonsterTargetDB(string index)
     {
         MonsterTargetInformation testData = ScriptableObject.CreateInstance<MonsterTargetInformation>();
-        testData = MonsterTargetDB_List[(int)testenum];
+        testData = MonsterTargetDB_List[index];
         return testData;
     }
     public Monster_aconstant Get_Monster_A_ConstantDB(EnumScp.A_Constant testenum)
