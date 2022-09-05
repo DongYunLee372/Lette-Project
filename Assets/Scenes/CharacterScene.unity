@@ -52617,9 +52617,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1121095337, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121095337, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: effectManagerTest
       value: 
       objectReference: {fileID: 365250506}
+    - target: {fileID: 1121095338, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712387625, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
@@ -52670,7 +52678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfoList.Array.size
@@ -52680,6 +52688,10 @@ PrefabInstance:
       propertyPath: attackinfoList.Array.data[0].aniclip
       value: 
       objectReference: {fileID: 7400000, guid: d1e750001102c4d44a993077e1cf25d2, type: 2}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[0].StartDelay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfoList.Array.data[0].AttackNum
       value: 0
@@ -52699,6 +52711,14 @@ PrefabInstance:
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfoList.Array.data[2].AttackType
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[0].RecoveryDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[2].RecoveryDelay
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfoList.Array.data[0].animationPlaySpeed
@@ -52724,5 +52744,8 @@ PrefabInstance:
       propertyPath: CharacterInfoPanel
       value: 
       objectReference: {fileID: 1920040074}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 836511858, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+    - {fileID: 1121095338, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+    - {fileID: 1121095337, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}

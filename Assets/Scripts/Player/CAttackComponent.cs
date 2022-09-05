@@ -20,13 +20,18 @@ public class CAttackComponent : BaseComponent
 
     public string monstertag;
 
+    public CorTimeCounter timer = new CorTimeCounter();
+
     //기본 공격 정보 해당 정보를 3개 만들면 기본 공격이 설정값들에 따라 3가지 동작으로 이어진다.
     [System.Serializable]
-    public class AttackMovementInfo
+    public class AttackInfo
     {
         [Tooltip("해당 공격의 타입을 설정한다 (노말, 광역, 투사체, 타겟팅)")]
         public CharEnumTypes.eAttackType AttackType;
-        
+
+        [Tooltip("공격이름")]
+        public int AttackName;
+
         [Tooltip("공격번호")]
         public int AttackNum;
 
@@ -39,10 +44,14 @@ public class CAttackComponent : BaseComponent
         [Tooltip("해당 공격의 애니메이션 클립")]
         public AnimationClip aniclip;
 
+        [Tooltip("선딜")]
+        [Range(0.0f, 10.0f)]
+        public float StartDelay;
+
         //후딜레이
-        [Tooltip("해당 공격의 후딜레이 후딜레이는 공격이 끝나고 다시 다음 동작으로 돌아가는데 까지 걸리는 시간")]
-        [Range(0.0f,1.0f)]
-        public float MovementDelay;
+        [Tooltip("후딜")]
+        [Range(0.0f,10.0f)]
+        public float RecoveryDelay;
 
         //다음동작으로 넘어가기 위한 시간
         //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
@@ -65,6 +74,9 @@ public class CAttackComponent : BaseComponent
         [Tooltip("공격 이펙트 생성 위치")]
         public Transform EffectPosRot;
 
+        [Tooltip("공격 이펙트 파괴 시간")]
+        public float EffectDestroyTime;
+
         //공격 중 움직일 거리
         [Tooltip("공격할때 움직일 거리")]
         public float movedis;
@@ -80,17 +92,20 @@ public class CAttackComponent : BaseComponent
         public GameObject TargetObj;
     }
 
-    public AttackMovementInfo[] attackinfos;
-    public List<AttackMovementInfo> attackinfoList;
+    public AttackInfo[] attackinfos;
+    public List<AttackInfo> attackinfoList;
 
     //스킬도 여기서 한번에 처리
     [System.Serializable]
     public class SkillInfo
     {
-        //스킬 이름 
+        [Tooltip("해당 공격의 타입을 설정한다 (노말, 광역, 투사체, 타겟팅)")]
+        public CharEnumTypes.eAttackType AttackType;
+
+        [Tooltip("스킬이름")]
         public string SkillName;
 
-        //스킬 번호
+        [Tooltip("스킬번호")]
         public int SkillNum;
 
         //스킬 애니메이션
@@ -137,13 +152,14 @@ public class CAttackComponent : BaseComponent
 
     public float lastAttackTime = 0;
 
-    public delegate void Invoker();
+    //public delegate void Invoker(GameObject obj);
 
     //public bool IsTimeCounterActive = false;
     public IEnumerator coroutine;
 
     void Start()
     {
+        
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
         weaponcollider = GetComponentInChildren<WeaponCollider>();
@@ -151,15 +167,15 @@ public class CAttackComponent : BaseComponent
 
         if(effectparent==null)
         {
-            effectparent = new GameObject("Effects").transform;
+            effectparent = new GameObject("EffectsContainer").transform;
         }
 
         //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for(int i=0;i<attackinfos.Length;i++)
         {
             eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null), 
-                new KeyValuePair<string, AnimationEventSystem.midCallback>(attackinfos[i].aniclip.name,AttackMove), 
-                new KeyValuePair<string, AnimationEventSystem.endCallback > (attackinfos[i].aniclip.name, AttackEnd));
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(attackinfos[i].aniclip.name, AttackMove), 
+                new KeyValuePair<string, AnimationEventSystem.endCallback> (attackinfos[i].aniclip.name, AttackEnd));
         }
 
         //초기화 할때 각각의 스킬 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
@@ -187,22 +203,23 @@ public class CAttackComponent : BaseComponent
     }
 
     //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
-    IEnumerator Cor_TimeCounter(float time, Invoker invoker)
-    {
-        float starttime = Time.time;
-        //IsTimeCounterActive = true;
+    //IEnumerator Cor_TimeCounter(float time, Invoker invoker,GameObject obj)
+    //{
+    //    float starttime = Time.time;
+    //    //IsTimeCounterActive = true;
 
-        while (true)
-        {
-            if((Time.time - starttime)>=time)
-            {
-                coroutine = null;
-                invoker.Invoke();
-                yield break;
-            }
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
+    //    while (true)
+    //    {
+    //        if((Time.time - starttime)>=time)
+    //        {
+    //            coroutine = null;
+    //            if(obj!=null)
+    //                invoker.Invoke(obj);
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //}
 
     //스킬을 재생해준다.
     public void SkillAttack(int skillnum)
@@ -219,8 +236,12 @@ public class CAttackComponent : BaseComponent
         if (curval.IsAttacking)
             return;
 
+        //공격중으로 바꿈
         if (curval.IsAttacking == false)
+        {
+            movecom.Stop();
             curval.IsAttacking = true;
+        }
 
         //StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
         animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
@@ -262,11 +283,14 @@ public class CAttackComponent : BaseComponent
             CurAttackNum = 0;
         }
 
-        coroutine = Cor_TimeCounter(attackinfos[CurAttackNum].EffectStartTime, CreateEffect);
+        //coroutine = Cor_TimeCounter(attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect);
+        coroutine = timer.Cor_TimeCounter<GameObject, float>
+            (attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect, 1.5f);
+
         StartCoroutine(coroutine);
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
-        animator.Play(attackinfos[CurAttackNum].aniclip.name, attackinfos[CurAttackNum].animationPlaySpeed);
+        animator.Play(attackinfos[CurAttackNum].aniclip.name, attackinfos[CurAttackNum].animationPlaySpeed,0,attackinfos[CurAttackNum].StartDelay);
     }
 
     //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨
@@ -295,18 +319,16 @@ public class CAttackComponent : BaseComponent
     }
 
     //공격 이펙트를 생성
-    public void CreateEffect()
+    public void CreateEffect(GameObject obj,float destroyTime)
     {
-        effectobj = GameObject.Instantiate(attackinfos[CurAttackNum].Effect);
+
+        effectobj = EffectManager.Instance.InstantiateEffect(obj, destroyTime);
         effectobj.transform.position = attackinfos[CurAttackNum].EffectPosRot.position;
         effectobj.transform.rotation = attackinfos[CurAttackNum].EffectPosRot.rotation;
-
-        //preparent = effectobj.transform.parent;
         effectobj.transform.parent = attackinfos[CurAttackNum].EffectPosRot;
+
         //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
-
-
-        Destroy(effectobj, 1.5f);
+        //Destroy(effectobj, 1.5f);
         //effectobj = null;
     }
 
@@ -315,21 +337,38 @@ public class CAttackComponent : BaseComponent
     //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
     public void AttackEnd(string s_val)
     {
-        
-
-        if(effectobj!=null)
+        //Debug.Log($"공격 끝 들어옴 -> {s_val}");
+        if (effectobj!=null)
         {
-            Debug.Log($"공격 끝 들어옴 -> {s_val}");
+            //Debug.Log($"공격 끝 들어옴 -> {s_val}");
             //effectobj.transform.parent = preparent;
             effectobj.transform.parent = effectparent;
         }
 
+        //후딜레이 구현 필요 
+        if(attackinfos[CurAttackNum].RecoveryDelay > 0.0f)
+        {
+            //Debug.Log($"후딜레이 -> {attackinfos[CurAttackNum].RecoveryDelay}");
+            animator.Pause();
+            StartCoroutine(timer.Cor_TimeCounter(attackinfos[CurAttackNum].RecoveryDelay, ChangeState));
+        }
+        else
+        {
+            ChangeState();
+        }
+        
+        //timer.Cor_TimeCounter( ChangeState)
+        //StartCoroutine(timer.Cor_TimeCounter<AttackInfo>(attackinfos[CurAttackNum].RecoveryDelay, ChangeState))
+    }
+
+    public void ChangeState()
+    {
         if (curval.IsAttacking == true)
             curval.IsAttacking = false;
 
         lastAttackTime = Time.time;
-
     }
+
 
     //공격이 중간에 끊겨야 할때
     public void AttackCutOff()

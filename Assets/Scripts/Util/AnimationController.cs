@@ -39,7 +39,7 @@ public class AnimationController : MonoBehaviour
     
 
     //클립이름, 재생속도 (기본이 1배속), 재생 시간 (재생시간이 0이면 계속 반복), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
-    public void Play(string pname, float PlaySpeed = 1.0f, float PlayTime = 0, float blendingtime = 0.1f)
+    public void Play(string pname, float PlaySpeed = 1.0f, float PlayTime = 0, float blendingtime = 0.2f)
     {
         //이미 재생중인 클입을 다시 재생 시키려면 Replay를 호출한다.
         if (pname == currentplayclipname)

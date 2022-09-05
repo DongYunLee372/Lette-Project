@@ -28,6 +28,16 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
+    public GameObject InstantiateEffect(GameObject effect, float DestroyTime)
+    {
+        GameObject copy = GameObject.Instantiate(effect);
+        copy.transform.parent = BaseEffect;
+        CurEffects.Add(copy.GetInstanceID(), copy);
+        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        StartCoroutine(cor);
+        return copy;
+    }
+
     public GameObject InstantiateEffect(GameObject effect,Vector3 pos)
     {
         GameObject copy = InstantiateEffect(effect);
@@ -40,31 +50,19 @@ public class EffectManager : MySingleton<EffectManager>
         GameObject copy = InstantiateEffect(effect);
         copy.transform.position = pos;
         copy.transform.rotation = rotation;
-        cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
         StartCoroutine(cor);
         return copy;
     }
 
-    //public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime = 1.0f)
-    //{
-    //    GameObject copy = InstantiateEffect(effect);
-    //    copy.transform.position = pos;
-    //    copy.transform.rotation = rotation;
-
-    //    //if(Loop)
-    //    //{
-    //    //    //copy.GetComponentInChildren<ParticleSystem>().loop = Loop;
-    //    //    //copy.GetComponentInChildren<ParticleSystem>().duration;
-    //    //}
-
-    //    cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
-    //    StartCoroutine(cor);
-    //    return copy;
-    //}
-
-    public void DestroyEffect(Object obj)
+    public GameObject InstantiateEffect(GameObject effect, Transform posrot, float DestroyTime = 1.0f)
     {
-        GameObject.Destroy(obj);
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = posrot.position;
+        copy.transform.rotation = posrot.rotation;
+        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        StartCoroutine(cor);
+        return copy;
     }
 
     //
@@ -73,7 +71,7 @@ public class EffectManager : MySingleton<EffectManager>
         GameObject copy = InstantiateEffect(effect);
         copy.transform.position = pos;
         copy.transform.parent = parent;
-        cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
         StartCoroutine(cor);
         return copy;
     }
@@ -84,7 +82,7 @@ public class EffectManager : MySingleton<EffectManager>
         copy.transform.position = pos;
         copy.transform.parent = parent;
         copy.transform.rotation = rotation;
-        cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
         StartCoroutine(cor);
         return copy;
     }
@@ -97,7 +95,7 @@ public class EffectManager : MySingleton<EffectManager>
         copy.transform.rotation = rotation;
 
         copy.transform.parent = parent;
-        cor = timer.Cor_TimeCounter(DestroyTime, DestroyEffect, effect);
+        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
         StartCoroutine(cor);
         return copy;
     }
@@ -129,9 +127,4 @@ public class EffectManager : MySingleton<EffectManager>
         BaseEffect = new GameObject("Effects").transform;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
