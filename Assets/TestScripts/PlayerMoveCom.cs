@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveCom : MonoBehaviour
+public class PlayerMoveCom : BaseCom
 {
     [System.Serializable]
     public class Com
@@ -40,7 +40,66 @@ public class PlayerMoveCom : MonoBehaviour
     public float MoveSpeed;
     public float Gra;
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    public BaseInteractive InteractiveObj;
+
+    public void Test_Save_Interactive(BaseInteractive obj)
+    {
+        InteractiveObj = obj;
+
+
+
+        InteractiveObj.Oninteractive();
+    }
+    public void Test_DeleteInteractive()
+    {
+        InteractiveObj = null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void KeyInput()
     {
         
@@ -192,5 +251,15 @@ public class PlayerMoveCom : MonoBehaviour
         
         Rotate();
         Move();
+    }
+
+    public override void InitCom()
+    {
+        P_comlist = EnumScp.ComponentList.Move;
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
     }
 }

@@ -90,5 +90,17 @@ namespace EnumScp
         Max
     }
 
+    public enum ComponentList
+    {
+        Move = 0,
+        Max
+    }
+
+    public enum InteractiveIndex
+    {
+        TestNPC_Sangmin = 0,
+        TestNPC_Sangmin2,
+        Max
+    }
 }
 

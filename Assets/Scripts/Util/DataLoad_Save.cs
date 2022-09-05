@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//데이터 적용 자동화 (자동 업데이트)
+// object 수정 데이터 박싱 언박싱 문제
+
 public class DataLoad_Save : MySingleton<DataLoad_Save>
 {
     [SerializeField]
