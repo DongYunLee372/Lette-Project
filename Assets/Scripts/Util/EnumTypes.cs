@@ -133,4 +133,14 @@ namespace Canvas_Enum
         enemy_canvas,
         start_canvas
     }
+
+    public enum KeyAction
+    {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT,
+        KEYCOUNT 
+    }
+
 }

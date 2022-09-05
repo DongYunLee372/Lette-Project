@@ -132,6 +132,11 @@ public class UIManager : Singleton<UIManager>
     {
         canvas[(int)num].SetActive(true);
     }
+
+    public GameObject Canvasreturn(CANVAS_NUM num)
+    {
+        return canvas[(int)num];
+    }
     // Start is called before the first frame update
   
     private void Awake()
@@ -140,11 +145,9 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
-
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("StartUI"));
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("OptionSetting")); 
     }
     // Update is called once per frame
-    void Update()
-    {
 
-    }
 }

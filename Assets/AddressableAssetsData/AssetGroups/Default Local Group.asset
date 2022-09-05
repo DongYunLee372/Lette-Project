@@ -119,6 +119,14 @@ MonoBehaviour:
     m_Address: TestScenes
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: cc8884be57bcf624684c43620abc4fec
+    m_Address: StartUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a62eff40c92cd01488863fa5149d79a1
+    m_Address: OptionSetting
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
