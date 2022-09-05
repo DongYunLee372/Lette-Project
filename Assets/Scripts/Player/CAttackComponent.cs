@@ -5,6 +5,7 @@ using UnityEngine;
 //jo
 /*스킬과 공격을 데이터를 입력해 간단하게 조작 할 수 있도록
   또한 이펙트 매니저와도 매끄럽게 연결 되도록 수정*/
+[System.Serializable]
 public class CAttackComponent : BaseComponent
 {
     [SerializeField]
@@ -173,8 +174,8 @@ public class CAttackComponent : BaseComponent
         //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for(int i=0;i<attackinfos.Length;i++)
         {
-            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null), 
-                new KeyValuePair<string, AnimationEventSystem.midCallback>(attackinfos[i].aniclip.name, AttackMove), 
+            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(attackinfos[i].aniclip.name, AttackMove),
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 
                 new KeyValuePair<string, AnimationEventSystem.endCallback> (attackinfos[i].aniclip.name, AttackEnd));
         }
 
@@ -284,13 +285,14 @@ public class CAttackComponent : BaseComponent
         }
 
         //coroutine = Cor_TimeCounter(attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect);
+        //일정 시간 이후에
         coroutine = timer.Cor_TimeCounter<GameObject, float>
             (attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect, 1.5f);
 
         StartCoroutine(coroutine);
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
-        animator.Play(attackinfos[CurAttackNum].aniclip.name, attackinfos[CurAttackNum].animationPlaySpeed,0,attackinfos[CurAttackNum].StartDelay);
+        animator.Play(attackinfos[CurAttackNum].aniclip.name, attackinfos[CurAttackNum].animationPlaySpeed/*,0,attackinfos[CurAttackNum].StartDelay*/);
     }
 
     //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨

@@ -52714,7 +52714,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfos.Array.data[0].RecoveryDelay
-      value: 0
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[1].RecoveryDelay
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfos.Array.data[2].RecoveryDelay

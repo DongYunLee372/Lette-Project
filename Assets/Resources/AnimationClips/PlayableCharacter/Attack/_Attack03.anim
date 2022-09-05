@@ -119116,7 +119116,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: OnMidEventString
+    functionName: OnBeginEventString
     data: _Attack03
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
