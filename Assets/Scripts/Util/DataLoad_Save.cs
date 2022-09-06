@@ -124,7 +124,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_DiffObj"])
                 , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_ThrowObj"])
                 );
-            MonsterSkillDB_List.Add(MonsterSkill_db_Dialog[i]["mon_Index"].ToString() , C_MonSkill);
+           // MonsterSkillDB_List.Add(MonsterSkill_db_Dialog[i]["mon_Index"].ToString() , C_MonSkill);
         }
         
         
