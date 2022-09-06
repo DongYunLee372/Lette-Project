@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class TestData : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Dictionary<string, MonsterInformation> MonsterDB_List = new Dictionary<string, MonsterInformation>();
     void Start()
     {
-        
+        MonsterInformation ddd;
+        //TestLoadFile.Read<MonsterInformation>(out ddd);
+
+
     }
 
     // Update is called once per frame
