@@ -13,10 +13,12 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
     List<CharacterInformation> PlayerDB_List = new List<CharacterInformation>();
 
     Dictionary<string, MonsterInformation> MonsterDB_List = new Dictionary<string, MonsterInformation>();
-    Dictionary<string, MonsterSkillInformation> MonsterSkillDB_List = new Dictionary<string, MonsterSkillInformation>();
+    //Dictionary<string, MonsterSkillInformation> MonsterSkillDB_List = new Dictionary<string, MonsterSkillInformation>();
     Dictionary<string, MonsterTargetInformation> MonsterTargetDB_List = new Dictionary<string, MonsterTargetInformation>();
 
-   
+
+    [SerializeField]
+    List<MonsterSkillInformation> MonsterSkillDB_List = new List<MonsterSkillInformation>();
     [SerializeField]
     List<Player_aconstant> Player_A_constantDB_List = new List<Player_aconstant>();
     [SerializeField]
@@ -124,7 +126,9 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
                 , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_DiffObj"])
                 , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_ThrowObj"])
                 );
-           // MonsterSkillDB_List.Add(MonsterSkill_db_Dialog[i]["mon_Index"].ToString() , C_MonSkill);
+            // MonsterSkillDB_List.Add(MonsterSkill_db_Dialog[i]["mon_Index"].ToString() , C_MonSkill);
+
+            MonsterSkillDB_List.Add(C_MonSkill);
         }
         
         
@@ -169,10 +173,10 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
         testData = PlayerDB_List[(int)testenum];
         return testData;
     }
-    public MonsterSkillInformation Get_MonsterSkillDB(string index)
+    public MonsterSkillInformation Get_MonsterSkillDB(EnumScp.MonsterSkill testenum)
     {
         MonsterSkillInformation testData = ScriptableObject.CreateInstance<MonsterSkillInformation>();
-        testData = MonsterSkillDB_List[index];
+        testData = MonsterSkillDB_List[(int)testenum];
         return testData;
     }
     public MonsterTargetInformation Get_MonsterTargetDB(string index)
