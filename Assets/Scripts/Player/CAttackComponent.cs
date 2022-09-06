@@ -23,6 +23,10 @@ public class CAttackComponent : BaseComponent
 
     public CorTimeCounter timer = new CorTimeCounter();
 
+    public bool IsLinkable = false;
+
+    public AttackInfo NextAttackInfo;
+
     //기본 공격 정보 해당 정보를 3개 만들면 기본 공격이 설정값들에 따라 3가지 동작으로 이어진다.
     [System.Serializable]
     public class AttackInfo
@@ -58,6 +62,9 @@ public class CAttackComponent : BaseComponent
         //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
         [Tooltip("연속동작이 있을때 다음 동작으로 들어가기 위한 입력 시간")]
         public float NextMovementTimeVal;
+
+        [Tooltip("다음 동작으로 넘어갈 수 있는 시간")]
+        public float NextAttackInputTime;
 
         //데미지
         [Tooltip("공격 데미지")]
@@ -222,6 +229,8 @@ public class CAttackComponent : BaseComponent
     //    }
     //}
 
+    
+
     //스킬을 재생해준다.
     public void SkillAttack(int skillnum)
     {
@@ -244,6 +253,14 @@ public class CAttackComponent : BaseComponent
             curval.IsAttacking = true;
         }
 
+
+        //if (attackinfos[CurAttackNum].Effect != null)
+        //{
+        //    coroutine = timer.Cor_TimeCounter<GameObject, float>
+        //    (attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect, 1.5f);
+        //    StartCoroutine(coroutine);
+        //}
+
         //StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
         animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
     }
@@ -258,9 +275,14 @@ public class CAttackComponent : BaseComponent
             curval = movecom.curval;
         }
 
-        //이미 공격중일때는 공격 불가
-        if (curval.IsAttacking)
+        ////이미 공격중일때는 공격 불가
+        //if (curval.IsAttacking)
+        //    return;
+
+        if (curval.IsAttacking&&!IsLinkable)
             return;
+
+        
 
         //공격중으로 바꿈
         if (curval.IsAttacking == false)
@@ -274,8 +296,9 @@ public class CAttackComponent : BaseComponent
 
 
         //다음 동작으로 넘어가기 위한
-        if (tempval <= attackinfos[CurAttackNum].NextMovementTimeVal)
+        if (IsLinkable|| tempval <= attackinfos[CurAttackNum].NextMovementTimeVal)
         {
+            Debug.Log("링크가능");
             CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/attackinfos.Length;
 
         }
@@ -286,13 +309,25 @@ public class CAttackComponent : BaseComponent
 
         //coroutine = Cor_TimeCounter(attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect);
         //일정 시간 이후에
-        coroutine = timer.Cor_TimeCounter<GameObject, float>
+        if(attackinfos[CurAttackNum].Effect!=null)
+        {
+            coroutine = timer.Cor_TimeCounter<GameObject, float>
             (attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect, 1.5f);
+            StartCoroutine(coroutine);
+        }
 
+        IsLinkable = false;
+        coroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].NextAttackInputTime, IsLinkAble);
         StartCoroutine(coroutine);
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
         animator.Play(attackinfos[CurAttackNum].aniclip.name, attackinfos[CurAttackNum].animationPlaySpeed/*,0,attackinfos[CurAttackNum].StartDelay*/);
+    }
+
+
+    public void IsLinkAble()
+    {
+        IsLinkable = true;
     }
 
     //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨
@@ -339,6 +374,7 @@ public class CAttackComponent : BaseComponent
     //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
     public void AttackEnd(string s_val)
     {
+        IsLinkable = false;
         //Debug.Log($"공격 끝 들어옴 -> {s_val}");
         if (effectobj!=null)
         {

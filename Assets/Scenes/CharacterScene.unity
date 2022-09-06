@@ -49484,9 +49484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerDB_List: []
-  MonsterDB_List: []
   MonsterSkillDB_List: []
-  MonsterTargetDB_List: []
   Player_A_constantDB_List: []
   Monster_A_constantDB_List: []
 --- !u!4 &2012882257
@@ -52632,6 +52630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712387626, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: moveoption.RotSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712387631, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -52685,6 +52687,18 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[0].Effect
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[1].Effect
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[2].Effect
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfoList.Array.data[0].aniclip
       value: 
       objectReference: {fileID: 7400000, guid: d1e750001102c4d44a993077e1cf25d2, type: 2}
@@ -52723,6 +52737,10 @@ PrefabInstance:
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfos.Array.data[2].RecoveryDelay
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[0].NextAttackInputTime
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfoList.Array.data[0].animationPlaySpeed

@@ -50,6 +50,9 @@ public class CMoveComponent : BaseComponent
         [SerializeField]
         public float RotMouseSpeed = 10f;
         [SerializeField]
+        [Range(0.0f,1.0f)]
+        public float RotSpeed = 0.5f;
+        [SerializeField]
         public float MoveSpeed;
         [SerializeField]
         public float RunSpeed;
@@ -778,7 +781,7 @@ public class CMoveComponent : BaseComponent
         if (nextRotY - curRotY > 180f) nextRotY -= 360f;
         else if (curRotY - nextRotY > 180f) nextRotY += 360f;
 
-        com.FpRoot.eulerAngles = Vector3.up * Mathf.Lerp(curRotY, nextRotY, 0.1f);
+        com.FpRoot.eulerAngles = Vector3.up * Mathf.Lerp(curRotY, nextRotY, moveoption.RotSpeed);
     }
 
 
