@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Canvas_Enum;
+using Global_Variable;
 
 public static class KeySetting { public static Dictionary<KeyAction, KeyCode> keys = new Dictionary<KeyAction, KeyCode>(); }
 public class OnclickButton : MonoBehaviour
 {
+    [SerializeField]
+    private string undo_uiname;
+    [SerializeField]
+    private string curr_uiname;
+
     public ButtonText buttontext;
     public int compltesettingcount = 0;
     [SerializeField]
@@ -40,11 +46,23 @@ public class OnclickButton : MonoBehaviour
     {
 
     }
-
+    public void Optionokbutton()
+    {
+        UIManager.Instance.Show(UIname.StartUI);
+        UIManager.Instance.Hide(UIname.OptionSetting);
+    }
     public void Option()
     {
-        UIManager.Instance.Prefabsload("OptionSetting", CANVAS_NUM.start_canvas);
-        UIManager.Instance.Hide("StartUI");
+        if (UIManager.Instance.Findobjbool(UIname.OptionSetting))
+        {
+            Debug.Log("안녕하세요");
+            UIManager.Instance.Show(UIname.OptionSetting);
+        }
+        else
+        {
+            UIManager.Instance.Prefabsload(UIname.OptionSetting, CANVAS_NUM.start_canvas);
+        }
+        UIManager.Instance.Hide(UIname.StartUI);
     }
     
     public void Keysetting(int num)

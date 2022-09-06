@@ -40,6 +40,11 @@ namespace Global_Variable
         public const string mon_06_10 = "mon_06_10";
     }
 
+    public class UIname
+    {
+        public const string OptionSetting = "OptionSetting";
+        public const string StartUI = "StartUI";
+    }
 
 
 

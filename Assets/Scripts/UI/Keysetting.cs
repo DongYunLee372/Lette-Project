@@ -7,7 +7,7 @@ public class Keysetting : MonoBehaviour
 {
     public Button mybutton;
     private int count;
-
+    public GameObject Paraentobj; 
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +15,7 @@ public class Keysetting : MonoBehaviour
         count = paranetobj.GetComponent<OnclickButton>().compltesettingcount;
         mybutton.onClick.AddListener(delegate { paranetobj.GetComponent<OnclickButton>().Keysetting(count); });
         paranetobj.GetComponent<OnclickButton>().Settingcountup();
-     
+        
     }
 
     // Update is called once per frame

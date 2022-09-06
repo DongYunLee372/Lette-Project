@@ -39,6 +39,20 @@ public class UIManager : Singleton<UIManager>
 
         return null;
     }
+
+    public bool Findobjbool(string path)   //있으면 true 없으면 false 를 리턴 
+    {
+
+        for (int i = 0; i < info.Count; i++)
+        {
+            if (info[i].path == path )
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     public GameObject Prefabsload(string name, CANVAS_NUM x , Transform a = null)
     {
         bool same = false;
