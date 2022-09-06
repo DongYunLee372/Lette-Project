@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//Ä³¸¯ÅÍ  ½ºÅÈÁõ°¡.
-//½ºÅ³ 
-//¾×¼Ç -
+//ìºë¦­í„°  ìŠ¤íƒ¯ì¦ê°€.
+//ìŠ¤í‚¬ 
+//ì•¡ì…˜ -
 
 
 public class LoadMG : MonoBehaviour
@@ -15,12 +15,12 @@ public class LoadMG : MonoBehaviour
 
      void Awake()
     {
-        //¸ó½ºÅÍ ÀúÀåÇÒ ¸®½ºÆ®
+        //ëª¬ìŠ¤í„° ì €ì¥í•  ë¦¬ìŠ¤íŠ¸
         MonsterLIst = new List<Battle_Character>();
-        //Ä³¸¯ÅÍ »ı¼º
+        //ìºë¦­í„° ìƒì„±
         Battle_Character Player = new Battle_Character();
 
-        //¸ó½ºÅÍ »ı¼º ÈÄ ¸®½ºÆ®¿¡ ÀúÀå ÀÏ´Ü 8¸¶¸®...
+        //ëª¬ìŠ¤í„° ìƒì„± í›„ ë¦¬ìŠ¤íŠ¸ì— ì €ì¥ ì¼ë‹¨ 8ë§ˆë¦¬...
         for(int i=0; i < StaticClass.MonsterCount; i++)
         {
             Battle_Character Monster = new Battle_Character();
@@ -32,32 +32,32 @@ public class LoadMG : MonoBehaviour
      MonsterInformation data;
     [SerializeField]
     DataLoad_Save TestDataLoad;
-    //Ä³¸¯ÅÍ,¸ó½ºÅÍ,¿ÀºêÁ§Æ®µî ÃÊ±âÈ­,¸®½ºÆ® Ãß°¡ ½ÃÅ°±â
+    //ìºë¦­í„°,ëª¬ìŠ¤í„°,ì˜¤ë¸Œì íŠ¸ë“± ì´ˆê¸°í™”,ë¦¬ìŠ¤íŠ¸ ì¶”ê°€ ì‹œí‚¤ê¸°
     void ObjectInIt()
     {
         EnumScp.MonsterIndex tempindex = 0;
 
-        //¸ó½ºÅÍ¶û Ä³¸¯ÅÍ ½ºÅÈ µğºñ·Î ¹Ş¾Æ¿Í¼­ ÃÊ±âÈ­ ÇØÁÖ±â.
+        //ëª¬ìŠ¤í„°ë‘ ìºë¦­í„° ìŠ¤íƒ¯ ë””ë¹„ë¡œ ë°›ì•„ì™€ì„œ ì´ˆê¸°í™” í•´ì£¼ê¸°.
 
         
         foreach(var monster in MonsterLIst)
         {
-            //µğºñ ¹Ş¾Æ¿À±â
+            //ë””ë¹„ ë°›ì•„ì˜¤ê¸°
             data = ScriptableObject.CreateInstance<MonsterInformation>();
-            data = TestDataLoad.Get_MonsterDB(tempindex);
+        //    data = TestDataLoad.Get_MonsterDB(tempindex);
             tempindex++;
-            //È¤½Ã ¸ó½ºÅÍ ³Ñ¾î°¡¸é ÃÊ±âÈ­
+            //í˜¹ì‹œ ëª¬ìŠ¤í„° ë„˜ì–´ê°€ë©´ ì´ˆê¸°í™”
             if(tempindex<=EnumScp.MonsterIndex.Max)
             {
                 break;
             }
-            //½ºÅİ ÃÊ±âÈ­ ÀÛ¾÷ (¾ÆÁ÷ ¾È¸¸µé¾îÁü) ÇÔ¼ö °¡Á®´Ù ¾²±â
+            //ìŠ¤í…Ÿ ì´ˆê¸°í™” ì‘ì—… (ì•„ì§ ì•ˆë§Œë“¤ì–´ì§) í•¨ìˆ˜ ê°€ì ¸ë‹¤ ì“°ê¸°
 
             Debug.Log(data.P_mon_nameKor);
         }
     }
 
-    //¸®¼Ò½ºµé ·Îµå ½ÃÅ°±â
+    //ë¦¬ì†ŒìŠ¤ë“¤ ë¡œë“œ ì‹œí‚¤ê¸°
     void ResourceInit()
     {
 

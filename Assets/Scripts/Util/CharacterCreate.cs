@@ -38,7 +38,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
     public IEnumerator CreateMonster_(EnumScp.MonsterIndex p_index, Transform trans,string name = "Skeleton_Knight")
     {
         MonsterInformation data = ScriptableObject.CreateInstance<MonsterInformation>();
-        data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
+    //    data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
 
        // string tempName = "Skeleton_Knight";
 
@@ -60,15 +60,15 @@ public class CharacterCreate : Singleton<CharacterCreate>
         List<MonsterSkillInformation> skill = new List<MonsterSkillInformation>();
         MonsterTargetInformation target = ScriptableObject.CreateInstance<MonsterTargetInformation>();
 
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_01));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_02));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_04));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_06));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_08));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_09));
-        skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_10));
-        target = DataLoad_Save.Instance.Get_MonsterTargetDB(EnumScp.MonsterTarget.ID33330212);
-        data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
+        //skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_01));
+        //skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_02));
+        //skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_04));
+        //skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_06));
+        //skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_08));
+        //skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_09));
+        //skill.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_06_10));
+        //target = DataLoad_Save.Instance.Get_MonsterTargetDB(EnumScp.MonsterTarget.ID33330212);
+        //data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
 
         // string tempName = "Skeleton_Knight";
 

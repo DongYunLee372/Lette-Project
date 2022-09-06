@@ -21,8 +21,9 @@ public class SCPTEST : MonoBehaviour
         
         //data = DataLoad_Save.Instance.Get_MonsterDB(EnumScp.MonsterIndex.mon_06_01);
         //pdata = DataLoad_Save.Instance.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
-        data2 = DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_05_01_3);
-        target = DataLoad_Save.Instance.Get_MonsterTargetDB(EnumScp.MonsterTarget.ID33330212);
+
+     //   data2 = DataLoad_Save.Instance.Get_MonsterSkillDB(EnumScp.MonsterSkill.mon_05_01_3);
+     //   target = DataLoad_Save.Instance.Get_MonsterTargetDB(EnumScp.MonsterTarget.ID33330212);
 
 
         Debug.Log("아라라" + data2.P_skill_Name_En);
