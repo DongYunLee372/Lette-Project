@@ -102,26 +102,36 @@ public static class AddressablesLoader
     public static IEnumerator LoadGameObjectAndMaterial(string name)
     {
         Debug.Log("LoadGameObjectAndMaterial호출");
-        //Load a GameObject
-        AsyncOperationHandle<GameObject> goHandle = Addressables.LoadAssetAsync<GameObject>(name);
-        yield return goHandle;
-        if (goHandle.Status == AsyncOperationStatus.Succeeded)
+
+        //같은거 로드 못하게 예외 처리 
+        //못찾으면 로드,찾으면 리턴,
+        GameObject findGameobj= AddressablesController.Instance.find_Asset_in_list(name);
+        if(findGameobj!=null)
         {
-            GameObject gameObject = goHandle.Result;
-            tempobj.Add(gameObject);
-            ListCount=tempobj.Count;
-            Debug.Log(gameObject.name + "로드");
-
-            foreach (var obj in tempobj)
-            {
-                //	c++;
-                Debug.Log(obj.name + "리스트확인");
-            }
-            //etc...
+            Debug.Log("이미 로드된 파일입니다.");
+            yield return null;
         }
+        else
+        {
+            //Load a GameObject
+            AsyncOperationHandle<GameObject> goHandle = Addressables.LoadAssetAsync<GameObject>(name);
+            yield return goHandle;
+            if (goHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                GameObject gameObject = goHandle.Result;
+                tempobj.Add(gameObject);
+                ListCount = tempobj.Count;
+                Debug.Log(gameObject.name + "로드");
 
+                foreach (var obj in tempobj)
+                {
+                    //	c++;
+                    Debug.Log(obj.name + "리스트확인");
+                }
+                //etc...
+            }
 
-
+        }
         ////Load a Material
         //AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("materialKey");
         //yield return locationHandle;
