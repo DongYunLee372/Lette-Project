@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
+class Generic_List<T>
+{
+    public List<T> List;
+}
 
 public class AddressablesController : Singleton<AddressablesController>
 {
@@ -12,6 +16,8 @@ public class AddressablesController : Singleton<AddressablesController>
 	[SerializeField]
 //	private List<GameObject> _createdObjs { get; } = new List<GameObject>();
 	private List<GameObject> _createdObjs = new List<GameObject>();
+
+    private Generic_List<GameObject> temp=new Generic_List<GameObject>();
 	GameObject tempob;
 	public int Loder_ListCount = 0;
 	public bool load_Comp = false;
@@ -94,31 +100,31 @@ public class AddressablesController : Singleton<AddressablesController>
     //}
 
 
-    public IEnumerator Load_Name(string name, Transform parent,List<GameObject> Save_list)
-    {
+    //public IEnumerator Load_Name<T>(string name, Transform parent,List<T> Save_list)
+    //{
 
-        Debug.Log("check_List_routine+LoadGameObjectAndMaterial");
-        //로드되길 기다림
-        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
-        //yield return new WaitForSeconds(1f);
+    //    Debug.Log("check_List_routine+LoadGameObjectAndMaterial");
+    //    //로드되길 기다림
+    //    yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
+    //    //yield return new WaitForSeconds(1f);
 
-        Debug.Log("check_List_routine+LoadGameObjectAndMaterial내려옴");
-        Debug.Log("Loder_ListCount" + Loder_ListCount);
-        Debug.Log("tempobj" + AddressablesLoader.tempobj.Count);
+    //    Debug.Log("check_List_routine+LoadGameObjectAndMaterial내려옴");
+    //    Debug.Log("Loder_ListCount" + Loder_ListCount);
+    //    Debug.Log("tempobj" + AddressablesLoader.tempobj.Count);
 
-        if (Loder_ListCount != AddressablesLoader.tempobj.Count)
-        {
-            Loder_ListCount = AddressablesLoader.tempobj.Count;
-            Debug.Log("list수는" + AddressablesLoader.tempobj.Count);
-            //check_List("susu");
-            load_Comp = true;
-        }
+    //    if (Loder_ListCount != AddressablesLoader.tempobj.Count)
+    //    {
+    //        Loder_ListCount = AddressablesLoader.tempobj.Count;
+    //        Debug.Log("list수는" + AddressablesLoader.tempobj.Count);
+    //        //check_List("susu");
+    //        load_Comp = true;
+    //    }
 
-        //로드 된 후 리스트에서 찾아서 생성
-        //yield return new WaitForSeconds(1.0f);
-        yield return StartCoroutine(Find_List_One(name, parent, Save_list));
+    //    //로드 된 후 리스트에서 찾아서 생성
+    //    //yield return new WaitForSeconds(1.0f);
+    //    yield return StartCoroutine(Find_List_One(name, parent, Save_list));
 
-    }
+    //}
 
     public IEnumerator Load_Name(string name, Transform parent)
     {
@@ -194,27 +200,27 @@ public class AddressablesController : Singleton<AddressablesController>
 
     }
 
-    //리스트에 저장
-    public IEnumerator Find_List_One(string name, Transform parent, List<GameObject> Save_list)
-    {
+    ////리스트에 저장
+    //public IEnumerator Find_List_One(string name, Transform parent, List<GameObject> Save_list)
+    //{
 
-        GameObject original = AddressablesController.Instance.find_Asset_in_list(name);
-        Debug.Log("찾은거" + original);
+    //    GameObject original = AddressablesController.Instance.find_Asset_in_list(name);
+    //    Debug.Log("찾은거" + original);
 
-        Save_list.Add(Instantiate(original, parent.position, Quaternion.identity));
+    //    Save_list.Add(Instantiate(original, parent.position, Quaternion.identity));
 
-        foreach (var obj in AddressablesLoader.tempobj)
-        {
-            if (name == obj.name)
-            {
-                Debug.Log(obj.name + "리스트안에 있음");
-            }
+    //    foreach (var obj in AddressablesLoader.tempobj)
+    //    {
+    //        if (name == obj.name)
+    //        {
+    //            Debug.Log(obj.name + "리스트안에 있음");
+    //        }
 
-        }
+    //    }
 
-        yield return null;
+    //    yield return null;
 
-    }
+    //}
 
     public IEnumerator Find_List(string name,Transform parent)
     {

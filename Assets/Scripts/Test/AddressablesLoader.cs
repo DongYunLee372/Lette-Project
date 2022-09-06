@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,11 +12,12 @@ using UnityEngine.SceneManagement;
 public static class AddressablesLoader
 {
     public static List<GameObject> tempobj = new List<GameObject>();
+    public static List<string> Load_String_List = new List<string>();
     public static int ListCount = 0;
     //레이블로 생성
     //Addressables.Release();
     public static async Task InitAssets_label<T>(string label, List<T> createdObjs)
-        where T : Object
+        where T : UnityEngine.Object
     {
         Debug.Log("생성전" + label);
 
@@ -34,7 +36,7 @@ public static class AddressablesLoader
     //이름으로 생성
     //Addressables.ReleaseInstance();
     public static async Task InitAssets_name<T>(string object_name, List<T> createdObjs)
-        where T : Object
+        where T : UnityEngine.Object
     {
         //AsyncOperationHandle<GameObject> operationHandle=
         // Addressables.LoadAssetAsync<GameObject>(object_name);
@@ -103,6 +105,16 @@ public static class AddressablesLoader
     {
         Debug.Log("LoadGameObjectAndMaterial호출");
 
+
+        if (Load_String_List.Contains(name))
+        {
+            Debug.Log("이미 로드된 파일입니다. 동일한 이름의 소스 이미 로드 요청되어있음.");
+            yield return null;
+        }
+        else
+        {
+            Load_String_List.Add(name);
+        }
         //같은거 로드 못하게 예외 처리 
         //못찾으면 로드,찾으면 리턴,
         GameObject findGameobj= AddressablesController.Instance.find_Asset_in_list(name);
@@ -147,6 +159,128 @@ public static class AddressablesLoader
         //Addressables.Release(goHandle);
         //Addressables.Release(matHandle);
     }
+
+    //델리게이트
+    public static IEnumerator LoadGameObjectAndMaterial(string name, Action<AsyncOperationHandle<GameObject>> Complete)
+    {
+        Debug.Log("LoadGameObjectAndMaterial호출");
+
+
+        if (Load_String_List.Contains(name))
+        {
+            Debug.Log("이미 로드된 파일입니다. 동일한 이름의 소스 이미 로드 요청되어있음.");
+            yield return null;
+        }
+        else
+        {
+            Load_String_List.Add(name);
+        }
+        //같은거 로드 못하게 예외 처리 
+        //못찾으면 로드,찾으면 리턴,
+        GameObject findGameobj = AddressablesController.Instance.find_Asset_in_list(name);
+        if (findGameobj != null)
+        {
+            Debug.Log("이미 로드된 파일입니다.");
+            yield return null;
+        }
+        else
+        {
+            //Load a GameObject
+            AsyncOperationHandle<GameObject> goHandle = Addressables.LoadAssetAsync<GameObject>(name);
+            goHandle .Completed += Complete;
+            yield return goHandle;
+            if (goHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                GameObject gameObject = goHandle.Result;
+                tempobj.Add(gameObject);
+                ListCount = tempobj.Count;
+                Debug.Log(gameObject.name + "로드");
+
+                foreach (var obj in tempobj)
+                {
+                    //	c++;
+                    Debug.Log(obj.name + "리스트확인");
+                }
+                //etc...
+            }
+
+        }
+        ////Load a Material
+        //AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("materialKey");
+        //yield return locationHandle;
+        //AsyncOperationHandle<Material> matHandle = Addressables.LoadAssetAsync<Material>(locationHandle.Result[0]);
+        //yield return matHandle;
+        //if (matHandle.Status == AsyncOperationStatus.Succeeded)
+        //{
+        //	Material mat = matHandle.Result;
+        //	//etc...
+        //}
+
+        //Use this only when the objects are no longer needed
+        //Addressables.Release(goHandle);
+        //Addressables.Release(matHandle);
+    }
+
+
+    //public static IEnumerator LoadGameObjectAndMaterial(<string name)
+    //{
+    //    Debug.Log("LoadGameObjectAndMaterial호출");
+
+
+    //    if (Load_String_List.Contains(name))
+    //    {
+    //        Debug.Log("이미 로드된 파일입니다. 동일한 이름의 소스 이미 로드 요청되어있음.");
+    //        yield return null;
+    //    }
+    //    else
+    //    {
+    //        Load_String_List.Add(name);
+    //    }
+    //    //같은거 로드 못하게 예외 처리 
+    //    //못찾으면 로드,찾으면 리턴,
+    //    GameObject findGameobj = AddressablesController.Instance.find_Asset_in_list(name);
+    //    if (findGameobj != null)
+    //    {
+    //        Debug.Log("이미 로드된 파일입니다.");
+    //        yield return null;
+    //    }
+    //    else
+    //    {
+    //        //Load a GameObject
+    //        AsyncOperationHandle<GameObject> goHandle = Addressables.LoadAssetAsync<GameObject>(name);
+    //        yield return goHandle;
+    //        if (goHandle.Status == AsyncOperationStatus.Succeeded)
+    //        {
+    //            GameObject gameObject = goHandle.Result;
+    //            tempobj.Add(gameObject);
+    //            ListCount = tempobj.Count;
+    //            Debug.Log(gameObject.name + "로드");
+
+    //            foreach (var obj in tempobj)
+    //            {
+    //                //	c++;
+    //                Debug.Log(obj.name + "리스트확인");
+    //            }
+    //            //etc...
+    //        }
+
+    //    }
+    //    ////Load a Material
+    //    //AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("materialKey");
+    //    //yield return locationHandle;
+    //    //AsyncOperationHandle<Material> matHandle = Addressables.LoadAssetAsync<Material>(locationHandle.Result[0]);
+    //    //yield return matHandle;
+    //    //if (matHandle.Status == AsyncOperationStatus.Succeeded)
+    //    //{
+    //    //	Material mat = matHandle.Result;
+    //    //	//etc...
+    //    //}
+
+    //    //Use this only when the objects are no longer needed
+    //    //Addressables.Release(goHandle);
+    //    //Addressables.Release(matHandle);
+    //}
+
 
     private static void ObjectLoadDone(AsyncOperationHandle<GameObject> obj)
     {
@@ -233,14 +367,6 @@ public static class AddressablesLoader
         }
     }
 
-
-
-    //public static GameObject LoadAsset_name(string object_name )
-    //   {
-
-
-    //	return 
-    //   }
 
 
 }
