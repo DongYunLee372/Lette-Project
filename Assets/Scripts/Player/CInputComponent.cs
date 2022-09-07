@@ -89,7 +89,7 @@ public class CInputComponent : BaseComponent
 
 
 
-        if (state == CharacterStateMachine.eCharacterState.Attack||
+        if (/*state == CharacterStateMachine.eCharacterState.Attack||*/
             state == CharacterStateMachine.eCharacterState.Rolling||
             state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
@@ -111,6 +111,9 @@ public class CInputComponent : BaseComponent
             LeftMouseDown();
             return;
         }
+
+        if (state == CharacterStateMachine.eCharacterState.Attack)
+            return;
 
         //오른쪽 마우스 클릭
         if (Input.GetMouseButtonDown(1))

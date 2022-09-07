@@ -25,7 +25,8 @@ public class CAttackComponent : BaseComponent
 
     public bool IsLinkable = false;
 
-    public AttackInfo NextAttackInfo;
+    public AttackInfo NextAttackInfo=null;
+    public int NextAttackNum = -1;
 
     //기본 공격 정보 해당 정보를 3개 만들면 기본 공격이 설정값들에 따라 3가지 동작으로 이어진다.
     [System.Serializable]
@@ -61,10 +62,10 @@ public class CAttackComponent : BaseComponent
         //다음동작으로 넘어가기 위한 시간
         //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
         [Tooltip("연속동작이 있을때 다음 동작으로 들어가기 위한 입력 시간")]
-        public float NextMovementTimeVal;
+        public float NextActionInputTime_End;
 
         [Tooltip("다음 동작으로 넘어갈 수 있는 시간")]
-        public float NextAttackInputTime;
+        public float NextActionInputTime_Start;
 
         //데미지
         [Tooltip("공격 데미지")]
@@ -164,7 +165,7 @@ public class CAttackComponent : BaseComponent
 
     //public bool IsTimeCounterActive = false;
     public IEnumerator coroutine;
-
+    public IEnumerator Linkcoroutine;
     void Start()
     {
         
@@ -193,7 +194,7 @@ public class CAttackComponent : BaseComponent
                 new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
         }
-
+        NextAttackInfo = null;
 
     }
 
@@ -279,10 +280,34 @@ public class CAttackComponent : BaseComponent
         //if (curval.IsAttacking)
         //    return;
 
-        if (curval.IsAttacking&&!IsLinkable)
+        //이미 공격 중이고 링크가 불가능하면 공격이 실행되지 않는다.
+        if (curval.IsAttacking && !IsLinkable)
+        {
+            int a = 0;
+            Debug.Log("공격나가버림");
             return;
+        }
 
-        
+
+
+        //이미 공격중이고 링크가 가능하면 다음 공격정보가 있는지 확인한다.
+        //이런식으로하면 실제로 다음공격이 실행될때 여기서 걸려버린다.
+        //if (curval.IsAttacking && IsLinkable && NextAttackInfo!=null)
+        //    return;
+
+        if (curval.IsAttacking && IsLinkable && NextAttackNum == -1)
+        {
+            Debug.Log("선입력들어옴");
+            NextAttackNum = (CurAttackNum + 1) % attackinfos.Length;
+            NextAttackInfo = attackinfos[NextAttackNum];
+            return;
+        }
+
+        //if(NextAttackInfo ==null)
+        //{
+
+        //}
+
 
         //공격중으로 바꿈
         if (curval.IsAttacking == false)
@@ -290,44 +315,62 @@ public class CAttackComponent : BaseComponent
             movecom.Stop();
             curval.IsAttacking = true;
         }
+
         
+
         //이전에 공격했던 시간과 현재 공격이 시작된 시간의 차이를 구한다.
         float tempval = Time.time - lastAttackTime;
 
-
-        //다음 동작으로 넘어가기 위한
-        if (IsLinkable|| tempval <= attackinfos[CurAttackNum].NextMovementTimeVal)
+        //선입력정보가 없으면 링크가능한지 판단해서 동작을 해준다.
+        if(NextAttackNum == -1)
         {
-            Debug.Log("링크가능");
-            CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/attackinfos.Length;
+            //다음 동작으로 넘어가기 위한
+            if (/*tempval <= attackinfos[CurAttackNum].NextMovementTimeVal*/IsLinkable)
+            {
+                Debug.Log("링크가능");
+                CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/attackinfos.Length;
 
+            }
+            else
+            {
+                CurAttackNum = 0;
+            }
         }
-        else
+        else//선입력정보가 있으면 해당 공격을 해주고 넘버를 올려준다.
         {
-            CurAttackNum = 0;
+            CurAttackNum = NextAttackInfo.AttackNum;
         }
+        NextAttackInfo = null;
+        NextAttackNum = -1;
 
         //coroutine = Cor_TimeCounter(attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect);
         //일정 시간 이후에
-        if(attackinfos[CurAttackNum].Effect!=null)
+        if (attackinfos[CurAttackNum].Effect!=null)
         {
             coroutine = timer.Cor_TimeCounter<GameObject, float>
             (attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect, 1.5f);
             StartCoroutine(coroutine);
         }
 
-        IsLinkable = false;
-        coroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].NextAttackInputTime, IsLinkAble);
-        StartCoroutine(coroutine);
+        //IsLinkable = false;
+        Linkcoroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].NextActionInputTime_Start, ActiveLinkable);
+        StartCoroutine(Linkcoroutine);
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
         animator.Play(attackinfos[CurAttackNum].aniclip.name, attackinfos[CurAttackNum].animationPlaySpeed/*,0,attackinfos[CurAttackNum].StartDelay*/);
     }
 
 
-    public void IsLinkAble()
+    public void ActiveLinkable()
     {
         IsLinkable = true;
+        Linkcoroutine = null;
+    }
+
+    public void DeActiveLinkable()
+    {
+        IsLinkable = false;
+        Linkcoroutine = null;
     }
 
     //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨
@@ -374,7 +417,7 @@ public class CAttackComponent : BaseComponent
     //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
     public void AttackEnd(string s_val)
     {
-        IsLinkable = false;
+        //IsLinkable = false;
         //Debug.Log($"공격 끝 들어옴 -> {s_val}");
         if (effectobj!=null)
         {
@@ -383,17 +426,29 @@ public class CAttackComponent : BaseComponent
             effectobj.transform.parent = effectparent;
         }
 
+        if (!IsLinkable)
+        {
+            ActiveLinkable();
+        }
+
+        Linkcoroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].NextActionInputTime_End, DeActiveLinkable);
+        StartCoroutine(Linkcoroutine);
+
         //후딜레이 구현 필요 
-        if(attackinfos[CurAttackNum].RecoveryDelay > 0.0f)
-        {
-            //Debug.Log($"후딜레이 -> {attackinfos[CurAttackNum].RecoveryDelay}");
-            animator.Pause();
-            StartCoroutine(timer.Cor_TimeCounter(attackinfos[CurAttackNum].RecoveryDelay, ChangeState));
-        }
-        else
-        {
-            ChangeState();
-        }
+        //if (attackinfos[CurAttackNum].RecoveryDelay > 0.0f)
+        //{
+        //    //Debug.Log($"후딜레이 -> {attackinfos[CurAttackNum].RecoveryDelay}");
+            
+        //}
+        //else
+        //{
+        //    ChangeState();
+        //}
+
+        animator.Pause();
+        StartCoroutine(timer.Cor_TimeCounter(attackinfos[CurAttackNum].RecoveryDelay, ChangeState));
+
+        
         
         //timer.Cor_TimeCounter( ChangeState)
         //StartCoroutine(timer.Cor_TimeCounter<AttackInfo>(attackinfos[CurAttackNum].RecoveryDelay, ChangeState))
@@ -401,10 +456,16 @@ public class CAttackComponent : BaseComponent
 
     public void ChangeState()
     {
-        if (curval.IsAttacking == true)
-            curval.IsAttacking = false;
+        curval.IsAttacking = false;
+        //if (curval.IsAttacking == true)
+            
 
         lastAttackTime = Time.time;
+
+        if (NextAttackNum != -1)
+        {
+            Attack();
+        }
     }
 
 
