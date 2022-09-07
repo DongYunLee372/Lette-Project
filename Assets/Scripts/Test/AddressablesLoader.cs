@@ -14,7 +14,8 @@ public static class AddressablesLoader
     public static List<GameObject> tempobj = new List<GameObject>();
     public static List<string> Load_String_List = new List<string>();
     public static int ListCount = 0;
-    //레이블로 생성
+    
+
     //Addressables.Release();
     public static async Task InitAssets_label<T>(string label, List<T> createdObjs)
         where T : UnityEngine.Object
@@ -57,6 +58,18 @@ public static class AddressablesLoader
         // Addressables.LoadAssetAsync<GameObject>(object_name);
 
         Addressables.LoadAssetAsync<GameObject>(object_name).Completed += ObjectLoadDone;
+
+        // yield return operationHandle;
+
+        //createdObjs.Add(operationHandle.Result as T
+    }
+
+    public static async Task InitAssets_name<T>(string object_name, Action<AsyncOperationHandle<T>> Complete)
+    {
+        //AsyncOperationHandle<GameObject> operationHandle=
+        // Addressables.LoadAssetAsync<GameObject>(object_name);
+
+        Addressables.LoadAssetAsync<T>(object_name).Completed += Complete;
 
         // yield return operationHandle;
 
@@ -337,7 +350,7 @@ public static class AddressablesLoader
         }
     }
 
-    private static void OnSceneUnloaded(AsyncOperationHandle<SceneInstance> obj)
+    public static void OnSceneUnloaded(AsyncOperationHandle<SceneInstance> obj)
     {
         switch (obj.Status)
         {
@@ -352,7 +365,7 @@ public static class AddressablesLoader
         }
     }
 
-    private static void OnSceneLoaded(AsyncOperationHandle<SceneInstance> obj)
+    public static void OnSceneLoaded(AsyncOperationHandle<SceneInstance> obj)
     {
         switch (obj.Status)
         {
