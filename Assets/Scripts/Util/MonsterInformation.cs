@@ -20,7 +20,7 @@ public class MonsterInformation : ScriptableObject
     private string mon_nameEng; //몬스터 영어명
     public string P_mon_nameeng { get { return mon_nameEng; } set { mon_nameEng = value; } }
     [SerializeField]
-    
+
 
     private int mon_Default; //몬스터 등급
     public int P_mon_Default { get { return mon_Default; } set { mon_Default = value; } }
@@ -102,6 +102,11 @@ public class MonsterInformation : ScriptableObject
 
         dieDelay = diedelay;
         
+    }
+
+    public void qq()
+    {
+        Debug.Log("안녕");
     }
 
    

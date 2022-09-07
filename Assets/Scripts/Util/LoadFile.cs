@@ -19,12 +19,16 @@ public class LoadFile : MonoBehaviour
 
         if (lines.Length <= 1) return list;
 
+        //Debug.Log(file + " " + lines.Length);
+
         var header = Regex.Split(lines[0], SPLIT_RE);
         for (var i = 1; i < lines.Length; i++)
         {
 
             var values = Regex.Split(lines[i], SPLIT_RE);
             if (values.Length == 0 || values[0] == "") continue;
+
+            Debug.Log(file + " values " + values.Length);
 
             var entry = new Dictionary<string, object>();
             for (var j = 0; j < header.Length && j < values.Length; j++)

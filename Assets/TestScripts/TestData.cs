@@ -6,10 +6,10 @@ public class TestData : MonoBehaviour
 {
     Dictionary<string, MonsterInformation> MonsterDB_List = new Dictionary<string, MonsterInformation>();
     void Start()
-    {
-        MonsterInformation ddd;
-        //TestLoadFile.Read<MonsterInformation>(out ddd);
+    {              
+        TestLoadFile.Read<MonsterInformation>(out MonsterDB_List);
 
+        
 
     }
 
