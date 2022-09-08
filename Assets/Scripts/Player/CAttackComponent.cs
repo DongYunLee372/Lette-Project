@@ -25,7 +25,8 @@ public class CAttackComponent : BaseComponent
 
     public bool IsLinkable = false;
 
-    public AttackInfo NextAttackInfo=null;
+    public AttackInfo NextAttackInfo = null;
+    public bool NextAttack = false;
     public int NextAttackNum = -1;
 
     //기본 공격 정보 해당 정보를 3개 만들면 기본 공격이 설정값들에 따라 3가지 동작으로 이어진다.
@@ -41,14 +42,14 @@ public class CAttackComponent : BaseComponent
         [Tooltip("공격번호")]
         public int AttackNum;
 
+        //해당 매니메이션 클립
+        [Tooltip("해당 공격의 애니메이션 클립")]
+        public AnimationClip aniclip;
+
         //애니메이션 배속
         [Tooltip("해당 공격의 애니메이션 재생 속도")]
         [Range(0.0f, 10.0f)]
         public float animationPlaySpeed;
-        
-        //해당 매니메이션 클립
-        [Tooltip("해당 공격의 애니메이션 클립")]
-        public AnimationClip aniclip;
 
         [Tooltip("선딜")]
         [Range(0.0f, 10.0f)]
@@ -56,28 +57,29 @@ public class CAttackComponent : BaseComponent
 
         //후딜레이
         [Tooltip("후딜")]
-        [Range(0.0f,10.0f)]
+        [Range(0.0f, 10.0f)]
         public float RecoveryDelay;
+
+
+        [Tooltip("다음 동작으로 넘어갈 수 있는 시간")]
+        public float NextActionInputTime_Start;
 
         //다음동작으로 넘어가기 위한 시간
         //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
         [Tooltip("연속동작이 있을때 다음 동작으로 들어가기 위한 입력 시간")]
         public float NextActionInputTime_End;
 
-        [Tooltip("다음 동작으로 넘어갈 수 있는 시간")]
-        public float NextActionInputTime_Start;
-
         //데미지
         [Tooltip("공격 데미지")]
         public float damage;
 
-        //이펙트 생성 타이밍
-        [Tooltip("공격 이펙트 생성 타이밍")]
-        public float EffectStartTime;
-
         //공격 이펙트
         [Tooltip("공격 이펙트")]
         public GameObject Effect;
+
+        //이펙트 생성 타이밍
+        [Tooltip("공격 이펙트 생성 타이밍")]
+        public float EffectStartTime;
 
         //공격 이펙트의 위치
         [Tooltip("공격 이펙트 생성 위치")]
@@ -168,27 +170,27 @@ public class CAttackComponent : BaseComponent
     public IEnumerator Linkcoroutine;
     void Start()
     {
-        
+
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
         weaponcollider = GetComponentInChildren<WeaponCollider>();
         weaponcollider?.SetCollitionFunction(MonsterAttack);
 
-        if(effectparent==null)
+        if (effectparent == null)
         {
             effectparent = new GameObject("EffectsContainer").transform;
         }
 
         //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
-        for(int i=0;i<attackinfos.Length;i++)
+        for (int i = 0; i < attackinfos.Length; i++)
         {
             eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(attackinfos[i].aniclip.name, AttackMove),
-                new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 
-                new KeyValuePair<string, AnimationEventSystem.endCallback> (attackinfos[i].aniclip.name, AttackEnd));
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+                new KeyValuePair<string, AnimationEventSystem.endCallback>(attackinfos[i].aniclip.name, AttackEnd));
         }
 
         //초기화 할때 각각의 스킬 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
-        for (int i=0;i<skillinfos.Length;i++)
+        for (int i = 0; i < skillinfos.Length; i++)
         {
             eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
                 new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
@@ -196,15 +198,17 @@ public class CAttackComponent : BaseComponent
         }
         NextAttackInfo = null;
 
+        //Dictionary<string, AttackInfo> attackinfos;
+        //DB.Instance.Load<AttackInfo>(out attackinfos);
     }
 
     public void MonsterAttack(Collider collision)
     {
-        
+
         if (!curval.IsAttacking)
             return;
-        
-        if(collision.gameObject.tag == monstertag)
+
+        if (collision.gameObject.tag == monstertag)
         {
             Debug.Log("공격 들어옴");
         }
@@ -230,7 +234,7 @@ public class CAttackComponent : BaseComponent
     //    }
     //}
 
-    
+
 
     //스킬을 재생해준다.
     public void SkillAttack(int skillnum)
@@ -270,7 +274,7 @@ public class CAttackComponent : BaseComponent
     public void Attack()
     {
         //필요한 컴포넌트를 받아온다.
-        if(movecom==null)
+        if (movecom == null)
         {
             movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
@@ -292,22 +296,21 @@ public class CAttackComponent : BaseComponent
 
         //이미 공격중이고 링크가 가능하면 다음 공격정보가 있는지 확인한다.
         //이런식으로하면 실제로 다음공격이 실행될때 여기서 걸려버린다.
-        //if (curval.IsAttacking && IsLinkable && NextAttackInfo!=null)
-        //    return;
-
-        if (curval.IsAttacking && IsLinkable && NextAttackNum == -1)
+        if (curval.IsAttacking && IsLinkable && /*NextAttackNum == -1*/NextAttack == false)
         {
             Debug.Log("선입력들어옴");
             NextAttackNum = (CurAttackNum + 1) % attackinfos.Length;
             NextAttackInfo = attackinfos[NextAttackNum];
+            NextAttack = true;
             return;
         }
 
-        //if(NextAttackInfo ==null)
-        //{
-
-        //}
-
+        //아직 공격중 이고 선입력이 들어왔는데 또 공격이 들어오면 리턴한다.
+        if (curval.IsAttacking && NextAttack == true)
+        {
+            if (NextAttackNum == (CurAttackNum + 1) % attackinfos.Length)
+                return;
+        }
 
         //공격중으로 바꿈
         if (curval.IsAttacking == false)
@@ -316,13 +319,13 @@ public class CAttackComponent : BaseComponent
             curval.IsAttacking = true;
         }
 
-        
+
 
         //이전에 공격했던 시간과 현재 공격이 시작된 시간의 차이를 구한다.
         float tempval = Time.time - lastAttackTime;
 
         //선입력정보가 없으면 링크가능한지 판단해서 동작을 해준다.
-        if(NextAttackNum == -1)
+        if (/*NextAttackNum == -1*/NextAttack == false)
         {
             //다음 동작으로 넘어가기 위한
             if (/*tempval <= attackinfos[CurAttackNum].NextMovementTimeVal*/IsLinkable)
@@ -342,10 +345,11 @@ public class CAttackComponent : BaseComponent
         }
         NextAttackInfo = null;
         NextAttackNum = -1;
+        NextAttack = false;
 
         //coroutine = Cor_TimeCounter(attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect);
         //일정 시간 이후에
-        if (attackinfos[CurAttackNum].Effect!=null)
+        if (attackinfos[CurAttackNum].Effect != null)
         {
             coroutine = timer.Cor_TimeCounter<GameObject, float>
             (attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect, 1.5f);
@@ -376,20 +380,19 @@ public class CAttackComponent : BaseComponent
     //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨
     public void AttackMove(string clipname)
     {
-        for(int i=0;i<attackinfos.Length;i++)
+        for (int i = 0; i < attackinfos.Length; i++)
         {
-            if(attackinfos[i].aniclip.name == clipname)
+            if (attackinfos[i].aniclip.name == clipname)
             {
                 //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
                 movecom.FowardDoMove(attackinfos[i].movedis, attackinfos[i].movetime);
-
                 return;
             }
         }
 
-        for(int i=0;i<skillinfos.Length;i++)
+        for (int i = 0; i < skillinfos.Length; i++)
         {
-            if(skillinfos[i].aniclip.name == clipname)
+            if (skillinfos[i].aniclip.name == clipname)
             {
                 movecom.FowardDoMove(skillinfos[i].Movedis, skillinfos[i].MoveTime);
                 return;
@@ -399,7 +402,7 @@ public class CAttackComponent : BaseComponent
     }
 
     //공격 이펙트를 생성
-    public void CreateEffect(GameObject obj,float destroyTime)
+    public void CreateEffect(GameObject obj, float destroyTime)
     {
 
         effectobj = EffectManager.Instance.InstantiateEffect(obj, destroyTime);
@@ -419,7 +422,7 @@ public class CAttackComponent : BaseComponent
     {
         //IsLinkable = false;
         //Debug.Log($"공격 끝 들어옴 -> {s_val}");
-        if (effectobj!=null)
+        if (effectobj != null)
         {
             //Debug.Log($"공격 끝 들어옴 -> {s_val}");
             //effectobj.transform.parent = preparent;
@@ -438,7 +441,7 @@ public class CAttackComponent : BaseComponent
         //if (attackinfos[CurAttackNum].RecoveryDelay > 0.0f)
         //{
         //    //Debug.Log($"후딜레이 -> {attackinfos[CurAttackNum].RecoveryDelay}");
-            
+
         //}
         //else
         //{
@@ -448,8 +451,8 @@ public class CAttackComponent : BaseComponent
         animator.Pause();
         StartCoroutine(timer.Cor_TimeCounter(attackinfos[CurAttackNum].RecoveryDelay, ChangeState));
 
-        
-        
+
+
         //timer.Cor_TimeCounter( ChangeState)
         //StartCoroutine(timer.Cor_TimeCounter<AttackInfo>(attackinfos[CurAttackNum].RecoveryDelay, ChangeState))
     }
@@ -458,11 +461,17 @@ public class CAttackComponent : BaseComponent
     {
         curval.IsAttacking = false;
         //if (curval.IsAttacking == true)
-            
+
 
         lastAttackTime = Time.time;
 
-        if (NextAttackNum != -1)
+        //if(Linkcoroutine!=null)
+        //{
+        //    StopCoroutine(Linkcoroutine);
+        //    Linkcoroutine = null;
+        //}
+
+        if (/*NextAttackNum != -1*/NextAttack == true)
         {
             Attack();
         }
@@ -473,12 +482,12 @@ public class CAttackComponent : BaseComponent
     public void AttackCutOff()
     {
         curval.IsAttacking = false;
-        if (coroutine!=null)
+        if (coroutine != null)
         {
             StopCoroutine(coroutine);
             coroutine = null;
         }
-            
+
     }
 
 
