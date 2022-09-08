@@ -52,7 +52,7 @@ public class PlayableCharacter : MonoBehaviour
     /*초기화*/
     private void Start()
     {
-        CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
+        CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
         Debug.Log($"{CharacterDBInfo.P_player_HP}");
 
         BaseComponent[] temp = GetComponentsInChildren<BaseComponent>();

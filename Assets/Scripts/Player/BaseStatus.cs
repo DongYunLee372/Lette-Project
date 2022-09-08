@@ -63,7 +63,7 @@ public class BaseStatus:MonoBehaviour
             curLevel = value;
             if (curLevel == 1)
             {
-                CharacterDBInfo = DBController.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
+                CharacterDBInfo = DBController.Get_PlayerDB(Global_Variable.CharVar.Asha);
                 MaxHP = CharacterDBInfo.P_player_HP;
                 MaxStamina = CharacterDBInfo.P_player_Stamina;
                 MaxBalance = CharacterDBInfo.P_player_Balance;
