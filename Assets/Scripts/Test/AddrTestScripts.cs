@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -16,11 +17,12 @@ public class AddrTestScripts : MonoBehaviour
     public delegate void Complete_delegate(AsyncOperationHandle<GameObject> comp);
     public Action<AsyncOperationHandle<GameObject>> Complete_Aciton;
 
-    public GameObject tempHPbar=null;
+    public GameObject tempHPbar;
     // Start is called before the first frame update
     void Start()
     {
         pos = new GameObject();
+       // tempHPbar = new GameObject();
         pos.transform.position = new Vector3(0f, 0f, 0f);
 
         //예외처리 테스트
@@ -35,20 +37,26 @@ public class AddrTestScripts : MonoBehaviour
 
         // AddressablesLoader.InitAssets_name<SceneInstance>("Demo", handle => m_LoadedScene = handle.Result);
 
-       // AddressablesLoader.InitAssets_name<GameObject>("Susu_", handle => tempHPbar = handle.Result);
+        // AddressablesLoader.InitAssets_name<GameObject>("Susu_", handle => tempHPbar = handle.Result);
 
-       // StartCoroutine(AddressablesController.Instance.Load_Name("Susu_", pos.transform));
+        // StartCoroutine(AddressablesController.Instance.Load_Name("Susu_", pos.transform));
 
-         Loder();
+        Loder();
+
+        //TaskRun();
+        //TaskFromResult();
+
     }
 
-    public async Task Loder()
+    async public void Loder()
     {
-        await AddressablesLoader.InitAssets_name<GameObject>("Susu_", handle => tempHPbar = handle.Result);
+      
+       await AddressablesLoader.InitAssets_name<GameObject>("Susu_", handle => tempHPbar = handle.Result);
+
         Debug.Log("다녀왔음"+ tempHPbar);
 
-        Instantiate(tempHPbar, new Vector3(0, 0, 0), Quaternion.identity);
-        Debug.Log("생성함" + pos.name);
+        Instantiate(tempHPbar, pos.transform);
+        Debug.Log("생성함"+pos.name );
 
       
     }
@@ -59,7 +67,37 @@ public class AddrTestScripts : MonoBehaviour
         Debug.Log("다녀왔음" + tempHPbar);
     }
 
-    
+
+    async void TaskRun()
+    {
+        var task = Task.Run(() => TaskRunMethod(3));
+        int count = await task;
+        Debug.Log("Count : " + task.Result); // 출력 : Count : 3  
+    }
+
+    private int TaskRunMethod(int limit)
+    {
+        int count = 0;
+        for (int i = 0; i < limit; i++)
+        {
+            ++count;
+            Thread.Sleep(1000);
+        }
+
+        return count;
+    }
+
+    async void TaskFromResult()
+    {
+        int sum = await Task.FromResult(Add(1, 2));
+        Debug.Log(sum+"sum"); // 출력 : 3  
+    }
+
+    private int Add(int a, int b)
+    {
+        return a + b;
+    }
+
 
 
     // Update is called once per frame
