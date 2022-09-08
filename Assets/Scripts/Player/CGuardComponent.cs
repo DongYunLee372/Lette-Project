@@ -103,16 +103,20 @@ public class CGuardComponent : BaseComponent
     //가드중일때 데미지가 들어왔을때는 이쪽으로 들어온다.
     public void Damaged_Guard(float damage,Vector3 hitpoint)
     {
-        if (PlayableCharacter.Instance.status.CurBalance >= BalanceDecreaseVal)
-        {
-            EffectManager.Instance.InstantiateEffect(GuardEffect, guardeffectpos.position, guardeffectpos.rotation);
-            PlayableCharacter.Instance.status.CurBalance -= BalanceDecreaseVal;
-            GuardStun();
-        }
-        else
-        {
-            PlayableCharacter.Instance.Damaged(damage, hitpoint);
-        }
+        //if (PlayableCharacter.Instance.status.CurBalance >= BalanceDecreaseVal)
+        //{
+        //    EffectManager.Instance.InstantiateEffect(GuardEffect, guardeffectpos.position, guardeffectpos.rotation);
+        //    PlayableCharacter.Instance.status.CurBalance -= BalanceDecreaseVal;
+        //    GuardStun();
+        //}
+        //else
+        //{
+        //    PlayableCharacter.Instance.Damaged(damage, hitpoint);
+        //}
+
+        //스테미나에 따라서
+
+        PlayableCharacter.Instance.Damaged(damage, hitpoint);
     }
 
 

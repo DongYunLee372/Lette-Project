@@ -21,10 +21,10 @@ public class BaseStatus:MonoBehaviour
     private float damage;//공격력
     [SerializeField]
     private float defense;//방어력
-    [SerializeField]
-    private float maxBalance;
-    [SerializeField]
-    private float curBalance;
+    //[SerializeField]
+    //private float maxBalance;
+    //[SerializeField]
+    //private float curBalance;
     [SerializeField]
     private float maxMP;
     [SerializeField]
@@ -33,12 +33,17 @@ public class BaseStatus:MonoBehaviour
     private int curExp;
     [SerializeField]
     private int nextExp;
-
+    [SerializeField]
+    private float maxGroggy;
+    [SerializeField]
+    private float curGroggy;
 
     [SerializeField]
     public CharacterInformation CharacterDBInfo;
+    public Dictionary<string, CharacterInformation> CharacterDBInfoDic;
+
     [SerializeField]
-    private DataLoad_Save DBController;
+    //private DataLoad_Save DBController;
     private UICharacterInfoPanel uiPanel;
 
     CorTimeCounter timecounter = new CorTimeCounter();
@@ -63,11 +68,12 @@ public class BaseStatus:MonoBehaviour
             curLevel = value;
             if (curLevel == 1)
             {
-                CharacterDBInfo = DBController.Get_PlayerDB(Global_Variable.CharVar.Asha);
-                MaxHP = CharacterDBInfo.P_player_HP;
-                MaxStamina = CharacterDBInfo.P_player_Stamina;
-                MaxBalance = CharacterDBInfo.P_player_Balance;
-                MaxMP = CharacterDBInfo.P_player_MP;
+                //CharacterDBInfo = DBController.Get_PlayerDB(Global_Variable.CharVar.Asha);
+                LoadFile.Read<CharacterInformation>(out CharacterDBInfoDic);
+                MaxHP = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_HP;
+                MaxStamina = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_Stamina;
+                //MaxBalance = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_Balance;
+                //MaxMP = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_MP;
 
             }
         }
@@ -106,7 +112,52 @@ public class BaseStatus:MonoBehaviour
         }
         return true;
     }
-    
+
+
+    public float MaxGroggy
+    {
+        get => maxGroggy;
+        set
+        {
+            maxGroggy = value;
+            //uiPanel.HPBar.SetMaxValue(value);
+            CurGroggy = maxGroggy;
+        }
+    }
+
+    public float CurGroggy
+    {
+        get => curGroggy;
+        set
+        {
+            curGroggy = value;
+            if (curGroggy > MaxGroggy)
+            {
+                curGroggy = MaxGroggy;
+            }
+            //uiPanel.HPBar.SetCurValue(value);
+        }
+    }
+
+    public bool GroggyUp(float val)
+    {
+        CurGroggy = CurGroggy + val;
+        if (CurGroggy == MaxGroggy)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public bool GroggyDown(float val)
+    {
+        CurGroggy = CurGroggy + val;
+        if (CurGroggy == 0)
+        {
+            return false;
+        }
+        return true;
+    }
 
     public float MaxStamina
     {
@@ -166,61 +217,61 @@ public class BaseStatus:MonoBehaviour
         return true;
     }
 
-    public float MaxBalance 
-    { 
-        get => maxBalance;
-        set
-        {
-            maxBalance = value;
-            uiPanel.Balancebar.SetMaxValue(value);
-            CurBalance = maxBalance;
-        }
-    }
-    public float CurBalance 
-    { 
-        get => curBalance;
-        set
-        {
-            if (value > curBalance)
-            {
-                if (CorBALCount != null)
-                {
-                    StopCoroutine(CorBALCount);
-                    CorBALCount = null;
-                }
-                if (CorBALRecover != null)
-                {
-                    StopCoroutine(CorBALRecover);
-                    CorBALRecover = null;
-                }
-            }
+    //public float MaxBalance 
+    //{ 
+    //    get => maxBalance;
+    //    set
+    //    {
+    //        maxBalance = value;
+    //        uiPanel.Balancebar.SetMaxValue(value);
+    //        CurBalance = maxBalance;
+    //    }
+    //}
+    //public float CurBalance 
+    //{ 
+    //    get => curBalance;
+    //    set
+    //    {
+    //        if (value > curBalance)
+    //        {
+    //            if (CorBALCount != null)
+    //            {
+    //                StopCoroutine(CorBALCount);
+    //                CorBALCount = null;
+    //            }
+    //            if (CorBALRecover != null)
+    //            {
+    //                StopCoroutine(CorBALRecover);
+    //                CorBALRecover = null;
+    //            }
+    //        }
 
 
-            curBalance = value;
-            if(curBalance>MaxBalance)
-            {
-                curBalance = MaxBalance;
-            }
-            uiPanel.Balancebar.SetCurValue(curBalance);
+    //        curBalance = value;
+    //        if(curBalance>MaxBalance)
+    //        {
+    //            curBalance = MaxBalance;
+    //        }
+    //        uiPanel.Balancebar.SetCurValue(curBalance);
 
-            if (curBalance != MaxBalance && CorBALCount == null)
-            {
-                CorBALCount = timecounter.Cor_TimeCounter(3.0f, BALRecoveryStart);
-                StartCoroutine(CorBALCount);
-            }
-        }
+    //        if (curBalance != MaxBalance && CorBALCount == null)
+    //        {
+    //            CorBALCount = timecounter.Cor_TimeCounter(3.0f, BALRecoveryStart);
+    //            StartCoroutine(CorBALCount);
+    //        }
+    //    }
 
-    }
+    //}
 
-    public bool BalanceUp(float val)
-    {
-        CurBalance = CurBalance + val;
-        if(CurBalance==MaxBalance)
-        {
-            return false;
-        }
-        return true;
-    }
+    //public bool BalanceUp(float val)
+    //{
+    //    CurBalance = CurBalance + val;
+    //    if(CurBalance==MaxBalance)
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 
 
     public float MaxMP 
@@ -298,9 +349,9 @@ public class BaseStatus:MonoBehaviour
         set => defense = value; 
     }
 
-    public void Init(DataLoad_Save DBController, UICharacterInfoPanel uipanel)
+    public void Init(UICharacterInfoPanel uipanel)
     {
-        this.DBController = DBController;
+        //this.DBController = DBController;
         this.uiPanel = uipanel;
         CurLevel = 1;
     }
@@ -326,15 +377,15 @@ public class BaseStatus:MonoBehaviour
         StartCoroutine(CorSTMRecover);
     }
 
-    public void BALRecoveryStart()
-    {
-        Debug.Log("Balancerecover 시작");
-        StopCoroutine(CorBALCount);
-        CorBALCount = null;
+    //public void BALRecoveryStart()
+    //{
+    //    Debug.Log("Balancerecover 시작");
+    //    StopCoroutine(CorBALCount);
+    //    CorBALCount = null;
 
-        CorBALRecover = Recovery(BalanceUp);
-        StartCoroutine(CorBALRecover);
-    }
+    //    CorBALRecover = Recovery(BalanceUp);
+    //    StartCoroutine(CorBALRecover);
+    //}
 
     IEnumerator Recovery(invoker _invoker)
     {

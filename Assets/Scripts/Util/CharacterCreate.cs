@@ -11,7 +11,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
     void Start()
     {
-        DataLoad_Save.Instance.Init();
+        //DataLoad_Save.Instance.Init();
 
     }
 

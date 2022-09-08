@@ -41,7 +41,7 @@ public class PlayableCharacter : MonoBehaviour
 
 
 
-    public CharacterInformation CharacterDBInfo;
+    //public CharacterInformation CharacterDBInfo;
 
     /*초기화*/
     private void Awake()
@@ -52,8 +52,8 @@ public class PlayableCharacter : MonoBehaviour
     /*초기화*/
     private void Start()
     {
-        CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
-        Debug.Log($"{CharacterDBInfo.P_player_HP}");
+        //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
+        //Debug.Log($"{CharacterDBInfo.P_player_HP}");
 
         BaseComponent[] temp = GetComponentsInChildren<BaseComponent>();
 
@@ -69,7 +69,7 @@ public class PlayableCharacter : MonoBehaviour
 
         status = this.gameObject.AddComponent<BaseStatus>();
         
-        status.Init(DataLoad_Save.Instance,CharacterInfoPanel);
+        status.Init(CharacterInfoPanel);
 
 
     }

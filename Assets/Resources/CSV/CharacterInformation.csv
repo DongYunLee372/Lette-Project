@@ -1,2 +1,2 @@
-player_name,player_HP,player_Def,player_MP,player_Stamina,player_mSpeed,player_Balance,player_Atk1,player_Stadown1,player_MPup1,player_BalDown1,player_Atk2,player_Stadown2,player_MPup2,player_BalDown2,player_Atk3,player_Stadown3,player_MPup3,player_BalDown3
-Asha,200,10,100,150,5,120,10,20,15,5,10,20,15,5,20,30,20,10
+player_name,player_HP,player_Def,player_Stamina,player_Stamina_Recovery_Time,player_Stamina_Recovery_Val,player_Groggy,player_Groggy_Recovery_Time,player_Groggy_Recovery_Val,player_Stagger_Groggy,player_Down_Groggy,player_mSpeed,player_RunSpeed,player_MouseSpeed,player_RotSpeed
+Asha,200,10,150,1,10,100,1,10,30,80,5,5,1,0.5
