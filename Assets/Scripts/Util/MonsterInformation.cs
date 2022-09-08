@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Monster Data", menuName = "Scriptable Object/Monster Data", order = int.MaxValue)]
-public class MonsterInformation : ScriptableObject
+public class MonsterInformation : Data
 {
     [SerializeField]
     private int Number;

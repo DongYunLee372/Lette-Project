@@ -10,34 +10,46 @@ namespace Global_Variable
     public class CharVar
     {
         public const string CharacterUIPanel = "FriendPanel";
-        public const string mon_01_01 = "mon_01_01";
-        public const string mon_01_02 = "mon_01_02";
-        public const string mon_02_01 = "mon_02_01";
-        public const string mon_03_01 = "mon_03_01";
-        public const string mon_04_01 = "mon_04_01";
-        public const string mon_04_02 = "mon_04_02";
-        public const string mon_05_01 = "mon_05_01";
-        public const string mon_06_01 = "mon_06_01";
 
+        // 몬스터들
+        public const string Slime = "Slime";
+        public const string Split_Slime = "Split Slime";
+        public const string BowMan = "BowMan";
+        public const string Front_Charger = "Front_Charger";
+        public const string Summoner = "Summoner";
+        public const string Skeleton_Warrior = "Skeleton_Warrior";
+        public const string High_Skeleton_Warrior = "High_Skeleton_Warrior";
+        public const string Arthur = "Arthur";
 
+        //몬스터 스킬들
+        public const string Split = "Split";
+        public const string Absorption = "Absorption";
+        public const string Absorption2 = "Absorption2";
+        public const string Shoot_Arrow = "Shoot_Arrow";
+        public const string Slap = "Slap";
+        public const string Sting = "Sting";
+        public const string Attack = "Attack";
+        public const string Rush_Attack = "Rush_Attack";
+        public const string Skeleton_recall = "Skeleton_recall";
+        public const string Meteor = "Meteor";
+        public const string Not_get_out_Soul = "Not_get_out_Soul";
+        public const string Roar = "Roar";
+        public const string Bang = "Bang";
+        public const string Shield_Counter = "Shield_Counter";
+        public const string Magic_Beam = "Magic_Beam";
+        public const string Monster_Recall = "Monster_Recall";
+        public const string Rush = "Rush";
+        public const string Double_Attack = "Double_Attack";
+        public const string Guided_Magic_Bullet2 = "Guided_Magic_Bullet2";
+        public const string Rush_Sword_Attack = "Rush_Sword_Attack";
+        public const string The_Great_Sword_Slap = "The_Great_Sword_Slap";
 
-        public const string mon_01_01_2 = "mon_01_01_2";
+        //몬스터 타겟 DB
+        public const string one33330211 = "33330211";
+        public const string two33330212 = "33330212";
+        public const string three33330312 = "33330312";
 
-
-        public const string mon_02_01_2 = "mon_02_01_2";
-        public const string mon_02_01_3 = "mon_02_01_3";
-        public const string mon_03_01_2 = "mon_03_01_2";
-        public const string mon_04_01_2 = "mon_04_01_2";
-        public const string mon_04_02_2 = "mon_04_02_2";
-        public const string mon_04_02_3 = "mon_04_02_3";
-        public const string mon_05_01_2 = "mon_05_01_2";
-        public const string mon_05_01_3 = "mon_05_01_3";
-        public const string mon_06_02 = "mon_06_02";
-        public const string mon_06_04 = "mon_06_04";
-        public const string mon_06_06 = "mon_06_06";
-        public const string mon_06_08 = "mon_06_08";
-        public const string mon_06_09 = "mon_06_09";
-        public const string mon_06_10 = "mon_06_10";
+        public const string Asha = "Asha"; //캐릭터
     }
 
     public class UIname

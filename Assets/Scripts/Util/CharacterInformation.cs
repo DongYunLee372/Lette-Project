@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Data", menuName = "Scriptable Object/Player Data", order = int.MaxValue)]
 
-public class CharacterInformation : ScriptableObject
+public class CharacterInformation : Data
 {
     [SerializeField]
     private int player_HP;

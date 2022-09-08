@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestData : MonoBehaviour
 {
-    Dictionary<string, MonsterInformation> MonsterDB_List = new Dictionary<string, MonsterInformation>();
+    Dictionary<string, MonsterInformation> MonsterDB_List;
     void Start()
     {              
         TestLoadFile.Read<MonsterInformation>(out MonsterDB_List);
@@ -13,9 +13,9 @@ public class TestData : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        TestLoadFile.Read<MonsterInformation>(out MonsterDB_List);
     }
+    
 }

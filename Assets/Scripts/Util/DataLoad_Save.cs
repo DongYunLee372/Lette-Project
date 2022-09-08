@@ -9,155 +9,20 @@ using UnityEngine;
 
 public class DataLoad_Save : MySingleton<DataLoad_Save>
 {
-    [SerializeField]
-    List<CharacterInformation> PlayerDB_List = new List<CharacterInformation>();
+    Dictionary<string, MonsterInformation> MonsterDB_List;
+    Dictionary<string, CharacterInformation> PlayerDB_List;
+    Dictionary<string, MonsterSkillInformation> MonsterSkillDB_List;
+    Dictionary<string, MonsterTargetInformation> MonsterTargetDB_List;
 
-    Dictionary<string, MonsterInformation> MonsterDB_List = new Dictionary<string, MonsterInformation>();
-    //Dictionary<string, MonsterSkillInformation> MonsterSkillDB_List = new Dictionary<string, MonsterSkillInformation>();
-    Dictionary<string, MonsterTargetInformation> MonsterTargetDB_List = new Dictionary<string, MonsterTargetInformation>();
-
-
-    [SerializeField]
-    List<MonsterSkillInformation> MonsterSkillDB_List = new List<MonsterSkillInformation>();
-    [SerializeField]
-    List<Player_aconstant> Player_A_constantDB_List = new List<Player_aconstant>();
-    [SerializeField]
-    List<Monster_aconstant> Monster_A_constantDB_List = new List<Monster_aconstant>();
-
+    //MonsterInformation qqq = new MonsterInformation();
+    
     private void Awake()
     {
-        Init();
-    }
-
-    public void Init()
-    {
-
-        List<Dictionary<string, object>> Player_db_Dialog = LoadFile.Read("CSV/Player_DB");
-        List<Dictionary<string, object>> Monster_db_Dialog = LoadFile.Read("CSV/Monster_DB");
-        List<Dictionary<string, object>> MonsterSkill_db_Dialog = LoadFile.Read("CSV/MonsterSkill_DB");
-        List<Dictionary<string, object>> MonsterTarget_db_Dialog = LoadFile.Read("CSV/MonsterTarget_DB");
-        List<Dictionary<string, object>> Player_A_constant_db_Dialog = LoadFile.Read("CSV/Player_a constant_DB");
-        List<Dictionary<string, object>> Monster_A_constant_db_Dialog = LoadFile.Read("CSV/Monster_a constant_DB");
-
-        for (int i = 0; i < Player_db_Dialog.Count; i++)
-        {
-            CharacterInformation C_test = new CharacterInformation();
-            C_test.set((int)Player_db_Dialog[i]["player_HP"]
-                , (int)Player_db_Dialog[i]["player_Def"]
-                , (int)Player_db_Dialog[i]["player_MP"]
-                , (int)Player_db_Dialog[i]["player_Stamina"]
-                , (int)Player_db_Dialog[i]["player_mSpeed"]
-                , (int)Player_db_Dialog[i]["player_Balance"]
-                , (int)Player_db_Dialog[i]["player_Atk1"]
-                , (int)Player_db_Dialog[i]["player_Stadown1"]
-                , (int)Player_db_Dialog[i]["player_MPup1"]
-                , (int)Player_db_Dialog[i]["player_BalDown1"]
-                , (int)Player_db_Dialog[i]["player_Atk2"]
-                , (int)Player_db_Dialog[i]["player_Stadown2"]
-                , (int)Player_db_Dialog[i]["player_MPup2"]
-                , (int)Player_db_Dialog[i]["player_BalDown2"]
-                , (int)Player_db_Dialog[i]["player_Atk3"]
-                , (int)Player_db_Dialog[i]["player_Stadown3"]
-                , (int)Player_db_Dialog[i]["player_MPup3"]
-                , (int)Player_db_Dialog[i]["player_BalDown3"]
-                );
-            PlayerDB_List.Add(C_test);    
-        }
-        Debug.Log("뭐지 " + Monster_db_Dialog.Count);
-        for (int i = 0; i < Monster_db_Dialog.Count; i++)
-        {
-            MonsterInformation C_Mon = new MonsterInformation();
-            C_Mon.Set((int)Monster_db_Dialog[i]["Number"]
-                , Monster_db_Dialog[i]["mon_Index"].ToString()
-                , Monster_db_Dialog[i]["mon_nameKor"].ToString()
-                , Monster_db_Dialog[i]["mon_nameEng"].ToString()
-                , (int)Monster_db_Dialog[i]["mon_Default"]
-                , (int)Monster_db_Dialog[i]["mon_Type"]
-                , (int)Monster_db_Dialog[i]["mon_Position"]
-                , (int)Monster_db_Dialog[i]["mon_MaxHP"]
-                , (int)Monster_db_Dialog[i]["mon_Atk"]
-                , (int)Monster_db_Dialog[i]["mon_Def"]
-                , (int)Monster_db_Dialog[i]["mon_moveSpeed"]
-                , (int)Monster_db_Dialog[i]["mon_Balance"]
-                , (int)Monster_db_Dialog[i]["mon_ShortRange"]
-                , (int)Monster_db_Dialog[i]["mon_LongRange"]
-                , (int)Monster_db_Dialog[i]["mon_maxMP"]
-                , (int)Monster_db_Dialog[i]["mon_haveMP"]
-                , (int)Monster_db_Dialog[i]["mon_regenMP"]
-                , (int)Monster_db_Dialog[i]["dieDelay"]
-                );
-            MonsterDB_List.Add(Monster_db_Dialog[i]["mon_Index"].ToString(), C_Mon);
-
-        }
-        for (int i = 0; i < MonsterTarget_db_Dialog.Count; i++)
-        {
-            MonsterTargetInformation C_MonTarget = new MonsterTargetInformation();
-            C_MonTarget.Set(Convert.ToInt32(MonsterTarget_db_Dialog[i]["Target_Rank"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["Number"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["Character_ID"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["target_Location1"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["target_Location2"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["target_Location3"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Location1"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Location2"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Location3"])
-                , Convert.ToInt32(MonsterTarget_db_Dialog[i]["mon_Range"])
-                );
-            MonsterTargetDB_List.Add(MonsterTarget_db_Dialog[i]["Character_ID"].ToString() , C_MonTarget);
-        }
-       
-        for (int i = 0; i < MonsterSkill_db_Dialog.Count; i++)
-        {
-            MonsterSkillInformation C_MonSkill = new MonsterSkillInformation();
-            C_MonSkill.Set(Convert.ToInt32(MonsterSkill_db_Dialog[i]["Number"])
-                , MonsterSkill_db_Dialog[i]["mon_Index"].ToString()
-                , MonsterSkill_db_Dialog[i]["skill_Name_Kor"].ToString()
-                , MonsterSkill_db_Dialog[i]["skill_Name_En"].ToString()
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_ID"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_Type"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_Targetyp"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_Range"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_dmg"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_MP"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_Cool"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_atkTime"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_continueTime"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_AtkCount"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_DiffObj"])
-                , Convert.ToInt32(MonsterSkill_db_Dialog[i]["skill_ThrowObj"])
-                );
-            // MonsterSkillDB_List.Add(MonsterSkill_db_Dialog[i]["mon_Index"].ToString() , C_MonSkill);
-
-            MonsterSkillDB_List.Add(C_MonSkill);
-        }
         
-        
-
-        for (int i = 0; i < Player_A_constant_db_Dialog.Count; i++)
-        {
-            Player_aconstant C_Player_aconstant = new Player_aconstant();
-            C_Player_aconstant.Set((int)Player_A_constant_db_Dialog[i]["Def"]
-                , (float)Player_A_constant_db_Dialog[i]["Damege_Absorption"]
-                , (float)Player_A_constant_db_Dialog[i]["Damege_Ratio"]
-                , (int)Player_A_constant_db_Dialog[i]["NowHP"]
-                , (int)Player_A_constant_db_Dialog[i]["Damege"]
-                
-                );
-            Player_A_constantDB_List.Add(C_Player_aconstant);
-        }
-
-        for (int i = 0; i < Monster_A_constant_db_Dialog.Count; i++)
-        {
-            Monster_aconstant C_mon_aconstant = new Monster_aconstant();
-            C_mon_aconstant.Set((int)Monster_A_constant_db_Dialog[i]["Def"]
-               , (float)Monster_A_constant_db_Dialog[i]["Damege_Absorption"]
-                , (float)Monster_A_constant_db_Dialog[i]["Damege_Ratio"]
-                , (int)Monster_A_constant_db_Dialog[i]["NowHP"]
-                , (int)Monster_A_constant_db_Dialog[i]["Damege"]
-                );
-            Monster_A_constantDB_List.Add(C_mon_aconstant);
-        }
-
+        LoadFile.Read<MonsterInformation>(out MonsterDB_List);
+        LoadFile.Read<CharacterInformation>(out PlayerDB_List);
+        LoadFile.Read<MonsterSkillInformation>(out MonsterSkillDB_List);
+        LoadFile.Read<MonsterTargetInformation>(out MonsterTargetDB_List);
     }
 
     public MonsterInformation Get_MonsterDB(string index)
@@ -167,16 +32,16 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
         return testData;
         
     }
-    public CharacterInformation Get_PlayerDB(EnumScp.PlayerDBIndex testenum)
+    public CharacterInformation Get_PlayerDB(string index)
     {
         CharacterInformation testData = ScriptableObject.CreateInstance<CharacterInformation>();
-        testData = PlayerDB_List[(int)testenum];
+        testData = PlayerDB_List[index];
         return testData;
     }
-    public MonsterSkillInformation Get_MonsterSkillDB(EnumScp.MonsterSkill testenum)
+    public MonsterSkillInformation Get_MonsterSkillDB(string index)
     {
         MonsterSkillInformation testData = ScriptableObject.CreateInstance<MonsterSkillInformation>();
-        testData = MonsterSkillDB_List[(int)testenum];
+        testData = MonsterSkillDB_List[index];
         return testData;
     }
     public MonsterTargetInformation Get_MonsterTargetDB(string index)
@@ -185,23 +50,9 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
         testData = MonsterTargetDB_List[index];
         return testData;
     }
-    public Monster_aconstant Get_Monster_A_ConstantDB(EnumScp.A_Constant testenum)
-    {
-        Monster_aconstant testData = ScriptableObject.CreateInstance<Monster_aconstant>();
-        testData = Monster_A_constantDB_List[(int)testenum];
-        return testData;
-    }
-    public Player_aconstant Get_Player_A_ConstantDB(EnumScp.A_Constant testenum)
-    {
-        Player_aconstant testData = ScriptableObject.CreateInstance<Player_aconstant>();
-        testData = Player_A_constantDB_List[(int)testenum];
-        return testData;
-    }
+    
 
-    void Start()
-    {
-       
-    }
+    
 
     
     

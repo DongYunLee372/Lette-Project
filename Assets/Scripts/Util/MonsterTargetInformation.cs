@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MonsterTarget Data", menuName = "Scriptable Object/MonsterTarget Data", order = int.MaxValue)]
-public class MonsterTargetInformation : ScriptableObject
+public class MonsterTargetInformation : Data
 {
     [SerializeField]
     private int Target_Rank;
