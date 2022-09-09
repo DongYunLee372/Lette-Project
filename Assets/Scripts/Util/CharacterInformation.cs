@@ -16,25 +16,12 @@ public class CharacterInformation : Data
     private int player_HP;
     public int P_player_HP { get { return player_HP; } set { player_HP = value; } }
 
-    //// hp 자동회복 시간 
-    //[SerializeField]
-    //private int player_HP_Recovery_Time;
-    //public int P_player_HP_Recovery_Time { get { return player_HP_Recovery_Time; } set { player_HP_Recovery_Time = value; } }
-
-    //// hp 자동회복 값
-    //[SerializeField]
-    //private int player_HP_Recovery_Val;
-    //public int P_player_HP_Recovery_Val { get { return player_HP_Recovery_Val; } set { player_HP_Recovery_Val = value; } }
 
     //캐릭터 방어력
     [SerializeField]
     private int player_Def;
     public int P_player_Def { get { return player_Def; } set { player_Def = value; } }
 
-    ////캐릭터 mp 총량
-    //[SerializeField]
-    //private int player_MP;
-    //public int P_player_MP { get { return player_MP; } set { player_MP = value; } }
 
     //캐릭터 Stamina 총량
     [SerializeField]
@@ -92,10 +79,31 @@ public class CharacterInformation : Data
     public int P_player_MouseSpeed { get { return player_MouseSpeed; } set { player_MouseSpeed = value; } }
 
     [SerializeField]
-    private int player_RotSpeed;
-    public int P_player_RotSpeed { get { return player_RotSpeed; } set { player_RotSpeed = value; } }
+    private float player_RotSpeed;
+    public float P_player_RotSpeed { get { return player_RotSpeed; } set { player_RotSpeed = value; } }
 
 
+    /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+    
+
+
+
+    ////캐릭터 mp 총량
+    //[SerializeField]
+    //private int player_MP;
+    //public int P_player_MP { get { return player_MP; } set { player_MP = value; } }
+
+    //// hp 자동회복 시간 
+    //[SerializeField]
+    //private int player_HP_Recovery_Time;
+    //public int P_player_HP_Recovery_Time { get { return player_HP_Recovery_Time; } set { player_HP_Recovery_Time = value; } }
+
+    //// hp 자동회복 값
+    //[SerializeField]
+    //private int player_HP_Recovery_Val;
+    //public int P_player_HP_Recovery_Val { get { return player_HP_Recovery_Val; } set { player_HP_Recovery_Val = value; } }
 
     //[SerializeField]
     //private int player_Balance;

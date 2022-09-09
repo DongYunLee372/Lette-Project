@@ -1,0 +1,4 @@
+AttackName,AttackType,AnimationClipName,AnimationPlaySpeed,StartDelay,RecoveryDelay,BufferdInputTime_Start,BufferdInputTime_End,Damage,StaminaGaugeDown,EffectName,EffectStartTime,EffectPosRot,EffectDestroyTime,movedistance,movetime,ProjectileObjName,TargetObjName,NextAttackName
+Attack1,Normal,_Attack01,1,0,0.1,0.2,0.2,10,5,,0,"0,0,0",0,5,0.1,,,_Attack02
+Attack2,Normal,_Attack02,1.2,0,0.1,0.2,0.2,10,5,,0,"0,0,0",0,10,0.2,,,_Attack03
+Attack3,Normal,_Attack03,3,0,0.2,0.4,0,10,10,,0,"0,0,0",0,10,0.3,,,

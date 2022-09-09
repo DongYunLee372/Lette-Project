@@ -37,7 +37,8 @@ public class BaseStatus:MonoBehaviour
     private float maxGroggy;
     [SerializeField]
     private float curGroggy;
-
+    [SerializeField]
+    private float testtesttest;
     [SerializeField]
     public CharacterInformation CharacterDBInfo;
     public Dictionary<string, CharacterInformation> CharacterDBInfoDic;
@@ -72,6 +73,7 @@ public class BaseStatus:MonoBehaviour
                 LoadFile.Read<CharacterInformation>(out CharacterDBInfoDic);
                 MaxHP = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_HP;
                 MaxStamina = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_Stamina;
+                testtesttest = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_RotSpeed;
                 //MaxBalance = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_Balance;
                 //MaxMP = CharacterDBInfoDic[Global_Variable.CharVar.Asha].P_player_MP;
 
@@ -406,10 +408,6 @@ public class BaseStatus:MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        
-    }
 
 
 }

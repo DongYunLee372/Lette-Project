@@ -25,13 +25,18 @@ public class CAttackComponent : BaseComponent
 
     public bool IsLinkable = false;
 
-    public AttackInfo NextAttackInfo = null;
+    public AttackInfo_Ex NextAttackInfo = null;
     public bool NextAttack = false;
     public int NextAttackNum = -1;
 
+    public Dictionary<string, AttackInfo> LoadedAttackInfoDic;
+
+    [SerializeField]
+    AttackInfo testinfooooo;
+
     //기본 공격 정보 해당 정보를 3개 만들면 기본 공격이 설정값들에 따라 3가지 동작으로 이어진다.
     [System.Serializable]
-    public class AttackInfo
+    public class AttackInfo_Ex
     {
         [Tooltip("해당 공격의 타입을 설정한다 (노말, 광역, 투사체, 타겟팅)")]
         public CharEnumTypes.eAttackType AttackType;
@@ -73,6 +78,10 @@ public class CAttackComponent : BaseComponent
         [Tooltip("공격 데미지")]
         public float damage;
 
+        //스테미나 소비값
+        [Tooltip("공격시 줄어들 스테미나 게이지")]
+        public float StaminaGaugeDown;
+
         //공격 이펙트
         [Tooltip("공격 이펙트")]
         public GameObject Effect;
@@ -103,8 +112,8 @@ public class CAttackComponent : BaseComponent
         public GameObject TargetObj;
     }
 
-    public AttackInfo[] attackinfos;
-    public List<AttackInfo> attackinfoList;
+    public AttackInfo_Ex[] attackinfos;
+    public List<AttackInfo_Ex> attackinfoList;
 
     //스킬도 여기서 한번에 처리
     [System.Serializable]
@@ -181,6 +190,17 @@ public class CAttackComponent : BaseComponent
             effectparent = new GameObject("EffectsContainer").transform;
         }
 
+        AnimationEventsSetting();
+        Initsetting();
+
+
+
+        //Dictionary<string, AttackInfo> attackinfos;
+        //DB.Instance.Load<AttackInfo>(out attackinfos);
+    }
+
+    void AnimationEventsSetting()
+    {
         //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for (int i = 0; i < attackinfos.Length; i++)
         {
@@ -196,11 +216,18 @@ public class CAttackComponent : BaseComponent
                 new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
         }
-        NextAttackInfo = null;
-
-        //Dictionary<string, AttackInfo> attackinfos;
-        //DB.Instance.Load<AttackInfo>(out attackinfos);
     }
+
+    void Initsetting()
+    {
+        NextAttackInfo = null;
+        //기본공격 정보 받아옴
+        LoadFile.Read<AttackInfo>(out LoadedAttackInfoDic);
+        testinfooooo = LoadedAttackInfoDic["Attack1"];
+        //스킬공격 정보 받아옴
+
+    }
+
 
     public void MonsterAttack(Collider collision)
     {

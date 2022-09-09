@@ -6,7 +6,7 @@ using UnityEngine;
 public class AttackObject : MonoBehaviour
 {
     //해당 오브젝트를 생성한 공격의 정보
-    public Playable_Character.AttackInfo info;
+    //public Playable_Character.AttackInfo info;
 
     //지속시간
     public float DurationTime;
