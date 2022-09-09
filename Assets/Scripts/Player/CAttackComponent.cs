@@ -32,20 +32,20 @@ public class CAttackComponent : BaseComponent
     public Dictionary<string, AttackInfo> LoadedAttackInfoDic;
 
     [SerializeField]
-    AttackInfo testinfooooo;
+    AttackInfo_Ex testinfooooo;
 
     //기본 공격 정보 해당 정보를 3개 만들면 기본 공격이 설정값들에 따라 3가지 동작으로 이어진다.
     [System.Serializable]
     public class AttackInfo_Ex
     {
-        [Tooltip("해당 공격의 타입을 설정한다 (노말, 광역, 투사체, 타겟팅)")]
-        public CharEnumTypes.eAttackType AttackType;
-
-        [Tooltip("공격이름")]
-        public int AttackName;
-
         [Tooltip("공격번호")]
         public int AttackNum;
+
+        [Tooltip("공격이름")]
+        public string AttackName;
+
+        [Tooltip("해당 공격의 타입을 설정한다 (노말, 광역, 투사체, 타겟팅)")]
+        public CharEnumTypes.eAttackType AttackType;
 
         //해당 매니메이션 클립
         [Tooltip("해당 공격의 애니메이션 클립")]
@@ -67,12 +67,12 @@ public class CAttackComponent : BaseComponent
 
 
         [Tooltip("다음 동작으로 넘어갈 수 있는 시간")]
-        public float NextActionInputTime_Start;
+        public float BufferdInputTime_Start;
 
         //다음동작으로 넘어가기 위한 시간
         //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
         [Tooltip("연속동작이 있을때 다음 동작으로 들어가기 위한 입력 시간")]
-        public float NextActionInputTime_End;
+        public float BufferdInputTime_End;
 
         //데미지
         [Tooltip("공격 데미지")]
@@ -223,11 +223,40 @@ public class CAttackComponent : BaseComponent
         NextAttackInfo = null;
         //기본공격 정보 받아옴
         LoadFile.Read<AttackInfo>(out LoadedAttackInfoDic);
-        testinfooooo = LoadedAttackInfoDic["Attack1"];
-        //스킬공격 정보 받아옴
 
+        //스킬공격 정보 받아옴
+        AttackInfoSetting(LoadedAttackInfoDic["0"], testinfooooo);
+        AttackInfoSetting(LoadedAttackInfoDic["0"], attackinfos[0]);
+        AttackInfoSetting(LoadedAttackInfoDic["1"], attackinfos[1]);
+        AttackInfoSetting(LoadedAttackInfoDic["2"], attackinfos[2]);
     }
 
+    void AttackInfoSetting(AttackInfo load, AttackInfo_Ex myinfo)
+    {
+        myinfo.AttackName = load.attackName;
+        myinfo.AttackNum = load.attackNum;
+        myinfo.AttackType = (CharEnumTypes.eAttackType)System.Enum.Parse(typeof(CharEnumTypes.eAttackType), load.attackType);
+
+        //myinfo.aniclip = 
+        myinfo.animationPlaySpeed = load.animationPlaySpeed;
+        myinfo.StartDelay = load.startDelay;
+        myinfo.RecoveryDelay = load.recoveryDelay;
+        myinfo.BufferdInputTime_Start = load.bufferdInputTime_Start;
+        myinfo.BufferdInputTime_End = load.BufferdInputTime_End;
+        myinfo.damage = load.damage;
+        myinfo.StaminaGaugeDown = load.StaminaGaugeDown;
+
+        //myinfo.Effect
+        myinfo.EffectStartTime = load.EffectStartTime;
+        //myinfo.EffectPosRot = load.EffectPosRot;
+        myinfo.EffectDestroyTime = load.EffectDestroyTime;
+
+        myinfo.movedis = load.movedis;
+        myinfo.movetime = load.movetime;
+
+        //myinfo.ProjectileObj = load.ProjectileObjName;
+        //myinfo.TargetObj = load.TargetObjName;
+    }
 
     public void MonsterAttack(Collider collision)
     {
@@ -384,7 +413,7 @@ public class CAttackComponent : BaseComponent
         }
 
         //IsLinkable = false;
-        Linkcoroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].NextActionInputTime_Start, ActiveLinkable);
+        Linkcoroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].BufferdInputTime_Start, ActiveLinkable);
         StartCoroutine(Linkcoroutine);
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
@@ -461,7 +490,7 @@ public class CAttackComponent : BaseComponent
             ActiveLinkable();
         }
 
-        Linkcoroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].NextActionInputTime_End, DeActiveLinkable);
+        Linkcoroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].BufferdInputTime_End, DeActiveLinkable);
         StartCoroutine(Linkcoroutine);
 
         //후딜레이 구현 필요 

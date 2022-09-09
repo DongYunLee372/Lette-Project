@@ -52739,6 +52739,14 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[0].BufferdInputTime_End
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[1].BufferdInputTime_End
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfoList.Array.data[0].animationPlaySpeed
       value: 1
       objectReference: {fileID: 0}
@@ -52753,6 +52761,14 @@ PrefabInstance:
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfoList.Array.data[0].NextMovementTimeVal
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[0].BufferdInputTime_Start
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: attackinfos.Array.data[1].BufferdInputTime_Start
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: attackinfos.Array.data[0].NextActionInputTime_End

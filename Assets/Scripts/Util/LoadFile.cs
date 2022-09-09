@@ -15,7 +15,7 @@ public class LoadFile : MySingleton<LoadFile>
     public static void Read<T>(out Dictionary<string, T> Dic2) /*where T : abc*/
     {
 
-        FieldInfo[] Fieldlist = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+        FieldInfo[] Fieldlist = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance| BindingFlags.Public);
 
         TextAsset data = Resources.Load("CSV/" + typeof(T).ToString()) as TextAsset;
         var lines = Regex.Split(data.text, LINE_SPLIT_RE);
