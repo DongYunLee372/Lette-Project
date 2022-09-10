@@ -29,6 +29,17 @@ public class CGuardComponent : BaseComponent
     public IEnumerator stuncoroutine;
     public delegate void Invoker();
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        animator = GetComponentInChildren<AnimationController>();
+        eventsystem = GetComponentInChildren<AnimationEventSystem>();
+        //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(GuardStunClip.name, AttackEnd));
+    }
+
+
     //가드를 하면 시점이 캐릭터의 정면으로 고정 되어야 한다.
     public void Guard()
     {
@@ -147,19 +158,6 @@ public class CGuardComponent : BaseComponent
         p_comtype = CharEnumTypes.eComponentTypes.GuardCom;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        animator = GetComponentInChildren<AnimationController>();
-        eventsystem = GetComponentInChildren<AnimationEventSystem>();
-        //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(GuardStunClip.name, AttackEnd));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
+    
 }

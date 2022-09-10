@@ -87,7 +87,7 @@ public class CMoveComponent : BaseComponent
 
         public float NextRollingTime = 0.1f;
 
-        
+        public float RollingStaminaDown = 20.0f;
 
         [Header("==================피격 관련 변수들==================")]
         public AnimationClip KnockDownClip;
@@ -169,7 +169,7 @@ public class CMoveComponent : BaseComponent
         }
 
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
-        inputcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.InputCom) as CInputComponent;
+        //inputcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.InputCom) as CInputComponent;
         //if (inputcom == null)
         //    Debug.Log("MoveCom 오류 inputcom = null");
 
@@ -607,9 +607,9 @@ public class CMoveComponent : BaseComponent
             return;
         
 
-        if (PlayableCharacter.Instance.status.CurStamina - 20 >= 0)
+        if (PlayableCharacter.Instance.status.CurStamina - moveoption.RollingStaminaDown >= 0)
         {
-            PlayableCharacter.Instance.status.CurStamina = PlayableCharacter.Instance.status.CurStamina - 20;
+            PlayableCharacter.Instance.status.CurStamina = PlayableCharacter.Instance.status.CurStamina - moveoption.RollingStaminaDown;
         }
         else
         {

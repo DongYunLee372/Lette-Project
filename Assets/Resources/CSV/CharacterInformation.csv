@@ -1,2 +1,2 @@
 player_name,player_HP,player_Def,player_Stamina,player_Stamina_Recovery_Time,player_Stamina_Recovery_Val,player_Groggy,player_Groggy_Recovery_Time,player_Groggy_Recovery_Val,player_Stagger_Groggy,player_Down_Groggy,player_mSpeed,player_RunSpeed,player_MouseSpeed,player_RotSpeed
-Asha,200,10,150,1,10,100,1,10,30,80,300,500,1,0.5
+Asha,200,10,150,2,10,100,2,10,30,80,300,500,1,0.5

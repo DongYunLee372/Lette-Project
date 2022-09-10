@@ -157,7 +157,7 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     
-    public void Damaged(float damage,Vector3 hitpoint)
+    public void Damaged(float damage,Vector3 hitpoint/*,float Groggy*/)
     {
         CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         EffectManager.Instance.InstantiateEffect(HitEffect, hitpoint);
@@ -165,14 +165,22 @@ public class PlayableCharacter : MonoBehaviour
         float finaldamage = damage - status.Defense;
         status.CurHP -= finaldamage;
 
-        if (finaldamage >= 80)
-        {
-            movecom.KnockDown();
-        }
-        else
-        {
-            movecom.KnockBack();
-        }
+        //status.GroggyUp(Groggy);
+        //if (status.CurGroggy >= 100)
+        //{
+        //    movecom.KnockDown();
+        //}
+        
+        movecom.KnockBack();
+
+        //if (finaldamage >= 80)
+        //{
+        //    movecom.KnockDown();
+        //}
+        //else
+        //{
+        //    movecom.KnockBack();    
+        //}
     }
 
     public BaseStatus GetCharacterStatus()

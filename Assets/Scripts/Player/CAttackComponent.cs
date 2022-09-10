@@ -177,6 +177,25 @@ public class CAttackComponent : BaseComponent
     //public bool IsTimeCounterActive = false;
     public IEnumerator coroutine;
     public IEnumerator Linkcoroutine;
+
+
+    public void Init()
+    {
+        animator = GetComponentInChildren<AnimationController>();
+        eventsystem = GetComponentInChildren<AnimationEventSystem>();
+        weaponcollider = GetComponentInChildren<WeaponCollider>();
+        weaponcollider?.SetCollitionFunction(MonsterAttack);
+
+        if (effectparent == null)
+        {
+            effectparent = new GameObject("EffectsContainer").transform;
+        }
+
+        AnimationEventsSetting();
+        Initsetting();
+    }
+
+
     void Start()
     {
 
@@ -336,9 +355,14 @@ public class CAttackComponent : BaseComponent
             curval = movecom.curval;
         }
 
-        ////이미 공격중일때는 공격 불가
-        //if (curval.IsAttacking)
-        //    return;
+        
+        if (CharacterStateMachine.Instance.CurState == CharacterStateMachine.eCharacterState.OutOfControl)
+            return;
+
+        //if (PlayableCharacter.Instance.status.CurStamina)
+        //{
+
+        //}
 
         //이미 공격 중이고 링크가 불가능하면 공격이 실행되지 않는다.
         if (curval.IsAttacking && !IsLinkable)
@@ -351,7 +375,7 @@ public class CAttackComponent : BaseComponent
 
 
         //이미 공격중이고 링크가 가능하면 다음 공격정보가 있는지 확인한다.
-        //이런식으로하면 실제로 다음공격이 실행될때 여기서 걸려버린다.
+        //이런식으로하면 실제로 다음공격이 실행될때 여기서 걸려버린다. -> 링크 공격이 실행되는 타이밍을 조절하는것으로 해결
         if (curval.IsAttacking && IsLinkable && /*NextAttackNum == -1*/NextAttack == false)
         {
             Debug.Log("선입력들어옴");
@@ -374,8 +398,6 @@ public class CAttackComponent : BaseComponent
             movecom.Stop();
             curval.IsAttacking = true;
         }
-
-
 
         //이전에 공격했던 시간과 현재 공격이 시작된 시간의 차이를 구한다.
         float tempval = Time.time - lastAttackTime;
@@ -418,6 +440,9 @@ public class CAttackComponent : BaseComponent
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
         animator.Play(attackinfos[CurAttackNum].aniclip.name, attackinfos[CurAttackNum].animationPlaySpeed/*,0,attackinfos[CurAttackNum].StartDelay*/);
+
+        PlayableCharacter.Instance.status.StaminaDown(attackinfos[CurAttackNum].StaminaGaugeDown);
+
     }
 
 
@@ -543,7 +568,16 @@ public class CAttackComponent : BaseComponent
             StopCoroutine(coroutine);
             coroutine = null;
         }
+        if(Linkcoroutine!=null)
+        {
+            StopCoroutine(Linkcoroutine);
+            Linkcoroutine = null;
+        }
 
+        curval.IsAttacking = false;
+
+        NextAttack = false;
+        NextAttackNum = -1;
     }
 
 

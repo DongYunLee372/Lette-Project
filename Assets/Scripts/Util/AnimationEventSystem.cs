@@ -28,13 +28,6 @@ public class AnimationEventSystem : MonoBehaviour
 	public midCallback _midCallback;
 	public endCallback _endCallback;
 
-	public UnityEvent beginCallBack;
-	public UnityAction begi;
-
-	private void Awake()
-    {
-
-    }
 
     private void Start()
     {
@@ -70,6 +63,7 @@ public class AnimationEventSystem : MonoBehaviour
 		if(BeginEventInvokers.TryGetValue(s_val,out _beginCallback))
         {
 			_beginCallback.Invoke(s_val);
+            //_beginCallback.
         }
 	}
 

@@ -22,7 +22,7 @@ public abstract class BaseComponent : MonoBehaviour
 
     public virtual void Init()
     {
-
+        InitComtype();
     }
 
 
@@ -35,15 +35,4 @@ public abstract class BaseComponent : MonoBehaviour
     {
         
     }
-
-
-    public virtual void Update()
-    {
-
-    }
-
-    //public abstract BaseComponent GetComponent();
-    //public abstract void SetComponent();
-
-    //public abstract void InitComponent();
 }
