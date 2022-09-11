@@ -19,6 +19,4 @@ public class WeaponCollider : MonoBehaviour
     {
         _collFunction(other);
     }
-
-
 }

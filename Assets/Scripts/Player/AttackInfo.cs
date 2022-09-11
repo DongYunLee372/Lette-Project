@@ -71,7 +71,7 @@ public class AttackInfo
     //공격 이펙트의 위치
     [Tooltip("공격 이펙트 생성 위치")]
     [SerializeField]
-    public string EffectPosRot;
+    public string effectPosRot;
 
     [Tooltip("공격 이펙트 파괴 시간")]
     [SerializeField]
@@ -94,6 +94,58 @@ public class AttackInfo
     [Tooltip("타겟팅공격일때 타겟오브젝트")]
     [SerializeField]
     public string TargetObjName;
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+
+    private AnimationClip aniClip;
+
+    public AnimationClip AniClip
+    {
+        get
+        {
+            if (aniClip == null)
+                Resources.Load("AnimationClips/PlayableCharacter/" + aniclipName);
+            return aniClip;
+        }
+    }
+
+    //private Vector3 EffectPosRot
+
+    private GameObject effectObj;
+
+    public GameObject EffectObj
+    {
+        get
+        {
+            if (effectObj == null)
+                Resources.Load("Prefabs/PlayerEffects/" + EffectName);
+            return effectObj;
+        }
+    }
+
+    private GameObject projectileObj;
+
+    public GameObject ProjectileObj
+    {
+        get
+        {
+            if (projectileObj == null)
+                Resources.Load("Prefabs/PlayerEffects/" + ProjectileObjName);
+            return projectileObj;
+        }
+    }
+
+    //private Transform EffectPosRot;
+
+    //public GameObject PEffectPosRot
+    //{
+    //    get
+    //    {
+    //        if (projectileObj == null)
+    //            Resources.Load("Prefabs/PlayerEffects/" + ProjectileObjName);
+    //        return projectileObj;
+    //    }
+    //}
 
 }
 

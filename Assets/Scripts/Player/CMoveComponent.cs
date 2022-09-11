@@ -167,19 +167,10 @@ public class CMoveComponent : BaseComponent
             gameObject.AddComponent<CheckAround>();
             TryGetComponent<CheckAround>(out checkaround);
         }
-
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
-        //inputcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.InputCom) as CInputComponent;
-        //if (inputcom == null)
-        //    Debug.Log("MoveCom 오류 inputcom = null");
-
-        //com.CharacterRoot = GameObject.Find("CharacterRoot").transform;
         com.CharacterRig = GetComponent<Rigidbody>();
         com.CapsuleCol = GetComponent<CapsuleCollider>();
-
         com.animator = GetComponentInChildren<AnimationController>();
-        //if (com.animator == null)
-        //    Debug.Log("MoveCom 오류 com.animator = null");
 
 
         eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),

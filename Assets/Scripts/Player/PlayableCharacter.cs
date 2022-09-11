@@ -194,13 +194,4 @@ public class PlayableCharacter : MonoBehaviour
     }
 
 
-
-
-
-    private void Update()
-    {
-        
-    }
-
-
 }
