@@ -82,11 +82,13 @@ MonoBehaviour:
   - m_GUID: 62f219c83dfa2fa4ca4235e907af4c34
     m_Address: summoner_
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Monster
   - m_GUID: 6d3c96368e8d3c54f956615b6390466b
     m_Address: Susu_
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Monster
   - m_GUID: d237983f4cea9fc4b929c344bbbd49d0
     m_Address: Test1
     m_ReadOnly: 0

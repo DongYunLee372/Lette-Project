@@ -12,6 +12,7 @@ public class AddrTestScripts : MonoBehaviour
 
     SceneInstance m_LoadedScene;
 
+    public GameObject tempOBJ_;
     public GameObject pos;
 
     public delegate void Complete_delegate(AsyncOperationHandle<GameObject> comp);
@@ -31,7 +32,8 @@ public class AddrTestScripts : MonoBehaviour
 
         //델리게이트 테스트
 
-        // StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar", handle => Debug.Log("델리게이트"+handle.Result.name)));
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Susu_", handle => Debug.Log("델리게이트"+handle.Result.name)));
+        //StartCoroutine( temp());
 
         //  StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Demo"));
 
@@ -41,17 +43,26 @@ public class AddrTestScripts : MonoBehaviour
 
         // StartCoroutine(AddressablesController.Instance.Load_Name("Susu_", pos.transform));
 
-        Loder();
+         Loder();
+
+        //label로 다수 로딩
+        //StartCoroutine(AddressablesLoader.LoadAndStoreResult("Monster"));
+
+        //  StartCoroutine(AddressablesLoader.LoadAndAssociateResultWithKey("Monster"));
+
+        //리스트로 다수 로딩
+       //StartCoroutine(AddressablesLoader.Load_Key_List(new List<object>() { "susu", "Susu_" }));
+
 
         //TaskRun();
         //TaskFromResult();
 
     }
 
-    async public void Loder()
+     public async void Loder()
     {
-      
-       await AddressablesLoader.InitAssets_name<GameObject>("Susu_", handle => tempHPbar = handle.Result);
+
+        //await AddressablesLoader.InitAssets_name_<GameObject>("susu", handle => tempHPbar = handle.Result);
 
         Debug.Log("다녀왔음"+ tempHPbar);
 
@@ -61,10 +72,15 @@ public class AddrTestScripts : MonoBehaviour
       
     }
 
+    //델리게이트 예시
     IEnumerator temp()
     {
-        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar", handle => tempHPbar = handle.Result));
-        Debug.Log("다녀왔음" + tempHPbar);
+        //yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar", handle => tempHPbar = handle.Result));
+        //Debug.Log("다녀왔음" + tempHPbar);
+
+        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Susu_", handle => tempOBJ_ = handle.Result));
+        Debug.Log("다녀왔음" + tempOBJ_);
+        Instantiate(tempOBJ_, pos.transform);
     }
 
 

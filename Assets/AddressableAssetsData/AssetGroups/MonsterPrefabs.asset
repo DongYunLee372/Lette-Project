@@ -20,7 +20,8 @@ MonoBehaviour:
   - m_GUID: df42f27fec159c34ba416df450d6358b
     m_Address: susu
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Monster
   - m_GUID: d2d49758f8b0e1a4dbd265b469f5c8c7
     m_Address: Boss
     m_ReadOnly: 0

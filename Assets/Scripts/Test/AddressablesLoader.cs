@@ -14,7 +14,10 @@ public static class AddressablesLoader
     public static List<GameObject> tempobj = new List<GameObject>();
     public static List<string> Load_String_List = new List<string>();
     public static int ListCount = 0;
-    
+
+    public static List<object> List = new List<object>();  //하나의 리스트에 로드 자산 관리 시키기
+    public static List<AsyncOperationHandle<GameObject>> handleList = new List<AsyncOperationHandle<GameObject>>();  //핸들 저장해서 언로드 관리 시키기.
+
 
     //Addressables.Release();
     public static async Task InitAssets_label<T>(string label, List<T> createdObjs)
@@ -75,6 +78,25 @@ public static class AddressablesLoader
 
         //createdObjs.Add(operationHandle.Result as T
     }
+
+    static public void InitAssets_name_<T>(string object_name, Action<AsyncOperationHandle<T>> Complete)
+    {
+        //AsyncOperationHandle<GameObject> operationHandle=
+        // Addressables.LoadAssetAsync<GameObject>(object_name);
+
+        AsyncOperationHandle<T> goHandle = Addressables.LoadAssetAsync<T>(object_name);
+        goHandle.Completed += Complete;
+
+        // yield return operationHandle;
+
+        //createdObjs.Add(operationHandle.Result as T
+    }
+
+
+
+
+
+
 
     //   public static void InitAssets_name(string object_name)
     //{
@@ -232,6 +254,93 @@ public static class AddressablesLoader
         //Use this only when the objects are no longer needed
         //Addressables.Release(goHandle);
         //Addressables.Release(matHandle);
+    }
+
+    //키 연관 리스트 저장, label로 다수로딩 코루틴 
+    public static IEnumerator LoadAndStoreResult(string Key)
+    {
+        List<GameObject> associationDoesNotMatter = new List<GameObject>();
+
+        AsyncOperationHandle<IList<GameObject>> handle =
+            Addressables.LoadAssetsAsync<GameObject>(Key, obj =>
+            {
+                associationDoesNotMatter.Add(obj);
+                Debug.Log(obj.name);
+            });
+        yield return handle;
+    }
+
+    //델리게이트 실행 (Key에 label)
+    public static IEnumerator LoadAndStoreResult<T>(string Key, Action<AsyncOperationHandle<IList<T>>> Complete)
+        where T : UnityEngine.Object
+    {
+        List<T> associationDoesNotMatter = new List<T>();
+
+        AsyncOperationHandle<IList<T>> handle =
+            Addressables.LoadAssetsAsync<T>(Key, obj => associationDoesNotMatter.Add(obj));
+        handle.Completed += Complete;
+        yield return handle;
+    }
+
+    //키 연관 저장, label사용 다수 로딩
+    public static IEnumerator LoadAndAssociateResultWithKey(string Key)
+    {
+        Debug.Log("시작");
+        AsyncOperationHandle<IList<IResourceLocation>> locations = Addressables.LoadResourceLocationsAsync(Key);
+        yield return locations;
+        Debug.Log("locations리턴");
+
+        Dictionary<string, GameObject> associationDoesMatter = new Dictionary<string, GameObject>();
+
+        foreach (IResourceLocation location in locations.Result)
+        {
+            Debug.Log("foreach시작");
+
+            AsyncOperationHandle<GameObject> handle =
+                Addressables.LoadAssetAsync<GameObject>(location);
+            handle.Completed += obj =>
+            {
+                associationDoesMatter.Add(location.PrimaryKey, obj.Result);
+
+                if (associationDoesMatter.ContainsKey(location.PrimaryKey))
+                {
+                    if (associationDoesMatter.TryGetValue(location.PrimaryKey, out GameObject game))
+                    {
+                        Debug.Log("primarykey : " + location.PrimaryKey);
+
+                        Debug.Log("objname : "+game.name);
+                    }
+
+                }
+            };
+            yield return handle;
+        }
+    }
+
+    //리스트로 로드
+    //MergeMode.Union외에 다른거는 오류
+    public static IEnumerator Load_Key_List(List<object> KeyList)
+    {
+        //AsyncOperationHandle<IList<GameObject>> loadWithMultipleKeys =
+        //Addressables.LoadAssetsAsync<GameObject>(new List<object>() { "susu", "Susu_" },
+        //    obj =>
+        //    {
+        //        //Gets called for every loaded asset
+        //        Debug.Log(obj.name);
+        //    });
+        //yield return loadWithMultipleKeys;
+        //IList<GameObject> multipleKeyResult1 = loadWithMultipleKeys.Result;
+
+        AsyncOperationHandle<IList<GameObject>> intersectionWithMultipleKeys =
+           Addressables.LoadAssetsAsync<GameObject>(KeyList,
+               obj =>
+               {
+                //Gets called for every loaded asset
+                Debug.Log(obj.name);
+               }, Addressables.MergeMode.Union);
+        yield return intersectionWithMultipleKeys;
+        IList<GameObject> multipleKeyResult2 = intersectionWithMultipleKeys.Result;
+
     }
 
 
