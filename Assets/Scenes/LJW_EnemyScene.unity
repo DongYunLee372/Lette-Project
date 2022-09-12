@@ -1672,12 +1672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c64825059b31894c97d457946b8d099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDB_List: []
-  MonsterDB_List: []
-  MonsterSkillDB_List: []
-  MonsterTargetDB_List: []
-  Player_A_constantDB_List: []
-  Monster_A_constantDB_List: []
 --- !u!4 &63591704
 Transform:
   m_ObjectHideFlags: 0
@@ -19967,38 +19961,6 @@ PrefabInstance:
     - target: {fileID: 3654817905455508347, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Info
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Skill_Info.Array.data[6]
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_Name

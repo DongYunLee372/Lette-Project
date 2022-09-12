@@ -432,18 +432,16 @@ public class Battle_Character : MonoBehaviour
     public float checkTime = 0.0f;
     public bool isStop; // 멈춰있는지
 
+    public string testSkillName;
+
     private void Update()
     {
         real_AI.AI_Update();
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            animator.Play("Rush");
-        }
-        else if (Input.GetKeyDown(KeyCode.G))
-        {
-            Debug.Log("기본공격");
-            animator.Play("Melee Attack");
+            Debug.Log("테스트 스킬");
+            animator.Play(testSkillName);
         }
 
         checkTime += Time.deltaTime;
