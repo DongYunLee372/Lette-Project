@@ -442,7 +442,8 @@ public class Battle_Character : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.G))
         {
-            animator.Play("Magic Beam");
+            Debug.Log("기본공격");
+            animator.Play("Melee Attack");
         }
 
         checkTime += Time.deltaTime;

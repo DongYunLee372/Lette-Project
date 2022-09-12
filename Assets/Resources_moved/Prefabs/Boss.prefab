@@ -1070,7 +1070,8 @@ Transform:
   m_LocalPosition: {x: 0.022872634, y: 0.011804754, z: -0.09424037}
   m_LocalScale: {x: 2.1381335, y: 2.1381397, z: 2.1381226}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8267345916773436469}
   m_Father: {fileID: 4676709962381877177}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1422,7 +1423,6 @@ Transform:
   - {fileID: 181053414}
   - {fileID: 7040977794710254203}
   - {fileID: 5847035042674421376}
-  - {fileID: 8267345916773436469}
   - {fileID: 5257283632548353446}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1611,8 +1611,8 @@ MonoBehaviour:
     missile_Index: 0
     spawn_Animation: 0
     add_Time: 0.85
-    pre_Delay: 5
-    pre_Delay_speed: 0.1
+    pre_Delay: 0
+    pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
   - Name: The Great Sword Slap
@@ -1869,9 +1869,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips: []
-  beginCallBack:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &919132149503474217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2921,8 +2918,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8267345916773436469}
-  - component: {fileID: 3744333710560044938}
   - component: {fileID: 1991062203247161523}
+  - component: {fileID: 1105236388140529433}
   m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
@@ -2937,27 +2934,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7370479286679070385}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.578, z: 0.72399986}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.44810224, y: 0.5047396, z: -0.5217436, w: -0.52175295}
+  m_LocalPosition: {x: 0.256, y: 0.068, z: -0.699}
+  m_LocalScale: {x: 0.2598313, y: 0.25983283, z: 0.25983226}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3654817905455508347}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3744333710560044938
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7370479286679070385}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.3093183, y: 5.093292, z: 2.6219416}
-  m_Center: {x: 0.07175267, y: -0.87589407, z: 0.9066062}
+  m_Father: {fileID: 790805915078450703}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 3.388, y: -84.892, z: -273.1}
 --- !u!114 &1991062203247161523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2971,6 +2955,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent_BC: {fileID: 0}
+--- !u!136 &1105236388140529433
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370479286679070385}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000002
+  m_Height: 3.2642615
+  m_Direction: 1
+  m_Center: {x: 0.00000006401614, y: -0.17003304, z: 0.96209365}
 --- !u!1 &7416031261847714043
 GameObject:
   m_ObjectHideFlags: 0
@@ -3490,7 +3488,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4429356384632805009, guid: cb7fd8296f75d7446b905b02d26db7ed, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4429356384632805009, guid: cb7fd8296f75d7446b905b02d26db7ed, type: 3}
       propertyPath: m_LocalPosition.x
