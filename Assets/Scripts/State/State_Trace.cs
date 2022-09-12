@@ -7,6 +7,10 @@ public class State_Trace : State
 {
     public override bool Judge(out State _State, Battle_Character b_c)
     {
+        // 아래 부분들이 다 필요없고 최종 사거리만 계산해서 최종 사거리안에 진입했다면 Attack 스테이트로 돌리면 될듯
+        // 변수 추가 받은 후 수정
+
+
         if (Vector3.Distance(b_c.transform.position,
             b_c.cur_Target.transform.position)
             <= b_c.mon_Info.P_mon_ShortRange) // 타겟을 공격할 수 있는 사거리 내 진입했다면

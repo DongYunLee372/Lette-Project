@@ -35,7 +35,7 @@ public class State_Attack : State
             return true;
         }
 
-        //b_c.Attack_Melee_Range 가 스킬 사용범위 변수로 바뀌어야함.
+        // 사거리가 있는 스킬
         if ((Vector3.Distance(b_c.transform.position,
             b_c.cur_Target.transform.position) <= b_c.now_Skill_Info.P_skill_Range)
             && b_c.mon_Info.P_mon_haveMP >= b_c.now_Skill_Info.P_skill_MP)
@@ -45,6 +45,7 @@ public class State_Attack : State
             return true;
         }
 
+        // 제자리에서 사용가능한 스킬 ( ex . 소환 )
         if (b_c.now_Skill_Info.P_skill_Range == 0
             && b_c.mon_Info.P_mon_haveMP >= b_c.now_Skill_Info.P_skill_MP)
         {
@@ -53,8 +54,9 @@ public class State_Attack : State
             return true;
         }
 
+        // 근접 공격 사거리 체크
         if ((Vector3.Distance(b_c.transform.position,
-                b_c.cur_Target.transform.position) <= b_c.mon_Info.P_mon_ShortRange) && !b_c.isAttack_Run) // 사정 거리 내에 있다면 
+                b_c.cur_Target.transform.position) <= b_c.mon_Info.P_mon_ShortRange) && !b_c.isAttack_Run) 
         {
             judge_logic = Enemy_Attack_Logic.Melee_Attack;
             _State = this;

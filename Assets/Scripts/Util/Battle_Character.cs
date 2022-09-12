@@ -217,12 +217,12 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
+                // 타겟을 바라보고 애니메이션 재생
+                gameObject.transform.LookAt(cur_Target.transform);
                 // 선딜이 있다면
                 if (attack_Info[i].pre_Delay != 0)
                 {
-                    Debug.Log("느려져져져져져져져져");
                     float original_Speed = animator.GetPlaySpeed();
-                    Debug.Log("느려져져져져져져져져");
                     animator.SetPlaySpeed(attack_Info[i].pre_Delay_speed);
 
                     StartCoroutine(pre_Delay_Coroutine(attack_Info[i].pre_Delay, original_Speed));
