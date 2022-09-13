@@ -20,10 +20,10 @@ public class AddrTestScripts : MonoBehaviour
 
     public GameObject tempHPbar;
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
         pos = new GameObject();
-       // tempHPbar = new GameObject();
+        // tempHPbar = new GameObject();
         pos.transform.position = new Vector3(0f, 0f, 0f);
 
         //예외처리 테스트
@@ -43,7 +43,10 @@ public class AddrTestScripts : MonoBehaviour
 
         // StartCoroutine(AddressablesController.Instance.Load_Name("Susu_", pos.transform));
 
-         Loder();
+       await Loder(tempAction);
+
+        Debug.Log("끝나야되는데?");
+
 
         //label로 다수 로딩
         //StartCoroutine(AddressablesLoader.LoadAndStoreResult("Monster"));
@@ -51,7 +54,7 @@ public class AddrTestScripts : MonoBehaviour
         //  StartCoroutine(AddressablesLoader.LoadAndAssociateResultWithKey("Monster"));
 
         //리스트로 다수 로딩
-       //StartCoroutine(AddressablesLoader.Load_Key_List(new List<object>() { "susu", "Susu_" }));
+        //StartCoroutine(AddressablesLoader.Load_Key_List(new List<object>() { "susu", "Susu_" }));
 
 
         //TaskRun();
@@ -59,17 +62,20 @@ public class AddrTestScripts : MonoBehaviour
 
     }
 
-     public async void Loder()
+     public async Task Loder(Action action)
     {
 
-        //await AddressablesLoader.InitAssets_name_<GameObject>("susu", handle => tempHPbar = handle.Result);
+        await AddressablesLoader.InitAssets_name_<GameObject>("susu", handle => tempHPbar = handle.Result);
 
-        Debug.Log("다녀왔음"+ tempHPbar);
+       Debug.Log("다녀왔음");
+        action();
+      //  Instantiate(tempHPbar, pos.transform);
+      //Debug.Log("생성함"+pos.name );
+    }
 
-        Instantiate(tempHPbar, pos.transform);
-        Debug.Log("생성함"+pos.name );
-
-      
+    void tempAction()
+    {
+        Debug.Log("다녀왔음 다음에 실행되면 되겠다.");
     }
 
     //델리게이트 예시

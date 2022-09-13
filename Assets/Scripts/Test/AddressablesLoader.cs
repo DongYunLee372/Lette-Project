@@ -37,6 +37,28 @@ public static class AddressablesLoader
         }
     }
 
+    public static async Task InitAssets_name_<T>(string object_name, Action<AsyncOperationHandle<T>> Complete)
+                where T : UnityEngine.Object
+    {
+        //AsyncOperationHandle<GameObject> operationHandle=
+        // Addressables.LoadAssetAsync<GameObject>(object_name);
+        Debug.Log("시작" + object_name);
+
+        var temp = await Addressables.LoadAssetAsync<GameObject>(object_name).Task;        
+        Debug.Log("가져옴" + object_name);
+
+        tempobj.Add(temp);
+      
+        foreach(var t in tempobj)
+        {
+            Debug.Log("요소 출력: "+t.name);
+        }
+        // yield return operationHandle;
+
+        //createdObjs.Add(operationHandle.Result as T
+    }
+
+
     //이름으로 생성
     //Addressables.ReleaseInstance();
     public static async Task InitAssets_name<T>(string object_name, List<T> createdObjs)
@@ -79,24 +101,7 @@ public static class AddressablesLoader
         //createdObjs.Add(operationHandle.Result as T
     }
 
-    static public void InitAssets_name_<T>(string object_name, Action<AsyncOperationHandle<T>> Complete)
-    {
-        //AsyncOperationHandle<GameObject> operationHandle=
-        // Addressables.LoadAssetAsync<GameObject>(object_name);
-
-        AsyncOperationHandle<T> goHandle = Addressables.LoadAssetAsync<T>(object_name);
-        goHandle.Completed += Complete;
-
-        // yield return operationHandle;
-
-        //createdObjs.Add(operationHandle.Result as T
-    }
-
-
-
-
-
-
+ 
 
     //   public static void InitAssets_name(string object_name)
     //{
