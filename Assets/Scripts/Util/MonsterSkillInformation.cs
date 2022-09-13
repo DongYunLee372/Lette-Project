@@ -6,8 +6,9 @@ using UnityEngine;
 public class MonsterSkillInformation : Data
 {
     [SerializeField]
-    private int Number;
-    public int P_Number { get { return Number; } set { Number = value; } }
+    private string skill_Name_En; //몬스터 영어명
+    public string P_skill_Name_En { get { return skill_Name_En; } set { skill_Name_En = value; } }
+   
     [SerializeField]
     private string mon_Index; //몬스터 번호
     public string P_mon_Index { get { return mon_Index; } set { mon_Index = value; } }
@@ -15,8 +16,8 @@ public class MonsterSkillInformation : Data
     private string skill_Name_Kor; //몬스터 한글명
     public string P_skill_Name_Kor { get { return skill_Name_Kor; } set { skill_Name_Kor = value; } }
     [SerializeField]
-    private string skill_Name_En; //몬스터 영어명
-    public string P_skill_Name_En { get { return skill_Name_En; } set { skill_Name_En = value; } }
+    private int Number;
+    public int P_Number { get { return Number; } set { Number = value; } }
     [SerializeField]
     private int skill_ID; //몬스터 아이디
     public int P_skill_ID { get { return skill_ID; } set { skill_ID = value; } }
@@ -44,8 +45,8 @@ public class MonsterSkillInformation : Data
     public int P_skill_Cool { get { return skill_Cool; } set { skill_Cool = value; } }
 
     [SerializeField]
-    private int skill_atkTime; //몬스터 공격 판정시간
-    public int P_skill_atkTime { get { return skill_atkTime; } set { skill_atkTime = value; } }
+    private float skill_atkTime; //몬스터 공격 판정시간
+    public float P_skill_atkTime { get { return skill_atkTime; } set { skill_atkTime = value; } }
 
     [SerializeField]
     private int skill_continueTime; //몬스터 스킬 지속시간
@@ -63,7 +64,7 @@ public class MonsterSkillInformation : Data
     private int skill_ThrowObj; //몬스터 스킬 투사체 생성여부
     public int P_skill_ThrowObj { get { return skill_ThrowObj; } set { skill_ThrowObj = value; } }
 
-    public void Set(int number ,string mon_index, string skill_name_kor, string skill_name_en, int skill_iD, int skill_type, int skill_targetyp , int skill_range ,int skill_dmg , int skill_mP , int skill_cool , int skill_atktime , int skill_continuetime 
+    public void Set(int number ,string mon_index, string skill_name_kor, string skill_name_en, int skill_iD, int skill_type, int skill_targetyp , int skill_range ,int skill_dmg , int skill_mP , int skill_cool , float skill_atktime , int skill_continuetime 
         , int skill_atkCount
         , int skill_diffObj , int skill_throwObj)
     {

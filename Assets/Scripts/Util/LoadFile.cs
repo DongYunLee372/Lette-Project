@@ -19,7 +19,7 @@ public class LoadFile : MySingleton<LoadFile>
 
         TextAsset data = Resources.Load("CSV/" + typeof(T).ToString()) as TextAsset;
         var lines = Regex.Split(data.text, LINE_SPLIT_RE);
-        if (lines.Length <= 2)
+        if (lines.Length <= 1)
         {
             Dic2 = null;
             return; //list;
@@ -48,6 +48,7 @@ public class LoadFile : MySingleton<LoadFile>
                 object finalvalue = value;
 
                 Type type = Fieldlist[j].FieldType;
+                Debug.Log(type);
                 Fieldlist[j].SetValue(information_T, Convert.ChangeType(value, type));
             }
 

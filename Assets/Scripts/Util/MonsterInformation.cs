@@ -7,6 +7,10 @@ using UnityEngine;
 public class MonsterInformation : Data
 {
     [SerializeField]
+    private string mon_nameEng; //몬스터 영어명
+    public string P_mon_nameeng { get { return mon_nameEng; } set { mon_nameEng = value; } }
+
+    [SerializeField]
     private int Number;
     public int P_Number { get { return Number; } set { Number = value; } }
     [SerializeField]
@@ -15,13 +19,9 @@ public class MonsterInformation : Data
     [SerializeField]
     private string mon_nameKor; //몬스터 한국명
     public string P_mon_nameKor { get { return mon_nameKor; } set { mon_nameKor = value; } }
+
+    
     [SerializeField]
-
-    private string mon_nameEng; //몬스터 영어명
-    public string P_mon_nameeng { get { return mon_nameEng; } set { mon_nameEng = value; } }
-    [SerializeField]
-
-
     private int mon_Default; //몬스터 등급
     public int P_mon_Default { get { return mon_Default; } set { mon_Default = value; } }
 
