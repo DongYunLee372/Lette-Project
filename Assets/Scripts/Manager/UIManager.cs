@@ -13,7 +13,6 @@ public class UIInfo
 }
 public class UIManager : Singleton<UIManager>
 {
-    private UIInfo uiinfo = new UIInfo();
 
     public List<UIInfo> info = new List<UIInfo>();
     public List<GameObject> canvas;
@@ -25,10 +24,22 @@ public class UIManager : Singleton<UIManager>
     //    enemy_canvas,
     //    start_canvas
     //}
-
+    public List<GameObject> Findobj_List(string path)
+    {
+        List<GameObject> test = new List<GameObject>();
+        for (int i = 0; i < info.Count; i++)
+        {
+            if (info[i].path == path && info[i].active)
+            {
+                test.Add( info[i].obj);
+            }
+        }
+        
+        return test;
+    }
     public GameObject Findobj(string path)
     {
-   
+    
         for (int i = 0; i < info.Count; i++)
         {
             if (info[i].path == path && info[i].active)
@@ -39,7 +50,17 @@ public class UIManager : Singleton<UIManager>
 
         return null;
     }
-
+    public GameObject Findobj(GameObject obj)
+    {
+        for (int i = 0; i < info.Count; i++)
+        {
+            if (info[i].obj == obj && info[i].active)
+            {
+                return info[i].obj;
+            }
+        }
+        return null;
+    }
     public bool Findobjbool(string path)   //있으면 true 없으면 false 를 리턴 
     {
 
@@ -53,12 +74,14 @@ public class UIManager : Singleton<UIManager>
 
         return false;
     }
+
+
     public GameObject Prefabsload(string name, CANVAS_NUM x , Transform a = null)
     {
         bool same = false;
         for (int i = 0; i < info.Count; i++)
         {
-            //Debug.Log(info[i].path);
+         
             if (info[i].path == name && info[i].path != "Hpbar")
             {
                 same = true;
@@ -88,6 +111,7 @@ public class UIManager : Singleton<UIManager>
     // 마우스커서 컨트롤 
     public void Show(string path)
     {
+        bool check = false;
         for (int i = 0; i < info.Count; i++)
         {
             if (info[i].path == path)
@@ -95,8 +119,13 @@ public class UIManager : Singleton<UIManager>
                 Debug.Log(info[i].path);
                 info[i].obj.SetActive(true);
                 info[i].active = true;
+
+                check = true;
             }
         }
+
+        if (!check)
+            Debug.Log("실패");
     }
     public void Hide(string path)
     {

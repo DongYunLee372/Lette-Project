@@ -90,7 +90,8 @@ public class Battle_Character : MonoBehaviour
     public Monster_aconstant mon_Aconstant;
 
     [Header("Monster Stats")]
-    public int cur_HP;
+    public float cur_HP;
+
     public Vector3 return_Pos; // 초기 좌표
     public Vector3 destination_Pos; // 순찰 좌표
     public bool patrol_Start = false; // 탐색 시작
@@ -195,7 +196,7 @@ public class Battle_Character : MonoBehaviour
 
         }
     }
-
+ 
     public void Skill_Rand()
     {
         int rand = Random.Range(0, mon_Skill_Info.Count);
@@ -451,5 +452,7 @@ public class Battle_Character : MonoBehaviour
             checkTime = 0f;
             isStop = true;
         }
+
+
     }
 }

@@ -99,3 +99,4 @@ MonoBehaviour:
   Maxhp: 0
   hpBarOffset: {x: -0.5, y: 2.4, z: 0}
   MyHpbar: {fileID: 0}
+  battle_Character: {fileID: 0}
