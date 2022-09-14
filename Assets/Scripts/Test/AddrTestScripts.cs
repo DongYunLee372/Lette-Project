@@ -20,6 +20,7 @@ public class AddrTestScripts : MonoBehaviour
 
     public GameObject tempHPbar;
     // Start is called before the first frame update
+    public GameObject te;
     async void Start()
     {
         pos = new GameObject();
@@ -43,8 +44,10 @@ public class AddrTestScripts : MonoBehaviour
 
         // StartCoroutine(AddressablesController.Instance.Load_Name("Susu_", pos.transform));
 
-       await Loder(tempAction);
+        //델리게이트 동기 로드 테스트
+        //await Loder("susu",tempAction);
 
+        te = await AddressablesLoader.InitAssets_Instantiate<GameObject>("susu", AddressablesLoader.Instantiate_Obj_List);
         Debug.Log("끝나야되는데?");
 
 
@@ -62,12 +65,14 @@ public class AddrTestScripts : MonoBehaviour
 
     }
 
-     public async Task Loder(Action action)
+    //동기 로드 후 델리게이트 사용
+    public async Task Loder(string obj_name,Action action)
     {
 
-        await AddressablesLoader.InitAssets_name_<GameObject>("susu", handle => tempHPbar = handle.Result);
+        await AddressablesLoader.InitAssets_name_<GameObject>(obj_name);
 
        Debug.Log("다녀왔음");
+
         action();
       //  Instantiate(tempHPbar, pos.transform);
       //Debug.Log("생성함"+pos.name );
@@ -125,6 +130,11 @@ public class AddrTestScripts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            AddressablesLoader.Destroy_Obj(te);
+        }
         
     }
 }

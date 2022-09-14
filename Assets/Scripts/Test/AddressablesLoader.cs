@@ -17,9 +17,12 @@ public static class AddressablesLoader
 
     public static List<object> List = new List<object>();  //하나의 리스트에 로드 자산 관리 시키기
     public static List<AsyncOperationHandle<GameObject>> handleList = new List<AsyncOperationHandle<GameObject>>();  //핸들 저장해서 언로드 관리 시키기.
+    public static List<GameObject> Instantiate_Obj_List = new List<GameObject>();  //instantiateAsync를 통해 생성된 오브젝트 관리
+
 
 
     //Addressables.Release();
+    //label가져와서 바로 생성 시키기
     public static async Task InitAssets_label<T>(string label, List<T> createdObjs)
         where T : UnityEngine.Object
     {
@@ -37,7 +40,53 @@ public static class AddressablesLoader
         }
     }
 
-    public static async Task InitAssets_name_<T>(string object_name, Action<AsyncOperationHandle<T>> Complete)
+    //로드 없이 바로 생성만 
+    public static async Task<T> InitAssets_Instantiate<T>(string name, List<T> createdObjs)
+       where T : UnityEngine.Object
+    {
+
+        var temp = await Addressables.InstantiateAsync(name).Task;
+
+        createdObjs.Add(temp as T);
+       
+        foreach(var t in createdObjs)
+        {
+            Debug.Log("리스트 들어감"+t.name);
+        }
+
+        return temp as T;
+
+        //var locations = await Addressables.LoadResourceLocationsAsync(name).Task;
+        //Debug.Log("생성가ㅣ져옴" + name);
+
+
+        //foreach (var location in locations)
+        //{
+        //    createdObjs.Add(await Addressables.InstantiateAsync(location).Task as T);
+        //    Debug.Log("생성" + name);
+        //}
+    }
+
+
+    public static void Destroy_Obj(GameObject delete_Obj)
+    {
+        if(delete_Obj!=null)
+        {
+            Debug.Log("객체 메모리 삭제 시도");
+
+            if (!Addressables.ReleaseInstance(delete_Obj))
+            {
+                Debug.Log("객체 메모리 삭제");
+                Addressables.ReleaseInstance(delete_Obj);
+                //Instantiate_Obj_List.Remove(delete_Obj);
+                Debug.Log("리스트 메모리 삭제");
+            }
+        }
+        
+    }
+
+    //동기 로드
+    public static async Task InitAssets_name_<T>(string object_name)
                 where T : UnityEngine.Object
     {
         //AsyncOperationHandle<GameObject> operationHandle=
@@ -53,6 +102,9 @@ public static class AddressablesLoader
         {
             Debug.Log("요소 출력: "+t.name);
         }
+
+    
+
         // yield return operationHandle;
 
         //createdObjs.Add(operationHandle.Result as T
