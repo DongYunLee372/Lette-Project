@@ -71,6 +71,8 @@ public class CMoveComponent : BaseComponent
         [SerializeField]
         public float SlopAccel;//(중력값과 같이 미끌어질때 점점증가될 값)
 
+        public float MaxStep;
+
         public float RunningStaminaVal;
         [Header("==================회피 관련 변수들==================")]
         public AnimationClip RollingClip;
