@@ -2330,13 +2330,8 @@ MonoBehaviour:
   eventsystem: {fileID: 0}
   lastRollingTime: 0
   lastRunningTime: 0
-  updown: {x: 0, y: 0, z: 0}
-  xnext: 0
-  rightleft: {x: 0, y: 0, z: 0}
-  ynext: 0
   teststart: {x: 0, y: 0, z: 0}
   testend: {x: 0, y: 0, z: 0}
-  testcube: {fileID: 0}
 --- !u!114 &5912692896712388560
 MonoBehaviour:
   m_ObjectHideFlags: 0

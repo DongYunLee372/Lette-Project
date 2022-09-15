@@ -114,49 +114,51 @@ public class CMoveComponent : BaseComponent
         public float ScrollSpeed = 500.0f;
     }
 
+    [HideInInspector]
     public Vector2 MouseMove = Vector2.zero;
-
+    [HideInInspector]
     public Vector3 MoveDir = Vector3.zero;
-
+    [HideInInspector]
     public Vector3 WorldMove = Vector3.zero;
-
+    [HideInInspector]
     public float CurGravity;//현재 벨로시티의 y값
-
+    [HideInInspector]
     public Com com = new Com();
-
+    [HideInInspector]
     public CurState curval = new CurState();
-    
+
     public MoveOption moveoption = new MoveOption();
-
+    [HideInInspector]
     public CInputComponent inputcom = null;
-
+    [HideInInspector]
     public float RollingStartTime;
-
+    [HideInInspector]
     public AnimationEventSystem eventsystem;
-
+    [HideInInspector]
     public CorTimeCounter timecounter = new CorTimeCounter();
-
+    [HideInInspector]
     public float lastRollingTime;
-
+    [HideInInspector]
     public float lastRunningTime;
-
+    [HideInInspector]
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius, transform.position.z);
+    [HideInInspector]
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius, transform.position.z);
-
+    [HideInInspector]
     public delegate void Invoker(string s_val);
 
-    [Header("============TestVals============")]
+    //[Header("============TestVals============")]
 
-    public Vector3 updown;
-    public float xnext;
+    //public Vector3 updown;
+    //public float xnext;
 
-    public Vector3 rightleft;
-    public float ynext;
+    //public Vector3 rightleft;
+    //public float ynext;
 
     public Vector3 teststart;
     public Vector3 testend;
 
-    public Transform testcube;
+    //public Transform testcube;
 
     void Start()
     {
@@ -714,19 +716,19 @@ public class CMoveComponent : BaseComponent
     {
         float xRotPrev = com.FpRoot.localEulerAngles.y;
         float xRotNext = xRotPrev + MouseMove.x * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
-        xnext = xRotNext;
+        //xnext = xRotNext;
         //if (xRotNext > 180f)
         //    xRotNext -= 360f;
 
         float yRotPrev = com.FpCamRig.localEulerAngles.x;
         float yRotNext = yRotPrev + MouseMove.y * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
-        ynext = yRotNext;
+        //ynext = yRotNext;
 
 
         com.FpRoot.localEulerAngles = Vector3.up * xRotNext;
-        updown = com.FpRoot.localEulerAngles;
+        //updown = com.FpRoot.localEulerAngles;
         com.FpCamRig.localEulerAngles = Vector3.right * yRotNext;
-        rightleft = com.FpCamRig.localEulerAngles;
+        //rightleft = com.FpCamRig.localEulerAngles;
 
     }
 
