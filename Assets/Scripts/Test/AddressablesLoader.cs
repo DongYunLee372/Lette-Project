@@ -9,6 +9,15 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
+public enum ErrorCode
+{
+    Load_Fail=0,  //로딩 실패
+    LoadObjectName_Duplication,  //이름 요청한 이름
+    Assets_Already_Loaded,  //이미 로딩 되어있는 경우
+    Instantiate_Fail ,  //생성 실패
+    Delete_Fail ,//삭제 실패
+    Unload_Fail //언로드 실패
+}
 public static class AddressablesLoader
 {
     public static List<GameObject> tempobj = new List<GameObject>();
@@ -18,6 +27,7 @@ public static class AddressablesLoader
     public static List<object> List = new List<object>();  //하나의 리스트에 로드 자산 관리 시키기
     public static List<AsyncOperationHandle<GameObject>> handleList = new List<AsyncOperationHandle<GameObject>>();  //핸들 저장해서 언로드 관리 시키기.
     public static List<GameObject> Instantiate_Obj_List = new List<GameObject>();  //instantiateAsync를 통해 생성된 오브젝트 관리
+
 
 
 
@@ -400,6 +410,19 @@ public static class AddressablesLoader
 
     }
 
+
+    public static bool Save_List()
+    {
+
+
+        return false;
+    }
+
+    public static bool Return_ErrorCode()
+    {
+
+        return false;
+    }
 
     //public static IEnumerator LoadGameObjectAndMaterial(<string name)
     //{
