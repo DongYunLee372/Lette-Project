@@ -29,7 +29,7 @@ public class LoadFile : MySingleton<LoadFile>
 
         var header = Regex.Split(lines[0], SPLIT_RE);
         //var datatype = Regex.Split(lines[1], SPLIT_RE);
-        Debug.Log(lines[0]);
+        //Debug.Log(lines[0]);
         //Debug.Log(lines[1]);
 
         string Key;
@@ -48,7 +48,7 @@ public class LoadFile : MySingleton<LoadFile>
                 object finalvalue = value;
 
                 Type type = Fieldlist[j].FieldType;
-                Debug.Log(type);
+                //Debug.Log(type);
                 Fieldlist[j].SetValue(information_T, Convert.ChangeType(value, type));
             }
 

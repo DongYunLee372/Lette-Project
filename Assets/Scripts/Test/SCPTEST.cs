@@ -17,7 +17,7 @@ public class SCPTEST : MonoBehaviour
 
     void Start()
     {
-        
+
         
         //data = DataLoad_Save.Instance.Get_MonsterDB(EnumScp.MonsterIndex.mon_06_01);
         //pdata = DataLoad_Save.Instance.Get_PlayerDB(EnumScp.PlayerDBIndex.Level1);
@@ -25,8 +25,8 @@ public class SCPTEST : MonoBehaviour
         //target = DataLoad_Save.Instance.Get_MonsterTargetDB(EnumScp.MonsterTarget.ID33330212);
 
 
-        Debug.Log("아라라" + data2.P_skill_Name_En);
-        Debug.Log("아라라" + target.P_mon_Range);
+        //Debug.Log("아라라" + data2.P_skill_Name_En);
+        //Debug.Log("아라라" + target.P_mon_Range);
         //Debug.Log("오라라" + data.P_mon_nameeng);
         //Debug.Log(pdata.P_player_Atk1);
         //Debug.Log(StaticClass.Add);
@@ -36,6 +36,10 @@ public class SCPTEST : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("ㄸ");
+            CutSceneManager.Instance.OnStart("OneCutScene");
+        }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseCutScene
+public abstract class BaseCutScene : MonoBehaviour
 {
     // 공통점 : 스킵 , 시작 , 끝 , 
 
@@ -24,12 +24,12 @@ public abstract class BaseCutScene
 
 
     public abstract bool P_CanSkip { get; protected set; }
-   
 
     /// <summary>
     /// 씬 시작
     /// </summary>
-    public abstract void Start();
+
+    public abstract void On();
     public abstract void Stop();
     public abstract void Skip();
 
@@ -41,8 +41,18 @@ public abstract class BaseCutScene
             _SkipCallback += m_skipcallback;
         if (m_stopcallback != null)
             _StopCallback += m_stopcallback;
-
     }
-    
 
+    public void OnStartCallback()
+    {
+        _StartCallback.Invoke();
+    }
+    public void OnSkipCallback()
+    {
+        _SkipCallback.Invoke();
+    }
+    public void OnStopCallback()
+    {
+        _StopCallback.Invoke();
+    }
 }
