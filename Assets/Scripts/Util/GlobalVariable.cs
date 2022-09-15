@@ -49,9 +49,25 @@ namespace Global_Variable
         public const string two33330212 = "33330212";
         public const string three33330312 = "33330312";
 
+        
+
         public const string Asha = "Asha"; //캐릭터
     }
 
+    public class Boss
+    {
+        //보스 기본공격 3개
+        public const string First_Atk = "First_Atk";
+        public const string Second_Atk = "Second_Atk";
+        public const string Third_Atk = "The_Great_Sword_Slap";
+        //보스 스킬들 6개
+        public const string USwing = "USwing";
+        public const string SSwing = "SSwing";
+        public const string LRush = "LRush";
+        public const string Sting = "Sting";
+        public const string DiagonalSwing = "DiagonalSwing";
+        public const string LRush_and_USwing = "LRush_and_USwing";
+    }
     public class UIname
     {
         public const string OptionSetting = "OptionSetting";

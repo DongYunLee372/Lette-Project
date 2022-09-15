@@ -1,5 +1,4 @@
-skill_Name_En,skill_Name_Kor,mon_Index,Group_Index,Atk_Skill1,Atk_Skill2,Atk_Skill3,skill_Range,
-First Atk,ì²«ë²ˆì§¸ ì¼ë°˜ê³µê²©,mon_06_01,G1,3060401,3060402,3060403,10,
-Second Atk,ë‘ë²ˆì§¸ ì¼ë°˜ê³µê²©,mon_06_01,G2,3060402,3060404,-,10,
-Third Atk,ì„¸ë²ˆì§¸ ì¼ë°˜ê³µê²©,mon_06_01,G3,3060405,3060405,3060406,10,
-
+skill_Name_En,skill_Name_Kor,mon_Index,Group_Index,Atk_Skill1,Atk_Skill2,Atk_Skill3,skill_Range
+First_Atk,Ã¹¹øÂ° ÀÏ¹İ°ø°İ,mon_06_01,G1,3060401,3060402,3060403,10
+Second_Atk,µÎ¹øÂ° ÀÏ¹İ°ø°İ,mon_06_01,G2,3060402,3060404,-,10
+Third_Atk,¼¼¹øÂ° ÀÏ¹İ°ø°İ,mon_06_01,G3,3060405,3060405,3060406,10

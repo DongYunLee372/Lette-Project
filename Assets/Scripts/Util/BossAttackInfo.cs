@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "BossAttack Data", menuName = "Scriptable Object/BossAttackInfo", order = int.MaxValue)]
 
-public class BossAttackInfo : MonoBehaviour
+public class BossAttackInfo : ScriptableObject
 {
     [SerializeField]
     private string skill_Name_En; //몬스터 영어명
