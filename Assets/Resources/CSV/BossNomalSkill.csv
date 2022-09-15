@@ -1,0 +1,8 @@
+skill_Name_En,skill_Name_Kor,mon_Index,skill_ID,skill_Type,skill_Targetyp,Group_Index,Group_Motion_Count,skill_dmg,skill_MP,skill_atkTime,skill_continueTime,skill_AtkCount,
+USwing,위에서 베기,mon_06_01,3060401,2,1,G1,1,5,10,2,0,1,
+SSwing,옆으로 베기,mon_06_01,3060402,2,1,"G1 , G2","2 , 1",5,10,2,0,1,
+LRush,약 돌진,mon_06_01,3060403,2,1,G1,3,5,10,2,0,1,
+Sting,찌르는 모션,mon_06_01,3060404,2,1,G2,2,5,10,2,0,1,
+DiagonalSwing,대각선 베기,mon_06_01,3060405,2,1,G3,"1 , 2",5,10,2,0,1,
+LRush and USwing,약 돌진 후 위로 베기,mon_06_01,3060406,2,1,G3,2,5,10,2,0,1,
+
