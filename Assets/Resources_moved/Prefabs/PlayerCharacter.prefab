@@ -31,6 +31,37 @@ Transform:
   m_Father: {fileID: 5912692895590823227}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1121701716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1121701717}
+  m_Layer: 0
+  m_Name: Skill1Effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1121701717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121701716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.001, y: 1.326, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5912692895590823227}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5912692895156706169
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +549,7 @@ Transform:
   - {fileID: 5912692897135278756}
   - {fileID: 5912692896014484492}
   - {fileID: 489346842}
+  - {fileID: 1121701717}
   m_Father: {fileID: 5912692896712387631}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2086,9 +2118,6 @@ GameObject:
   - component: {fileID: 5912692896712387626}
   - component: {fileID: 5912692896712388560}
   - component: {fileID: 5912692896712388561}
-  - component: {fileID: 1121095337}
-  - component: {fileID: 1121095338}
-  - component: {fileID: 836511858}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -2166,7 +2195,6 @@ MonoBehaviour:
   CharacterInfoPanel: {fileID: 0}
   HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
   effectmanager: {fileID: 0}
-  CharacterDBInfo: {fileID: 0}
 --- !u!114 &5912692896712388562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2236,32 +2264,33 @@ MonoBehaviour:
     CapsuleCol: {fileID: 0}
     animator: {fileID: 0}
   curval:
-    isCursorActive: 0
-    isFPP: 1
+    IsCursorActive: 0
+    IsFPP: 1
     isMoving: 0
-    isRunning: 0
-    isGrounded: 0
-    isJumping: 0
-    isFalling: 0
-    isSlip: 0
-    isFowordBlock: 0
-    isOnTheSlop: 0
+    IsRunning: 0
+    IsGrounded: 0
+    IsJumping: 0
+    IsFalling: 0
+    IsSlip: 0
+    IsFowordBlock: 0
+    IsOnTheSlop: 0
     isAttacking: 0
     isGuard: 0
     isKnockBack: 0
     isKnockDown: 0
-    isNoDamage: 0
+    IsNoDamage: 0
     isRolling: 0
-    lastJump: 0
-    curGroundSlopAngle: 0
-    curFowardSlopAngle: 0
-    curGroundNomal: {x: 0, y: 0, z: 0}
-    curGroundCross: {x: 0, y: 0, z: 0}
-    curHorVelocity: {x: 0, y: 0, z: 0}
-    curVirVelocity: {x: 0, y: 0, z: 0}
-    moveAccel: 0
+    LastJump: 0
+    CurGroundSlopAngle: 0
+    CurFowardSlopAngle: 0
+    CurGroundNomal: {x: 0, y: 0, z: 0}
+    CurGroundCross: {x: 0, y: 0, z: 0}
+    CurHorVelocity: {x: 0, y: 0, z: 0}
+    CurVirVelocity: {x: 0, y: 0, z: 0}
+    MoveAccel: 0
   moveoption:
     RotMouseSpeed: 1
+    RotSpeed: 0.5
     MoveSpeed: 300
     RunSpeed: 500
     MinAngle: 0
@@ -2271,7 +2300,7 @@ MonoBehaviour:
     JumpcoolTime: 1
     GroundMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     MaxSlop: 70
     SlopAccel: 0
     RunningStaminaVal: 4
@@ -2281,6 +2310,7 @@ MonoBehaviour:
     RollingTime: 0
     RollingFreeDamageTime: 0
     NextRollingTime: 0.1
+    RollingStaminaDown: 20
     KnockDownClip: {fileID: 7400000, guid: 0c62720761979084caafe70772d508f8, type: 2}
     KnockBackClip: {fileID: 7400000, guid: fb154bb004a47594ea4d6d9afb25d388, type: 2}
     KnockDownTime: 1
@@ -2314,92 +2344,81 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896712387625}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 071bddc9f34591443975b72312a660a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   comtype: 0
   curval:
-    isCursorActive: 0
-    isFPP: 1
+    IsCursorActive: 0
+    IsFPP: 1
     isMoving: 0
-    isRunning: 0
-    isGrounded: 0
-    isJumping: 0
-    isFalling: 0
-    isSlip: 0
-    isFowordBlock: 0
-    isOnTheSlop: 0
+    IsRunning: 0
+    IsGrounded: 0
+    IsJumping: 0
+    IsFalling: 0
+    IsSlip: 0
+    IsFowordBlock: 0
+    IsOnTheSlop: 0
     isAttacking: 0
     isGuard: 0
     isKnockBack: 0
     isKnockDown: 0
-    isNoDamage: 0
+    IsNoDamage: 0
     isRolling: 0
-    lastJump: 0
-    curGroundSlopAngle: 0
-    curFowardSlopAngle: 0
-    curGroundNomal: {x: 0, y: 0, z: 0}
-    curGroundCross: {x: 0, y: 0, z: 0}
-    curHorVelocity: {x: 0, y: 0, z: 0}
-    curVirVelocity: {x: 0, y: 0, z: 0}
-    moveAccel: 0
-  LastAttackTime: 0
-  AttackNum: 0
+    LastJump: 0
+    CurGroundSlopAngle: 0
+    CurFowardSlopAngle: 0
+    CurGroundNomal: {x: 0, y: 0, z: 0}
+    CurGroundCross: {x: 0, y: 0, z: 0}
+    CurHorVelocity: {x: 0, y: 0, z: 0}
+    CurVirVelocity: {x: 0, y: 0, z: 0}
+    MoveAccel: 0
+  CurAttackNum: 0
   movecom: {fileID: 0}
   effectparent: {fileID: 0}
   weaponcollider: {fileID: 0}
   monstertag: Enemy
-  animator: {fileID: 0}
-  eventsystem: {fileID: 0}
-  attackinfos:
-  - AttackNum: 0
-    animationPlaySpeed: 1
-    aniclip: {fileID: 7400000, guid: d1e750001102c4d44a993077e1cf25d2, type: 2}
-    MovementDelay: 0
-    NextMovementTimeVal: 0.5
+  IsLinkable: 0
+  NextAttackInfo:
+    attackNum: 0
+    attackName: 
+    attackType: 
+    aniclipName: 
+    animationPlaySpeed: 0
+    startDelay: 0
+    recoveryDelay: 0
+    bufferdInputTime_Start: 0
+    BufferdInputTime_End: 0
     damage: 0
-    EffectStartTime: 0.45
-    Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
-    EffectPosRot: {fileID: 5912692896680884495}
-    movedis: 5
-    movetime: 0.1
-  - AttackNum: 1
-    animationPlaySpeed: 1.2
-    aniclip: {fileID: 7400000, guid: 358908e8526d3de43ac7ecc0a637f6a4, type: 2}
-    MovementDelay: 0
-    NextMovementTimeVal: 0.5
-    damage: 0
+    StaminaGaugeDown: 0
+    EffectName: 
     EffectStartTime: 0
-    Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
-    EffectPosRot: {fileID: 5912692897135278756}
-    movedis: 10
-    movetime: 0.2
-  - AttackNum: 2
-    animationPlaySpeed: 3
-    aniclip: {fileID: 7400000, guid: 52fad86f8d4b13a4cb9320f5c1902e3d, type: 2}
-    MovementDelay: 0
-    NextMovementTimeVal: 0.5
-    damage: 0
-    EffectStartTime: 0.35
-    Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
-    EffectPosRot: {fileID: 5912692896014484492}
-    movedis: 10
-    movetime: 0.3
+    effectPosRot: 
+    EffectDestroyTime: 0
+    movedis: 0
+    movetime: 0
+    ProjectileObjName: 
+    TargetObjName: 
+  NextAttack: 0
+  NextAttackNum: -1
   skillinfos:
-  - SkillName: Skill01
+  - AttackType: 0
+    SkillName: Skill01
     SkillNum: 0
     aniclip: {fileID: 7400000, guid: a76d7c4bcbef6914d9ef750535f17a37, type: 2}
     animationPlaySpeed: 1.8
-    MovementDelay: 0
-    NextMovementTimeVal: 0
+    StartDelay: 0
+    RecoveryDelay: 0
     damage: 0
-    Effect: {fileID: 0}
-    EffectStartTime: 0
-    EffectPosRot: {fileID: 0}
+    Effect: {fileID: 1648509489993130, guid: 8a0c2ade089d4c44fbdf861f7bcd7be6, type: 3}
+    EffectStartTime: 0.8
+    EffectPosRot: {fileID: 1121701717}
     Movedis: 0
     MoveTime: 0
+  animator: {fileID: 0}
+  eventsystem: {fileID: 0}
   effectobj: {fileID: 0}
   preparent: {fileID: 0}
   lastAttackTime: 0
@@ -2430,166 +2449,6 @@ MonoBehaviour:
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
---- !u!114 &1121095337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5912692896712387625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda2c557dd845a64b908ba8000097049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curval:
-    isCursorActive: 0
-    isFPP: 1
-    isMoving: 0
-    isRunning: 0
-    isGrounded: 0
-    isJumping: 0
-    isFalling: 0
-    isSlip: 0
-    isFowordBlock: 0
-    isOnTheSlop: 0
-    isAttacking: 0
-    isGuard: 0
-    isKnockBack: 0
-    isKnockDown: 0
-    isNoDamage: 0
-    isRolling: 0
-    lastJump: 0
-    curGroundSlopAngle: 0
-    curFowardSlopAngle: 0
-    curGroundNomal: {x: 0, y: 0, z: 0}
-    curGroundCross: {x: 0, y: 0, z: 0}
-    curHorVelocity: {x: 0, y: 0, z: 0}
-    curVirVelocity: {x: 0, y: 0, z: 0}
-    moveAccel: 0
-  Movedic: []
-  Movetime: []
-  nameClip: []
-  movecom: {fileID: 0}
-  eventsystem: {fileID: 0}
-  ComboAttackState: 0
-  PlayerScp: {fileID: 0}
-  enemyScp: {fileID: 0}
-  effectManagerTest: {fileID: 0}
---- !u!114 &1121095338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5912692896712387625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f230c1fb59f6c924c9d52f8858a866e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comtype: 4
-  curval:
-    isCursorActive: 0
-    isFPP: 1
-    isMoving: 0
-    isRunning: 0
-    isGrounded: 0
-    isJumping: 0
-    isFalling: 0
-    isSlip: 0
-    isFowordBlock: 0
-    isOnTheSlop: 0
-    isAttacking: 0
-    isGuard: 0
-    isKnockBack: 0
-    isKnockDown: 0
-    isNoDamage: 0
-    isRolling: 0
-    lastJump: 0
-    curGroundSlopAngle: 0
-    curFowardSlopAngle: 0
-    curGroundNomal: {x: 0, y: 0, z: 0}
-    curGroundCross: {x: 0, y: 0, z: 0}
-    curHorVelocity: {x: 0, y: 0, z: 0}
-    curVirVelocity: {x: 0, y: 0, z: 0}
-    moveAccel: 0
-  LastAttackTime: 0
-  AttackNum: 0
-  movecom: {fileID: 0}
-  Attack_InformationList:
-  - {fileID: 11400000, guid: bbc9bad4c9e84224a9ffd811c75c6f56, type: 2}
-  - {fileID: 11400000, guid: f612c1e0e7e4361419e38f51b4f0e324, type: 2}
-  - {fileID: 11400000, guid: f4c2ca71b21f74f4291121a5a69c2a9b, type: 2}
-  SkillData: {fileID: 11400000, guid: 65e4fd3a0d94a7a438c0b36079e9e783, type: 2}
-  colliders: []
-  animator: {fileID: 0}
-  eventsystem: {fileID: 0}
-  attackinfos:
-  - AttackNum: 0
-    animationPlaySpeed: 0
-    aniclip: {fileID: 0}
-    MovementDelay: 0
-    NextMovementTimeVal: 0
-    damage: 0
-    EffectStartTime: 0
-    Effect: {fileID: 0}
-    EffectPosRot: {fileID: 5912692896680884495}
-    movedis: 0
-    movetime: 0
-  - AttackNum: 0
-    animationPlaySpeed: 0
-    aniclip: {fileID: 0}
-    MovementDelay: 0
-    NextMovementTimeVal: 0
-    damage: 0
-    EffectStartTime: 0
-    Effect: {fileID: 0}
-    EffectPosRot: {fileID: 5912692897135278756}
-    movedis: 0
-    movetime: 0
-  - AttackNum: 0
-    animationPlaySpeed: 0
-    aniclip: {fileID: 0}
-    MovementDelay: 0
-    NextMovementTimeVal: 0
-    damage: 0
-    EffectStartTime: 0
-    Effect: {fileID: 0}
-    EffectPosRot: {fileID: 5912692896014484492}
-    movedis: 0
-    movetime: 0
-  skillinfos: []
-  effectobj: {fileID: 0}
-  preparent: {fileID: 0}
-  lastAttackTime: 0
-  testAttckmanager: {fileID: 0}
-  AttackColliderParent: {fileID: 0}
-  att: {fileID: 0}
-  Player: {fileID: 0}
-  rigidbody: {fileID: 0}
---- !u!195 &836511858
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5912692896712387625}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &5912692896735992643
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,9 +3029,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips: []
-  beginCallBack:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &5912692897056710730
 MonoBehaviour:
   m_ObjectHideFlags: 0

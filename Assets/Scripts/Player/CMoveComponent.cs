@@ -6,8 +6,6 @@ using UnityEngine;
 //상수화 할 상수들을 관리할 크래스 제작
 //curval 에서 확인
 //컬링 알아보기
-
-
 public class CMoveComponent : BaseComponent
 {
     public enum Direction

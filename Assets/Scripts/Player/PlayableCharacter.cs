@@ -21,10 +21,7 @@ public class PlayableCharacter : MonoBehaviour
 
     [Header("================캐릭터 UI================")]
     public UICharacterInfoPanel CharacterInfoPanel;
-    //public SlideBar HPBar;
-    //public SlideBar MPBar;
-    //public SlideBar STMBar;
-    //public SlideBar BalanceBar;
+
     [Header("================피격 이펙트================")]
     public GameObject HitEffect;
     public EffectManager effectmanager;
