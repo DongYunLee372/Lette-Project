@@ -47,8 +47,13 @@ public class AddrTestScripts : MonoBehaviour
         //델리게이트 동기 로드 테스트
         //await Loder("susu",tempAction);
 
-        te = await AddressablesLoader.InitAssets_Instantiate<GameObject>("susu", AddressablesLoader.Instantiate_Obj_List);
-        Debug.Log("끝나야되는데?");
+        //te = await AddressablesLoader.InitAssets_Instantiate<GameObject>("susu", AddressablesLoader.Instantiate_Obj_List);
+        //Debug.Log("끝나야되는데?");
+
+
+        StartCoroutine(tempCheck());
+
+
 
 
         //label로 다수 로딩
@@ -62,6 +67,29 @@ public class AddrTestScripts : MonoBehaviour
 
         //TaskRun();
         //TaskFromResult();
+
+    }
+
+    IEnumerator tempCheck()
+    {
+        yield return StartCoroutine(AddressablesLoader.LoadAndStoreResult("susu"));
+        AddressablesLoader.tempCheckList();
+
+        yield return new WaitForSeconds(2f);
+        Debug.Log("2초 지남");
+       object tempObj= AddressablesLoader.Find_Asset_In_AllList("susu");
+        Instantiate(tempObj as GameObject, new Vector3(0f, 0f, 0f), Quaternion.identity);
+
+        yield return new WaitForSeconds(2f);
+        Debug.Log("2초 지남");
+
+
+        if (tempObj!=null)
+        {
+            Debug.Log("삭제하러 들어옴");
+            AddressablesLoader.tempCheckList_delete<UnityEngine.Object>((UnityEngine.Object)tempObj);
+        }
+        Debug.Log("끝남");
 
     }
 
