@@ -37,14 +37,14 @@ public static class AddressablesLoader
 
     public static List<object> List = new List<object>();  //하나의 리스트에 로드 자산 관리 시키기
     public static List<AsyncOperationHandle<GameObject>> handleList = new List<AsyncOperationHandle<GameObject>>();  //핸들 저장해서 언로드 관리 시키기.
-    public static List<AsyncOperationHandle<IList<GameObject>>> handleIList = new List<AsyncOperationHandle<IList<GameObject>>>();
+    public static List<AsyncOperationHandle<IList<GameObject>>> handleIList = new List<AsyncOperationHandle<IList<GameObject>>>();  //핸들 저장
     public static List<GameObject> Instantiate_Obj_List = new List<GameObject>();  //instantiateAsync를 통해 생성된 오브젝트 관리
 
 
 
 
     //Addressables.Release();
-    //label가져와서 바로 생성 시키기
+    //label가져와서 바로 생성 시키기, 리스트 저장 (label,저장할 리스트)
     public static async Task InitAssets_label<T>(string label, List<T> createdObjs)
         where T : UnityEngine.Object
     {
@@ -57,12 +57,15 @@ public static class AddressablesLoader
 
         foreach (var location in locations)
         {
-            createdObjs.Add(await Addressables.InstantiateAsync(location).Task as T);
+            var temp = await Addressables.InstantiateAsync(location).Task as T;
+             createdObjs.Add(temp);
+             List.Add(temp);  //List에 저장 (생성된 오브젝트)
+
             Debug.Log("생성" + label);
         }
     }
 
-    //로드 없이 바로 생성만 
+    //로드 없이 바로 생성만 /동기
     public static async Task<T> InitAssets_Instantiate<T>(string name, List<T> createdObjs)
        where T : UnityEngine.Object
     {
@@ -70,10 +73,18 @@ public static class AddressablesLoader
         var temp = await Addressables.InstantiateAsync(name).Task;
 
         createdObjs.Add(temp as T);
-       
-        foreach(var t in createdObjs)
+
+        List.Add(temp);
+
+        foreach (var t in createdObjs)
         {
-            Debug.Log("리스트 들어감"+t.name);
+            Debug.Log("createdObjs 리스트 들어감" + t);
+        }
+
+
+        foreach (var t in List)
+        {
+            Debug.Log("List 리스트 들어감" + t);
         }
 
         return temp as T;
@@ -135,15 +146,12 @@ public static class AddressablesLoader
                     tempsaveT = t;
                     List.Remove(t);
                     Addressables.Release(t);
-                  
+
                     Debug.Log("삭제 완료");
+                    return;
                 }
             }
         }
-
-        //IList핸들 리스트에서 삭제
-        handleIList.Remove(tempsaveT);
-        Debug.Log("일단 삭제해씀");
 
 
         foreach (var t in handleIList)
@@ -165,10 +173,19 @@ public static class AddressablesLoader
               
                 Addressables.Release(t);
                 List.Remove(t);
+                // GameObject.Destroy(delete_Obj);
+                break;
+
             }
 
             Debug.Log("List 조회 : " + t);
         }
+
+        //IList핸들 리스트에서 삭제
+
+       handleIList.Remove(tempsaveT);
+        Debug.Log("handleIList 삭제해씀");
+
 
     }
 
@@ -177,6 +194,15 @@ public static class AddressablesLoader
         object findAsset=null;
 
         Debug.Log("Find_Asset_In_AllList 진입");
+
+        //if(List.Contains(FindObj))
+        //{
+        //    findAsset = List.Find(FindObj);
+        //    Debug.Log("findAsset찾음 in List");
+
+        //    return findAsset;
+        //}
+
 
         foreach(var t in List)
         {
@@ -209,13 +235,14 @@ public static class AddressablesLoader
     public static object Find_Asset_In_AllList(string FindObj)
     {
         object findAsset = null;
+        string List_name = " (UnityEngine.GameObject)";  //
 
         Debug.Log("Find_Asset_In_AllList 진입");
 
         foreach (var t in List)
         {
             Debug.Log("List 요소 조회 : " + t);
-            if (t.ToString() == FindObj)
+            if (t.ToString() == FindObj+ List_name)
             {
                 findAsset = t;
                 Debug.Log("findAsset찾음 in List");
@@ -278,18 +305,18 @@ public static class AddressablesLoader
     public static async Task InitAssets_name_<T>(string object_name)
                 where T : UnityEngine.Object
     {
-        //AsyncOperationHandle<GameObject> operationHandle=
-        // Addressables.LoadAssetAsync<GameObject>(object_name);
+        //AsyncOperationHandle<T> operationHandle=
+        //await Addressables.LoadAssetAsync<T>(object_name).Task;
         Debug.Log("시작" + object_name);
 
-        var temp = await Addressables.LoadAssetAsync<GameObject>(object_name).Task;        
+        var temp = await Addressables.LoadAssetAsync<T>(object_name).Task;        
         Debug.Log("가져옴" + object_name);
 
-        tempobj.Add(temp);
-      
-        foreach(var t in tempobj)
+        List.Add(temp);
+
+        foreach(var t in List)
         {
-            Debug.Log("요소 출력: "+t.name);
+            Debug.Log("요소 출력: "+t);
         }
 
     

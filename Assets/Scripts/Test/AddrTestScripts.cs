@@ -18,6 +18,7 @@ public class AddrTestScripts : MonoBehaviour
     public delegate void Complete_delegate(AsyncOperationHandle<GameObject> comp);
     public Action<AsyncOperationHandle<GameObject>> Complete_Aciton;
 
+
     public GameObject tempHPbar;
     // Start is called before the first frame update
     public GameObject te;
@@ -51,10 +52,21 @@ public class AddrTestScripts : MonoBehaviour
         //Debug.Log("끝나야되는데?");
 
 
-        StartCoroutine(tempCheck());
+        // StartCoroutine(tempCheck());
+
+        //GameObject tem=  await  AddressablesLoader.InitAssets_Instantiate<GameObject>("susu",AddressablesLoader.tempobj);
 
 
+         await AddressablesLoader.InitAssets_name_<GameObject>("susu");
 
+        object find = AddressablesLoader.Find_Asset_In_AllList("susu");
+        if (find != null)
+        {
+            Debug.Log("찾았당");
+            Instantiate((GameObject)find, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        }
+
+        AddressablesLoader.tempCheckList_delete<UnityEngine.Object>((UnityEngine.Object)find);
 
         //label로 다수 로딩
         //StartCoroutine(AddressablesLoader.LoadAndStoreResult("Monster"));
@@ -78,7 +90,7 @@ public class AddrTestScripts : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Debug.Log("2초 지남");
        object tempObj= AddressablesLoader.Find_Asset_In_AllList("susu");
-        Instantiate(tempObj as GameObject, new Vector3(0f, 0f, 0f), Quaternion.identity);
+       GameObject t= Instantiate(tempObj as GameObject, new Vector3(0f, 0f, 0f), Quaternion.identity);
 
         yield return new WaitForSeconds(2f);
         Debug.Log("2초 지남");
@@ -88,9 +100,10 @@ public class AddrTestScripts : MonoBehaviour
         {
             Debug.Log("삭제하러 들어옴");
             AddressablesLoader.tempCheckList_delete<UnityEngine.Object>((UnityEngine.Object)tempObj);
+            Destroy(t);
+           
         }
         Debug.Log("끝남");
-
     }
 
     //동기 로드 후 델리게이트 사용
