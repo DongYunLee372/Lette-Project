@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 class Generic_List<T>
 {
     public List<T> List;
+    public List<AsyncOperationHandle<T>> asyncOperations;
+    public Dictionary<string, List<AsyncOperationHandle<IList<T>>>> keyValuePairs;
 }
 
 public class AddressablesController : Singleton<AddressablesController>
@@ -21,6 +24,8 @@ public class AddressablesController : Singleton<AddressablesController>
 	GameObject tempob;
 	public int Loder_ListCount = 0;
 	public bool load_Comp = false;
+
+    
 
 	private void Start()
 	{
