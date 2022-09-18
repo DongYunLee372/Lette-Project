@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseCutScene : MonoBehaviour
+public abstract class BaseCutScene
 {
     // 공통점 : 스킵 , 시작 , 끝 , 
 
@@ -46,13 +46,16 @@ public abstract class BaseCutScene : MonoBehaviour
     public void OnStartCallback()
     {
         _StartCallback.Invoke();
+        _StartCallback = null;
     }
     public void OnSkipCallback()
     {
         _SkipCallback.Invoke();
+        _SkipCallback = null;
     }
     public void OnStopCallback()
     {
         _StopCallback.Invoke();
+        _StopCallback = null;
     }
 }

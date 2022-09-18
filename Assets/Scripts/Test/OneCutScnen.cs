@@ -26,7 +26,7 @@ public class OneCutScnen : BaseCutScene
     private void Awake()
     {
         SetCallBack(On, Skip, Stop);
-        CutSceneManager.Instance.AddCutScene(this.name, this);
+        CutSceneManager.Instance.AddCutScene("One", this);
     }
 
     

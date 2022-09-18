@@ -44,24 +44,51 @@ public class CutSceneManager : MySingleton<CutSceneManager>
 
     public void OnStart(string name)
     {
-        Debug.Log("앙");
-
         BaseCutScene cut;
         if(CutSceneDic.TryGetValue(name , out cut))
         {
-            Debug.Log(cut.name);
+            //Debug.Log(cut.name);
             cut.OnStartCallback();
         }
     }
 
     public void OnStop(string name)
     {
-
+        BaseCutScene cut;
+        if (CutSceneDic.TryGetValue(name, out cut))
+        {
+            //Debug.Log(cut.name);
+            cut.OnStopCallback();
+        }
     }
 
     public void OnSkip(string name)
     {
+        BaseCutScene cut;
+        if (CutSceneDic.TryGetValue(name, out cut))
+        {
+            if(IsSkipScene(cut))
+            {
+                cut.OnSkipCallback();
+            }
+            
+        }
+    }
 
+    public void NowCutScene()
+    {
+
+    }
+
+    public void IsCutScene()
+    {
+
+    }
+
+    public bool IsSkipScene(BaseCutScene cut)
+    {
+
+        return true;
     }
 
     void Start()
