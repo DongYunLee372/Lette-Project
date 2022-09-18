@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //jo
@@ -31,6 +32,9 @@ public class CAttackComponent : BaseComponent
     public int NextAttackNum = -1;
 
     public Dictionary<string, AttackInfo> LoadedAttackInfoDic;
+
+    public List<AttackInfo> AttackInfos;
+
 
     //[SerializeField]
    // AttackInfo_Ex testinfooooo;
@@ -195,8 +199,12 @@ public class CAttackComponent : BaseComponent
             effectparent = new GameObject("EffectsContainer").transform;
         }
 
+
+
         AnimationEventsSetting();
         Initsetting();
+
+        //AttackInfos = LoadedAttackInfoDic["0"].ToList();
     }
 
 
@@ -349,6 +357,7 @@ public class CAttackComponent : BaseComponent
         //StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
         animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
     }
+
 
     //공격 함수
     public void Attack()
