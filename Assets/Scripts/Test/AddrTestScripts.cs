@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 
@@ -18,6 +19,7 @@ public class AddrTestScripts : MonoBehaviour
     public delegate void Complete_delegate(AsyncOperationHandle<GameObject> comp);
     public Action<AsyncOperationHandle<GameObject>> Complete_Aciton;
 
+    public  Dictionary<string, List<string>> AssetList = new Dictionary<string, List<string>>();
 
     public GameObject tempHPbar;
     // Start is called before the first frame update
@@ -57,16 +59,19 @@ public class AddrTestScripts : MonoBehaviour
         //GameObject tem=  await  AddressablesLoader.InitAssets_Instantiate<GameObject>("susu",AddressablesLoader.tempobj);
 
 
-         await AddressablesLoader.InitAssets_name_<GameObject>("susu");
+        // await AddressablesLoader.InitAssets_name_<GameObject>("susu");
 
-        object find = AddressablesLoader.Find_Asset_In_AllList("susu");
-        if (find != null)
-        {
-            Debug.Log("찾았당");
-            Instantiate((GameObject)find, new Vector3(0f, 0f, 0f), Quaternion.identity);
-        }
+        //object find = AddressablesLoader.Find_Asset_In_AllList("susu");
+        //if (find != null)
+        //{
+        //    Debug.Log("찾았당");
+        //    Instantiate((GameObject)find, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        //}
 
-        AddressablesLoader.tempCheckList_delete<UnityEngine.Object>((UnityEngine.Object)find);
+        //AddressablesLoader.tempCheckList_delete<UnityEngine.Object>((UnityEngine.Object)find);
+
+        StartCoroutine(tempCheck1());
+
 
         //label로 다수 로딩
         //StartCoroutine(AddressablesLoader.LoadAndStoreResult("Monster"));
@@ -79,6 +84,57 @@ public class AddrTestScripts : MonoBehaviour
 
         //TaskRun();
         //TaskFromResult();
+
+    }
+
+    void tempListchec()
+    {
+        List<string> temp = new List<string>();
+        temp.Add("temp a");
+        temp.Add("temp b");
+        temp.Add("temp c");
+        List<string> temp1 = new List<string>();
+        temp1.Add("temp1 a");
+        temp1.Add("temp1 b");
+        temp1.Add("temp1 c");
+        List<string> temp2 = new List<string>();
+        temp1.Add("temp2 a");
+        temp1.Add("temp2 b");
+        temp1.Add("temp2 c");
+        AssetList.Add("1", temp);
+        AssetList.Add("2", temp1);
+      //  AssetList.Add("1", temp2);
+
+
+        if (AssetList.ContainsKey("2"))
+        {
+           foreach(var t in AssetList["2"])
+            {
+                Debug.Log(t);
+            }
+        }
+
+    }
+
+    IEnumerator tempCheck1()
+    {
+
+       
+
+         yield return StartCoroutine(AddressablesLoader.LoadAndStoreResult<GameObject>("susu",handle=> Debug.Log("dd"))); 
+
+        object find = AddressablesLoader.Find_Asset_In_AllList("susu");
+
+        if (find != null)
+
+        {
+            Debug.Log("find있엉");
+           // Addressables.Release(find);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        AddressablesLoader.tempCheckList_delete((GameObject)find);
 
     }
 
@@ -130,7 +186,7 @@ public class AddrTestScripts : MonoBehaviour
         //yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar", handle => tempHPbar = handle.Result));
         //Debug.Log("다녀왔음" + tempHPbar);
 
-        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Susu_", handle => tempOBJ_ = handle.Result));
+        yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial<GameObject>("Susu_", handle => tempOBJ_ = handle.Result));
         Debug.Log("다녀왔음" + tempOBJ_);
         Instantiate(tempOBJ_, pos.transform);
     }
