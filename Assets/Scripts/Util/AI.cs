@@ -24,7 +24,7 @@ public class AI
         // now_State = b_c.init_state << 이런식으로 배틀 캐릭터에서 어드레서블로 불러온 State_Init 을 넣어주면 자연스럽게 연결된 스테이트들도 같이 붙는다.
         // 그리고 Init을 통해 해당 AI에 필요한
         // pre_State_List를 넣어줌.
-        pre_State_List = new List<State>();
+        // pre_State_List = new List<State>();
         pre_State_List = now_State.State_Initialize();
 
         pre_State = now_State;
