@@ -441,7 +441,6 @@ public class Battle_Character : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Debug.Log("테스트 스킬");
             animator.Play(testSkillName);
         }
 
