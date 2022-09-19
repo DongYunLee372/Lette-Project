@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class State_Patrol : State
 {
-    public override bool Judge(out State _State, Battle_Character b_c)
+    public override bool Judge(out State _State, Battle_Character battle_character)
     {
-        Collider[] cols = Physics.OverlapSphere(b_c.transform.position,
-            b_c.mon_Target_Info.P_mon_Range);
+        Collider[] cols = Physics.OverlapSphere(battle_character.transform.position,
+            battle_character.mon_Target_Info.P_mon_Range);
         //, 1 << 8); // 비트 연산자로 8번째 레이어
 
         if (cols.Length > 0)
@@ -16,8 +16,8 @@ public class State_Patrol : State
             {
                 if (cols[i].tag == "Player")
                 {
-                    b_c.cur_Target = cols[i].gameObject;
-                    b_c.real_AI.pre_State = this;
+                    battle_character.cur_Target = cols[i].gameObject;
+                    battle_character.real_AI.pre_State = this;
                     _State = Trans_List[0];
                     return false;
                 }
@@ -28,40 +28,40 @@ public class State_Patrol : State
         return true;
     }
 
-    public override void Run(Battle_Character b_c)
+    public override void Run(Battle_Character battle_character)
     {
-        b_c.animator.Play("Walk");
+        battle_character.animator.Play("Walk");
 
-        Vector3 charPos = new Vector3(b_c.transform.position.x,
-            0, b_c.transform.position.z);
-        Vector3 desPos = new Vector3(b_c.destination_Pos.x
-            , 0, b_c.destination_Pos.z);
+        Vector3 charPos = new Vector3(battle_character.transform.position.x,
+            0, battle_character.transform.position.z);
+        Vector3 desPos = new Vector3(battle_character.destination_Pos.x
+            , 0, battle_character.destination_Pos.z);
 
         if (Vector3.Distance(charPos, desPos) <= 1f)
         {
-            if (!b_c.patrol_Start)
+            if (!battle_character.patrol_Start)
             {
-                StartCoroutine(patrol_Think_Coroutine(b_c));
-                b_c.patrol_Start = true;
+                StartCoroutine(patrol_Think_Coroutine(battle_character));
+                battle_character.patrol_Start = true;
 
                 //anim.SetBool("isWalk", false);
             }
         }
         else
         {
-            b_c.real_AI.navMesh.SetDestination(b_c.destination_Pos);
+            battle_character.real_AI.navMesh.SetDestination(battle_character.destination_Pos);
         }
     }
 
-    protected IEnumerator patrol_Think_Coroutine(Battle_Character b_c)  // 다음 목적지 생각하는 코루틴
+    protected IEnumerator patrol_Think_Coroutine(Battle_Character battle_character)  // 다음 목적지 생각하는 코루틴
     {
         yield return new WaitForSeconds(1f);
 
         int randX = Random.Range(-10, 10);
         int randZ = Random.Range(-10, 10);
 
-        b_c.destination_Pos = new Vector3(b_c.return_Pos.x + randX, b_c.return_Pos.y, b_c.return_Pos.z + randZ);
+        battle_character.destination_Pos = new Vector3(battle_character.return_Pos.x + randX, battle_character.return_Pos.y, battle_character.return_Pos.z + randZ);
 
-        b_c.patrol_Start = false;
+        battle_character.patrol_Start = false;
     }
 }

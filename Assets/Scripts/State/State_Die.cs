@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class State_Die : State
 {
-    public override bool Judge(out State _State, Battle_Character b_c)
+    public override bool Judge(out State _State, Battle_Character battle_character)
     {
         // 0으로 바꿔야함
-        if (b_c.cur_HP <= 0) // 사망
+        if (battle_character.cur_HP <= 0) // 사망
         {
             _State = this;
             return true;
@@ -17,20 +17,20 @@ public class State_Die : State
         return false;
     }
 
-    public override void Run(Battle_Character b_c)
+    public override void Run(Battle_Character battle_character)
     {
         // 사망 애니메이션 등 사망 시 부활하고 소환하는 등등의 효과(스킬)을 호출. 
         // 스킬 구조 구현 시 추가해줘야함.
-        if (b_c.phase_Effect != null && !first_Start)
+        if (battle_character.phase_Effect != null && !first_Start)
         {
-            b_c.animator.Play("Monster Recall");
+            battle_character.animator.Play("Monster Recall");
 
-            StartCoroutine(death_Coroutine(b_c.phase_Effect, b_c.transform));
+            StartCoroutine(death_Coroutine(battle_character.phase_Effect, battle_character.transform));
 
             this.first_Start = true;
         }
 
-        b_c.real_AI.now_State = Trans_List[0];
+        battle_character.real_AI.now_State = Trans_List[0];
     }
 
     IEnumerator death_Coroutine(GameObject eff, Transform transform)

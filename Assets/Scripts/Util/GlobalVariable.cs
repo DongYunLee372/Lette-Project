@@ -52,6 +52,7 @@ namespace Global_Variable
         
 
         public const string Asha = "Asha"; //캐릭터
+        public const string Player_Tag = "Player"; // 플레이어 태그 
     }
 
     public class Boss

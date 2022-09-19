@@ -2,6 +2,7 @@ using Enemy_Enum;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Global_Variable;
 
 /*
 ex ) 원거리, 근거리 처럼 다른 스테이트 프로세스를 수행해야 한다면 
@@ -167,7 +168,7 @@ public class Battle_Character : MonoBehaviour
         if (is_Boss)
         {
             real_AI.isPause = true;
-            cur_Target = GameObject.FindGameObjectWithTag("Player");
+            cur_Target = GameObject.FindGameObjectWithTag(CharVar.Player_Tag);
         }
 
         StartCoroutine(Mana_Regen());

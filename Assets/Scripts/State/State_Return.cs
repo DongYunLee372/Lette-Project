@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class State_Return : State
 {
-    public override bool Judge(out State _State, Battle_Character b_c)
+    public override bool Judge(out State _State, Battle_Character battle_character)
     {
-        if (b_c.isReturn)
+        if (battle_character.isReturn)
         {
-            if ((Vector3.Distance(b_c.transform.position, b_c.return_Pos) <= 0.5f))
+            if ((Vector3.Distance(battle_character.transform.position, battle_character.return_Pos) <= 0.5f))
             {
                 _State = Trans_List[0];
-                b_c.real_AI.pre_State = this;
+                battle_character.real_AI.pre_State = this;
                 return false;
             }
 
@@ -23,9 +23,9 @@ public class State_Return : State
         return false;
     }
 
-    public override void Run(Battle_Character b_c)
+    public override void Run(Battle_Character battle_character)
     {
-        b_c.animator.Play("Walk");
-        b_c.real_AI.navMesh.SetDestination(b_c.return_Pos);
+        battle_character.animator.Play("Walk");
+        battle_character.real_AI.navMesh.SetDestination(battle_character.return_Pos);
     }
 }

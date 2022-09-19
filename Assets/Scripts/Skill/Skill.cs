@@ -9,17 +9,17 @@ Skill_Run함수를 호출하면서 데이터를 넘겨줘서 스킬을 사용하
 
 public class Skill : MonoBehaviour
 {
-    public virtual void Skill_Run(Battle_Character b_c, MonsterSkillInformation skill_data)
+    public virtual void Skill_Run(Battle_Character battle_character, MonsterSkillInformation skill_data)
     {
-        b_c.isAttack_Run = true;
-        b_c.checkTime = 0f;
-        b_c.isStop = false;
-        b_c.gameObject.transform.LookAt(b_c.cur_Target.transform);
-        b_c.animator.Play(skill_data.P_skill_Name_En);
+        battle_character.isAttack_Run = true;
+        battle_character.checkTime = 0f;
+        battle_character.isStop = false;
+        battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+        battle_character.animator.Play(skill_data.P_skill_Name_En);
 
         if (skill_data.P_skill_ThrowObj != 1 && skill_data.P_skill_DiffObj != 1)
         {
-            b_c.attack_Collider.SetActive(true);
+            battle_character.attack_Collider.SetActive(true);
         }
         // 애니메이션 재생 ( 애니메이션 클립에 이벤트들을 붙여줌 해당 시간에 판정 
         // 어택매니저로 공격 호출
@@ -38,7 +38,7 @@ public class Skill : MonoBehaviour
 
         // 캐릭터 현재 마나 - 스킬의 마나
         // //b_c.mon_Info
-        b_c.mon_Info.P_mon_haveMP -= skill_data.P_skill_MP;
+        battle_character.mon_Info.P_mon_haveMP -= skill_data.P_skill_MP;
     }
 
     protected IEnumerator Shoot_Coroutine(MonsterSkillInformation skill_data)

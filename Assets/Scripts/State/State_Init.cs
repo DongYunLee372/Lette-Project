@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class State_Init : State
 {
-    public override bool Judge(out State _State, Battle_Character b_c)
+    public override bool Judge(out State _State, Battle_Character battle_character)
     {
         _State = Trans_List[0]; // 0번은 init에서 전이될 스테이트
         return false;
     }
 
-    public override void Run(Battle_Character b_c)
+    public override void Run(Battle_Character battle_character)
     {
 
     }
