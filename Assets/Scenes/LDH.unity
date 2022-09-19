@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -444,10 +444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c64825059b31894c97d457946b8d099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDB_List: []
-  MonsterSkillDB_List: []
-  Player_A_constantDB_List: []
-  Monster_A_constantDB_List: []
 --- !u!4 &592250650
 Transform:
   m_ObjectHideFlags: 0
@@ -931,7 +927,7 @@ MonoBehaviour:
   curr_uiname: StartUI
   buttontext: {fileID: 0}
   compltesettingcount: 0
-  defaultkeys: 77000000730000006100000064000000
+  defaultkeys: 77000000730000006100000064000000200000004301000044010000
   KeymapingCheck: 1
 --- !u!114 &1438310907
 MonoBehaviour:

@@ -20,7 +20,10 @@ public class ButtonText : MonoBehaviour
     {
         for (int i = 0; i < texts.Count; i++)
         {
-            texts[i].text = KeySetting.keys[(KeyAction)i].ToString();
+            if (KeySetting.keys[(KeyAction)i].ToString() == "None")
+                texts[i].text = "";
+            else
+                texts[i].text = KeySetting.keys[(KeyAction)i].ToString();
         }
     }
 }

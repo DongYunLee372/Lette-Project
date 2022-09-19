@@ -37,5 +37,17 @@ public class UITest : MonoBehaviour
         {
             Debug.Log("오른쪽");
         }
+        if (Input.GetKey(KeySetting.keys[KeyAction.ROOL]))
+        {
+            Debug.Log("구르기");
+        }
+        if (Input.GetKey(KeySetting.keys[KeyAction.ATTACK]))
+        {
+            Debug.Log("공격");
+        }
+        if (Input.GetKey(KeySetting.keys[KeyAction.DEFENSE]))
+        {
+            Debug.Log("방어");
+        }
     }
 }

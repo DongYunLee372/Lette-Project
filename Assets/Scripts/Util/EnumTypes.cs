@@ -140,6 +140,9 @@ namespace Canvas_Enum
         DOWN,
         LEFT,
         RIGHT,
+        ROOL,
+        ATTACK,
+        DEFENSE,
         KEYCOUNT 
     }
 
