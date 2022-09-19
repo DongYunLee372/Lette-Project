@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 7bf7f5729dc605840ac1c48981bd9c9b
   m_SerializeEntries:
   - m_GUID: d1469fb3fd6cfb84e9fcaad9c9adcfdb
-    m_Address: Prefabs/Appoint
+    m_Address: Appoint
     m_ReadOnly: 0
     m_SerializedLabels:
     - Monster

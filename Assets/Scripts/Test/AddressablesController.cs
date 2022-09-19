@@ -26,6 +26,10 @@ public class AddressablesController : Singleton<AddressablesController>
 	public bool load_Comp = false;
 
     
+    public void gg()
+    {
+        Debug.Log("gg");
+    }
 
 	private void Start()
 	{

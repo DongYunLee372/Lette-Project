@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.UI;
 
 public class AddrTestScripts : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class AddrTestScripts : MonoBehaviour
 
     public GameObject tempOBJ_;
     public GameObject pos;
+
+    public List<GameObject> tempList = new List<GameObject>();
 
     public delegate void Complete_delegate(AsyncOperationHandle<GameObject> comp);
     public Action<AsyncOperationHandle<GameObject>> Complete_Aciton;
@@ -70,7 +73,62 @@ public class AddrTestScripts : MonoBehaviour
 
         //AddressablesLoader.tempCheckList_delete<UnityEngine.Object>((UnityEngine.Object)find);
 
-        StartCoroutine(tempCheck1());
+        //AddressablesController.Instance.gg();
+
+        TestAddressablesLoader<GameObject> temp = new TestAddressablesLoader<GameObject>();
+        // //testaddressablesloader<gameobject> temp3 = new testaddressablesloader<gameobject>();
+        //  await temp.initassets_label("susu");
+        // gameobject te = temp.findloadasset("susu");
+        // //gameobject aa= instantiate(te, new vector3(10f, 10f, 10f), quaternion.identity);
+        //// destroy(aa);
+
+        // temp.delete_object(te);
+
+        // StartCoroutine(tempch());
+       await temp.InitAssets_label("Monster");
+        await temp.InitAssets_label("Monster");
+
+
+        //List<string> t = new List<string>();
+        //t.Add("susu");
+        //t.Add("Susu_");
+        //t.Add("Appoint");
+
+
+        //StartCoroutine( temp.Load_Key_List(t, handl=>Debug.Log("gg")));
+        //Debug.Log("물론 이거 비동기");
+
+        //TestAddressablesLoader<Sprite> temp1 = new TestAddressablesLoader<Sprite>();
+
+        // await temp.InitAssets_Instantiate("Susu_", tempList);
+
+        //foreach (var t in tempList)
+        //{
+        //    Debug.Log("tempList확인" + t.name);
+
+        //}
+
+        // await temp1.InitAssets_name_("Estus");
+
+        //Debug.Log("temp");
+        //temp.tempAllAsset();
+        //Debug.Log("temp1");
+
+        //temp1.tempAllAsset();
+        //Debug.Log("temp3");
+        //temp3.tempAllAsset();
+
+        // tempch();
+
+        // GameObject temp111 = temp.FindLoadAsset("susu");
+        // temp111.transform.position = new Vector3(50f, 0f, 0f);
+        //Instantiate(temp111, new Vector3(10f, 10f, 10f), Quaternion.identity);
+
+        // TestAddressablesLoader<Sprite>.Instance.tempAllAsset();
+
+        // Debug.Log("gg");
+
+        // StartCoroutine(tempCheck1());
 
 
         //label로 다수 로딩
@@ -87,6 +145,32 @@ public class AddrTestScripts : MonoBehaviour
 
     }
 
+
+    IEnumerator tempch()
+    {
+        TestAddressablesLoader<GameObject> temp = new TestAddressablesLoader<GameObject>();
+        List<string> t = new List<string>();
+        t.Add("susu");
+        t.Add("Susu_");
+        t.Add("Appoint");
+
+        yield return temp.Load_Key_List(t);
+
+       GameObject at= temp.FindLoadAsset("susu");
+        temp.Delete_Object(at);
+        temp.tem();
+
+         at = temp.FindLoadAsset("Susu_");
+        temp.Delete_Object(at);
+        temp.tem();
+
+        at = temp.FindLoadAsset("Appoint");
+        temp.Delete_Object(at);
+        temp.tem();
+
+        temp.OnRelease();
+
+    }
     void tempListchec()
     {
         List<string> temp = new List<string>();
