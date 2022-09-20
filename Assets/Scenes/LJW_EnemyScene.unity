@@ -19962,6 +19962,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: real_AI.Init_State
+      value: 
+      objectReference: {fileID: 1173432524}
     - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -30354,7 +30358,8 @@ MonoBehaviour:
   damaged_Effect: {fileID: 0}
   phase_Effect: {fileID: 0}
   real_AI:
-    b_c: {fileID: 0}
+    battle_character: {fileID: 0}
+    Init_State: {fileID: 0}
     pre_State: {fileID: 0}
     now_State: {fileID: 0}
     pre_State_List: []
@@ -30367,6 +30372,7 @@ MonoBehaviour:
   nextTime: 0
   checkTime: 0
   isStop: 0
+  testSkillName: 
 --- !u!65 &1292960880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39063,7 +39069,8 @@ MonoBehaviour:
   damaged_Effect: {fileID: 0}
   phase_Effect: {fileID: 0}
   real_AI:
-    b_c: {fileID: 0}
+    battle_character: {fileID: 0}
+    Init_State: {fileID: 0}
     pre_State: {fileID: 0}
     now_State: {fileID: 0}
     pre_State_List: []
@@ -39076,6 +39083,7 @@ MonoBehaviour:
   nextTime: 0
   checkTime: 0
   isStop: 0
+  testSkillName: 
 --- !u!4 &1726810992
 Transform:
   m_ObjectHideFlags: 0
@@ -40574,7 +40582,8 @@ MonoBehaviour:
   damaged_Effect: {fileID: 152628, guid: 4e42a2081531c814fa4774bd0d6b45df, type: 3}
   phase_Effect: {fileID: 1436447386774278, guid: b36e5394bf3902b41877ecba9aa55b8d, type: 3}
   real_AI:
-    b_c: {fileID: 0}
+    battle_character: {fileID: 0}
+    Init_State: {fileID: 0}
     pre_State: {fileID: 0}
     now_State: {fileID: 1173432524}
     pre_State_List: []
@@ -40587,6 +40596,7 @@ MonoBehaviour:
   nextTime: 4
   checkTime: 0
   isStop: 0
+  testSkillName: 
 --- !u!1001 &1776479698
 PrefabInstance:
   m_ObjectHideFlags: 0

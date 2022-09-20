@@ -6,7 +6,9 @@ using UnityEngine.AI;
 [System.Serializable]
 public class AI
 {
-    public Battle_Character b_c;
+    public Battle_Character battle_character;
+
+    public State Init_State; // 초기화 할때 사용할 스테이트(State_Init)를 등록
 
     public State pre_State;
     public State now_State;
@@ -15,17 +17,17 @@ public class AI
 
     public bool isPause = false; // 정지
 
-    public void AI_Init(Battle_Character b_c)
+    public void AI_Init(Battle_Character battle_character)
     {
-        this.b_c = b_c;
+        this.battle_character = battle_character;
 
-        navMesh = b_c.GetComponent<NavMeshAgent>();
+        navMesh = battle_character.GetComponent<NavMeshAgent>();
 
         // now_State = b_c.init_state << 이런식으로 배틀 캐릭터에서 어드레서블로 불러온 State_Init 을 넣어주면 자연스럽게 연결된 스테이트들도 같이 붙는다.
         // 그리고 Init을 통해 해당 AI에 필요한
         // pre_State_List를 넣어줌.
         // pre_State_List = new List<State>();
-        pre_State_List = now_State.State_Initialize();
+        pre_State_List = Init_State.GetComponent<State_Init>().Init_State_Initialize();
 
         pre_State = now_State;
     }
@@ -39,9 +41,9 @@ public class AI
         {
             State temp_State = now_State;
 
-            if (st.Judge(out now_State, b_c))
+            if (st.Judge(out now_State, battle_character))
             {
-                st.Run(b_c);
+                st.Run(battle_character);
                 return;
             }
             else // 위의 판단에서 반환값으로 null 받았을경우에 다시 상태를 넣어주기 위함.
@@ -50,9 +52,9 @@ public class AI
             }
         }
 
-        if (now_State.Judge(out now_State, b_c))
+        if (now_State.Judge(out now_State, battle_character))
         {
-            now_State.Run(b_c);
+            now_State.Run(battle_character);
         }
     }
 }

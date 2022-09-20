@@ -15,7 +15,7 @@ public class State_Init : State
 
     }
 
-    public override List<State> State_Initialize()
+    public List<State> Init_State_Initialize()
     {
         List<State> state_List = new List<State>();
 
