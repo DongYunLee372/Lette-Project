@@ -10,21 +10,20 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 
-public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
-      where T : UnityEngine.Object
+public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
 {
   
     public static List<string> Load_String_List = new List<string>();
     public static int ListCount = 0;
 
-    public static List<T> InstList = new List<T>();  //바로 생성된 오브젝트 리스트에 로드 자산 관리 시키기 , 핸들 x
-    public static List<T> AssetList = new List<T>();  //로드된 자산 관리 시키기 ,핸들 x
+    public static List<UnityEngine.Object> InstList = new List<UnityEngine.Object>();  //바로 생성된 오브젝트 리스트에 로드 자산 관리 시키기 , 핸들 x
+    public static List<UnityEngine.Object> AssetList = new List<UnityEngine.Object>();  //로드된 자산 관리 시키기 ,핸들 x
 
-    public static List<AsyncOperationHandle<T>> handleList = new List<AsyncOperationHandle<T>>();  //핸들 저장해서 언로드 관리 시키기.
-    public static List<AsyncOperationHandle<IList<T>>> handleIList = new List<AsyncOperationHandle<IList<T>>>();  //핸들 저장
+    public static List<AsyncOperationHandle<UnityEngine.Object>> handleList = new List<AsyncOperationHandle<UnityEngine.Object>>();  //핸들 저장해서 언로드 관리 시키기.
+    public static List<AsyncOperationHandle<IList<UnityEngine.Object>>> handleIList = new List<AsyncOperationHandle<IList<UnityEngine.Object>>>();  //핸들 저장
 
-    public static Dictionary<string, AsyncOperationHandle<T>> handleList_Dic = new Dictionary<string, AsyncOperationHandle<T>>();  //key값을 통해 오브젝트, 핸들을 관리  핸들1
-    public static Dictionary<string, AsyncOperationHandle<IList<T>>> HandleIList_Dic = new Dictionary<string, AsyncOperationHandle<IList<T>>>();   //key값을 통해 오브젝트, 핸들을 관리 , IList
+    public static Dictionary<string, AsyncOperationHandle<UnityEngine.Object>> handleList_Dic = new Dictionary<string, AsyncOperationHandle<UnityEngine.Object>>();  //key값을 통해 오브젝트, 핸들을 관리  핸들1
+    public static Dictionary<string, AsyncOperationHandle<IList<UnityEngine.Object>>> HandleIList_Dic = new Dictionary<string, AsyncOperationHandle<IList<UnityEngine.Object>>>();   //key값을 통해 오브젝트, 핸들을 관리 , IList
 
 
     //test 끝나면 헤더파일로 이동시키기
@@ -33,7 +32,8 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
 
     //Addressables.Release();
     //label가져와서 바로 생성 시키기, 멀티 ,동기
-    public async Task InitAssets_label(string label)
+    public async Task InitAssets_label<T>(string label)
+     where T : UnityEngine.Object
 
     {
         ErrorCode error=ErrorCode.None;
@@ -63,8 +63,8 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
     }
 
     //객체 바로 생성 /동기  확인 완
-    public async Task<T> InitAssets_Instantiate(string name)
-    // where T : UnityEngine.Object
+    public async Task<T> InitAssets_Instantiate<T>(string name)
+     where T : UnityEngine.Object
     {
 
         ErrorCode error = ErrorCode.None;
@@ -90,7 +90,8 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
     }
 
     //동기 로드  확인 완  //단일 로드 (객체 생성아님
-    public async Task InitAssets_name_(string object_name)
+    public async Task InitAssets_name_<T>(string object_name)
+     where T : UnityEngine.Object
 
     {
         ErrorCode error = ErrorCode.None;
@@ -118,14 +119,18 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
 
     }
 
+    //그냥 저거 단일을 계속 중첩하면 그게 멀티로드지 안그래?
+
     //찾기
-    public T FindLoadAsset(string key)
+    public T FindLoadAsset<T>(string key)
+     where T : UnityEngine.Object
+
     {
-   
+
 
         Debug.Log("FindLoadAsset찾으러 들어옴");
 
-        T findAsset = null;
+        T findAsset = default;
 
         foreach (var t in InstList)
         {
@@ -134,7 +139,7 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
             if (key+Inst_String == t.name)
             {
                 Debug.Log("InstList 발견" + t);
-                findAsset = t;
+                findAsset = t as T;
                 return findAsset;
             }
         }
@@ -146,7 +151,7 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
             if (key == t.name)
             {
                 Debug.Log("List 발견" + t);
-                findAsset = t;
+                findAsset = t as T;
                 return findAsset;
             }
         }
@@ -159,7 +164,7 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
             {
                 Debug.Log("handleList 발견"+t.Result.name);
 
-                findAsset = t.Result;
+                findAsset = t as T;
                 return findAsset;
 
             }
@@ -175,7 +180,7 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
                 {
                     Debug.Log("handleIList 발견"+e.name);
 
-                    findAsset = e;
+                    findAsset = e as T;
                     return findAsset;
 
                 }
@@ -185,7 +190,9 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
     }
 
     //삭제
-    public bool Delete_Object(T delete)
+    public bool Delete_Object<T>(T delete)
+     where T : UnityEngine.Object
+
     {
         //OnRelease();
 
@@ -212,7 +219,7 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
             return true;
         }
 
-        AsyncOperationHandle<T> temp = new AsyncOperationHandle<T>();
+        AsyncOperationHandle<UnityEngine.Object> temp = new AsyncOperationHandle<UnityEngine.Object>();
         bool result = false;
 
         foreach (var t in handleList)
@@ -224,8 +231,8 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
                 Debug.Log("handleList 발견" + t.Result.name);
 
                 Addressables.Release(delete);
-                temp = t;
-             
+               
+                temp = t ;
                 result= true;
 
             }
@@ -273,7 +280,7 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
            if(t.Result.Count==0)
             {
 
-                Addressables.Release(t);
+                Addressables.Release(t );
                 Debug.Log("핸들 삭제됌");
 
             }
@@ -341,7 +348,10 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
     }
 
     //객체 불러오기 (1개
-    public IEnumerator LoadGameObjectAndMaterial(string name)
+    public IEnumerator LoadGameObjectAndMaterial<T>(string name)
+     where T : UnityEngine.Object
+
+
     {
         Debug.Log("LoadGameObjectAndMaterial호출");
 
@@ -407,7 +417,9 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
     }
 
     //델리게이트
-    public IEnumerator LoadGameObjectAndMaterial(string name, Action<AsyncOperationHandle<T>> Complete)
+    public IEnumerator LoadGameObjectAndMaterial<T>(string name, Action<AsyncOperationHandle<T>> Complete)
+     where T : UnityEngine.Object
+
     {
         Debug.Log("LoadGameObjectAndMaterial호출");
 
@@ -460,7 +472,8 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
     }
 
     //키 연관 리스트 저장, label로 다수로딩 비동기 /객체 생성 아니고 로딩만. 확인
-    public IEnumerator LoadAndStoreResult(string Key)
+    public IEnumerator LoadAndStoreResult<T>(string Key)
+     where T : UnityEngine.Object
     {
         ErrorCode error;
 
@@ -472,16 +485,16 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
 
         Load_String_List.Add(Key); //로드할 에셋 이름 저장
 
-        List<T> associationDoesNotMatter = new List<T>();
+        List<UnityEngine.Object> associationDoesNotMatter = new List<UnityEngine.Object>();
 
-        AsyncOperationHandle<IList<T>> handle =
-            Addressables.LoadAssetsAsync<T>(Key, obj =>
+        AsyncOperationHandle<IList<UnityEngine.Object>> handle =
+            Addressables.LoadAssetsAsync<UnityEngine.Object>(Key, obj =>
             {
                 associationDoesNotMatter.Add(obj);
                 //잠시  object저장 되는지 확인
 
                 //List.Add(obj);
-                Debug.Log(obj.name);
+                Debug.Log(obj);
             });
         yield return handle;
         //handleList.Add(handle);
@@ -497,8 +510,8 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
 
 
     //델리게이트 실행 (Key에 label) ,다수로딩/ 비동기 +  함수 연결  확인 / 해제 생각
-    public IEnumerator LoadAndStoreResult(string Key, Action<AsyncOperationHandle<IList<T>>> Complete)
-       // where T : UnityEngine.Object
+    public IEnumerator LoadAndStoreResult<T>(string Key, Action<AsyncOperationHandle<IList<UnityEngine.Object>>> Complete=null)
+        where T : UnityEngine.Object
     {
 
         ErrorCode error;
@@ -511,13 +524,14 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
 
         Load_String_List.Add(Key); //로드할 에셋 이름 저장
 
-        List<T> associationDoesNotMatter = new List<T>();
+        List<UnityEngine.Object> associationDoesNotMatter = new List<UnityEngine.Object>();
 
-        AsyncOperationHandle<IList<T>> handle =
-            Addressables.LoadAssetsAsync<T>(Key, obj => associationDoesNotMatter.Add(obj));
+        AsyncOperationHandle<IList<UnityEngine.Object>> handle =
+            Addressables.LoadAssetsAsync<UnityEngine.Object>(Key, obj => associationDoesNotMatter.Add(obj));
         handle.Completed += Complete;
         yield return handle;
         // handleIObjectList.Add();
+
          handleIList.Add(handle);
         //List.Add(handle);
 
@@ -529,7 +543,9 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
  
     //리스트로 로드 비동기
     //MergeMode.Union외에 다른거는 오류
-    public IEnumerator Load_Key_List(List<string> KeyList)
+    public IEnumerator Load_Key_List<T>(List<string> KeyList)
+        where T : UnityEngine.Object
+
     {
 
         ErrorCode error;
@@ -566,7 +582,8 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
                }, Addressables.MergeMode.Union);
         yield return intersectionWithMultipleKeys;
 
-        handleIList.Add(intersectionWithMultipleKeys);
+        //저장..ㅠㅠ
+        // handleIList.Add(intersectionWithMultipleKeys );
 
         IList<T> multipleKeyResult2 = intersectionWithMultipleKeys.Result;
 
@@ -583,7 +600,9 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
     }
 
     //리스트로 로드 비동기+함수
-    public IEnumerator Load_Key_List(List<string> KeyList, Action<AsyncOperationHandle<IList<T>>> action)
+    public IEnumerator Load_Key_List<T>(List<string> KeyList, Action<AsyncOperationHandle<IList<T>>> action)
+        where T : UnityEngine.Object
+
     {
         ErrorCode error;
 
@@ -609,7 +628,8 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
 
         yield return intersectionWithMultipleKeys;
 
-        handleIList.Add(intersectionWithMultipleKeys);
+        //저장..ㅠㅠ
+       // handleIList.Add(intersectionWithMultipleKeys);
 
         IList<T> multipleKeyResult2 = intersectionWithMultipleKeys.Result;
 
@@ -636,7 +656,7 @@ public class TestAddressablesLoader<T> : Singleton<TestAddressablesLoader<T>>
 
 
     //키 연관 저장, label사용 다수 로딩  ,비동기라 ( 비동기 label 있으니까 보류
-    public IEnumerator LoadAndAssociateResultWithKey(string Key)
+    public IEnumerator LoadAndAssociateResultWithKey<T>(string Key)
     {
 
         Load_String_List.Add(Key); //로드할 에셋 이름 저장

@@ -46,10 +46,6 @@ MonoBehaviour:
     m_Address: UIBar
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 8d2f792ccf19db7438ed338f1f5f7f02
-    m_Address: Demo
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

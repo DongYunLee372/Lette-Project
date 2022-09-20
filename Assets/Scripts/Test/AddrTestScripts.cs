@@ -75,18 +75,18 @@ public class AddrTestScripts : MonoBehaviour
 
         //AddressablesController.Instance.gg();
 
-        TestAddressablesLoader<GameObject> temp = new TestAddressablesLoader<GameObject>();
-        // //testaddressablesloader<gameobject> temp3 = new testaddressablesloader<gameobject>();
-        //  await temp.initassets_label("susu");
-        // gameobject te = temp.findloadasset("susu");
-        // //gameobject aa= instantiate(te, new vector3(10f, 10f, 10f), quaternion.identity);
+        //TestAddressablesLoader<GameObject> temp = new TestAddressablesLoader<GameObject>();
+        //// //testaddressablesloader<gameobject> temp3 = new testaddressablesloader<gameobject>();
+        //   temp.InitAssets_label("susu");
+        //GameObject te = temp.FindLoadAsset("susu");
+        //GameObject aa = Instantiate(te, new Vector3(10f, 10f, 10f), Quaternion.identity);
         //// destroy(aa);
 
         // temp.delete_object(te);
 
         // StartCoroutine(tempch());
-       await temp.InitAssets_label("Monster");
-        await temp.InitAssets_label("Monster");
+      // await temp.InitAssets_label("Monster");
+       // await temp.InitAssets_label("Monster");
 
 
         //List<string> t = new List<string>();
@@ -146,31 +146,7 @@ public class AddrTestScripts : MonoBehaviour
     }
 
 
-    IEnumerator tempch()
-    {
-        TestAddressablesLoader<GameObject> temp = new TestAddressablesLoader<GameObject>();
-        List<string> t = new List<string>();
-        t.Add("susu");
-        t.Add("Susu_");
-        t.Add("Appoint");
 
-        yield return temp.Load_Key_List(t);
-
-       GameObject at= temp.FindLoadAsset("susu");
-        temp.Delete_Object(at);
-        temp.tem();
-
-         at = temp.FindLoadAsset("Susu_");
-        temp.Delete_Object(at);
-        temp.tem();
-
-        at = temp.FindLoadAsset("Appoint");
-        temp.Delete_Object(at);
-        temp.tem();
-
-        temp.OnRelease();
-
-    }
     void tempListchec()
     {
         List<string> temp = new List<string>();

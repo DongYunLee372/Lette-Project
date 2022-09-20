@@ -20,7 +20,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestScenes 1.unity
     guid: 524707d80eee9914d97db95548efec87
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/AddrTestScene.unity
+    guid: a85a703894a5b804694309c5b9e9ce98
+  - enabled: 0
     path: Assets/Scenes/Demo.unity
     guid: 8d2f792ccf19db7438ed338f1f5f7f02
   m_configObjects:
