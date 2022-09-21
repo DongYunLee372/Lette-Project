@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 namespace CharEnumTypes
 {
+    public enum eCollType
+    {
+        Sphere,
+        Box,
+        collMax
+    }
     public enum eAttackType
     {
         Normal,//일반

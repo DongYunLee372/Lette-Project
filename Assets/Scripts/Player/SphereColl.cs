@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SphereColl : Colliders
+{
+    public override void VirtualStart()
+    {
+        base.VirtualStart();
+        colltype = CharEnumTypes.eCollType.Sphere;
+        Mycollider = GetComponent<SphereCollider>();
+    }
+
+    public SphereCollider GetCollider()
+    {
+        return Mycollider as SphereCollider;
+    }
+
+    public override void SetRadious(float radius)
+    {
+        SphereCollider col = Mycollider as SphereCollider;
+        col.radius = radius;
+    }
+}
