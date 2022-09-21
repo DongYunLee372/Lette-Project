@@ -23,7 +23,8 @@ public class State_Die : State
         // 스킬 구조 구현 시 추가해줘야함.
         if (battle_character.phase_Effect != null && !first_Start)
         {
-            battle_character.animator.Play("Monster Recall");
+            // 캐릭터 데이터로 
+            // battle_character.animator.Play("Monster Recall");
 
             StartCoroutine(death_Coroutine(battle_character.phase_Effect, battle_character.transform));
 
@@ -35,6 +36,7 @@ public class State_Die : State
 
     IEnumerator death_Coroutine(GameObject eff, Transform transform)
     {
+        // 이펙트 매니저로
         yield return new WaitForSeconds(3f);
 
         GameObject effectobj = GameObject.Instantiate(eff);
