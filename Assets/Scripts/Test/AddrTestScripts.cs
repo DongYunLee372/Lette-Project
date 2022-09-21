@@ -12,6 +12,8 @@ using UnityEngine.UI;
 public class AddrTestScripts : MonoBehaviour
 {
 
+
+
     SceneInstance m_LoadedScene;
 
     public GameObject tempOBJ_;
@@ -27,7 +29,7 @@ public class AddrTestScripts : MonoBehaviour
     public GameObject tempHPbar;
     // Start is called before the first frame update
     public GameObject te;
-    async void Start()
+     void Start()
     {
         pos = new GameObject();
         // tempHPbar = new GameObject();
@@ -85,15 +87,22 @@ public class AddrTestScripts : MonoBehaviour
         // temp.delete_object(te);
 
         // StartCoroutine(tempch());
-      // await temp.InitAssets_label("Monster");
-       // await temp.InitAssets_label("Monster");
+        // await temp.InitAssets_label("Monster");
+        // await temp.InitAssets_label("Monster");
 
 
-        //List<string> t = new List<string>();
-        //t.Add("susu");
-        //t.Add("Susu_");
-        //t.Add("Appoint");
+        List<string> t = new List<string>();
+        t.Add("susu");
+        t.Add("Susu_");
+        t.Add("Appoint");
+        GameObject temp = null;
 
+        //TestAddressablesLoader.Instance.Single_Load<GameObject>("susu", false, Act
+        //TestAddressablesLoader.Instance.Single_Instantiate<GameObject>("susu", false, Act1);
+        // TestAddressablesLoader.Instance.Multi_Lable_Instantiate<GameObject>("Monster", false, tete);
+        //TestAddressablesLoader.Instance.Multi_Lable_Instantiate<GameObject>("Monster", false, tete);
+
+        Debug.Log(temp);
 
         //StartCoroutine( temp.Load_Key_List(t, handl=>Debug.Log("gg")));
         //Debug.Log("물론 이거 비동기");
@@ -107,6 +116,12 @@ public class AddrTestScripts : MonoBehaviour
         //    Debug.Log("tempList확인" + t.name);
 
         //}
+
+        StartCoroutine(Tq());
+        // StartCoroutine(tAe());
+
+        //TestAddressablesLoader.Instance.Multi_Lable_Instantiate<GameObject>("Monster",true,tete);
+
 
         // await temp1.InitAssets_name_("Estus");
 
@@ -145,6 +160,68 @@ public class AddrTestScripts : MonoBehaviour
 
     }
 
+    IEnumerator Tq()
+    {
+        yield return StartCoroutine(TestAddressablesLoader.Instance.Load_Name<GameObject>("susu", pos.transform));
+        GameObject t= TestAddressablesLoader.Instance.Find_InstantiateObj<GameObject>("susu");
+        yield return new WaitForSeconds(2f);
+        TestAddressablesLoader.Instance.Delete_Object<GameObject>(t);
+        yield return new WaitForSeconds(2f);
+        GameObject a = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
+        Debug.Log("삭제 ㄱ");
+        TestAddressablesLoader.Instance.Delete_Object<GameObject>(a);
+    }
+
+    void Act<T>(T action)
+     where T : UnityEngine.Object
+
+    {
+        T temp = action;
+        Debug.Log(temp);
+        T t= Instantiate(temp, new Vector3(0, 0, 0), Quaternion.identity);
+        Debug.Log("아 일단 생성ㅋㅋ");
+
+        TestAddressablesLoader.Instance.Delete_Object(temp);
+        Debug.Log("삭제 호출끝");
+        TestAddressablesLoader.Instance.tempListCheck();
+        TestAddressablesLoader.Instance.Delete_Object(t);
+    }
+
+    void Act1<T>(T action)
+   where T : UnityEngine.Object
+
+    {
+        T temp = action;
+        Debug.Log(temp);
+
+        GameObject t = temp as GameObject;
+        t.transform.position = new Vector3(10f, 10f, 10f);
+        
+        Debug.Log("아 일단 생성ㅋㅋ");
+
+       // TestAddressablesLoader.Instance.Delete_Object(temp);
+        Debug.Log("삭제 호출끝");
+        TestAddressablesLoader.Instance.tempListCheck();
+       // TestAddressablesLoader.Instance.Delete_Object(t);
+
+    }
+
+    IEnumerator tAe()
+    {
+        GameObject te = null;
+        yield return StartCoroutine(TestAddressablesLoader.Instance.AsyncLoad_single<GameObject>("susu", handle => { te = handle; }));
+        Debug.Log(te);
+        Instantiate(te, new Vector3(0, 0, 0), Quaternion.identity);
+
+        yield return new WaitForSeconds(2f);
+        TestAddressablesLoader.Instance.Delete_Object<GameObject>(te);
+    }
+    void tete()
+    {
+        var temp = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
+        Debug.Log("삭제?");
+        TestAddressablesLoader.Instance.Delete_Object<GameObject>(temp);
+    }
 
 
     void tempListchec()

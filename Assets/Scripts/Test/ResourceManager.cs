@@ -26,6 +26,7 @@ public class ResourceManager : MonoBehaviour
         return Resources.Load<T>(path);
     }
 
+    //오브젝트 풀링 어드레서블
     public IEnumerator Instantiate_(string path, Transform parent = null)
     {
         GameObject original = AddressablesController.Instance.find_Asset_in_list(path);
