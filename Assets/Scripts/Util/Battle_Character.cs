@@ -64,6 +64,8 @@ public class Attack_Info // 스킬이나 공격info
     public float pre_Delay, pre_Delay_speed;
     // 후딜 지속 시간, 선딜 스피드
     public float post_Delay, post_Delay_speed;
+
+    public string after_skill_name; // 이어지는 공격이 있을 경우에 그 공격의 이름
 }
 
 public class Battle_Character : MonoBehaviour
@@ -87,6 +89,7 @@ public class Battle_Character : MonoBehaviour
     public List<MonsterSkillInformation> mon_Skill_Info = new List<MonsterSkillInformation>();
     public MonsterSkillInformation now_Skill_Info;
     public MonsterTargetInformation mon_Target_Info;
+    public List<BossNomalSkill> mon_Normal_Attack_Info = new List<BossNomalSkill>();
     public Player_aconstant player_Aconstant;
     public Monster_aconstant mon_Aconstant;
 
@@ -197,7 +200,7 @@ public class Battle_Character : MonoBehaviour
 
         }
     }
- 
+
     public void Skill_Rand()
     {
         int rand = Random.Range(0, mon_Skill_Info.Count);
@@ -219,6 +222,7 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
+                real_AI.now_State.GetComponent<State_Attack>().attack_Info_Index = i;
                 // 타겟을 바라보고 애니메이션 재생
                 gameObject.transform.LookAt(cur_Target.transform);
                 // 선딜이 있다면
@@ -363,14 +367,7 @@ public class Battle_Character : MonoBehaviour
                 missileobj.transform.position = attack_Info[info_num].missile_Pos.position;
                 missileobj.transform.rotation = attack_Info[info_num].missile_Pos.rotation;
 
-                if (missileobj.GetComponentInChildren<RFX1_TransformMotion>())
-                {
-                    missileobj.GetComponentInChildren<RFX1_TransformMotion>().Target = cur_Target;
-                }
-                else
-                {
-
-                }
+                missileobj.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Long_Attack;
 
                 Destroy(missileobj, 5.0f);
             }
@@ -442,7 +439,8 @@ public class Battle_Character : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            animator.Play(testSkillName);
+            Debug.Log("ㅇㅇ");
+            animator.Play("Normal_Attack_1");
         }
 
         checkTime += Time.deltaTime;
