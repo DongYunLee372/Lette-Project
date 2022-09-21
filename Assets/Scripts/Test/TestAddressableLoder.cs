@@ -29,16 +29,51 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
     string Load_String= " (UnityEngine.GameObject)";  //List찾을때
 
     //Addressables.Release();
+    //원본지켜...
+    ////label가져와서 바로 생성 시키기, 멀티 ,동기
+    //public async Task InitAssets_label<T>(string label)
+    // where T : UnityEngine.Object
+
+    //{
+    //    ErrorCode error=ErrorCode.None;
+
+    //    if (!LoadCheck(label,out error))
+    //    {
+    //        Debug.Log("에러"+error);
+    //        return;
+    //    }
+
+    //    Load_String_List.Add(label);  //로드되는 label
+
+    //    Debug.Log("생성전" + label);
+
+
+    //    var locations = await Addressables.LoadResourceLocationsAsync(label).Task;
+    //    Debug.Log("생성가ㅣ져옴" + label);
+
+
+    //    foreach (var location in locations)
+    //    {
+    //        var temp = await Addressables.InstantiateAsync(location).Task;
+    //        InstList.Add(temp as T);  //List에 저장 (생성된 오브젝트)
+    //        Load_String_List.Add(temp.ToString());  //로드되는 오브젝트 이름
+    //        Debug.Log("생성" + temp);
+    //    }
+
+    //    return;
+
+    //}
+
     //label가져와서 바로 생성 시키기, 멀티 ,동기
     public async Task InitAssets_label<T>(string label)
      where T : UnityEngine.Object
 
     {
-        ErrorCode error=ErrorCode.None;
+        ErrorCode error = ErrorCode.None;
 
-        if (!LoadCheck(label,out error))
+        if (!LoadCheck(label, out error))
         {
-            Debug.Log("에러"+error);
+            Debug.Log("에러" + error);
             return;
         }
 
@@ -47,17 +82,23 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         Debug.Log("생성전" + label);
 
 
-        var locations = await Addressables.LoadResourceLocationsAsync(label).Task;
-        Debug.Log("생성가ㅣ져옴" + label);
+
+             var locations = await Addressables.LoadResourceLocationsAsync(label).Task;
+            Debug.Log("생성가ㅣ져옴" + label);
 
 
-        foreach (var location in locations)
-        {
-            var temp = await Addressables.InstantiateAsync(location).Task;
-            InstList.Add(temp as T);  //List에 저장 (생성된 오브젝트)
-            Load_String_List.Add(temp.ToString());  //로드되는 오브젝트 이름
-            Debug.Log("생성" + temp);
-        }
+            foreach (var location in locations)
+            {
+                var temp = await Addressables.InstantiateAsync(location).Task;
+                InstList.Add(temp as T);  //List에 저장 (생성된 오브젝트)
+                Load_String_List.Add(temp.ToString());  //로드되는 오브젝트 이름
+                Debug.Log("생성" + temp);
+            }
+     
+       
+
+        return;
+
     }
 
     //객체 바로 생성 /동기  확인 완
@@ -103,19 +144,90 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
 
         Debug.Log("시작" + object_name);
 
-        var temp = await Addressables.LoadAssetAsync<T>(object_name).Task;
-        Debug.Log("가져옴" + object_name);
-       
-        AssetList.Add(temp);
-        Debug.Log("저장" + temp);
+        //Task te = Addressables.LoadAssetAsync<T>(object_name).Task;
 
+        var temp = await Addressables.LoadAssetAsync<T>(object_name).Task;
+        Debug.Log("가져옴" + temp);
+
+        Task temptask= Task.Run(() => { 
+            AssetList.Add(temp as T);
+            Debug.Log("리스트 저장");
+            });
+        temptask.Wait();
+        Debug.Log("저장기다림");
 
         foreach (var t in AssetList)
         {
             Debug.Log("요소 출력: " + t);
         }
 
+        return;
+
     }
+
+    public void InitAssets_name_sync<T>(string object_name)
+   where T : UnityEngine.Object
+
+    {
+        ErrorCode error = ErrorCode.None;
+
+        if (!LoadCheck(object_name, out error))
+        {
+            Debug.Log("에러" + error);
+            return;
+        }
+        Load_String_List.Add(object_name); //로드되는 에셋 이름
+
+        Debug.Log("시작" + object_name);
+
+        //Task te = Addressables.LoadAssetAsync<T>(object_name).Task;
+
+        var temp =  Addressables.LoadAssetAsync<T>(object_name);
+        T go = temp.WaitForCompletion();
+
+        Debug.Log("가져옴" + temp);
+       AssetList.Add(go);
+  
+        foreach (var t in AssetList)
+        {
+            Debug.Log("요소 출력: " + t);
+        }
+
+        return;
+    }
+
+    //원본
+    //동기 로드  확인 완  //단일 로드 (객체 생성아님
+    //public async Task InitAssets_name_<T>(string object_name)
+    // where T : UnityEngine.Object
+
+    //{
+    //    ErrorCode error = ErrorCode.None;
+
+    //    if (!LoadCheck(object_name, out error))
+    //    {
+    //        Debug.Log("에러" + error);
+    //        return;
+    //    }
+    //    Load_String_List.Add(object_name); //로드되는 에셋 이름
+
+    //    Debug.Log("시작" + object_name);
+
+    //    var temp = await Addressables.LoadAssetAsync<T>(object_name).Task;
+    //    Debug.Log("가져옴" + object_name);
+
+    //    AssetList.Add(temp);
+    //    Debug.Log("저장" + temp);
+
+
+    //    foreach (var t in AssetList)
+    //    {
+    //        Debug.Log("요소 출력: " + t);
+    //    }
+
+    //    return;
+
+    //}
 
     //멀티 로드,리스트
     public async Task MultiLoadAsset<T>(List<string> keyList)
@@ -150,13 +262,53 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
             Debug.Log("요소 출력: " + t);
         }
 
-    }
+        return;
 
+    }
 
 
     //await안써도 되는거
     //하나 로드 할때, 비동기면 false, 동기면 true
-    public async void Single_Load<T>(string label, bool sync,Action<T> action=null)
+    public void Single_Load_Task_Test<T>(string label, bool sync, Action<T> Complete = null)
+     where T : UnityEngine.Object
+    {
+        if (!sync)
+        {
+
+            Debug.Log("시작하러 옴");
+            InitAssets_name_sync<T>(label);
+             //InitAssets_name_<T>(label).Wait();
+             // ta.Wait();
+            Debug.Log("대기 끝");
+
+            // Task task = Task.Run(InitAssets_name_<T>(label));
+
+
+            T findobj = FindLoadAsset<T>(label);
+            if (Complete != null)
+            {
+                Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
+
+            }
+            // Task.WaitAll();
+        }
+        else
+        {
+            InitAssets_name_<T>(label);
+            T findobj = FindLoadAsset<T>(label);
+            if (Complete != null)
+            {
+                Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
+
+            }
+        }
+
+        return;
+    }
+
+    //await안써도 되는거
+    //하나 로드 할때, 비동기면 false, 동기면 true
+    public async void Single_Load<T>(string label, bool sync,Action<T> Complete=null)
      where T : UnityEngine.Object
 
     {
@@ -164,14 +316,22 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         {
             await InitAssets_name_<T>(label);
             T findobj = FindLoadAsset<T>(label);
-            action(findobj) ; //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
           
+            if(Complete!=null)
+            {
+                Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
+
+            }
         }
         else
         {
             InitAssets_name_<T>(label);
             T findobj = FindLoadAsset<T>(label);
-            action(findobj);  //비동기로 이루어짐 (비동기면 굳이 여기로 안넘기고 밖에서 호출해도 됌)
+            if (Complete != null)
+            {
+                Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
+
+            }
         }
     }
 
@@ -548,60 +708,60 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
     }
 
     //델리게이트
-    public IEnumerator LoadGameObjectAndMaterial<T>(string name, Action<AsyncOperationHandle<T>> Complete)
-     where T : UnityEngine.Object
+    //public IEnumerator LoadGameObjectAndMaterial<T>(string name, Action<AsyncOperationHandle<T>> Complete)
+    // where T : UnityEngine.Object
 
-    {
-        Debug.Log("LoadGameObjectAndMaterial호출");
+    //{
+    //    Debug.Log("LoadGameObjectAndMaterial호출");
 
 
 
-        if (Load_String_List.Contains(name))
-        {
-            Debug.Log("이미 로드된 파일입니다. 동일한 이름의 소스 이미 로드 요청되어있음.");
-            yield return null;
-        }
-        else
-        {
-            Load_String_List.Add(name);
-        }
-        //같은거 로드 못하게 예외 처리 
-        //못찾으면 로드,찾으면 리턴,
-        GameObject findGameobj = AddressablesController.Instance.find_Asset_in_list(name);
-        if (findGameobj != null)
-        {
-            Debug.Log("이미 로드된 파일입니다.");
-            yield return null;
-        }
-        else
-        {
-            //Load a GameObject
-            AsyncOperationHandle<T> goHandle = Addressables.LoadAssetAsync<T>(name);
-            goHandle.Completed += Complete;
-            yield return goHandle;
-            if (goHandle.Status == AsyncOperationStatus.Succeeded)
-            {
-                T gameObject = goHandle.Result;
+    //    if (Load_String_List.Contains(name))
+    //    {
+    //        Debug.Log("이미 로드된 파일입니다. 동일한 이름의 소스 이미 로드 요청되어있음.");
+    //        yield return null;
+    //    }
+    //    else
+    //    {
+    //        Load_String_List.Add(name);
+    //    }
+    //    //같은거 로드 못하게 예외 처리 
+    //    //못찾으면 로드,찾으면 리턴,
+    //    GameObject findGameobj = AddressablesController.Instance.find_Asset_in_list(name);
+    //    if (findGameobj != null)
+    //    {
+    //        Debug.Log("이미 로드된 파일입니다.");
+    //        yield return null;
+    //    }
+    //    else
+    //    {
+    //        //Load a GameObject
+    //        AsyncOperationHandle<T> goHandle = Addressables.LoadAssetAsync<T>(name);
+    //        goHandle.Completed += Complete;
+    //        yield return goHandle;
+    //        if (goHandle.Status == AsyncOperationStatus.Succeeded)
+    //        {
+    //            T gameObject = goHandle.Result;
              
-                Debug.Log(gameObject.name + "로드");
-            }
+    //            Debug.Log(gameObject.name + "로드");
+    //        }
 
-        }
-        ////Load a Material
-        //AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("materialKey");
-        //yield return locationHandle;
-        //AsyncOperationHandle<Material> matHandle = Addressables.LoadAssetAsync<Material>(locationHandle.Result[0]);
-        //yield return matHandle;
-        //if (matHandle.Status == AsyncOperationStatus.Succeeded)
-        //{
-        //	Material mat = matHandle.Result;
-        //	//etc...
-        //}
+    //    }
+    //    ////Load a Material
+    //    //AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("materialKey");
+    //    //yield return locationHandle;
+    //    //AsyncOperationHandle<Material> matHandle = Addressables.LoadAssetAsync<Material>(locationHandle.Result[0]);
+    //    //yield return matHandle;
+    //    //if (matHandle.Status == AsyncOperationStatus.Succeeded)
+    //    //{
+    //    //	Material mat = matHandle.Result;
+    //    //	//etc...
+    //    //}
 
-        //Use this only when the objects are no longer needed
-        //Addressables.Release(goHandle);
-        //Addressables.Release(matHandle);
-    }
+    //    //Use this only when the objects are no longer needed
+    //    //Addressables.Release(goHandle);
+    //    //Addressables.Release(matHandle);
+    //}
 
 
 

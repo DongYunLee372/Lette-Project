@@ -102,7 +102,6 @@ public class AddrTestScripts : MonoBehaviour
         // TestAddressablesLoader.Instance.Multi_Lable_Instantiate<GameObject>("Monster", false, tete);
         //TestAddressablesLoader.Instance.Multi_Lable_Instantiate<GameObject>("Monster", false, tete);
 
-        Debug.Log(temp);
 
         //StartCoroutine( temp.Load_Key_List(t, handl=>Debug.Log("gg")));
         //Debug.Log("물론 이거 비동기");
@@ -117,7 +116,13 @@ public class AddrTestScripts : MonoBehaviour
 
         //}
 
-        StartCoroutine(Tq());
+        // StartCoroutine(Tq());
+        TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", false);
+        Debug.Log("???");
+        new WaitForSeconds(2f);
+        GameObject tagae = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
+        TestAddressablesLoader.Instance.Delete_Object<GameObject>(tagae);
+        //testJG();
         // StartCoroutine(tAe());
 
         //TestAddressablesLoader.Instance.Multi_Lable_Instantiate<GameObject>("Monster",true,tete);
@@ -160,6 +165,14 @@ public class AddrTestScripts : MonoBehaviour
 
     }
 
+
+    public void testJG()
+    {
+        TestAddressablesLoader.Instance.Single_Instantiate<GameObject>("susu",false);
+        Debug.Log("어디볼까");
+    }
+   
+
     IEnumerator Tq()
     {
         yield return StartCoroutine(TestAddressablesLoader.Instance.Load_Name<GameObject>("susu", pos.transform));
@@ -179,7 +192,7 @@ public class AddrTestScripts : MonoBehaviour
         T temp = action;
         Debug.Log(temp);
         T t= Instantiate(temp, new Vector3(0, 0, 0), Quaternion.identity);
-        Debug.Log("아 일단 생성ㅋㅋ");
+        Debug.Log("아 일단 생성");
 
         TestAddressablesLoader.Instance.Delete_Object(temp);
         Debug.Log("삭제 호출끝");
@@ -197,7 +210,7 @@ public class AddrTestScripts : MonoBehaviour
         GameObject t = temp as GameObject;
         t.transform.position = new Vector3(10f, 10f, 10f);
         
-        Debug.Log("아 일단 생성ㅋㅋ");
+        Debug.Log("아 일단 생성");
 
        // TestAddressablesLoader.Instance.Delete_Object(temp);
         Debug.Log("삭제 호출끝");
