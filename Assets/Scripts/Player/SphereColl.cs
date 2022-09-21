@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class SphereColl : Colliders
 {
+    private void Awake()
+    {
+        VirtualStart();
+    }
+    private void Start()
+    {
+        VirtualStart();
+    }
+
     public override void VirtualStart()
     {
         base.VirtualStart();
@@ -20,5 +29,8 @@ public class SphereColl : Colliders
     {
         SphereCollider col = Mycollider as SphereCollider;
         col.radius = radius;
+        
     }
+
+    
 }

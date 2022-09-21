@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class BoxColl : Colliders
 {
+    private void Awake()
+    {
+        VirtualStart();
+    }
+
+    private void Start()
+    {
+        VirtualStart();
+    }
+
     public override void VirtualStart()
     {
         base.VirtualStart();

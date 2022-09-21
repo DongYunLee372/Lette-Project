@@ -354,6 +354,9 @@ public class CAttackComponent : BaseComponent
             StartCoroutine(coroutine);
         }
 
+        ColliderSpawnSystem.Instance.SpawnSphereCollider(transform.position, 10, 5, monstertag, MonsterAttack);
+
+
         //StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
         animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
     }

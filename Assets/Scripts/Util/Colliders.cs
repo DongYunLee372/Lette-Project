@@ -37,16 +37,11 @@ public class Colliders : MonoBehaviour
 
     public virtual void VirtualStart()
     {
-        Start();
-    }
-
-    public void Start()
-    {
         _collFunction = null;
         targetLayer = -1;
         targetTag = null;
-
-
+        //Start();
     }
+
 
 }
