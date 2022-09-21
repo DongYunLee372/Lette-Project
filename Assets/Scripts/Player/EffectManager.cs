@@ -10,7 +10,7 @@ using UnityEngine;
 public class EffectManager : MySingleton<EffectManager>
 {
     //public List<GameObject> CurEffects;
-    public Transform BaseEffect;// 기본 이펙트 생성 위치
+    //public Transform BaseEffect;// 기본 이펙트 생성 위치
 
     public Dictionary<int, GameObject> CurEffects = new Dictionary<int, GameObject>();
 
@@ -23,7 +23,7 @@ public class EffectManager : MySingleton<EffectManager>
     public GameObject InstantiateEffect(GameObject effect)
     {
         GameObject copy = GameObject.Instantiate(effect);
-        copy.transform.parent = BaseEffect;
+        copy.transform.parent = null;
         CurEffects.Add(copy.GetInstanceID(), copy);
         return copy;
     }
@@ -31,7 +31,7 @@ public class EffectManager : MySingleton<EffectManager>
     public GameObject InstantiateEffect(GameObject effect, float DestroyTime)
     {
         GameObject copy = GameObject.Instantiate(effect);
-        copy.transform.parent = BaseEffect;
+        copy.transform.parent = null;
         CurEffects.Add(copy.GetInstanceID(), copy);
         cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
         StartCoroutine(cor);
@@ -113,7 +113,7 @@ public class EffectManager : MySingleton<EffectManager>
             
         if(parent ==null)
         {
-            effect.transform.parent = BaseEffect;
+            effect.transform.parent = null;
         }
         else
         {
@@ -121,10 +121,10 @@ public class EffectManager : MySingleton<EffectManager>
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        BaseEffect = new GameObject("Effects").transform;
-    }
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    BaseEffect = new GameObject("Effects").transform;
+    //}
 
 }

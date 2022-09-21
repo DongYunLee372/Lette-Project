@@ -19,7 +19,7 @@ public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
 
         copycoll = GameObject.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Box]);
         //copycoll.GetComponent<GameObject>().SetActive(true);
-        copycoll.GetComponent<GameObject>().transform.position = pos;
+        copycoll.gameObject.transform.position = pos;
         copycoll.targetLayer = targetLayer;
         copycoll.SetCollitionFunction(func);
         copycoll.SetSize(size);
@@ -38,7 +38,7 @@ public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
 
         copycoll = GameObject.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Sphere]);
         //copycoll.GetComponent<GameObject>().SetActive(true);
-        copycoll.GetComponent<GameObject>().transform.position = pos;
+        copycoll.gameObject.transform.position = pos;
         copycoll.targetLayer = targetLayer;
         copycoll.SetCollitionFunction(func);
         copycoll.SetRadious(radius);
@@ -59,7 +59,7 @@ public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
 
         copycoll = GameObject.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Box]);
         //copycoll.GetComponent<GameObject>().SetActive(true);
-        copycoll.GetComponent<GameObject>().transform.position = pos;
+        copycoll.gameObject.transform.position = pos;
         copycoll.targetTag = targetLayer;
         copycoll.SetCollitionFunction(func);
         copycoll.SetSize(size);
@@ -78,7 +78,7 @@ public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
 
         copycoll = GameObject.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Sphere]);
         //copycoll.GetComponent<GameObject>().SetActive(true);
-        copycoll.GetComponent<GameObject>().transform.position = pos;
+        copycoll.gameObject.transform.position = pos;
         copycoll.targetTag = targetLayer;
         copycoll.SetCollitionFunction(func);
         copycoll.SetRadious(radius);
