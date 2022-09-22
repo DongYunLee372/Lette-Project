@@ -526,7 +526,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
     }
 
     //찾기
-    private T FindLoadAsset<T>(string key)
+    public T FindLoadAsset<T>(string key)
      where T : UnityEngine.Object
 
     {

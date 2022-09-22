@@ -124,28 +124,51 @@ public class ResourceManager : MonoBehaviour
 
     //}
 
-
-
     // 어드레서블로 바꿔야댐
-    public GameObject Instantiate(string path, Transform parent = null)
-    {
-        GameObject original = Load<GameObject>($"Prefabs/{path}");
+    //public T Instantiate<T,U>(string path, Transform parent = null)
+    //    where T : UnityEngine.Object
+    //    where U : Poolable
 
-        if (original == null)
-        {
-            Debug.Log($"Failed to load prefab : {path}");
-            return null;
-        }
+    //{
+    //     AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
+    //    UnityEngine.Object original = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
 
-        if (original.GetComponent<Poolable>() != null)
-        {
-            return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
-        }
+    //    if (original == null)
+    //    {
+    //        Debug.Log($"Failed to load prefab : {path}");
+    //        return null;
+    //    }
 
-        GameObject go = Object.Instantiate(original, parent);
-        go.name = original.name;
-        return go;
-    }
+    //    if (original.GetComponent<Poolable>() != null)
+    //    {
+    //        return GameMG.Instance.ObjManager.Pop(original , parent).gameObject;
+    //    }
+
+    //    GameObject go = Object.Instantiate(original, parent);
+    //    go.name = original.name;
+    //    return go;
+    //}
+
+    // 어드레서블로 바꿔야댐 원본
+    //public GameObject Instantiate(string path, Transform parent = null)
+    //{
+    //    GameObject original = Load<GameObject>($"Prefabs/{path}");
+
+    //    if (original == null)
+    //    {
+    //        Debug.Log($"Failed to load prefab : {path}");
+    //        return null;
+    //    }
+
+    //    if (original.GetComponent<Poolable>() != null)
+    //    {
+    //        return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
+    //    }
+
+    //    GameObject go = Object.Instantiate(original, parent);
+    //    go.name = original.name;
+    //    return go;
+    //}
 
     public void Destroy(GameObject go)
     {
