@@ -128,7 +128,7 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         return temp as T;
     }
 
-    //동기 로드  확인 완  //단일 로드 (객체 생성아님
+    //비동기 로드  확인 완  //단일 로드 (객체 생성아님
     public async Task InitAssets_name_<T>(string object_name)
      where T : UnityEngine.Object
 
@@ -149,11 +149,9 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         var temp = await Addressables.LoadAssetAsync<T>(object_name).Task;
         Debug.Log("가져옴" + temp);
 
-        Task temptask= Task.Run(() => { 
-            AssetList.Add(temp as T);
-            Debug.Log("리스트 저장");
-            });
-        temptask.Wait();
+      
+        AssetList.Add(temp as T);
+         
         Debug.Log("저장기다림");
 
         foreach (var t in AssetList)
@@ -165,6 +163,44 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
 
     }
 
+
+    //동기 로드 멀티
+    public void InitAssets_name_sync<T>(List<string> keyList)
+   where T : UnityEngine.Object
+
+    {
+        ErrorCode error = ErrorCode.None;
+
+        foreach(var t in keyList)
+        {
+            if (!LoadCheck(t, out error))
+            {
+                Debug.Log("에러" + error);
+                return;
+            }
+            else
+            {
+                Load_String_List.Add(t); //로드되는 에셋 이름
+                Debug.Log("시작" + t);
+            }
+
+            var temp = Addressables.LoadAssetAsync<T>(t);
+            T go = temp.WaitForCompletion();
+
+            Debug.Log("가져옴" + go);
+            AssetList.Add(go);
+
+        }
+  
+        foreach (var t in AssetList)
+        {
+            Debug.Log("요소 출력: " + t);
+        }
+        return;
+    }
+
+
+    //동기 로드 단일
     public void InitAssets_name_sync<T>(string object_name)
    where T : UnityEngine.Object
 
@@ -182,20 +218,18 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
 
         //Task te = Addressables.LoadAssetAsync<T>(object_name).Task;
 
-        var temp =  Addressables.LoadAssetAsync<T>(object_name);
+        var temp = Addressables.LoadAssetAsync<T>(object_name);
         T go = temp.WaitForCompletion();
 
         Debug.Log("가져옴" + temp);
-       AssetList.Add(go);
-  
+        AssetList.Add(go);
+
         foreach (var t in AssetList)
         {
             Debug.Log("요소 출력: " + t);
         }
-
         return;
     }
-
     //원본
     //동기 로드  확인 완  //단일 로드 (객체 생성아님
     //public async Task InitAssets_name_<T>(string object_name)
@@ -267,9 +301,9 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
     }
 
 
-    //await안써도 되는거
-    //하나 로드 할때, 비동기면 false, 동기면 true
-    public void Single_Load_Task_Test<T>(string label, bool sync, Action<T> Complete = null)
+    
+    //하나 로드 할때, 비동기면 false, 동기면 true  생성까지 되는거 아님.
+    public async void Single_Load_Task_Test<T>(string label, bool sync, Action<T> Complete = null)
      where T : UnityEngine.Object
     {
         if (!sync)
@@ -294,7 +328,35 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         }
         else
         {
-            InitAssets_name_<T>(label);
+             await InitAssets_name_<T>(label);
+            T findobj = FindLoadAsset<T>(label);
+            if (Complete != null)
+            {
+                Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
+
+            }
+        }
+
+        return;
+    }
+
+
+    //하나 로드 할때, 비동기면 false, 동기면 true  생성까지 되는거 아님.
+    public async void Single_Load_Task_Test<T>(List<string> keyList, bool sync, Action<T> Complete = null)
+     where T : UnityEngine.Object
+    {
+        if (!sync)
+        {
+
+            Debug.Log("시작하러 옴");
+            InitAssets_name_sync<T>(keyList);
+          
+            Debug.Log("대기 끝");
+
+        }
+        else
+        {
+            await InitAssets_name_<T>(keyList);
             T findobj = FindLoadAsset<T>(label);
             if (Complete != null)
             {

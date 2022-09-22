@@ -119,7 +119,7 @@ public class AddrTestScripts : MonoBehaviour
         // StartCoroutine(Tq());
         TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", false);
         Debug.Log("???");
-        new WaitForSeconds(2f);
+      
         GameObject tagae = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
         TestAddressablesLoader.Instance.Delete_Object<GameObject>(tagae);
         //testJG();
