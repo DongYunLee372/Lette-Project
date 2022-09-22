@@ -58,9 +58,9 @@ namespace Global_Variable
     public class Boss
     {
         //보스 기본공격 3개
-        public const string First_Atk = "First_Atk";
-        public const string Second_Atk = "Second_Atk";
-        public const string Third_Atk = "The_Great_Sword_Slap";
+        
+        
+        public const string Guided_Magic_Bullet = "Guided_Magic_Bullet";
         //보스 스킬들 6개
         public const string USwing = "USwing";
         public const string SSwing = "SSwing";
