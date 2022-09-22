@@ -15,9 +15,7 @@ public class MonsterSkillInformation : Data
     [SerializeField]
     private string skill_Name_Kor; //몬스터 한글명
     public string P_skill_Name_Kor { get { return skill_Name_Kor; } set { skill_Name_Kor = value; } }
-    [SerializeField]
-    private int Number;
-    public int P_Number { get { return Number; } set { Number = value; } }
+    
     [SerializeField]
     private int skill_ID; //몬스터 아이디
     public int P_skill_ID { get { return skill_ID; } set { skill_ID = value; } }
@@ -64,27 +62,6 @@ public class MonsterSkillInformation : Data
     private int skill_ThrowObj; //몬스터 스킬 투사체 생성여부
     public int P_skill_ThrowObj { get { return skill_ThrowObj; } set { skill_ThrowObj = value; } }
 
-    public void Set(int number ,string mon_index, string skill_name_kor, string skill_name_en, int skill_iD, int skill_type, int skill_targetyp , int skill_range ,int skill_dmg , int skill_mP , int skill_cool , float skill_atktime , int skill_continuetime 
-        , int skill_atkCount
-        , int skill_diffObj , int skill_throwObj)
-    {
-        Number = number;
-        mon_Index = mon_index;
-        skill_Name_Kor = skill_name_kor;
-        skill_Name_En = skill_name_en;
-        skill_ID = skill_iD;
-        skill_Type = skill_type;
-        skill_Targetyp = skill_targetyp;
-        skill_Range = skill_range;
-        skill_Dmg = skill_dmg;
-        skill_MP = skill_mP;
-        skill_Cool = skill_cool;
-        skill_atkTime = skill_atktime;
-        skill_continueTime = skill_continuetime;
-        skill_AtkCount = skill_atkCount;
-        skill_DiffObj = skill_diffObj;
-
-        skill_ThrowObj = skill_throwObj;
-    }
+   
 
 }

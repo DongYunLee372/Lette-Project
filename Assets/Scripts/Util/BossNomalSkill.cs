@@ -38,6 +38,12 @@ public class BossNomalSkill : ScriptableObject
     private string Group_Motion_Count; //몬스터 영어명
     public string P_Group_Motion_Count { get { return Group_Motion_Count; } set { Group_Motion_Count = value; } }
 
+    
+    [SerializeField]
+    private int skill_Range; //몬스터 영어명
+    public int P_skill_Range { get { return skill_Range; } set { skill_Range = value; } }
+
+
     [SerializeField]
     private int skill_dmg; //몬스터 영어명
     public int P_skill_dmg { get { return skill_dmg; } set { skill_dmg = value; } }

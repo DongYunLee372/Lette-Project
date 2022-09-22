@@ -13,7 +13,7 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
     Dictionary<string, CharacterInformation> PlayerDB_List;
     Dictionary<string, MonsterSkillInformation> MonsterSkillDB_List;
     Dictionary<string, MonsterTargetInformation> MonsterTargetDB_List;
-    Dictionary<string, BossAttackInfo> BossAttackInfoDB_List;
+    Dictionary<string, Mon_Normal_Atk_Group> Mon_Normal_atk_Group;
     Dictionary<string, BossNomalSkill> BossNomalSkillDB_List;
 
 
@@ -24,13 +24,13 @@ public class DataLoad_Save : MySingleton<DataLoad_Save>
         LoadFile.Read<CharacterInformation>(out PlayerDB_List);
         LoadFile.Read<MonsterSkillInformation>(out MonsterSkillDB_List);
         LoadFile.Read<MonsterTargetInformation>(out MonsterTargetDB_List);
-        LoadFile.Read<BossAttackInfo>(out BossAttackInfoDB_List);
+        LoadFile.Read<Mon_Normal_Atk_Group>(out Mon_Normal_atk_Group);
         LoadFile.Read<BossNomalSkill>(out BossNomalSkillDB_List);
     }
-    public BossAttackInfo Get_BossAttackDB(string index)
+    public Mon_Normal_Atk_Group Get_Mon_Normal_Atk_GroupDB(string index)
     {
-        BossAttackInfo testData = ScriptableObject.CreateInstance<BossAttackInfo>();
-        testData = BossAttackInfoDB_List[index];
+        Mon_Normal_Atk_Group testData = ScriptableObject.CreateInstance<Mon_Normal_Atk_Group>();
+        testData = Mon_Normal_atk_Group[index];
         return testData;
 
     }
