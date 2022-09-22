@@ -24,7 +24,7 @@ public class CorTimeCounter
         {
             if ((Time.time - starttime) >= time)
             {
-                invoker.Invoke();
+                invoker?.Invoke();
                 yield break;
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -39,7 +39,7 @@ public class CorTimeCounter
         {
             if ((Time.time - starttime) >= time)
             {
-                invoker.Invoke(str);
+                invoker?.Invoke(str);
                 yield break;
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -53,7 +53,7 @@ public class CorTimeCounter
         {
             if ((Time.time - starttime) >= time)
             {
-                invoker.Invoke(o);
+                invoker?.Invoke(o);
                 yield break;
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -68,7 +68,7 @@ public class CorTimeCounter
         {
             if ((Time.time - starttime) >= time)
             {
-                invoker.Invoke(val);
+                invoker?.Invoke(val);
                 yield break;
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -82,7 +82,7 @@ public class CorTimeCounter
         {
             if ((Time.time - starttime) >= time)
             {
-                invoker.Invoke(val1, val2);
+                invoker?.Invoke(val1, val2);
                 yield break;
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -96,7 +96,7 @@ public class CorTimeCounter
         {
             if ((Time.time - starttime) >= time)
             {
-                invoker.Invoke(val1, val2, val3);
+                invoker?.Invoke(val1, val2, val3);
                 yield break;
             }
             yield return new WaitForSeconds(Time.deltaTime);
@@ -104,30 +104,50 @@ public class CorTimeCounter
     }
 
 
-    public IEnumerator Cor_TimeCounterLoop(float time, Invoker invoker, float duration)
+    public IEnumerator Cor_TimeCounterLoop(float time, Invoker EndInvoker, Invoker Loopinvoker, float duration)
     {
         float starttime = Time.time;
         float _duration = duration;
-        float lastInvokeTime = 0;
+        float lastInvokeTime = Time.time;
 
         while (true)
         {
             if ((Time.time - starttime) >= time)
             {
-                invoker.Invoke();
+                
+                EndInvoker?.Invoke();
                 yield break;
             }
 
             if(Time.time-lastInvokeTime>=duration)
             {
-
+                Loopinvoker?.Invoke();
             }
-
-
-
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 
+    public IEnumerator Cor_TimeCounterLoop<T>(float time, TInvoker<T> EndInvoker, TInvoker<T> Loopinvoker, float duration,T Endval,T LoopVal)
+    {
+        float starttime = Time.time;
+        float _duration = duration;
+        float lastInvokeTime = Time.time;
 
+        while (true)
+        {
+            if ((Time.time - starttime) >= time)
+            {
+
+                EndInvoker?.Invoke(Endval);
+                yield break;
+            }
+
+            if (Time.time - lastInvokeTime >= duration)
+            {
+                lastInvokeTime = Time.time;
+                Loopinvoker?.Invoke(LoopVal);
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
 }

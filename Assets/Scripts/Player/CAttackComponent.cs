@@ -354,6 +354,8 @@ public class CAttackComponent : BaseComponent
             StartCoroutine(coroutine);
         }
 
+        //EffectManager.Instance.SpawnEffectLooping(skillinfos[skillnum].Effect, this.transform.position, Quaternion.identity, 2, 10);
+
         ColliderSpawnSystem.Instance.SpawnSphereCollider(transform.position, 10, 5, monstertag, MonsterAttack);
 
 

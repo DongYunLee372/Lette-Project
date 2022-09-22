@@ -54,6 +54,7 @@ public class EffectManager : MySingleton<EffectManager>
         return copyeffect;
     }
 
+    //한번만 재생하고 사라진다.
     public GameObject SpawnEffectOneLoop(GameObject effect, Transform posrot)
     {
         GameObject copyeffect = InstantiateEffect(effect);
@@ -88,12 +89,21 @@ public class EffectManager : MySingleton<EffectManager>
         copyeffect.transform.position = pos;
         copyeffect.transform.rotation = rotation;
 
-
+        cor = timer.Cor_TimeCounterLoop<GameObject>(destroyTime, GameObject.Destroy, Restart, 3, copyeffect, copyeffect);
+        StartCoroutine(cor);
 
         return copyeffect;
     }
 
-
+    public void Restart(GameObject effect)
+    {
+        ParticleSystem[] particles = null;
+        particles = effect.GetComponentsInChildren<ParticleSystem>();
+        foreach(ParticleSystem particle in particles)
+        {
+            particle.Play();
+        }
+    }
 
 
     public void SetLoop(GameObject effect, bool flag)
@@ -211,5 +221,17 @@ public class EffectManager : MySingleton<EffectManager>
     {
 
     }
+
+}
+
+public class TempObjectPoolManager
+{
+
+}
+
+
+
+public class PoolableObject
+{
 
 }

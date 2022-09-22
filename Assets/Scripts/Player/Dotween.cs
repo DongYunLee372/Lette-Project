@@ -1,0 +1,149 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Dotween : Singleton<Dotween>
+{
+    public enum Ease
+    {
+        Linear,
+        easeOutCirc,
+        easeInCirc,
+        easeInOutCirc,
+        easeMax
+    }
+
+    Ease curEaseMode = Ease.Linear;
+    GameObject CurMoveObject = null;
+
+    //x는 시간, 리턴값은 속도
+    public float getEaseVal(float x)
+    {
+        //x = 0~1까지
+        float y = 0;
+        switch(curEaseMode)
+        {
+            case Ease.Linear:
+                y = x;
+                break;
+
+            case Ease.easeOutCirc:
+                y = Mathf.Sqrt(1.0f - Mathf.Pow(x - 1.0f, 2.0f));
+                break;
+
+            case Ease.easeInCirc:
+                y = 1 - Mathf.Sqrt(1.0f - Mathf.Pow(x, 2.0f));
+                break;
+
+            case Ease.easeInOutCirc:
+                y = x < 0.5? (1.0f - Mathf.Sqrt(1 - Mathf.Pow(2.0f * x, 2.0f))) / 2.0f : (Mathf.Sqrt(1.0f - Mathf.Pow(-2.0f * x + 2.0f, 2.0f)) + 1.0f) / 2.0f;
+                break;
+
+        }
+        return y;
+    }
+
+    public void SetEase(Ease _ease)
+    {
+        curEaseMode = _ease;
+    }
+
+    //duration 시간동안 목표위치로 이동한다.
+    public void DoMove(GameObject obj, Vector3 destpos, float duration)
+    {
+        Vector3 startpos = obj.transform.position;
+        Vector3 directon = destpos - startpos;
+
+        float timeval = 1 / duration;
+
+        float speed = directon.magnitude / duration;
+
+        StartCoroutine(CorDoMove(obj, destpos, duration));
+    }
+
+    public IEnumerator CorDoMove(GameObject obj, Vector3 dest, float duration)
+    {
+        float startTime = Time.time;
+        float countVal = Time.deltaTime;
+        //목표시간까지의 움직여야 될 횟수
+        float maxCount = duration / Time.deltaTime;
+
+        //0~1까지의 값을 만든다고 할때 1회마다 증가할 값
+        float addval = 1 / maxCount;
+
+        float curval = 0;
+        float count = 0;
+
+        Vector3 startpos = obj.transform.position;
+        //목표까지의 방향과 거리
+        Vector3 direction = dest - obj.transform.position;
+        float distance = direction.magnitude;
+        direction.Normalize();
+
+        Vector3 start = obj.transform.position;
+
+        while(true)
+        {
+            //지정한 시간이 되면 끝난다.
+            if(count>=maxCount)
+            {
+                yield break;
+            }
+
+            if (curval > 1)
+            {
+                yield break;
+            }
+
+            obj.transform.position = startpos + (direction * getEaseVal(curval) * distance);
+            curval += addval;
+            count += countVal;
+
+            yield return new WaitForSeconds(countVal);
+        }
+
+    }
+
+    //public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration, Invoker invoker = null)
+    //{
+    //    float runtime = 0.0f;
+
+    //    Vector3 direction = dest - start;
+
+    //    //Move(direction * 2);
+
+    //    while (true)
+    //    {
+
+    //        direction = dest - transform.position;
+
+    //        if (CharacterStateMachine.Instance.GetState() == CharacterStateMachine.eCharacterState.OutOfControl)
+    //        {
+    //            if (invoker != null)
+    //                invoker.Invoke("");
+
+    //            Move(new Vector3(0, 0, 0));
+    //            yield break;
+    //        }
+
+    //        if (runtime >= duration)
+    //        {
+    //            if (invoker != null)
+    //                invoker.Invoke("");
+
+    //            Move(new Vector3(0, 0, 0));
+
+    //            yield break;
+    //        }
+    //        runtime += Time.deltaTime;
+
+    //        if (!curval.IsFowordBlock)
+    //            Move(direction);
+
+
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+
+    //}
+
+}

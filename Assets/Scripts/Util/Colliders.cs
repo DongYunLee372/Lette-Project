@@ -8,20 +8,34 @@ public class Colliders : MonoBehaviour
     public string targetTag;
     public LayerMask targetLayer;
     public delegate void CollFunction(Collider other);
-    public CollFunction _collFunction;
+
+    public CollFunction _EnterFunction;
+    public CollFunction _OuterFunction;
+    public CollFunction _StayFunction;
+
     public Collider Mycollider;
 
-    public void SetCollitionFunction(CollFunction _function)
+    public void SetCollitionFunction(CollFunction _enterfunction, CollFunction _outerfunction, CollFunction _stayfunction)
     {
-        _collFunction = _function;
+        _EnterFunction = _enterfunction;
+        _OuterFunction = _outerfunction;
+        _StayFunction = _stayfunction;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(_collFunction!=null)
-            _collFunction(other);
+        _EnterFunction?.Invoke(other);
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        _OuterFunction?.Invoke(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        _StayFunction?.Invoke(other);        
+    }
     public void SetActive(bool t)
     {
         this.gameObject.SetActive(t);
@@ -35,9 +49,15 @@ public class Colliders : MonoBehaviour
     {
     }
 
+    public void SetParent(Transform _parent)
+    {
+        gameObject.transform.parent = _parent;
+    }
     public virtual void VirtualStart()
     {
-        _collFunction = null;
+        _EnterFunction = null;
+        _OuterFunction = null;
+        _StayFunction = null;
         targetLayer = -1;
         targetTag = null;
         //Start();
