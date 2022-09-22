@@ -5,6 +5,8 @@ using UnityEngine;
 /*StartCoroutine() 으로 해당 클래스의 함수를 실행 시켜주면 지정한 시간이 지나면 같이 설정해준 invoker를 실행 시켜준다.
   ex) StartCoroutine(CorTimeCounter객체.Cor_TimeCounter<GameObject>(1.5f,함수,인자))
       StartCoroutine(CorTimeCounter객체.Cor_TimeCounter(1.5f,함수))*/
+
+//일정 시간동안 일정 주기로 지정한 함수를 실해 시켜주는 기능 추가
 public class CorTimeCounter
 {
     public delegate void Invoker();
@@ -100,5 +102,32 @@ public class CorTimeCounter
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
+
+
+    public IEnumerator Cor_TimeCounterLoop(float time, Invoker invoker, float duration)
+    {
+        float starttime = Time.time;
+        float _duration = duration;
+        float lastInvokeTime = 0;
+
+        while (true)
+        {
+            if ((Time.time - starttime) >= time)
+            {
+                invoker.Invoke();
+                yield break;
+            }
+
+            if(Time.time-lastInvokeTime>=duration)
+            {
+
+            }
+
+
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
 
 }

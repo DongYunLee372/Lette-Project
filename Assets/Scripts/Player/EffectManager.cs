@@ -29,9 +29,83 @@ public class EffectManager : MySingleton<EffectManager>
 
     public IEnumerator cor;
 
+    //한번만 실행하고 사라진다.
+    public GameObject SpawnEffectOneLoop(GameObject effect, Vector3 pos, Quaternion rotation)
+    {
+        GameObject copyeffect = InstantiateEffect(effect);
+        ParticleSystem[] particles = null;
+        particles = effect.GetComponentsInChildren<ParticleSystem>();
+
+        copyeffect.transform.position = pos;
+        copyeffect.transform.rotation = rotation;
+
+        float maxduration = 0;
+        foreach(ParticleSystem particle in particles)
+        {
+            if(particle.main.duration>maxduration)
+            {
+                maxduration = particle.main.duration;
+            }
+        }
+
+        cor = timer.Cor_TimeCounter(maxduration, GameObject.Destroy, copyeffect);
+        StartCoroutine(cor);
+
+        return copyeffect;
+    }
+
+    public GameObject SpawnEffectOneLoop(GameObject effect, Transform posrot)
+    {
+        GameObject copyeffect = InstantiateEffect(effect);
+        ParticleSystem[] particles = null;
+        particles = effect.GetComponentsInChildren<ParticleSystem>();
+
+        copyeffect.transform.position = posrot.position;
+        copyeffect.transform.rotation = posrot.rotation;
+
+        float maxduration = 0;
+        foreach (ParticleSystem particle in particles)
+        {
+            if (particle.main.duration > maxduration)
+            {
+                maxduration = particle.main.duration;
+            }
+        }
+
+        cor = timer.Cor_TimeCounter(maxduration, GameObject.Destroy, copyeffect);
+        StartCoroutine(cor);
+
+        return copyeffect;
+    }
+
+    //일정 주기로 재시작
+    public GameObject SpawnEffectLooping(GameObject effect, Vector3 pos, Quaternion rotation, float _duration, float destroyTime)
+    {
+        GameObject copyeffect = InstantiateEffect(effect);
+        ParticleSystem[] particles = null;
+        particles = effect.GetComponentsInChildren<ParticleSystem>();
+
+        copyeffect.transform.position = pos;
+        copyeffect.transform.rotation = rotation;
 
 
 
+        return copyeffect;
+    }
+
+
+
+
+    public void SetLoop(GameObject effect, bool flag)
+    {
+
+    }
+
+    
+
+
+
+    //기본 스폰
     public GameObject InstantiateEffect(GameObject effect)
     {
         GameObject copy = GameObject.Instantiate(effect);
@@ -40,6 +114,7 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
+    //사라질 시간
     public GameObject InstantiateEffect(GameObject effect, float DestroyTime)
     {
         GameObject copy = GameObject.Instantiate(effect);
@@ -50,6 +125,7 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
+    //위치
     public GameObject InstantiateEffect(GameObject effect,Vector3 pos)
     {
         GameObject copy = InstantiateEffect(effect);
@@ -57,6 +133,7 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
+    //위치, 회전, 파괴시간
     public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime=1.0f)
     {
         GameObject copy = InstantiateEffect(effect);
@@ -67,6 +144,7 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
+    //transform, 파괴시간
     public GameObject InstantiateEffect(GameObject effect, Transform posrot, float DestroyTime = 1.0f)
     {
         GameObject copy = InstantiateEffect(effect);
@@ -77,7 +155,7 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
-    //
+    //위치, 파괴시간, 부모transform
     public GameObject InstantiateEffect(GameObject effect, Vector3 pos, float DestroyTime, Transform parent)
     {
         GameObject copy = InstantiateEffect(effect);
@@ -88,6 +166,7 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
+    //위치, 회전, 파괴시간, 부모transform
     public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime, Transform parent)
     {
         GameObject copy = InstantiateEffect(effect);
@@ -99,6 +178,7 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
+    //위지, 크기, 회전, 파괴시간, 부모transform
     public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Vector3 size, Quaternion rotation, float DestroyTime, Transform parent)
     {
         GameObject copy = InstantiateEffect(effect);
@@ -112,25 +192,19 @@ public class EffectManager : MySingleton<EffectManager>
         return copy;
     }
 
-
+    //해당 이펙트의 부모transform을 설정 null 가능
     public void SetParent(GameObject effectobj, Transform parent)
     {
         GameObject effect;
         CurEffects.TryGetValue(effectobj.GetInstanceID(), out effect);
+
         if (effect == null)
         {
             Debug.Log($"{this.name} not exist effect");
             return;
         }
-            
-        if(parent ==null)
-        {
-            effect.transform.parent = null;
-        }
-        else
-        {
-            effect.transform.parent = parent;
-        }
+
+        effect.transform.parent = parent;
     }
 
     public void SetLoop(ParticleSystem effect, bool b)
