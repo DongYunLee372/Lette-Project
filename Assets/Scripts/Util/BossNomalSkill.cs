@@ -7,8 +7,8 @@ public class BossNomalSkill : ScriptableObject
     
 {
     [SerializeField]
-    private string skill_Name_En; //몬스터 영어명
-    public string P_skill_Name_En { get { return skill_Name_En; } set { skill_Name_En = value; } }
+    private string skill_ID; //몬스터 영어명
+    public string P_skill_ID { get { return skill_ID; } set { skill_ID = value; } }
 
     [SerializeField]
     private string skill_Name_Kor; 
@@ -19,8 +19,8 @@ public class BossNomalSkill : ScriptableObject
     public string P_mon_Index { get { return mon_Index; } set { mon_Index = value; } }
 
     [SerializeField]
-    private int skill_ID; //몬스터 영어명
-    public int P_skill_ID { get { return skill_ID; } set { skill_ID = value; } }
+    private string skill_Name_En; //몬스터 영어명
+    public string P_skill_Name_En { get { return skill_Name_En; } set { skill_Name_En = value; } }
 
     [SerializeField]
     private int skill_Type; //몬스터 영어명
