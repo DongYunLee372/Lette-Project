@@ -40,41 +40,33 @@ public class State_Attack : State
             return true;
         }
 
-        // 사거리가 있는 스킬
-        //if ((Vector3.Distance(battle_character.transform.position,
-        //    battle_character.cur_Target.transform.position) <= battle_character.now_Skill_Info.P_skill_Range)
-        //    && battle_character.mon_Info.P_mon_haveMP >= battle_character.now_Skill_Info.P_skill_MP)
-        //{
-        //    judge_logic = Enemy_Attack_Logic.Skill_Using;
-        //    _State = this;
-        //    return true;
-        //}
+        // 근접 공격 사거리 체크
+        if ((Vector3.Distance(battle_character.transform.position,
+                battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk) && !battle_character.isAttack_Run)
+        {
+            judge_logic = Enemy_Attack_Logic.Melee_Attack;
+            _State = this;
+            return true;
+        }
 
-        //// 제자리에서 사용가능한 스킬 ( ex . 소환 )
-        //if (battle_character.now_Skill_Info.P_skill_Range == 0
-        //    && battle_character.mon_Info.P_mon_haveMP >= battle_character.now_Skill_Info.P_skill_MP)
-        //{
-        //    judge_logic = Enemy_Attack_Logic.Skill_Using;
-        //    _State = this;
-        //    return true;
-        //}
+        string[] special_Range = battle_character.mon_Info.P_mon_SpecialAtk.Split(",");
 
-        //// 근접 공격 사거리 체크
-        //if ((Vector3.Distance(battle_character.transform.position,
-        //        battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_ShortRange) && !battle_character.isAttack_Run)
-        //{
-        //    judge_logic = Enemy_Attack_Logic.Melee_Attack;
-        //    _State = this;
-        //    return true;
-        //}
+        if ((Vector3.Distance(battle_character.transform.position,
+               battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1])) && !battle_character.isAttack_Run)
+        {
+            judge_logic = Enemy_Attack_Logic.Skill_Using;
+            _State = this;
+            return true;
+        }
 
-        //if (battle_character.attack_Logic[(int)Enemy_Attack_Logic.Long_Attack] == true && (Vector3.Distance(battle_character.transform.position,
-        //    battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_LongRange)) // 원거리 공격방식이 존재
-        //{
-        //    judge_logic = Enemy_Attack_Logic.Long_Attack;
-        //    _State = this;
-        //    return true;
-        //}
+
+        if (battle_character.mon_Info.P_mon_FarAtk != 0 && (Vector3.Distance(battle_character.transform.position,
+            battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_FarAtk)) // 원거리 공격
+        {
+            judge_logic = Enemy_Attack_Logic.Long_Attack;
+            _State = this;
+            return true;
+        }
 
         battle_character.real_AI.pre_State = this;
         _State = Trans_List[0];
@@ -129,7 +121,7 @@ public class State_Attack : State
 
                 Attack_Result = false;
                 Result_return_Object = null;
-                
+
                 battle_character.attack_Type = Enemy_Attack_Type.Normal_Attack;
                 battle_character.animator.Play("Long Attack");
                 //GameObject missile
