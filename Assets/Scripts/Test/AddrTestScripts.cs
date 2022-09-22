@@ -116,13 +116,40 @@ public class AddrTestScripts : MonoBehaviour
         //    Debug.Log("tempList확인" + t.name);
 
         //}
-
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("susu");
+        var a=AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>("susu");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(a);
         // StartCoroutine(Tq());
-       
-        TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", false, true, com => temp = com);  //동기,생성 x
-        Debug.Log("???");
-        Debug.Log("temp로드" + temp);
-        
+
+        // TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", false, true, com => temp = com);  //동기,생성 x
+        //TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", true, true, com => temp = com);  //비동기,생성 x
+        //TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", false, false, com => temp = com);  //동기,생성 o
+        // TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", true, false, com => temp = com);  //비동기,생성 o
+        //  Debug.Log("???");
+        //  Debug.Log("temp로드" + temp);
+
+
+        //TestAddressablesLoader.Instance.Delete_Object<GameObject>(a);
+
+        //TestAddressablesLoader.Instance.Multi_Load_Task_Test<GameObject>(t, false, () => Debug.Log("gg"));  //동기,생성 x
+        // TestAddressablesLoader.Instance.Multi_Load_Task_Test<GameObject>(t,false, () => Debug.Log("gg"));  //동기,생성 x
+
+        //생성한 것을 반환받는 작업.
+        // var a = TestAddressablesLoader.Instance.Instantiate_LoadObject<GameObject>("susu");
+
+        //Debug.Log(a);
+        //foreach(var name in a)
+        //{
+        //    Debug.Log("생성해서 가져온 리스트" + name);
+        //}
+
+        //바깥에서 원본 지울때 (핸들만...ㅠㅠ)
+        //StartCoroutine( TestAddressablesLoader.Instance.Delete_Object<GameObject>(t));
+        // Debug.Log("메인");
+
+        //StartCoroutine(TestAddressablesLoader.Instance.Load_Name<GameObject>("susu", pos.transform));
+
+
         //testJG();
         // StartCoroutine(tAe());
 
@@ -149,8 +176,8 @@ public class AddrTestScripts : MonoBehaviour
 
         // Debug.Log("gg");
 
-        // StartCoroutine(tempCheck1());
 
+        // AddressablesLoadManager.Instance.tempchekc();
 
         //label로 다수 로딩
         //StartCoroutine(AddressablesLoader.LoadAndStoreResult("Monster"));
@@ -166,24 +193,47 @@ public class AddrTestScripts : MonoBehaviour
 
     }
 
+    IEnumerator qqq()
+    {
 
+        List<string> t = new List<string>();
+        t.Add("susu");
+        t.Add("Susu_");
+        t.Add("Appoint");
+
+        AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(t, true);  //동기,생성 x
+        var s= AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("susu");
+       // AddressablesLoadManager.Instance.tempchekc();
+
+        AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(t, true);  //동기,생성 x
+
+        yield return new WaitForSeconds(2f);
+        Debug.Log("삭제하러감");
+        yield return StartCoroutine( AddressablesLoadManager.Instance.Delete_Object<GameObject>(t));
+        yield return new WaitForSeconds(5f);
+        Debug.Log("삭제완료하고 다시 로드");
+
+        AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(t, true);  //동기,생성 x
+
+
+    }
     public void testJG()
     {
-        TestAddressablesLoader.Instance.Single_Instantiate<GameObject>("susu",false);
+        AddressablesLoadManager.Instance.Single_Instantiate<GameObject>("susu",false);
         Debug.Log("어디볼까");
     }
    
 
     IEnumerator Tq()
     {
-        yield return StartCoroutine(TestAddressablesLoader.Instance.Load_Name<GameObject>("susu", pos.transform));
-        GameObject t= TestAddressablesLoader.Instance.Find_InstantiateObj<GameObject>("susu");
+        yield return StartCoroutine(AddressablesLoadManager.Instance.Load_Name<GameObject>("susu", pos.transform));
+        GameObject t= AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("susu");
         yield return new WaitForSeconds(2f);
-        TestAddressablesLoader.Instance.Delete_Object<GameObject>(t);
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(t);
         yield return new WaitForSeconds(2f);
-        GameObject a = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
+       // GameObject a = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
         Debug.Log("삭제 ㄱ");
-        TestAddressablesLoader.Instance.Delete_Object<GameObject>(a);
+       // TestAddressablesLoader.Instance.Delete_Object<GameObject>(a);
     }
 
     void Act<T>(T action)
@@ -195,10 +245,10 @@ public class AddrTestScripts : MonoBehaviour
         T t= Instantiate(temp, new Vector3(0, 0, 0), Quaternion.identity);
         Debug.Log("아 일단 생성");
 
-        TestAddressablesLoader.Instance.Delete_Object(temp);
+        AddressablesLoadManager.Instance.Delete_Object(temp);
         Debug.Log("삭제 호출끝");
-        TestAddressablesLoader.Instance.tempListCheck();
-        TestAddressablesLoader.Instance.Delete_Object(t);
+        AddressablesLoadManager.Instance.tempListCheck();
+        AddressablesLoadManager.Instance.Delete_Object(t);
     }
 
     void Act1<T>(T action)
@@ -215,7 +265,7 @@ public class AddrTestScripts : MonoBehaviour
 
        // TestAddressablesLoader.Instance.Delete_Object(temp);
         Debug.Log("삭제 호출끝");
-        TestAddressablesLoader.Instance.tempListCheck();
+        AddressablesLoadManager.Instance.tempListCheck();
        // TestAddressablesLoader.Instance.Delete_Object(t);
 
     }
@@ -223,18 +273,18 @@ public class AddrTestScripts : MonoBehaviour
     IEnumerator tAe()
     {
         GameObject te = null;
-        yield return StartCoroutine(TestAddressablesLoader.Instance.AsyncLoad_single<GameObject>("susu", handle => { te = handle; }));
+        yield return StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("susu", handle => { te = handle; }));
         Debug.Log(te);
         Instantiate(te, new Vector3(0, 0, 0), Quaternion.identity);
 
         yield return new WaitForSeconds(2f);
-        TestAddressablesLoader.Instance.Delete_Object<GameObject>(te);
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(te);
     }
     void tete()
     {
-        var temp = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
+       // var temp = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
         Debug.Log("삭제?");
-        TestAddressablesLoader.Instance.Delete_Object<GameObject>(temp);
+      //  TestAddressablesLoader.Instance.Delete_Object<GameObject>(temp);
     }
 
 

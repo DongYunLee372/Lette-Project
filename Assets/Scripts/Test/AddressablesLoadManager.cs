@@ -10,59 +10,54 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 
-public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
+public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 {
   
-    public static List<string> Load_String_List = new List<string>();
-    public static int ListCount = 0;
+    private  List<string> Load_String_List = new List<string>();  //로드하는 이름
 
-    public static List<UnityEngine.Object> CreateObjectList = new List<UnityEngine.Object>();  //Instantiate로 생성된 오브젝트들 관리 =>어드레서블 에셋이 아니라 에셋으로 복사 된 오브젝트를 말함.
-    public static List<UnityEngine.Object> InstList = new List<UnityEngine.Object>();  //바로 생성된 오브젝트 리스트에 로드 자산 관리 시키기 , 핸들 x
-    public static List<UnityEngine.Object> AssetList = new List<UnityEngine.Object>();  //로드된 자산 관리 시키기 ,핸들 x
+    private  List<UnityEngine.Object> CreateObjectList = new List<UnityEngine.Object>();  //Instantiate로 생성된 오브젝트들 관리 =>어드레서블 에셋이 아니라 에셋으로 복사 된 오브젝트를 말함.
+    private  List<UnityEngine.Object> InstList = new List<UnityEngine.Object>();  //바로 생성된 오브젝트 리스트에 로드 자산 관리 시키기 , 핸들 x
+    private  List<UnityEngine.Object> AssetList = new List<UnityEngine.Object>();  //로드된 자산 관리 시키기 ,핸들 x
 
     public static List<AsyncOperationHandle<UnityEngine.Object>> handleList = new List<AsyncOperationHandle<UnityEngine.Object>>();  //핸들 저장해서 언로드 관리 시키기.
-  //  public static List<AsyncOperationHandle<IList<UnityEngine.Object>>> handleIList = new List<AsyncOperationHandle<IList<UnityEngine.Object>>>();  //핸들 저장
-
-
+  
     //test 끝나면 헤더파일로 이동시키기
     string Inst_String = "(Clone)";  //InstList 찾을때 필요
     string Load_String= " (UnityEngine.GameObject)";  //List찾을때
 
-    //Addressables.Release();
-    //원본지켜...
-    ////label가져와서 바로 생성 시키기, 멀티 ,동기
-    //public async Task InitAssets_label<T>(string label)
-    // where T : UnityEngine.Object
+    //자주 사용하실 함수 목록
+    // 1. SingleAsset_Load<T>(string label, bool async=false, bool cashing = true, Action<T> Complete = null)
 
-    //{
-    //    ErrorCode error=ErrorCode.None;
+    //오른쪽부터 순서대로 (1.string 로드할 이름, 2.false=동기/true=비동기, 3.true=저장/false=저장 안하고 바로 객체 생성, 4.로드 후 실행할 함수)
+    //동기로드와 저장을 기본으로 합니다. 그래서 평소 리소스 로드 하는거처럼 쓰고싶다 하시면
+    //Single_Load_Task_Test<T>(string 로드할에셋 이름) 넣어주시면 됩니다. 
+    //만약 비동기 로드를 원하신다면 async를 true로 , 저장없이 바로 Instantiate하는것처럼 오브젝트만 생성하고싶다면 caching 부분 false로 해주시면됩니다.
+    //default로 사용하시면 상관 없는데 caching 없이 사용하실 때 주의하실게 한번만 생성하고 끝날거에만 사용해주세요 !
+    //두번이상 생성해야 한다 라고 하면 cashing기본값으로 사용하시면 됩니다. 후에 오브젝트 풀링 적용해야 하는거도 cashing 기본값으로 사용
 
-    //    if (!LoadCheck(label,out error))
-    //    {
-    //        Debug.Log("에러"+error);
-    //        return;
-    //    }
+  
+    //2. MultiAsset_Load<T>(List<string> keyList, bool async=false, Action Complete = null)
 
-    //    Load_String_List.Add(label);  //로드되는 label
+    //오른쪽부터 순서대로 (1.string 로드할 이름, 2.false=동기/true=비동기 , 3. 비동기 로드 후 실행할 함수)
+    //앞에거랑 마찬가지로 동기를 기본으로 합니다.
+    //비동기 다 필요없고 많은 양의 에셋을 한번에 동기로 로드하고 싶다면 MultiAsset_Load<T>(List<string> keyList) 쓰시면 됩니다. 비동기로 할거면 async만 true로 하십셔
 
-    //    Debug.Log("생성전" + label);
+    
+    //3. 기존에 쓰던 Load_Name입니다. <T> 타입만 추가 되고 기존과 동작은 같습니다.
 
+    
+    //4. Instantiate_LoadObject<T>(string key,Vector3 vec=default(Vector3)) 
+    // 리소스 로드했으면 생성하실때 쓰시면 됩니다. 오른쪽부터 이름, 위치 입니다. (T타입 반환)입니다. List<string>형식으로 넣어주셔도 됩니다. (멀티 로드 하시고 한번에 생성하고싶으실때 사용하셔도 됩니다) 마찬가지로 List<T> 반환
 
-    //    var locations = await Addressables.LoadResourceLocationsAsync(label).Task;
-    //    Debug.Log("생성가ㅣ져옴" + label);
+   
+    //5. Find_InstantiateObj<T>(string key) 
+    //만약 1번에서 캐싱없이 생성을 하셨는데 얘를 제어하고싶다. 하시면 key값에 로드 할때 썼던거 쓰세요 
 
-
-    //    foreach (var location in locations)
-    //    {
-    //        var temp = await Addressables.InstantiateAsync(location).Task;
-    //        InstList.Add(temp as T);  //List에 저장 (생성된 오브젝트)
-    //        Load_String_List.Add(temp.ToString());  //로드되는 오브젝트 이름
-    //        Debug.Log("생성" + temp);
-    //    }
-
-    //    return;
-
-    //}
+   
+    //6. Delete_Object<T>(T delete)
+    //삭제하실때 이거로 삭제 부탁드립니다
+    
+    //ps. 멀티 객체 생성은 로드 말고는 잘 안쓸거라 생각해서 함수에 넣지는 않았는데 필요하시다면 바로 밑에 나온 함수 사용하시면됩니다. 그리고 더 필요하다 싶은 기능 있으시거나 함수 알아보기 힘들다 하시면 언제든 말씀해주십셔
 
     //label가져와서 바로 생성 시키기, 멀티 ,비동기
     public async Task InitAssets_label<T>(string label)
@@ -95,8 +90,6 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
                 Debug.Log("생성" + temp);
             }
      
-       
-
         return;
 
     }
@@ -204,7 +197,7 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
             Debug.Log("에러" + error);
             return;
         }
-        Load_String_List.Add(object_name); //로드되는 에셋 이름
+        Load_String_List.Add(object_name); //로드할때 쓰는 키 (중복 로딩 방지 위함)
 
         Debug.Log("시작" + object_name);
 
@@ -337,21 +330,21 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
     //하나 로드 할때, 비동기면 false, 동기면 true  생성까지 되는거 아님.
     //로드할 이름, 동기 여부 (동기면 false,비동기면 true, 기본적으로 동기 설정), 저장 여부(저장만 할건지, 저장 없이 바로 객체만 생성 할건지), 로드만 하는 경우에는 Action 매개 변수 통해서 로드 된 객체 찾아 갈 수 있음.
     //주의점이 cashing 안하고 바로 생성하는 경우는 Gameobject 형식만 불러올수 있음.
-    public async void Single_Load_Task_Test<T>(string label, bool async=true, bool cashing = true, Action<T> Complete = null)
+    public async void SingleAsset_Load<T>(string label, bool async=false, bool caching = true, Action<T> Complete = null)
      where T : UnityEngine.Object
     {
         if (!async)  //동기여부 false면 동기
         {
 
             Debug.Log("시작하러 옴");
-            if (cashing)  //캐싱 여부 true 면 저장 (로드만 해오는거)
+            if (caching)  //캐싱 여부 true 면 저장 (로드만 해오는거)
             {
                 InitAssets_name_sync<T>(label);  //단일 로드만 해옴 동기
 
                 T findobj = FindLoadAsset<T>(label);  //찾을거 반환해서 가져감.
                 if (Complete != null)
                 {
-                    Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
+                    Complete(findobj); //동기 단일 에셋 로드 한게 Complete의 매개변수로 들어감.
 
                 }
             }
@@ -366,43 +359,52 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         }
         else //async 동기 여부 true면 비동기
         {
-            if (cashing)  //로드해서 저장만.
+            if (caching)  //로드해서 저장만.
             {
                 await InitAssets_name_async<T>(label);  //단일로드 비동기 ,객체 저장
-                T findobj = FindLoadAsset<T>(label);
-                if (Complete != null)
-                {
-                    Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
-                }
+                
             }
             else  //저장 안하고 바로 생성
             {
                 await InitAssets_Instantiate_async<T>(label);  //단일로드 비동기 객체 바로 생성
 
             }
+            // Complete의 매개변수로 결과 반환
+            T findobj = FindLoadAsset<T>(label);
+            if (Complete != null)
+            {
+                Complete(findobj); //찾은거 
+            }
         }
 
         return;
     }
 
-
+    //이거를 생성하고 반환할수있는게 필요 =>Instantiate_LoadObject(string or List<string>)
     //하나 로드 할때, 비동기면 false, 동기면 true  생성까지 되는거 아님.
-    public async void Multi_Load_Task_Test<T>(List<string> keyList, bool sync, Action Complete = null)
+    //로드할 키(string) 리스트형식, 비동기는 true,동기는 false, 비동기 실행후 실행할 함수
+    public async void MultiAsset_Load<T>(List<string> keyList, bool async=false, Action Complete = null)
      where T : UnityEngine.Object
     {
-        if (!sync)
+        if (!async)  //false 기본값일때 동기로드
         {
 
             Debug.Log("시작하러 옴");
             InitAssets_name_sync<T>(keyList);  //동기 멀티 로드
-          
+
+            //동기 멀티 로드 생성 저장x
+
             Debug.Log("대기 끝");
 
         }
-        else
+        else  //비동기 로드
         {
             await MultiLoadAsset<T>(keyList);  //비동기 멀티 로드
-            Complete(); 
+            //비동기 멀티 로드 생성 저장x
+            if(Complete!=null)
+            {
+                Complete();
+            }
         }
 
         return;
@@ -524,7 +526,7 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
     }
 
     //찾기
-    public T FindLoadAsset<T>(string key)
+    private T FindLoadAsset<T>(string key)
      where T : UnityEngine.Object
 
     {
@@ -597,6 +599,44 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         return findAsset;
     }
 
+    //밖에서 삭제 하고 싶을 때 string형으로 검색해서 삭제.
+    //핸들 리턴해서 조작하지 않기 위함임. (언로드가 제대로 되지 않을 수도 있기 때문에 삭제하는 곳을 하나로 통합함. 비용이 많이 들수도 있겠지만... 최적화는 나중에..)
+    public bool Delete_Object<T>(string delete)
+   where T : UnityEngine.Object
+    {
+        var find_delete = FindLoadAsset<T>(delete);
+        if(find_delete!=null)
+        {
+           bool result= Delete_Object<T>(find_delete);
+
+            if(!result)
+            {
+                return false;
+            }
+            Load_String_List.Remove(delete);  //로드할때 쓰였던 이름삭제 (다시 로드 가능)
+            return true;
+        }
+
+        return false;
+    }
+
+    //비동기 언로드 (리스트사용 하면 비동기가 필요할듯 싶지만 걍 코루틴..)
+    public IEnumerator Delete_Object<T>(List<string> deleteList)
+     where T : UnityEngine.Object
+
+    {
+        Debug.Log("최초삭제호출");
+
+        
+             foreach (string key in deleteList)
+             {
+            yield return Delete_Object<T>(key);
+             }
+
+
+        Debug.Log("최초삭제호출끝");
+    }
+
     //삭제
     public bool Delete_Object<T>(T delete)
      where T : UnityEngine.Object
@@ -614,17 +654,21 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
             Addressables.ReleaseInstance(delete as GameObject);
             //Addressables.Release(delete);
             InstList.Remove(delete);
+            Load_String_List.Remove(delete.ToString());
+
             return true;
         }
         //로드 확인 완
         if (AssetList.Contains(delete))
         {
-            Debug.Log("삭제 List : " + delete);
+            Debug.Log("삭제 AssetList : " + delete);
 
 
             //Addressables.ReleaseInstance(delete as GameObject);
             Addressables.Release(delete);
             AssetList.Remove(delete);
+            Load_String_List.Remove(delete.ToString());
+
             return true;
         }
 
@@ -632,6 +676,8 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         {
             Debug.Log("삭제 CreateObjectList : " + delete);
             Destroy(delete);
+            Load_String_List.Remove(delete.ToString());
+
             return true;
         }
 
@@ -647,7 +693,8 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
                 Debug.Log("handleList 삭제" + t.Result.name);
 
                 Addressables.Release(delete);
-               
+                Load_String_List.Remove(delete.ToString());
+
                 temp = t ;
                 result= true;
 
@@ -684,6 +731,72 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
 
     }
 
+    //멀티 로드를 했을때, 생성된 리스트를 반환하거나, 객체를 반환할수 있게끔. 근데 이게 핸들은 아니어야됌.
+
+    //이미 로드 된 객체에서 복사 해서 반환함. string 형식으로 key값 받음.
+    public T Instantiate_LoadObject<T>(string key,Vector3 vec=default(Vector3))  //바깥에서 string으로 반환
+        where T : UnityEngine.Object
+    {
+        T findobj = FindLoadAsset<T>(key);
+        T return_obj=null;
+        if(findobj!=null)
+        {
+            return_obj=Instantiate(findobj, vec, Quaternion.identity);
+            CreateObjectList.Add(return_obj); 
+            Debug.Log("핸들에서 복사 반환");
+            return return_obj;
+        }
+        else
+        {
+            //만약 로드 된 핸들이 아니라면, 생성된 오브젝트들 검색하고 반환.
+            findobj = Find_InstantiateObj<T>(key);
+            Debug.Log("생성된 오브젝트에서 복사 반환");
+            
+        }
+        //그래도 널이면 없는것..
+        return return_obj;
+    }
+
+    //리스트로 반환하기. 
+    public List<T> Instantiate_LoadObject<T>(List<string> keyList, Vector3 vec = default(Vector3))  //바깥에서 string으로 반환
+        where T : UnityEngine.Object
+    {
+        List<T> findobjList = new List<T>();
+
+        foreach(var name in keyList)
+        {
+            T findobj = FindLoadAsset<T>(name);
+            T return_obj = null;
+            if (findobj != null)
+            {
+                return_obj = Instantiate(findobj, vec, Quaternion.identity);
+                CreateObjectList.Add(return_obj);
+                findobjList.Add(return_obj);
+                Debug.Log("핸들에서 복사 반환");
+               
+            }
+            else
+            {
+                //만약 로드 된 핸들이 아니라면, 생성된 오브젝트를 검색하고 반환.
+                findobj = Find_InstantiateObj<T>(name);
+                if(findobj!=null)
+                {
+                    findobjList.Add(return_obj);
+                    Debug.Log("생성된 오브젝트에서 복사 반환");
+                }
+                else
+                {
+                    Debug.Log("원하는 객체를 찾을 수 없습니다. 로드 필요: "+name);
+                }
+            }
+        }
+
+        //그래도 널이면 없는것..
+        return findobjList;
+
+    }
+
+    //핸들로 복사되어 생성된 객체를 저장해 놓은 리스트에서 찾기. ->저장하지 않은 객체들만 가능함. 또는 캐싱 없이 생성된 오브젝트만.
     public T Find_InstantiateObj<T>(string key)
         where T : UnityEngine.Object
     {
@@ -698,6 +811,15 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
             }
         }
 
+        foreach (var t in InstList)
+        {
+            if (key + Inst_String+ Load_String == t.ToString())
+            {
+                Debug.Log(name + "InstList 발견");
+                findobj = t as T;
+                return findobj;
+            }
+        }
         return findobj;
     }
 
@@ -724,6 +846,13 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
     //잠시 핸들 확인하려고 하는거 (요소 다 빠지는지 확인)
     public void tempListCheck()
     {
+
+        Debug.Log("Load_String_List조회");
+        foreach (var t in Load_String_List)
+        {
+            Debug.Log("Load_String_List : " + t);
+        }
+
 
         Debug.Log("AssetList조회");
         foreach (var t in AssetList)
@@ -797,13 +926,21 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
     }
 
 
-    public IEnumerator Load_Name<T>(string name, Transform parent)
+    //기존에 Load_Name이랑 같음.
+    public IEnumerator Load_Name<T>(string name, Transform parent,Action<T> Complete=null)
         where T : UnityEngine.Object
     {
 
         Debug.Log("로드" + name);
-        yield return StartCoroutine(AsyncLoad_single<T>(name));
 
+        if(Complete!=null)
+        {
+            yield return StartCoroutine(AsyncLoad_single<T>(name,Complete));
+        }
+        else
+        {
+            yield return StartCoroutine(AsyncLoad_single<T>(name));
+        }
         var findobj = FindLoadAsset<T>(name);
         CreateObjectList.Add(Instantiate(findobj, parent.position, Quaternion.identity));
 
