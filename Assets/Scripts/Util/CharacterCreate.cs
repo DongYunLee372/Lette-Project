@@ -67,17 +67,25 @@ public class CharacterCreate : Singleton<CharacterCreate>
         MonsterTargetInformation target = ScriptableObject.CreateInstance<MonsterTargetInformation>();
 
         List<BossNomalSkill> bossNomalSkills = new List<BossNomalSkill>();
-        List<BossAttackInfo> mon_Attack_Info = new List<BossAttackInfo>();
+        List<Mon_Normal_Atk_Group> mon_Normal_Atk_Group = new List<Mon_Normal_Atk_Group>();
+        List<MonsterSkillInformation> monsterSkillInformation = new List<MonsterSkillInformation>();
 
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.USwing));
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.SSwing));
+        bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.BOSS_USwing));
+        bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.BOSS_SSwing));
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.LRush));
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.Sting));
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.DiagonalSwing));
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.LRush_and_USwing));
-        mon_Attack_Info.Add(DataLoad_Save.Instance.Get_BossAttackDB(Global_Variable.Boss.USwing));
-        mon_Attack_Info.Add(DataLoad_Save.Instance.Get_BossAttackDB(Global_Variable.Boss.SSwing));
-        mon_Attack_Info.Add(DataLoad_Save.Instance.Get_BossAttackDB(Global_Variable.Boss.Guided_Magic_Bullet));
+
+        monsterSkillInformation.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(Global_Variable.Boss.Rush_Atk));
+        monsterSkillInformation.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(Global_Variable.Boss.Guided_Magic_Bullet));
+
+        mon_Normal_Atk_Group.Add(DataLoad_Save.Instance.Get_Mon_Normal_Atk_GroupDB(Global_Variable.Boss.First_Atk));
+        mon_Normal_Atk_Group.Add(DataLoad_Save.Instance.Get_Mon_Normal_Atk_GroupDB(Global_Variable.Boss.Second_Atk));
+        mon_Normal_Atk_Group.Add(DataLoad_Save.Instance.Get_Mon_Normal_Atk_GroupDB(Global_Variable.Boss.Third_Atk));
+
 
         target = DataLoad_Save.Instance.Get_MonsterTargetDB(Global_Variable.CharVar.one33330211);
         data = DataLoad_Save.Instance.Get_MonsterDB(Global_Variable.CharVar.Arthur);
@@ -88,7 +96,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
 
         GameObject temp = AddressablesController.Instance.find_Asset_in_list(name);
-        temp.GetComponent<Battle_Character>().Stat_Initialize(data,mon_Attack_Info,bossNomalSkills,target);
+        temp.GetComponent<Battle_Character>().Stat_Initialize(data,mon_Normal_Atk_Group,bossNomalSkills, monsterSkillInformation,target);
 
         GameObject b = Instantiate(temp, trans);
        b.GetComponent<Battle_Character>().bosshpbar.SetHpbar(data.P_mon_MaxHP,data.P_mon_nameKor);

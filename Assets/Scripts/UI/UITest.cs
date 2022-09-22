@@ -4,6 +4,7 @@ using UnityEngine;
 using Canvas_Enum;
 public class UITest : MonoBehaviour
 {
+    public Transform data;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +20,13 @@ public class UITest : MonoBehaviour
         { 
             UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
             //UIManager.Instance.Prefabsload("OptionSetting", CANVAS_NUM.start_canvas);
+            
+          //  CharacterCreate.Instantiate.
         }
-
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, data));
+        }
         if(Input.GetKey( KeySetting.keys[KeyAction.UP] ))
         {
             Debug.Log("위");
