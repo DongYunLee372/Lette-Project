@@ -50,8 +50,8 @@ namespace Global_Variable
         //보스 스킬들 6개
         public const string USwing = "3010101";
         public const string SSwing = "3010102";
-        public const string BOSS_USwing = "3010201";
-        public const string BOSS_SSwing = "3010202";
+        public const string BOSS_USwing = "3060201";
+        public const string BOSS_SSwing = "3060202";
         public const string LRush = "3060203";
         public const string Sting = "3060204";
         public const string DiagonalSwing = "3060205";
