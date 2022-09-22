@@ -1,9 +1,2 @@
-mon_nameEng,Number,mon_Index,mon_nameKor,mon_Default,mon_Type,mon_Position,mon_MaxHP,mon_Atk,mon_Def,mon_moveSpeed,mon_ShortRange,mon_LongRange,mon_Balance,mon_maxMP,mon_haveMP,mon_regenMP,dieDelay
-Slime,1,mon_01_01,슬라임,1,1,1,80,5,3,2,2,0,25,3,25,1,1
-Split_Slime,2,mon_01_02,분열 슬라임,1,1,1,40,3,1,2,2,0,20,3,25,1,1
-BowMan,3,mon_02_01,활병,1,1,3,100,12,3,2,0,7,50,3,25,1,1
-Front_Charger,4,mon_03_01,선발 돌격대,1,1,1,120,10,6,5,3,0,40,3,40,1,1
-Summoner,5,mon_04_01,소환사,1,1,2,50,7,2,3,0,5,30,3,40,1,1
-Skeleton_Warrior,6,mon_04_02,스켈레톤 검사,1,1,1,100,6,1,5,3,0,50,3,40,1,1
-High_Skeleton_Warrior,7,mon_05_01,상위 스켈레톤 검사,2,1,1,200,15,8,5,3,0,100,3,40,1,1
-Arthur,8,mon_06_01,아서,4,1,1,1000,30,10,3,3,0,200,100,90,10,1
+mon_nameEng,Number,mon_Index,mon_nameKor,mon_Default,mon_Type,mon_Position,mon_MaxHP,mon_Atk,mon_Def,mon_moveSpeed,mon_Balance,mon_maxMP,mon_CloseAtk,mon_FarAtk,mon_SpecialAtk,mon_regenMP,dieDelay,drop_Reward
+Arthur,1,mon_06_01,아서,4,1,1,1000,30,10,3,200,100,2,8,"3,7",10,1,

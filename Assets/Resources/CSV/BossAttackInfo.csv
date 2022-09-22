@@ -1,4 +1,4 @@
-skill_Name_En,skill_Name_Kor,mon_Index,Group_Index,Atk_Skill1,Atk_Skill2,Atk_Skill3,skill_Range
-First_Atk,첫번째 일반공격,mon_06_01,G1,3060401,3060402,3060403,10
-Second_Atk,두번째 일반공격,mon_06_01,G2,3060402,3060404,999999,10
-Third_Atk,세번째 일반공격,mon_06_01,G3,3060405,3060405,3060406,10
+skill_Name_En,skill_Name_Kor,mon_Index,skill_ID,skill_Type,skill_Targetyp,skill_Range,skill_dmg,skill_MP,skill_Cool,skill_atkTime,skill_continueTime,skill_AtkCount,skill_DiffObj,skill_ThrowObj
+USwing,위에서 베기,mon_06_01,3060101,2,1,5,3,5,5,2,0,1,0,0
+SSwing,옆으로 베기,mon_06_01,3060102,2,1,5,3,5,5,2,0,1,0,0
+Guided_Magic_Bullet,유도 마력탄,mon_06_01,3060103,2,1,10,10,20,10,3,0,1,0,1

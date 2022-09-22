@@ -45,69 +45,48 @@ public class MonsterInformation : Data
     public int P_mon_Def { get { return mon_Def; } set { mon_Def = value; } }
 
     [SerializeField]
+    private int mon_moveSpeed; //몬스터 스피드
+    public int P_mon_moveSpeed { get { return mon_moveSpeed; } set { mon_moveSpeed = value; } }
+
+    [SerializeField]
     private int mon_Balance; //몬스터 균형게이지
     public int P_mon_Balance { get { return mon_Balance; } set { mon_Balance = value; } }
 
-    [SerializeField]
-    private int mon_LongRange; //몬스터 균형게이지
-    public int P_mon_LongRange { get { return mon_LongRange; } set { mon_LongRange = value; } }
 
-    [SerializeField]
-    private int mon_ShortRange; //몬스터 균형게이지
-    public int P_mon_ShortRange { get { return mon_ShortRange; } set { mon_ShortRange = value; } }
-    
-    [SerializeField]
-    private int mon_moveSpeed; //몬스터 스피드
-    public int P_mon_moveSpeed { get { return mon_moveSpeed; } set { mon_moveSpeed = value; } }
+    //mon_CloseAtk mon_FarAtk  mon_SpecialAtk mon_regenMP dieDelay drop_Reward
 
     [SerializeField]
     private int mon_MaxMp; //몬스터 최대마나
     public int P_mon_MaxMp { get { return mon_MaxMp; } set { mon_MaxMp = value; } }
 
     [SerializeField]
+    private int mon_CloseAtk; //몬스터 마나 회복량
+    public int P_mon_CloseAtk { get { return mon_CloseAtk; } set { mon_CloseAtk = value; } }
+
+    [SerializeField]
+    private int mon_FarAtk; 
+    public int P_mon_FarAtk { get { return mon_FarAtk; } set { mon_FarAtk = value; } }
+
+    [SerializeField]
+    private string mon_SpecialAtk; //몬스터 마나 회복량
+    public string P_mon_SpecialAtk { get { return mon_SpecialAtk; } set { mon_SpecialAtk = value; } }
+
+    [SerializeField]
     private int mon_regenMP; //몬스터 마나 회복량
     public int P_mon_regenMP { get { return mon_regenMP; } set { mon_regenMP = value; } }
 
-    [SerializeField]
-    private int mon_haveMP; //몬스터 마나 회복량
-    public int P_mon_haveMP { get { return mon_haveMP; } set { mon_haveMP = value; } }
 
     [SerializeField]
     private int dieDelay; //몬스터 사망딜레이
     public int P_dieDelay { get { return dieDelay; } set { dieDelay = value; } }
+
     [SerializeField]
     private int drop_Reward; //몬스터 보상
     public int P_drop_Reward{ get { return drop_Reward; } set { drop_Reward = value; } }
 
-    public void Set(int num, string mon_index, string mon_namekor, string mon_nameeng, int mon_default, int mon_type, int mon_position, int mon_hp,
-        int mon_atk, int mon_def, int mon_balance, int mon_shortrange, int mon_longrange, int mon_movespeed, int mon_maxmp , int mon_havemP, int mon_regenmP ,int diedelay)
-    {
-        Number = num;
-        mon_Index = mon_index;
-        mon_nameKor = mon_namekor;
-        mon_nameEng = mon_nameeng;
-        mon_Default = mon_default;
-        mon_Type = mon_type;
-        mon_Position = mon_position;
-        mon_MaxHP = mon_hp;
-        mon_Atk = mon_atk;
-        mon_Def = mon_def;
-        mon_Balance = mon_balance;
-        mon_moveSpeed = mon_movespeed;
-        mon_ShortRange = mon_longrange;
-        mon_LongRange = 
-        mon_MaxMp = mon_maxmp;
-        mon_haveMP = mon_havemP;
-        mon_regenMP = mon_regenmP;
+    
 
-        dieDelay = diedelay;
-        
-    }
-
-    public void qq()
-    {
-        Debug.Log("안녕");
-    }
+    
 
    
 }

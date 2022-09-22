@@ -1,7 +1,7 @@
-skill_Name_En,skill_Name_Kor,mon_Index,skill_ID,skill_Type,skill_Targetyp,Group_Index,Group_Motion_Count,skill_dmg,skill_MP,skill_atkTime,skill_continueTime,skill_AtkCount
-USwing,À§¿¡¼­ º£±â,mon_06_01,3060401,2,1,G1,1,5,10,2,0,1
-SSwing,¿·À¸·Î º£±â,mon_06_01,3060402,2,1,"G1 , G2","2 , 1",5,10,2,0,1
-LRush,¾à µ¹Áø,mon_06_01,3060403,2,1,G1,3,5,10,2,0,1
-Sting,Âî¸£´Â ¸ğ¼Ç,mon_06_01,3060404,2,1,G2,2,5,10,2,0,1
-DiagonalSwing,´ë°¢¼± º£±â,mon_06_01,3060405,2,1,G3,"1 , 2",5,10,2,0,1
-LRush_and_USwing,¾à µ¹Áø ÈÄ À§·Î º£±â,mon_06_01,3060406,2,1,G3,2,5,10,2,0,1
+skill_Name_En,skill_Name_Kor,mon_Index,skill_ID,skill_Type,skill_Targetyp,Group_Index,Group_Motion_Count,skill_dmg,skill_MP,skill_atkTime,skill_continueTime,skill_AtkCount,skill_DiffObj,skill_ThrowObj
+USwing,ìœ„ì—ì„œ ë² ê¸°,mon_06_01,3060401,2,1,G1,1,5,10,2,0,1,0,0
+SSwing,ì˜†ìœ¼ë¡œ ë² ê¸°,mon_06_01,3060402,2,1,"G1 , G2","2 , 1",5,10,2,0,1,0,0
+LRush,ì•½ ëŒì§„,mon_06_01,3060403,2,1,G1,3,5,10,2,0,1,0,0
+Sting,ì°Œë¥´ëŠ” ëª¨ì…˜,mon_06_01,3060404,2,1,G2,2,5,10,2,0,1,0,0
+DiagonalSwing,ëŒ€ê°ì„  ë² ê¸°,mon_06_01,3060405,2,1,G3,"1 , 2",5,10,2,0,1,0,0
+LRush_and_USwing,ì•½ ëŒì§„ í›„ ìœ„ë¡œ ë² ê¸°,mon_06_01,3060406,2,1,G3,2,5,10,2,0,1,0,0
