@@ -92,6 +92,7 @@ public class Battle_Character : MonoBehaviour
     public List<BossNomalSkill> mon_Normal_Attack_Info = new List<BossNomalSkill>();
     public Player_aconstant player_Aconstant;
     public Monster_aconstant mon_Aconstant;
+    public List<BossAttackInfo> mon_Attack_Info = new List<BossAttackInfo>();
 
     [Header("Monster Stats")]
     public float cur_HP;
@@ -407,8 +408,8 @@ public class Battle_Character : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        if (mon_Info.P_mon_haveMP < mon_Info.P_mon_MaxMp)
-            mon_Info.P_mon_haveMP += mon_Info.P_mon_regenMP;
+        //if (mon_Info.P_mon_haveMP < mon_Info.P_mon_MaxMp)
+        //    mon_Info.P_mon_haveMP += mon_Info.P_mon_regenMP;
 
         StartCoroutine(Mana_Regen());
     }
