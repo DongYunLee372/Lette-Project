@@ -124,9 +124,10 @@ public class Battle_Character : MonoBehaviour
     public bool is_Boss = false; // 보스 몬스터 판별
 
 
-    public void Stat_Initialize(MonsterInformation info, List<MonsterSkillInformation> skill, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
+    public void Stat_Initialize(MonsterInformation info, List<BossAttackInfo> p_Attack_skill, List<BossNomalSkill> p_BossNomalSkill, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
     {
-        mon_Skill_Info = skill;
+        mon_Attack_Info = p_Attack_skill;
+        mon_Normal_Attack_Info = p_BossNomalSkill;
         mon_Info = info;
         mon_Target_Info = target;
         cur_HP = mon_Info.P_mon_MaxHP;
