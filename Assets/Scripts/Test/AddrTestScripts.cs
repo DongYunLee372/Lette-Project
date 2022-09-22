@@ -8,6 +8,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class AddrTestScripts : MonoBehaviour
 {
@@ -117,11 +118,11 @@ public class AddrTestScripts : MonoBehaviour
         //}
 
         // StartCoroutine(Tq());
-        TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", false);
+       
+        TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", false, true, com => temp = com);  //동기,생성 x
         Debug.Log("???");
-      
-        GameObject tagae = TestAddressablesLoader.Instance.FindLoadAsset<GameObject>("susu");
-        TestAddressablesLoader.Instance.Delete_Object<GameObject>(tagae);
+        Debug.Log("temp로드" + temp);
+        
         //testJG();
         // StartCoroutine(tAe());
 
