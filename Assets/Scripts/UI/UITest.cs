@@ -49,5 +49,7 @@ public class UITest : MonoBehaviour
         {
             Debug.Log("방어");
         }
+
+       
     }
 }

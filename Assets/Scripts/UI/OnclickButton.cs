@@ -15,23 +15,79 @@ public class OnclickButton : MonoBehaviour
     private string undo_uiname;
     [SerializeField]
     private string curr_uiname;
-
+    string QWE = "A";
     public ButtonText buttontext;
     public int compltesettingcount = 0;
     [SerializeField]
-    private KeyCode[] defaultkeys = new KeyCode[(int)KeyAction.KEYCOUNT];// { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D , KeyCode.Space , KeyCode.Mouse0 , KeyCode.Mouse1 }; //처음키 설정 .
+    private KeyCode[] defaultkeys = new KeyCode[7];//{ KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D , KeyCode.Space , KeyCode.Mouse0 , KeyCode.Mouse1 }; //처음키 설정 .
+    static KeyCode[] s_defautkeys = new KeyCode[7];
     [SerializeField]
     bool KeymapingCheck = false;
+    [SerializeField]
+    bool buttoncheck = false;
     private int key = -1;
     private void Awake()
     {
-        KeymapingCheck = false;
-        for (int i =0; i<(int)KeyAction.KEYCOUNT; i++)
+        for(int i=0; i< (int)KeyAction.KEYCOUNT; i++)
         {
-            Debug.Log(i);
-            KeySetting.keys.Add((KeyAction)i, defaultkeys[i]);
-            
+            s_defautkeys[i] = defaultkeys[i]; //전역 변수 사용
         }
+        KeymapingCheck = false;
+        Save_Optiondata loadData = SaveSystem.Load("save_001"); //캐릭터 아이디로 변경.
+        if (loadData == null)                                      //캐릭터가 없다면 디폴트셋팅.  
+        {
+            KeymapingCheck = false;
+            for (int i = 0; i < (int)KeyAction.KEYCOUNT; i++)
+            {
+                Debug.Log(i);
+                KeySetting.keys.Add((KeyAction)i, defaultkeys[i]);
+            }
+        }
+        else
+        {
+            KeySetting.keys.Add((KeyAction.UP), loadData.up);
+            KeySetting.keys.Add((KeyAction.DOWN), loadData.down);
+            KeySetting.keys.Add((KeyAction.LEFT), loadData.left);
+            KeySetting.keys.Add((KeyAction.RIGHT), loadData.right);
+            KeySetting.keys.Add((KeyAction.ROOL), loadData.roll);
+            KeySetting.keys.Add((KeyAction.ATTACK), loadData.attack);
+            KeySetting.keys.Add((KeyAction.DEFENSE), loadData.defens);
+
+            Debug.Log("로드하기");
+            //KeySetting.keys[KeyAction.DOWN] = loadData.down;
+            //KeySetting.keys[KeyAction.LEFT] = loadData.left;
+            //KeySetting.keys[KeyAction.RIGHT] = loadData.right;
+            //KeySetting.keys[KeyAction.ROOL] = loadData.roll;
+            //KeySetting.keys[KeyAction.ATTACK] = loadData.attack;
+            //KeySetting.keys[KeyAction.DEFENSE] = loadData.defens;
+            //  buttontext.Updatetexts();
+        }
+    }
+    public void DefaultSetting()
+    {
+        for (int i = 0; i < (int)KeyAction.KEYCOUNT; i++)
+        {
+            KeySetting.keys[(KeyAction)i] = s_defautkeys[i];      
+        }
+        buttoncheck = true;
+
+
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X)) //불러오기 
+        {
+            Save_Optiondata loadData = SaveSystem.Load("save_001");
+              Debug.Log(string.Format("LoadData Result => name : {0}, age : {1}, power : {2}", loadData.up, loadData.down, loadData.left));
+            buttontext.Updatetexts();
+        }
+        if(Input.GetKeyDown(KeyCode.Z)) //저장 
+        {
+            Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
+       KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
+            SaveSystem.Save(character, "save_001");
+        }
+            buttontext.Updatetexts();
     }
     public void Settingcountup()
     {
@@ -45,7 +101,7 @@ public class OnclickButton : MonoBehaviour
 
     public void Restart()
     {
-
+         
     }
 
     public void Exitgame()
@@ -56,6 +112,10 @@ public class OnclickButton : MonoBehaviour
     {
         UIManager.Instance.Show(UIname.StartUI);
         UIManager.Instance.Hide(UIname.OptionSetting);
+
+        Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
+      KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
+        SaveSystem.Save(character, "save_001");
     }
     public void Option()
     {
