@@ -59,10 +59,10 @@ public class BossNomalSkill : ScriptableObject
     public int P_skill_AtkCount { get { return skill_AtkCount; } set { skill_AtkCount = value; } }
 
     [SerializeField]
-    private bool skill_DiffObj;
-    public bool P_skill_DiffObj { get { return skill_DiffObj; } set { skill_DiffObj = value; } }
+    private int skill_DiffObj;
+    public int P_skill_DiffObj { get { return skill_DiffObj; } set { skill_DiffObj = value; } }
 
     [SerializeField]
-    private bool skill_ThrowObj;
-    public bool P_skill_ThrowObj { get { return skill_ThrowObj; } set { skill_ThrowObj = value; } }
+    private int skill_ThrowObj;
+    public int P_skill_ThrowObj { get { return skill_ThrowObj; } set { skill_ThrowObj = value; } }
 }
