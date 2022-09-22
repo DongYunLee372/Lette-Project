@@ -356,11 +356,11 @@ public class TestAddressablesLoader : Singleton<TestAddressablesLoader>
         }
         else
         {
-            await InitAssets_name_<T>(keyList);
-            T findobj = FindLoadAsset<T>(label);
+            //await InitAssets_name_<T>(keyList);
+           // T findobj = FindLoadAsset<T>(label);
             if (Complete != null)
             {
-                Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
+            //    Complete(findobj); //동기 작업 하고싶은 내용 (밖에서 호출하고 await안쓰면 그냥 넘어감.
 
             }
         }
