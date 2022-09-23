@@ -94,7 +94,7 @@ public class Battle_Character : MonoBehaviour
     public Monster_aconstant mon_Aconstant;
     public List<BossAttackInfo> mon_Attack_Info = new List<BossAttackInfo>();
     public List<Mon_Normal_Atk_Group> mon_normal_atak_group = new List<Mon_Normal_Atk_Group>();
-    public MonsterSkillInformation monsterSkillInformation = new MonsterSkillInformation();
+    public MonsterSkillInformation monsterSkillInformation;
    
     [Header("Monster Stats")]
     public float cur_HP;
