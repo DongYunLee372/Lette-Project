@@ -5,12 +5,13 @@ using Enemy_Enum;
 
 public class State_Trace : State
 {
+
+    int Longest_range;
+
     public override bool Judge(out State _State, Battle_Character battle_character)
     {
         // 아래 부분들이 다 필요없고 최종 사거리만 계산해서 최종 사거리안에 진입했다면 Attack 스테이트로 돌리면 될듯
         // 변수 추가 받은 후 수정
-        int Longest_range = Longest_Range_Find(battle_character);
-
         if (Vector3.Distance(battle_character.transform.position,
             battle_character.cur_Target.transform.position)
             <= Longest_range) // 타겟을 공격할 수 있는 사거리 내 진입했다면
@@ -50,5 +51,10 @@ public class State_Trace : State
     {
         battle_character.animator.Play("Walk");
         battle_character.real_AI.navMesh.SetDestination(battle_character.cur_Target.transform.position);
+    }
+
+    public override void State_Initialize(Battle_Character battle_character)
+    {
+        Longest_range = Longest_Range_Find(battle_character);
     }
 }

@@ -11,5 +11,5 @@ public abstract class State : MonoBehaviour
 
     public abstract void Run(Battle_Character battle_character);
 
-    public virtual void State_Initialize() { } // 이닛 스테이트의 초기화가 아닌 초기화 함수가 필요한 State를 위함
+    public virtual void State_Initialize(Battle_Character battle_character) { } // 이닛 스테이트의 초기화가 아닌 초기화 함수가 필요한 State를 위함
 }

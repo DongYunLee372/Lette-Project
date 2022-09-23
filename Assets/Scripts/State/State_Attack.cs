@@ -13,6 +13,8 @@ public class State_Attack : State
 
     public int attack_Info_Index; // 배틀 캐릭터의 Attack_Info index
 
+    string[] special_Range;
+
     public override bool Judge(out State _State, Battle_Character battle_character)
     {
         if (battle_character.isAttack_Run)
@@ -49,7 +51,6 @@ public class State_Attack : State
             return true;
         }
 
-        string[] special_Range = battle_character.mon_Info.P_mon_SpecialAtk.Split(",");
 
         if ((Vector3.Distance(battle_character.transform.position,
                battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1])) && !battle_character.isAttack_Run)
@@ -138,9 +139,9 @@ public class State_Attack : State
         }
     }
 
-    public override void State_Initialize()
+    public override void State_Initialize(Battle_Character battle_character)
     {
-
+        special_Range = battle_character.mon_Info.P_mon_SpecialAtk.Split(",");
     }
 
 }
