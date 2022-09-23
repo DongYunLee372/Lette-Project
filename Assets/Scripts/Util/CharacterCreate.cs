@@ -79,7 +79,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.DiagonalSwing));
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.LRush_and_USwing));
 
-        monsterSkillInformation.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(Global_Variable.Boss.Rush_Atk));
+        monsterSkillInformation=(DataLoad_Save.Instance.Get_MonsterSkillDB(Global_Variable.Boss.Rush_Atk));
 
         mon_Normal_Atk_Group.Add(DataLoad_Save.Instance.Get_Mon_Normal_Atk_GroupDB(Global_Variable.Boss.First_Atk));
         mon_Normal_Atk_Group.Add(DataLoad_Save.Instance.Get_Mon_Normal_Atk_GroupDB(Global_Variable.Boss.Second_Atk));
