@@ -94,8 +94,8 @@ public class Battle_Character : MonoBehaviour
     public Monster_aconstant mon_Aconstant;
     public List<BossAttackInfo> mon_Attack_Info = new List<BossAttackInfo>();
     public List<Mon_Normal_Atk_Group> mon_normal_atak_group = new List<Mon_Normal_Atk_Group>();
-    public List<MonsterSkillInformation> monsterSkillInformation = new List<MonsterSkillInformation>();
-
+    public MonsterSkillInformation monsterSkillInformation = new MonsterSkillInformation();
+   
     [Header("Monster Stats")]
     public float cur_HP;
 
@@ -126,7 +126,7 @@ public class Battle_Character : MonoBehaviour
     public bool is_Boss = false; // 보스 몬스터 판별
 
 
-    public void Stat_Initialize(MonsterInformation info, List<Mon_Normal_Atk_Group> p_mon_normal_atak_group, List<BossNomalSkill> p_BossNomalSkill, List<MonsterSkillInformation> p_monsterSkillInformation, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
+    public void Stat_Initialize(MonsterInformation info, List<Mon_Normal_Atk_Group> p_mon_normal_atak_group, List<BossNomalSkill> p_BossNomalSkill, MonsterSkillInformation p_monsterSkillInformation, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
     {
         mon_normal_atak_group = p_mon_normal_atak_group;
         mon_Normal_Attack_Info = p_BossNomalSkill;

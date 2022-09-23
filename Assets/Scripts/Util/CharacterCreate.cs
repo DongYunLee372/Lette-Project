@@ -68,7 +68,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
         List<BossNomalSkill> bossNomalSkills = new List<BossNomalSkill>();
         List<Mon_Normal_Atk_Group> mon_Normal_Atk_Group = new List<Mon_Normal_Atk_Group>();
-        List<MonsterSkillInformation> monsterSkillInformation = new List<MonsterSkillInformation>();
+        MonsterSkillInformation monsterSkillInformation = new MonsterSkillInformation();
 
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.USwing));
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.SSwing));
@@ -80,7 +80,6 @@ public class CharacterCreate : Singleton<CharacterCreate>
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.LRush_and_USwing));
 
         monsterSkillInformation.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(Global_Variable.Boss.Rush_Atk));
-        monsterSkillInformation.Add(DataLoad_Save.Instance.Get_MonsterSkillDB(Global_Variable.Boss.Guided_Magic_Bullet));
 
         mon_Normal_Atk_Group.Add(DataLoad_Save.Instance.Get_Mon_Normal_Atk_GroupDB(Global_Variable.Boss.First_Atk));
         mon_Normal_Atk_Group.Add(DataLoad_Save.Instance.Get_Mon_Normal_Atk_GroupDB(Global_Variable.Boss.Second_Atk));
