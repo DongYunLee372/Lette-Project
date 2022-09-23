@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack_1
+  m_Name: USwing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -61,7 +61,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Chulsango_Up
+  m_Name: LRush and USwing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -346,7 +346,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack_2
+  m_Name: SSwing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -373,7 +373,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack_2 0
+  m_Name: SSwing 0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -447,13 +447,13 @@ AnimatorStateMachine:
     m_Position: {x: 700, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1132259151170517647}
-    m_Position: {x: 360, y: 300, z: 0}
+    m_Position: {x: 350, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5685603117450144609}
     m_Position: {x: 480, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8242990328356426098}
-    m_Position: {x: 370, y: 360, z: 0}
+    m_Position: {x: 480, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2568993434424074828}
     m_Position: {x: 700, y: 130, z: 0}
@@ -478,7 +478,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 50, y: 70, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -8153101186756367345}
+  m_DefaultState: {fileID: 8242990328356426098}
 --- !u!1102 &3777969780610468817
 AnimatorState:
   serializedVersion: 6
@@ -584,7 +584,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lunge
+  m_Name: Sting
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -654,7 +654,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Chulsango
+  m_Name: LRush
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -680,7 +680,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rush
+  m_Name: Rush Atk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -706,7 +706,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack_3
+  m_Name: DiagonalSwing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

@@ -123,7 +123,7 @@ public class State_Attack : State
                 Result_return_Object = null;
 
                 battle_character.attack_Type = Enemy_Attack_Type.Normal_Attack;
-                battle_character.animator.Play("Long Attack");
+                //battle_character.animator.Play("Long Attack");
                 //GameObject missile
                 break;
             case Enemy_Attack_Logic.Skill_Using:
@@ -133,10 +133,14 @@ public class State_Attack : State
 
                 battle_character.attack_Type = Enemy_Attack_Type.Skill_Attack;
                 battle_character.skill_handler.Skill_Run(battle_character, battle_character.now_Skill_Info);
-                battle_character.Skill_Rand();
+                //battle_character.Skill_Rand();
                 break;
         }
     }
 
+    public override void State_Initialize()
+    {
+
+    }
 
 }

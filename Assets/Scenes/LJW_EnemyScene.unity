@@ -19963,9 +19963,65 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: real_AI.Init_State
+      propertyPath: mon_Info
       value: 
-      objectReference: {fileID: 1173432524}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Target_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[6]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[7]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: monsterSkillInformation.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: monsterSkillInformation.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -30339,8 +30395,12 @@ MonoBehaviour:
   mon_Skill_Info: []
   now_Skill_Info: {fileID: 0}
   mon_Target_Info: {fileID: 0}
+  mon_Normal_Attack_Info: []
   player_Aconstant: {fileID: 0}
   mon_Aconstant: {fileID: 0}
+  mon_Attack_Info: []
+  mon_normal_atak_group: []
+  monsterSkillInformation: []
   cur_HP: 0
   return_Pos: {x: 0, y: 0, z: 0}
   destination_Pos: {x: 0, y: 0, z: 0}
@@ -39050,8 +39110,12 @@ MonoBehaviour:
   mon_Skill_Info: []
   now_Skill_Info: {fileID: 0}
   mon_Target_Info: {fileID: 0}
+  mon_Normal_Attack_Info: []
   player_Aconstant: {fileID: 0}
   mon_Aconstant: {fileID: 0}
+  mon_Attack_Info: []
+  mon_normal_atak_group: []
+  monsterSkillInformation: []
   cur_HP: 0
   return_Pos: {x: 0, y: 0, z: 0}
   destination_Pos: {x: 0, y: 0, z: 0}
@@ -40270,8 +40334,12 @@ MonoBehaviour:
   mon_Skill_Info: []
   now_Skill_Info: {fileID: 0}
   mon_Target_Info: {fileID: 0}
+  mon_Normal_Attack_Info: []
   player_Aconstant: {fileID: 0}
   mon_Aconstant: {fileID: 0}
+  mon_Attack_Info: []
+  mon_normal_atak_group: []
+  monsterSkillInformation: []
   cur_HP: 1000
   return_Pos: {x: 0, y: 0, z: 0}
   destination_Pos: {x: 0, y: 0, z: 0}
@@ -40319,6 +40387,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   - Name: Melee Attack
     Movedis:
     - 0
@@ -40354,6 +40423,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   - Name: The Great Sword Slap
     Movedis:
     - 0
@@ -40387,6 +40457,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   - Name: Double Attack
     Movedis:
     - -0.5
@@ -40420,6 +40491,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   - Name: Monster Recall
     Movedis:
     - 0
@@ -40450,6 +40522,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   - Name: Rush
     Movedis:
     - 1
@@ -40480,6 +40553,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   - Name: Rush Sword Attack
     Movedis:
     - 1
@@ -40513,6 +40587,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   - Name: Magic Beam
     Movedis:
     - 0
@@ -40546,6 +40621,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   - Name: Guided Magic Bullet2
     Movedis:
     - 0
@@ -40579,6 +40655,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
+    after_skill_name: 
   damaged_Effect: {fileID: 152628, guid: 4e42a2081531c814fa4774bd0d6b45df, type: 3}
   phase_Effect: {fileID: 1436447386774278, guid: b36e5394bf3902b41877ecba9aa55b8d, type: 3}
   real_AI:
