@@ -10,6 +10,7 @@ using UnityEngine;
 public class CAttackComponent : BaseComponent
 {
     [SerializeField]
+    [HideInInspector]
     CurState curval;
     [HideInInspector]
     public int CurAttackNum = 0;
@@ -34,94 +35,8 @@ public class CAttackComponent : BaseComponent
     [HideInInspector]
     public int NextAttackNum = -1;
 
-    //public Dictionary<string, AttackInfo> LoadedAttackInfoDic;
 
     public List<AttackInfo> AttackInfos;
-
-
-    //[SerializeField]
-   // AttackInfo_Ex testinfooooo;
-
-    //기본 공격 정보 해당 정보를 3개 만들면 기본 공격이 설정값들에 따라 3가지 동작으로 이어진다.
-    //[System.Serializable]
-    //public class AttackInfo_Ex
-    //{
-    //    [Tooltip("공격번호")]
-    //    public int AttackNum;
-
-    //    [Tooltip("공격이름")]
-    //    public string AttackName;
-
-    //    [Tooltip("해당 공격의 타입을 설정한다 (노말, 광역, 투사체, 타겟팅)")]
-    //    public CharEnumTypes.eAttackType AttackType;
-
-    //    //해당 매니메이션 클립
-    //    [Tooltip("해당 공격의 애니메이션 클립")]
-    //    public AnimationClip aniclip;
-
-    //    //애니메이션 배속
-    //    [Tooltip("해당 공격의 애니메이션 재생 속도")]
-    //    [Range(0.0f, 10.0f)]
-    //    public float animationPlaySpeed;
-
-    //    [Tooltip("선딜")]
-    //    [Range(0.0f, 10.0f)]
-    //    public float StartDelay;
-
-    //    //후딜레이
-    //    [Tooltip("후딜")]
-    //    [Range(0.0f, 10.0f)]
-    //    public float RecoveryDelay;
-
-
-    //    [Tooltip("다음 동작으로 넘어갈 수 있는 시간")]
-    //    public float BufferdInputTime_Start;
-
-    //    //다음동작으로 넘어가기 위한 시간
-    //    //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
-    //    [Tooltip("연속동작이 있을때 다음 동작으로 들어가기 위한 입력 시간")]
-    //    public float BufferdInputTime_End;
-
-    //    //데미지
-    //    [Tooltip("공격 데미지")]
-    //    public float damage;
-
-    //    //스테미나 소비값
-    //    [Tooltip("공격시 줄어들 스테미나 게이지")]
-    //    public float StaminaGaugeDown;
-
-    //    //공격 이펙트
-    //    [Tooltip("공격 이펙트")]
-    //    public GameObject Effect;
-
-    //    //이펙트 생성 타이밍
-    //    [Tooltip("공격 이펙트 생성 타이밍")]
-    //    public float EffectStartTime;
-
-    //    //공격 이펙트의 위치
-    //    [Tooltip("공격 이펙트 생성 위치")]
-    //    public Transform EffectPosRot;
-
-    //    [Tooltip("공격 이펙트 파괴 시간")]
-    //    public float EffectDestroyTime;
-
-    //    //공격 중 움직일 거리
-    //    [Tooltip("공격할때 움직일 거리")]
-    //    public float movedis;
-
-    //    //움직일 시간
-    //    [Tooltip("공격할때 움직일 시간")]
-    //    public float movetime;
-
-    //    [Tooltip("투사체가 있는 공격일때 투사체의 게임 오브젝트")]
-    //    public GameObject ProjectileObj;
-
-    //    [Tooltip("타겟팅공격일때 타겟오브젝트")]
-    //    public GameObject TargetObj;
-    //}
-
-    //public AttackInfo_Ex[] attackinfos;
-    //public List<AttackInfo_Ex> attackinfoList;
 
     //스킬도 여기서 한번에 처리
     [System.Serializable]

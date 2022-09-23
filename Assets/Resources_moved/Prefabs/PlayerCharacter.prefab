@@ -2118,6 +2118,7 @@ GameObject:
   - component: {fileID: 5912692896712387626}
   - component: {fileID: 5912692896712388560}
   - component: {fileID: 5912692896712388561}
+  - component: {fileID: 410231355}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -2503,6 +2504,33 @@ MonoBehaviour:
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
+--- !u!114 &410231355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912692896712387625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79204f9a6472b7a4e8c0ae26c76bddab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curLevel: 0
+  maxHP: 0
+  curHP: 0
+  maxStamina: 0
+  curStamina: 0
+  Damage: 0
+  Defense: 0
+  maxMP: 0
+  curMP: 0
+  CurExp: 0
+  NextExp: 0
+  maxGroggy: 0
+  curGroggy: 0
+  DBInfo: {fileID: 0}
+  uiPanel: {fileID: 0}
 --- !u!1 &5912692896735992643
 GameObject:
   m_ObjectHideFlags: 0

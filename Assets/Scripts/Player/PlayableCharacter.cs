@@ -16,6 +16,7 @@ public class PlayableCharacter : MonoBehaviour
     [Header("================BaseComponent================")]
     public BaseComponent[] components = new BaseComponent[(int)CharEnumTypes.eComponentTypes.comMax];
 
+    [SerializeField]
     public BaseStatus status;
 
 
@@ -64,7 +65,7 @@ public class PlayableCharacter : MonoBehaviour
         //CharacterInfoPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUIPanel, UIManager.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
 
 
-        status = this.gameObject.AddComponent<BaseStatus>();
+        status = GetComponent<BaseStatus>();
         
         status.Init(CharacterInfoPanel);
 

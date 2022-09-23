@@ -39,8 +39,10 @@ public class BaseStatus:MonoBehaviour
     private float curGroggy;
 
 
+
     [SerializeField]
     public CharacterInformation DBInfo;
+
     public Dictionary<string, CharacterInformation> CharacterDBInfoDic;
 
     [SerializeField]
@@ -78,12 +80,12 @@ public class BaseStatus:MonoBehaviour
                 Defense = DBInfo.P_player_Def;
                 MaxGroggy = DBInfo.P_player_Groggy;
                 CurGroggy = 0;
-                CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+                //CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
-                movecom.moveoption.MoveSpeed = DBInfo.P_player_MoveSpeed;
-                movecom.moveoption.RunSpeed = DBInfo.P_player_RunSpeed;
-                movecom.moveoption.RotSpeed = DBInfo.P_player_RotSpeed;
-                movecom.moveoption.RotMouseSpeed = DBInfo.P_player_MouseSpeed;
+               // movecom.moveoption.MoveSpeed = DBInfo.P_player_MoveSpeed;
+                //movecom.moveoption.RunSpeed = DBInfo.P_player_RunSpeed;
+                //movecom.moveoption.RotSpeed = DBInfo.P_player_RotSpeed;
+                //movecom.moveoption.RotMouseSpeed = DBInfo.P_player_MouseSpeed;
 
             }
         }
