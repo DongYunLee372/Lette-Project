@@ -150,25 +150,25 @@ public class ResourceManager : MonoBehaviour
     //}
 
     // 어드레서블로 바꿔야댐 원본
-    //public GameObject Instantiate(string path, Transform parent = null)
-    //{
-    //    GameObject original = Load<GameObject>($"Prefabs/{path}");
+    public GameObject Instantiate(string path, Transform parent = null)
+    {
+        GameObject original = Load<GameObject>($"Prefabs/{path}");
 
-    //    if (original == null)
-    //    {
-    //        Debug.Log($"Failed to load prefab : {path}");
-    //        return null;
-    //    }
+        if (original == null)
+        {
+            Debug.Log($"Failed to load prefab : {path}");
+            return null;
+        }
 
-    //    if (original.GetComponent<Poolable>() != null)
-    //    {
-    //        return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
-    //    }
+        if (original.GetComponent<Poolable>() != null)
+        {
+            return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
+        }
 
-    //    GameObject go = Object.Instantiate(original, parent);
-    //    go.name = original.name;
-    //    return go;
-    //}
+        GameObject go = Object.Instantiate(original, parent);
+        go.name = original.name;
+        return go;
+    }
 
     public void Destroy(GameObject go)
     {
