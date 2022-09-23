@@ -149,11 +149,10 @@ public class ResourceManager : MonoBehaviour
     //}
 
     //public T Instantiate<T>(string path, Transform parent = null)
-    //where T : UnityEngine.Object
-
+    //where T : UnityEngine.Object 
     //{
     //    AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
-    //    UnityEngine.Object original = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
+    //    T = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
 
     //    if (original == null)
     //    {
@@ -161,12 +160,10 @@ public class ResourceManager : MonoBehaviour
     //        return null;
     //    }
 
-    //    if (original.GetComponent<Poolable>() != null)
-    //    {
-    //        return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
-    //    }
-
-    //    GameObject go = Object.Instantiate(original, parent);
+       
+    //    return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
+      
+    //    T go = Object.Instantiate(original, parent);
     //    go.name = original.name;
     //    return go;
     //}
