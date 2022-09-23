@@ -35,29 +35,31 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
     //default로 사용하시면 상관 없는데 caching 없이 사용하실 때 주의하실게 한번만 생성하고 끝날거에만 사용해주세요 !
     //두번이상 생성해야 한다 라고 하면 cashing기본값으로 사용하시면 됩니다. 후에 오브젝트 풀링 적용해야 하는거도 cashing 기본값으로 사용
 
-  
+
     //2. MultiAsset_Load<T>(List<string> keyList, bool async=false, Action Complete = null)
 
     //오른쪽부터 순서대로 (1.string 로드할 이름, 2.false=동기/true=비동기 , 3. 비동기 로드 후 실행할 함수)
     //앞에거랑 마찬가지로 동기를 기본으로 합니다.
     //비동기 다 필요없고 많은 양의 에셋을 한번에 동기로 로드하고 싶다면 MultiAsset_Load<T>(List<string> keyList) 쓰시면 됩니다. 비동기로 할거면 async만 true로 하십셔
 
-    
+
     //3. 기존에 쓰던 Load_Name입니다. <T> 타입만 추가 되고 기존과 동작은 같습니다.
 
-    
+
     //4. Instantiate_LoadObject<T>(string key,Vector3 vec=default(Vector3)) 
     // 리소스 로드했으면 생성하실때 쓰시면 됩니다. 오른쪽부터 이름, 위치 입니다. (T타입 반환)입니다. List<string>형식으로 넣어주셔도 됩니다. (멀티 로드 하시고 한번에 생성하고싶으실때 사용하셔도 됩니다) 마찬가지로 List<T> 반환
 
-   
+
     //5. Find_InstantiateObj<T>(string key) 
     //만약 1번에서 캐싱없이 생성을 하셨는데 얘를 제어하고싶다. 하시면 key값에 로드 할때 썼던거 쓰세요 
 
-   
+
     //6. Delete_Object<T>(T delete)
     //삭제하실때 이거로 삭제 부탁드립니다
-    
+
     //ps. 멀티 객체 생성은 로드 말고는 잘 안쓸거라 생각해서 함수에 넣지는 않았는데 필요하시다면 바로 밑에 나온 함수 사용하시면됩니다. 그리고 더 필요하다 싶은 기능 있으시거나 함수 알아보기 힘들다 하시면 언제든 말씀해주십셔
+
+    //추가로 그냥 나는 비동기 이런거 다 필요없고 객체 로드하고 생성하는거까지 해달라 SingleLoad_Instantiate<T>(string 이름,vector3 = null) 이거 사용하시면 됩니다. 반환받을수도 있습니다.
 
     //label가져와서 바로 생성 시키기, 멀티 ,비동기
     public async Task InitAssets_label<T>(string label)
@@ -321,6 +323,16 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
         return;
 
+    }
+
+    public T SingleLoad_Instantiate<T>(string name,Vector3 vector3=default(Vector3))
+     where T : UnityEngine.Object
+
+    {
+        InitAssets_name_sync<T>(name);  //단일 로드만 해옴 동기
+
+        var tempObj = Instantiate_LoadObject<T>(name, vector3);
+        return tempObj as T;
     }
 
     //단일 동기 - 생성

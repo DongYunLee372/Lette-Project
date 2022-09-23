@@ -125,12 +125,11 @@ public class ResourceManager : MonoBehaviour
     //}
 
     // 어드레서블로 바꿔야댐
-    //public T Instantiate<T,U>(string path, Transform parent = null)
+    //public T Instantiate<T>(string path, Transform parent = null)
     //    where T : UnityEngine.Object
-    //    where U : Poolable
 
     //{
-    //     AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
+    //    AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
     //    UnityEngine.Object original = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
 
     //    if (original == null)
@@ -141,13 +140,39 @@ public class ResourceManager : MonoBehaviour
 
     //    if (original.GetComponent<Poolable>() != null)
     //    {
-    //        return GameMG.Instance.ObjManager.Pop(original , parent).gameObject;
+    //        return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
     //    }
 
     //    GameObject go = Object.Instantiate(original, parent);
     //    go.name = original.name;
     //    return go;
     //}
+
+    //public T Instantiate<T>(string path, Transform parent = null)
+    //where T : UnityEngine.Object
+
+    //{
+    //    AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
+    //    UnityEngine.Object original = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
+
+    //    if (original == null)
+    //    {
+    //        Debug.Log($"Failed to load prefab : {path}");
+    //        return null;
+    //    }
+
+    //    if (original.GetComponent<Poolable>() != null)
+    //    {
+    //        return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
+    //    }
+
+    //    GameObject go = Object.Instantiate(original, parent);
+    //    go.name = original.name;
+    //    return go;
+    //}
+
+
+
 
     // 어드레서블로 바꿔야댐 원본
     public GameObject Instantiate(string path, Transform parent = null)
