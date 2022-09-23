@@ -15,6 +15,8 @@ using UnityEngine;
 //이펙트의 모든 파티클들의 duration을 조사해서 해당 duration이 끝나면 삭제되ㅗ도록
 //일정 주기로 다시실행하도록(비활성화시켰다가 활성화?)
 
+//이펙트가 이동 가능하도록
+
 
 public class EffectManager : MySingleton<EffectManager>
 {

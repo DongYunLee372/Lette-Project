@@ -100,13 +100,5 @@ public class SlideBar : MonoBehaviour
         return CurValue;
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            Debug.Log("v눌림");
-            SetCurValue(GetCurValue() * 0.8f);
-        }
-    }
 
 }

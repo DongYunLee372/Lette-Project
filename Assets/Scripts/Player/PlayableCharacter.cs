@@ -5,8 +5,6 @@ using UnityEngine;
 //플레이어블 캐릭터의 모든것을 관리한다.
 //1. 컴포넌트들 관리, 기존 ComponentManager가 하던 일을 그대로 실행
 //2. 플레이어 데이터를 받아와서 각각의 컴포넌트 들에게 각각 필요한 데이터들을 넘겨준다.
-
-
 public class PlayableCharacter : MonoBehaviour
 {
     [Header("================UnityComponent================")]
@@ -21,7 +19,7 @@ public class PlayableCharacter : MonoBehaviour
 
 
     [Header("================캐릭터 UI================")]
-    public UICharacterInfoPanel CharacterInfoPanel;
+    public UICharacterInfoPanel CharacterUIPanel;
 
     [Header("================피격 이펙트================")]
     public GameObject HitEffect;
@@ -54,6 +52,8 @@ public class PlayableCharacter : MonoBehaviour
         //Debug.Log($"{CharacterDBInfo.P_player_HP}");
 
         BaseComponent[] temp = GetComponentsInChildren<BaseComponent>();
+        status = GetComponent<BaseStatus>();
+
 
         foreach (BaseComponent a in temp)
         {
@@ -64,13 +64,34 @@ public class PlayableCharacter : MonoBehaviour
 
         //CharacterInfoPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUIPanel, UIManager.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
 
+        //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
+        if(CharacterUIPanel==null)
+            AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(Global_Variable.CharVar.CharacterUI, false, true, CeateUI);
 
-        status = GetComponent<BaseStatus>();
+
+        status.Init(CharacterUIPanel);
+        Canvas canvas = FindObjectOfType<Canvas>();
+        CharacterUIPanel.transform.parent = canvas.transform;
+        CharacterUIPanel.transform.localPosition = status.player_UIPos;
         
-        status.Init(CharacterInfoPanel);
+
+        if (CharacterUIPanel != null)
+        {
+            
+            Debug.Log("UI 로드 성공");
+        }
+
+        else
+            Debug.Log("character UI Create Fail");
 
 
     }
+
+    public void CeateUI(GameObject obj)
+    {
+        CharacterUIPanel = GameObject.Instantiate(obj).GetComponent<UICharacterInfoPanel>();
+    }
+
 
     /*MyComponent 관련 메소드*/
     public BaseComponent GetMyComponent(CharEnumTypes.eComponentTypes type)

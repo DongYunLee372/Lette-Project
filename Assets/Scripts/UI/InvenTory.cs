@@ -18,9 +18,9 @@ public class InvenTory : MySingleton<InvenTory>
     {
         if (slots[(int)key].MinusItem(1))
         {
-            float tempHp = Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.HPBar.GetCurValue();
+            float tempHp = Player.GetComponent<PlayableCharacter>().CharacterUIPanel.HPBar.GetCurValue();
 
-            Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.HPBar.SetCurValue(tempHp + 50);
+            Player.GetComponent<PlayableCharacter>().CharacterUIPanel.HPBar.SetCurValue(tempHp + 50);
         }
     }
     public void DropItem(Sprite image, int count, string dropitemname)

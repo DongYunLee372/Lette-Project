@@ -195,9 +195,9 @@ public class PlayerAttack : BaseComponent
         att.ComboAttackMana(animator, SkillData.P_aniclip.name, SkillData.P_animationPlaySpeed);
 
 
-        float tempMp = Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.MPBar.GetCurValue();
+        //float tempMp = Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.MPBar.GetCurValue();
 
-        Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.MPBar.SetCurValue(tempMp - 10);
+        //Player.GetComponent<PlayableCharacter>().CharacterInfoPanel.MPBar.SetCurValue(tempMp - 10);
     }
 
     public void CreateEffect()

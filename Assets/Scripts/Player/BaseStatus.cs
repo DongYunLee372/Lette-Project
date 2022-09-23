@@ -6,7 +6,73 @@ using UnityEngine;
 public class BaseStatus:MonoBehaviour
 {
     [Header("=========================")]
-    [Header("Status")]
+    [Header("초기 세팅값")]
+
+    //캐릭터 이름
+    [SerializeField]
+    public string character_Name;
+
+    //캐릭터 hp 총량
+    [SerializeField]
+    public int player_HP;
+
+    //캐릭터 방어력
+    [SerializeField]
+    public int player_Def;
+
+
+    //캐릭터 Stamina 총량
+    [SerializeField]
+    public int player_Stamina;
+
+    // Stamina 자동회복 시간 
+    [SerializeField]
+    public int player_Stamina_Recovery_Time;
+
+    // Stamina 자동회복 값
+    [SerializeField]
+    public int player_Stamina_Recovery_Val;
+
+    //그로기값 최대치
+    [SerializeField]
+    public int player_Groggy;
+
+    // 그로기값 자동회복 시간 
+    [SerializeField]
+    public int player_Groggy_Recovery_Time;
+
+    // 그로기값 자동회복 값
+    [SerializeField]
+    public int player_Groggy_Recovery_Val;
+
+    //경직 상태에 빠지는 그로기값
+    [SerializeField]
+    public int player_Stagger_Groggy;
+
+    //다운 상태에 빠지는 그로기값
+    [SerializeField]
+    public int player_Down_Groggy;
+
+    ////캐릭터 움직임 속도
+    //[SerializeField]
+    //private int player_MoveSpeed;
+
+    ////캐릭터 움직임 속도
+    //[SerializeField]
+    //private int player_RunSpeed;
+
+    //[SerializeField]
+    //private int player_MouseSpeed;
+
+    //[SerializeField]
+    //private float player_RotSpeed;
+
+    [SerializeField]
+    public Vector2 player_UIPos;
+
+
+    [Header("=========================")]
+    [Header("자동 세팅 변경금지 <Status>")]
     [SerializeField]
     private int curLevel;
     [SerializeField]
@@ -41,7 +107,7 @@ public class BaseStatus:MonoBehaviour
 
 
     [SerializeField]
-    public CharacterInformation DBInfo;
+    //public CharacterInformation DBInfo;
 
     public Dictionary<string, CharacterInformation> CharacterDBInfoDic;
 
@@ -59,37 +125,52 @@ public class BaseStatus:MonoBehaviour
     IEnumerator CorGroggyCount;
     IEnumerator CorGroggyRecover;
 
-    public int CurLevel
+    public void Init(UICharacterInfoPanel uipanel)
     {
-        get
-        {
-            return curLevel;
-        }
-        set
-        {
-            curLevel = value;
-            if (curLevel == 1)
-            {
-                //csv로부터 캐릭터의 정보들을 받아온다.
-                LoadFile.Read<CharacterInformation>(out CharacterDBInfoDic);
-                DBInfo = CharacterDBInfoDic[Global_Variable.CharVar.Asha];
+        //this.DBController = DBController;
+        this.uiPanel = uipanel;
 
-                //각각의 필요한 값들을 필요한 곳에 넣어준다.
-                MaxHP = DBInfo.P_player_HP;
-                MaxStamina = DBInfo.P_player_Stamina;
-                Defense = DBInfo.P_player_Def;
-                MaxGroggy = DBInfo.P_player_Groggy;
-                CurGroggy = 0;
-                //CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        MaxHP = player_HP;
+        MaxStamina = player_Stamina;
+        Defense = player_Def;
+        MaxGroggy = player_Groggy;
+        CurGroggy = 0;
 
-               // movecom.moveoption.MoveSpeed = DBInfo.P_player_MoveSpeed;
-                //movecom.moveoption.RunSpeed = DBInfo.P_player_RunSpeed;
-                //movecom.moveoption.RotSpeed = DBInfo.P_player_RotSpeed;
-                //movecom.moveoption.RotMouseSpeed = DBInfo.P_player_MouseSpeed;
 
-            }
-        }
+        //CurLevel = 1;
     }
+
+    //public int CurLevel
+    //{
+    //    get
+    //    {
+    //        return curLevel;
+    //    }
+    //    set
+    //    {
+    //        curLevel = value;
+    //        if (curLevel == 1)
+    //        {
+    //            //csv로부터 캐릭터의 정보들을 받아온다.
+    //            LoadFile.Read<CharacterInformation>(out CharacterDBInfoDic);
+    //            DBInfo = CharacterDBInfoDic[Global_Variable.CharVar.Asha];
+
+    //            //각각의 필요한 값들을 필요한 곳에 넣어준다.
+    //            MaxHP = DBInfo.P_player_HP;
+    //            MaxStamina = DBInfo.P_player_Stamina;
+    //            Defense = DBInfo.P_player_Def;
+    //            MaxGroggy = DBInfo.P_player_Groggy;
+    //            CurGroggy = 0;
+    //            //CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+
+    //           // movecom.moveoption.MoveSpeed = DBInfo.P_player_MoveSpeed;
+    //            //movecom.moveoption.RunSpeed = DBInfo.P_player_RunSpeed;
+    //            //movecom.moveoption.RotSpeed = DBInfo.P_player_RotSpeed;
+    //            //movecom.moveoption.RotMouseSpeed = DBInfo.P_player_MouseSpeed;
+
+    //        }
+    //    }
+    //}
     public float MaxHP
     {
         get => maxHP;
@@ -188,7 +269,7 @@ public class BaseStatus:MonoBehaviour
             //
             if (curGroggy != 0 && CorGroggyCount == null && CorGroggyRecover == null)
             {
-                CorGroggyCount = timecounter.Cor_TimeCounter(DBInfo.P_player_Groggy_Recovery_Time, GroggyRecoveryStart);
+                CorGroggyCount = timecounter.Cor_TimeCounter(player_Groggy_Recovery_Time, GroggyRecoveryStart);
                 StartCoroutine(CorGroggyCount);
             }
 
@@ -267,7 +348,7 @@ public class BaseStatus:MonoBehaviour
             //모든 값이 변경된 뒤에 stamina가 최대치가 아니고 이미 회복중이 아니거나 카운트가 돌고있는 중이 아니면 회복을 위한 카운터를 시작해준다. 
             if (curStamina != MaxStamina && CorSTMCount == null&&CorSTMRecover==null)
             {
-                CorSTMCount = timecounter.Cor_TimeCounter(DBInfo.P_player_Stamina_Recovery_Time, STMRecoveryStart);
+                CorSTMCount = timecounter.Cor_TimeCounter(player_Stamina_Recovery_Time, STMRecoveryStart);
                 StartCoroutine(CorSTMCount);
             }
                 
@@ -298,12 +379,7 @@ public class BaseStatus:MonoBehaviour
 
 
 
-    public void Init(UICharacterInfoPanel uipanel)
-    {
-        //this.DBController = DBController;
-        this.uiPanel = uipanel;
-        CurLevel = 1;
-    }
+    
 
 
     
@@ -314,7 +390,7 @@ public class BaseStatus:MonoBehaviour
         StopCoroutine(CorSTMCount);
         CorSTMCount = null;
 
-        CorSTMRecover = Recovery(StaminaUp, DBInfo.P_player_Stamina_Recovery_Val);
+        CorSTMRecover = Recovery(StaminaUp, player_Stamina_Recovery_Val);
         StartCoroutine(CorSTMRecover);
     }
 
@@ -324,7 +400,7 @@ public class BaseStatus:MonoBehaviour
         StopCoroutine(CorSTMCount);
         CorSTMCount = null;
 
-        CorSTMRecover = Recovery(GroggyDown, DBInfo.P_player_Groggy_Recovery_Val);
+        CorSTMRecover = Recovery(GroggyDown, player_Groggy_Recovery_Val);
         StartCoroutine(CorSTMRecover);
     }
 

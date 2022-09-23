@@ -9,7 +9,9 @@ namespace Global_Variable
 {
     public class CharVar
     {
-        public const string CharacterUIPanel = "FriendPanel";
+        //캐릭터 UI
+        //public const string CharacterUIPanel = "FriendPanel";
+        public const string CharacterUI = "PlayerUIPanel";
 
         // 몬스터들
         public const string Slime = "Slime";

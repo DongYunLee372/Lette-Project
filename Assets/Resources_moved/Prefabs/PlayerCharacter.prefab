@@ -2112,13 +2112,13 @@ GameObject:
   - component: {fileID: 5912692896712387631}
   - component: {fileID: 5912692896712387629}
   - component: {fileID: 5912692896712387628}
+  - component: {fileID: 410231355}
   - component: {fileID: 5912692896712388563}
-  - component: {fileID: 5912692896712388562}
-  - component: {fileID: 5912692896712387627}
   - component: {fileID: 5912692896712387626}
   - component: {fileID: 5912692896712388560}
   - component: {fileID: 5912692896712388561}
-  - component: {fileID: 410231355}
+  - component: {fileID: 5912692896712387627}
+  - component: {fileID: 5912692896712388562}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -2173,6 +2173,44 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &410231355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912692896712387625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79204f9a6472b7a4e8c0ae26c76bddab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character_Name: Asha
+  player_HP: 200
+  player_Def: 10
+  player_Stamina: 150
+  player_Stamina_Recovery_Time: 2
+  player_Stamina_Recovery_Val: 10
+  player_Groggy: 100
+  player_Groggy_Recovery_Time: 2
+  player_Groggy_Recovery_Val: 10
+  player_Stagger_Groggy: 30
+  player_Down_Groggy: 80
+  player_UIPos: {x: -787, y: -479}
+  curLevel: 0
+  maxHP: 0
+  curHP: 0
+  maxStamina: 0
+  curStamina: 0
+  Damage: 0
+  Defense: 0
+  maxMP: 0
+  curMP: 0
+  CurExp: 0
+  NextExp: 0
+  maxGroggy: 0
+  curGroggy: 0
+  uiPanel: {fileID: 0}
 --- !u!114 &5912692896712388563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2193,50 +2231,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   status: {fileID: 0}
-  CharacterInfoPanel: {fileID: 0}
+  CharacterUIPanel: {fileID: 0}
   HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
   effectmanager: {fileID: 0}
---- !u!114 &5912692896712388562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5912692896712387625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5b69a6adf6433e4e92be0c6e93cc370, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationBlendingTimeSets: []
-  CurState: 0
-  PreState: 0
---- !u!114 &5912692896712387627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5912692896712387625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb2885f9f447514b997e8db6127ae7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comtype: 0
-  _key:
-    right: 100
-    foward: 119
-    left: 97
-    back: 115
-    Rolling: 32
-    Run: 304
-    skill01: 49
-    skill02: 50
-    skill03: 51
-  movecom: {fileID: 0}
-  attackcom: {fileID: 0}
-  guardcom: {fileID: 0}
 --- !u!114 &5912692896712387626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2504,7 +2501,7 @@ MonoBehaviour:
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
---- !u!114 &410231355
+--- !u!114 &5912692896712387627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2513,24 +2510,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 5912692896712387625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79204f9a6472b7a4e8c0ae26c76bddab, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fb2885f9f447514b997e8db6127ae7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curLevel: 0
-  maxHP: 0
-  curHP: 0
-  maxStamina: 0
-  curStamina: 0
-  Damage: 0
-  Defense: 0
-  maxMP: 0
-  curMP: 0
-  CurExp: 0
-  NextExp: 0
-  maxGroggy: 0
-  curGroggy: 0
-  DBInfo: {fileID: 0}
-  uiPanel: {fileID: 0}
+  comtype: 0
+  _key:
+    right: 100
+    foward: 119
+    left: 97
+    back: 115
+    Rolling: 32
+    Run: 304
+    skill01: 49
+    skill02: 50
+    skill03: 51
+  movecom: {fileID: 0}
+  attackcom: {fileID: 0}
+  guardcom: {fileID: 0}
+--- !u!114 &5912692896712388562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912692896712387625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5b69a6adf6433e4e92be0c6e93cc370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationBlendingTimeSets: []
+  CurState: 0
+  PreState: 0
 --- !u!1 &5912692896735992643
 GameObject:
   m_ObjectHideFlags: 0

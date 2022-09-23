@@ -29,10 +29,6 @@ namespace CharEnumTypes
         AttackCom,
         comMax
     }
-    public enum eInputEvents
-    {
-
-    }
 
     public enum eAnimationState
     {
@@ -80,26 +76,6 @@ namespace CharEnumTypes
     }
 
 
-
-    //public enum eAnimationClips
-    //{
-    //    Idle01,
-    //    Idle02,
-    //    Idle03,
-    //    Dash,
-    //    Die,
-    //    Attack01,
-    //    Attack010,
-    //    Attack02,
-    //    Damage,
-    //    Run,
-    //    Skill01,
-    //    Skill02,
-    //    Skill03,
-    //    Skill04,
-    //    Stun,
-    //    AnimationMax
-    //}
 }
 
 namespace Enemy_Enum
