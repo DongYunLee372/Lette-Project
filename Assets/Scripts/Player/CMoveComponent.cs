@@ -126,7 +126,7 @@ public class CMoveComponent : BaseComponent
     public float CurGravity;//현재 벨로시티의 y값
     [HideInInspector]
     public Com com = new Com();
-    [HideInInspector]
+    //[HideInInspector]
     public CurState curval = new CurState();
 
     public MoveOption moveoption = new MoveOption();

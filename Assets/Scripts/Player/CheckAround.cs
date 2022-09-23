@@ -55,10 +55,11 @@ public class CheckAround : MonoBehaviour
         //Vector3 temp = new Vector3(WorldMove.x, 0, WorldMove.z);
         //temp = com.FpRoot.forward /*+ Vector3.down*/;
         //NavMesh.Raycast()
-        bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.1f, movecom.com.FpRoot.forward, out hit, 0.3f, LayerMask.GetMask("Wall"));
+        bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.1f, movecom.com.FpRoot.forward, out hit, 0.3f/*, LayerMask.GetMask("Wall")*/);
 
         if (cast)
         {
+            if(hit.transform.gameObject.layer == LayerMask.GetMask("Wall")|| hit.transform.gameObject.layer == LayerMask.GetMask("Ground"))
             Debug.DrawLine(Capsulebottomcenter, hit.point,Color.cyan);
             curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
             if (curval.CurFowardSlopAngle >= 70.0f)
@@ -122,7 +123,7 @@ public class CheckAround : MonoBehaviour
             //bool cast = NavMesh.Raycast(this.transform.position + new Vector3(0,2,0), temppos, out navhit, NavMesh.GetAreaFromName("Walkable"));
             //Debug.DrawLine(this.transform.position + new Vector3(0, 2, 0), temppos, cast ? Color.red : Color.blue);
             bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius, Vector3.down, out hit, CapsuleCol.radius-0.15f,LayerMask.GetMask("Ground"));
-
+            
             if (cast)
             {
                 Debug.DrawLine(Capsulebottomcenter, hit.point, Color.blue);
