@@ -94,7 +94,7 @@ public class Battle_Character : MonoBehaviour
     public Monster_aconstant mon_Aconstant;
     public List<BossAttackInfo> mon_Attack_Info = new List<BossAttackInfo>();
     public List<Mon_Normal_Atk_Group> mon_normal_atak_group = new List<Mon_Normal_Atk_Group>();
-   
+
     [Header("Monster Stats")]
     public float cur_HP;
 
@@ -227,7 +227,8 @@ public class Battle_Character : MonoBehaviour
             if (attack_Info[i].Name == clipname)
             {
                 Debug.Log("재생이다잉" + clipname);
-                real_AI.now_State.GetComponent<State_Attack>().attack_Info_Index = i;
+                if (real_AI.now_State.GetComponent<State_Attack>() != null)
+                    real_AI.now_State.GetComponent<State_Attack>().attack_Info_Index = i;
                 // 타겟을 바라보고 애니메이션 재생
                 gameObject.transform.LookAt(cur_Target.transform);
                 // 선딜이 있다면
