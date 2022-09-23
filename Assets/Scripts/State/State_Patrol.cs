@@ -14,7 +14,7 @@ public class State_Patrol : State
         {
             for (int i = 0; i < cols.Length; i++)
             {
-                if (cols[i].tag == "Player")
+                if(cols[i].CompareTag("Player"))
                 {
                     battle_character.cur_Target = cols[i].gameObject;
                     battle_character.real_AI.pre_State = this;

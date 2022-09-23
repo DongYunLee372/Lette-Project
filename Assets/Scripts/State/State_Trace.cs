@@ -5,7 +5,6 @@ using Enemy_Enum;
 
 public class State_Trace : State
 {
-
     int Longest_range;
 
     public override bool Judge(out State _State, Battle_Character battle_character)

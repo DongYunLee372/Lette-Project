@@ -21,7 +21,7 @@ public class Enemy_Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.CompareTag("Player"))
         {
             Debug.Log("플레이어 맞음");
             Vector3 pos = new Vector3();

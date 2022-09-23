@@ -26,7 +26,7 @@ public class State_Die : State
             // 캐릭터 데이터로 
             // battle_character.animator.Play("Monster Recall");
 
-            StartCoroutine(death_Coroutine(battle_character.phase_Effect, battle_character.transform));
+            //StartCoroutine(death_Coroutine(battle_character.phase_Effect, battle_character.transform));
 
             this.first_Start = true;
         }
