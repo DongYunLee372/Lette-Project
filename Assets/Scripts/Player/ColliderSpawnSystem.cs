@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
 {
-    
+
     //public CharEnumTypes.eCollType colltype;
 
     public Colliders[] collprefabs = new Colliders[(int)CharEnumTypes.eCollType.collMax];
@@ -18,8 +18,11 @@ public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
     public List<Colliders> SpawnedCollList = new List<Colliders>();
 
     CorTimeCounter timer = new CorTimeCounter();
+
+    public MyDotween.Dotween dotween = new MyDotween.Dotween();
+
     //
-    public Colliders SpawnBoxCollider(Vector3 pos, Vector3 size, float SpawnTime,LayerMask targetLayer,  Colliders.CollFunction func)
+    public Colliders SpawnBoxCollider(Vector3 pos, Vector3 size, float SpawnTime, LayerMask targetLayer, Colliders.CollFunction func)
     {
         Colliders copycoll = null;
         //colltype = type;
@@ -121,21 +124,27 @@ public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
         coll.SetCollitionFunction(enterfunc, outerfunc, stayfunc);
     }
 
+
+    public void DoMove(Colliders coll, Vector3 dest, float duration)
+    {
+        dotween.DoMove(coll.gameObject, dest, duration);
+    }
+
+
+
+
     //public void SetFunction(Colliders.CollFunction func)
     //{
     //    collprefabs[(int)colltype].SetCollitionFunction(func);
     //}
 
-
-
     //미리 만들
     void Start()
     {
-        for(CharEnumTypes.eCollType i =0;i<CharEnumTypes.eCollType.collMax;i++)
+        for (CharEnumTypes.eCollType i = 0; i < CharEnumTypes.eCollType.collMax; i++)
         {
             collprefabs[(int)i] = Resources.Load<Colliders>("Prefabs/" + i.ToString() + "Coll");
             //Debug.Log(colltype.ToString() + "찾음");
         }
-        //Resources.Load<Colliders>("Prefabs/" + colltype + "Coll");
     }
 }

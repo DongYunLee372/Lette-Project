@@ -2303,6 +2303,7 @@ MonoBehaviour:
       m_Bits: 64
     MaxSlop: 70
     SlopAccel: 0
+    MaxStep: 0
     RunningStaminaVal: 4
     RollingClip: {fileID: 7400000, guid: 207adbd2d547d7f408adcac0b17f4e44, type: 2}
     RollingClipPlaySpeed: 2.3
@@ -2398,6 +2399,64 @@ MonoBehaviour:
     TargetObjName: 
   NextAttack: 0
   NextAttackNum: -1
+  AttackInfos:
+  - attackNum: 0
+    attackName: Attack1
+    attackType: Normal
+    aniclipName: _Attack01
+    animationPlaySpeed: 1
+    startDelay: 0
+    recoveryDelay: 0.1
+    bufferdInputTime_Start: 0.2
+    BufferdInputTime_End: 0.2
+    damage: 10
+    StaminaGaugeDown: 5
+    EffectName: 
+    EffectStartTime: 0
+    effectPosRot: 
+    EffectDestroyTime: 0
+    movedis: 5
+    movetime: 0.1
+    ProjectileObjName: 
+    TargetObjName: 
+  - attackNum: 1
+    attackName: Attack2
+    attackType: Normal
+    aniclipName: _Attack02
+    animationPlaySpeed: 1.2
+    startDelay: 0
+    recoveryDelay: 0.1
+    bufferdInputTime_Start: 0.2
+    BufferdInputTime_End: 0.2
+    damage: 10
+    StaminaGaugeDown: 5
+    EffectName: 
+    EffectStartTime: 0
+    effectPosRot: 
+    EffectDestroyTime: 0
+    movedis: 10
+    movetime: 0.2
+    ProjectileObjName: 
+    TargetObjName: 
+  - attackNum: 2
+    attackName: Attack03
+    attackType: Normal
+    aniclipName: _Attack03
+    animationPlaySpeed: 3
+    startDelay: 0
+    recoveryDelay: 0.2
+    bufferdInputTime_Start: 0.4
+    BufferdInputTime_End: 0
+    damage: 10
+    StaminaGaugeDown: 10
+    EffectName: 
+    EffectStartTime: 0
+    effectPosRot: 
+    EffectDestroyTime: 0
+    movedis: 10
+    movetime: 0.3
+    ProjectileObjName: 
+    TargetObjName: 
   skillinfos:
   - AttackType: 0
     SkillName: Skill01

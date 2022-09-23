@@ -11,27 +11,30 @@ public class CAttackComponent : BaseComponent
 {
     [SerializeField]
     CurState curval;
-
+    [HideInInspector]
     public int CurAttackNum = 0;
-
+    [HideInInspector]
     public CMoveComponent movecom;
-
+    [HideInInspector]
     public Transform effectparent;
-
+    [HideInInspector]
     public WeaponCollider weaponcollider;
-
+    [HideInInspector]
     public string monstertag;
-
+    [HideInInspector]
     public CorTimeCounter timer = new CorTimeCounter();
-
+    [HideInInspector]
     public bool IsLinkable = false;
 
-   // public AttackInfo_Ex NextAttackInfo = null;
+    // public AttackInfo_Ex NextAttackInfo = null;
+    [HideInInspector]
     public AttackInfo NextAttackInfo = null;
+    [HideInInspector]
     public bool NextAttack = false;
+    [HideInInspector]
     public int NextAttackNum = -1;
 
-    public Dictionary<string, AttackInfo> LoadedAttackInfoDic;
+    //public Dictionary<string, AttackInfo> LoadedAttackInfoDic;
 
     public List<AttackInfo> AttackInfos;
 
@@ -169,43 +172,24 @@ public class CAttackComponent : BaseComponent
     }
 
     public SkillInfo[] skillinfos;
-
+    [HideInInspector]
     public AnimationController animator;
-
+    [HideInInspector]
     public AnimationEventSystem eventsystem;
-
+    [HideInInspector]
     public GameObject effectobj;
-
+    [HideInInspector]
     public Transform preparent;
-
+    [HideInInspector]
     public float lastAttackTime = 0;
 
     //public delegate void Invoker(GameObject obj);
 
     //public bool IsTimeCounterActive = false;
+    [HideInInspector]
     public IEnumerator coroutine;
+    [HideInInspector]
     public IEnumerator Linkcoroutine;
-
-
-    public void Init()
-    {
-        animator = GetComponentInChildren<AnimationController>();
-        eventsystem = GetComponentInChildren<AnimationEventSystem>();
-        weaponcollider = GetComponentInChildren<WeaponCollider>();
-        weaponcollider?.SetCollitionFunction(MonsterAttack);
-
-        if (effectparent == null)
-        {
-            effectparent = new GameObject("EffectsContainer").transform;
-        }
-
-
-
-        AnimationEventsSetting();
-        Initsetting();
-
-        //AttackInfos = LoadedAttackInfoDic["0"].ToList();
-    }
 
 
     void Start()
@@ -224,9 +208,6 @@ public class CAttackComponent : BaseComponent
         Initsetting();
         AnimationEventsSetting();
         
-
-
-
         //Dictionary<string, AttackInfo> attackinfos;
         //DB.Instance.Load<AttackInfo>(out attackinfos);
     }
@@ -234,20 +215,20 @@ public class CAttackComponent : BaseComponent
     void AnimationEventsSetting()
     {
         //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
-        //for (int i = 0; i < attackinfos.Length; i++)
-        //{
-        //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(attackinfos[i].aniclip.name, AttackMove),
-        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(attackinfos[i].aniclip.name, AttackEnd));
-        //}
-
-
-        foreach(var a in LoadedAttackInfoDic)
+        for (int i = 0; i < AttackInfos.Count; i++)
         {
-            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(a.Value.aniclipName, AttackMove),
+            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove),
                 new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-                new KeyValuePair<string, AnimationEventSystem.endCallback>(a.Value.aniclipName, AttackEnd));
+                new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd));
         }
+
+
+        //foreach (var a in LoadedAttackInfoDic)
+        //{
+        //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(a.Value.aniclipName, AttackMove),
+        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(a.Value.aniclipName, AttackEnd));
+        //}
 
         //for (int i = 0; i < LoadedAttackInfoDic.Count; i++)
         //{
@@ -270,7 +251,7 @@ public class CAttackComponent : BaseComponent
     {
         NextAttackInfo = null;
         //기본공격 정보 받아옴
-        LoadFile.Read<AttackInfo>(out LoadedAttackInfoDic);
+        //LoadFile.Read<AttackInfo>(out LoadedAttackInfoDic);
 
         //스킬공격 정보 받아옴
         //AttackInfoSetting(LoadedAttackInfoDic["0"], testinfooooo);
@@ -316,7 +297,7 @@ public class CAttackComponent : BaseComponent
         if (collision.gameObject.tag == monstertag)
         {
             //collision.GetComponent<Battle_Character>().Damaged((int)attackinfos[CurAttackNum].damage, this.transform.position);
-            collision.GetComponent<Battle_Character>().Damaged((int)LoadedAttackInfoDic[CurAttackNum.ToString()].damage, this.transform.position);
+            collision.GetComponent<Battle_Character>().Damaged((int)AttackInfos[CurAttackNum].damage, this.transform.position);
             //Debug.Log("공격 들어옴");
         }
 
@@ -401,8 +382,8 @@ public class CAttackComponent : BaseComponent
             //NextAttackNum = (CurAttackNum + 1) % attackinfos.Length;
             //NextAttackInfo = attackinfos[NextAttackNum];
 
-            NextAttackNum = (CurAttackNum + 1) % LoadedAttackInfoDic.Count;
-            NextAttackInfo = LoadedAttackInfoDic[NextAttackNum.ToString()];
+            NextAttackNum = (CurAttackNum + 1) % AttackInfos.Count;
+            NextAttackInfo = AttackInfos[NextAttackNum];
 
             NextAttack = true;
             return;
@@ -414,7 +395,7 @@ public class CAttackComponent : BaseComponent
             //if (NextAttackNum == (CurAttackNum + 1) % attackinfos.Length)
             //    return;
 
-            if (NextAttackNum == (CurAttackNum + 1) % LoadedAttackInfoDic.Count)
+            if (NextAttackNum == (CurAttackNum + 1) % AttackInfos.Count)
                 return;
         }
 
@@ -437,7 +418,7 @@ public class CAttackComponent : BaseComponent
                 Debug.Log("링크가능");
                 //CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/attackinfos.Length;
 
-                CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/LoadedAttackInfoDic.Count;
+                CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/AttackInfos.Count;
             }
             else
             {
@@ -473,13 +454,13 @@ public class CAttackComponent : BaseComponent
 
 
         //IsLinkable = false;
-        Linkcoroutine = timer.Cor_TimeCounter(LoadedAttackInfoDic[CurAttackNum.ToString()].bufferdInputTime_Start, ActiveLinkable);
+        Linkcoroutine = timer.Cor_TimeCounter(AttackInfos[CurAttackNum].bufferdInputTime_Start, ActiveLinkable);
         StartCoroutine(Linkcoroutine);
 
         //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
-        animator.Play(LoadedAttackInfoDic[CurAttackNum.ToString()].aniclipName, LoadedAttackInfoDic[CurAttackNum.ToString()].animationPlaySpeed/*,0,attackinfos[CurAttackNum].StartDelay*/);
+        animator.Play(AttackInfos[CurAttackNum].aniclipName, AttackInfos[CurAttackNum].animationPlaySpeed/*,0,attackinfos[CurAttackNum].StartDelay*/);
 
-        PlayableCharacter.Instance.status.StaminaDown(LoadedAttackInfoDic[CurAttackNum.ToString()].StaminaGaugeDown);
+        PlayableCharacter.Instance.status.StaminaDown(AttackInfos[CurAttackNum].StaminaGaugeDown);
 
     }
 
@@ -509,12 +490,12 @@ public class CAttackComponent : BaseComponent
         //    }
         //}
 
-        for (int i = 0; i < LoadedAttackInfoDic.Count; i++)
+        for (int i = 0; i < AttackInfos.Count; i++)
         {
-            if (LoadedAttackInfoDic[i.ToString()].aniclipName == clipname)
+            if (AttackInfos[i].aniclipName == clipname)
             {
                 //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
-                movecom.FowardDoMove(LoadedAttackInfoDic[i.ToString()].movedis, LoadedAttackInfoDic[i.ToString()].movetime);
+                movecom.FowardDoMove(AttackInfos[i].movedis, AttackInfos[i].movetime);
                 return;
             }
         }
@@ -566,7 +547,7 @@ public class CAttackComponent : BaseComponent
         //Linkcoroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].BufferdInputTime_End, DeActiveLinkable);
         //StartCoroutine(Linkcoroutine);
 
-        Linkcoroutine = timer.Cor_TimeCounter(LoadedAttackInfoDic[CurAttackNum.ToString()].BufferdInputTime_End, DeActiveLinkable);
+        Linkcoroutine = timer.Cor_TimeCounter(AttackInfos[CurAttackNum].BufferdInputTime_End, DeActiveLinkable);
         StartCoroutine(Linkcoroutine);
 
 
@@ -584,7 +565,7 @@ public class CAttackComponent : BaseComponent
         animator.Pause();
         //StartCoroutine(timer.Cor_TimeCounter(attackinfos[CurAttackNum].RecoveryDelay, ChangeState));
 
-        StartCoroutine(timer.Cor_TimeCounter(LoadedAttackInfoDic[CurAttackNum.ToString()].recoveryDelay, ChangeState));
+        StartCoroutine(timer.Cor_TimeCounter(AttackInfos[CurAttackNum].recoveryDelay, ChangeState));
 
         //timer.Cor_TimeCounter( ChangeState)
         //StartCoroutine(timer.Cor_TimeCounter<AttackInfo>(attackinfos[CurAttackNum].RecoveryDelay, ChangeState))
