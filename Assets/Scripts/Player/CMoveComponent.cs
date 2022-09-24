@@ -157,6 +157,9 @@ public class CMoveComponent : BaseComponent
     //public Vector3 rightleft;
     //public float ynext;
 
+    public Transform playerChestTr;
+
+
     public Vector3 teststart;
     public Vector3 testend;
 
@@ -174,6 +177,8 @@ public class CMoveComponent : BaseComponent
         com.CapsuleCol = GetComponent<CapsuleCollider>();
         com.animator = GetComponentInChildren<AnimationController>();
 
+        if (playerChestTr == null)
+            playerChestTr = com.animator.animator.GetBoneTransform(HumanBodyBones.Head);
 
         eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
                              new KeyValuePair<string, AnimationEventSystem.midCallback>(moveoption.KnockDownClip.name, KnockDownPause),
@@ -752,11 +757,19 @@ public class CMoveComponent : BaseComponent
         //TpCamRig.localEulerAngles = Vector3.up * xRotNext;
 
         //TpCamRig.localEulerAngles = Vector3.right * yRotNext;
+        
+
+        
+
+
+        
         if (yRotNext == 0 && xRotNext == 0)
             return;
 
         com.TpCamRig.localEulerAngles = new Vector3(yRotNext, xRotNext, 0);
     }
+
+    
 
     //이떄는 마우스로움직이는게아니고 키보드 입력에 따라서 회전 해야 하기때문에 따로 만듦
     public void RotateTPFP()
@@ -896,5 +909,10 @@ public class CMoveComponent : BaseComponent
             }
             
         }
+    }
+
+    private void LateUpdate()
+    {
+        playerChestTr.LookAt( com.TpCamRig.forward * 2);
     }
 }

@@ -252,7 +252,7 @@ public class CInputComponent : BaseComponent
             }
             else
             {
-                movecom.com.animator.Play("_Idle");
+                movecom.com.animator.Play("_Idle_Avatar");
             }
         }
         else
