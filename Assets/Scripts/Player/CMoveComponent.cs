@@ -925,8 +925,91 @@ public class CMoveComponent : BaseComponent
         }
     }
 
+
+    public float testLookY;
+    public float testLookZ;
+    public float testaxisY;
+    public float testaxisZ;
     private void LateUpdate()
     {
-        playerChestTr.LookAt( com.TpCamRig.forward * 2);
+        //상대좌표
+        Vector3 rot = Quaternion.LookRotation(com.TpCamRig.forward, -playerChestTr.right/*Vector3.up*/).eulerAngles;
+        
+        testLookY = rot.y;
+        testLookZ = rot.x;
+        testaxisY = com.FpRoot.eulerAngles.y;
+        testaxisZ = com.FpRoot.eulerAngles.z;
+
+        if (testaxisY == 0)
+        {
+            if (rot.y >= 180)
+            {
+                testLookY = rot.y - 360;
+            }
+        }
+        else if(testaxisY >= 360 - 42 || testaxisY <= 85)
+        {
+            if (rot.y >= 180)
+            {
+                testLookY = rot.y - 360;
+            }
+
+            if(testaxisY>=180)
+            {
+                testaxisY -= 360;
+            }
+
+            testLookY = testLookY - testaxisY;
+        }
+        else
+        {
+            testLookY = rot.y - testaxisY;
+            
+        }
+            
+
+        if (testaxisZ == 0)
+        {
+            if (rot.x >= 180)
+            {
+                testLookZ = rot.x - 360;
+            }
+        }
+        else if(testaxisZ >= 360 - 33 || testaxisZ <= 35)
+        {
+            if (rot.x >= 180)
+            {
+                testLookZ = rot.x - 360;
+            }
+
+            if (testaxisZ >= 180)
+            {
+                testaxisZ -= 360;
+            }
+
+            testLookZ = testLookZ - testaxisZ;
+        }
+        else
+        {
+            testLookZ = rot.x - testaxisZ;
+            
+        }
+
+        rot.y = GetMinMaxRange(testLookY, -42, 85) + testaxisY;
+        rot.x = GetMinMaxRange(testLookZ, -33, 35) + testaxisZ;
+
+        playerChestTr.eulerAngles = new Vector3(playerChestTr.eulerAngles.x, rot.y - 90, (-rot.x + 270));
+
     }
+
+    float GetMinMaxRange(float val, float min, float max)
+    {
+        if (val < min)
+            return min;
+        if (val > max)
+            return max;
+
+        return val;
+    }
+
 }

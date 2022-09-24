@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _GuardStun
+  m_Name: _GuardStun1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack03
+  m_Name: _Attack031111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -59,7 +59,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Guard_Avatar
+  m_Name: _Guard
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -85,7 +85,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Rolling
+  m_Name: _Rolling1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -111,7 +111,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack01_new_Avatar
+  m_Name: _Attack01_new
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -137,7 +137,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack03_new
+  m_Name: _Attack03_new1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -163,7 +163,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _GuardStun_Avatar
+  m_Name: _GuardStun
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -189,7 +189,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Guard_LeftMove
+  m_Name: Guard_LeftMove1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -215,7 +215,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Walk_Avatar
+  m_Name: _Walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -241,7 +241,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Idle_Avatar
+  m_Name: _Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -267,7 +267,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Guard_BackMove_Avatar
+  m_Name: _Guard_BackMove
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -293,7 +293,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack001
+  m_Name: _Attack0011111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -449,7 +449,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Skill1_Avatar
+  m_Name: _Skill1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -475,7 +475,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Dash
+  m_Name: _Dash1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -501,7 +501,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Guard_BackMove
+  m_Name: Guard_BackMove1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -527,7 +527,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Guard_RightMove
+  m_Name: Guard_RightMove1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -553,7 +553,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Damaged_KnockBack
+  m_Name: _Damaged_KnockBack11111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -579,7 +579,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack01
+  m_Name: _Attack011111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -605,7 +605,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack01_new
+  m_Name: _Attack01_new1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -631,7 +631,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Dash_Avatar
+  m_Name: _Dash
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -657,7 +657,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack02
+  m_Name: _Attack021111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -683,7 +683,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Guard_LeftMove_Avatar
+  m_Name: _Guard_LeftMove
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -709,7 +709,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack02_new_Avatar
+  m_Name: _Attack02_new
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -735,7 +735,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Idle
+  m_Name: _Idle1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -789,7 +789,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack1ToIdle
+  m_Name: Attack1ToIdle1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -815,7 +815,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Guard_RightMove_Avatar
+  m_Name: _Guard_RightMove
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -841,7 +841,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack003
+  m_Name: _Attack0031111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -898,7 +898,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Skill01
+  m_Name: _Skill011111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -924,7 +924,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Rolling_Avatar
+  m_Name: _Rolling
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -950,7 +950,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Guard
+  m_Name: _Guard1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -976,7 +976,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack03_new_Avatar
+  m_Name: _Attack03_new
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1002,7 +1002,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Damaged_Avatar
+  m_Name: _Damaged
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1028,7 +1028,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Damaged
+  m_Name: _Damaged11111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1054,7 +1054,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack002
+  m_Name: _Attack0021111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1080,7 +1080,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Walk
+  m_Name: _Walk1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1106,7 +1106,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Attack02_new
+  m_Name: _Attack02_new1111
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1132,7 +1132,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Damaged_KnockBack_Avatar
+  m_Name: _Damaged_KnockBack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
