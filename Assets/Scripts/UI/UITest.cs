@@ -17,7 +17,7 @@ public class UITest : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Alpha0))
-        { 
+        {     
             UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
             //UIManager.Instance.Prefabsload("OptionSetting", CANVAS_NUM.start_canvas);
             

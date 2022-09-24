@@ -51,7 +51,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         GameObject Monster = Instantiate(temp, trans);
 
 
-        hpBar.GetComponent<EnemyHpbar>().SetHpBar(data.P_mon_MaxHP, Monster.transform, Monster);
+        hpBar.GetComponent<EnemyHpbar>().SetHpBar(data.P_mon_MaxHP, Monster.transform, Monster.GetComponent<Battle_Character>());
 
         //  obj_hp.GetComponent<EnemyHpbar>().battle_Character = b.GetComponent<Battle_Character>();
         //  obj_hp.GetComponent<EnemyHpbar>().MyHpbar = obj_hp.GetComponent<EnemyHpbar>().SetHpBar(data.P_mon_MaxHP, b.transform);
@@ -69,6 +69,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         List<BossNomalSkill> bossNomalSkills = new List<BossNomalSkill>();
         List<Mon_Normal_Atk_Group> mon_Normal_Atk_Group = new List<Mon_Normal_Atk_Group>();
         MonsterSkillInformation monsterSkillInformation = ScriptableObject.CreateInstance<MonsterSkillInformation>();
+
 
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.BOSS_USwing));
         bossNomalSkills.Add(DataLoad_Save.Instance.Get_BossSkillDB(Global_Variable.Boss.BOSS_SSwing));
@@ -96,8 +97,9 @@ public class CharacterCreate : Singleton<CharacterCreate>
         temp.GetComponent<Battle_Character>().Stat_Initialize(data,mon_Normal_Atk_Group,bossNomalSkills, monsterSkillInformation,target);
 
         GameObject b = Instantiate(temp, trans);
-       b.GetComponent<Battle_Character>().bosshpbar.SetHpbar(data.P_mon_MaxHP,data.P_mon_nameKor);
-
+        b.GetComponent<Battle_Character>().bosshpbar.SetHpbar(data.P_mon_MaxHP,data.P_mon_nameKor,b.GetComponent<Battle_Character>());
+        Debug.Log(data.P_mon_nameKor);
+        Debug.Log(data.P_mon_MaxHP);
 
         yield return null;
 

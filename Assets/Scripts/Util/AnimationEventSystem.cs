@@ -60,6 +60,8 @@ public class AnimationEventSystem : MonoBehaviour
     public void OnBeginEventString(string s_val)
 	{
 		//_beginCallback?.Invoke(s_val);
+        
+            
 		if(BeginEventInvokers.TryGetValue(s_val,out _beginCallback))
         {
 			_beginCallback.Invoke(s_val);

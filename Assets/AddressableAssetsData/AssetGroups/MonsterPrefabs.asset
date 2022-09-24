@@ -30,10 +30,6 @@ MonoBehaviour:
     m_Address: 123
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 19df7f83c6a3aeb4abb68ed39a295f25
-    m_Address: Bosshpbar
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 6f95e6b4d87912f4caa1a02676746b2a
     m_Address: Estust
     m_ReadOnly: 0

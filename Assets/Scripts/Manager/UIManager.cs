@@ -56,6 +56,7 @@ public class UIManager : Singleton<UIManager>
         {
             if (info[i].obj == obj && info[i].active)
             {
+                Debug.Log("삭제할게요");
                 return info[i].obj;
             }
         }
@@ -189,7 +190,8 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("StartUI"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("OptionSetting")); 
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("OptionSetting"));
+        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Boss_HP"));
     }
     // Update is called once per frame
 

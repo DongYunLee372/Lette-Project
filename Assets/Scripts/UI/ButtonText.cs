@@ -13,6 +13,7 @@ public class ButtonText : MonoBehaviour
     {
         Paraentscanvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         Paraentscanvas.GetComponent<OnclickButton>().buttontext= this.gameObject.GetComponent<ButtonText>();
+        Paraentscanvas.GetComponent<OnclickButton>().text = texts;
         Updatetexts();
     }
 
