@@ -56,7 +56,7 @@ public class EnemyHpbar : MonoBehaviour
         Debug.Log(main.name);
         rectHp.localPosition = localPos; // 체력바 위치조정
 
-        myhp.GetComponent<Image>().fillAmount = battle_character_obj.GetComponent<Battle_Character>().cur_HP / Maxhp;
+        myhp.GetComponent<Image>().fillAmount = battle_Character.cur_HP / Maxhp;
     }
     public void hit()
     {
@@ -65,31 +65,17 @@ public class EnemyHpbar : MonoBehaviour
        // myhp.value = (float)Curhp / (float)Maxhp;
     }
 
-    public EnemyHpbar SetHpBar(float HP, Transform trans , GameObject battle_obj)
+    public EnemyHpbar SetHpBar(float HP, Transform trans , Battle_Character battle_obj)
     {
-       
-        // // enemyHpBarCanvas = enemyHpBarCanvas.GetComponent<Canvas>();
-        // GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", UIManager.CANVAS_NUM.ex_skill);
-        // // myhp = hpBar;
-        // myhp = hpBar.GetComponent<Image>();
-        // var _hpbar = hpBar.GetComponent<EnemyHpbar>();
-        // // hpBar.transform.SetParent(enemyHpBarCanvas.transform);
-        // _hpbar.enemyTr = trans;
-        // _hpbar.offset = hpBarOffset;
-        // _hpbar.Maxhp = HP;
-        // _hpbar.Curhp = HP;
-        // var _test = hpBar.GetComponent<Image>();
-        //// _hpbar.myhp = _test;
-        // MyHpbar = _hpbar;
         GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", CANVAS_NUM.enemy_canvas);
     
         var _hpbar = hpBar.GetComponent<EnemyHpbar>();
         //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = trans;
         _hpbar.offset = new Vector3(0, 2.3f, 0); ;
-        _hpbar.Maxhp = HP;
+        _hpbar.Maxhp = 100;
         _hpbar.Curhp = HP;
-        _hpbar.battle_character_obj = battle_obj;
+        _hpbar.battle_Character = battle_obj;
         var _test = hpBar.GetComponent<Image>();
         _hpbar.myhp = _test;
         MyHpbar = _hpbar;

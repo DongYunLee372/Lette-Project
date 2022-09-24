@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Canvas_Enum;
 using Global_Variable;
-
+using UnityEngine.UI;
 public static class KeySetting 
 {
     public static Dictionary<KeyAction, KeyCode> keys = new Dictionary<KeyAction, KeyCode>(); 
@@ -15,8 +15,9 @@ public class OnclickButton : MonoBehaviour
     private string undo_uiname;
     [SerializeField]
     private string curr_uiname;
-    string QWE = "A";
+
     public ButtonText buttontext;
+    public List<Text> text;
     public int compltesettingcount = 0;
     [SerializeField]
     private KeyCode[] defaultkeys = new KeyCode[7];//{ KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D , KeyCode.Space , KeyCode.Mouse0 , KeyCode.Mouse1 }; //처음키 설정 .
@@ -52,15 +53,7 @@ public class OnclickButton : MonoBehaviour
             KeySetting.keys.Add((KeyAction.ROOL), loadData.roll);
             KeySetting.keys.Add((KeyAction.ATTACK), loadData.attack);
             KeySetting.keys.Add((KeyAction.DEFENSE), loadData.defens);
-
             Debug.Log("로드하기");
-            //KeySetting.keys[KeyAction.DOWN] = loadData.down;
-            //KeySetting.keys[KeyAction.LEFT] = loadData.left;
-            //KeySetting.keys[KeyAction.RIGHT] = loadData.right;
-            //KeySetting.keys[KeyAction.ROOL] = loadData.roll;
-            //KeySetting.keys[KeyAction.ATTACK] = loadData.attack;
-            //KeySetting.keys[KeyAction.DEFENSE] = loadData.defens;
-            //  buttontext.Updatetexts();
         }
     }
     public void DefaultSetting()
@@ -69,25 +62,11 @@ public class OnclickButton : MonoBehaviour
         {
             KeySetting.keys[(KeyAction)i] = s_defautkeys[i];      
         }
-        buttoncheck = true;
-
-
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X)) //불러오기 
-        {
-            Save_Optiondata loadData = SaveSystem.Load("save_001");
-              Debug.Log(string.Format("LoadData Result => name : {0}, age : {1}, power : {2}", loadData.up, loadData.down, loadData.left));
-            buttontext.Updatetexts();
-        }
-        if(Input.GetKeyDown(KeyCode.Z)) //저장 
-        {
-            Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
-       KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
-            SaveSystem.Save(character, "save_001");
-        }
-            buttontext.Updatetexts();
+     
+        Updatetexts();
     }
     public void Settingcountup()
     {
@@ -114,8 +93,9 @@ public class OnclickButton : MonoBehaviour
         UIManager.Instance.Hide(UIname.OptionSetting);
 
         Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
-      KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
+        KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
         SaveSystem.Save(character, "save_001");
+        buttoncheck = false;
     }
     public void Option()
     {
@@ -128,6 +108,7 @@ public class OnclickButton : MonoBehaviour
             UIManager.Instance.Prefabsload(UIname.OptionSetting, CANVAS_NUM.start_canvas);  //추가한다. 
         }
         UIManager.Instance.Hide(UIname.StartUI); //메인 UI는 HIDE시킨다 
+        buttoncheck = true;
     }
     
     public void Keysetting(int num)
@@ -178,6 +159,17 @@ public class OnclickButton : MonoBehaviour
                 KeySetting.keys[(KeyAction)i] = KeyCode.None;
                 break;
             }
+        }
+    }
+
+    public void Updatetexts()
+    {
+        for (int i = 0; i < text.Count; i++)
+        {
+            if (KeySetting.keys[(KeyAction)i].ToString() == "None")
+                text[i].text = "";
+            else
+                text[i].text = KeySetting.keys[(KeyAction)i].ToString();
         }
     }
 }

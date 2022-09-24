@@ -137,6 +137,10 @@ MonoBehaviour:
     m_Address: PlayerUIPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 82e50146481e6b440911b72b4be125dc
+    m_Address: Boss_HP
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
