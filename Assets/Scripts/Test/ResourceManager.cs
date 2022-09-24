@@ -19,7 +19,7 @@ public class ResourceManager : MonoBehaviour
             if (index >= 0)
                 name = name.Substring(index + 1);
 
-            GameObject go = GameMG.Instance.ObjManager.GetOriginal(name);
+            GameObject go = GameMG.Instance.ObjManager.GetOriginal<GameObject>(name);
             if (go != null)
                 return go as T;
         }
@@ -125,31 +125,34 @@ public class ResourceManager : MonoBehaviour
     //}
 
     // 어드레서블로 바꿔야댐
+    public T Instantiate<T>(string path, Transform parent = null)
+       where T : UnityEngine.Object
+
+    {
+        AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
+       T original = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
+
+        if (original == null)
+        {
+            Debug.Log($"Failed to load prefab : {path}");
+            return null;
+        }
+
+
+      //  if (original.GetComponent<Poolable>() != null)
+        //{
+       var t= GameMG.Instance.ObjManager.Pop<T>(original, parent) as T;
+        Debug.Log("bb"+t);
+        return GameMG.Instance.ObjManager.Pop<T>(original, parent) as T;
+        //}
+
+       // GameObject go = Object.Instantiate(original, parent) as T;
+      //  go.name = original.name;
+       // return go;
+    }
+
     //public T Instantiate<T>(string path, Transform parent = null)
-    //    where T : UnityEngine.Object
-
-    //{
-    //    AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
-    //    UnityEngine.Object original = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
-
-    //    if (original == null)
-    //    {
-    //        Debug.Log($"Failed to load prefab : {path}");
-    //        return null;
-    //    }
-
-    //    if (original.GetComponent<Poolable>() != null)
-    //    {
-    //        return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
-    //    }
-
-    //    GameObject go = Object.Instantiate(original, parent);
-    //    go.name = original.name;
-    //    return go;
-    //}
-
-    //public T Instantiate<T>(string path, Transform parent = null)
-    //where T : UnityEngine.Object 
+    //where T : UnityEngine.Object
     //{
     //    AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
     //    T = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
@@ -160,9 +163,9 @@ public class ResourceManager : MonoBehaviour
     //        return null;
     //    }
 
-       
+
     //    return GameMG.Instance.ObjManager.Pop(original, parent).gameObject;
-      
+
     //    T go = Object.Instantiate(original, parent);
     //    go.name = original.name;
     //    return go;

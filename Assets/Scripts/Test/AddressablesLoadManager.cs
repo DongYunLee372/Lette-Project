@@ -1019,7 +1019,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
     static SceneInstance m_LoadedScene;
 
-    public static void OnSceneAction(string SceneName)
+    public void OnSceneAction(string SceneName)
     {
         if (m_LoadedScene.Scene.name == null)
         {
@@ -1032,7 +1032,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         }
     }
 
-    public static void OnUnloadedAction(string SceneName)
+    public void OnUnloadedAction(string SceneName)
     {
         if (m_LoadedScene.Scene.name != null)
         {
@@ -1044,7 +1044,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         }
     }
 
-    public static void OnSceneUnloaded(AsyncOperationHandle<SceneInstance> obj)
+    public void OnSceneUnloaded(AsyncOperationHandle<SceneInstance> obj)
     {
         switch (obj.Status)
         {
@@ -1059,7 +1059,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         }
     }
 
-    public static void OnSceneLoaded(AsyncOperationHandle<SceneInstance> obj)
+    public void OnSceneLoaded(AsyncOperationHandle<SceneInstance> obj)
     {
         switch (obj.Status)
         {

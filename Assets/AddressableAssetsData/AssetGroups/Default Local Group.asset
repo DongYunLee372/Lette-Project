@@ -117,20 +117,12 @@ MonoBehaviour:
     m_Address: SwordHitRedLegacy.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 524707d80eee9914d97db95548efec87
-    m_Address: TestScenes
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: cc8884be57bcf624684c43620abc4fec
     m_Address: StartUI
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: a62eff40c92cd01488863fa5149d79a1
     m_Address: OptionSetting
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 8d2f792ccf19db7438ed338f1f5f7f02
-    m_Address: Demo
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: a73e9b11aa9476f42b16d5a4710e62be

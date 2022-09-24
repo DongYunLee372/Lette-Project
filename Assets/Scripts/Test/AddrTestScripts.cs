@@ -86,17 +86,30 @@ public class AddrTestScripts : MonoBehaviour
         //// destroy(aa);
 
         // temp.delete_object(te);
+        Pool<GameObject> pool = new Pool<GameObject>();
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("susu");
+        GameObject te = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("susu");
+
+        //에러 나중에 생각...ㅋ큐ㅠ 
+        pool.Init(te);
+        //  GameMG.Instance.Resource.Instantiate<GameObject>("susu");
+
+
+        GameMG.Instance.startGame("Demo");
+
+
 
         // StartCoroutine(tempch());
+
         // await temp.InitAssets_label("Monster");
         // await temp.InitAssets_label("Monster");
 
 
-        List<string> t = new List<string>();
-        t.Add("susu");
-        t.Add("Susu_");
-        t.Add("Appoint");
-        GameObject temp = null;
+        //List<string> t = new List<string>();
+        //t.Add("susu");
+        //t.Add("Susu_");
+        //t.Add("Appoint");
+        //GameObject temp = null;
 
         //TestAddressablesLoader.Instance.Single_Load<GameObject>("susu", false, Act
         //TestAddressablesLoader.Instance.Single_Instantiate<GameObject>("susu", false, Act1);
@@ -116,9 +129,9 @@ public class AddrTestScripts : MonoBehaviour
         //    Debug.Log("tempList확인" + t.name);
 
         //}
-        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("susu");
-        var a=AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>("susu");
-        AddressablesLoadManager.Instance.Delete_Object<GameObject>(a);
+        //AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("susu");
+        //var a=AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>("susu");
+        //AddressablesLoadManager.Instance.Delete_Object<GameObject>(a);
         // StartCoroutine(Tq());
 
         // TestAddressablesLoader.Instance.Single_Load_Task_Test<GameObject>("susu", false, true, com => temp = com);  //동기,생성 x

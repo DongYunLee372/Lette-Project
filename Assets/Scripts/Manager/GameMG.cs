@@ -71,13 +71,15 @@ public class GameMG : Singleton<GameMG>
     public void startGame(string SceneName)//스테이지값)  //플레이어 스탯 고정...
     {
 
-
+       // string s = SceneName;
         //어드레서블 생성 후 
 
-        StartCoroutine(LoadMyAsyncScene(SceneName));
+        AddressablesLoadManager.Instance.OnSceneAction(SceneName);
 
-        GameObject PlayerInitPos = new GameObject();
-        PlayerInitPos.transform.position = Init_PlayerPos;
+      //  StartCoroutine(LoadMyAsyncScene(SceneName));
+
+       // GameObject PlayerInitPos = new GameObject();
+      //  PlayerInitPos.transform.position = Init_PlayerPos;
 
       
        // GameMG.Instance.Resource.Instantiate("PlayerCharacter", PlayerInitPos.transform);

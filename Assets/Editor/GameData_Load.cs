@@ -9,7 +9,7 @@ public class GameData_Load : Singleton<GameData_Load>
 
     void Start()
     {
-        TestPos_and_Load();
+      //  TestPos_and_Load();
     }
 
     void TestPos_and_Load()  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
