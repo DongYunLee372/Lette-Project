@@ -47,6 +47,16 @@ public class CurState
         return false;
     }
 
+    public bool CheckStepAble()
+    {
+        CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        if (IsFowordBlock && CurStepHeight<=movecom.moveoption.StepHeight)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     [SerializeField]
     public bool IsCursorActive = false;
@@ -102,8 +112,11 @@ public class CurState
     public Vector3 CurVirVelocity;
     [SerializeField]
     public float MoveAccel;
+    [SerializeField]
+    public float CurStepHeight;
+    [SerializeField]
+    public Vector3 CurStepPos;
 
-   
     public bool IsMoving { 
         get
         {

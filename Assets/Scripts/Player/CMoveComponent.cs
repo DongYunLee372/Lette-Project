@@ -74,6 +74,13 @@ public class CMoveComponent : BaseComponent
         public float MaxStep;
 
         public float RunningStaminaVal;
+
+        public float StepHeight;//올라갈 수 있는 계단 높이
+
+        public float StepCkeckDis;//눈높이에서 해당 위치만큼 이동한 곳에서 수직아래로 레이를 쏜다.
+
+
+
         [Header("==================회피 관련 변수들==================")]
         public AnimationClip RollingClip;
 
@@ -146,6 +153,9 @@ public class CMoveComponent : BaseComponent
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius, transform.position.z);
     [HideInInspector]
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius, transform.position.z);
+
+    public float CharacterHeight => com.CapsuleCol.height;
+
     [HideInInspector]
     public delegate void Invoker(string s_val);
 
@@ -395,6 +405,10 @@ public class CMoveComponent : BaseComponent
     //움직일 방향과 거리를 넣어주면 현재 지형에 따라서 움직여 준다.
     public void Move(Vector3 MoveVal)
     {
+        if(curval.CheckStepAble())
+        {
+            this.transform.position = curval.CurStepPos;
+        }
 
         if (curval.IsOnTheSlop)
         {
