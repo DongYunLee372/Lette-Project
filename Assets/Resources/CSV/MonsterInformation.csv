@@ -1,2 +1,2 @@
 mon_nameEng,Number,mon_Index,mon_nameKor,mon_Default,mon_Type,mon_Position,mon_MaxHP,mon_Atk,mon_Def,mon_moveSpeed,mon_Balance,mon_maxMP,mon_CloseAtk,mon_FarAtk,mon_SpecialAtk,mon_regenMP,dieDelay,drop_Reward
-Arthur,1,mon_06_01,¾Æ¼­,4,1,1,1000,30,10,3,200,100,2,8,"3,7",10,1,0
+Arthur,1,mon_06_01,ì•„ì„œ,4,1,1,1000,30,10,3,200,100,2,8,"3,7",10,1,0
