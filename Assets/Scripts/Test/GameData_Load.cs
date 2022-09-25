@@ -45,30 +45,39 @@ public class GameData_Load : Singleton<GameData_Load>
 
     void TestPos_and_Load()  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
-      
-        var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
-            //AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
+        //  TestMainLoad.Instance.
+        var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
+    
+        // var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
+
+        //  var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
+        //AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
 
         foreach (var s in tempDataSave.SaveDatas)
         {
             Debug.Log("보는중 : " + s.prefabsName);
 
-            if(s.prefabsName=="Boss")
+            if(s!=null)
             {
-                //GameObject abc = new GameObject();
-                //abc.transform.position = s.Position;
+                if (s.prefabsName == "Boss")
+                {
+                    //GameObject abc = new GameObject();
+                    //abc.transform.position = s.Position;
 
-                Debug.Log("dd");
-               // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
+                    Debug.Log("dd");
+                    // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
 
-                BoosInit(s.prefabsName,s.Position);
+                    BoosInit(s.prefabsName, s.Position);
+                }
+                else
+                {
+                    AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+
+                }
+                Debug.Log("보는중 : " + s.Position);
             }
-            else
-            {
-                AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
 
-            }
-            Debug.Log("보는중 : " + s.Position);
+         
         }
 
     }

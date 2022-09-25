@@ -147,7 +147,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742986994}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2a4c62001c93a741a467de4205ff9d6, type: 3}
   m_Name: 
@@ -354,35 +354,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1527078963}
-  - component: {fileID: 1527078962}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1527078962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527078961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ae0b55da2412ee4b83a282cc684fce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  a:
-  - {fileID: 0}
-  Prefapsname:
-  - PlayerCharacter
-  - Boss
-  Position:
-  - {x: 400, y: 78.63019, z: 230}
-  - {x: 400, y: 78.63019, z: 220}
-  load_And_SaveDatas: []
+  m_IsActive: 0
 --- !u!4 &1527078963
 Transform:
   m_ObjectHideFlags: 0

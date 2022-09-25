@@ -2,8 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-public class TestMainLoad : Singleton<TestMainLoad>
+public class TestMainLoad : Editor
 {
+    private static TestMainLoad instance=null;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+          //  DontDestroyOnLoad(this);
+        }
+        else
+        {
+            //Destroy(this);
+        }
+
+    }
+
+    public static TestMainLoad Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                return null;
+
+            }
+            return instance;
+        }
+    }
+
+
 
     public List<Load_And_SaveData> a = new List<Load_And_SaveData>();
 
