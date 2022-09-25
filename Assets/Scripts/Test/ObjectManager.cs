@@ -99,7 +99,7 @@ public class ObjectManager : MonoBehaviour
     public static ObjectManager Instance;
 
     // Dictionary<string, UnityEngine.Object> _pool = new Dictionary<string, UnityEngine.Object>();
-    Dictionary<string,Pool<UnityEngine.Object>> _pool = new Dictionary<string, Pool<UnityEngine.Object>>();
+    Dictionary<string,Pool<UnityEngine.Object>> _pool = new Dictionary<string, Pool<UnityEngine.Object>>();  //이거가 풀
 
     Transform _root;
 
@@ -111,6 +111,18 @@ public class ObjectManager : MonoBehaviour
         Instance = this;
     }
 
+    public bool check<T>(T obj)
+       where T : UnityEngine.Object
+    {
+        if (_pool.ContainsKey(obj.name))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public void Init()
     {
         if (_root == null)
@@ -134,7 +146,7 @@ public class ObjectManager : MonoBehaviour
         //PoolData<T> poolData = new PoolData<T>();
 
 
-        var pooldata = _pool[name] as Pool<T>;//.Push(poolable);
+        var pooldata = _pool[name]; //as Pool<T>;//.Push(poolable);
        // pooldata.
         pooldata.Push(poolable);
 
@@ -150,12 +162,12 @@ public class ObjectManager : MonoBehaviour
         pool.Init(original, count);
        // pool.Root.parent = _root;
 
-        _pool.Add(original.name, pool);
+        _pool.Add(original.name, pool);  
         //여기 value가 안들어간다..
         Debug.Log("검색" + _pool.Count);
         foreach(var a in _pool[original.name]._poolDataStack)
         {
-            Debug.Log("스택검색" + a);
+            Debug.Log("스택검색" + a.obj.name);
         }
     }
 
@@ -164,18 +176,27 @@ public class ObjectManager : MonoBehaviour
     {
         if (_pool.ContainsKey(original.name) == false)
         {
-            Debug.Log("pop하러 왔는디"+original.name);
-            CreatePool<T>(original);
+            Debug.Log("pop하러 왔는디"+original.name);  //엥 근데 그러면 어차피 original.name이거로 만들고 이거로 검색하지 않아..?
+            CreatePool<T>(original);  
            // _pool.Add()
         }
-        Debug.Log("pool검색" + _pool[original.name]);
-        var pool = _pool[original.name] as Pool<T>;
-        Debug.Log("일단찍어" + pool._poolDataStack.Pop().obj);
-        var a= pool._poolDataStack.Pop();
-        Debug.Log("anjsep"+a.obj);
-        a.poolable = true;
+        Debug.Log("pool검색" + _pool[original.name]);  //
+       var pool = _pool[original.name];
+         var a = pool._poolDataStack.Pop();   //여기서 오류가 떠...
+
         
-        return a.obj;
+
+        var t = a.obj as GameObject;
+        GameObject temp = (a.obj as T) as GameObject; //
+        temp.SetActive(true);
+        a.poolable = true;
+       // var a = _pool[original.name]._poolDataStack.Pop();  
+
+        Debug.Log("일단찍어" + a.obj);
+
+       // Debug.Log("anjsep"+a.obj);
+
+        return a.obj as T;
        //foreach(var a in pool._poolDataStack)
        // {
        //     if(a.poolable)

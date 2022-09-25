@@ -29,7 +29,7 @@ public class GameMG : Singleton<GameMG>
     ResourceManager _resourceManager = new ResourceManager();
     public List<GameObject> tempObj_Manager = new List<GameObject>();
 
-    public ObjectManager ObjManager { get { return Instance._objManager; } }
+    public ObjectManager ObjManager { get { return Instance._objManager; } }  //이거 아녀???
     public ResourceManager Resource { get { return Instance._resourceManager; } }
 
     //플레이 시간

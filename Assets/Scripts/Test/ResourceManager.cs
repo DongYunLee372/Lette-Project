@@ -141,8 +141,8 @@ public class ResourceManager : MonoBehaviour
 
       //  if (original.GetComponent<Poolable>() != null)
         //{
-       var t= GameMG.Instance.ObjManager.Pop<T>(original, parent) as T;
-        Debug.Log("bb"+t);
+      // var t= GameMG.Instance.ObjManager.Pop<T>(original, parent) as T;   //여기랑
+       // Debug.Log("bb"+t);
         return GameMG.Instance.ObjManager.Pop<T>(original, parent) as T;
         //}
 
@@ -195,17 +195,20 @@ public class ResourceManager : MonoBehaviour
         return go;
     }
 
-    public void Destroy(GameObject go)
+    public void Destroy<T>(T go)
+       where T : UnityEngine.Object
     {
         if (go == null)
             return;
 
-        Poolable poolable = go.GetComponent<Poolable>();
-        if (poolable != null)
-        {
-            GameMG.Instance.ObjManager.Push(poolable);
+        //Poolable poolable = go.GetComponent<Poolable>();
+        //if (poolable != null)
+        //{
+        if (GameMG.Instance.ObjManager.check<T>(go))
+        { GameMG.Instance.ObjManager.Push<T>(go);
             return;
         }
+        //}
 
         Object.Destroy(go);
     }
