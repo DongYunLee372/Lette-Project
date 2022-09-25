@@ -51,6 +51,11 @@ public class BossNomalSkill : ScriptableObject
     [SerializeField]
     private int skill_MP; //몬스터 영어명
     public int P_skill_MP { get { return skill_MP; } set { skill_MP = value; } }
+    
+
+    [SerializeField]
+    private int skill_Groggy; //몬스터 영어명
+    public int P_skill_Groggy { get { return skill_Groggy; } set { skill_Groggy = value; } }
 
     [SerializeField]
     private int skill_atkTime; //몬스터 영어명

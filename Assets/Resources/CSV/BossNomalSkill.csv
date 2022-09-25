@@ -1,9 +1,10 @@
-skill_ID,skill_Name_Kor,mon_Index,skill_Name_En,skill_Type,skill_Targetyp,Group_Index,Group_Motion_Count,skill_Range,skill_dmg,skill_MP,skill_atkTime,skill_continueTime,skill_AtkCount,skill_DiffObj,skill_ThrowObj
-3010101,À§¿¡¼­ º£±â,mon_01_01,USwing,2,1,0,0,5,3,5,2,0,1,0,0
-3010102,¿·À¸·Î º£±â,mon_01_01,SSwing,2,1,0,0,5,3,5,2,0,1,0,0
-3060201,À§¿¡¼­ º£±â,mon_06_01,USwing,2,1,G1,1,5,5,10,2,0,1,0,0
-3060202,¿·À¸·Î º£±â,mon_06_01,SSwing,2,1,"G1 , G2","2 , 1",5,5,10,2,0,1,0,0
-3060203,¾à µ¹Áø,mon_06_01,LRush,2,1,G1,3,5,5,10,2,0,1,0,0
-3060204,Âî¸£´Â ¸ğ¼Ç,mon_06_01,Sting,2,1,G2,2,5,5,10,2,0,1,0,0
-3060205,´ë°¢¼± º£±â,mon_06_01,DiagonalSwing,2,1,G3,"1 , 2",5,5,10,2,0,1,0,0
-3060206,¾à µ¹Áø ÈÄ À§·Î º£±â,mon_06_01,LRush and USwing,2,1,G3,2,5,5,10,2,0,1,0,0
+skill_ID,skill_Name_Kor,mon_Index,skill_Name_En,skill_Type,skill_Targetyp,Group_Index,Group_Motion_Count,skill_Range,skill_dmg,skill_MP,skill_Groggy,skill_atkTime,skill_continueTime,skill_AtkCount,skill_DiffObj,skill_ThrowObj
+3010101,ìœ„ì—ì„œ ë² ê¸°,mon_01_01,USwing,2,1,0,0,5,3,5,10,2,0,1,0,0
+3010102,ì˜†ìœ¼ë¡œ ë² ê¸°,mon_01_01,SSwing,2,1,0,0,5,3,5,10,2,0,1,0,0
+3060201,ìœ„ì—ì„œ ë² ê¸°,mon_06_01,USwing,2,1,G1,1,5,5,10,20,2,0,1,0,0
+3060202,ì˜†ìœ¼ë¡œ ë² ê¸°,mon_06_01,SSwing,2,1,"G1 , G2","2 , 1",5,5,10,20,2,0,1,0,0
+3060203,ì•½ ëŒì§„,mon_06_01,LRush,2,1,G1,3,5,5,10,20,2,0,1,0,0
+3060204,ì°Œë¥´ëŠ” ëª¨ì…˜,mon_06_01,Sting,2,1,G2,2,5,5,10,20,2,0,1,0,0
+3060205,ëŒ€ê°ì„  ë² ê¸°,mon_06_01,DiagonalSwing,2,1,G3,"1 , 2",5,5,10,20,2,0,1,0,0
+3060206,ì•½ ëŒì§„ í›„ ìœ„ë¡œ ë² ê¸°,mon_06_01,LRush and USwing,2,1,G3,2,5,5,10,20,2,0,1,0,0
+3060207,í•˜ë‹¨ ë² ê¸°,mon_06_01,DSwing,2,1,G1,1,5,5,10,20,2,0,1,0,0
