@@ -4,21 +4,48 @@ using UnityEngine;
 
 public class GameData_Load : Singleton<GameData_Load>
 {
+    List<string> str=new List<string>();
 
-   
+    private void Awake()
+    {
+
+    
+
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
+        ////StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("StartUI"));
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("OptionSetting"));
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Boss_HP"));
+    }
+
     void Start()
     {
-       
+
+        str.Add("Hpbar");
+        str.Add("FriendPanel");
+        str.Add("Inven");
+        str.Add("Boss_HP");
+        str.Add("StartUI");
+        str.Add("OptionSetting");
+
+        AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
+
         AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
         //GameMG.Instance.startGame("Roomtest");
         TestPos_and_Load();
+      
+
+
     }
 
 
 
     void TestPos_and_Load()  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
+      
         var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
             //AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
 
@@ -28,6 +55,12 @@ public class GameData_Load : Singleton<GameData_Load>
 
             if(s.prefabsName=="Boss")
             {
+                //GameObject abc = new GameObject();
+                //abc.transform.position = s.Position;
+
+                Debug.Log("dd");
+               // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
+
                 BoosInit(s.prefabsName,s.Position);
             }
             else
@@ -47,11 +80,10 @@ public class GameData_Load : Singleton<GameData_Load>
 
         AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(name);
         var boss = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
-      //  boss.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, bossNomalSkills, monsterSkillInformation, target);
+        //   boss.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, bossNomalSkills, monsterSkillInformation, target);
 
-        StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
+         StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
 
-     
     }
 
     void Update()
