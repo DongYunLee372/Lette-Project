@@ -50,7 +50,7 @@ public class CurState
     public bool CheckStepAble()
     {
         CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        if (IsFowordBlock && CurStepHeight<=movecom.moveoption.StepHeight)
+        if (IsStep && IsFowordBlock && CurStepHeight<movecom.moveoption.StepHeight)
         {
             return true;
         }
@@ -89,6 +89,9 @@ public class CurState
 
     [SerializeField]
     public bool IsNoDamage = false;
+
+    [SerializeField]
+    public bool IsStep = false;
 
     //[SerializeField]
     //private bool isAttacked = false;

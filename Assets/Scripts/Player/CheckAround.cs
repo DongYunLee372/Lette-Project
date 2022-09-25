@@ -29,10 +29,6 @@ public class CheckAround : MonoBehaviour
     
     Vector3 temppos;
 
-    //GameObject tempcube;
-
-    //NavMeshAgent testnavagent;
-
     private void Awake()
     {
         CapsuleCol = GetComponent<CapsuleCollider>();
@@ -49,6 +45,8 @@ public class CheckAround : MonoBehaviour
         //testnavagent = GetComponent<NavMeshAgent>();
     }
 
+
+    public float testhitangle;
     public void CheckFront()
     {
         if (movecom == null)
@@ -63,14 +61,26 @@ public class CheckAround : MonoBehaviour
         //temp = com.FpRoot.forward /*+ Vector3.down*/;
         //NavMesh.Raycast()
         hits = Physics.CapsuleCastAll(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.1f, movecom.com.FpRoot.forward,  0.3f/*, LayerMask.GetMask("Wall")*/);
+        curval.IsStep = false;
 
         if (hits.Length>0)
         {
             foreach(RaycastHit hit in hits)
             {
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Wall") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                //전방 검사에서 무언가에 막혀있고 막고있는 물체가 벽이면 계단검사를 수행하지 않는다.
+                if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Wall"))
                 {
-                    Debug.DrawLine(Capsulebottomcenter, hit.point, Color.cyan);
+                    curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
+                    if (curval.CurFowardSlopAngle >= 70.0f)
+                    {
+                        curval.IsFowordBlock = true;
+                    }
+                    return;
+                }
+
+                //전방에 막혀있는 물체가 땅이라면 계단인지 검사한다.
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
                     curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
                     if (curval.CurFowardSlopAngle >= 70.0f)
                     {
@@ -80,15 +90,30 @@ public class CheckAround : MonoBehaviour
                     //앞이 막혔으면 가로막혀있는 구조물의 높이를 구한다.
                     Vector3 pos = movecom.Capsuletopcenter + (movecom.com.FpRoot.forward * movecom.moveoption.StepCkeckDis);
                     RaycastHit hit2;
-                    bool cast2 = Physics.Raycast(pos, Vector3.down, out hit2, movecom.CharacterHeight);
-                    if (cast2)
-                    {
-                        if (hit2.transform.gameObject.layer == LayerMask.NameToLayer("Wall") || hit2.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                        {
-                            Debug.DrawLine(Capsuletopcenter, hit2.point, Color.cyan);
+                    
+                    Vector3 direction = this.transform.position + (movecom.com.FpRoot.forward * movecom.moveoption.StepCkeckDis)- movecom.Capsuletopcenter;
 
+
+                    Ray ray = new Ray(movecom.Capsuletopcenter, direction);
+                    Debug.DrawLine(ray.origin, ray.origin + ray.direction * movecom.CharacterHeight, Color.red);
+                    bool falg = Physics.Raycast(ray , out hit2 ,movecom.CharacterHeight,LayerMask.GetMask("Ground"));
+                    
+                    if(falg)
+                    {
+                        testhitangle = Vector3.Angle(hit2.normal, Vector3.up);
+                        if (Vector3.Angle(hit2.normal, Vector3.up) == 0)
+                        {
+                            curval.IsStep = true;
                             curval.CurStepHeight = hit2.point.y - transform.position.y;
                             curval.CurStepPos = hit2.point;
+                        }
+
+
+                        Debug.DrawLine(ray.origin, hit2.point, Color.yellow);
+
+                        if (hit2.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                        {
+                            
                         }
                     }
 
