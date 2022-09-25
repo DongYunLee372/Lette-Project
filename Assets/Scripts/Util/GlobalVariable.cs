@@ -49,7 +49,7 @@ namespace Global_Variable
         public const string Guided_Magic_Bullet = "Guided_Magic_Bullet";
 
         
-        //보스 스킬들 6개
+        //보스 스킬들 7개
         public const string USwing = "3010101";
         public const string SSwing = "3010102";
         public const string BOSS_USwing = "3060201";
@@ -58,6 +58,7 @@ namespace Global_Variable
         public const string Sting = "3060204";
         public const string DiagonalSwing = "3060205";
         public const string LRush_and_USwing = "3060206";
+        public const string DSwing = "3060207";
     }
     public class UIname
     {
