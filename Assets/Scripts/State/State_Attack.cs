@@ -13,7 +13,7 @@ public class State_Attack : State
 
     public int attack_Info_Index; // 배틀 캐릭터의 Attack_Info index
 
-    string[] special_Range;
+    public string[] special_Range = new string[2];
 
     public override bool Judge(out State _State, Battle_Character battle_character)
     {
@@ -76,10 +76,10 @@ public class State_Attack : State
 
     public void Rand_Normal_Attack(Battle_Character battle_character)
     {
-        int count = battle_character.mon_Normal_Attack_Info.Count;
+        int count = battle_character.mon_normal_atak_group.Count;
         int rand = Random.Range(0, count);
 
-        battle_character.animator.Play(battle_character.mon_Normal_Attack_Info[rand].P_skill_Name_En);
+        battle_character.animator.Play(battle_character.mon_normal_atak_group[rand].P_skill_Name_En);
     }
 
     public void Connect_Process(Battle_Character battle_character)
@@ -142,6 +142,8 @@ public class State_Attack : State
     public override void State_Initialize(Battle_Character battle_character)
     {
         special_Range = battle_character.mon_Info.P_mon_SpecialAtk.Split(",");
+
+        Debug.Log("special = " + special_Range[0] + "," + special_Range[1]);
     }
 
 }

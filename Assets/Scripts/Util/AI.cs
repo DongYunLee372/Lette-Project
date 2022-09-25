@@ -52,14 +52,14 @@ public class AI
             }
         }
 
+        if (!now_State.first_Start)
+        {
+            now_State.State_Initialize(battle_character);
+            now_State.first_Start = true;
+        }
+
         if (now_State.Judge(out now_State, battle_character))
         {
-            if (!now_State.first_Start)
-            {
-                now_State.State_Initialize(battle_character);
-                now_State.first_Start = true;
-            }
-
             now_State.Run(battle_character);
         }
     }

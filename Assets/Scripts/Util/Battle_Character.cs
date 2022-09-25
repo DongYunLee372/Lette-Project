@@ -57,6 +57,12 @@ public class Attack_Info // 스킬이나 공격info
     // Spawn 애니메이션 판별
     public bool spawn_Animation;
 
+    // 일반공격 그룹에 속해있는지
+    public bool is_Normal_Attack;
+
+    // 일반공격 그룹 내 마지막 공격인지
+    public bool normal_Last_Attack;
+
     // 애니메이션 꺼지는 추가 시간이 필요한 경우 ( 4개 이상의 이벤트가 필요할 때 )
     public float add_Time;
 
@@ -191,14 +197,6 @@ public class Battle_Character : MonoBehaviour
         effectobj.transform.rotation = transform.rotation;
 
         Destroy(effectobj, 0.25f);
-
-        if (is_Boss)
-        {
-            GameObject a = UIManager.Instance.Findobj("Bosshpbar");
-            a.GetComponent<Bosshpbar>().HitDamage(cur_HP);
-
-
-        }
     }
 
     public void Skill_Rand()
@@ -254,6 +252,34 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
+                if (attack_Info[i].is_Normal_Attack)
+                {
+                    if (attack_Info[i].normal_Last_Attack)
+                    {
+                        if (attack_Info[i].add_Time == 0)
+                        {
+                            attack_Collider.SetActive(false);
+                            isAttack_Run = false;
+                        }
+                        else if (attack_Info[i].add_Time != 0)
+                        {
+                            StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time));
+                        }
+                    }
+                }
+                else
+                {
+                    if (attack_Info[i].add_Time == 0)
+                    {
+                        attack_Collider.SetActive(false);
+                        isAttack_Run = false;
+                    }
+                    else if (attack_Info[i].add_Time != 0)
+                    {
+                        StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time));
+                    }
+                }
+
                 // 후딜이 있다면
                 if (attack_Info[i].post_Delay != 0)
                 {
@@ -375,15 +401,7 @@ public class Battle_Character : MonoBehaviour
             }
         }
 
-        if (index == 2 && attack_Info[info_num].add_Time == 0)
-        {
-            attack_Collider.SetActive(false);
-            isAttack_Run = false;
-        }
-        else if (index == 2 && attack_Info[info_num].add_Time != 0)
-        {
-            StartCoroutine(ani_Add_Time_Coroutine(attack_Info[info_num].add_Time));
-        }
+
     }
 
     IEnumerator nav_Coroutine(float speed, float acc)

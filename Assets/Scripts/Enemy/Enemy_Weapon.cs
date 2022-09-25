@@ -23,18 +23,15 @@ public class Enemy_Weapon : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            Debug.Log("플레이어 맞음");
-            Vector3 pos = new Vector3();
-            pos.z += 1f;
-
             switch (parent_character.attack_Type) // 공격 타입에 맞게 데미지를 입혀줌.
             {
                 case Enemy_Enum.Enemy_Attack_Type.Normal_Attack:
-                    collider.gameObject.GetComponent<PlayableCharacter>().BeAttacked(parent_character.mon_Info.P_mon_Atk, pos);
+                    collider.gameObject.GetComponent<PlayableCharacter>().BeAttacked(parent_character.mon_Info.P_mon_Atk, collider.transform.position);
                     break;
                 case Enemy_Enum.Enemy_Attack_Type.Skill_Attack:
                     // 캐릭터의 damaged 함수호출
-                    collider.gameObject.GetComponent<PlayableCharacter>().BeAttacked(parent_character.now_Skill_Info.P_skill_dmg, pos);
+                    collider.gameObject.GetComponent<PlayableCharacter>().BeAttacked
+                        (parent_character.now_Skill_Info.P_skill_dmg, collider.transform.position);
                     break;
             }
 
