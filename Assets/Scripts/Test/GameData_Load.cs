@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GameData_Load : Singleton<GameData_Load>
 {
-   
 
+   
     void Start()
     {
+       
         AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
         //GameMG.Instance.startGame("Roomtest");
@@ -25,11 +26,32 @@ public class GameData_Load : Singleton<GameData_Load>
         {
             Debug.Log("보는중 : " + s.prefabsName);
 
-            AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
-           
+            if(s.prefabsName=="Boss")
+            {
+                BoosInit(s.prefabsName,s.Position);
+            }
+            else
+            {
+                AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+
+            }
             Debug.Log("보는중 : " + s.Position);
         }
 
+    }
+
+    void BoosInit(string name,Vector3 pos)
+    {
+        GameObject abc = new GameObject();
+        abc.transform.position = pos;
+
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(name);
+        var boss = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
+      //  boss.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, bossNomalSkills, monsterSkillInformation, target);
+
+        StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
+
+     
     }
 
     void Update()
