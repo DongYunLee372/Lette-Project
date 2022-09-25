@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &742986995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,28 +376,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   a:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  t:
-  - a1
-  - b2
-  - c3
-  - sdf
-  - dfg
-  - d
-  - s
-  - d
-  - g
-  ta:
-  - {x: 10, y: 10, z: 10}
-  - {x: 20, y: 20, z: 20}
-  - {x: 30, y: 30, z: 30}
-  - {x: 40, y: 40, z: 40}
-  - {x: 50, y: 50, z: 50}
-  - {x: 50, y: 50, z: 50}
-  - {x: 50, y: 50, z: 50}
-  - {x: 50, y: 50, z: 50}
-  - {x: 50, y: 50, z: 50}
+  Prefapsname:
+  - PlayerCharacter
+  - Boss
+  Position:
+  - {x: 400, y: 80, z: 230}
+  - {x: 400, y: 80, z: 220}
   load_And_SaveDatas: []
 --- !u!4 &1527078963
 Transform:

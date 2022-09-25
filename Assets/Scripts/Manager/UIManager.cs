@@ -188,7 +188,7 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
+        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("StartUI"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("OptionSetting"));
         StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Boss_HP"));
