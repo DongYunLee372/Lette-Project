@@ -18,7 +18,7 @@ class Pool<T>
 
   //  Stack<T> _poolStack = new Stack<T>();
 
-    Stack<PoolData<T>> _poolDataStack = new Stack<PoolData<T>>();
+   public Stack<PoolData<T>> _poolDataStack = new Stack<PoolData<T>>();
 
     public void Init(T original, int count = 60)
     {
@@ -98,7 +98,9 @@ public class ObjectManager : MonoBehaviour
 {
     public static ObjectManager Instance;
 
-    Dictionary<string, UnityEngine.Object> _pool = new Dictionary<string, UnityEngine.Object>();
+    // Dictionary<string, UnityEngine.Object> _pool = new Dictionary<string, UnityEngine.Object>();
+    Dictionary<string,Pool<UnityEngine.Object>> _pool = new Dictionary<string, Pool<UnityEngine.Object>>();
+
     Transform _root;
 
     //    Dictionary<string, Pool> _pool = new Dictionary<string, Pool>();
@@ -143,12 +145,18 @@ public class ObjectManager : MonoBehaviour
     public void CreatePool<T>(T original, int count = 60)
         where T : UnityEngine.Object
     {
-        Pool<T> pool = new Pool<T>();
+        Pool<UnityEngine.Object> pool = new Pool<UnityEngine.Object>();
        // pool.
         pool.Init(original, count);
        // pool.Root.parent = _root;
 
-        _pool.Add(original.name, pool as T);
+        _pool.Add(original.name, pool);
+        //여기 value가 안들어간다..
+        Debug.Log("검색" + _pool.Count);
+        foreach(var a in _pool[original.name]._poolDataStack)
+        {
+            Debug.Log("스택검색" + a);
+        }
     }
 
     public T Pop<T>(T original, Transform parent = null)
@@ -160,10 +168,26 @@ public class ObjectManager : MonoBehaviour
             CreatePool<T>(original);
            // _pool.Add()
         }
-
+        Debug.Log("pool검색" + _pool[original.name]);
         var pool = _pool[original.name] as Pool<T>;
-
-       return pool.Pop();
+        Debug.Log("일단찍어" + pool._poolDataStack.Pop().obj);
+        var a= pool._poolDataStack.Pop();
+        Debug.Log("anjsep"+a.obj);
+        a.poolable = true;
+        
+        return a.obj;
+       //foreach(var a in pool._poolDataStack)
+       // {
+       //     if(a.poolable)
+       //     {
+       //         a.poolable = true;
+       //         return pool._poolDataStack.Pop
+       //     }
+       // }
+      
+     
+       // Debug.Log("pool"+pool);
+       //return pool.Pop();
         //return _pool[original.name].Pop(parent);
     }
 

@@ -86,16 +86,16 @@ public class AddrTestScripts : MonoBehaviour
         //// destroy(aa);
 
         // temp.delete_object(te);
-        Pool<GameObject> pool = new Pool<GameObject>();
-        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("susu");
-        GameObject te = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("susu");
+       // Pool<GameObject> pool = new Pool<GameObject>();
+       // AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("susu");
+       // GameObject te = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("susu");
 
         //에러 나중에 생각...ㅋ큐ㅠ 
-        pool.Init(te);
-        //  GameMG.Instance.Resource.Instantiate<GameObject>("susu");
+     //   pool.Init(te);
+         GameMG.Instance.Resource.Instantiate<GameObject>("susu");
 
 
-        GameMG.Instance.startGame("Demo");
+       // GameMG.Instance.startGame("Demo");
 
 
 

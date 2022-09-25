@@ -7,8 +7,8 @@ public class TestMainLoad : MonoBehaviour
 
     public List<Load_And_SaveData> a = new List<Load_And_SaveData>();
 
-    public List<string> t = new List<string>();
-    public List<Vector3> ta = new List<Vector3>();
+    public List<string> Prefapsname = new List<string>();
+    public List<Vector3> Position = new List<Vector3>();
 
     public List<Load_And_SaveData> load_And_SaveDatas = new List<Load_And_SaveData>();
 
@@ -17,13 +17,13 @@ public class TestMainLoad : MonoBehaviour
     string type = ".asset";
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.F2))
         {
             //var DataSave = ScriptableObject.CreateInstance<GameSaveData>();
             //AssetDatabase.CreateAsset(DataSave, "Assets/GameData/TestGameData.asset");
             var tempDataSave = AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
 
-            for (int i=0; i<t.Count; i++)
+            for (int i=0; i<Prefapsname.Count; i++)
             {
                 string tempstring = path + testSaveDataName + i + type;
 
@@ -36,9 +36,9 @@ public class TestMainLoad : MonoBehaviour
                     Debug.Log("찾는결과 : "+te);
                     var data = AssetDatabase.LoadAssetAtPath<Load_And_SaveData>(tempstring);
                     Debug.Log(tempData+"원래있던거?");
-                    data.prefabsName = t[i].ToString();
+                    data.prefabsName = Prefapsname[i].ToString();
                     Debug.Log(data.prefabsName + i);
-                    data.Position = ta[i];
+                    data.Position = Position[i];
                     Debug.Log(data.Position + "" + i);
                     EditorUtility.SetDirty(data);
                 }
@@ -48,9 +48,9 @@ public class TestMainLoad : MonoBehaviour
 
                     var data = ScriptableObject.CreateInstance<Load_And_SaveData>();
 
-                    data.prefabsName = t[i].ToString();
+                    data.prefabsName = Prefapsname[i].ToString();
                     Debug.Log(data.prefabsName + i);
-                    data.Position = ta[i];
+                    data.Position = Position[i];
                     Debug.Log(data.Position + "" + i);
                     AssetDatabase.CreateAsset(data, "Assets/GameData/TestData" + i + ".asset");
                     var saveData = AssetDatabase.LoadAssetAtPath<Load_And_SaveData>("Assets/GameData/TestData" + i + ".asset");

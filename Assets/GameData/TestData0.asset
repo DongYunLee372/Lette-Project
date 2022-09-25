@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d34ef56feb1124f8726ba09c4f5b7e, type: 3}
   m_Name: TestData0
   m_EditorClassIdentifier: 
-  prefabsName: a1
-  Position: {x: 10, y: 10, z: 10}
+  prefabsName: PlayerCharacter
+  Position: {x: 0, y: 0, z: 0}
