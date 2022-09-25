@@ -220,9 +220,9 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
-                Debug.Log("재생이다잉" + clipname);
                 if (real_AI.now_State.GetComponent<State_Attack>() != null)
                     real_AI.now_State.GetComponent<State_Attack>().attack_Info_Index = i;
+
                 // 타겟을 바라보고 애니메이션 재생
                 gameObject.transform.LookAt(cur_Target.transform);
                 // 선딜이 있다면
@@ -287,6 +287,8 @@ public class Battle_Character : MonoBehaviour
 
                     StartCoroutine(post_Delay_Coroutine(attack_Info[i].post_Delay));
                 }
+
+                attack_Collider.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Melee_Attack;
 
                 return;
             }
@@ -447,11 +449,35 @@ public class Battle_Character : MonoBehaviour
     }
 
     public float TimeLeft = 4.0f;
-    public float nextTime = 4.0f;
-    public float checkTime = 0.0f;
+    public float stop_NextTime = 4.0f;
+    public float skill_NextTime = 6.0f;
+    public float stop_CheckTime = 0.0f;
+    public float skill_CheckTime = 0.0f;
+
     public bool isStop; // 멈춰있는지
+    public bool isSkill_Using; // 전에 사용했던 스킬을 바로 사용하지 못하게끔 하는 변수
 
     public string testSkillName;
+
+    void Time_Check()
+    {
+        stop_CheckTime += Time.deltaTime;
+        skill_CheckTime += Time.deltaTime;
+
+        if (stop_CheckTime > stop_NextTime)
+        {
+            //nextTime = Time.time + TimeLeft;
+            stop_CheckTime = 0f;
+            isStop = true;
+        }
+
+        if (skill_CheckTime > skill_NextTime)
+        {
+            //nextTime = Time.time + TimeLeft;
+            skill_CheckTime = 0f;
+            isSkill_Using = true;
+        }
+    }
 
     private void Update()
     {
@@ -463,14 +489,7 @@ public class Battle_Character : MonoBehaviour
             animator.Play("Normal_Attack_1");
         }
 
-        checkTime += Time.deltaTime;
-        if (checkTime > nextTime)
-        {
-            //nextTime = Time.time + TimeLeft;
-            checkTime = 0f;
-            isStop = true;
-        }
-
+        Time_Check();
 
     }
 }

@@ -7,6 +7,7 @@ public class Enemy_Weapon : MonoBehaviour
     [SerializeField]
     private Battle_Character parent_character;
 
+    [SerializeField]
     public Enemy_Enum.Enemy_Attack_Logic my_Logic;
 
     void Start()
@@ -35,7 +36,8 @@ public class Enemy_Weapon : MonoBehaviour
                     break;
             }
 
-            if (my_Logic == Enemy_Enum.Enemy_Attack_Logic.Long_Attack)
+            if (my_Logic == Enemy_Enum.Enemy_Attack_Logic.Long_Attack ||
+                my_Logic == Enemy_Enum.Enemy_Attack_Logic.Skill_Using)
             {
                 if (parent_character.real_AI.now_State.GetComponent<State_Attack>() != null)
                 {

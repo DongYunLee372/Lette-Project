@@ -193,7 +193,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cbfb7ac1e9e08214480ef331318908cc, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0c4309d985f8098439e2c7151a7a1f81, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -333,7 +333,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 59a262c39e74a074591d46d68d3e5e98, type: 2}
+  m_Motion: {fileID: 7400000, guid: 54de79181f59c4c4a9438ab3e9378a46, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -597,7 +597,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2b87ee72a34443c419a9a56fe65a8300, type: 2}
+  m_Motion: {fileID: 7400000, guid: d901c71fb88b8cd45ad3af7006ffb103, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -667,7 +667,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2c17a80842391c8478c322c510da60d5, type: 2}
+  m_Motion: {fileID: 7400000, guid: 39602b9f49738474aa2bf793abb9bf59, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -680,7 +680,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rush Atk
+  m_Name: Rush_Atk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

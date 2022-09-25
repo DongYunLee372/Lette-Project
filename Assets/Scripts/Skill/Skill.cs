@@ -1,3 +1,4 @@
+using Enemy_Enum;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class Skill : MonoBehaviour
     public virtual void Skill_Run(Battle_Character battle_character, MonsterSkillInformation skill_data)
     {
         battle_character.isAttack_Run = true;
-        battle_character.checkTime = 0f;
+        battle_character.stop_CheckTime = 0f;
         battle_character.isStop = false;
         battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
         battle_character.animator.Play(skill_data.P_skill_Name_En);
@@ -20,6 +21,7 @@ public class Skill : MonoBehaviour
         if (skill_data.P_skill_ThrowObj != 1 && skill_data.P_skill_DiffObj != 1)
         {
             battle_character.attack_Collider.SetActive(true);
+            battle_character.attack_Collider.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Skill_Using;
         }
         // 애니메이션 재생 ( 애니메이션 클립에 이벤트들을 붙여줌 해당 시간에 판정 
         // 어택매니저로 공격 호출
@@ -38,7 +40,7 @@ public class Skill : MonoBehaviour
 
         // 캐릭터 현재 마나 - 스킬의 마나
         // //b_c.mon_Info
-       // battle_character.mon_Info.P_mon_haveMP -= skill_data.P_skill_MP;
+        // battle_character.mon_Info.P_mon_haveMP -= skill_data.P_skill_MP;
     }
 
     protected IEnumerator Shoot_Coroutine(MonsterSkillInformation skill_data)

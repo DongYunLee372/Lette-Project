@@ -53,7 +53,8 @@ public class State_Attack : State
 
 
         if ((Vector3.Distance(battle_character.transform.position,
-               battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1])) && !battle_character.isAttack_Run)
+               battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1]))
+               && !battle_character.isAttack_Run && battle_character.isSkill_Using)
         {
             judge_logic = Enemy_Attack_Logic.Skill_Using;
             _State = this;
@@ -86,10 +87,14 @@ public class State_Attack : State
     {
         if (Attack_Result)
         {
-            if (Result_return_Object.GetComponent<Enemy_Weapon>() != null)
+            if (Result_return_Object.GetComponent<Enemy_Weapon>() != null &&
+                battle_character.attack_Info[attack_Info_Index].after_skill_name != "")
             {
                 battle_character.animator.Play(battle_character.
                     attack_Info[attack_Info_Index].after_skill_name);
+                Debug.Log("라스트 : 밀리 공격 : " + battle_character.
+                    attack_Info[attack_Info_Index].after_skill_name);
+
             }
         }
     }
@@ -111,7 +116,7 @@ public class State_Attack : State
                 Result_return_Object = null;
 
                 battle_character.attack_Type = Enemy_Attack_Type.Normal_Attack;
-                battle_character.checkTime = 0f;
+                battle_character.stop_CheckTime = 0f;
                 battle_character.isStop = false;
                 battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
                 battle_character.attack_Collider.SetActive(true);
@@ -119,6 +124,8 @@ public class State_Attack : State
                 break;
             case Enemy_Attack_Logic.Long_Attack:
                 // 원거리라면 원거리 발사체 발사
+
+                Debug.Log("라스트 : 원거리 : ");
 
                 Attack_Result = false;
                 Result_return_Object = null;
@@ -132,8 +139,12 @@ public class State_Attack : State
                 Attack_Result = false;
                 Result_return_Object = null;
 
+                battle_character.isSkill_Using = false;
+                battle_character.skill_CheckTime = 0f;
                 battle_character.attack_Type = Enemy_Attack_Type.Skill_Attack;
                 battle_character.skill_handler.Skill_Run(battle_character, battle_character.now_Skill_Info);
+
+                Debug.Log("라스트 : 스킬 공격 : " + battle_character.now_Skill_Info.P_skill_Name_En);
                 //battle_character.Skill_Rand();
                 break;
         }
