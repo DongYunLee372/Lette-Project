@@ -46,8 +46,11 @@ public class GameData_Load : Singleton<GameData_Load>
     void TestPos_and_Load()  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
         //  TestMainLoad.Instance.
-        var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
-    
+        //    var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
+
+       AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("TestGameData");
+
+       var  tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
         // var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
 
         //  var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");

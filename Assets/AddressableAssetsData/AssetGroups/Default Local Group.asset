@@ -133,6 +133,10 @@ MonoBehaviour:
     m_Address: Roomtest
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: fa3ff36ead8f3bc4fa9358cfece333aa
+    m_Address: TestGameData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
