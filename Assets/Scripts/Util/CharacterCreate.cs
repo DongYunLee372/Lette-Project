@@ -9,6 +9,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
     //  public DataLoad_Save TestDataLoad;
 
     public GameObject hpBar;
+    public GameObject bosshpbar;
     void Start()
     {
         //DataLoad_Save.Instance.Init();
@@ -97,7 +98,8 @@ public class CharacterCreate : Singleton<CharacterCreate>
         temp.GetComponent<Battle_Character>().Stat_Initialize(data,mon_Normal_Atk_Group,bossNomalSkills, monsterSkillInformation,target);
 
         GameObject b = Instantiate(temp, trans);
-        b.GetComponent<Battle_Character>().bosshpbar.SetHpbar(data.P_mon_MaxHP,data.P_mon_nameKor,b.GetComponent<Battle_Character>());
+        bosshpbar.GetComponent<Bosshpbar>().SetHpbar(data.P_mon_MaxHP,data.P_mon_nameKor,b.GetComponent<Battle_Character>());
+        
         Debug.Log(data.P_mon_nameKor);
         Debug.Log(data.P_mon_MaxHP);
 

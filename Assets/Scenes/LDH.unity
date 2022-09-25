@@ -1179,6 +1179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 3039878299523158168, guid: a5dcc9ee26d52ef4bafda2e16bf1678e, type: 3}
+  bosshpbar: {fileID: 1986811234096197644, guid: 82e50146481e6b440911b72b4be125dc, type: 3}
 --- !u!4 &1242248416
 Transform:
   m_ObjectHideFlags: 0
