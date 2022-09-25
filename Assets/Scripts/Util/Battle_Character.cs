@@ -170,15 +170,11 @@ public class Battle_Character : MonoBehaviour
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(attack_Info[i].Name, Animation_End));
         }
 
-        Skill_Rand();
-
         if (is_Boss)
         {
             real_AI.isPause = true;
             cur_Target = GameObject.FindGameObjectWithTag(CharVar.Player_Tag);
         }
-
-        StartCoroutine(Mana_Regen());
     }
 
 
