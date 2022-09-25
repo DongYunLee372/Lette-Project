@@ -133,6 +133,10 @@ MonoBehaviour:
     m_Address: Boss_HP
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 26e13c7c8aacf0c41a5e02d292da3b74
+    m_Address: Roomtest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

@@ -19900,6 +19900,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].Name
+      value: Foot_Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].add_Time
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].jump_Acc
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: mon_normal_atak_group.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -19910,6 +19926,10 @@ PrefabInstance:
     - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: mon_normal_atak_group.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].jump_Speed
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: mon_Normal_Attack_Info.Array.data[0]
@@ -19951,6 +19971,42 @@ PrefabInstance:
       propertyPath: monsterSkillInformation.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[6].after_skill_name
+      value: Foot_Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].effect.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].Movedis.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].MoveTime.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].Movedis.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].effect_Pos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].off_Mesh_Pos.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].EffectStartTime.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[7].off_Mesh_Pos.Array.data[0]
+      value: 
+      objectReference: {fileID: 1025002740}
     - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -24305,6 +24361,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 496582, guid: 85f5f4776e3804945ab0095870a1212b, type: 3}
   m_PrefabInstance: {fileID: 1019620791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1025002740 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1480112878, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+  m_PrefabInstance: {fileID: 840770210}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1027687937
 PrefabInstance:
