@@ -27,10 +27,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Monster
-  - m_GUID: a491f6561d8678143b180e4680f70238
-    m_Address: Load_test
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: e9289f49a91d21843baaa311416ffd7f
     m_Address: PlayerCharacter
     m_ReadOnly: 0
