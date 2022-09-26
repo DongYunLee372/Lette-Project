@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_Weapon : MonoBehaviour
 {
     [SerializeField]
-    private Battle_Character parent_character;
+    public Battle_Character parent_character;
 
     [SerializeField]
     public Enemy_Enum.Enemy_Attack_Logic my_Logic;

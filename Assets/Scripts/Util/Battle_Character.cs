@@ -103,6 +103,7 @@ public class Battle_Character : MonoBehaviour
 
     [Header("Monster Stats")]
     public float cur_HP;
+    public int cur_Groggy; // 현재 공격의 그로기 수치
 
     public Vector3 return_Pos; // 초기 좌표
     public Vector3 destination_Pos; // 순찰 좌표
@@ -186,17 +187,16 @@ public class Battle_Character : MonoBehaviour
 
     public virtual void Damaged(int damage_Amount, Vector3 point)
     {
-        // Cur_HP -= (damage_Amount - Armor);
-        //  MyHpbar.Curhp = Cur_HP;
-        //MyHpbar.hit();
         isHit = true;
         cur_HP -= damage_Amount - mon_Info.P_mon_Def;
 
-        GameObject effectobj = GameObject.Instantiate(damaged_Effect);
-        effectobj.transform.position = point;
-        effectobj.transform.rotation = transform.rotation;
+        EffectManager.Instance.InstantiateEffect(damaged_Effect, point);
 
-        Destroy(effectobj, 0.25f);
+        //GameObject effectobj = GameObject.Instantiate(damaged_Effect);
+        //effectobj.transform.position = point;
+        //effectobj.transform.rotation = transform.rotation;
+
+        //Destroy(effectobj, 0.25f);
     }
 
     public void Skill_Rand()
@@ -222,6 +222,17 @@ public class Battle_Character : MonoBehaviour
             {
                 if (real_AI.now_State.GetComponent<State_Attack>() != null)
                     real_AI.now_State.GetComponent<State_Attack>().attack_Info_Index = i;
+
+                cur_Groggy = 0; // 그로기 수치를 0으로 초기화 해준 후
+
+                foreach (BossNomalSkill atk_Info in mon_Normal_Attack_Info) // 해당 개체가 가진 공격들 리스트를 검사해서
+                {
+                    if (atk_Info.P_skill_Name_En == clipname)
+                    {
+                        cur_Groggy = atk_Info.P_skill_Groggy;
+                        break;
+                    }
+                }
 
                 // 타겟을 바라보고 애니메이션 재생
                 gameObject.transform.LookAt(cur_Target.transform);
@@ -398,12 +409,11 @@ public class Battle_Character : MonoBehaviour
                 missileobj.transform.rotation = attack_Info[info_num].missile_Pos.rotation;
 
                 missileobj.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Long_Attack;
+                missileobj.GetComponent<Enemy_Weapon>().parent_character = this;
 
                 Destroy(missileobj, 5.0f);
             }
         }
-
-
     }
 
     IEnumerator nav_Coroutine(float speed, float acc)

@@ -145,7 +145,6 @@ public class State_Attack : State
                 battle_character.skill_handler.Skill_Run(battle_character, battle_character.now_Skill_Info);
 
                 Debug.Log("라스트 : 스킬 공격 : " + battle_character.now_Skill_Info.P_skill_Name_En);
-                //battle_character.Skill_Rand();
                 break;
         }
     }
