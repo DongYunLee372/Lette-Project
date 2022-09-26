@@ -42,6 +42,9 @@ public class Attack_Info // 스킬이나 공격info
     // 점프 가속도
     public float[] jump_Acc;
 
+    // 회전 가속도
+    public float[] jump_Angular;
+
     // 발사체
     public GameObject missile;
 
@@ -395,6 +398,7 @@ public class Battle_Character : MonoBehaviour
             attack_Info[info_num].off_Mesh_Pos[0].localPosition += new Vector3(0, 0, attack_Info[info_num].Movedis[index]);
 
             real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
+            real_AI.navMesh.angularSpeed = attack_Info[info_num].jump_Angular[index];
             real_AI.navMesh.speed = attack_Info[info_num].jump_Speed[index];
             real_AI.navMesh.acceleration = attack_Info[info_num].jump_Acc[index];
 
