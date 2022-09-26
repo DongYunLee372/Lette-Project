@@ -4,9 +4,9 @@ using UnityEngine;
 
 
 //작업할것
-//1. 생성한 공격판정을 다른 오브젝트의 하위에 붙일 수 있도록
-//2. 공격판정이 원하는 곳으로 움직일 수 있도록
-//3. 들어올때 나갈때 계속 있을때 각각 실행 가능하도록
+//1. 생성한 공격판정을 다른 오브젝트의 하위에 붙일 수 있도록 OK
+//2. 공격판정이 원하는 곳으로 움직일 수 있도록 OK
+//3. 들어올때 나갈때 계속 있을때 각각 실행 가능하도록 OK
 
 public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
 {
@@ -125,18 +125,13 @@ public class ColliderSpawnSystem : Singleton<ColliderSpawnSystem>
     }
 
 
-    public void DoMove(Colliders coll, Vector3 dest, float duration)
+    public void DoMove(Colliders coll, Vector3 dest, float duration, MyDotween.Dotween.Ease ease = MyDotween.Dotween.Ease.Linear)
     {
+        dotween.SetEase(ease);
         dotween.DoMove(coll.gameObject, dest, duration);
     }
 
 
-
-
-    //public void SetFunction(Colliders.CollFunction func)
-    //{
-    //    collprefabs[(int)colltype].SetCollitionFunction(func);
-    //}
 
     //미리 만들
     void Start()

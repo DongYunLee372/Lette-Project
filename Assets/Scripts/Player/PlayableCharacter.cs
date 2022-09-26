@@ -212,5 +212,14 @@ public class PlayableCharacter : MonoBehaviour
         status.CurExp += exp;
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Debug.Log("0번 눌림");
+            //ResourceCreateDeleteManager.Instance.InstantiateObj<PlayableCharacter>("PlayerCharacter");
 
+            ResourceCreateDeleteManager.Instance.RegistPoolManager<PlayableCharacter>("PlayerCharacter");
+        }
+    }
 }

@@ -7,6 +7,8 @@ namespace MyDotween
     //작성된 curEaseMode 그래프모양 대로 지정한 위치에 지정한 시간동안 움직인다.
     public class Dotween
     {
+        public List<Tween> SequenceQueue;
+        public int CurSequenceNum = 0;
         public enum Ease
         {
             Linear,
@@ -19,8 +21,48 @@ namespace MyDotween
             easeMax
         }
 
+        public enum LoopType
+        {
+            Restart,
+            Incremental,
+            Yoyo
+        }
+
         Ease curEaseMode = Ease.Linear;
         GameObject CurMoveObject = null;
+
+
+        //루프횟수가 -1이면 무한루프
+        public void SetLoop(int loops, LoopType loopType = LoopType.Restart)
+        {
+
+        }
+
+
+        //맨 마지막에 추가
+        public void Append(Tween tween)
+        {
+
+        }
+
+        //순서와 관계없이 일정 시간 이후에 시작
+        public void Insert(float inserttime, Tween tween)
+        {
+
+        }
+
+        //앞에 추가된 트윈과 동시 시작
+        public void Join(Tween tween)
+        {
+
+        }
+
+        //맨 처음에 시작
+        public void Prepend(Tween tween)
+        {
+
+        }
+
 
         //x는 시간, 리턴값은 속도
         //https://easings.net/ko# 사이트에서 그래프 모양 확인 가능

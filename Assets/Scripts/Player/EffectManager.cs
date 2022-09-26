@@ -31,6 +31,8 @@ public class EffectManager : MySingleton<EffectManager>
 
     public IEnumerator cor;
 
+    public MyDotween.Dotween dotween = new MyDotween.Dotween();
+
     //한번만 실행하고 사라진다.
     public GameObject SpawnEffectOneLoop(GameObject effect, Vector3 pos, Quaternion rotation)
     {
@@ -222,6 +224,12 @@ public class EffectManager : MySingleton<EffectManager>
     public void SetLoop(ParticleSystem effect, bool b)
     {
 
+    }
+
+    public void DoMove(GameObject effect, Vector3 dest, float duration, MyDotween.Dotween.Ease ease = MyDotween.Dotween.Ease.Linear)
+    {
+        dotween.SetEase(ease);
+        dotween.DoMove(effect, dest, duration);
     }
 
 }
