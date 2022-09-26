@@ -512,7 +512,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("ㅇㅇ");
-            animator.Play("First_Atk");
+            animator.Play("Second_Atk");
         }
 
         Time_Check();
