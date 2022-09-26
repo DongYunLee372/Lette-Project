@@ -398,7 +398,12 @@ public class Battle_Character : MonoBehaviour
             attack_Info[info_num].off_Mesh_Pos[0].localPosition += new Vector3(0, 0, attack_Info[info_num].Movedis[index]);
 
             real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
-            real_AI.navMesh.angularSpeed = attack_Info[info_num].jump_Angular[index];
+
+            if (attack_Info[info_num].jump_Angular[index] == -1)
+            {
+                real_AI.navMesh.angularSpeed = 0;
+            }
+
             real_AI.navMesh.speed = attack_Info[info_num].jump_Speed[index];
             real_AI.navMesh.acceleration = attack_Info[info_num].jump_Acc[index];
 
@@ -432,6 +437,7 @@ public class Battle_Character : MonoBehaviour
 
         real_AI.navMesh.speed = speed;
         real_AI.navMesh.acceleration = acc;
+        real_AI.navMesh.angularSpeed = 120f;
     }
 
     IEnumerator eff_Coroutine(float sec, GameObject eff, Transform pos)
