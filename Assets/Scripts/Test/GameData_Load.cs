@@ -23,6 +23,26 @@ public class GameData_Load : Singleton<GameData_Load>
     void Start()
     {
 
+     
+
+
+
+    //    GameMG.Instance.startGame("Roomtest");
+
+      //  AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
+
+        //GameMG.Instance.startGame("Roomtest");
+     //   TestPos_and_Load();
+      
+
+
+    }
+
+
+
+   public void TestPos_and_Load()  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
+    {
+
         str.Add("Hpbar");
         str.Add("FriendPanel");
         str.Add("Inven");
@@ -32,23 +52,13 @@ public class GameData_Load : Singleton<GameData_Load>
 
         AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
 
-        AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
-        //GameMG.Instance.startGame("Roomtest");
-        TestPos_and_Load();
-      
+          AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
-
-    }
-
-
-
-    void TestPos_and_Load()  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
-    {
         //  TestMainLoad.Instance.
         //    var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
 
-       AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("TestGameData");
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("TestGameData");
 
        var  tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
         // var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");

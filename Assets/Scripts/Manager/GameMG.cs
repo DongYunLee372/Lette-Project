@@ -190,7 +190,7 @@ public class GameMG : Singleton<GameMG>
 
     void Start()
     {
-        //  Reset_Timer();
+        GameData_Load.Instance.TestPos_and_Load();
     }
 
 }

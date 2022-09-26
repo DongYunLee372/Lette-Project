@@ -211,6 +211,10 @@ public class AddrTestScripts : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         GameMG.Instance.Resource.Destroy<T>(a);
+        yield return new WaitForSeconds(3f);
+        
+        GameMG.Instance.Resource.Instantiate<T>("susu");
+
     }
 
     IEnumerator qqq()
