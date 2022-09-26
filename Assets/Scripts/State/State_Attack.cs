@@ -45,7 +45,7 @@ public class State_Attack : State
         // 근접 공격 사거리 체크
         if ((Vector3.Distance(battle_character.transform.position,
                 battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk) && !battle_character.isAttack_Run)
-        {
+        { 
             judge_logic = Enemy_Attack_Logic.Melee_Attack;
             _State = this;
             return true;
@@ -53,8 +53,12 @@ public class State_Attack : State
 
 
         if ((Vector3.Distance(battle_character.transform.position,
-               battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1]))
-               && !battle_character.isAttack_Run && battle_character.isSkill_Using)
+               battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1])) 
+               && 
+               (Vector3.Distance(battle_character.transform.position,
+               battle_character.cur_Target.transform.position) >= int.Parse(special_Range[0])) 
+               && 
+               !battle_character.isAttack_Run && battle_character.isSkill_Using)
         {
             judge_logic = Enemy_Attack_Logic.Skill_Using;
             _State = this;
@@ -63,7 +67,8 @@ public class State_Attack : State
 
 
         if (battle_character.mon_Info.P_mon_FarAtk != 0 && (Vector3.Distance(battle_character.transform.position,
-            battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_FarAtk)) // 원거리 공격
+            battle_character.cur_Target.transform.position) >= battle_character.mon_Info.P_mon_FarAtk) &&
+            battle_character.isShooting) // 원거리 공격
         {
             judge_logic = Enemy_Attack_Logic.Long_Attack;
             _State = this;
@@ -130,8 +135,13 @@ public class State_Attack : State
                 Attack_Result = false;
                 Result_return_Object = null;
 
+                battle_character.isShooting = false;
+                battle_character.long_CheckTime = 0f;
+                battle_character.isStop = false;
                 battle_character.attack_Type = Enemy_Attack_Type.Normal_Attack;
-                //battle_character.animator.Play("Long Attack");
+                battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+                battle_character.isAttack_Run = true;
+                battle_character.animator.Play("Long_Attack");
                 //GameObject missile
                 break;
             case Enemy_Attack_Logic.Skill_Using:

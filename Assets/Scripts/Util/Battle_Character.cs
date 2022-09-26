@@ -263,7 +263,10 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
-                if (attack_Info[i].is_Normal_Attack)
+                if (attack_Info[i].off_Mesh_Pos[0])
+                    attack_Info[i].off_Mesh_Pos[0].localPosition = begin_Pos;
+
+                if (attack_Info[i].is_Normal_Attack) // 일반 공격인 경우 
                 {
                     if (attack_Info[i].normal_Last_Attack)
                     {
@@ -278,7 +281,7 @@ public class Battle_Character : MonoBehaviour
                         }
                     }
                 }
-                else
+                else // 일반 공격이 아닌 경우
                 {
                     if (attack_Info[i].add_Time == 0)
                     {
@@ -357,8 +360,6 @@ public class Battle_Character : MonoBehaviour
                     real_AI.isPause = false;
                 }
 
-                if (attack_Info[i].off_Mesh_Pos[0])
-                    attack_Info[i].off_Mesh_Pos[0].localPosition = begin_Pos;
 
                 return;
             }
@@ -452,13 +453,16 @@ public class Battle_Character : MonoBehaviour
     }
 
     public float TimeLeft = 4.0f;
-    public float stop_NextTime = 4.0f;
-    public float skill_NextTime = 6.0f;
+    public float stop_NextTime = 4.0f; // 정지 방지 시간
+    public float skill_NextTime = 6.0f; // 스킬 쿨타임
+    public float long_NextTime = 4.0f; // 원거리 공격 쿨타임
     public float stop_CheckTime = 0.0f;
     public float skill_CheckTime = 0.0f;
+    public float long_CheckTime = 0.0f;
 
     public bool isStop; // 멈춰있는지
     public bool isSkill_Using; // 전에 사용했던 스킬을 바로 사용하지 못하게끔 하는 변수
+    public bool isShooting;
 
     public string testSkillName;
 
@@ -466,6 +470,7 @@ public class Battle_Character : MonoBehaviour
     {
         stop_CheckTime += Time.deltaTime;
         skill_CheckTime += Time.deltaTime;
+        long_CheckTime += Time.deltaTime;
 
         if (stop_CheckTime > stop_NextTime)
         {
@@ -479,6 +484,12 @@ public class Battle_Character : MonoBehaviour
             //nextTime = Time.time + TimeLeft;
             skill_CheckTime = 0f;
             isSkill_Using = true;
+        }
+
+        if(long_CheckTime > long_NextTime)
+        {
+            long_CheckTime = 0f;
+            isShooting = true;
         }
     }
 
