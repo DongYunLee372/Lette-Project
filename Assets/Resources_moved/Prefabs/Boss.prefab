@@ -1577,8 +1577,14 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 0
-    jump_Acc: 0
+    jump_Speed:
+    - 0
+    - 0
+    - 0
+    jump_Acc:
+    - 0
+    - 0
+    - 0
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1589,7 +1595,7 @@ MonoBehaviour:
     add_Time: 0
     pre_Delay: 0
     pre_Delay_speed: 0
-    post_Delay: 5
+    post_Delay: 0.25
     post_Delay_speed: 0
     after_skill_name: 
   - Name: SSwing
@@ -1615,8 +1621,14 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 100
-    jump_Acc: 10
+    jump_Speed:
+    - 0
+    - 0
+    - 0
+    jump_Acc:
+    - 0
+    - 0
+    - 0
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1627,7 +1639,7 @@ MonoBehaviour:
     add_Time: 0
     pre_Delay: 0
     pre_Delay_speed: 0
-    post_Delay: 0
+    post_Delay: 0.25
     post_Delay_speed: 0
     after_skill_name: 
   - Name: DiagonalSwing
@@ -1653,8 +1665,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 100
-    jump_Acc: 10
+    jump_Speed: []
+    jump_Acc: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1691,8 +1703,14 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 100
-    jump_Acc: 10
+    jump_Speed:
+    - 0
+    - 0
+    - 0
+    jump_Acc:
+    - 0
+    - 0
+    - 0
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1703,7 +1721,7 @@ MonoBehaviour:
     add_Time: 0
     pre_Delay: 0
     pre_Delay_speed: 0
-    post_Delay: 0
+    post_Delay: 0.25
     post_Delay_speed: 0
     after_skill_name: 
   - Name: Sting
@@ -1729,8 +1747,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 100
-    jump_Acc: 25
+    jump_Speed: []
+    jump_Acc: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1767,8 +1785,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 100
-    jump_Acc: 10
+    jump_Speed: []
+    jump_Acc: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1805,8 +1823,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 0
-    jump_Acc: 0
+    jump_Speed: []
+    jump_Acc: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1843,8 +1861,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 100
-    jump_Acc: 10
+    jump_Speed: []
+    jump_Acc: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1881,8 +1899,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 100
-    jump_Acc: 10
+    jump_Speed: []
+    jump_Acc: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1919,8 +1937,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 0
-    jump_Acc: 0
+    jump_Speed: []
+    jump_Acc: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1957,8 +1975,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 0
-    jump_Acc: 0
+    jump_Speed: []
+    jump_Acc: []
     missile: {fileID: 1252854708237055356, guid: 39b88489431d8fc4aaa18fe2deb50d00, type: 3}
     missile_Amount: 1
     missile_Pos: {fileID: 5847035042674421376}

@@ -19908,7 +19908,23 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[1].jump_Acc.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[3].jump_Acc.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: attack_Info.Array.data[0].jump_Speed.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[1].jump_Speed.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
+      propertyPath: attack_Info.Array.data[3].jump_Speed.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}

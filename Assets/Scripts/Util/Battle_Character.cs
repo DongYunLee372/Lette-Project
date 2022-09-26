@@ -320,6 +320,7 @@ public class Battle_Character : MonoBehaviour
 
         Debug.Log("후딜있음 끝남");
         animator.Resume();
+        animator.animator.SetTrigger("Delay_Trg");
         isDelay = false;
     }
 
