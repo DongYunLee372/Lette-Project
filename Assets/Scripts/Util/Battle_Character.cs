@@ -438,7 +438,7 @@ public class Battle_Character : MonoBehaviour
         real_AI.navMesh.speed = speed;
         real_AI.navMesh.acceleration = acc;
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
 
         real_AI.navMesh.angularSpeed = 120f;
     }
