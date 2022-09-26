@@ -6,6 +6,21 @@ namespace MyDotween
 {
     public class Tween
     {
+        Tween Join;
+        Vector3 destpos;
+        GameObject TargetObj;
+        float Duration;
+        Dotween.LoopType LoopType;
+        Dotween.Ease Ease;
+
+
+
+
+        public void Start()
+        {
+
+        }
+
 
     }
 

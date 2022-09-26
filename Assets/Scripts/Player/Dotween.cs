@@ -33,32 +33,7 @@ namespace MyDotween
 
 
         //루프횟수가 -1이면 무한루프
-        public void SetLoop(int loops, LoopType loopType = LoopType.Restart)
-        {
-
-        }
-
-
-        //맨 마지막에 추가
-        public void Append(Tween tween)
-        {
-
-        }
-
-        //순서와 관계없이 일정 시간 이후에 시작
-        public void Insert(float inserttime, Tween tween)
-        {
-
-        }
-
-        //앞에 추가된 트윈과 동시 시작
-        public void Join(Tween tween)
-        {
-
-        }
-
-        //맨 처음에 시작
-        public void Prepend(Tween tween)
+        public void SetLoop(int loops, Dotween.LoopType loopType = Dotween.LoopType.Restart)
         {
 
         }
