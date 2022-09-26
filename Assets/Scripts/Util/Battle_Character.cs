@@ -376,15 +376,8 @@ public class Battle_Character : MonoBehaviour
             }
             else
             {
-                GameObject effectobj = GameObject.Instantiate(attack_Info[info_num].effect[index]);
-                effectobj.transform.position = attack_Info[info_num].effect_Pos[index].position;
-                effectobj.transform.rotation = attack_Info[info_num].effect_Pos[index].rotation;
-
-                //preparent = effectobj.transform.parent;
-                //effectobj.transform.parent = attack_Info[i].effect_Pos[2];
-                //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
-
-                Destroy(effectobj, 1.5f);
+                EffectManager.Instance.InstantiateEffect(attack_Info[info_num].effect[index],
+                    attack_Info[info_num].effect_Pos[index].position);
             }
         }
 
