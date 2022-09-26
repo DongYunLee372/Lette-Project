@@ -1965,7 +1965,7 @@ MonoBehaviour:
     - {fileID: 1480112878}
     jump_Speed: 0
     jump_Acc: 0
-    missile: {fileID: 6296029976698363673, guid: 7275b4f1cfb4c0e48bb490e3d5585f44, type: 3}
+    missile: {fileID: 1252854708237055356, guid: 39b88489431d8fc4aaa18fe2deb50d00, type: 3}
     missile_Amount: 1
     missile_Pos: {fileID: 5847035042674421376}
     missile_Index: 0

@@ -390,7 +390,7 @@ public class Battle_Character : MonoBehaviour
             Debug.Log("스팅 움직여라 : " + attack_Info[info_num].Name);
             Debug.Log("스팅 local 좌표  " + attack_Info[info_num].Name + " : " + attack_Info[info_num].off_Mesh_Pos[0].localPosition);
             Debug.Log("스팅 노로컬 좌표  " + attack_Info[info_num].Name + " : " + attack_Info[info_num].off_Mesh_Pos[0].position);
-            
+
             attack_Info[info_num].off_Mesh_Pos[0].localPosition += new Vector3(0, 0, attack_Info[info_num].Movedis[index]);
 
             real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
@@ -406,6 +406,11 @@ public class Battle_Character : MonoBehaviour
             {
                 GameObject missileobj = GameObject.Instantiate(attack_Info[info_num].missile);
                 missileobj.transform.position = attack_Info[info_num].missile_Pos.position;
+
+                Vector3 dirVec = cur_Target.transform.position - missileobj.transform.position;
+
+                missileobj.GetComponent<Rigidbody>().AddForce(dirVec * 100f, ForceMode.Impulse);
+
                 missileobj.transform.rotation = attack_Info[info_num].missile_Pos.rotation;
 
                 missileobj.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Long_Attack;
@@ -492,7 +497,7 @@ public class Battle_Character : MonoBehaviour
             isSkill_Using = true;
         }
 
-        if(long_CheckTime > long_NextTime)
+        if (long_CheckTime > long_NextTime)
         {
             long_CheckTime = 0f;
             isShooting = true;
