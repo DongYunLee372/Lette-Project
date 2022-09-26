@@ -22,7 +22,7 @@ public class State_Attack : State
             if (battle_character.isStop)
             {
                 if (battle_character.attack_Info[battle_character.ani_Index].off_Mesh_Pos[0])
-                    battle_character.attack_Info[battle_character.ani_Index].off_Mesh_Pos[0].position = battle_character.begin_Pos;
+                    battle_character.attack_Info[battle_character.ani_Index].off_Mesh_Pos[0].localPosition = battle_character.begin_Pos;
                 battle_character.isAttack_Run = false;
                 battle_character.real_AI.pre_State = this;
                 battle_character.attack_Collider.SetActive(false);

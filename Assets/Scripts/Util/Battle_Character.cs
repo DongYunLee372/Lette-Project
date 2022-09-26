@@ -220,6 +220,7 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
+                Debug.Log("스팅 : " + attack_Info[i].Name + "시작");
                 if (real_AI.now_State.GetComponent<State_Attack>() != null)
                     real_AI.now_State.GetComponent<State_Attack>().attack_Info_Index = i;
 
@@ -270,6 +271,8 @@ public class Battle_Character : MonoBehaviour
                 {
                     if (attack_Info[i].normal_Last_Attack)
                     {
+                        Debug.Log("워크크");
+                        animator.Play("Walk");
                         if (attack_Info[i].add_Time == 0)
                         {
                             attack_Collider.SetActive(false);
@@ -384,13 +387,16 @@ public class Battle_Character : MonoBehaviour
 
         if (attack_Info[info_num].Movedis[index] != 0)
         {
+            Debug.Log("스팅 움직여라 : " + attack_Info[info_num].Name);
+            Debug.Log("스팅 local 좌표  " + attack_Info[info_num].Name + " : " + attack_Info[info_num].off_Mesh_Pos[0].localPosition);
+            Debug.Log("스팅 노로컬 좌표  " + attack_Info[info_num].Name + " : " + attack_Info[info_num].off_Mesh_Pos[0].position);
+            
             attack_Info[info_num].off_Mesh_Pos[0].localPosition += new Vector3(0, 0, attack_Info[info_num].Movedis[index]);
 
             real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
             real_AI.navMesh.speed = attack_Info[info_num].jump_Speed;
             real_AI.navMesh.acceleration = attack_Info[info_num].jump_Acc;
 
-            Debug.Log("3번째 : " + attack_Info[info_num].off_Mesh_Pos[0].position);
             StartCoroutine(nav_Coroutine(3.5f, 8f));
         }
 
