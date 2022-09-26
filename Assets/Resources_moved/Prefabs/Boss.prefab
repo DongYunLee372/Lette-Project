@@ -1735,8 +1735,8 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: 500
-    jump_Acc: 50
+    jump_Speed: 100
+    jump_Acc: 25
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1978,44 +1978,6 @@ MonoBehaviour:
     post_Delay: 0
     post_Delay_speed: 0
     after_skill_name: LRush
-  - Name: temp
-    Movedis:
-    - 0
-    - 0
-    - 0
-    MoveTime:
-    - 0
-    - 0
-    - 0
-    effect:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    EffectStartTime:
-    - 0
-    - 0
-    - 0
-    effect_Pos:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    off_Mesh_Pos:
-    - {fileID: 1480112878}
-    jump_Speed: 0
-    jump_Acc: 0
-    missile: {fileID: 0}
-    missile_Amount: 0
-    missile_Pos: {fileID: 5847035042674421376}
-    missile_Index: 0
-    spawn_Animation: 0
-    is_Normal_Attack: 0
-    normal_Last_Attack: 0
-    add_Time: 0
-    pre_Delay: 0
-    pre_Delay_speed: 0
-    post_Delay: 0
-    post_Delay_speed: 0
-    after_skill_name: 
   damaged_Effect: {fileID: 152628, guid: 4e42a2081531c814fa4774bd0d6b45df, type: 3}
   phase_Effect: {fileID: 1436447386774278, guid: b36e5394bf3902b41877ecba9aa55b8d, type: 3}
   real_AI:
@@ -2030,7 +1992,7 @@ MonoBehaviour:
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   TimeLeft: 4
-  stop_NextTime: 4
+  stop_NextTime: 5
   skill_NextTime: 6
   long_NextTime: 4
   stop_CheckTime: 0
