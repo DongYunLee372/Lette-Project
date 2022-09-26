@@ -1585,6 +1585,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1629,6 +1630,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1667,6 +1669,7 @@ MonoBehaviour:
     - {fileID: 1480112878}
     jump_Speed: []
     jump_Acc: []
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1711,6 +1714,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1747,8 +1751,15 @@ MonoBehaviour:
     - {fileID: 0}
     off_Mesh_Pos:
     - {fileID: 1480112878}
-    jump_Speed: []
-    jump_Acc: []
+    jump_Speed:
+    - 0
+    - 0
+    - 0
+    jump_Acc:
+    - 0
+    - 0
+    - 0
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1787,6 +1798,7 @@ MonoBehaviour:
     - {fileID: 1480112878}
     jump_Speed: []
     jump_Acc: []
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1825,6 +1837,7 @@ MonoBehaviour:
     - {fileID: 1480112878}
     jump_Speed: []
     jump_Acc: []
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1863,6 +1876,7 @@ MonoBehaviour:
     - {fileID: 1480112878}
     jump_Speed: []
     jump_Acc: []
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1901,6 +1915,7 @@ MonoBehaviour:
     - {fileID: 1480112878}
     jump_Speed: []
     jump_Acc: []
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1939,6 +1954,7 @@ MonoBehaviour:
     - {fileID: 1480112878}
     jump_Speed: []
     jump_Acc: []
+    jump_Angular: []
     missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
@@ -1977,6 +1993,7 @@ MonoBehaviour:
     - {fileID: 1480112878}
     jump_Speed: []
     jump_Acc: []
+    jump_Angular: []
     missile: {fileID: 1252854708237055356, guid: 39b88489431d8fc4aaa18fe2deb50d00, type: 3}
     missile_Amount: 1
     missile_Pos: {fileID: 5847035042674421376}
