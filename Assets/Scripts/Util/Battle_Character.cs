@@ -37,10 +37,10 @@ public class Attack_Info // 스킬이나 공격info
     public Transform[] off_Mesh_Pos;
 
     // 점프 속도
-    public float jump_Speed;
+    public float[] jump_Speed;
 
     // 점프 가속도
-    public float jump_Acc;
+    public float[] jump_Acc;
 
     // 발사체
     public GameObject missile;
@@ -264,6 +264,7 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
+                Debug.Log("파이널 들어옴 " + clipname);
                 if (attack_Info[i].off_Mesh_Pos[0])
                     attack_Info[i].off_Mesh_Pos[0].localPosition = begin_Pos;
 
@@ -301,7 +302,8 @@ public class Battle_Character : MonoBehaviour
                 if (attack_Info[i].post_Delay != 0)
                 {
                     isDelay = true;
-
+                    animator.Pause();
+                    Debug.Log("후딜있음 시작");
                     StartCoroutine(post_Delay_Coroutine(attack_Info[i].post_Delay));
                 }
 
@@ -316,6 +318,8 @@ public class Battle_Character : MonoBehaviour
     {
         yield return new WaitForSeconds(sec);
 
+        Debug.Log("후딜있음 끝남");
+        animator.Resume();
         isDelay = false;
     }
 
@@ -387,15 +391,11 @@ public class Battle_Character : MonoBehaviour
 
         if (attack_Info[info_num].Movedis[index] != 0)
         {
-            Debug.Log("스팅 움직여라 : " + attack_Info[info_num].Name);
-            Debug.Log("스팅 local 좌표  " + attack_Info[info_num].Name + " : " + attack_Info[info_num].off_Mesh_Pos[0].localPosition);
-            Debug.Log("스팅 노로컬 좌표  " + attack_Info[info_num].Name + " : " + attack_Info[info_num].off_Mesh_Pos[0].position);
-
             attack_Info[info_num].off_Mesh_Pos[0].localPosition += new Vector3(0, 0, attack_Info[info_num].Movedis[index]);
 
             real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
-            real_AI.navMesh.speed = attack_Info[info_num].jump_Speed;
-            real_AI.navMesh.acceleration = attack_Info[info_num].jump_Acc;
+            real_AI.navMesh.speed = attack_Info[info_num].jump_Speed[index];
+            real_AI.navMesh.acceleration = attack_Info[info_num].jump_Acc[index];
 
             StartCoroutine(nav_Coroutine(3.5f, 8f));
         }
@@ -423,7 +423,7 @@ public class Battle_Character : MonoBehaviour
 
     IEnumerator nav_Coroutine(float speed, float acc)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         real_AI.navMesh.speed = speed;
         real_AI.navMesh.acceleration = acc;
@@ -511,7 +511,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("ㅇㅇ");
-            animator.Play("Normal_Attack_1");
+            animator.Play("First_Atk");
         }
 
         Time_Check();
