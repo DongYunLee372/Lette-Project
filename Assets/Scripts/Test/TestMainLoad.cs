@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-public class TestMainLoad : Editor
+public class TestMainLoad : MonoBehaviour//Editor
 {
 
 
