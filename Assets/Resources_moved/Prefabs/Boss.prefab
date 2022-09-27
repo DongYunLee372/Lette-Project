@@ -1658,7 +1658,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -1707,7 +1707,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -1756,7 +1756,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -1805,7 +1805,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -1854,7 +1854,7 @@ MonoBehaviour:
     - -1
     - 0
     - -1
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -1894,7 +1894,7 @@ MonoBehaviour:
     jump_Speed: []
     jump_Acc: []
     jump_Angular: []
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -1943,7 +1943,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -1992,7 +1992,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -2041,7 +2041,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -2081,7 +2081,7 @@ MonoBehaviour:
     jump_Speed: []
     jump_Acc: []
     jump_Angular: []
-    missile: 
+    missile: {fileID: 0}
     missile_Amount: 0
     missile_Pos: {fileID: 0}
     missile_Index: 0
@@ -2130,7 +2130,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    missile: Boss_Arrow
+    missile: {fileID: 1252854708237055356, guid: 39b88489431d8fc4aaa18fe2deb50d00, type: 3}
     missile_Amount: 1
     missile_Pos: {fileID: 5847035042674421376}
     missile_Index: 0

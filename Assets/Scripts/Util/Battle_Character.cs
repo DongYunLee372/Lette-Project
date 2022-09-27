@@ -46,7 +46,7 @@ public class Attack_Info // 스킬이나 공격info
     public float[] jump_Angular;
 
     // 발사체
-    public string missile;
+    public GameObject missile;
 
     // 발사체 개수
     public int missile_Amount;
@@ -433,7 +433,7 @@ public class Battle_Character : MonoBehaviour
         {
             for (int i = 0; i < attack_Info[info_num].missile_Amount; i++)
             {
-                GameObject missileobj = GameMG.Instance.Resource.Instantiate<GameObject>("Boss_Arrow");
+                GameObject missileobj = GameObject.Instantiate(attack_Info[info_num].missile);
                 //GameObject missileobj = GameMG.Instance.Resource.Instantiate<GameObject>("susu");
                 missileobj.transform.position = attack_Info[info_num].missile_Pos.position;
 

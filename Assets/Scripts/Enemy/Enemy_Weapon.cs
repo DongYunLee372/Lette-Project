@@ -51,7 +51,8 @@ public class Enemy_Weapon : MonoBehaviour
 
             if (my_Logic == Enemy_Enum.Enemy_Attack_Logic.Long_Attack)
             {
-                GameMG.Instance.Resource.Destroy<GameObject>(this.gameObject);
+                //GameMG.Instance.Resource.Destroy<GameObject>(this.gameObject);
+                Destroy(this.gameObject);
             }
         }
     }
