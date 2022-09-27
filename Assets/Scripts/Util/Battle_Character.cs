@@ -433,8 +433,8 @@ public class Battle_Character : MonoBehaviour
         {
             for (int i = 0; i < attack_Info[info_num].missile_Amount; i++)
             {
-                GameObject missileobj = GameObject.Instantiate(attack_Info[info_num].missile);
-                //GameObject missileobj = GameMG.Instance.Resource.Instantiate<GameObject>("susu");
+                //GameObject missileobj = GameObject.Instantiate(attack_Info[info_num].missile);
+                GameObject missileobj = GameMG.Instance.Resource.Instantiate<GameObject>("Boss_Arrow");
                 missileobj.transform.position = attack_Info[info_num].missile_Pos.position;
 
                 Vector3 dirVec = cur_Target.transform.position - missileobj.transform.position;

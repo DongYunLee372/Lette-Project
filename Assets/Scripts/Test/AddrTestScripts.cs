@@ -14,7 +14,7 @@ public class AddrTestScripts : MonoBehaviour
 {
 
 
-
+    public Canvas canvas;
     SceneInstance m_LoadedScene;
 
     public GameObject tempOBJ_;
@@ -95,7 +95,7 @@ public class AddrTestScripts : MonoBehaviour
         //var a= GameMG.Instance.Resource.Instantiate<GameObject>("Boss_Arrow");
         // StartCoroutine(ee(a));
 
-        GameMG.Instance.startGame("Demo");
+       // GameMG.Instance.startGame("Demo");
 
        // GameMG.Instance.startGame("Demo");
 

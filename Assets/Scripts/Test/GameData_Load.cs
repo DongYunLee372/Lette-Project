@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class GameData_Load :Singleton<GameData_Load>
 
 
 
-   public void TestPos_and_Load()  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
+   public void TestPos_and_Load(Action action=null)  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
 
         str.Add("Hpbar");
@@ -79,6 +80,12 @@ public class GameData_Load :Singleton<GameData_Load>
             }
 
          
+        }
+
+        if(action!=null)
+        {
+
+        action();
         }
 
     }
