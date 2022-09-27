@@ -288,18 +288,25 @@ public class BaseStatus:MonoBehaviour
     {
         CurGroggy = CurGroggy + val;
 
+        Debug.Log("그로기 증가 현재 그로기 : " + CurGroggy);
+
         //플레이어가 다운될정도의 그로기 값이 모이면 플레이어 다운
         if (CurGroggy>=player_Down_Groggy)
         {
+            Debug.Log("그로기 증가로 다운 실행");
             CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             movecom.KnockDown();
+            return true;
         }
 
         //들어온 그로기 값이 경직에 빠지게 하는 그로기값이면 경직
         if (val>=player_Stagger_Groggy)
         {
+            Debug.Log("그로기 증가로 경직 실행");
             CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             movecom.KnockBack();
+
+            return true;
         }
 
         

@@ -995,6 +995,12 @@ public class CMoveComponent : BaseComponent
             
         }
 
+        if(testLookY>=130|| testLookY<=-93)
+        {
+            playerChestTr.eulerAngles = new Vector3(playerChestTr.eulerAngles.x, -90, 270);
+            return;
+        }
+
         rot.y = GetMinMaxRange(testLookY, -42, 85) + testaxisY;
         rot.x = GetMinMaxRange(testLookZ, -33, 35) + testaxisZ;
 
