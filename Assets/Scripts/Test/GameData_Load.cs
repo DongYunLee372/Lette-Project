@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameData_Load :MonoBehaviour
+public class GameData_Load :Singleton<GameData_Load>
 {
     List<string> str=new List<string>();
 
@@ -40,8 +40,8 @@ public class GameData_Load :MonoBehaviour
 
         AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
 
-        GameMG.Instance.startGame("Roomtest");
-          //AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
+       // GameMG.Instance.startGame("Roomtest");
+          AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
         //  TestMainLoad.Instance.
         //    var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");

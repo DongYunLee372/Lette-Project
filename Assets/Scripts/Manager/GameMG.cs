@@ -193,7 +193,7 @@ public class GameMG : Singleton<GameMG>
     {
 
 
-        gameData_Load.TestPos_and_Load();
+        GameData_Load.Instance.TestPos_and_Load();
     }
 
 }
