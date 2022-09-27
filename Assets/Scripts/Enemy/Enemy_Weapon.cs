@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy_Weapon : MonoBehaviour
 {
-    [SerializeField]
     public Battle_Character parent_character;
 
     [SerializeField]
@@ -12,7 +11,8 @@ public class Enemy_Weapon : MonoBehaviour
 
     void Start()
     {
-        parent_character = GetComponentInParent<Battle_Character>();
+        if (parent_character == null)
+            parent_character = GetComponentInParent<Battle_Character>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -28,12 +28,12 @@ public class Enemy_Weapon : MonoBehaviour
             {
                 case Enemy_Enum.Enemy_Attack_Type.Normal_Attack:
                     collider.gameObject.GetComponent<PlayableCharacter>().BeAttacked(parent_character.mon_Info.P_mon_Atk, collider.transform.position
-                        ,parent_character.cur_Groggy);
+                        , parent_character.cur_Groggy);
                     break;
                 case Enemy_Enum.Enemy_Attack_Type.Skill_Attack:
                     // 캐릭터의 damaged 함수호출
                     collider.gameObject.GetComponent<PlayableCharacter>().BeAttacked
-                        (parent_character.now_Skill_Info.P_skill_dmg, collider.transform.position,parent_character.cur_Groggy);
+                        (parent_character.now_Skill_Info.P_skill_dmg, collider.transform.position, parent_character.cur_Groggy);
                     break;
             }
 
