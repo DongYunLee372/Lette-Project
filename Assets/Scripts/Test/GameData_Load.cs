@@ -2,23 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameData_Load : Singleton<GameData_Load>
+public class GameData_Load :MonoBehaviour
 {
     List<string> str=new List<string>();
 
-    private void Awake()
-    {
-
-    
-
-        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
-        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
-        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
-        ////StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
-        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("StartUI"));
-        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("OptionSetting"));
-        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Boss_HP"));
-    }
+   
 
     void Start()
     {
@@ -52,7 +40,7 @@ public class GameData_Load : Singleton<GameData_Load>
 
         AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
 
-
+      //  GameMG.Instance.startGame("Roomtest");
           AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
         //  TestMainLoad.Instance.

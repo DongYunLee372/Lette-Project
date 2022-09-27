@@ -129,6 +129,8 @@ public class ResourceManager : MonoBehaviour
        where T : UnityEngine.Object
 
     {
+
+        Debug.Log("Instantiate호출");
         AddressablesLoadManager.Instance.SingleAsset_Load<T>(path);
        T original = AddressablesLoadManager.Instance.FindLoadAsset<T>(path);
 
@@ -139,6 +141,7 @@ public class ResourceManager : MonoBehaviour
             return null;
         }
 
+        Debug.Log("중간");
 
         //  if (original.GetComponent<Poolable>() != null)
         //{

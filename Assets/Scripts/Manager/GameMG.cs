@@ -25,9 +25,10 @@ public class GameMG : Singleton<GameMG>
     private bool isEnded;
     private Vector3 Init_PlayerPos = new Vector3(0, 0, 0);
 
-    ObjectManager _objManager = new ObjectManager();
-    ResourceManager _resourceManager = new ResourceManager();
+    public ObjectManager _objManager;//= new ObjectManager();
+    public ResourceManager _resourceManager;//= new ResourceManager();
     public List<GameObject> tempObj_Manager = new List<GameObject>();
+    public GameData_Load gameData_Load=null;
 
     public ObjectManager ObjManager { get { return Instance._objManager; } }  //이거 아녀???
     public ResourceManager Resource { get { return Instance._resourceManager; } }
@@ -190,7 +191,7 @@ public class GameMG : Singleton<GameMG>
 
     void Start()
     {
-        GameData_Load.Instance.TestPos_and_Load();
+        gameData_Load.TestPos_and_Load();
     }
 
 }

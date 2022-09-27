@@ -92,8 +92,10 @@ public class AddrTestScripts : MonoBehaviour
 
         //에러 나중에 생각...ㅋ큐ㅠ 
      //   pool.Init(te);
-        var a= GameMG.Instance.Resource.Instantiate<GameObject>("Boss_Arrow");
-       // StartCoroutine(ee(a));
+        //var a= GameMG.Instance.Resource.Instantiate<GameObject>("Boss_Arrow");
+        // StartCoroutine(ee(a));
+
+        GameMG.Instance.startGame("Demo");
 
        // GameMG.Instance.startGame("Demo");
 
