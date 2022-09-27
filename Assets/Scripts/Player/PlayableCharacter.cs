@@ -184,14 +184,14 @@ public class PlayableCharacter : MonoBehaviour
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;
         status.CurHP -= finaldamage;
-
+        status.GroggyUp(Groggy);
         //status.GroggyUp(Groggy);
         //if (status.CurGroggy >= 100)
         //{
         //    movecom.KnockDown();
         //}
         
-        movecom.KnockBack();
+        //movecom.KnockBack();
 
         //if (finaldamage >= 80)
         //{

@@ -7,11 +7,11 @@ public class BaseStatus:MonoBehaviour
 {
     [Header("=========================")]
     [Header("초기 세팅값")]
-
+    [Header("이름")]
     //캐릭터 이름
     [SerializeField]
     public string character_Name;
-
+    [Header("hp")]
     //캐릭터 hp 총량
     [SerializeField]
     public int player_HP;
@@ -20,35 +20,42 @@ public class BaseStatus:MonoBehaviour
     [SerializeField]
     public int player_Def;
 
-
+    [Header("스테미나 총량")]
     //캐릭터 Stamina 총량
     [SerializeField]
     public int player_Stamina;
 
+    [Header("스테미나 자동 회복 시간")]
     // Stamina 자동회복 시간 
     [SerializeField]
     public int player_Stamina_Recovery_Time;
 
+    [Header("스테미나 자동 회복 값")]
     // Stamina 자동회복 값
     [SerializeField]
     public int player_Stamina_Recovery_Val;
 
+    [Header("그로기값 총량")]
     //그로기값 최대치
     [SerializeField]
     public int player_Groggy;
 
+    [Header("그로기값 자동회복 시간")]
     // 그로기값 자동회복 시간 
     [SerializeField]
     public int player_Groggy_Recovery_Time;
 
+    [Header("그로기값 자동회복 값")]
     // 그로기값 자동회복 값
     [SerializeField]
     public int player_Groggy_Recovery_Val;
 
+    [Header("경직상태에 빠지는 그로기값 (누적값이 아니라 한번에 들어온 값으로 판단)")]
     //경직 상태에 빠지는 그로기값
     [SerializeField]
     public int player_Stagger_Groggy;
 
+    [Header("경직상태에 빠지는 그로기값 (누적값으로 판단)")]
     //다운 상태에 빠지는 그로기값
     [SerializeField]
     public int player_Down_Groggy;
@@ -280,6 +287,23 @@ public class BaseStatus:MonoBehaviour
     public bool GroggyUp(float val)
     {
         CurGroggy = CurGroggy + val;
+
+        //플레이어가 다운될정도의 그로기 값이 모이면 플레이어 다운
+        if (CurGroggy>=player_Down_Groggy)
+        {
+            CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom.KnockDown();
+        }
+
+        //들어온 그로기 값이 경직에 빠지게 하는 그로기값이면 경직
+        if (val>=player_Stagger_Groggy)
+        {
+            CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            movecom.KnockBack();
+        }
+
+        
+
         if (CurGroggy == MaxGroggy)
         {
             return false;
