@@ -19,7 +19,7 @@ public class State_Attack : State
     {
         if (battle_character.isAttack_Run)
         {
-            if (battle_character.isStop)
+            if (battle_character.stop_CoolTime.isCheck)
             {
                 if (battle_character.attack_Info[battle_character.ani_Index].off_Mesh_Pos[0])
                     battle_character.attack_Info[battle_character.ani_Index].off_Mesh_Pos[0].localPosition = battle_character.begin_Pos;
@@ -47,7 +47,9 @@ public class State_Attack : State
 
         // 근접 공격 사거리 체크
         if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk) && !battle_character.isAttack_Run)
+                battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk)
+                && !battle_character.isAttack_Run
+                && battle_character.normal_CoolTime.isCheck)
         {
             judge_logic = Enemy_Attack_Logic.Melee_Attack;
             _State = this;
@@ -61,7 +63,8 @@ public class State_Attack : State
                (Vector3.Distance(battle_character.transform.position,
                battle_character.cur_Target.transform.position) >= int.Parse(special_Range[0]))
                &&
-               !battle_character.isAttack_Run && battle_character.isSkill_Using)
+               !battle_character.isAttack_Run && battle_character.skill_CoolTime.isCheck
+               && battle_character.normal_CoolTime.isCheck)
         {
             judge_logic = Enemy_Attack_Logic.Skill_Using;
             _State = this;
@@ -71,7 +74,8 @@ public class State_Attack : State
 
         if (battle_character.mon_Info.P_mon_FarAtk != 0 && (Vector3.Distance(battle_character.transform.position,
             battle_character.cur_Target.transform.position) >= battle_character.mon_Info.P_mon_FarAtk) &&
-            battle_character.isShooting) // 원거리 공격
+            battle_character.long_CoolTime.isCheck
+            && battle_character.normal_CoolTime.isCheck) // 원거리 공격
         {
             judge_logic = Enemy_Attack_Logic.Long_Attack;
             _State = this;
@@ -125,8 +129,8 @@ public class State_Attack : State
                 Result_return_Object = null;
 
                 battle_character.attack_Type = Enemy_Attack_Type.Normal_Attack;
-                battle_character.stop_CheckTime = 0f;
-                battle_character.isStop = false;
+                battle_character.stop_CoolTime.check_Time = 0f;
+                battle_character.stop_CoolTime.isCheck = false;
                 battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
                 battle_character.isAttack_Run = true;
                 break;
@@ -138,9 +142,9 @@ public class State_Attack : State
                 Attack_Result = false;
                 Result_return_Object = null;
 
-                battle_character.isShooting = false;
-                battle_character.long_CheckTime = 0f;
-                battle_character.isStop = false;
+                battle_character.long_CoolTime.isCheck = false;
+                battle_character.long_CoolTime.check_Time = 0f;
+                battle_character.stop_CoolTime.isCheck = false;
                 battle_character.attack_Type = Enemy_Attack_Type.Normal_Attack;
                 battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
                 battle_character.isAttack_Run = true;
@@ -152,8 +156,8 @@ public class State_Attack : State
                 Attack_Result = false;
                 Result_return_Object = null;
 
-                battle_character.isSkill_Using = false;
-                battle_character.skill_CheckTime = 0f;
+                battle_character.skill_CoolTime.isCheck = false;
+                battle_character.skill_CoolTime.check_Time = 0f;
                 battle_character.attack_Type = Enemy_Attack_Type.Skill_Attack;
                 battle_character.skill_handler.Skill_Run(battle_character, battle_character.now_Skill_Info);
 

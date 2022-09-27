@@ -80,6 +80,14 @@ public class Attack_Info // 스킬이나 공격info
     public string after_skill_name; // 이어지는 공격이 있을 경우에 그 공격의 이름
 }
 
+[System.Serializable]
+public class CoolTime
+{
+    public float check_Time;
+    public float next_Time;
+    public bool isCheck;
+}
+
 public class Battle_Character : MonoBehaviour
 {
     public FSM_AI ai = new FSM_AI();
@@ -236,6 +244,19 @@ public class Battle_Character : MonoBehaviour
         }
     }
 
+    public void Animation_Attack_Collider_Stop(string clipname)
+    {
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(true);
+
+                return;
+            }
+        }
+    }
+
     public void Animation_Awake(string clipname)
     {
         for (int i = 0; i < attack_Info.Length; i++)
@@ -305,6 +326,9 @@ public class Battle_Character : MonoBehaviour
                         {
                             StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
                         }
+
+                        normal_CoolTime.check_Time = 0f;
+                        normal_CoolTime.isCheck = false;
                     }
                 }
                 else // 일반 공격이 아닌 경우
@@ -318,6 +342,9 @@ public class Battle_Character : MonoBehaviour
                     {
                         StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
                     }
+
+                    normal_CoolTime.check_Time = 0f;
+                    normal_CoolTime.isCheck = false;
                 }
 
                 // 후딜이 있다면
@@ -497,44 +524,48 @@ public class Battle_Character : MonoBehaviour
         Initalize();
     }
 
-    public float TimeLeft = 4.0f;
-    public float stop_NextTime = 4.0f; // 정지 방지 시간
-    public float skill_NextTime = 6.0f; // 스킬 쿨타임
-    public float long_NextTime = 4.0f; // 원거리 공격 쿨타임
-    public float stop_CheckTime = 0.0f;
-    public float skill_CheckTime = 0.0f;
-    public float long_CheckTime = 0.0f;
 
-    public bool isStop; // 멈춰있는지
-    public bool isSkill_Using; // 전에 사용했던 스킬을 바로 사용하지 못하게끔 하는 변수
-    public bool isShooting;
+
+
+    public CoolTime stop_CoolTime;  // 정지 방지
+    public CoolTime skill_CoolTime;  // 스킬 쿨타임 
+    public CoolTime long_CoolTime;  // 원거리 공격 쿨타임
+    public CoolTime normal_CoolTime;  // 공격간 최소 쿨타임
 
     public string testSkillName;
 
     void Time_Check()
     {
-        stop_CheckTime += Time.deltaTime;
-        skill_CheckTime += Time.deltaTime;
-        long_CheckTime += Time.deltaTime;
 
-        if (stop_CheckTime > stop_NextTime)
+        stop_CoolTime.check_Time += Time.deltaTime;
+        skill_CoolTime.check_Time += Time.deltaTime;
+        long_CoolTime.check_Time += Time.deltaTime;
+        normal_CoolTime.check_Time += Time.deltaTime;
+
+        if (stop_CoolTime.check_Time > stop_CoolTime.next_Time)
         {
             //nextTime = Time.time + TimeLeft;
-            stop_CheckTime = 0f;
-            isStop = true;
+            stop_CoolTime.check_Time = 0f;
+            stop_CoolTime.isCheck = true;
         }
 
-        if (skill_CheckTime > skill_NextTime)
+        if (skill_CoolTime.check_Time > skill_CoolTime.next_Time)
         {
             //nextTime = Time.time + TimeLeft;
-            skill_CheckTime = 0f;
-            isSkill_Using = true;
+            skill_CoolTime.check_Time = 0f;
+            skill_CoolTime.isCheck = true;
         }
 
-        if (long_CheckTime > long_NextTime)
+        if (long_CoolTime.check_Time > long_CoolTime.next_Time)
         {
-            long_CheckTime = 0f;
-            isShooting = true;
+            long_CoolTime.check_Time = 0f;
+            long_CoolTime.isCheck = true;
+        }
+
+        if (normal_CoolTime.check_Time > normal_CoolTime.next_Time)
+        {
+            normal_CoolTime.check_Time = 0f;
+            normal_CoolTime.isCheck = true;
         }
     }
 

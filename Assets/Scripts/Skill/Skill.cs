@@ -13,8 +13,8 @@ public class Skill : MonoBehaviour
     public virtual void Skill_Run(Battle_Character battle_character, MonsterSkillInformation skill_data)
     {
         battle_character.isAttack_Run = true;
-        battle_character.stop_CheckTime = 0f;
-        battle_character.isStop = false;
+        battle_character.stop_CoolTime.check_Time = 0f;
+        battle_character.stop_CoolTime.isCheck = false;
         battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
         battle_character.animator.Play(skill_data.P_skill_Name_En);
 
