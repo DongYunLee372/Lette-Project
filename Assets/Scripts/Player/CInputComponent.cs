@@ -296,19 +296,19 @@ public class CInputComponent : BaseComponent
 
     void Update()
     {
-        //넉백 테스트
-        if(Input.GetKeyDown(KeyCode.U))
-        {
-            PlayableCharacter.Instance.BeAttacked(10,this.transform.position);
-            //movecom.KnockBack();
-        }
+        ////넉백 테스트
+        //if(Input.GetKeyDown(KeyCode.U))
+        //{
+        //    PlayableCharacter.Instance.BeAttacked(10,this.transform.position);
+        //    //movecom.KnockBack();
+        //}
 
-        //넉다운 테스트
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            PlayableCharacter.Instance.BeAttacked(90,this.transform.position);
-            //movecom.KnockDown();
-        }
+        ////넉다운 테스트
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    PlayableCharacter.Instance.BeAttacked(90,this.transform.position);
+        //    //movecom.KnockDown();
+        //}
 
         //키 입력
         KeyInput();
