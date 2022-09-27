@@ -129,7 +129,7 @@ public class PlayableCharacter : MonoBehaviour
     /*플에이어가 공격을 받았을때 해당 함수를 호출
       현재 플레이어의 상태에 따라서 넉백, 가드넉백, 회피 등등의 동작을 결정한다.
       공격을 당했을때 공격을 당한 위치(충돌한 위치)도 함께 넘겨준다.(피격 이펙트를 출력하기 위해)*/
-    public void BeAttacked(float damage, Vector3 hitpoint)
+    public void BeAttacked(float damage, Vector3 hitpoint, float Groggy)
     {
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
         
@@ -139,7 +139,7 @@ public class PlayableCharacter : MonoBehaviour
             state == CharacterStateMachine.eCharacterState.Move ||
             state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
-            Damaged(damage, hitpoint);
+            Damaged(damage, hitpoint, Groggy);
         }
 
         //2. 가드중 
@@ -170,13 +170,13 @@ public class PlayableCharacter : MonoBehaviour
             PlayerAttack attackcom = GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
             //CAttackComponent attackcom = GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
             attackcom.PlayerHit();
-            Damaged(damage, hitpoint);
+            Damaged(damage, hitpoint, Groggy);
         }
 
     }
 
     
-    public void Damaged(float damage,Vector3 hitpoint/*,float Groggy*/)
+    public void Damaged(float damage,Vector3 hitpoint, float Groggy)
     {
         CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         EffectManager.Instance.InstantiateEffect(HitEffect, hitpoint);
