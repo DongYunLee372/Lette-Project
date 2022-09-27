@@ -16,7 +16,75 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 8a5fd0f45b23d1643a3f4e18955d3e4d
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: d2d49758f8b0e1a4dbd265b469f5c8c7
+    m_Address: Boss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 39b88489431d8fc4aaa18fe2deb50d00
+    m_Address: Boss_Arrow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 82e50146481e6b440911b72b4be125dc
+    m_Address: Boss_HP
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f2c73200962aea749bf4beaa8acf288a
+    m_Address: Enemy HpBar Slider
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 16e50229ff23d7840b95134739f65244
+    m_Address: FriendPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a5dcc9ee26d52ef4bafda2e16bf1678e
+    m_Address: Hpbar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e9289f49a91d21843baaa311416ffd7f
+    m_Address: PlayerCharacter
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a62eff40c92cd01488863fa5149d79a1
+    m_Address: OptionSetting
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bf1dc5f18c9584f479a1439400583b7f
+    m_Address: Inven
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cc8884be57bcf624684c43620abc4fec
+    m_Address: StartUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 26e13c7c8aacf0c41a5e02d292da3b74
+    m_Address: Roomtest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fa3ff36ead8f3bc4fa9358cfece333aa
+    m_Address: TestGameData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a73e9b11aa9476f42b16d5a4710e62be
+    m_Address: PlayerUIPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5e452b9fd9cc1884ca2d1fe458df33d9
+    m_Address: UIBar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: df42f27fec159c34ba416df450d6358b
+    m_Address: susu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f95e6b4d87912f4caa1a02676746b2a
+    m_Address: Estust
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 540a2e88dbef67c4f85cb779a44d1f2d
+    m_Address: ButtonListner
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
