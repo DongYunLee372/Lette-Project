@@ -593,7 +593,7 @@ public class CMoveComponent : BaseComponent
     //    }
     //}
 
-    public void Damaged_Rolling(float damage,Vector3 hitpoint)
+    public void Damaged_Rolling(float damage,Vector3 hitpoint, float Groggy)
     {
         //회피 중 피격 당했을때 무적상태인지 아닌지 판단
         if (/*curval.IsRolling && */curval.IsNoDamage)
@@ -602,7 +602,7 @@ public class CMoveComponent : BaseComponent
         }
         else
         {
-            PlayableCharacter.Instance.Damaged(damage, hitpoint);
+            PlayableCharacter.Instance.Damaged(damage, hitpoint,Groggy);
         }
     }
 

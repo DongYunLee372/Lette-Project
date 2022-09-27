@@ -132,7 +132,8 @@ public class PlayableCharacter : MonoBehaviour
     public void BeAttacked(float damage, Vector3 hitpoint, float Groggy)
     {
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
-        
+
+        //float Groggy = 0;
 
         //1. 무조건 공격이 성공하는 상태(Idle, Move, OutOfControl)
         if (state == CharacterStateMachine.eCharacterState.Idle ||
@@ -149,7 +150,7 @@ public class PlayableCharacter : MonoBehaviour
         {
             CGuardComponent guardcom = GetMyComponent(CharEnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
 
-            guardcom.Damaged_Guard(damage, hitpoint);
+            guardcom.Damaged_Guard(damage, hitpoint,Groggy);
         }
 
         //3. 회피중
@@ -160,7 +161,7 @@ public class PlayableCharacter : MonoBehaviour
             CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
             if(!movecom.curval.IsNoDamage)
-                movecom.Damaged_Rolling(damage, hitpoint);
+                movecom.Damaged_Rolling(damage, hitpoint,Groggy);
 
         }
 

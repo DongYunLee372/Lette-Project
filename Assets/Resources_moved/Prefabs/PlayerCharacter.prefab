@@ -2293,8 +2293,8 @@ MonoBehaviour:
   moveoption:
     RotMouseSpeed: 1
     RotSpeed: 0.5
-    MoveSpeed: 300
-    RunSpeed: 500
+    MoveSpeed: 130
+    RunSpeed: 420
     MinAngle: 0
     MaxAngle: 0
     Gravity: 0
@@ -2310,12 +2310,12 @@ MonoBehaviour:
     StepHeight: 1
     StepCkeckDis: 0.3
     RollingClip: {fileID: 7400000, guid: 207adbd2d547d7f408adcac0b17f4e44, type: 2}
-    RollingClipPlaySpeed: 2.3
+    RollingClipPlaySpeed: 2.1
     RollingDistance: 8
     RollingTime: 0
     RollingFreeDamageTime: 0
-    NextRollingTime: 0.1
-    RollingStaminaDown: 20
+    NextRollingTime: 0.14
+    RollingStaminaDown: 15
     KnockDownClip: {fileID: 7400000, guid: 0c62720761979084caafe70772d508f8, type: 2}
     KnockBackClip: {fileID: 7400000, guid: fb154bb004a47594ea4d6d9afb25d388, type: 2}
     KnockDownTime: 1
@@ -2416,9 +2416,9 @@ MonoBehaviour:
     attackName: Attack1
     attackType: Normal
     aniclipName: _Attack01_new
-    animationPlaySpeed: 1
-    startDelay: 0
-    recoveryDelay: 0.1
+    animationPlaySpeed: 1.53
+    startDelay: 0.69
+    recoveryDelay: 0.14
     bufferdInputTime_Start: 0.2
     BufferdInputTime_End: 0.2
     damage: 10
@@ -2427,17 +2427,17 @@ MonoBehaviour:
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
-    movedis: 5
-    movetime: 0.1
+    movedis: 4
+    movetime: 0.21
     ProjectileObjName: 
     TargetObjName: 
   - attackNum: 1
     attackName: Attack2
     attackType: Normal
     aniclipName: _Attack02_new
-    animationPlaySpeed: 1.2
-    startDelay: 0
-    recoveryDelay: 0.1
+    animationPlaySpeed: 0.92
+    startDelay: 0.42
+    recoveryDelay: 0.21
     bufferdInputTime_Start: 0.2
     BufferdInputTime_End: 0.2
     damage: 10
@@ -2446,7 +2446,7 @@ MonoBehaviour:
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
-    movedis: 10
+    movedis: 4
     movetime: 0.2
     ProjectileObjName: 
     TargetObjName: 
@@ -2454,9 +2454,9 @@ MonoBehaviour:
     attackName: Attack03
     attackType: Normal
     aniclipName: _Attack03_new
-    animationPlaySpeed: 1
+    animationPlaySpeed: 0.9
     startDelay: 0
-    recoveryDelay: 0.2
+    recoveryDelay: 0.41
     bufferdInputTime_Start: 0.4
     BufferdInputTime_End: 0
     damage: 10
@@ -2465,8 +2465,8 @@ MonoBehaviour:
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
-    movedis: 10
-    movetime: 0.3
+    movedis: 4
+    movetime: 0.21
     ProjectileObjName: 
     TargetObjName: 
   skillinfos:

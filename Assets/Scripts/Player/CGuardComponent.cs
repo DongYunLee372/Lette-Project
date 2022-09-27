@@ -112,7 +112,7 @@ public class CGuardComponent : BaseComponent
 
 
     //가드중일때 데미지가 들어왔을때는 이쪽으로 들어온다.
-    public void Damaged_Guard(float damage,Vector3 hitpoint)
+    public void Damaged_Guard(float damage,Vector3 hitpoint,float Groggy)
     {
         //if (PlayableCharacter.Instance.status.CurBalance >= BalanceDecreaseVal)
         //{
@@ -127,7 +127,7 @@ public class CGuardComponent : BaseComponent
 
         //스테미나에 따라서
 
-        PlayableCharacter.Instance.Damaged(damage, hitpoint);
+        PlayableCharacter.Instance.Damaged(damage, hitpoint,Groggy);
     }
 
 
