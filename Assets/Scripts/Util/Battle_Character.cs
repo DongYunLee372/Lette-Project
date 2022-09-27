@@ -69,6 +69,9 @@ public class Attack_Info // 스킬이나 공격info
     // 애니메이션 꺼지는 추가 시간이 필요한 경우 ( 4개 이상의 이벤트가 필요할 때 )
     public float add_Time;
 
+    // 콜라이더 선택 번호
+    public int attack_Collider_Num; // 0번 = 칼 , 1번 = 몸통
+
     // 선딜 지속 시간, 선딜 스피드
     public float pre_Delay, pre_Delay_speed;
     // 후딜 지속 시간, 선딜 스피드
@@ -118,7 +121,7 @@ public class Battle_Character : MonoBehaviour
     public bool isReturn; // enemy_Area 에서 나갈경우 true 체크해줘서 ai가 판단할 수 있게끔 하는 변수
 
     [Header("=========Attack Related=========")]
-    public GameObject attack_Collider; // 공격 판정 충돌 범위 콜라이더 
+    public GameObject[] attack_Collider; // 공격 판정 충돌 범위 콜라이더 
     public Enemy_Attack_Type attack_Type; // 공격 타입
     public bool[] attack_Logic = new bool[(int)(Enemy_Attack_Logic.Attack_Logic_Amount) - 1];
     public bool isHit = false; // 맞았는지 판별 
@@ -163,13 +166,15 @@ public class Battle_Character : MonoBehaviour
         return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         destination_Pos = transform.position;
 
-        attack_Collider = GetComponentInChildren<Enemy_Weapon>()?.gameObject;
+        //attack_Collider = GetComponentInChildren<Enemy_Weapon>()?.gameObject;
 
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
         //movecom = GetComponentInChildren<CMoveComponent>();
-        //skill_handler = 
-        attack_Collider.SetActive(false);
+        //skill_handler =
+        foreach (GameObject col in attack_Collider)
+            col.SetActive(false);
+
         real_AI.AI_Init(this);
 
         for (int i = 0; i < attack_Info.Length; i++)
@@ -216,6 +221,20 @@ public class Battle_Character : MonoBehaviour
 
     public Vector3 begin_Pos = new Vector3();
     public int ani_Index; // 애니메이션 어택인포 인덱스
+
+
+    public void Animation_Attack(string clipname)
+    {
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(true);
+
+                return;
+            }
+        }
+    }
 
     public void Animation_Awake(string clipname)
     {
@@ -279,12 +298,12 @@ public class Battle_Character : MonoBehaviour
                         animator.Play("Walk");
                         if (attack_Info[i].add_Time == 0)
                         {
-                            attack_Collider.SetActive(false);
+                            attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(false);
                             isAttack_Run = false;
                         }
                         else if (attack_Info[i].add_Time != 0)
                         {
-                            StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time));
+                            StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
                         }
                     }
                 }
@@ -292,12 +311,12 @@ public class Battle_Character : MonoBehaviour
                 {
                     if (attack_Info[i].add_Time == 0)
                     {
-                        attack_Collider.SetActive(false);
+                        attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(false);
                         isAttack_Run = false;
                     }
                     else if (attack_Info[i].add_Time != 0)
                     {
-                        StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time));
+                        StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
                     }
                 }
 
@@ -310,7 +329,7 @@ public class Battle_Character : MonoBehaviour
                     StartCoroutine(post_Delay_Coroutine(attack_Info[i].post_Delay));
                 }
 
-                attack_Collider.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Melee_Attack;
+                attack_Collider[attack_Info[i].attack_Collider_Num].GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Melee_Attack;
 
                 return;
             }
@@ -464,11 +483,11 @@ public class Battle_Character : MonoBehaviour
         StartCoroutine(Mana_Regen());
     }
 
-    IEnumerator ani_Add_Time_Coroutine(float time)
+    IEnumerator ani_Add_Time_Coroutine(float time, int num)
     {
         yield return new WaitForSeconds(time);
 
-        attack_Collider.SetActive(false);
+        attack_Collider[num].SetActive(false);
         isAttack_Run = false;
     }
 

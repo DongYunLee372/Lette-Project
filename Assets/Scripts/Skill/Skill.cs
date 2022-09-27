@@ -20,8 +20,8 @@ public class Skill : MonoBehaviour
 
         if (skill_data.P_skill_ThrowObj != 1 && skill_data.P_skill_DiffObj != 1)
         {
-            battle_character.attack_Collider.SetActive(true);
-            battle_character.attack_Collider.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Skill_Using;
+            battle_character.attack_Collider[1].SetActive(true);
+            battle_character.attack_Collider[1].GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Skill_Using;
         }
         // 애니메이션 재생 ( 애니메이션 클립에 이벤트들을 붙여줌 해당 시간에 판정 
         // 어택매니저로 공격 호출

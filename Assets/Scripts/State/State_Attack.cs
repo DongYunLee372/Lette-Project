@@ -25,7 +25,10 @@ public class State_Attack : State
                     battle_character.attack_Info[battle_character.ani_Index].off_Mesh_Pos[0].localPosition = battle_character.begin_Pos;
                 battle_character.isAttack_Run = false;
                 battle_character.real_AI.pre_State = this;
-                battle_character.attack_Collider.SetActive(false);
+
+                foreach (GameObject obj in battle_character.attack_Collider)
+                    obj.SetActive(false);
+
                 _State = Trans_List[0];
                 return false;
             }
@@ -125,7 +128,6 @@ public class State_Attack : State
                 battle_character.stop_CheckTime = 0f;
                 battle_character.isStop = false;
                 battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
-                battle_character.attack_Collider.SetActive(true);
                 battle_character.isAttack_Run = true;
                 break;
             case Enemy_Attack_Logic.Long_Attack:
