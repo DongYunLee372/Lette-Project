@@ -85,6 +85,10 @@ MonoBehaviour:
     m_Address: ButtonListner
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: cfe9fa2a982a3704e96928504506f43e
+    m_Address: FloorTrab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

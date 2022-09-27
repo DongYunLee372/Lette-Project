@@ -17,26 +17,26 @@ public class FloorTrab : BaseInteractive
         TrabCollider = GetComponentInChildren<BoxCollider>();
         Debug.Log(TrabCollider.name);
         coroutine = StartTrab();
-        MoveSpeed = 7f;
+        MoveSpeed = 10f;
     }
 
     public IEnumerator StartTrab()
     {
         IsInteractive = true;
-        Vector3 temppos = Spear.transform.position;
-        Vector3 dir = (this.transform.position - Spear.transform.position).normalized;
+        Vector3 temppos = Spear.transform.localPosition;
+        Vector3 dir = (this.transform.localPosition - Spear.transform.position).normalized;
         while (true)
         {
             if(Spear.transform.position.y >= this.transform.position.y)
             {
-                yield break;
+                break;
             }
             //temppos.y = MoveSpeed * Time.deltaTime;
-            Spear.transform.position += dir * MoveSpeed * Time.deltaTime;
+            Spear.transform.localPosition += dir * MoveSpeed * Time.deltaTime;
             yield return new WaitForSeconds(0.1f);
         }
 
-        Debug.Log("끝");
+        Debug.Log("부안아미ㅗㅜ지ㅗ리ㅗ지롬지옴지ㅏㅇ닝");
         IsInteractive = false;
         yield return null;
     }
