@@ -25,8 +25,8 @@ public class GameMG : Singleton<GameMG>
     private bool isEnded;
     private Vector3 Init_PlayerPos = new Vector3(0, 0, 0);
 
-    public ObjectManager _objManager;//= new ObjectManager();
-    public ResourceManager _resourceManager;//= new ResourceManager();
+     ObjectManager _objManager= new ObjectManager();
+     ResourceManager _resourceManager= new ResourceManager();
     public List<GameObject> tempObj_Manager = new List<GameObject>();
     public GameData_Load gameData_Load=null;
 
@@ -191,6 +191,8 @@ public class GameMG : Singleton<GameMG>
 
     void Start()
     {
+
+
         gameData_Load.TestPos_and_Load();
     }
 

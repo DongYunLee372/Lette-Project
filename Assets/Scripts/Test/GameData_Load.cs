@@ -40,8 +40,8 @@ public class GameData_Load :MonoBehaviour
 
         AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
 
-      //  GameMG.Instance.startGame("Roomtest");
-          AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
+        GameMG.Instance.startGame("Roomtest");
+          //AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
         //  TestMainLoad.Instance.
         //    var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
