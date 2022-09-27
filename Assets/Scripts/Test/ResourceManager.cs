@@ -135,14 +135,17 @@ public class ResourceManager : MonoBehaviour
         if (original == null)
         {
             Debug.Log($"Failed to load prefab : {path}");
+            Debug.Log("null리턴");
             return null;
         }
 
 
-      //  if (original.GetComponent<Poolable>() != null)
+        //  if (original.GetComponent<Poolable>() != null)
         //{
-      // var t= GameMG.Instance.ObjManager.Pop<T>(original, parent) as T;   //여기랑
-       // Debug.Log("bb"+t);
+        // var t= GameMG.Instance.ObjManager.Pop<T>(original, parent) as T;   //여기랑
+        // Debug.Log("bb"+t);
+        Debug.Log("null아님");
+
         return GameMG.Instance.ObjManager.Pop<T>(original, parent) as T;
         //}
 

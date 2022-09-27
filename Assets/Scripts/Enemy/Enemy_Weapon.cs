@@ -47,6 +47,11 @@ public class Enemy_Weapon : MonoBehaviour
                     attack.Result_return_Object = this.gameObject;
                 }
             }
+
+            if (my_Logic == Enemy_Enum.Enemy_Attack_Logic.Long_Attack)
+            {
+                GameMG.Instance.Resource.Destroy<GameObject>(this.gameObject);
+            }
         }
     }
 

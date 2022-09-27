@@ -46,7 +46,7 @@ public class Attack_Info // 스킬이나 공격info
     public float[] jump_Angular;
 
     // 발사체
-    public GameObject missile;
+    public string missile;
 
     // 발사체 개수
     public int missile_Amount;
@@ -433,19 +433,20 @@ public class Battle_Character : MonoBehaviour
         {
             for (int i = 0; i < attack_Info[info_num].missile_Amount; i++)
             {
-                GameObject missileobj = GameObject.Instantiate(attack_Info[info_num].missile);
-                missileobj.transform.position = attack_Info[info_num].missile_Pos.position;
+                //GameObject missileobj = GameObject.Instantiate(attack_Info[info_num].missile);
+                //GameObject missileobj = GameMG.Instance.Resource.Instantiate<GameObject>("susu");
+                //missileobj.transform.position = attack_Info[info_num].missile_Pos.position;
 
-                Vector3 dirVec = cur_Target.transform.position - missileobj.transform.position;
+                //Vector3 dirVec = cur_Target.transform.position - missileobj.transform.position;
 
-                missileobj.GetComponent<Rigidbody>().AddForce(dirVec * 10f, ForceMode.Impulse);
+                //missileobj.GetComponent<Rigidbody>().AddForce(dirVec * 5f, ForceMode.Impulse);
 
-                missileobj.transform.rotation = attack_Info[info_num].missile_Pos.rotation;
+                //missileobj.transform.rotation = attack_Info[info_num].missile_Pos.rotation;
 
-                missileobj.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Long_Attack;
-                missileobj.GetComponent<Enemy_Weapon>().parent_character = this;
+                //missileobj.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Long_Attack;
+                //missileobj.GetComponent<Enemy_Weapon>().parent_character = this;
 
-                Destroy(missileobj, 5.0f);
+                //Destroy(missileobj, 5.0f);
             }
         }
     }

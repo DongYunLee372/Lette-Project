@@ -92,8 +92,8 @@ public class AddrTestScripts : MonoBehaviour
 
         //에러 나중에 생각...ㅋ큐ㅠ 
      //   pool.Init(te);
-        var a= GameMG.Instance.Resource.Instantiate<GameObject>("susu");
-        StartCoroutine(ee(a));
+        var a= GameMG.Instance.Resource.Instantiate<GameObject>("Boss_Arrow");
+       // StartCoroutine(ee(a));
 
        // GameMG.Instance.startGame("Demo");
 
@@ -206,16 +206,16 @@ public class AddrTestScripts : MonoBehaviour
 
     }
 
-    IEnumerator ee<T>(T a)
-        where T : UnityEngine.Object
-    {
-        yield return new WaitForSeconds(2f);
-        GameMG.Instance.Resource.Destroy<T>(a);
-        yield return new WaitForSeconds(3f);
+    //IEnumerator ee<T>(T a)
+    //    where T : UnityEngine.Object
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    GameMG.Instance.Resource.Destroy<T>(a);
+    //    yield return new WaitForSeconds(3f);
         
-        GameMG.Instance.Resource.Instantiate<T>("susu");
+    //    GameMG.Instance.Resource.Instantiate<T>("susu");
 
-    }
+    //}
 
     IEnumerator qqq()
     {

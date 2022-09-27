@@ -137,6 +137,10 @@ MonoBehaviour:
     m_Address: TestGameData
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 39b88489431d8fc4aaa18fe2deb50d00
+    m_Address: Boss_Arrow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
