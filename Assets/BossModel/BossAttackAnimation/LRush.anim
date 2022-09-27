@@ -128802,8 +128802,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6
+  - time: 0.26666668
     functionName: Animation_Begin
+    data: LRush
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.8
+    functionName: Animation_Middle
+    data: LRush
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1333333
+    functionName: Animation_End
     data: LRush
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

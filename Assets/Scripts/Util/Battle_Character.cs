@@ -419,7 +419,7 @@ public class Battle_Character : MonoBehaviour
 
                 Vector3 dirVec = cur_Target.transform.position - missileobj.transform.position;
 
-                missileobj.GetComponent<Rigidbody>().AddForce(dirVec * 100f, ForceMode.Impulse);
+                missileobj.GetComponent<Rigidbody>().AddForce(dirVec * 10f, ForceMode.Impulse);
 
                 missileobj.transform.rotation = attack_Info[info_num].missile_Pos.rotation;
 
