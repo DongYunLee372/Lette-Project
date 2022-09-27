@@ -109,7 +109,7 @@ public class Battle_Character : MonoBehaviour
 
     [Header("Monster Stats")]
     public float cur_HP;
-    public int cur_Groggy; // 현재 공격의 그로기 수치
+    public float cur_Groggy; // 현재 공격의 그로기 수치
 
     public Vector3 return_Pos; // 초기 좌표
     public Vector3 destination_Pos; // 순찰 좌표
