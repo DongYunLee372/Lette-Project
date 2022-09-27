@@ -100,6 +100,7 @@ namespace EnumScp
     {
         TestNPC_Sangmin = 0,
         TestNPC_Sangmin2,
+        Trab,
         Max
     }
 }
