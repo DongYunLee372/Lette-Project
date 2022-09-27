@@ -616,6 +616,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
     public bool Delete_Object<T>(string delete)
    where T : UnityEngine.Object
     {
+        //핸들삭제
         var find_delete = FindLoadAsset<T>(delete);
         if(find_delete!=null)
         {
@@ -625,6 +626,13 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             {
                 return false;
             }
+            var find_Inst_delete = Find_InstantiateObj<T>(delete);
+
+            if(find_Inst_delete!=null)
+            {
+                Delete_Object_In_Handle<T>(find_Inst_delete);  //생성된객체삭제
+            }
+
             Load_String_List.Remove(delete);  //로드할때 쓰였던 이름삭제 (다시 로드 가능)
             return true;
         }
@@ -649,12 +657,39 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         Debug.Log("최초삭제호출끝");
     }
 
+    public bool Delete_Object_In_Handle<T>(T delete)
+     where T : UnityEngine.Object
+    {
+        bool result=false;
+        if (CreateObjectList.Contains(delete))
+        {
+           // Addressables.Release(delete);
+            AssetList.Remove(delete);
+            Load_String_List.Remove(delete.ToString());
+            result = true;
+
+        }
+
+        if(InstList.Contains(delete))
+        {
+            Addressables.ReleaseInstance(delete as GameObject);
+            InstList.Remove(delete);
+            Load_String_List.Remove(delete.ToString());
+            result = true;
+        }
+
+        return result;
+    }
+
+
+    //최적화를 하려면 생성 리스트 따로 핸들리스트 따로 두번 돌아가지고 리턴하는게 제일 빠를듯. 아니면 분리를 하던가.
     //삭제
     public bool Delete_Object<T>(T delete)
      where T : UnityEngine.Object
 
     {
         //OnRelease();
+        bool result = false;
 
         Debug.Log("Delete_Object : " );
 
@@ -667,8 +702,9 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             //Addressables.Release(delete);
             InstList.Remove(delete);
             Load_String_List.Remove(delete.ToString());
+            result = true;
 
-            return true;
+            // return true;
         }
         //로드 확인 완
         if (AssetList.Contains(delete))
@@ -680,8 +716,9 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             Addressables.Release(delete);
             AssetList.Remove(delete);
             Load_String_List.Remove(delete.ToString());
+            result = true;
 
-            return true;
+            // return true;
         }
 
         if (CreateObjectList.Contains(delete))
@@ -689,12 +726,12 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             Debug.Log("삭제 CreateObjectList : " + delete);
             Destroy(delete);
             Load_String_List.Remove(delete.ToString());
+            result = true;
 
-            return true;
+            //   return true;
         }
 
         AsyncOperationHandle<UnityEngine.Object> temp = new AsyncOperationHandle<UnityEngine.Object>();
-        bool result = false;
 
         foreach (var t in handleList)
         {
@@ -1050,6 +1087,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = new SceneInstance();
+                GameMG.Instance.Loading_screen(true);
                 break;
             case AsyncOperationStatus.Failed:
                 Debug.LogError("씬 언로드 실패: " /*+ addSceneReference.AssetGUID*/);
@@ -1065,6 +1103,8 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = obj.Result;
+                GameMG.Instance.Loading_screen(false);
+
                 break;
             case AsyncOperationStatus.Failed:
                 Debug.LogError("씬 로드 실패: " /*+ addSceneReference.AssetGUID*/);

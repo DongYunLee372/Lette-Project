@@ -86,18 +86,20 @@ public class AddrTestScripts : MonoBehaviour
         //// destroy(aa);
 
         // temp.delete_object(te);
-       // Pool<GameObject> pool = new Pool<GameObject>();
-       // AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("susu");
-       // GameObject te = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("susu");
+        // Pool<GameObject> pool = new Pool<GameObject>();
+        // AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("susu");
+        // GameObject te = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("susu");
 
         //에러 나중에 생각...ㅋ큐ㅠ 
-     //   pool.Init(te);
+        //   pool.Init(te);
         //var a= GameMG.Instance.Resource.Instantiate<GameObject>("Boss_Arrow");
         // StartCoroutine(ee(a));
 
-       // GameMG.Instance.startGame("Demo");
+        // GameMG.Instance.startGame("Demo");
 
-       // GameMG.Instance.startGame("Demo");
+
+
+        // GameMG.Instance.startGame("Demo");
 
 
 
@@ -170,6 +172,7 @@ public class AddrTestScripts : MonoBehaviour
 
         //TestAddressablesLoader.Instance.Multi_Lable_Instantiate<GameObject>("Monster",true,tete);
 
+        StartCoroutine(qeq());
 
         // await temp1.InitAssets_name_("Estus");
 
@@ -214,10 +217,21 @@ public class AddrTestScripts : MonoBehaviour
     //    yield return new WaitForSeconds(2f);
     //    GameMG.Instance.Resource.Destroy<T>(a);
     //    yield return new WaitForSeconds(3f);
-        
+
     //    GameMG.Instance.Resource.Instantiate<T>("susu");
 
     //}
+    IEnumerator qeq()
+    {
+
+        AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>("PlayerCharacter", new Vector3(10f, 10f, 10f));
+      //  AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("PlayerCharacter");
+       yield return StartCoroutine(CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, pos.transform, "Boss"));
+        yield return new WaitForSeconds(3f);
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>("PlayerCharacter");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>("Boss");
+
+    }
 
     IEnumerator qqq()
     {

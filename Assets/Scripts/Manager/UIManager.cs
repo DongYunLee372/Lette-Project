@@ -95,7 +95,7 @@ public class UIManager : Singleton<UIManager>
         else
         {
             UIInfo tmp = new UIInfo();
-            GameObject obj = AddressablesController.Instance.find_Asset_in_list(name);
+            GameObject obj = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
             tmp.obj = Instantiate(obj, canvas[(int)x].transform);
             tmp.obj.transform.SetParent(canvas[(int)x].transform);
             tmp.path = name;

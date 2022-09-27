@@ -99,7 +99,7 @@ public class GameData_Load :Singleton<GameData_Load>
         var boss = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
         //   boss.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, bossNomalSkills, monsterSkillInformation, target);
 
-         StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
+         StartCoroutine(CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
 
     }
 

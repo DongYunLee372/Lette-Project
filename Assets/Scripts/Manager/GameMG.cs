@@ -18,6 +18,11 @@ public class GameMG : Singleton<GameMG>
 {
     public Scenes_Stage scenes_Stage = Scenes_Stage.Loding;
 
+    public GameObject Canvas;
+    public GameObject PlayerCanvas;
+    public GameObject EnemyCanvas;
+
+
     public float PlayTime;  //플레이 시간 저장
     private float time_start;
     private float time_current;
@@ -188,12 +193,48 @@ public class GameMG : Singleton<GameMG>
 
     }
 
+    void GameSceneChange()
+    {
+        AddressablesLoadManager.Instance.OnUnloadedAction("Roomtest");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>("PlayerCharacter");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>("Boss");
+
+    }
+
+    //바깥에서 사용
+    public void Loading_screen(bool show)
+    {
+        Canvas.SetActive(show);
+
+        PlayerCanvas.SetActive(!show);
+        EnemyCanvas.SetActive(!show);
+
+        //여기 다른 UI도 넣어.. 조절 가능하게..
+    }
+
+    IEnumerator temp()
+    {
+        GameData_Load.Instance.TestPos_and_Load();
+
+        yield return new WaitForSeconds(7f);
+        GameSceneChange();
+        yield return new WaitForSeconds(10f);
+        GameData_Load.Instance.TestPos_and_Load();
+
+
+    }
 
     void Start()
     {
+        //처음 시작할때 캔버스 끄게..
+        //PlayerCanvas.SetActive(false);
+        //EnemyCanvas.SetActive(false);
 
 
-        GameData_Load.Instance.TestPos_and_Load();
+        StartCoroutine(temp());  
+
+       // GameData_Load.Instance.TestPos_and_Load();
+       
     }
 
 }
