@@ -9,13 +9,21 @@ Shader "Custom/TestShader2"
 
         SubShader
     {
-        Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
+        //Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
+        Tags{"RenderType" = "Opaque"}
+
         LOD 200
+
+        GrabPass{}
 
         CGPROGRAM
         //#pragma surface surf Standard fullforwardshadows
-        #pragma surface surf water alpha:blend noambient vertex:vert
+        #pragma surface surf water /*alpha:blend*/ noambient vertex:vert
         #pragma target 3.0
+
+
+
+        sampler2D _GrabTexture;
 
         sampler2D _BumpTex;
         sampler2D _MainTex;
@@ -26,6 +34,9 @@ Shader "Custom/TestShader2"
             float2 uv_MainTex;
             float2 uv_BumpTex;
             float3 worldRefl;
+            float3 viewDir;
+            float4 screenPos;
+
             INTERNAL_DATA
         };
 
@@ -51,11 +62,28 @@ Shader "Custom/TestShader2"
             float3 normal1 = UnpackNormal(tex2D(_BumpTex, IN.uv_BumpTex + _Time.y * 0.01));
             float3 normal2 = UnpackNormal(tex2D(_BumpTex, IN.uv_BumpTex - _Time.y * 0.01));
             o.Normal = (normal1 + normal2) * 0.5;
+
             //o.Normal *= float3(0.5, 0.5, 1);
 
 
             float4 reflection = texCUBE(_CUBE, WorldReflectionVector(IN, o.Normal));
-            o.Emission = reflection * 1.05;
+            //o.Emission = reflection * 1.05;
+
+            //추가
+
+            float rim = saturate(dot(o.Normal, IN.viewDir));
+
+            float rim1 = pow(1 - rim, 50) * 0.8;//기울어지면 밝아짐
+            float rim2 = pow(1 - rim, 4);//프레넬 마스킹용(알파)
+
+            float3 ScreenUV = IN.screenPos.rgb / IN.screenPos.a;
+
+            //o.Emission = IN.screenPos.rgb / IN.screenPos.a;
+            //o.Emission = tex2D(_GrabTexture, ScreenUV+o.Normal.xy*0.03)*0.5;
+
+            float4 grabtex = tex2D(_GrabTexture, ScreenUV + o.Normal.xy * 0.03) * 0.5;
+            o.Emission = lerp(grabtex, reflection, rim2) + (rim1 * _LightColor0);
+
             o.Alpha = 1;
         }
 
@@ -78,10 +106,16 @@ Shader "Custom/TestShader2"
             float rim2 = pow(1 - rim, 2);//프레넬 마스킹용(알파)
 
             //float4 final = rim1 * _LightColor0;//라이트받아오기
-            float4 final = saturate(rim1 + spec) * _LightColor0;//라이트받아오기
+            //float4 final = saturate(rim1 + spec) * _LightColor0;//라이트받아오기
+
+            float4 final;
+            final.rgb = spec * _LightColor0;
+            final.a = s.Alpha + spec;
+            //final.a = saturate(rim2 + spec);
+            return final;
             //return final;
             //return float4(final.rgb, rim2);
-            return float4(final.rgb, saturate(rim2 + spec));
+            //return float4(final.rgb, saturate(rim2 + spec));
         }
         ENDCG
     }
