@@ -274,6 +274,9 @@ public class CAttackComponent : BaseComponent
         if (CharacterStateMachine.Instance.CurState == CharacterStateMachine.eCharacterState.OutOfControl)
             return;
 
+        //스테미나가 다 떨어졌으면 공격을 못한다.
+        if (PlayableCharacter.Instance.status.CurStamina <= 0)
+            return;
         //if (PlayableCharacter.Instance.status.CurStamina)
         //{
 

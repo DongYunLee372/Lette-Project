@@ -185,22 +185,6 @@ public class PlayableCharacter : MonoBehaviour
         float finaldamage = damage - status.Defense;
         status.CurHP -= finaldamage;
         status.GroggyUp(Groggy);
-        //status.GroggyUp(Groggy);
-        //if (status.CurGroggy >= 100)
-        //{
-        //    movecom.KnockDown();
-        //}
-        
-        //movecom.KnockBack();
-
-        //if (finaldamage >= 80)
-        //{
-        //    movecom.KnockDown();
-        //}
-        //else
-        //{
-        //    movecom.KnockBack();    
-        //}
     }
 
     public BaseStatus GetCharacterStatus()
@@ -220,7 +204,7 @@ public class PlayableCharacter : MonoBehaviour
             Debug.Log("0번 눌림");
             //ResourceCreateDeleteManager.Instance.InstantiateObj<PlayableCharacter>("PlayerCharacter");
 
-            ResourceCreateDeleteManager.Instance.RegistPoolManager<PlayableCharacter>("PlayerCharacter");
+            //ResourceCreateDeleteManager.Instance.RegistPoolManager<PlayableCharacter>("PlayerCharacter");
         }
     }
 }

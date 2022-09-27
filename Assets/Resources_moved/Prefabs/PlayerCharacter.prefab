@@ -2338,10 +2338,6 @@ MonoBehaviour:
   playerChestTr: {fileID: 0}
   teststart: {x: 0, y: 0, z: 0}
   testend: {x: 0, y: 0, z: 0}
-  testLookY: 0
-  testLookZ: 0
-  testaxisY: 0
-  testaxisZ: 0
 --- !u!114 &5912692896712388560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2421,7 +2417,7 @@ MonoBehaviour:
     recoveryDelay: 0.14
     bufferdInputTime_Start: 0.2
     BufferdInputTime_End: 0.2
-    damage: 10
+    damage: 20
     StaminaGaugeDown: 5
     EffectName: 
     EffectStartTime: 0
@@ -2440,7 +2436,7 @@ MonoBehaviour:
     recoveryDelay: 0.21
     bufferdInputTime_Start: 0.2
     BufferdInputTime_End: 0.2
-    damage: 10
+    damage: 20
     StaminaGaugeDown: 5
     EffectName: 
     EffectStartTime: 0
@@ -2459,7 +2455,7 @@ MonoBehaviour:
     recoveryDelay: 0.41
     bufferdInputTime_Start: 0.4
     BufferdInputTime_End: 0
-    damage: 10
+    damage: 30
     StaminaGaugeDown: 10
     EffectName: 
     EffectStartTime: 0

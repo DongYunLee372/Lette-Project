@@ -219,7 +219,11 @@ public class CInputComponent : BaseComponent
         if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
             //left shift 처리
-            if (Input.GetKey(_key.Run)) movecom.curval.IsRunning = true;
+            if (Input.GetKey(_key.Run))
+            {
+                if(PlayableCharacter.Instance.status.CurStamina>0)
+                    movecom.curval.IsRunning = true;
+            } 
             else movecom.curval.IsRunning = false;
 
 

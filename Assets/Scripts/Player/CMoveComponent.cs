@@ -387,8 +387,9 @@ public class CMoveComponent : BaseComponent
         WorldMove = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * WorldMove;//경사로에 의한 y축 이동방향
 
         float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
+        //float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina  > 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
 
-        if(WorldMove.magnitude > 0)
+        if (WorldMove.magnitude > 0)
         {
             int a = 0;
             a = 10;
@@ -617,11 +618,13 @@ public class CMoveComponent : BaseComponent
         //이미 구르고 있으면 구르지 못한다.
         if (Time.time - lastRollingTime <= moveoption.NextRollingTime) 
             return;
-        
 
-        if (PlayableCharacter.Instance.status.CurStamina - moveoption.RollingStaminaDown >= 0)
+
+        //if (PlayableCharacter.Instance.status.CurStamina - moveoption.RollingStaminaDown >= 0)
+        if (PlayableCharacter.Instance.status.CurStamina > 0)
         {
-            PlayableCharacter.Instance.status.CurStamina = PlayableCharacter.Instance.status.CurStamina - moveoption.RollingStaminaDown;
+            PlayableCharacter.Instance.status.StaminaDown(moveoption.RollingStaminaDown);
+            //PlayableCharacter.Instance.status.CurStamina = PlayableCharacter.Instance.status.CurStamina - moveoption.RollingStaminaDown;
         }
         else
         {
@@ -919,103 +922,105 @@ public class CMoveComponent : BaseComponent
             if (Time.time - lastRunningTime >= 1.0f)
             {
                 lastRunningTime = Time.time;
-                PlayableCharacter.Instance.status.CurStamina -= moveoption.RunningStaminaVal;
+
+                //PlayableCharacter.Instance.status.CurStamina -= moveoption.RunningStaminaVal;
+                PlayableCharacter.Instance.status.StaminaDown(moveoption.RunningStaminaVal);
             }
             
         }
     }
 
 
-    public float testLookY;
-    public float testLookZ;
-    public float testaxisY;
-    public float testaxisZ;
-    private void LateUpdate()
-    {
-        //상대좌표
-        Vector3 rot = Quaternion.LookRotation(com.TpCamRig.forward, -playerChestTr.right/*Vector3.up*/).eulerAngles;
+    //public float testLookY;
+    //public float testLookZ;
+    //public float testaxisY;
+    //public float testaxisZ;
+    //private void LateUpdate()
+    //{
+    //    //상대좌표
+    //    Vector3 rot = Quaternion.LookRotation(com.TpCamRig.forward, -playerChestTr.right/*Vector3.up*/).eulerAngles;
         
-        testLookY = rot.y;
-        testLookZ = rot.x;
-        testaxisY = com.FpRoot.eulerAngles.y;
-        testaxisZ = com.FpRoot.eulerAngles.z;
+    //    testLookY = rot.y;
+    //    testLookZ = rot.x;
+    //    testaxisY = com.FpRoot.eulerAngles.y;
+    //    testaxisZ = com.FpRoot.eulerAngles.z;
 
-        if (testaxisY == 0)
-        {
-            if (rot.y >= 180)
-            {
-                testLookY = rot.y - 360;
-            }
-        }
-        else if(testaxisY >= 360 - 42 || testaxisY <= 85)
-        {
-            if (rot.y >= 180)
-            {
-                testLookY = rot.y - 360;
-            }
+    //    if (testaxisY == 0)
+    //    {
+    //        if (rot.y >= 180)
+    //        {
+    //            testLookY = rot.y - 360;
+    //        }
+    //    }
+    //    else if(testaxisY >= 360 - 42 || testaxisY <= 85)
+    //    {
+    //        if (rot.y >= 180)
+    //        {
+    //            testLookY = rot.y - 360;
+    //        }
 
-            if(testaxisY>=180)
-            {
-                testaxisY -= 360;
-            }
+    //        if(testaxisY>=180)
+    //        {
+    //            testaxisY -= 360;
+    //        }
 
-            testLookY = testLookY - testaxisY;
-        }
-        else
-        {
-            testLookY = rot.y - testaxisY;
+    //        testLookY = testLookY - testaxisY;
+    //    }
+    //    else
+    //    {
+    //        testLookY = rot.y - testaxisY;
             
-        }
+    //    }
             
 
-        if (testaxisZ == 0)
-        {
-            if (rot.x >= 180)
-            {
-                testLookZ = rot.x - 360;
-            }
-        }
-        else if(testaxisZ >= 360 - 33 || testaxisZ <= 35)
-        {
-            if (rot.x >= 180)
-            {
-                testLookZ = rot.x - 360;
-            }
+    //    if (testaxisZ == 0)
+    //    {
+    //        if (rot.x >= 180)
+    //        {
+    //            testLookZ = rot.x - 360;
+    //        }
+    //    }
+    //    else if(testaxisZ >= 360 - 33 || testaxisZ <= 35)
+    //    {
+    //        if (rot.x >= 180)
+    //        {
+    //            testLookZ = rot.x - 360;
+    //        }
 
-            if (testaxisZ >= 180)
-            {
-                testaxisZ -= 360;
-            }
+    //        if (testaxisZ >= 180)
+    //        {
+    //            testaxisZ -= 360;
+    //        }
 
-            testLookZ = testLookZ - testaxisZ;
-        }
-        else
-        {
-            testLookZ = rot.x - testaxisZ;
+    //        testLookZ = testLookZ - testaxisZ;
+    //    }
+    //    else
+    //    {
+    //        testLookZ = rot.x - testaxisZ;
             
-        }
+    //    }
 
-        if(testLookY>=130|| testLookY<=-93)
-        {
-            playerChestTr.eulerAngles = new Vector3(playerChestTr.eulerAngles.x, -90, 270);
-            return;
-        }
+    //    if(testLookY>=130|| testLookY<=-93)
+    //    {
+    //        playerChestTr.eulerAngles = new Vector3(playerChestTr.eulerAngles.x, -90, 270);
+    //        return;
+    //    }
 
-        rot.y = GetMinMaxRange(testLookY, -42, 85) + testaxisY;
-        rot.x = GetMinMaxRange(testLookZ, -33, 35) + testaxisZ;
+    //    rot.y = GetMinMaxRange(testLookY, -42, 85) + testaxisY;
+    //    rot.x = GetMinMaxRange(testLookZ, -33, 35) + testaxisZ;
 
-        playerChestTr.eulerAngles = new Vector3(playerChestTr.eulerAngles.x, rot.y - 90, (-rot.x + 270));
+    //    playerChestTr.eulerAngles = new Vector3(playerChestTr.eulerAngles.x, rot.y - 90, (-rot.x + 270));
 
-    }
+    //}
 
-    float GetMinMaxRange(float val, float min, float max)
-    {
-        if (val < min)
-            return min;
-        if (val > max)
-            return max;
+    //float GetMinMaxRange(float val, float min, float max)
+    //{
+    //    if (val < min)
+    //        return min;
+    //    if (val > max)
+    //        return max;
 
-        return val;
-    }
+    //    return val;
+    //}
 
 }
