@@ -47,7 +47,7 @@ public class State_Attack : State
 
         // 너무 가까우면 뒤로 점프하기 위함
         if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= 0.5f))
+                battle_character.cur_Target.transform.position) <= 0.5f) && battle_character.is_Backword)
         {
             judge_logic = Enemy_Attack_Logic.BackWord_Jump;
             _State = this;

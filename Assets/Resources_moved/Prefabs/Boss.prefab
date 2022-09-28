@@ -2204,7 +2204,7 @@ MonoBehaviour:
     navMesh: {fileID: 0}
     isPause: 0
   is_Boss: 1
-  is_Backword: 0
+  is_Backword: 1
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   stop_CoolTime:
