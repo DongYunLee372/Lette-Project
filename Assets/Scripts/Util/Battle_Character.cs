@@ -144,7 +144,7 @@ public class Battle_Character : MonoBehaviour
     [Header("==========AI=================")]
     public AI real_AI;
     public bool is_Boss = false; // 보스 몬스터 판별
-
+    public bool is_Backword = false;
 
     public void Stat_Initialize(MonsterInformation info, List<Mon_Normal_Atk_Group> p_mon_normal_atak_group, List<BossNomalSkill> p_BossNomalSkill, MonsterSkillInformation p_monsterSkillInformation, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
     {
@@ -576,7 +576,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("ㅇㅇ");
-            animator.Play("Second_Atk");
+            animator.Play("BackWord_Jump");
         }
 
         Time_Check();

@@ -19891,54 +19891,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Info
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: now_Skill_Info
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Target_Info
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_normal_atak_group.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_normal_atak_group.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_normal_atak_group.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Normal_Attack_Info.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Normal_Attack_Info.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Normal_Attack_Info.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Normal_Attack_Info.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Normal_Attack_Info.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833193269907886469, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
-      propertyPath: mon_Normal_Attack_Info.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4175774917437551041, guid: d2d49758f8b0e1a4dbd265b469f5c8c7, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -38852,6 +38804,7 @@ MonoBehaviour:
     navMesh: {fileID: 0}
     isPause: 0
   is_Boss: 0
+  is_Backword: 0
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   stop_CoolTime:

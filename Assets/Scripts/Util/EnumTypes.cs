@@ -104,6 +104,7 @@ namespace Enemy_Enum
         Melee_Attack = 0,
         Long_Attack,
         Skill_Using,
+        BackWord_Jump,
         Skill_Wait,
         Attack_Logic_Amount,
     }
@@ -127,7 +128,7 @@ namespace Canvas_Enum
         ROOL,
         ATTACK,
         DEFENSE,
-        KEYCOUNT 
+        KEYCOUNT
     }
 
 }

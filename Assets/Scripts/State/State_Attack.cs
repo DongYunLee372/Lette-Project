@@ -45,6 +45,15 @@ public class State_Attack : State
             return true;
         }
 
+        // 너무 가까우면 뒤로 점프하기 위함
+        if ((Vector3.Distance(battle_character.transform.position,
+                battle_character.cur_Target.transform.position) <= 0.5f))
+        {
+            judge_logic = Enemy_Attack_Logic.BackWord_Jump;
+            _State = this;
+            return true;
+        }
+
         // 근접 공격 사거리 체크
         if ((Vector3.Distance(battle_character.transform.position,
                 battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk)
@@ -56,7 +65,7 @@ public class State_Attack : State
             return true;
         }
 
-
+        // 스킬
         if ((Vector3.Distance(battle_character.transform.position,
                battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1]))
                &&
@@ -120,6 +129,16 @@ public class State_Attack : State
                 // isDelay를 통해 판별을 기다림
                 Connect_Process(battle_character);
                 // 기다리기
+                break;
+            case Enemy_Attack_Logic.BackWord_Jump:
+                battle_character.skill_CoolTime.isCheck = false;
+                battle_character.skill_CoolTime.check_Time = 0f;
+                battle_character.isAttack_Run = true;
+                battle_character.stop_CoolTime.check_Time = 0f;
+                battle_character.stop_CoolTime.isCheck = false;
+                battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+
+                battle_character.animator.Play("BackWord_Jump");
                 break;
             case Enemy_Attack_Logic.Melee_Attack:
                 // 근접 공격이라면 배틀캐릭터 스크립트 내 공격 판정범위 활성화

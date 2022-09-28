@@ -47,6 +47,15 @@ public class State_Trace : State
             return false;
         }
 
+        // 너무 가까우면 뒤로 점프하기 위함
+        if ((Vector3.Distance(battle_character.transform.position,
+                battle_character.cur_Target.transform.position) <= 0.5f))
+        {
+            _State = Trans_List[0];
+            battle_character.real_AI.pre_State = this;
+            return false;
+        }
+
         _State = this;
         return true;
     }

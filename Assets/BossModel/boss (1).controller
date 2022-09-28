@@ -408,6 +408,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &1838836655722453789
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BackWord_Jump
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: f584e7244b4af1640a4958fd7e87b83c, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &2059774402522649793
 AnimatorState:
   serializedVersion: 6
@@ -464,7 +490,7 @@ AnimatorStateMachine:
     m_Position: {x: 260, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6590300996174121285}
-    m_Position: {x: 700, y: 260, z: 0}
+    m_Position: {x: 700, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1132259151170517647}
     m_Position: {x: 480, y: -120, z: 0}
@@ -495,6 +521,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 3510512674017605475}
     m_Position: {x: 30, y: 260, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1838836655722453789}
+    m_Position: {x: 480, y: 200, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -2676682952217561573}
