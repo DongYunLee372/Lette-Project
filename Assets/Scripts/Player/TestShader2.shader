@@ -52,7 +52,7 @@ Shader "Custom/TestShader2"
         void vert(inout appdata_full v)
         {
             //v.vertex.z += v.texcoord.x;
-            v.vertex.z += cos(abs(v.texcoord.x * 2 - 1) * 10/*파도간격*/ + _Time.y/*파도속도*/) * 0.2/*파도높이*/;//하프렘버트 역공식과 삼각함수 적용
+            v.vertex.z += cos(abs(v.texcoord.x * 2 - 1) * 10/*파도간격*/ + _Time.y/*파도속도*/) * 1.5/*파도높이*/;//하프렘버트 역공식과 삼각함수 적용
         }
 
         void surf(Input IN, inout SurfaceOutput o)
