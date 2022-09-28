@@ -149,21 +149,21 @@ public class CInputComponent : BaseComponent
             }
 
             //스킬1번
-            if (Input.GetKey(_key.skill01))
+            if (Input.GetKeyDown(_key.skill01))
             {
                 SkillAttack(0);
                 return;
             }
 
             //스킬2번
-            if (Input.GetKey(_key.skill02))
+            if (Input.GetKeyDown(_key.skill02))
             {
                 SkillAttack(1);
                 return;
             }
 
             //스킬3번
-            if (Input.GetKey(_key.skill03))
+            if (Input.GetKeyDown(_key.skill03))
             {
                 SkillAttack(2);
                 return;
@@ -219,13 +219,15 @@ public class CInputComponent : BaseComponent
 
         if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
+            movecom.curval.IsRunning = false;
+
             //left shift 처리
             if (Input.GetKey(_key.Run))
             {
                 if(PlayableCharacter.Instance.status.CurStamina > 0)
                     movecom.curval.IsRunning = true;
             } 
-            else movecom.curval.IsRunning = false;
+            //else movecom.curval.IsRunning = false;
 
 
 
