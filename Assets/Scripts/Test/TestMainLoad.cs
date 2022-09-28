@@ -34,7 +34,7 @@ public class TestMainLoad : MonoBehaviour//Editor
             //var DataSave = ScriptableObject.CreateInstance<GameSaveData>();
             //AssetDatabase.CreateAsset(DataSave, "Assets/GameData/TestGameData.asset");
             SaveD(Prefapsname, Position, "TestGameData");
-            SaveD(Prefapsname_1, Position_1,"BoatScene");
+            SaveD(Prefapsname_1, Position_1, "BoatData");
 
 
             //var tempDataSave = AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");

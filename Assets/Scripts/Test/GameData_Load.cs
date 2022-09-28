@@ -219,9 +219,9 @@ public class GameData_Load :Singleton<GameData_Load>
 
         AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
 
-        AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("BoatScene");
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("BoatData");
 
-        var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("BoatScene");
+        var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("BoatData");
 
         if(tempDataSave==null)
         {

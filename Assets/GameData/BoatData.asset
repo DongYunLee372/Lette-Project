@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da8b45b7ff056834b9fca3b5983b857e, type: 3}
-  m_Name: BoatScene
+  m_Name: BoatData
   m_EditorClassIdentifier: 
   SaveDatas:
-  - {fileID: 11400000, guid: c3c94b0507afeb246977f220b948a49d, type: 2}
+  - {fileID: 11400000, guid: b797ce8d6a030ab469eec410562f0117, type: 2}
