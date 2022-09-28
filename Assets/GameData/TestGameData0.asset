@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TestGameData0
   m_EditorClassIdentifier: 
   prefabsName: PlayerCharacter
-  Position: {x: 400, y: 68.99049, z: 230}
+  Position: {x: 395, y: 75, z: 230}
