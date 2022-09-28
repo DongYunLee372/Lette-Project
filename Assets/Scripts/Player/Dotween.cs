@@ -9,6 +9,11 @@ namespace MyDotween
     {
         public List<Tween> SequenceQueue;
         public int CurSequenceNum = 0;
+
+        
+
+
+
         public enum Ease
         {
             Linear,
@@ -140,9 +145,5 @@ namespace MyDotween
             }
 
         }
-
-
-
-
     }
 }

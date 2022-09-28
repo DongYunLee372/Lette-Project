@@ -202,6 +202,10 @@ public class PlayableCharacter : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha0))
         {
             Debug.Log("0번 눌림");
+            MyDotween.Sequence sq = new MyDotween.Sequence();
+            sq.Append(new MyDotween.Tween()).Append(new MyDotween.Tween()).Append(new MyDotween.Tween()).Join(new MyDotween.Tween());
+            sq.Start();
+
             //ResourceCreateDeleteManager.Instance.InstantiateObj<PlayableCharacter>("PlayerCharacter");
 
             //ResourceCreateDeleteManager.Instance.RegistPoolManager<PlayableCharacter>("PlayerCharacter");
