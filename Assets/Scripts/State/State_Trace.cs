@@ -23,7 +23,7 @@ public class State_Trace : State
             battle_character.real_AI.pre_State = this;
             return false;
         }
-
+        
         if ((Vector3.Distance(battle_character.transform.position,
                  battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1]))
                  &&
