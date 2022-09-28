@@ -12,6 +12,7 @@ public class MySingleton<T> : MonoBehaviour where T : MonoBehaviour
             if (instance == null)
             {
                 instance = (T)FindObjectOfType(typeof(T));
+                //obj = (T)FindObjectOfType(typeof(T));
             }
             if (instance)
             {

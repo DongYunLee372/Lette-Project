@@ -141,9 +141,10 @@ public class CInputComponent : BaseComponent
         {
             //space 처리
             //구르기를 먼저 처리하고 움직임은 처리하지 않게 하기 위해서
-            if (Input.GetKey(_key.Rolling))
+            if (Input.GetKeyDown(_key.Rolling))
             {
-                movecom.Rolling();
+                if (PlayableCharacter.Instance.status.CurStamina > 0)
+                    movecom.Rolling();
                 return;
             }
 
@@ -221,7 +222,7 @@ public class CInputComponent : BaseComponent
             //left shift 처리
             if (Input.GetKey(_key.Run))
             {
-                if(PlayableCharacter.Instance.status.CurStamina>0)
+                if(PlayableCharacter.Instance.status.CurStamina > 0)
                     movecom.curval.IsRunning = true;
             } 
             else movecom.curval.IsRunning = false;
