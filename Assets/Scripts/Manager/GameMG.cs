@@ -231,9 +231,9 @@ public class GameMG : Singleton<GameMG>
         //EnemyCanvas.SetActive(false);
 
 
-        StartCoroutine(temp());  
+       // StartCoroutine(temp());  
 
-       // GameData_Load.Instance.TestPos_and_Load();
+        GameData_Load.Instance.TestPos_and_Load();
        
     }
 
