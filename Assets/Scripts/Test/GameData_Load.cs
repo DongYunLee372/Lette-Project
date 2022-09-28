@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameData_Load :Singleton<GameData_Load>
 {
     List<string> str=new List<string>();
-
+    public SkyboxManager skyboxMG;
    
 
     void Start()
@@ -199,12 +199,12 @@ public class GameData_Load :Singleton<GameData_Load>
         {
             case Scenes_Stage.Stage1:
                 BoatScene_Data_Load();
-                SkyboxManager.Instance.SkyBox_Setting("BoatScene");
+                skyboxMG.SkyBox_Setting("BoatScene");
                 break;
 
             case Scenes_Stage.Stage2:
                 StartCoroutine(Load_Boss());
-                SkyboxManager.Instance.SkyBox_Setting("Roomtest");
+                skyboxMG.SkyBox_Setting("Roomtest");
                 break;
 
 

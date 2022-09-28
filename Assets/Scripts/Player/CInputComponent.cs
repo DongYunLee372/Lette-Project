@@ -141,28 +141,29 @@ public class CInputComponent : BaseComponent
         {
             //space 처리
             //구르기를 먼저 처리하고 움직임은 처리하지 않게 하기 위해서
-            if (Input.GetKey(_key.Rolling))
+            if (Input.GetKeyDown(_key.Rolling))
             {
-                movecom.Rolling();
+                if (PlayableCharacter.Instance.status.CurStamina > 0)
+                    movecom.Rolling();
                 return;
             }
 
             //스킬1번
-            if (Input.GetKey(_key.skill01))
+            if (Input.GetKeyDown(_key.skill01))
             {
                 SkillAttack(0);
                 return;
             }
 
             //스킬2번
-            if (Input.GetKey(_key.skill02))
+            if (Input.GetKeyDown(_key.skill02))
             {
                 SkillAttack(1);
                 return;
             }
 
             //스킬3번
-            if (Input.GetKey(_key.skill03))
+            if (Input.GetKeyDown(_key.skill03))
             {
                 SkillAttack(2);
                 return;
@@ -215,16 +216,19 @@ public class CInputComponent : BaseComponent
         }
 
         movecom.MoveDir = new Vector3(h, 0, v);
+        movecom.curval.IsRunning = false;
 
         if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
+            
+
             //left shift 처리
             if (Input.GetKey(_key.Run))
             {
-                if(PlayableCharacter.Instance.status.CurStamina>0)
+                if(PlayableCharacter.Instance.status.CurStamina > 0)
                     movecom.curval.IsRunning = true;
             } 
-            else movecom.curval.IsRunning = false;
+            //else movecom.curval.IsRunning = false;
 
 
 
