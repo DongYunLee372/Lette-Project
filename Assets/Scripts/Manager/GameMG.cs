@@ -224,6 +224,34 @@ public class GameMG : Singleton<GameMG>
 
     }
 
+    IEnumerator Load_Boss()
+    {
+
+        AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
+        yield return new WaitForSeconds(3f);
+        GameData_Load.Instance.TestPos_and_Load();
+
+    }
+
+    public void ChangeScene(Scenes_Stage num)
+    {
+        switch (num)
+        {
+            case Scenes_Stage.Stage1:
+               StartCoroutine( Load_Boss());
+                break;
+
+            case Scenes_Stage.Stage2:
+
+                break;
+
+
+            case Scenes_Stage.Boss:
+
+                break;
+        }
+    }
+
     void Start()
     {
         //처음 시작할때 캔버스 끄게..
@@ -231,9 +259,12 @@ public class GameMG : Singleton<GameMG>
         //EnemyCanvas.SetActive(false);
 
 
-       // StartCoroutine(temp());  
+        // StartCoroutine(temp());  
 
-        GameData_Load.Instance.TestPos_and_Load();
+
+        AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
+
+
        
     }
 

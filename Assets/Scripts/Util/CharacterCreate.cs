@@ -138,7 +138,8 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
         //로드
         AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(name);
-       GameObject temp= AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>(name);
+        GameObject temp = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
+                        //AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>(name);
      //   yield return StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>(name));
 
     //    GameObject temp = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
