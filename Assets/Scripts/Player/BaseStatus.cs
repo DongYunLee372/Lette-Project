@@ -273,7 +273,7 @@ public class BaseStatus:MonoBehaviour
             //uiPanel.HPBar.SetCurValue(value);
 
 
-            //
+            //그로기값이 있고
             if (curGroggy != 0 && CorGroggyCount == null && CorGroggyRecover == null)
             {
                 CorGroggyCount = timecounter.Cor_TimeCounter(player_Groggy_Recovery_Time, GroggyRecoveryStart);
@@ -428,11 +428,11 @@ public class BaseStatus:MonoBehaviour
     public void GroggyRecoveryStart()
     {
         Debug.Log("그로기 회복 시작");
-        StopCoroutine(CorSTMCount);
-        CorSTMCount = null;
+        StopCoroutine(CorGroggyCount);
+        CorGroggyCount = null;
 
-        CorSTMRecover = Recovery(GroggyDown, player_Groggy_Recovery_Val);
-        StartCoroutine(CorSTMRecover);
+        CorGroggyRecover = Recovery(GroggyDown, player_Groggy_Recovery_Val);
+        StartCoroutine(CorGroggyRecover);
     }
 
     IEnumerator Recovery(invoker _invoker,float val)

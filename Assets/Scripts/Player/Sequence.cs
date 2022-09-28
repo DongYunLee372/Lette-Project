@@ -7,14 +7,80 @@ namespace MyDotween
 {
     public class Sequence
     {
-        Queue<Tween> sequence = new Queue<Tween>();
+        ////////////////////////////////////////////////////////////
+        /// 원형큐
+        ////////////////////////////////////////////////////////////
+        int queueSize = 20;
+        Tween[] queue;
+        int Rear = 0;//맨 마지막원소의 위치 증가시키고 삽입
+        int Front = 0;//맨 앞 원소의 한칸 앞
+        ////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////
+        
+
+        //독립적으로 실행되는 트윈들의 리스트
+        List<Tween> InsertTweens = new List<Tween>();
+
+        //루프타입
         Dotween.LoopType loopType;
         int loopCount = 0;
         int CurLoopCount = 0;
+
+        //타이머
         CorTimeCounter TimeCounter = new CorTimeCounter();
 
+        public Sequence()
+        {
+            queue = new Tween[queueSize];
+            Rear = Front = 0;
+
+        }
+
+        public Sequence(int _QueueSize)
+        {
+            queueSize = _QueueSize;
+            queue = new Tween[_QueueSize];
+            Rear = Front = 0;
+
+        }
+
+        public bool EnQueue(Tween[] _queue, Tween tween)
+        {
+            if((Rear+1)%queueSize==Front)
+            {
+                return false;
+            }
 
 
+            Rear = (Rear + 1) % queueSize;
+            _queue[Rear] = tween;
+
+            return true;
+        }
+
+        public Tween DeQueue(Tween[] _queue)
+        {
+            if(Front==Rear)
+            {
+                return null;
+            }
+
+            Front = (Front + 1) % queueSize;
+            return _queue[Front];
+
+        }
+
+        public Tween Peek(Tween[] _queue)
+        {
+            if (Front == Rear)
+            {
+                return null;
+            }
+
+            return _queue[(Front + 1) % queueSize];
+        }
+
+        //큐에서 하나씩 빼서 실행하는데 뒤에있는 것이 조인설정이 있으면 해당 트윈도 동시 실행
         public void Start()
         {
 
@@ -22,7 +88,7 @@ namespace MyDotween
 
 
         //루프횟수가 -1이면 무한루프
-        public Sequence SetLoop(int loops, Dotween.LoopType loopType = Dotween.LoopType.Restart)
+        public Sequence SetLoop(int loops/*루프횟수*/, Dotween.LoopType loopType = Dotween.LoopType.Restart)
         {
 
 
@@ -33,8 +99,7 @@ namespace MyDotween
         //맨 마지막에 추가
         public Sequence Append(Tween tween)
         {
-
-            sequence.Enqueue(tween);
+            EnQueue(queue, tween);
             return this;
         }
 
@@ -51,7 +116,7 @@ namespace MyDotween
         public Sequence Join(Tween tween)
         {
 
-
+            
             return this;
         }
 
