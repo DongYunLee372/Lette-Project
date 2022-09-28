@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 1724488231}
   - component: {fileID: 1724488230}
   m_Layer: 0
-  m_Name: GameDataLoad
+  m_Name: GameData_Load
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
