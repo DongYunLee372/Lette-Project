@@ -1,3 +1,4 @@
+using EnumScp;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,14 +12,24 @@ public class FloorTrab : BaseInteractive
     public IEnumerator coroutine = null;
     public float MoveSpeed = 0f;
 
+    private int Instance;
+    private InteractiveIndex interactive;
+
+    public override int P_Instance { get { return Instance; } protected set { Instance = value; } }
+    public override InteractiveIndex P_interactive { get { return interactive; } protected set { interactive = value; } }
 
     public override void Init()
     {
-        InteractiveObjManager.Instance.SetInteractiveObj(EnumScp.InteractiveIndex.Trab, this);
+        
         TrabCollider = GetComponentInChildren<BoxCollider>();
         Debug.Log(TrabCollider.name);
         coroutine = StartTrab();
         MoveSpeed = 10f;
+
+        P_Instance = GetInstanceID();
+        P_interactive = InteractiveIndex.Trab;
+
+        InteractiveObjManager.Instance.SetInteractiveObj(P_interactive, this);
     }
 
     public IEnumerator StartTrab()

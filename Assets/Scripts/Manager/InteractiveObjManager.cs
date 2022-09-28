@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InteractiveObjManager : MySingleton<InteractiveObjManager>
 {
+
+
     [SerializeField]
     Dictionary<EnumScp.InteractiveIndex, BaseInteractive> InteractiveObjDic = new Dictionary<EnumScp.InteractiveIndex, BaseInteractive>();
     public void SetInteractiveObj(EnumScp.InteractiveIndex index, BaseInteractive obj) //플레이어와 상호작용 하는 obj의 정보를 딕셔너리에 저장
@@ -25,5 +27,16 @@ public class InteractiveObjManager : MySingleton<InteractiveObjManager>
     public void IsInteractiveObj(EnumScp.InteractiveIndex index)
     {
 
+    }
+
+    private void Awake()
+    {
+        BaseInteractive[] temp = GetComponentsInChildren<BaseInteractive>();
+       
+        //foreach (BaseInteractive a in temp)
+        //{
+            
+        //   a.P_interactive
+        //}
     }
 }
