@@ -9,7 +9,7 @@ public class portal : MonoBehaviour
     {
         if(other.tag=="Player")
         {
-            GameMG.Instance.ChangeScene(Scenes_Stage.Stage1);
+            GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage2);
         }
     }
 

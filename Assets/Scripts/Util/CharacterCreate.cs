@@ -145,9 +145,12 @@ public class CharacterCreate : Singleton<CharacterCreate>
     //    GameObject temp = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
         temp.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, bossNomalSkills, monsterSkillInformation, target);
 
-        GameObject b = Instantiate(temp, trans);
+        GameObject b = AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>(name);
+        b.transform.position = trans.position;
+        //GameObject b = Instantiate(temp, trans);
         bosshpbar.GetComponent<Bosshpbar>().SetHpbar(data.P_mon_MaxHP, data.P_mon_nameKor, b.GetComponent<Battle_Character>());
 
+        b.SetActive(false);
         Debug.Log(data.P_mon_nameKor);
         Debug.Log(data.P_mon_MaxHP);
 

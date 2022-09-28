@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkyboxManager : MonoBehaviour
+public class SkyboxManager : Singleton<SkyboxManager>
 {
     public List<Material> skybox_Mat;
 
@@ -20,8 +20,4 @@ public class SkyboxManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-
-    }
 }

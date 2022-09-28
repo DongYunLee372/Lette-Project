@@ -224,33 +224,7 @@ public class GameMG : Singleton<GameMG>
 
     }
 
-    IEnumerator Load_Boss()
-    {
-
-        AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
-        yield return new WaitForSeconds(3f);
-        GameData_Load.Instance.TestPos_and_Load();
-
-    }
-
-    public void ChangeScene(Scenes_Stage num)
-    {
-        switch (num)
-        {
-            case Scenes_Stage.Stage1:
-               StartCoroutine( Load_Boss());
-                break;
-
-            case Scenes_Stage.Stage2:
-
-                break;
-
-
-            case Scenes_Stage.Boss:
-
-                break;
-        }
-    }
+   
 
     void Start()
     {
@@ -261,8 +235,9 @@ public class GameMG : Singleton<GameMG>
 
         // StartCoroutine(temp());  
 
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
 
-        AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
+       // AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
 
 
        

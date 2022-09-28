@@ -41,25 +41,118 @@ public class GameData_Load :Singleton<GameData_Load>
 
         AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
 
-       // GameMG.Instance.startGame("Roomtest");
-          AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("TestGameData");
 
+        var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
+        // GameMG.Instance.startGame("Roomtest");
+        AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
+
+        var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        find.SetActive(false);
         //  TestMainLoad.Instance.
         //    var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
 
-        AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("TestGameData");
 
-       var  tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
         // var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
 
         //  var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
         //AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
+        DataLoad(tempDataSave);
 
+        //foreach (var s in tempDataSave.SaveDatas)
+        //{
+        //    Debug.Log("보는중 : " + s.prefabsName);
+
+        //    if(s!=null)
+        //    {
+        //        if (s.prefabsName == "Boss")
+        //        {
+        //            //GameObject abc = new GameObject();
+        //            //abc.transform.position = s.Position;
+
+        //            Debug.Log("dd");
+        //            // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
+
+        //            BoosInit(s.prefabsName, s.Position);
+        //        }
+        //        if(s.prefabsName== "PlayerCharacter")
+        //        {
+        //            var find = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("PlayerCharacter");
+        //            if (find!=null)
+        //            {
+        //                Debug.Log("캐릭터 위치이동");
+        //                find.transform.position = s.Position;
+        //            }
+        //            else
+        //            {
+        //                Debug.Log("캐릭터 생성");
+        //                AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+
+        //        }
+        //        Debug.Log("보는중 : " + s.Position);
+        //    }
+
+         
+        //}
+
+        if(action!=null)
+        {
+        action();
+        }
+
+    }
+    
+    void PlayerPos()
+    {
+
+        var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
+
+        foreach (var a in tempDataSave.SaveDatas)
+        {
+            if(a.prefabsName== "PlayerCharacter")
+            {
+                var find = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("PlayerCharacter");
+                if (find != null)
+                {
+                    Debug.Log("캐릭터 위치이동");
+                  
+                    find.transform.position = new Vector3(a.Position.x, a.Position.y + 50, a.Position.z);
+                }
+            }
+        }
+    }
+
+  
+
+    IEnumerator Load_Boss()
+    {
+
+        AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
+        yield return new WaitForSeconds(2f);
+        TestPos_and_Load();
+        yield return new WaitForSeconds(5f);
+        PlayerPos();
+         var find=AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        find.SetActive(true);
+        var boss= AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
+        boss.SetActive(true);
+
+
+
+    }
+
+    public void DataLoad(GameSaveData tempDataSave)
+    {
         foreach (var s in tempDataSave.SaveDatas)
         {
             Debug.Log("보는중 : " + s.prefabsName);
 
-            if(s!=null)
+            if (s != null)
             {
                 if (s.prefabsName == "Boss")
                 {
@@ -68,38 +161,86 @@ public class GameData_Load :Singleton<GameData_Load>
 
                     Debug.Log("dd");
                     // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
+                    GameObject abc = new GameObject();
+                    abc.transform.position = s.Position;
 
-                    BoosInit(s.prefabsName, s.Position);
+                    StartCoroutine(CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, abc.transform, s.prefabsName));
+                }
+                else if (s.prefabsName == "PlayerCharacter")
+                {
+                    var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+                    if (find != null)
+                    {
+                        Debug.Log("캐릭터 위치이동");
+                        find.transform.position = s.Position;
+                    }
+                    else
+                    {
+                        Debug.Log("캐릭터 생성");
+                        AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+                    }
                 }
                 else
                 {
+                    Debug.Log("보스 캐릭터아닌 뭔가를 생성하러옴");
                     AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
 
                 }
                 Debug.Log("보는중 : " + s.Position);
             }
 
-         
-        }
 
-        if(action!=null)
+        }
+    }
+
+    public void ChangeScene(Scenes_Stage num)
+    {
+        switch (num)
         {
+            case Scenes_Stage.Stage1:
+                BoatScene_Data_Load();
+                SkyboxManager.Instance.SkyBox_Setting("BoatScene");
+                break;
 
-        action();
+            case Scenes_Stage.Stage2:
+                StartCoroutine(Load_Boss());
+                SkyboxManager.Instance.SkyBox_Setting("Roomtest");
+                break;
+
+
+            case Scenes_Stage.Boss:
+
+                break;
         }
+    }
+
+    public void BoatScene_Data_Load()
+    {
+
+        AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
+
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("BoatScene");
+
+        var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("BoatScene");
+
+        if(tempDataSave==null)
+        {
+            Debug.Log("데이터 널");
+        }
+        foreach(var a in tempDataSave.SaveDatas)
+        {
+            Debug.Log("가져온데이터 이름" + a.prefabsName);
+            Debug.Log("가져온데이터 위치" + a.Position);
+
+        }
+
+        DataLoad(tempDataSave);
+
 
     }
 
-    void BoosInit(string name,Vector3 pos)
+    public void BoatScene()
     {
-        GameObject abc = new GameObject();
-        abc.transform.position = pos;
-
-        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(name);
-        var boss = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
-        //   boss.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, bossNomalSkills, monsterSkillInformation, target);
-
-         StartCoroutine(CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
 
     }
 

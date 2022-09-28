@@ -1056,11 +1056,16 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
     static SceneInstance m_LoadedScene;
 
-    public void OnSceneAction(string SceneName)
+    public void OnSceneAction(string SceneName,Action action=null)
     {
         if (m_LoadedScene.Scene.name == null)
         {
             Addressables.LoadSceneAsync(SceneName, LoadSceneMode.Additive).Completed += OnSceneLoaded;
+            if (action != null)
+            {
+                Debug.Log("action실행");
+                action();
+            }
         }
         else
         {
@@ -1088,6 +1093,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = new SceneInstance();
                 GameMG.Instance.Loading_screen(true);
+                Debug.Log("씬언로드완료");
                 break;
             case AsyncOperationStatus.Failed:
                 Debug.LogError("씬 언로드 실패: " /*+ addSceneReference.AssetGUID*/);
@@ -1104,6 +1110,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = obj.Result;
                 GameMG.Instance.Loading_screen(false);
+                Debug.Log("씬로드완료");
 
                 break;
             case AsyncOperationStatus.Failed:
