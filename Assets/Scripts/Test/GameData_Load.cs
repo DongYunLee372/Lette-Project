@@ -121,7 +121,7 @@ public class GameData_Load :Singleton<GameData_Load>
                 {
                     Debug.Log("캐릭터 위치이동");
                   
-                    find.transform.position = new Vector3(a.Position.x, a.Position.y + 50, a.Position.z);
+                    find.transform.position = a.Position;
                 }
             }
         }
@@ -135,7 +135,7 @@ public class GameData_Load :Singleton<GameData_Load>
         AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
         yield return new WaitForSeconds(2f);
         TestPos_and_Load();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2.5f);
         PlayerPos();
          var find=AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         find.SetActive(true);

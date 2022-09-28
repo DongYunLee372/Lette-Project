@@ -393,7 +393,7 @@ MonoBehaviour:
   - PlayerCharacter
   - Boss
   Position:
-  - {x: 395, y: 75, z: 230}
+  - {x: 394.8824, y: 68.56716, z: 230}
   - {x: 400, y: 68.99049, z: 221}
   Prefapsname_1:
   - PlayerCharacter
