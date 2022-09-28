@@ -216,10 +216,11 @@ public class CInputComponent : BaseComponent
         }
 
         movecom.MoveDir = new Vector3(h, 0, v);
+        movecom.curval.IsRunning = false;
 
         if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
-            movecom.curval.IsRunning = false;
+            
 
             //left shift 처리
             if (Input.GetKey(_key.Run))
