@@ -116,6 +116,7 @@ MonoBehaviour:
   TrabCollider: {fileID: 0}
   IsInteractive: 0
   Spear: {fileID: 3046466013138020706}
+  Floor: {fileID: 3046466013062103437}
   MoveSpeed: 0
 --- !u!1 &3046466013138020706
 GameObject:

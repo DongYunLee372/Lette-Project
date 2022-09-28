@@ -7,6 +7,7 @@ public class FloorTrab : BaseInteractive
     public Collider TrabCollider = null;
     public bool IsInteractive = false;
     public GameObject Spear = null;
+    public GameObject Floor = null;
     public IEnumerator coroutine = null;
     public float MoveSpeed = 0f;
 
@@ -23,16 +24,16 @@ public class FloorTrab : BaseInteractive
     public IEnumerator StartTrab()
     {
         IsInteractive = true;
-        Vector3 temppos = Spear.transform.localPosition;
-        Vector3 dir = (this.transform.localPosition - Spear.transform.position).normalized;
+        Vector3 temppos = Spear.transform.position;
+        Vector3 dir = (Floor.transform.position - Spear.transform.position).normalized;
         while (true)
         {
-            if(Spear.transform.position.y >= this.transform.position.y)
+            if(Spear.transform.position.y >= Floor.transform.position.y)
             {
                 break;
             }
             //temppos.y = MoveSpeed * Time.deltaTime;
-            Spear.transform.localPosition += dir * MoveSpeed * Time.deltaTime;
+            Spear.transform.position += dir * MoveSpeed * Time.deltaTime;
             yield return new WaitForSeconds(0.1f);
         }
 
