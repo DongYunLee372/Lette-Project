@@ -7,10 +7,10 @@ namespace MyDotween
     //작성된 curEaseMode 그래프모양 대로 지정한 위치에 지정한 시간동안 움직인다.
     public class Dotween
     {
-        public List<Tween> SequenceQueue;
-        public int CurSequenceNum = 0;
+        //public List<Tween> SequenceQueue;
+        //public int CurSequenceNum = 0;
 
-        
+
 
 
 
@@ -28,6 +28,7 @@ namespace MyDotween
 
         public enum LoopType
         {
+            None = -1,
             Restart,
             Incremental,
             Yoyo
@@ -145,5 +146,9 @@ namespace MyDotween
             }
 
         }
+
+
+
+
     }
 }

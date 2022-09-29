@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace MyDotween
 {
-    public class Tween:DotweenCore
+    public class Tween : DotweenCore
     {
+        public float StartTime = -1;
+
         public Tween Join;
         public Vector3 destpos;
         public GameObject TargetObj;
@@ -13,30 +15,65 @@ namespace MyDotween
         public Dotween.LoopType LoopType;
         //public Dotween.Ease Ease;
 
-        public delegate void CallBackEvent();
+        //public delegate void CallBackEvent();
 
         private CallBackEvent startevent;
         private CallBackEvent endevent;
 
-        public Tween()
+        //public Tween()
+        //{
+        //    Join = null;
+        //    destpos = Vector3.zero;
+        //    TargetObj = null;
+        //    Duration = 0;
+        //    LoopType = Dotween.LoopType.Restart;
+        //    curEaseMode = Dotween.Ease.Linear;
+        //    StartTime = -1;
+        //}
+
+
+        public enum TweenType
         {
-            Join = null;
-            destpos = Vector3.zero;
-            TargetObj = null;
-            Duration = 0;
-            LoopType = Dotween.LoopType.Restart;
-            curEaseMode = Dotween.Ease.Linear;
+            Move,
+            Scale,
+            Rotate,
+            LocalMove
         }
+
 
         public Tween(GameObject _target, Vector3 _dest, float _duration, Dotween.Ease ease = Dotween.Ease.Linear)
         {
+            StartTime = -1;
             Join = null;
             destpos = _dest;
             TargetObj = _target;
             Duration = _duration;
-            LoopType = Dotween.LoopType.Restart;
+            LoopType = Dotween.LoopType.None;
             curEaseMode = ease;
         }
+
+
+        //public static Tween DoMove()
+        //{
+
+        //}
+
+        //public static Tween DoScale()
+        //{
+
+
+        //}
+
+        //public static Tween DoRotate()
+        //{
+
+
+        //}
+
+        
+
+
+
 
 
         public void Start()
@@ -55,7 +92,7 @@ namespace MyDotween
             if (endevent != null)
                 endevent();
 
-            
+
         }
         public void OnStart(CallBackEvent _event)
         {

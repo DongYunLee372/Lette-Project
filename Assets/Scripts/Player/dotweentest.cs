@@ -20,10 +20,12 @@ public class dotweentest : MonoBehaviour
             Debug.Log("Doooooooooooooooostart");
 
             MyDotween.Sequence sq = new MyDotween.Sequence();
-            sq.Append(new MyDotween.Tween(this.gameObject, new Vector3(10, 0, 0), 2))
-                .Append(new MyDotween.Tween(this.gameObject, new Vector3(10, 0, 10), 2))
-                .Append(new MyDotween.Tween(this.gameObject, new Vector3(10, 0, 0), 2))
-                .Join(new MyDotween.Tween(obj, obj.transform.position + new Vector3(10, 0, 0), 2));
+            sq.Append(new MyDotween.Tween(this.gameObject, new Vector3(10, 0, 0), 2, Dotween.Ease.Linear))
+                .Append(new MyDotween.Tween(this.gameObject, new Vector3(10, 0, 10), 2, Dotween.Ease.Linear))
+                .Append(new MyDotween.Tween(this.gameObject, new Vector3(10, 0, 0), 2, Dotween.Ease.Linear))
+                .Join(new MyDotween.Tween(obj, obj.transform.position + new Vector3(10, 0, 0), 2, Dotween.Ease.Linear))
+                .Prepend(new MyDotween.Tween(obj, obj.transform.position + new Vector3(-10, 0, 0), 2, Dotween.Ease.Linear));
+
             sq.Start();
 
 
