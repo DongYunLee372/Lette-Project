@@ -48,7 +48,7 @@ public class FloorTrab : BaseInteractive
             yield return new WaitForSeconds(0.1f);
         }
 
-        Debug.Log("부안아미ㅗㅜ지ㅗ리ㅗ지롬지옴지ㅏㅇ닝");
+        
         IsInteractive = false;
         yield return null;
     }
@@ -62,6 +62,7 @@ public class FloorTrab : BaseInteractive
     public void OnTriggerEnter(Collider other)
     {
         Oninteractive();
+        //InteractiveObjManager.Instance.EndInteractiveObj(this.GetType().ToString());
     }
 
     public override void Awake()

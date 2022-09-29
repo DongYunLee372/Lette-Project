@@ -42,7 +42,7 @@ public class TestNPCSCP : BaseInteractive
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerMoveCom>().Test_DeleteInteractive();
-            InteractiveObjManager.Instance.EndInteractiveObj(EnumScp.InteractiveIndex.TestNPC_Sangmin);
+            //InteractiveObjManager.Instance.EndInteractiveObj(EnumScp.InteractiveIndex.TestNPC_Sangmin);
 
         }
     }
