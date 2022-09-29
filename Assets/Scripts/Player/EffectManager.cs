@@ -140,10 +140,12 @@ public class EffectManager : MySingleton<EffectManager>
     }
 
     //위치
-    public GameObject InstantiateEffect(GameObject effect,Vector3 pos)
+    public GameObject InstantiateEffect(GameObject effect,Vector3 pos, float DestroyTime = 1.0f)
     {
         GameObject copy = InstantiateEffect(effect);
         copy.transform.position = pos;
+        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        StartCoroutine(cor);
         return copy;
     }
 
