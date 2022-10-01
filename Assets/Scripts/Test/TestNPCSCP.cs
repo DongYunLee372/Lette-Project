@@ -1,3 +1,4 @@
+using EnumScp;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class TestNPCSCP : BaseInteractive
     TEST_ScriptableOBJ NPC_Infor;
 
     BaseInteractive test;
+
+    public override int P_Instance { get => throw new System.NotImplementedException(); protected set => throw new System.NotImplementedException(); }
+    public override InteractiveIndex P_interactive { get => throw new System.NotImplementedException(); protected set => throw new System.NotImplementedException(); }
+
     public override void Init()
     {
         P_interactive = EnumScp.InteractiveIndex.TestNPC_Sangmin;
@@ -37,7 +42,7 @@ public class TestNPCSCP : BaseInteractive
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerMoveCom>().Test_DeleteInteractive();
-            InteractiveObjManager.Instance.EndInteractiveObj(EnumScp.InteractiveIndex.TestNPC_Sangmin);
+            //InteractiveObjManager.Instance.EndInteractiveObj(EnumScp.InteractiveIndex.TestNPC_Sangmin);
 
         }
     }

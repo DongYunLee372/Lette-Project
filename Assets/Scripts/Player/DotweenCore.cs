@@ -52,7 +52,7 @@ namespace MyDotween
         }
 
         //duration 시간동안 목표위치로 이동한다.
-        public void DoMove(GameObject obj, Vector3 destpos, float duration,CallBackEvent _event = null)
+        public void DoMove(GameObject obj, Vector3 destpos, float duration, CallBackEvent _event = null)
         {
             Vector3 startpos = obj.transform.position;
             Vector3 directon = destpos - startpos;
@@ -63,6 +63,78 @@ namespace MyDotween
 
             CoroutineHandler.Start_Coroutine(CorDoMove(obj, destpos, duration, _event));
         }
+
+        public IEnumerator CorDoMove(GameObject obj, Vector3 dest, float duration, CallBackEvent _event = null)
+        {
+            float testtime = Time.time;
+            float startTime = Time.time;
+            float lastTime = 0;
+            float curtime = 0;
+            //float countVal = Time.deltaTime;
+            //목표시간까지의 움직여야 될 횟수
+            //float maxCount = duration / countVal;
+
+            //0~1까지의 값을 만든다고 할때 1회마다 증가할 값
+            //float addval = 1 / maxCount;
+
+            float curval = 0;
+            float count = 0;
+
+            Vector3 startpos = obj.transform.position;
+            //목표까지의 방향과 거리
+            Vector3 direction = dest - obj.transform.position;
+            float distance = direction.magnitude;
+            direction.Normalize();
+
+            Vector3 start = obj.transform.position;
+
+            lastTime = Time.time;
+            while (true)
+            {
+                count++;
+                if (count >= 10)
+                {
+                    int a = 0;
+                }
+                //curtime += Time.deltaTime;
+                curtime += Time.time - lastTime;
+                //지정한 시간이 되면 끝난다.
+                if (curtime >= duration)
+                {
+                    obj.transform.position = startpos + (direction * getEaseVal(1) * distance);
+                    _event?.Invoke();
+                    Debug.Log(Time.time - testtime + "초 걸림");
+                    yield break;
+                }
+
+                if (curval > 1)
+                {
+                    obj.transform.position = startpos + (direction * getEaseVal(1) * distance);
+                    _event?.Invoke();
+                    Debug.Log(Time.time - testtime + "초 걸림");
+                    yield break;
+                }
+
+
+                obj.transform.position = startpos + (direction * getEaseVal(curval) * distance);
+                curval = curtime / duration;
+                lastTime = Time.time;
+                //curval += addval;
+                //count += countVal;
+
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+
+        }
+
+
+
+
+
+
+
+
+
 
         //public IEnumerator CorDoMove(GameObject obj, Vector3 dest, float duration, CallBackEvent _event = null)
         //{
@@ -111,59 +183,6 @@ namespace MyDotween
         //    }
 
         //}
-
-
-        public IEnumerator CorDoMove(GameObject obj, Vector3 dest, float duration, CallBackEvent _event = null)
-        {
-            float testtime = Time.time;
-            float startTime = Time.time;
-            float curtime = 0;
-            //float countVal = Time.deltaTime;
-            //목표시간까지의 움직여야 될 횟수
-            //float maxCount = duration / countVal;
-
-            //0~1까지의 값을 만든다고 할때 1회마다 증가할 값
-            //float addval = 1 / maxCount;
-
-            float curval = 0;
-            float count = 0;
-
-            Vector3 startpos = obj.transform.position;
-            //목표까지의 방향과 거리
-            Vector3 direction = dest - obj.transform.position;
-            float distance = direction.magnitude;
-            direction.Normalize();
-
-            Vector3 start = obj.transform.position;
-
-            while (true)
-            {
-                curtime += Time.deltaTime;
-                //지정한 시간이 되면 끝난다.
-                if (curtime >= duration)
-                {
-                    _event?.Invoke();
-                    Debug.Log(Time.time - testtime + "초 걸림");
-                    yield break;
-                }
-
-                if (curval > 1)
-                {
-                    _event?.Invoke();
-                    //Debug.Log(Time.time - testtime + "초 걸림");
-                    yield break;
-                }
-
-
-                obj.transform.position = startpos + (direction * getEaseVal(curval) * distance);
-                curval =  curtime/ duration;
-                //curval += addval;
-                //count += countVal;
-
-                yield return new WaitForSeconds(Time.deltaTime);
-            }
-
-        }
 
     }
 }

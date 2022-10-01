@@ -1,3 +1,4 @@
+using EnumScp;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,14 +12,24 @@ public class FloorTrab : BaseInteractive
     public IEnumerator coroutine = null;
     public float MoveSpeed = 0f;
 
+    private int Instance;
+    private InteractiveIndex interactive;
+
+    public override int P_Instance { get { return Instance; } protected set { Instance = value; } }
+    public override InteractiveIndex P_interactive { get { return interactive; } protected set { interactive = value; } }
 
     public override void Init()
     {
-        InteractiveObjManager.Instance.SetInteractiveObj(EnumScp.InteractiveIndex.Trab, this);
+        
         TrabCollider = GetComponentInChildren<BoxCollider>();
         Debug.Log(TrabCollider.name);
         coroutine = StartTrab();
         MoveSpeed = 10f;
+
+        P_Instance = GetInstanceID();
+        P_interactive = InteractiveIndex.Trab;
+
+        InteractiveObjManager.Instance.SetInteractiveObj(P_interactive, this);
     }
 
     public IEnumerator StartTrab()
@@ -37,7 +48,7 @@ public class FloorTrab : BaseInteractive
             yield return new WaitForSeconds(0.1f);
         }
 
-        Debug.Log("부안아미ㅗㅜ지ㅗ리ㅗ지롬지옴지ㅏㅇ닝");
+        
         IsInteractive = false;
         yield return null;
     }
@@ -51,6 +62,7 @@ public class FloorTrab : BaseInteractive
     public void OnTriggerEnter(Collider other)
     {
         Oninteractive();
+        //InteractiveObjManager.Instance.EndInteractiveObj(this.GetType().ToString());
     }
 
     public override void Awake()
