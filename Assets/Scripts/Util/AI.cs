@@ -34,14 +34,14 @@ public class AI
 
     public void AI_Update()
     {
-        if (isPause) // BattleCharacter에서 AI를 정지시켰다면 정지
+        if (isPause) // AI를 잠시 정지시킬 수 있도록 함.
             return;
 
-        foreach (var st in pre_State_List)
+        foreach (var st in pre_State_List) // 선행 상태들 먼저 판단
         {
             State temp_State = now_State;
 
-            if (st.Judge(out now_State, battle_character))
+            if (st.Judge(out now_State, battle_character)) // 해당 상태를 판단
             {
                 st.Run(battle_character);
                 return;
@@ -52,13 +52,13 @@ public class AI
             }
         }
 
-        if (!now_State.first_Start)
+        if (!now_State.first_Start) // 해당 상태를 처음 진입한다면 초기화를 해줌.
         {
             now_State.State_Initialize(battle_character);
             now_State.first_Start = true;
         }
 
-        if (now_State.Judge(out now_State, battle_character))
+        if (now_State.Judge(out now_State, battle_character)) 
         {
             now_State.Run(battle_character);
         }
