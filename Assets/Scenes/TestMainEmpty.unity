@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a4c62001c93a741a467de4205ff9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skyboxMG: {fileID: 0}
 --- !u!4 &742986996
 Transform:
   m_ObjectHideFlags: 0
@@ -393,7 +394,7 @@ MonoBehaviour:
   - PlayerCharacter
   - Boss
   Position:
-  - {x: 394.8824, y: 68.56716, z: 230}
+  - {x: 394.8824, y: 70, z: 230}
   - {x: 400, y: 68.99049, z: 221}
   Prefapsname_1:
   - PlayerCharacter
