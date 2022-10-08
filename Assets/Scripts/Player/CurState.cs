@@ -50,7 +50,11 @@ public class CurState
     public bool CheckStepAble()
     {
         CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        if (IsStep && IsFowordBlock && CurStepHeight<movecom.moveoption.StepHeight)
+        if (IsFowordBlock)
+        {
+            return false;
+        }
+        if (IsStep && CurStepHeight<movecom.moveoption.StepHeight)
         {
             return true;
         }

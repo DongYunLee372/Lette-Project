@@ -60,8 +60,12 @@ public class CheckAround : MonoBehaviour
         //Vector3 temp = new Vector3(WorldMove.x, 0, WorldMove.z);
         //temp = com.FpRoot.forward /*+ Vector3.down*/;
         //NavMesh.Raycast()
-        hits = Physics.CapsuleCastAll(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.1f, movecom.com.FpRoot.forward,  0.3f/*, LayerMask.GetMask("Wall")*/);
         curval.IsStep = false;
+
+
+
+        hits = Physics.CapsuleCastAll(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.1f, movecom.com.FpRoot.forward,  0.3f/*, LayerMask.GetMask("Wall")*/);
+        
 
         if (hits.Length>0)
         {
@@ -75,10 +79,12 @@ public class CheckAround : MonoBehaviour
                     {
                         curval.IsFowordBlock = true;
                     }
+                    
                     return;
-                }
+                }//if(Layer(Wall))
 
-                //전방에 막혀있는 물체가 땅이라면 계단인지 검사한다.
+
+                //전방에 막혀있는 물체가 땅이라면 전방의 경사만 체크하고 리턴한다.
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
                     curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
@@ -86,19 +92,24 @@ public class CheckAround : MonoBehaviour
                     {
                         curval.IsFowordBlock = true;
                     }
+                    return;
+                }//if(Layer(Ground))
 
-                    //앞이 막혔으면 가로막혀있는 구조물의 높이를 구한다.
+
+                //정방에 막혀있는 물체가 계달일때
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Stairs"))
+                {
+                    //앞이 계단이면 가로막혀있는 계단의 높이를 구한다.
                     Vector3 pos = movecom.Capsuletopcenter + (movecom.com.FpRoot.forward * movecom.moveoption.StepCkeckDis);
                     RaycastHit hit2;
-                    
-                    Vector3 direction = this.transform.position + (movecom.com.FpRoot.forward * movecom.moveoption.StepCkeckDis)- movecom.Capsuletopcenter;
-
+                    Vector3 direction = this.transform.position + (movecom.com.FpRoot.forward * movecom.moveoption.StepCkeckDis) - movecom.Capsuletopcenter;
 
                     Ray ray = new Ray(movecom.Capsuletopcenter, direction);
-                    Debug.DrawLine(ray.origin, ray.origin + ray.direction * movecom.CharacterHeight, Color.red);
-                    bool falg = Physics.Raycast(ray , out hit2 ,movecom.CharacterHeight,LayerMask.GetMask("Ground"));
-                    
-                    if(falg)
+
+                    //Debug.DrawLine(ray.origin, ray.origin + ray.direction * movecom.CharacterHeight, Color.red);
+                    bool falg = Physics.Raycast(ray, out hit2, movecom.CharacterHeight, LayerMask.GetMask("Stairs"));
+
+                    if (falg)
                     {
                         testhitangle = Vector3.Angle(hit2.normal, Vector3.up);
                         if (Vector3.Angle(hit2.normal, Vector3.up) == 0)
@@ -107,47 +118,40 @@ public class CheckAround : MonoBehaviour
                             curval.CurStepHeight = hit2.point.y - transform.position.y;
                             curval.CurStepPos = hit2.point;
                         }
-
-
                         Debug.DrawLine(ray.origin, hit2.point, Color.yellow);
-
-                        if (hit2.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                        {
-                            
-                        }
                     }
+                }//if(Layer(Stairs))
 
-                }//if(Layer)
 
             }//foreach
 
         }//if(hits)
     }
 
-    public void CheckFoward()
-    {
-        if (movecom == null)
-        {
-            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-            curval = movecom.curval;
-        }
-        RaycastHit hit;
-        curval.CurFowardSlopAngle = 0;
-        curval.IsFowordBlock = false;
-        //Vector3 temp = new Vector3(WorldMove.x, 0, WorldMove.z);
-        //temp = com.FpRoot.forward /*+ Vector3.down*/;
-        //NavMesh.Raycast()
-        bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.2f, movecom.com.FpRoot.forward, out hit, 0.3f);
-        if (cast)
-        {
-            Debug.DrawLine(Capsulebottomcenter, hit.point, Color.cyan);
-            curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
-            if (curval.CurFowardSlopAngle >= 70.0f)
-            {
-                curval.IsFowordBlock = true;
-            }
-        }
-    }
+    //public void CheckFoward()
+    //{
+    //    if (movecom == null)
+    //    {
+    //        movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+    //        curval = movecom.curval;
+    //    }
+    //    RaycastHit hit;
+    //    curval.CurFowardSlopAngle = 0;
+    //    curval.IsFowordBlock = false;
+    //    //Vector3 temp = new Vector3(WorldMove.x, 0, WorldMove.z);
+    //    //temp = com.FpRoot.forward /*+ Vector3.down*/;
+    //    //NavMesh.Raycast()
+    //    bool cast = Physics.CapsuleCast(Capsuletopcenter, Capsulebottomcenter, CapsuleCol.radius - 0.2f, movecom.com.FpRoot.forward, out hit, 0.3f);
+    //    if (cast)
+    //    {
+    //        Debug.DrawLine(Capsulebottomcenter, hit.point, Color.cyan);
+    //        curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
+    //        if (curval.CurFowardSlopAngle >= 70.0f)
+    //        {
+    //            curval.IsFowordBlock = true;
+    //        }
+    //    }
+    //}
 
 
     public void CheckGround()
@@ -165,11 +169,11 @@ public class CheckAround : MonoBehaviour
 
         if (Time.time >= curval.LastJump + 0.2f)//점프하고 0.2초 동안은 지면검사를 하지 않는다.
         {
-            RaycastHit hit;
+            //RaycastHit hit;
 
             NavMeshHit navhit;
 
-
+            RaycastHit[] hits;
 
             temppos = new Vector3(this.transform.position.x, this.transform.position.y  - 10, this.transform.position.z);
             //tempcube.transform.position = temppos;
@@ -177,28 +181,33 @@ public class CheckAround : MonoBehaviour
             //bool cast = testnavagent.Raycast(temppos, out navhit);
             //bool cast = NavMesh.Raycast(this.transform.position + new Vector3(0,2,0), temppos, out navhit, NavMesh.GetAreaFromName("Walkable"));
             //Debug.DrawLine(this.transform.position + new Vector3(0, 2, 0), temppos, cast ? Color.red : Color.blue);
-            bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius, Vector3.down, out hit, CapsuleCol.radius-0.15f,LayerMask.GetMask("Ground"));
-            
-            if (cast)
+            //bool cast = Physics.SphereCast(Capsulebottomcenter, CapsuleCol.radius, Vector3.down, out hit, CapsuleCol.radius-0.15f,LayerMask.GetMask("Ground"));
+            hits = Physics.SphereCastAll(Capsulebottomcenter, CapsuleCol.radius, Vector3.down, CapsuleCol.radius - 0.15f);
+            if (hits.Length > 0)
             {
-                Debug.DrawLine(Capsulebottomcenter, hit.point, Color.blue);
-
-                curval.IsGrounded = true;
-                curval.CurGroundNomal = hit.normal;
-                curval.CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
-
-                curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, movecom.com.FpRoot.forward) - 90f;
-
-                if (curval.CurGroundSlopAngle > 1.0f)
+                foreach (var hit in hits)
                 {
-                    curval.IsOnTheSlop = true;
-                    if (curval.CurGroundSlopAngle >= movecom.moveoption.MaxSlop)
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Stairs") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
-                        curval.IsSlip = true;
+                        Debug.DrawLine(Capsulebottomcenter, hit.point, Color.blue);
+
+                        curval.IsGrounded = true;
+                        curval.CurGroundNomal = hit.normal;
+                        curval.CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
+
+                        curval.CurFowardSlopAngle = Vector3.Angle(hit.normal, movecom.com.FpRoot.forward) - 90f;
+
+                        if (curval.CurGroundSlopAngle > 1.0f)
+                        {
+                            curval.IsOnTheSlop = true;
+                            if (curval.CurGroundSlopAngle >= movecom.moveoption.MaxSlop)
+                            {
+                                curval.IsSlip = true;
+                            }
+                        }
+                        curval.CurGroundCross = Vector3.Cross(curval.CurGroundNomal, Vector3.up);
                     }
                 }
-                curval.CurGroundCross = Vector3.Cross(curval.CurGroundNomal, Vector3.up);
-
             }
         }
 

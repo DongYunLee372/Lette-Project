@@ -125,9 +125,9 @@ public class CMoveComponent : BaseComponent
 
     [HideInInspector]
     public Vector2 MouseMove = Vector2.zero;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 MoveDir = Vector3.zero;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 WorldMove = Vector3.zero;
     [HideInInspector]
     public float CurGravity;//현재 벨로시티의 y값
@@ -382,8 +382,9 @@ public class CMoveComponent : BaseComponent
 
         }
 
+        //y성분은 버린다.
         WorldMove = com.TpCamRig.TransformDirection(MoveDir);
-        //WorldMove = com.FpCamRig.TransformDirection(MoveDir);
+        WorldMove.y = 0;
         WorldMove = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * WorldMove;//경사로에 의한 y축 이동방향
 
         float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
@@ -404,6 +405,7 @@ public class CMoveComponent : BaseComponent
 
 
     //움직일 방향과 거리를 넣어주면 현재 지형에 따라서 움직여 준다.
+    //기울어진 지형과 계단에서의 움직임 처리 제작 필요
     public void Move(Vector3 MoveVal)
     {
         if(curval.CheckStepAble())
@@ -413,7 +415,7 @@ public class CMoveComponent : BaseComponent
 
         if (curval.IsOnTheSlop)
         {
-            curval.CurVirVelocity = new Vector3(0, CurGravity + moveoption.SlopAccel, 0);//중력값과 경사로에서의 미끄러질때의 가속도값
+            curval.CurVirVelocity = new Vector3(0, CurGravity/* + moveoption.SlopAccel*/, 0);//중력값과 경사로에서의 미끄러질때의 가속도값
 
             //CurVirVelocity = new Vector3(0, 0, 0);
             if (curval.IsSlip)
