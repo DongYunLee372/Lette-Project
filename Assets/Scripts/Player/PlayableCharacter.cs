@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //플레이어블 캐릭터의 모든것을 관리한다.
@@ -35,10 +36,6 @@ public class PlayableCharacter : MonoBehaviour
             return _instance;
         }
     }
-
-
-
-    //public CharacterInformation CharacterDBInfo;
 
     /*초기화*/
     private void Awake()
@@ -81,11 +78,10 @@ public class PlayableCharacter : MonoBehaviour
             
             Debug.Log("UI 로드 성공");
         }
-
         else
             Debug.Log("character UI Create Fail");
 
-
+        StartCoroutine(MonsterSearchCoroutine());
     }
 
     public void CeateUI(GameObject obj)
@@ -197,18 +193,85 @@ public class PlayableCharacter : MonoBehaviour
         status.CurExp += exp;
     }
 
+    public List<Battle_Character> _monsterObject;
+    public float _monsterSearchTime = 3.0f;
+    private float lastsearchTime;
+
+    public int CurMonsterIndex = 0;
+
+    public bool IsFocusingOn = false;
+
+    //일정 시간마다 화면에 있는 몬스터들을 확인해서 거리별로 리스트에 넣는다.
+    public IEnumerator MonsterSearchCoroutine()
+    {
+        Battle_Character[] temp;
+        RaycastHit hit;
+        while (true)
+        {
+            temp = FindObjectsOfType<Battle_Character>();
+
+            //해당 몬스터가 카메라 안에 있는지 확인
+            for (int i = 0; i < temp.Length; i++)
+            {
+                Vector3 screenPos = GetCamera().WorldToViewportPoint(temp[i].gameObject.transform.position);
+                if (screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1 && screenPos.z >= 0)
+                {
+                    Debug.Log(temp[i].gameObject.name + "화면에 탐지");
+                }
+            }
+
+            //카메라 안에 있으면 해당 물체로 ray를 쏴서 장애물이 있는지과 거리를 확인한다.
+            for (int i = 0; i < temp.Length; i++)
+            {
+                Vector3 dir = temp[i].gameObject.transform.position - transform.position;
+                if(Physics.Raycast(transform.position, dir, out hit))
+                {
+                    if(!hit.transform.CompareTag("Monster"))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        //hit.distance
+                    }
+                }
+
+
+            }
+
+
+
+            yield return new WaitForSeconds(_monsterSearchTime);
+        }
+    }
+
+    public void FocusTab()
+    {
+
+    }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Debug.Log("0번 눌림");
-            //MyDotween.Sequence sq = new MyDotween.Sequence();
-            //sq.Append(new MyDotween.Tween()).Append(new MyDotween.Tween()).Append(new MyDotween.Tween()).Join(new MyDotween.Tween());
-            //sq.Start();
+        //if(Time.time-lastsearchTime>=_monterSearchTime)
+        //{
+        //    lastsearchTime = Time.time;
 
-            //ResourceCreateDeleteManager.Instance.InstantiateObj<PlayableCharacter>("PlayerCharacter");
 
-            //ResourceCreateDeleteManager.Instance.RegistPoolManager<PlayableCharacter>("PlayerCharacter");
-        }
+
+
+        //}
+        //GetCamera().
+
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    Debug.Log("0번 눌림");
+        //    //MyDotween.Sequence sq = new MyDotween.Sequence();
+        //    //sq.Append(new MyDotween.Tween()).Append(new MyDotween.Tween()).Append(new MyDotween.Tween()).Join(new MyDotween.Tween());
+        //    //sq.Start();
+        //    //ResourceCreateDeleteManager.Instance.InstantiateObj<PlayableCharacter>("PlayerCharacter");
+        //    //ResourceCreateDeleteManager.Instance.RegistPoolManager<PlayableCharacter>("PlayerCharacter");
+        //}
+        //FindObjectsOfTypeAll
+        //FindObjectOfType
     }
 }
