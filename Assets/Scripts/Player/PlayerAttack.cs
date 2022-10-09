@@ -203,7 +203,7 @@ public class PlayerAttack : BaseComponent
     public void CreateEffect()
     {
         //att.CreateEffect(SkillData.P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 10);
-        att.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 40);
+        //att.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 40);
 
         //testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f , 10);
         //preparent = testAttckmanager.CreateEffect(Attack_InformationList[AttackNum].P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f);
@@ -211,7 +211,7 @@ public class PlayerAttack : BaseComponent
     }
     public void SkillCreateEffect()
     {
-        att.CreateEffect(SkillData.P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 60);             
+        //att.CreateEffect(SkillData.P_Effect, attackinfos[AttackNum].EffectPosRot, 1.5f, 60);             
     }
     public void Attack()
     {

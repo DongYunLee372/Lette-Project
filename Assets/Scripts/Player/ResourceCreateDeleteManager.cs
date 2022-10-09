@@ -36,13 +36,24 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
         else
         {
             Debug.Log("그냥 생성");
-            return Instantiate(result).GetComponent<T>();
+            temp = Addressables.InstantiateAsync(adressableName);
+            result = temp.WaitForCompletion();
+
+            if (typeof(T) == typeof(GameObject))
+                return result as T;
+            else
+                return result.GetComponent<T>();
+             
+            //return Instantiate(result).GetComponent<T>();
         }
 
     }
 
     public void DestroyObj<T>(string adressableName,GameObject obj)
     {
+        if (obj == null)
+            return;
+
         if (poolManager.IsPooling(adressableName))//풀링을 하고 있는 객체면 풀링에서 꺼내서 주고
         {
             Debug.Log("풀링 돌려줌");
@@ -55,30 +66,10 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
         }
     }
 
-
-    //public T InstantiateObj<T> (T obj)
-    //{
-    //    T getObj;
-    //    if(poolManager.IsPooling(obj.GetType().Name))
-    //    {
-    //        getObj = poolManager.GetObject<T>();
-    //    }
-    //    else
-    //    {
-    //        getObj = GameObject.Instantiate(obj);
-    //    }
-    //    return default(T);
-    //}
-
     public void RegistPoolManager<T>(string _adressablename)
     {
         poolManager.CreatePool<T>(_adressablename);
     }
-
-
-    
-
-
 
 }
 
@@ -183,11 +174,11 @@ public class ObjectPoolManager
     //네임으로 관리
     public void ReturnObject(string adressableName, GameObject obj)
     {
+        if (obj == null)
+            return;
+
         ObjectPool pool = null;
-
         bool flag = PoolDic.ContainsKey(adressableName);
-        //
-
         if (flag)
         {
             PoolDic.TryGetValue(adressableName, out pool);
@@ -269,6 +260,12 @@ public class ObjectPool/*<T>:ObjectPoolBase*/
 
     public void ReturnObj(GameObject obj)
     {
+        if (obj == null)
+            return;
+
+        if (_stack.Contains(obj))
+            return;
+
         obj.SetActive(false);
         _stack.Push(obj);
     }

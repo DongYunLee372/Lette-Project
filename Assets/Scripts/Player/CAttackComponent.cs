@@ -72,6 +72,8 @@ public class CAttackComponent : BaseComponent
         //이펙트
         public GameObject Effect;
 
+        public string EffectAdressable;
+
         //이펙트 생성 시간
         public float EffectStartTime;
 
@@ -245,8 +247,8 @@ public class CAttackComponent : BaseComponent
 
         if (skillinfos[skillnum].Effect != null)
         {
-            coroutine = timer.Cor_TimeCounter<GameObject,Transform, float>
-                (skillinfos[skillnum].EffectStartTime, CreateEffect, skillinfos[skillnum].Effect, skillinfos[skillnum].EffectPosRot, 1.5f);
+            coroutine = timer.Cor_TimeCounter<string,Transform, float>
+                (skillinfos[skillnum].EffectStartTime, CreateEffect, skillinfos[skillnum].EffectAdressable, skillinfos[skillnum].EffectPosRot, 1.5f);
             StartCoroutine(coroutine);
         }
 
@@ -430,10 +432,10 @@ public class CAttackComponent : BaseComponent
     }
 
     //공격 이펙트를 생성
-    public void CreateEffect(GameObject obj,Transform posrot, float destroyTime)
+    public void CreateEffect(string adressableAdress,Transform posrot, float destroyTime)
     {
 
-        effectobj = EffectManager.Instance.InstantiateEffect(obj, destroyTime);
+        effectobj = EffectManager.Instance.InstantiateEffect(adressableAdress, destroyTime);
         effectobj.transform.position = posrot.position;
         effectobj.transform.rotation = posrot.rotation;
         effectobj.transform.parent = posrot;

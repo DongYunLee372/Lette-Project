@@ -23,6 +23,7 @@ public class PlayableCharacter : MonoBehaviour
 
     [Header("================피격 이펙트================")]
     public GameObject HitEffect;
+    public string HitEffectAdressableName;
     public EffectManager effectmanager;
 
     /*싱글톤*/
@@ -179,7 +180,7 @@ public class PlayableCharacter : MonoBehaviour
     public void Damaged(float damage,Vector3 hitpoint, float Groggy)
     {
         CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        EffectManager.Instance.InstantiateEffect(HitEffect, hitpoint);
+        EffectManager.Instance.InstantiateEffect(HitEffectAdressableName, hitpoint);
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;
         status.CurHP -= finaldamage;
