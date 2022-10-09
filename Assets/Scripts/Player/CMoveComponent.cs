@@ -75,11 +75,15 @@ public class CMoveComponent : BaseComponent
 
         public float RunningStaminaVal;
 
+        [Header("==================계단 이동 관련 변수들==================")]
+
         public float StepHeight;//올라갈 수 있는 계단 높이
 
         public float StepCkeckDis;//눈높이에서 해당 위치만큼 이동한 곳에서 수직아래로 레이를 쏜다.
 
+        public float StepWeightVal = 3000;//계단을 올라가기 위한 가중치 연속적인 계단을 올라갈때 움직임 속도가 빨라지는 
 
+        
 
         [Header("==================회피 관련 변수들==================")]
         public AnimationClip RollingClip;
@@ -153,6 +157,8 @@ public class CMoveComponent : BaseComponent
     public Vector3 Capsuletopcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.height - com.CapsuleCol.radius, transform.position.z);
     [HideInInspector]
     public Vector3 Capsulebottomcenter => new Vector3(transform.position.x, transform.position.y + com.CapsuleCol.radius, transform.position.z);
+
+    public float CurStepWeight = 0;
 
     public float CharacterHeight => com.CapsuleCol.height;
 
@@ -410,8 +416,19 @@ public class CMoveComponent : BaseComponent
     {
         if(curval.CheckStepAble())
         {
-            this.transform.position = curval.CurStepPos;
+            if(CurStepWeight>=moveoption.StepWeightVal)
+            {
+                this.transform.position = curval.CurStepPos;
+                CurStepWeight = 0;
+                return;
+            }
+            else
+            {
+                CurStepWeight += MoveVal.magnitude;
+            }
         }
+
+        //CurStepWeight = 0;
 
         if (curval.IsOnTheSlop)
         {

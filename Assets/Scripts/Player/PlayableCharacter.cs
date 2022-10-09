@@ -92,7 +92,6 @@ public class PlayableCharacter : MonoBehaviour
         CharacterUIPanel = GameObject.Instantiate(obj).GetComponent<UICharacterInfoPanel>();
     }
 
-
     /*MyComponent 관련 메소드*/
     public BaseComponent GetMyComponent(CharEnumTypes.eComponentTypes type)
     {
