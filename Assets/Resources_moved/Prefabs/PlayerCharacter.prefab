@@ -2539,6 +2539,7 @@ MonoBehaviour:
   movecom: {fileID: 0}
   attackcom: {fileID: 0}
   guardcom: {fileID: 0}
+  testtestobj: {fileID: 0}
 --- !u!114 &5912692896712388562
 MonoBehaviour:
   m_ObjectHideFlags: 0

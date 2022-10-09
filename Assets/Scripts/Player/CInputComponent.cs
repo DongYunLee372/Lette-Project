@@ -225,7 +225,7 @@ public class CInputComponent : BaseComponent
             //left shift 처리
             if (Input.GetKey(_key.Run))
             {
-                if(PlayableCharacter.Instance.status.CurStamina > 0)
+                if(PlayableCharacter.Instance.status.CurStamina >= movecom.moveoption.RunningStaminaVal)
                     movecom.curval.IsRunning = true;
             } 
             //else movecom.curval.IsRunning = false;
@@ -302,6 +302,8 @@ public class CInputComponent : BaseComponent
         attackcom.SkillAttack(0);
     }
 
+    public dotweentest testtestobj;
+
     void Update()
     {
         //넉백 테스트
@@ -317,6 +319,14 @@ public class CInputComponent : BaseComponent
             PlayableCharacter.Instance.BeAttacked(90, this.transform.position,40.0f);
             //movecom.KnockDown();
         }
+
+        //테스트
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Debug.Log(testtestobj.GetType().Name + "풀 생성 들어옴");
+            ResourceCreateDeleteManager.Instance.RegistPoolManager<dotweentest>("testcube");
+        }
+
 
         //키 입력
         KeyInput();

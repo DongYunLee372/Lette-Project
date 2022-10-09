@@ -58,9 +58,9 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
     //    return default(T);
     //}
 
-    public void RegistPoolManager<T>(string _name)
+    public void RegistPoolManager<T>(string _adressablename)
     {
-        poolManager.CreatePool<T>(_name);
+        poolManager.CreatePool<T>(_adressablename);
     }
 
 
@@ -73,10 +73,10 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
 
 }
 
-
+//해당 타입의 풀들을 만들어서 관리한다.
 public class ObjectPoolManager
 {
-    public Dictionary<string, ObjectPool<object>> PoolDic = new Dictionary<string, ObjectPool<object>>();
+    public Dictionary<string, ObjectPool> PoolDic = new Dictionary<string, ObjectPool>();
 
     public bool IsPooling(string typestring)
     {
@@ -84,10 +84,10 @@ public class ObjectPoolManager
     }
 
 
-    public void CreatePool<T>(string adressableName) 
+    public void CreatePool<T>(string adressableName,int poolsize=10) 
     {
         //string typename = obj.GetType().Name;
-        ObjectPool<object> pool = null;
+        ObjectPool pool = null;
 
         //이미 해당 타입의 풀이 있는지 확인하고 없으면 만들어 준다.
         PoolDic.TryGetValue(typeof(T).Name, out pool);
@@ -95,22 +95,40 @@ public class ObjectPoolManager
 
         if(pool==null)
         {
-            pool = new ObjectPool<object>(adressableName, typeof(T));
-            
+            Debug.Log(typeof(T).Name + "풀 생성 시도");
+            pool = new ObjectPool(adressableName, typeof(T), poolsize);
+            PoolDic.Add(typeof(T).Name, pool);
         }
-
-
 
     }
 
     public T GetObject<T>()
     {
+        ObjectPool pool = null;
+        PoolDic.TryGetValue(typeof(T).Name, out pool);
+
+        if(pool!=null)
+        {
+            return pool.GetObj().GetComponent<T>();
+        }
+
+        Debug.LogError("존재하지 않는 타입");
         return default(T);
     }
 
-    public void ReturnObject<T>(T obj)
+    public void ReturnObject(System.Type _type, GameObject obj)
     {
+        ObjectPool pool = null;
 
+        bool flag = PoolDic.ContainsKey(_type.Name);
+        //PoolDic.TryGetValue(typeof(T).Name, out pool);
+
+        if (flag)
+        {
+            //pool = (ObjectPool<T>)PoolDic[typeof(T).Name];
+
+            pool.ReturnObj(obj);
+        }
     }
 
 
@@ -118,22 +136,74 @@ public class ObjectPoolManager
 }
 
 
-
-
-public class ObjectPool<T>
+public class ObjectPoolBase
 {
+    
+    
 
-    string AdressableName;
-    public Queue<object> _queue;
+}
 
-    public ObjectPool(string _Name, System.Type type)
+
+
+//풀은 게임오브젝트로 관리
+//객체는 기본적으로 10개 생성
+public class ObjectPool/*<T>:ObjectPoolBase*/
+{
+    //T _poolObj;
+    string _adressableName;
+    System.Type _type;
+    public Stack<GameObject> _stack;
+    int _poolSize = 0;
+    Transform _parent;
+
+
+    public ObjectPool(string adressableName, System.Type type,int poolsize)
     {
-        AdressableName = _Name;
+        _stack = new Stack<GameObject>();
+        //System.Type _type = System.Type.GetType(_Name);
+        _type = type;
+        _adressableName = adressableName;
+        _poolSize = poolsize;
+
+
+        CreateObj();
+
+        Debug.Log(_type.Name + "풀 생성 완료");
+
+        
+        
     }
 
 
+    public void CreateObj()
+    {
+        for (int i = 0; i < _poolSize; i++)
+        {
+            var temp = Addressables.InstantiateAsync(_adressableName);
+            var result = temp.WaitForCompletion();
+            result.SetActive(false);
+            _stack.Push(result);
+        }
+    }
 
 
+    public GameObject GetObj()
+    {
+        GameObject temp = null;
+        if (_stack.Count>0)
+        {
+            temp = _stack.Pop();
+            temp.SetActive(true);
+            temp.transform.SetParent(null);
+        }
+        return temp;
+    }
+
+    public void ReturnObj(GameObject obj)
+    {
+        obj.SetActive(false);
+        _stack.Push(obj);
+    }
 
 
 }
