@@ -303,6 +303,7 @@ public class CInputComponent : BaseComponent
     }
 
     public dotweentest testtestobj;
+    public GameObject testtestobj2;
 
     void Update()
     {
@@ -321,11 +322,39 @@ public class CInputComponent : BaseComponent
         }
 
         //테스트
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log(testtestobj.GetType().Name + "풀 생성 들어옴");
+            //Debug.Log(testtestobj.GetType().Name + "풀 생성 들어옴");
             ResourceCreateDeleteManager.Instance.RegistPoolManager<dotweentest>("testcube");
         }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            testtestobj = ResourceCreateDeleteManager.Instance.InstantiateObj<dotweentest>("testcube");
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            testtestobj2 = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Testcube2");
+        }
+
+
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            ResourceCreateDeleteManager.Instance.RegistPoolManager<GameObject>("Testcube2");
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            ResourceCreateDeleteManager.Instance.DestroyObj<dotweentest>("testcube",testtestobj.gameObject);
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>("Testcube2",testtestobj2);
+        }
+
 
 
         //키 입력

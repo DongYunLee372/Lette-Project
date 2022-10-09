@@ -11,7 +11,7 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
 {
     ObjectPoolManager poolManager = new ObjectPoolManager();
     //어드레서블로 로드 & 생성
-    public T InstantiateObj<T>(string adressableName)
+    public T InstantiateObj<T>(string adressableName) where T:class
     {
         //어드레서블로
         //var temp = Addressables.InstantiateAsync(adressableName);
@@ -28,21 +28,33 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
 
         T resulttype = result.GetComponent<T>();
         Debug.Log("타입" + resulttype.GetType().ToString());
-        if(poolManager.IsPooling(result.GetType().ToString()))//풀링을 하고 있는 객체면 풀링에서 꺼내서 주고
+        if(poolManager.IsPooling(adressableName))//풀링을 하고 있는 객체면 풀링에서 꺼내서 주고
         {
-            return poolManager.GetObject<T>();
+            Debug.Log("풀링생성");
+            return poolManager.GetObject<T>(adressableName);
         }
         else
         {
+            Debug.Log("그냥 생성");
             return Instantiate(result).GetComponent<T>();
         }
 
     }
 
-    public void Create(GameObject obj)
+    public void DestroyObj<T>(string adressableName,GameObject obj)
     {
-
+        if (poolManager.IsPooling(adressableName))//풀링을 하고 있는 객체면 풀링에서 꺼내서 주고
+        {
+            Debug.Log("풀링 돌려줌");
+            poolManager.ReturnObject(adressableName, obj);
+        }
+        else
+        {
+            Debug.Log("그냥삭제");
+            Addressables.ReleaseInstance(obj);
+        }
     }
+
 
     //public T InstantiateObj<T> (T obj)
     //{
@@ -64,10 +76,7 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
     }
 
 
-    public void DestroyObj<T>(T obj)
-    {
-
-    }
+    
 
 
 
@@ -78,60 +87,113 @@ public class ObjectPoolManager
 {
     public Dictionary<string, ObjectPool> PoolDic = new Dictionary<string, ObjectPool>();
 
-    public bool IsPooling(string typestring)
+    //public bool IsPooling(string typestring)
+    //{
+    //    return PoolDic.ContainsKey(typestring);
+    //}
+
+    public bool IsPooling(string adressableName)
     {
-        return PoolDic.ContainsKey(typestring);
+        return PoolDic.ContainsKey(adressableName);
     }
 
+    ////타입으로 관리
+    //public void CreatePool<T>(string adressableName,int poolsize=10) 
+    //{
+    //    //string typename = obj.GetType().Name;
+    //    ObjectPool pool = null;
 
-    public void CreatePool<T>(string adressableName,int poolsize=10) 
+    //    //이미 해당 타입의 풀이 있는지 확인하고 없으면 만들어 준다.
+    //    PoolDic.TryGetValue(typeof(T).Name, out pool);
+    //    Debug.Log(typeof(T).Name +"풀 생성 들어옴");
+
+    //    if(pool==null)
+    //    {
+    //        Debug.Log(typeof(T).Name + "풀 생성 시도");
+    //        pool = new ObjectPool(adressableName, typeof(T), poolsize);
+    //        PoolDic.Add(typeof(T).Name, pool);
+    //    }
+
+    //}
+
+    //어드레서블 네임으로 관리
+    public void CreatePool<T>(string adressableName, int poolsize = 10)
     {
         //string typename = obj.GetType().Name;
         ObjectPool pool = null;
 
         //이미 해당 타입의 풀이 있는지 확인하고 없으면 만들어 준다.
-        PoolDic.TryGetValue(typeof(T).Name, out pool);
-        Debug.Log(typeof(T).Name +"풀 생성 들어옴");
+        PoolDic.TryGetValue(adressableName, out pool);
+        Debug.Log(adressableName + "풀 생성 들어옴");
 
-        if(pool==null)
+        if (pool == null)
         {
-            Debug.Log(typeof(T).Name + "풀 생성 시도");
+            Debug.Log(adressableName + "풀 생성 시도");
             pool = new ObjectPool(adressableName, typeof(T), poolsize);
-            PoolDic.Add(typeof(T).Name, pool);
+            PoolDic.Add(adressableName, pool);
         }
 
     }
 
-    public T GetObject<T>()
+    //public T GetObject<T>()
+    //{
+    //    ObjectPool pool = null;
+    //    PoolDic.TryGetValue(typeof(T).Name, out pool);
+
+    //    if(pool!=null)
+    //    {
+    //        return pool.GetObj().GetComponent<T>();
+    //    }
+
+    //    Debug.LogError("존재하지 않는 타입");
+    //    return default(T);
+    //}
+
+    //네임으로 관리
+    public T GetObject<T>(string adressableName) where T :class
     {
         ObjectPool pool = null;
-        PoolDic.TryGetValue(typeof(T).Name, out pool);
+        PoolDic.TryGetValue(adressableName, out pool);
 
-        if(pool!=null)
+        if (pool != null)
         {
-            return pool.GetObj().GetComponent<T>();
+            if (typeof(T) == typeof(GameObject))
+                return pool.GetObj() as T;
+            else
+                return pool.GetObj().GetComponent<T>();
         }
 
         Debug.LogError("존재하지 않는 타입");
         return default(T);
     }
 
-    public void ReturnObject(System.Type _type, GameObject obj)
+    //public void ReturnObject(System.Type _type, GameObject obj)
+    //{
+    //    ObjectPool pool = null;
+
+    //    bool flag = PoolDic.ContainsKey(_type.Name);
+    //    //
+
+    //    if (flag)
+    //    {
+    //        PoolDic.TryGetValue(_type.Name, out pool);
+    //        pool.ReturnObj(obj);
+    //    }
+    //}
+    //네임으로 관리
+    public void ReturnObject(string adressableName, GameObject obj)
     {
         ObjectPool pool = null;
 
-        bool flag = PoolDic.ContainsKey(_type.Name);
-        //PoolDic.TryGetValue(typeof(T).Name, out pool);
+        bool flag = PoolDic.ContainsKey(adressableName);
+        //
 
         if (flag)
         {
-            //pool = (ObjectPool<T>)PoolDic[typeof(T).Name];
-
+            PoolDic.TryGetValue(adressableName, out pool);
             pool.ReturnObj(obj);
         }
     }
-
-
 
 }
 
@@ -166,7 +228,7 @@ public class ObjectPool/*<T>:ObjectPoolBase*/
         _poolSize = poolsize;
 
 
-        CreateObj();
+        CreateObj(_poolSize);
 
         Debug.Log(_type.Name + "풀 생성 완료");
 
@@ -175,9 +237,9 @@ public class ObjectPool/*<T>:ObjectPoolBase*/
     }
 
 
-    public void CreateObj()
+    public void CreateObj(int count)
     {
-        for (int i = 0; i < _poolSize; i++)
+        for (int i = 0; i < count; i++)
         {
             var temp = Addressables.InstantiateAsync(_adressableName);
             var result = temp.WaitForCompletion();
@@ -190,12 +252,18 @@ public class ObjectPool/*<T>:ObjectPoolBase*/
     public GameObject GetObj()
     {
         GameObject temp = null;
-        if (_stack.Count>0)
-        {
+
+        if(_stack.Count>0)
             temp = _stack.Pop();
-            temp.SetActive(true);
-            temp.transform.SetParent(null);
+
+        if (temp == null)
+        {
+            CreateObj(1);
+            temp = _stack.Pop();
         }
+        temp.SetActive(true);
+        temp.transform.SetParent(null);
+
         return temp;
     }
 
