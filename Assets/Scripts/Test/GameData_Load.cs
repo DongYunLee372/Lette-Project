@@ -32,6 +32,9 @@ public class GameData_Load :Singleton<GameData_Load>
    public void TestPos_and_Load(Action action=null)  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
 
+        AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
+
+
         str.Add("Hpbar");
         str.Add("FriendPanel");
         str.Add("Inven");
@@ -45,7 +48,6 @@ public class GameData_Load :Singleton<GameData_Load>
 
         var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
         // GameMG.Instance.startGame("Roomtest");
-        AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
         var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         find.SetActive(false);
