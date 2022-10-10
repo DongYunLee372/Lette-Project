@@ -839,6 +839,18 @@ public class CMoveComponent : BaseComponent
         com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
     }
 
+    //3인칭 카메라가 해당 방향을 바라보도록 회전
+    public void LookAt(Vector3 lookpos)
+    {
+        Vector3 dir = lookpos-transform.position;
+
+        Vector3 rot = Quaternion.LookRotation(dir, Vector3.up).eulerAngles;
+
+        Vector3 temp = com.TpCamRig.eulerAngles;
+
+        com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
+    }
+
     //줌인 
     public void ZoomIn(float scroll)
     {
@@ -910,6 +922,24 @@ public class CMoveComponent : BaseComponent
 
     }
 
+    public void Focusing()
+    {
+        PlayableCharacter tempinstance = PlayableCharacter.Instance;
+        if (tempinstance.IsFocusingOn)
+        {
+            if(tempinstance._monsterObject.FindIndex(x=>x._monster == tempinstance.CurFocusedMonster._monster)!=-1)
+            {
+                LookAt(tempinstance.CurFocusedMonster._monster.gameObject.transform.position);
+            }
+            else
+            {
+                tempinstance.IsFocusingOn = false;
+                tempinstance.CurFocusedIndex = 0;
+                tempinstance.CurFocusedMonster = null;
+            }
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -934,6 +964,7 @@ public class CMoveComponent : BaseComponent
         Rotation();
         HorVelocity();
         MoveCalculate();
+        Focusing();
         //LookAtFoward();
         //달리는 중일떄 1초마다 스테미나를 줄여준다.
         if (curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)

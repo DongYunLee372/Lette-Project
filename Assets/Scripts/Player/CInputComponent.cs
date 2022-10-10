@@ -33,6 +33,8 @@ public class CInputComponent : BaseComponent
         public KeyCode skill02 = KeyCode.Alpha2;
 
         public KeyCode skill03 = KeyCode.Alpha3;
+
+        public KeyCode Tab = KeyCode.Tab;
     }
 
     [Header("Keys")]
@@ -87,6 +89,10 @@ public class CInputComponent : BaseComponent
             
         }
 
+        if (Input.GetKeyDown(_key.Tab))
+        {
+            PlayableCharacter.Instance.FocusTab();
+        }
 
 
         if (/*state == CharacterStateMachine.eCharacterState.Attack||*/
@@ -324,7 +330,6 @@ public class CInputComponent : BaseComponent
         //테스트
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            //Debug.Log(testtestobj.GetType().Name + "풀 생성 들어옴");
             ResourceCreateDeleteManager.Instance.RegistPoolManager<dotweentest>("testcube");
         }
 

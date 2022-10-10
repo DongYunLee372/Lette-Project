@@ -193,21 +193,49 @@ public class PlayableCharacter : MonoBehaviour
         status.CurExp += exp;
     }
 
-    public List<Battle_Character> _monsterObject;
+    //적 탐색 & 포커싱 세팅
+    [System.Serializable]
+    public class Battle_Character_Info
+    {
+        public Battle_Character_Info(Battle_Character monster)
+        {
+            _monster = monster;
+            _distance = 0;
+            _index = -1;
+            _isFocused = false;
+            _isBlocked = false;
+        }
+
+        public Battle_Character _monster;
+        public float _distance;
+        public int _index;
+        public bool _isFocused;
+        public bool _isBlocked;
+    }
+
+
+    public List<Battle_Character_Info> _monsterObject = new List<Battle_Character_Info>();
     public float _monsterSearchTime = 3.0f;
     private float lastsearchTime;
 
     public int CurMonsterIndex = 0;
 
     public bool IsFocusingOn = false;
+    public int CurFocusedIndex = -1;
+    public Battle_Character_Info CurFocusedMonster;
+
 
     //일정 시간마다 화면에 있는 몬스터들을 확인해서 거리별로 리스트에 넣는다.
     public IEnumerator MonsterSearchCoroutine()
     {
         Battle_Character[] temp;
+        List<Battle_Character_Info> tempViewMonster = new List<Battle_Character_Info>();
+
         RaycastHit hit;
         while (true)
         {
+            tempViewMonster.Clear();
+
             temp = FindObjectsOfType<Battle_Character>();
 
             //해당 몬스터가 카메라 안에 있는지 확인
@@ -217,29 +245,52 @@ public class PlayableCharacter : MonoBehaviour
                 if (screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1 && screenPos.z >= 0)
                 {
                     Debug.Log(temp[i].gameObject.name + "화면에 탐지");
+                    Battle_Character_Info info = new Battle_Character_Info(temp[i]);
+                    tempViewMonster.Add(info);
                 }
             }
 
             //카메라 안에 있으면 해당 물체로 ray를 쏴서 장애물이 있는지과 거리를 확인한다.
-            for (int i = 0; i < temp.Length; i++)
+            for (int i = 0; i < tempViewMonster.Count; i++)
             {
-                Vector3 dir = temp[i].gameObject.transform.position - transform.position;
+                Vector3 dir = tempViewMonster[i]._monster.gameObject.transform.position - transform.position;
                 if(Physics.Raycast(transform.position, dir, out hit))
                 {
-                    if(!hit.transform.CompareTag("Monster"))
+                    if(!hit.transform.CompareTag("Enemy"))
                     {
+                        tempViewMonster.RemoveAt(i);
+                        //tempViewMonster[i]._isBlocked = true;
+                        //tempViewMonster[i]._distance = 0;
                         continue;
                     }
                     else
                     {
-                        //hit.distance
+                        tempViewMonster[i]._distance = hit.distance;
                     }
                 }
-
-
             }
 
+            //거리에 따라 정렬
+            _monsterObject = tempViewMonster.OrderBy(x => x._distance).ToList();
 
+            //탕색과 정렬을 끝냈는데 현재 포커싱 중인 몬스터가 사라졌으면 포커싱을 끝내준다.
+            if(IsFocusingOn)
+            {
+                //_monsterObject.Find(x => x == CurFocusedMonster);
+                int index = _monsterObject.FindIndex(x => x == CurFocusedMonster);
+                //탐색을 완료 했는데 포커싱 중인 몬스터가 없어졌을때
+                if (index != -1)
+                {
+                    Debug.Log("탐색결과 몬스터 존재 X");
+                    IsFocusingOn = false;
+                    CurFocusedIndex = 0;
+                    CurFocusedMonster = null;
+                }
+                else
+                {
+                    CurFocusedIndex = index;
+                }
+            }
 
             yield return new WaitForSeconds(_monsterSearchTime);
         }
@@ -247,31 +298,24 @@ public class PlayableCharacter : MonoBehaviour
 
     public void FocusTab()
     {
+        if(!IsFocusingOn)
+        {
+            if (_monsterObject.Count > 0)
+            {
+                
+                IsFocusingOn = true;
+                CurFocusedIndex = 0;
+                CurFocusedMonster = _monsterObject[0];
+                Debug.Log(CurFocusedMonster._monster.gameObject.name + "포커싱 시작");
+            }
+        }
+        else
+        {
+            CurFocusedIndex = (CurFocusedIndex + 1) % _monsterObject.Count;
+            CurFocusedMonster = _monsterObject[CurFocusedIndex];
+        }
+
 
     }
 
-    private void Update()
-    {
-        //if(Time.time-lastsearchTime>=_monterSearchTime)
-        //{
-        //    lastsearchTime = Time.time;
-
-
-
-
-        //}
-        //GetCamera().
-
-        //if (Input.GetKeyDown(KeyCode.Alpha0))
-        //{
-        //    Debug.Log("0번 눌림");
-        //    //MyDotween.Sequence sq = new MyDotween.Sequence();
-        //    //sq.Append(new MyDotween.Tween()).Append(new MyDotween.Tween()).Append(new MyDotween.Tween()).Join(new MyDotween.Tween());
-        //    //sq.Start();
-        //    //ResourceCreateDeleteManager.Instance.InstantiateObj<PlayableCharacter>("PlayerCharacter");
-        //    //ResourceCreateDeleteManager.Instance.RegistPoolManager<PlayableCharacter>("PlayerCharacter");
-        //}
-        //FindObjectsOfTypeAll
-        //FindObjectOfType
-    }
 }
