@@ -2333,11 +2333,11 @@ MonoBehaviour:
     KnockBackClip: {fileID: 7400000, guid: fb154bb004a47594ea4d6d9afb25d388, type: 2}
     KnockDownTime: 1
     KnockBackTime: 0
-    GuardFrontMoveClip: {fileID: 0}
-    GuardRightMoveClip: {fileID: 7400000, guid: 3807c40e073c3264696d50bb11b85729, type: 2}
-    GuardLeftMoveClip: {fileID: 7400000, guid: fed91820561870646bddcd2a389dbcf8, type: 2}
-    GuardBackMoveClip: {fileID: 7400000, guid: e4e962e0a1c505a4fbdd72119cbe39e0, type: 2}
-    GuardMoveSpeed: 150
+    GuardFrontMoveClip: _Guard_FowordMove
+    GuardRightMoveClip: _Guard_RightMove
+    GuardLeftMoveClip: _Guard_LeftMove
+    GuardBackMoveClip: _Guard_BackMove
+    GuardMoveSpeed: 100
     FPMaxZoomIn: 60
     FPMaxZoomOut: 90
     TPMaxZoomIn: 30

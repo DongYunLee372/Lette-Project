@@ -11,7 +11,7 @@ public class CInputComponent : BaseComponent
     {
         p_comtype = CharEnumTypes.eComponentTypes.InputCom;
     }
-    
+
     //사용할 키 지정
     [System.Serializable]
     public class KeySetting
@@ -50,14 +50,23 @@ public class CInputComponent : BaseComponent
     //3. Defence 컴포넌트
     public CGuardComponent guardcom;
 
+
     private GameObject canvas;
 
     //키와 마우스 입력을 처리한다.
     void KeyInput()
     {
-        if (canvas.GetComponent<MainOption>().ShowOption)
-            return;
-     
+        MainOption option;
+        if (canvas!=null)
+        {
+            canvas.TryGetComponent<MainOption>(out option);
+            if (option != null)
+                if (option.ShowOption)
+                    return;
+        }
+        
+        
+
         if (movecom == null)
             movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
@@ -75,22 +84,22 @@ public class CInputComponent : BaseComponent
         //if(state != CharacterStateMachine.eCharacterState.Guard&&
         //    state != CharacterStateMachine.eCharacterState.GuardStun)
         //{
-            
+
         //}
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
         float scroll = Input.GetAxis("Mouse ScrollWheel") * -1;
-        
+
 
         if (scroll > 0)//줌인 줌아웃에 사용
         {
             movecom.ZoomOut(scroll);
         }
-        else 
+        else
         {
             movecom.ZoomIn(scroll);
-            
-            
+
+
         }
 
         if (Input.GetKeyDown(_key.Tab))
@@ -100,7 +109,7 @@ public class CInputComponent : BaseComponent
 
 
         if (/*state == CharacterStateMachine.eCharacterState.Attack||*/
-            state == CharacterStateMachine.eCharacterState.Rolling||
+            state == CharacterStateMachine.eCharacterState.Rolling ||
             state == CharacterStateMachine.eCharacterState.OutOfControl)
         {
             //movecom.curval.IsMoving = false;
@@ -113,7 +122,7 @@ public class CInputComponent : BaseComponent
         //    return;
         //}
 
-        
+
 
         //왼쪽 마우스 클릭
         if (Input.GetMouseButtonDown(0))
@@ -138,16 +147,16 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        if(/*state == CharacterStateMachine.eCharacterState.Guard||*/
+        if (/*state == CharacterStateMachine.eCharacterState.Guard||*/
            state == CharacterStateMachine.eCharacterState.GuardStun)
         {
             //movecom.curval.IsMoving = false;
             return;
         }
 
-        
 
-        if(state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
+
+        if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
             //space 처리
             //구르기를 먼저 처리하고 움직임은 처리하지 않게 하기 위해서
@@ -183,46 +192,50 @@ public class CInputComponent : BaseComponent
         //wasd 처리
         if (Input.GetKey(_key.foward))
         {
+            v += 1.0f;
             if (state == CharacterStateMachine.eCharacterState.Guard)
             {
                 movecom.GuardMove(CMoveComponent.Direction.Front);
-                return;
+                //return;
             }
-            else
-                v += 1.0f;
+
+
         }
         if (Input.GetKey(_key.back))
         {
+            v -= 1.0f;
             if (state == CharacterStateMachine.eCharacterState.Guard)
             {
                 movecom.GuardMove(CMoveComponent.Direction.Back);
-                return;
+                //return;
             }
-                
-            else
-                v -= 1.0f; 
+
+
+
         }
-        if (Input.GetKey(_key.left)) 
+        if (Input.GetKey(_key.left))
         {
+            h -= 1.0f;
             if (state == CharacterStateMachine.eCharacterState.Guard)
             {
                 movecom.GuardMove(CMoveComponent.Direction.Left);
-                return;
+                //return;
             }
-               
-            else
-                h -= 1.0f;
+
+
+
         }
-        if (Input.GetKey(_key.right)) 
+        if (Input.GetKey(_key.right))
         {
+            h += 1.0f;
             if (state == CharacterStateMachine.eCharacterState.Guard)
             {
                 movecom.GuardMove(CMoveComponent.Direction.Right);
-                return;
+                //return;
             }
-                
-            else
-                h += 1.0f;
+
+
+
         }
 
         movecom.MoveDir = new Vector3(h, 0, v);
@@ -230,14 +243,12 @@ public class CInputComponent : BaseComponent
 
         if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
-            
-
             //left shift 처리
             if (Input.GetKey(_key.Run))
             {
-                if(PlayableCharacter.Instance.status.CurStamina >= movecom.moveoption.RunningStaminaVal)
+                if (PlayableCharacter.Instance.status.CurStamina >= movecom.moveoption.RunningStaminaVal)
                     movecom.curval.IsRunning = true;
-            } 
+            }
             //else movecom.curval.IsRunning = false;
 
 
@@ -275,7 +286,9 @@ public class CInputComponent : BaseComponent
         }
         else
         {
-            movecom.com.animator.Play("_Guard");
+            //가드중이고 움직이는 중이 아닐때
+            if (movecom.MoveDir.magnitude <= 0)
+                movecom.com.animator.Play("_Guard");
         }
     }
 
@@ -302,7 +315,7 @@ public class CInputComponent : BaseComponent
             guardcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
         guardcom.GuardDown();
     }
-    
+
     void SkillAttack(int num)
     {
         if (attackcom == null)
@@ -320,14 +333,14 @@ public class CInputComponent : BaseComponent
         //넉백 테스트
         if (Input.GetKeyDown(KeyCode.U))
         {
-            PlayableCharacter.Instance.BeAttacked(10, this.transform.position,10.0f);
+            PlayableCharacter.Instance.BeAttacked(10, this.transform.position, 10.0f);
             //movecom.KnockBack();
         }
 
         //넉다운 테스트
         if (Input.GetKeyDown(KeyCode.I))
         {
-            PlayableCharacter.Instance.BeAttacked(90, this.transform.position,40.0f);
+            PlayableCharacter.Instance.BeAttacked(90, this.transform.position, 40.0f);
             //movecom.KnockDown();
         }
 
@@ -356,21 +369,17 @@ public class CInputComponent : BaseComponent
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            ResourceCreateDeleteManager.Instance.DestroyObj<dotweentest>("testcube",testtestobj.gameObject);
+            ResourceCreateDeleteManager.Instance.DestroyObj<dotweentest>("testcube", testtestobj.gameObject);
         }
 
         if (Input.GetKeyDown(KeyCode.N))
         {
-            ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>("Testcube2",testtestobj2);
+            ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>("Testcube2", testtestobj2);
         }
 
 
 
         //키 입력
         KeyInput();
-    }
-    private void Start()
-    {
-        canvas = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
     }
 }
