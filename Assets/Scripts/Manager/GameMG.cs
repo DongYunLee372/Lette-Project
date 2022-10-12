@@ -235,7 +235,7 @@ public class GameMG : Singleton<GameMG>
 
         // StartCoroutine(temp());  
 
-        GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
+       // GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
 
        // AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
 

@@ -79,7 +79,7 @@ public class OnclickButton : MonoBehaviour
         canvas.GetComponent<MainOption>().GameStart = true;
 
         UIManager.Instance.Hide(UIname.StartUI);
-
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
     }
 
     public void b_Restart()

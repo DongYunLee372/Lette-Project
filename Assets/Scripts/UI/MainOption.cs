@@ -34,7 +34,7 @@ public class MainOption : MonoBehaviour
         }
         if(GameStart)
         {
-            
+            ShowOption = true;
             if (UIManager.Instance.Findobjbool("IngameOption"))
             {
                 UIManager.Instance.Show("IngameOption");
@@ -43,10 +43,16 @@ public class MainOption : MonoBehaviour
             {
                 UIManager.Instance.Prefabsload("IngameOption", Canvas_Enum.CANVAS_NUM.start_canvas);
             }
-
-                ShowOption = true;
+               
         }
-
-        
+    }
+    private void Start()
+    {
+       StartCoroutine("UI");
+    }
+    IEnumerator UI()
+    {
+        yield return new WaitForSeconds(2f);
+        UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas); 
     }
 }
