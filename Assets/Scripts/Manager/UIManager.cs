@@ -96,6 +96,8 @@ public class UIManager : Singleton<UIManager>
         {
             UIInfo tmp = new UIInfo();
             GameObject obj = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
+            //  AddressablesLoadManager.Instance.Load_Name<GameObject>(name);
+            Debug.Log(obj);
             tmp.obj = Instantiate(obj, canvas[(int)x].transform);
             tmp.obj.transform.SetParent(canvas[(int)x].transform);
             tmp.path = name;
@@ -185,14 +187,16 @@ public class UIManager : Singleton<UIManager>
   
     private void Awake()
     {
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Hpbar"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("FriendPanel"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Inven"));
-        //StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Bosshpbar"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("StartUI"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("OptionSetting"));
-        StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial("Boss_HP"));
+
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("MainOption"));
+        StartCoroutine( AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("StartUI"));
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("OptionSetting"));
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Boss_HP"));
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("FriendPanel"));
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Hpbar"));
+ 
     }
+    
     // Update is called once per frame
 
 }

@@ -2135,7 +2135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896712387625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 394.8824, y: 68.99049, z: 230}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2240,6 +2240,13 @@ MonoBehaviour:
   _monsterSearchTime: 3
   CurMonsterIndex: 0
   IsFocusingOn: 0
+  CurFocusedIndex: -1
+  CurFocusedMonster:
+    _monster: {fileID: 0}
+    _distance: 0
+    _index: 0
+    _isFocused: 0
+    _isBlocked: 0
 --- !u!114 &5912692896712387626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2542,6 +2549,7 @@ MonoBehaviour:
     skill01: 49
     skill02: 50
     skill03: 51
+    Tab: 9
   movecom: {fileID: 0}
   attackcom: {fileID: 0}
   guardcom: {fileID: 0}
