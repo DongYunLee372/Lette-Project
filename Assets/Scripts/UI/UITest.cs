@@ -18,9 +18,10 @@ public class UITest : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {     
             UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
-           // UIManager.Instance.Prefabsload("OptionSetting", CANVAS_NUM.enemy_canvas);
-            
-          //  CharacterCreate.Instantiate.
+           
+            // UIManager.Instance.Prefabsload("OptionSetting", CANVAS_NUM.enemy_canvas);
+
+            //  CharacterCreate.Instantiate.
         }
   
 

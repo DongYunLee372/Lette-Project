@@ -75,7 +75,11 @@ public class OnclickButton : MonoBehaviour
     // Start is called before the first frame update
     public void b_Gamestart()
     {
-        Debug.Log("게임시작");
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().GameStart = true;
+
+        UIManager.Instance.Hide(UIname.StartUI);
+
     }
 
     public void b_Restart()
@@ -107,6 +111,7 @@ public class OnclickButton : MonoBehaviour
     {
         UIManager.Instance.Show(UIname.StartUI);
         UIManager.Instance.Hide(UIname.MainOption);
+        UIManager.Instance.Hide(UIname.IngameOption);
 
         //Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
         //KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
@@ -124,6 +129,8 @@ public class OnclickButton : MonoBehaviour
             UIManager.Instance.Prefabsload(UIname.MainOption, CANVAS_NUM.start_canvas);  //추가한다. 
         }
         UIManager.Instance.Hide(UIname.StartUI); //메인 UI는 HIDE시킨다 
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().GameStart = false;
         buttoncheck = true;
     }
     

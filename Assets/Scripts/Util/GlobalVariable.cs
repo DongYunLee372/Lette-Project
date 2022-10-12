@@ -64,6 +64,7 @@ namespace Global_Variable
     {
         public const string MainOption = "MainOption";
         public const string StartUI = "StartUI";
+        public const string IngameOption = "IngameOption";
     }
 
 

@@ -187,14 +187,15 @@ public class UIManager : Singleton<UIManager>
   
     private void Awake()
     {
-
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("IngameOption"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("MainOption"));
-        StartCoroutine( AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("StartUI"));
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("StartUI"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("OptionSetting"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Boss_HP"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("FriendPanel"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Hpbar"));
- 
+     
+        
     }
     
     // Update is called once per frame
