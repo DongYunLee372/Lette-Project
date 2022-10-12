@@ -77,9 +77,14 @@ public class OnclickButton : MonoBehaviour
     {
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         canvas.GetComponent<MainOption>().GameStart = true;
-
+        canvas.GetComponent<MainOption>().ShowOption = false;
+        canvas.GetComponent<MainOption>().mainoption = false;
         UIManager.Instance.Hide(UIname.StartUI);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
+        Debug.Log("게임시작");
     }
 
     public void b_Restart()
@@ -113,6 +118,8 @@ public class OnclickButton : MonoBehaviour
         UIManager.Instance.Hide(UIname.MainOption);
         UIManager.Instance.Hide(UIname.IngameOption);
 
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().mainoption = true;
         //Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
         //KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
         //SaveSystem.Save(character, "save_001");
@@ -131,6 +138,8 @@ public class OnclickButton : MonoBehaviour
         UIManager.Instance.Hide(UIname.StartUI); //메인 UI는 HIDE시킨다 
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         canvas.GetComponent<MainOption>().GameStart = false;
+        canvas.GetComponent<MainOption>().mainoption = false;
+        canvas.GetComponent<MainOption>().mainoption = true;
         buttoncheck = true;
     }
     

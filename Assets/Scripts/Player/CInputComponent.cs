@@ -49,11 +49,15 @@ public class CInputComponent : BaseComponent
     //public PlayerAttack attackcom;
     //3. Defence 컴포넌트
     public CGuardComponent guardcom;
-    
-   
+
+    private GameObject canvas;
+
     //키와 마우스 입력을 처리한다.
     void KeyInput()
     {
+        if (canvas.GetComponent<MainOption>().ShowOption)
+            return;
+     
         if (movecom == null)
             movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
@@ -364,5 +368,9 @@ public class CInputComponent : BaseComponent
 
         //키 입력
         KeyInput();
+    }
+    private void Start()
+    {
+        canvas = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
     }
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Canvas_Enum;
+using UnityEngine.EventSystems;
+
 public class UITest : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -23,8 +25,8 @@ public class UITest : MonoBehaviour
 
             //  CharacterCreate.Instantiate.
         }
-  
 
+       
        
     }
 }

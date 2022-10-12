@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MainOption : MonoBehaviour
 {
@@ -15,13 +16,16 @@ public class MainOption : MonoBehaviour
 
     public bool GameStart;
     public bool ShowOption;
-
+    public bool mainoption;
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (mainoption)
+            return;
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Ingame();
         }
+      
     }
 
     public void Ingame()
@@ -30,20 +34,25 @@ public class MainOption : MonoBehaviour
         {
             UIManager.Instance.Hide("IngameOption");
             ShowOption = false;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             return;
         }
         if(GameStart)
         {
-            ShowOption = true;
+            
             if (UIManager.Instance.Findobjbool("IngameOption"))
             {
                 UIManager.Instance.Show("IngameOption");
+                ShowOption = true;
             }
             else
             {
                 UIManager.Instance.Prefabsload("IngameOption", Canvas_Enum.CANVAS_NUM.start_canvas);
+                ShowOption = true;
             }
-               
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     private void Start()
