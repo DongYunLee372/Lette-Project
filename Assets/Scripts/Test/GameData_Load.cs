@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 
 public class GameData_Load :Singleton<GameData_Load>
 {
@@ -32,7 +34,6 @@ public class GameData_Load :Singleton<GameData_Load>
    public void TestPos_and_Load(Action action=null)  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
 
-        AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
 
         str.Add("Hpbar");
@@ -53,14 +54,14 @@ public class GameData_Load :Singleton<GameData_Load>
         find.SetActive(false);
         //  TestMainLoad.Instance.
         //    var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
-
+        StartCoroutine(CheckLoadScene(tempDataSave));
+        AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
         // var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
 
         //  var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
         //AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
-        DataLoad(tempDataSave);
-
+       
         //foreach (var s in tempDataSave.SaveDatas)
         //{
         //    Debug.Log("보는중 : " + s.prefabsName);
@@ -200,11 +201,13 @@ public class GameData_Load :Singleton<GameData_Load>
         switch (num)
         {
             case Scenes_Stage.Stage1:
+                GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
                 BoatScene_Data_Load();
                 skyboxMG.SkyBox_Setting("BoatScene");
                 break;
 
             case Scenes_Stage.Stage2:
+                GameMG.Instance.scenes_Stage = Scenes_Stage.Stage2;
                 StartCoroutine(Load_Boss());
                 skyboxMG.SkyBox_Setting("Roomtest");
                 break;
@@ -219,26 +222,45 @@ public class GameData_Load :Singleton<GameData_Load>
     public void BoatScene_Data_Load()
     {
 
-        AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
-
         AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("BoatData");
 
         var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("BoatData");
 
-        if(tempDataSave==null)
+        if (tempDataSave == null)
         {
             Debug.Log("데이터 널");
         }
-        foreach(var a in tempDataSave.SaveDatas)
+        foreach (var a in tempDataSave.SaveDatas)
         {
             Debug.Log("가져온데이터 이름" + a.prefabsName);
             Debug.Log("가져온데이터 위치" + a.Position);
 
         }
 
-        DataLoad(tempDataSave);
+        // AddressablesLoadManager.Instance.action1= DataLoad;
 
+        StartCoroutine(CheckLoadScene(tempDataSave));
+        AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
 
+    }
+
+    IEnumerator CheckLoadScene(GameSaveData tempsave)
+    {
+        while(true)
+        {
+            if(AddressablesLoadManager.Instance.SceneLoadCheck==true)
+            {
+                Debug.Log("gpg?");
+                DataLoad(tempsave);
+                Debug.Log("gpg2?");
+                AddressablesLoadManager.Instance.SceneLoadCheck = false;
+                yield break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.3f);
+            }
+        }
     }
 
     public void BoatScene()

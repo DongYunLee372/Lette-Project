@@ -394,12 +394,12 @@ MonoBehaviour:
   - PlayerCharacter
   - Boss
   Position:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 26, y: -18.62, z: 52}
+  - {x: 25.8, y: -21.4, z: -33}
   Prefapsname_1:
   - PlayerCharacter
   Position_1:
-  - {x: 1.33, y: 5.28, z: 2.75}
+  - {x: 0.01, y: 2.14, z: -10}
 --- !u!1 &2008802320
 GameObject:
   m_ObjectHideFlags: 0

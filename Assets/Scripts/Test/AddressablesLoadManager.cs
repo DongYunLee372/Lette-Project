@@ -1054,18 +1054,22 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
 
 
-    static SceneInstance m_LoadedScene;
-
-    public void OnSceneAction(string SceneName,Action action=null)
+    public SceneInstance m_LoadedScene;
+    public bool SceneLoadCheck=false;
+    public Action<GameSaveData> action1;
+    public void OnSceneAction(string SceneName,Action<AsyncOperationHandle<SceneInstance>> temp=null)
     {
         if (m_LoadedScene.Scene.name == null)
         {
-            Addressables.LoadSceneAsync(SceneName, LoadSceneMode.Additive).Completed += OnSceneLoaded;
-            if (action != null)
+            if (temp == null)
             {
-                Debug.Log("action실행");
-                action();
+                Addressables.LoadSceneAsync(SceneName, LoadSceneMode.Additive).Completed += OnSceneLoaded;
             }
+            else
+            {
+                Addressables.LoadSceneAsync(SceneName, LoadSceneMode.Additive).Completed += temp;
+            }
+
         }
         else
         {
@@ -1093,6 +1097,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = new SceneInstance();
                 GameMG.Instance.Loading_screen(true);
+                SceneLoadCheck = true;
                 Debug.Log("씬언로드완료");
                 break;
             case AsyncOperationStatus.Failed:
@@ -1110,6 +1115,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = obj.Result;
                 GameMG.Instance.Loading_screen(false);
+                SceneLoadCheck = true;
                 Debug.Log("씬로드완료");
 
                 break;
@@ -1120,7 +1126,6 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
                 break;
         }
     }
-
 
 
 }
