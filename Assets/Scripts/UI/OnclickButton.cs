@@ -73,41 +73,73 @@ public class OnclickButton : MonoBehaviour
         compltesettingcount++;
     }
     // Start is called before the first frame update
-    public void Gamestart()
+    public void b_Gamestart()
     {
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().GameStart = true;
+        canvas.GetComponent<MainOption>().ShowOption = false;
+        canvas.GetComponent<MainOption>().mainoption = false;
+        UIManager.Instance.Hide(UIname.StartUI);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
         Debug.Log("게임시작");
     }
 
-    public void Restart()
+    public void b_Restart()
     {
          
     }
 
-    public void Exitgame()
+    public void b_Exitgame()
     {
 
+    }
+
+    public void b_Reverse()
+    {
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().Reversemouse = !canvas.GetComponent<MainOption>().Reversemouse; 
+    }
+    public void b_Autoevade()
+    {
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().Autoevade = !canvas.GetComponent<MainOption>().Autoevade;
+    }
+    public void b_Lookon()
+    {
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().Lookon = !canvas.GetComponent<MainOption>().Lookon;
     }
     public void Optionokbutton()
     {
         UIManager.Instance.Show(UIname.StartUI);
-        UIManager.Instance.Hide(UIname.OptionSetting);
+        UIManager.Instance.Hide(UIname.MainOption);
+        UIManager.Instance.Hide(UIname.IngameOption);
 
-        Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
-        KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
-        SaveSystem.Save(character, "save_001");
-        buttoncheck = false;
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().mainoption = true;
+        //Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
+        //KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
+        //SaveSystem.Save(character, "save_001");
+        //buttoncheck = false;
     }
     public void Option()
     {
-        if (UIManager.Instance.Findobjbool(UIname.OptionSetting))   //옵션버튼 눌렀을때 옵션UI가 HIDE상태라면 
+        if (UIManager.Instance.Findobjbool(UIname.MainOption))   //옵션버튼 눌렀을때 옵션UI가 HIDE상태라면 
         {       
-            UIManager.Instance.Show(UIname.OptionSetting);          //옵션버튼을 SHOW한다 
+            UIManager.Instance.Show(UIname.MainOption);          //옵션버튼을 SHOW한다 
         }
         else    //오브젝트가 존재하지않으면 
         {
-            UIManager.Instance.Prefabsload(UIname.OptionSetting, CANVAS_NUM.start_canvas);  //추가한다. 
+            UIManager.Instance.Prefabsload(UIname.MainOption, CANVAS_NUM.start_canvas);  //추가한다. 
         }
         UIManager.Instance.Hide(UIname.StartUI); //메인 UI는 HIDE시킨다 
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().GameStart = false;
+        canvas.GetComponent<MainOption>().mainoption = false;
+        canvas.GetComponent<MainOption>().mainoption = true;
         buttoncheck = true;
     }
     

@@ -2234,7 +2234,19 @@ MonoBehaviour:
   status: {fileID: 0}
   CharacterUIPanel: {fileID: 0}
   HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
+  HitEffectAdressableName: 
   effectmanager: {fileID: 0}
+  _monsterObject: []
+  _monsterSearchTime: 3
+  CurMonsterIndex: 0
+  IsFocusingOn: 0
+  CurFocusedIndex: -1
+  CurFocusedMonster:
+    _monster: {fileID: 0}
+    _distance: 0
+    _index: 0
+    _isFocused: 0
+    _isBlocked: 0
 --- !u!114 &5912692896712387626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2321,11 +2333,11 @@ MonoBehaviour:
     KnockBackClip: {fileID: 7400000, guid: fb154bb004a47594ea4d6d9afb25d388, type: 2}
     KnockDownTime: 1
     KnockBackTime: 0
-    GuardFrontMoveClip: {fileID: 0}
-    GuardRightMoveClip: {fileID: 7400000, guid: 3807c40e073c3264696d50bb11b85729, type: 2}
-    GuardLeftMoveClip: {fileID: 7400000, guid: fed91820561870646bddcd2a389dbcf8, type: 2}
-    GuardBackMoveClip: {fileID: 7400000, guid: e4e962e0a1c505a4fbdd72119cbe39e0, type: 2}
-    GuardMoveSpeed: 150
+    GuardFrontMoveClip: _Guard_FowordMove
+    GuardRightMoveClip: _Guard_RightMove
+    GuardLeftMoveClip: _Guard_LeftMove
+    GuardBackMoveClip: _Guard_BackMove
+    GuardMoveSpeed: 100
     FPMaxZoomIn: 60
     FPMaxZoomOut: 90
     TPMaxZoomIn: 30
@@ -2477,6 +2489,7 @@ MonoBehaviour:
     RecoveryDelay: 0
     damage: 0
     Effect: {fileID: 1648509489993130, guid: 8a0c2ade089d4c44fbdf861f7bcd7be6, type: 3}
+    EffectAdressable: Eff7_Slash
     EffectStartTime: 0.8
     EffectPosRot: {fileID: 1121701717}
     Movedis: 0
@@ -2536,9 +2549,12 @@ MonoBehaviour:
     skill01: 49
     skill02: 50
     skill03: 51
+    Tab: 9
   movecom: {fileID: 0}
   attackcom: {fileID: 0}
   guardcom: {fileID: 0}
+  testtestobj: {fileID: 0}
+  testtestobj2: {fileID: 0}
 --- !u!114 &5912692896712388562
 MonoBehaviour:
   m_ObjectHideFlags: 0

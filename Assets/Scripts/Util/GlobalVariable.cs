@@ -62,8 +62,9 @@ namespace Global_Variable
     }
     public class UIname
     {
-        public const string OptionSetting = "OptionSetting";
+        public const string MainOption = "MainOption";
         public const string StartUI = "StartUI";
+        public const string IngameOption = "IngameOption";
     }
 
 

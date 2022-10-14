@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace MyDotween
 {
+    //여러개의 동작(Tween) 들을 묶어서 한번에 순차적으로 실행 시켜준다.
     public class Sequence
     {
         #region 원형 큐
@@ -73,13 +74,14 @@ namespace MyDotween
         int sqRear = 0;
         Vector3 sqStart;
 
+        //생성자
         public Sequence()
         {
             queue = new Tween[queueSize];
             Rear = Front = 0;
 
         }
-
+        //생성자(size)
         public Sequence(int _QueueSize)
         {
             queueSize = _QueueSize;
@@ -132,6 +134,7 @@ namespace MyDotween
             Debug.Log("시퀀스 실행" + Front);
         }
 
+
         public void TweenEnd()
         {
             Debug.Log("시퀀스 끝");
@@ -140,6 +143,8 @@ namespace MyDotween
             //루프타입에 따라 다시 동작을 해준다.
             if (Peek(queue) == null)
             {
+                //루프설정 만들 필요
+
                 //if(CurLoopCount>=loopCount)
                 //{
                 //    CurLoopCount++;
@@ -154,6 +159,7 @@ namespace MyDotween
                 Start();
             }
         }
+
 
         //루프횟수가 -1이면 무한루프
         public Sequence SetLoop(int loops/*루프횟수*/, Dotween.LoopType loopType = Dotween.LoopType.Restart)

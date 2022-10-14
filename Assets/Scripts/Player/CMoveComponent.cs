@@ -110,10 +110,10 @@ public class CMoveComponent : BaseComponent
         public float KnockBackTime;
 
         [Header("==================가드 중 이동 관련 변수들==================")]
-        public AnimationClip GuardFrontMoveClip;
-        public AnimationClip GuardRightMoveClip;
-        public AnimationClip GuardLeftMoveClip;
-        public AnimationClip GuardBackMoveClip;
+        public string GuardFrontMoveClip;
+        public string GuardRightMoveClip;
+        public string GuardLeftMoveClip;
+        public string GuardBackMoveClip;
 
         public float GuardMoveSpeed;
 
@@ -227,29 +227,32 @@ public class CMoveComponent : BaseComponent
         if (dir== Direction.Front)
         {
             tempdir = new Vector3(0, 0, 1);
-            
+            Debug.Log("guardleft");
+            com.animator.Play(moveoption.GuardFrontMoveClip, 1.5f);
         }
         else if(dir == Direction.Left)
         {
             tempdir = new Vector3(-1, 0, 0);
             Debug.Log("guardleft");
-            com.animator.Play(moveoption.GuardLeftMoveClip.name, 1.5f);
+            com.animator.Play(moveoption.GuardLeftMoveClip, 1.5f);
         }
         else if(dir == Direction.Right)
         {
             tempdir = new Vector3(1, 0, 0);
             Debug.Log("guardright");
-            com.animator.Play(moveoption.GuardRightMoveClip.name, 1.5f);
+            com.animator.Play(moveoption.GuardRightMoveClip, 1.5f);
         }
         else
         {
             tempdir = new Vector3(0, 0, -1);
             Debug.Log("guardback");
-            com.animator.Play(moveoption.GuardBackMoveClip.name, 1.5f);
+            com.animator.Play(moveoption.GuardBackMoveClip, 1.5f);
         }
-        tempmove = com.FpCamRig.TransformDirection(tempdir);
+        tempmove = com.TpCamRig.TransformDirection(tempdir);
         tempmove = tempmove * moveoption.GuardMoveSpeed * Time.deltaTime;
-        com.CharacterRig.velocity = new Vector3(tempmove.x, CurGravity, tempmove.z);
+        tempmove.y = 0;
+        Move(tempmove);
+        //com.CharacterRig.velocity = new Vector3(tempmove.x, CurGravity, tempmove.z);
 
     }
 
@@ -370,13 +373,21 @@ public class CMoveComponent : BaseComponent
             WorldMove.z = 0;
             return;
         }
+        if(MoveDir.sqrMagnitude<=0)
+        {
+            Move(Vector3.zero);
+        }
+        if(curval.IsGuard)
+        {
+            return;
+        }
+        
 
         MoveDir.Normalize();
 
-        if (MoveDir.magnitude > 0)
+        if (MoveDir.sqrMagnitude <= 0)
         {
-            int a = 0;
-            a = 10;
+
         }
 
         if(curval.IsOnTheSlop)
@@ -414,6 +425,8 @@ public class CMoveComponent : BaseComponent
     //기울어진 지형과 계단에서의 움직임 처리 제작 필요
     public void Move(Vector3 MoveVal)
     {
+        
+
         if(curval.CheckStepAble())
         {
             if(CurStepWeight>=moveoption.StepWeightVal)
@@ -839,6 +852,18 @@ public class CMoveComponent : BaseComponent
         com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
     }
 
+    //3인칭 카메라가 해당 방향을 바라보도록 회전
+    public void LookAt(Vector3 lookpos)
+    {
+        Vector3 dir = lookpos-transform.position;
+
+        Vector3 rot = Quaternion.LookRotation(dir, Vector3.up).eulerAngles;
+
+        Vector3 temp = com.TpCamRig.eulerAngles;
+
+        com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
+    }
+
     //줌인 
     public void ZoomIn(float scroll)
     {
@@ -910,6 +935,24 @@ public class CMoveComponent : BaseComponent
 
     }
 
+    public void Focusing()
+    {
+        PlayableCharacter tempinstance = PlayableCharacter.Instance;
+        if (tempinstance.IsFocusingOn)
+        {
+            if(tempinstance._monsterObject.FindIndex(x=>x._monster == tempinstance.CurFocusedMonster._monster)!=-1)
+            {
+                LookAt(tempinstance.CurFocusedMonster._monster.gameObject.transform.position);
+            }
+            else
+            {
+                tempinstance.IsFocusingOn = false;
+                tempinstance.CurFocusedIndex = 0;
+                tempinstance.CurFocusedMonster = null;
+            }
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -934,6 +977,7 @@ public class CMoveComponent : BaseComponent
         Rotation();
         HorVelocity();
         MoveCalculate();
+        Focusing();
         //LookAtFoward();
         //달리는 중일떄 1초마다 스테미나를 줄여준다.
         if (curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)

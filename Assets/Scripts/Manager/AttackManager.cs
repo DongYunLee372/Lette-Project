@@ -68,16 +68,18 @@ public class AttackManager : MonoBehaviour
         ComboAttackState = true;
         animator.Play(AniName, time);
     }
-    public void CreateEffect(GameObject effect , Transform EffectPosRot , float destroyTime , float damage)
+
+    public void CreateEffect(string adressableAdress , Transform EffectPosRot , float destroyTime , float damage)
     {
         GameObject effectobj;
        
-        effectobj = EffectManager.Instance.InstantiateEffect(effect, EffectPosRot.position, EffectPosRot.rotation, destroyTime);
+        effectobj = EffectManager.Instance.InstantiateEffect(adressableAdress, EffectPosRot.position, EffectPosRot.rotation, destroyTime);
         effectobj.GetComponent<ColliderEventDamage>().DamageSetting(damage);
        
         //StartCoroutine(Cor_TimeCounter(destroyTime , effectobj));
 
     }
+
     IEnumerator Cor_TimeCounter(float time , GameObject obj)
     {
         float starttime = Time.time;

@@ -34,11 +34,11 @@ public class EffectManager : MySingleton<EffectManager>
     public MyDotween.Dotween dotween = new MyDotween.Dotween();
 
     //한번만 실행하고 사라진다.
-    public GameObject SpawnEffectOneLoop(GameObject effect, Vector3 pos, Quaternion rotation)
+    public GameObject SpawnEffectOneLoop(string adressableAdress, Vector3 pos, Quaternion rotation)
     {
-        GameObject copyeffect = InstantiateEffect(effect);
+        GameObject copyeffect = InstantiateEffect(adressableAdress);
         ParticleSystem[] particles = null;
-        particles = effect.GetComponentsInChildren<ParticleSystem>();
+        particles = copyeffect.GetComponentsInChildren<ParticleSystem>();
 
         copyeffect.transform.position = pos;
         copyeffect.transform.rotation = rotation;
@@ -59,11 +59,11 @@ public class EffectManager : MySingleton<EffectManager>
     }
 
     //한번만 재생하고 사라진다.
-    public GameObject SpawnEffectOneLoop(GameObject effect, Transform posrot)
+    public GameObject SpawnEffectOneLoop(string adressableAdress, Transform posrot)
     {
-        GameObject copyeffect = InstantiateEffect(effect);
+        GameObject copyeffect = InstantiateEffect(adressableAdress);
         ParticleSystem[] particles = null;
-        particles = effect.GetComponentsInChildren<ParticleSystem>();
+        particles = copyeffect.GetComponentsInChildren<ParticleSystem>();
 
         copyeffect.transform.position = posrot.position;
         copyeffect.transform.rotation = posrot.rotation;
@@ -84,11 +84,11 @@ public class EffectManager : MySingleton<EffectManager>
     }
 
     //일정 주기로 재시작
-    public GameObject SpawnEffectLooping(GameObject effect, Vector3 pos, Quaternion rotation, float _duration, float destroyTime)
+    public GameObject SpawnEffectLooping(string adressableAdress, Vector3 pos, Quaternion rotation, float _duration, float destroyTime)
     {
-        GameObject copyeffect = InstantiateEffect(effect);
+        GameObject copyeffect = InstantiateEffect(adressableAdress);
         ParticleSystem[] particles = null;
-        particles = effect.GetComponentsInChildren<ParticleSystem>();
+        particles = copyeffect.GetComponentsInChildren<ParticleSystem>();
 
         copyeffect.transform.position = pos;
         copyeffect.transform.rotation = rotation;
@@ -120,90 +120,91 @@ public class EffectManager : MySingleton<EffectManager>
 
 
     //기본 스폰
-    public GameObject InstantiateEffect(GameObject effect)
+    public GameObject InstantiateEffect(string adressableAdress)
     {
-        GameObject copy = GameObject.Instantiate(effect);
+        //GameObject copy = GameObject.Instantiate(effect);
+        GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
         copy.transform.parent = null;
         CurEffects.Add(copy.GetInstanceID(), copy);
         return copy;
     }
 
     //사라질 시간
-    public GameObject InstantiateEffect(GameObject effect, float DestroyTime)
+    public GameObject InstantiateEffect(string adressableAdress, float DestroyTime)
     {
-        GameObject copy = GameObject.Instantiate(effect);
+        GameObject copy = InstantiateEffect(adressableAdress);
         copy.transform.parent = null;
-        CurEffects.Add(copy.GetInstanceID(), copy);
-        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        //CurEffects.Add(copy.GetInstanceID(), copy);
+        cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
         StartCoroutine(cor);
         return copy;
     }
 
     //위치
-    public GameObject InstantiateEffect(GameObject effect,Vector3 pos, float DestroyTime = 1.0f)
+    public GameObject InstantiateEffect(string adressableAdress, Vector3 pos, float DestroyTime = 1.0f)
     {
-        GameObject copy = InstantiateEffect(effect);
+        GameObject copy = InstantiateEffect(adressableAdress);
         copy.transform.position = pos;
-        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
         StartCoroutine(cor);
         return copy;
     }
 
     //위치, 회전, 파괴시간
-    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime=1.0f)
+    public GameObject InstantiateEffect(string adressableAdress, Vector3 pos, Quaternion rotation, float DestroyTime=1.0f)
     {
-        GameObject copy = InstantiateEffect(effect);
+        GameObject copy = InstantiateEffect(adressableAdress);
         copy.transform.position = pos;
         copy.transform.rotation = rotation;
-        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
         StartCoroutine(cor);
         return copy;
     }
 
     //transform, 파괴시간
-    public GameObject InstantiateEffect(GameObject effect, Transform posrot, float DestroyTime = 1.0f)
+    public GameObject InstantiateEffect(string adressableAdress, Transform posrot, float DestroyTime = 1.0f)
     {
-        GameObject copy = InstantiateEffect(effect);
+        GameObject copy = InstantiateEffect(adressableAdress);
         copy.transform.position = posrot.position;
         copy.transform.rotation = posrot.rotation;
-        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
         StartCoroutine(cor);
         return copy;
     }
 
     //위치, 파괴시간, 부모transform
-    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, float DestroyTime, Transform parent)
+    public GameObject InstantiateEffect(string adressableAdress, Vector3 pos, float DestroyTime, Transform parent)
     {
-        GameObject copy = InstantiateEffect(effect);
+        GameObject copy = InstantiateEffect(adressableAdress);
         copy.transform.position = pos;
         copy.transform.parent = parent;
-        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
         StartCoroutine(cor);
         return copy;
     }
 
     //위치, 회전, 파괴시간, 부모transform
-    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime, Transform parent)
+    public GameObject InstantiateEffect(string adressableAdress, Vector3 pos, Quaternion rotation, float DestroyTime, Transform parent)
     {
-        GameObject copy = InstantiateEffect(effect);
+        GameObject copy = InstantiateEffect(adressableAdress);
         copy.transform.position = pos;
         copy.transform.parent = parent;
         copy.transform.rotation = rotation;
-        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
         StartCoroutine(cor);
         return copy;
     }
 
     //위지, 크기, 회전, 파괴시간, 부모transform
-    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Vector3 size, Quaternion rotation, float DestroyTime, Transform parent)
+    public GameObject InstantiateEffect(string adressableAdress, Vector3 pos, Vector3 size, Quaternion rotation, float DestroyTime, Transform parent)
     {
-        GameObject copy = InstantiateEffect(effect);
+        GameObject copy = InstantiateEffect(adressableAdress);
         copy.transform.position = pos;
         copy.transform.localScale = size;
         copy.transform.rotation = rotation;
 
         copy.transform.parent = parent;
-        cor = timer.Cor_TimeCounter(DestroyTime, GameObject.Destroy, copy);
+        cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
         StartCoroutine(cor);
         return copy;
     }
@@ -223,9 +224,9 @@ public class EffectManager : MySingleton<EffectManager>
         effect.transform.parent = parent;
     }
 
-    public void SetLoop(ParticleSystem effect, bool b)
+    public void DestroyEffect(string adressableAdress, GameObject obj)
     {
-
+        ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>(adressableAdress, obj);
     }
 
     public void DoMove(GameObject effect, Vector3 dest, float duration, MyDotween.Dotween.Ease ease = MyDotween.Dotween.Ease.Linear)
@@ -234,16 +235,108 @@ public class EffectManager : MySingleton<EffectManager>
         dotween.DoMove(effect, dest, duration);
     }
 
-}
-
-public class TempObjectPoolManager
-{
-
-}
+    public void DoMove(MyDotween.Sequence sequence)
+    {
+        sequence.Start();
+    }
 
 
 
-public class PoolableObject
-{
+    #region 이전버전
+    //기본 스폰
+    public GameObject InstantiateEffect(GameObject effect)
+    {
+        GameObject copy = GameObject.Instantiate(effect);
+        //GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
+        copy.transform.parent = null;
+        CurEffects.Add(copy.GetInstanceID(), copy);
+        return copy;
+    }
 
+    //사라질 시간
+    public GameObject InstantiateEffect(GameObject effect, float DestroyTime)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.parent = null;
+        CurEffects.Add(copy.GetInstanceID(), copy);
+        cor = timer.Cor_TimeCounter<GameObject>(DestroyTime, DestroyEffect, copy);
+        StartCoroutine(cor);
+        return copy;
+    }
+
+    //위치
+    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, float DestroyTime = 1.0f)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = pos;
+        cor = timer.Cor_TimeCounter<GameObject>(DestroyTime, DestroyEffect, copy);
+        StartCoroutine(cor);
+        return copy;
+    }
+
+    //위치, 회전, 파괴시간
+    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime = 1.0f)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = pos;
+        copy.transform.rotation = rotation;
+        cor = timer.Cor_TimeCounter<GameObject>(DestroyTime, DestroyEffect, copy);
+        StartCoroutine(cor);
+        return copy;
+    }
+
+    //transform, 파괴시간
+    public GameObject InstantiateEffect(GameObject effect, Transform posrot, float DestroyTime = 1.0f)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = posrot.position;
+        copy.transform.rotation = posrot.rotation;
+        cor = timer.Cor_TimeCounter<GameObject>(DestroyTime, DestroyEffect, copy);
+        StartCoroutine(cor);
+        return copy;
+    }
+
+    //위치, 파괴시간, 부모transform
+    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, float DestroyTime, Transform parent)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = pos;
+        copy.transform.parent = parent;
+        cor = timer.Cor_TimeCounter<GameObject>(DestroyTime, DestroyEffect,  copy);
+        StartCoroutine(cor);
+        return copy;
+    }
+
+    //위치, 회전, 파괴시간, 부모transform
+    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Quaternion rotation, float DestroyTime, Transform parent)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = pos;
+        copy.transform.parent = parent;
+        copy.transform.rotation = rotation;
+        cor = timer.Cor_TimeCounter<GameObject>(DestroyTime, DestroyEffect, copy);
+        StartCoroutine(cor);
+        return copy;
+    }
+
+    //위지, 크기, 회전, 파괴시간, 부모transform
+    public GameObject InstantiateEffect(GameObject effect, Vector3 pos, Vector3 size, Quaternion rotation, float DestroyTime, Transform parent)
+    {
+        GameObject copy = InstantiateEffect(effect);
+        copy.transform.position = pos;
+        copy.transform.localScale = size;
+        copy.transform.rotation = rotation;
+
+        copy.transform.parent = parent;
+        cor = timer.Cor_TimeCounter<GameObject>(DestroyTime, DestroyEffect, copy);
+        StartCoroutine(cor);
+        return copy;
+    }
+
+    public void DestroyEffect(GameObject obj)
+    {
+        GameObject.Destroy(obj);
+    }
+
+    #endregion
 }

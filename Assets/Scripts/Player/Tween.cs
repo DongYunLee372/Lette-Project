@@ -52,7 +52,7 @@ namespace MyDotween
             curEaseMode = ease;
         }
 
-
+        //확장 예정
         //public static Tween DoMove()
         //{
 
@@ -69,11 +69,6 @@ namespace MyDotween
 
 
         //}
-
-        
-
-
-
 
 
         public void Start()
@@ -94,11 +89,14 @@ namespace MyDotween
 
 
         }
+
+        //동작이 실행될때 실행될 이벤트
         public void OnStart(CallBackEvent _event)
         {
             startevent += _event;
         }
 
+        //동작이 끝날때 실행될 이벤트
         public void OnEnd(CallBackEvent _event)
         {
             endevent += _event;
@@ -109,8 +107,6 @@ namespace MyDotween
         {
 
         }
-
-
     }
 
 
