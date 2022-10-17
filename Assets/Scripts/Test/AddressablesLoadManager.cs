@@ -749,10 +749,11 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
             }
         }
-
-        if(result)
+      
+        if (result)
         {
             handleList.Remove(temp);
+           // Destroy(delete);
             return result;
         }
         //이거 요소 다 빠지면 해제 해줘야됌  OnRelease
@@ -1073,7 +1074,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         }
         else
         {
-            //Addressables.UnloadSceneAsync(m_LoadedScene).Completed += OnSceneUnloaded;
+            Addressables.UnloadSceneAsync(m_LoadedScene).Completed += OnSceneUnloaded;
             Debug.Log("로드 실패");
         }
     }

@@ -204,10 +204,11 @@ public class GameMG : Singleton<GameMG>
     //바깥에서 사용
     public void Loading_screen(bool show)
     {
-        Canvas.SetActive(show);
+        Canvas.GetComponent<TestOnoff>().ShowImage(show);
 
-        PlayerCanvas.SetActive(!show);
-        EnemyCanvas.SetActive(!show);
+
+        //PlayerCanvas.SetActive(!show);
+        //EnemyCanvas.SetActive(!show);
 
         //여기 다른 UI도 넣어.. 조절 가능하게..
     }
@@ -231,16 +232,17 @@ public class GameMG : Singleton<GameMG>
         //처음 시작할때 캔버스 끄게..
         //PlayerCanvas.SetActive(false);
         //EnemyCanvas.SetActive(false);
-
-
+        // GameData_Load.Instance.LoadingImageShow();
+        // Canvas.SetActive(false);
         // StartCoroutine(temp());  
+        Canvas.GetComponent<TestOnoff>().ShowImage(true);
 
-       // GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
+        // GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
 
-       // AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
+        // AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
 
 
-       
+
     }
 
 }

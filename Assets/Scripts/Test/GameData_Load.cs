@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.UI;
 
 public class GameData_Load :Singleton<GameData_Load>
 {
     List<string> str=new List<string>();
     public SkyboxManager skyboxMG;
-   
+    public GameObject Canvas_;
+    public GameObject Im;
 
     void Start()
     {
@@ -201,12 +203,15 @@ public class GameData_Load :Singleton<GameData_Load>
         switch (num)
         {
             case Scenes_Stage.Stage1:
+                Canvas_.SetActive(true);
+                LoadingImageShow();
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
-                BoatScene_Data_Load();
+               // BoatScene_Data_Load();
                 skyboxMG.SkyBox_Setting("BoatScene");
                 break;
 
             case Scenes_Stage.Stage2:
+                LoadingImageShow();
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage2;
                 StartCoroutine(Load_Boss());
                 skyboxMG.SkyBox_Setting("Roomtest");
@@ -219,6 +224,48 @@ public class GameData_Load :Singleton<GameData_Load>
         }
     }
 
+    //로딩 이미지 교체
+    public void LoadingImageShow()
+    {
+        Canvas_.GetComponent<TestOnoff>().ShowImage(true);
+        //GameMG.Instance.Loading_screen(true);
+
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("LoadingImage");
+        GameObject Loading= AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingImage");
+       
+        GameObject LoadingImgae=  Instantiate(Loading, new Vector3(0f, 0f, 0f), Quaternion.identity, GameMG.Instance.Canvas.transform);
+        RectTransform parentPos = GameMG.Instance.Canvas.GetComponent<RectTransform>();
+        LoadingImgae.transform.position = parentPos.position;
+
+        List<string> loadKeyList = new List<string>();
+        loadKeyList.Add("Loading_Door1");
+        loadKeyList.Add("LoadingDoor2");
+        loadKeyList.Add("Loading_Treasure");
+        StartCoroutine( LoadImageChange(loadKeyList, LoadingImgae));
+
+        //Canvas_.GetComponent<TestOnoff>().ShowImage(false);
+
+    }
+
+    IEnumerator LoadImageChange(List<string> keylist,GameObject LoadingImgae)
+    {
+
+        AddressablesLoadManager.Instance.MultiAsset_Load<Sprite>(keylist);
+
+        foreach(string s in keylist)
+        {
+            LoadingImgae.GetComponent<Image>().sprite = AddressablesLoadManager.Instance.FindLoadAsset<Sprite>(s);
+            yield return new WaitForSeconds(1f);
+        }
+
+       GameObject delete= AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingImage");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(delete);
+        Destroy(LoadingImgae);
+        StartCoroutine(AddressablesLoadManager.Instance.Delete_Object<Sprite>(keylist));
+
+        BoatScene_Data_Load();
+
+    }
     public void BoatScene_Data_Load()
     {
 
@@ -241,6 +288,7 @@ public class GameData_Load :Singleton<GameData_Load>
 
         StartCoroutine(CheckLoadScene(tempDataSave));
         AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
+
 
     }
 
