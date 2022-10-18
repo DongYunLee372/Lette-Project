@@ -2234,7 +2234,7 @@ MonoBehaviour:
   status: {fileID: 0}
   CharacterUIPanel: {fileID: 0}
   HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
-  HitEffectAdressableName: 
+  HitEffectAdressableName: SwordHitRed
   effectmanager: {fileID: 0}
   _monsterObject: []
   _monsterSearchTime: 3

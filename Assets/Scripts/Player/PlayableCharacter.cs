@@ -179,8 +179,23 @@ public class PlayableCharacter : MonoBehaviour
         EffectManager.Instance.InstantiateEffect(HitEffectAdressableName, hitpoint);
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;
-        status.CurHP -= finaldamage;
+        
         status.GroggyUp(Groggy);
+        status.CurHP -= finaldamage;
+
+
+        //캐릭터 사망
+        //사망 애니메이션 출력하고 씬 재시작 함수 호출
+        if(status.CurHP<=0)
+        {
+            movecom.com.animator.Play("_Dead");    
+        }
+
+    }
+
+    public void Dead()
+    {
+
     }
 
     public BaseStatus GetCharacterStatus()
