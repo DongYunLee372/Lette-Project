@@ -1641,15 +1641,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5bec301d94f158429d75b0caade8084, type: 3}
       propertyPath: m_LocalScale.x
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5bec301d94f158429d75b0caade8084, type: 3}
       propertyPath: m_LocalScale.y
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5bec301d94f158429d75b0caade8084, type: 3}
       propertyPath: m_LocalScale.z
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5bec301d94f158429d75b0caade8084, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3695,7 +3695,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866888444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.51, y: 11.71, z: -36.36}
+  m_LocalPosition: {x: 2.96, y: 6.5, z: -18.53}
   m_LocalScale: {x: 1.9343766, y: 1.9343766, z: 1.9343766}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4095,6 +4095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e5448d23c4ba4459618fdff4a12ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SceneLoadCheck: 0
 --- !u!4 &2077784239
 Transform:
   m_ObjectHideFlags: 0

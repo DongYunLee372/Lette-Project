@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BoatData0
   m_EditorClassIdentifier: 
   prefabsName: PlayerCharacter
-  Position: {x: 0.01, y: 5, z: -10}
+  Position: {x: 0.01, y: 2.14, z: -10}

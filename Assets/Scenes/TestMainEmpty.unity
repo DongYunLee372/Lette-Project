@@ -401,7 +401,7 @@ MonoBehaviour:
   Prefapsname_1:
   - PlayerCharacter
   Position_1:
-  - {x: 0.01, y: 5, z: -10}
+  - {x: 0.01, y: 2.14, z: -10}
   SceneName: []
   LoadImageName:
   - 
