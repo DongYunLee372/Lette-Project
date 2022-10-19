@@ -23,7 +23,15 @@ public class TestMainLoad : MonoBehaviour//Editor
 
     public List<Vector3> Position_1 = new List<Vector3>();
 
- 
+    [Header("=========LoadingScene LoadImageData=========")]
+
+    [Header("LoadSceneName")]
+    public List<string> SceneName = new List<string>();
+
+    [Header("ImageName")]
+    public List<string> LoadImageName = new List<string>();
+
+
     string path = "Assets/GameData/";
     string testSaveDataName = "TestData";
     string type = ".asset";
@@ -35,6 +43,8 @@ public class TestMainLoad : MonoBehaviour//Editor
             //AssetDatabase.CreateAsset(DataSave, "Assets/GameData/TestGameData.asset");
             SaveD(Prefapsname, Position, "TestGameData");
             SaveD(Prefapsname_1, Position_1, "BoatData");
+           // SaveD(SceneName, Position_1, "LoadImageData");
+
 
 
             //var tempDataSave = AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
@@ -83,6 +93,7 @@ public class TestMainLoad : MonoBehaviour//Editor
         }
     }
 
+ 
     public void SaveD(List<string> Prefapsname_,List<Vector3>Position_,string path_)
     {
         var tempDataSave = AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/"+ path_ + ".asset");

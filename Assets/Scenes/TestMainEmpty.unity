@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skyboxMG: {fileID: 0}
+  Canvas_: {fileID: 0}
+  Im: {fileID: 0}
 --- !u!4 &742986996
 Transform:
   m_ObjectHideFlags: 0
@@ -399,7 +401,10 @@ MonoBehaviour:
   Prefapsname_1:
   - PlayerCharacter
   Position_1:
-  - {x: 0.01, y: 2.14, z: -10}
+  - {x: 0.01, y: 5, z: -10}
+  SceneName: []
+  LoadImageName:
+  - 
 --- !u!1 &2008802320
 GameObject:
   m_ObjectHideFlags: 0

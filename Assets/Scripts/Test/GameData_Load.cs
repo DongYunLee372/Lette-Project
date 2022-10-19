@@ -137,8 +137,7 @@ public class GameData_Load :Singleton<GameData_Load>
     IEnumerator Load_Boss()
     {
 
-        AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
-        yield return new WaitForSeconds(2f);
+      //  yield return new WaitForSeconds(2f);
         TestPos_and_Load();
         yield return new WaitForSeconds(2.5f);
         PlayerPos();
@@ -204,50 +203,83 @@ public class GameData_Load :Singleton<GameData_Load>
         {
             case Scenes_Stage.Stage1:
                 Canvas_.SetActive(true);
-                LoadingImageShow();
+                LoadingImageShow(Scenes_Stage.Stage1);
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
                // BoatScene_Data_Load();
                 skyboxMG.SkyBox_Setting("BoatScene");
                 break;
 
             case Scenes_Stage.Stage2:
-                LoadingImageShow();
+                AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
+                LoadingImageShow(Scenes_Stage.Stage2);
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage2;
-                StartCoroutine(Load_Boss());
                 skyboxMG.SkyBox_Setting("Roomtest");
+              
+                //AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
+               
                 break;
 
 
             case Scenes_Stage.Boss:
 
                 break;
+
+            case Scenes_Stage.restart_Loading:
+                {
+                    switch(GameMG.Instance.scenes_Stage)
+                    {
+                        case Scenes_Stage.Stage1:   //스테이지 1에서 죽었을때
+                            unloadBoatScene();
+                            break;
+
+                        case Scenes_Stage.Stage2:  //스테이지 2에서 죽었을 때
+
+                            break;
+                    }
+                }
+
+                break;
         }
     }
 
+    void unloadBoatScene()
+    {
+        AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
+        var temp=AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
+                                                                           //몬스터 추가되면 삭제
+
+        LoadingImageShow(Scenes_Stage.Stage2);
+        GameMG.Instance.scenes_Stage = Scenes_Stage.Stage2;
+        skyboxMG.SkyBox_Setting("Roomtest");
+    }
+
     //로딩 이미지 교체
-    public void LoadingImageShow()
+    public void LoadingImageShow(Scenes_Stage scenes_Stage)
     {
         Canvas_.GetComponent<TestOnoff>().ShowImage(true);
         //GameMG.Instance.Loading_screen(true);
-
+        Debug.Log("로딩이미지");
         AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("LoadingImage");
         GameObject Loading= AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingImage");
-       
-        GameObject LoadingImgae=  Instantiate(Loading, new Vector3(0f, 0f, 0f), Quaternion.identity, GameMG.Instance.Canvas.transform);
+        Debug.Log("로딩이미지찾기");
+
+        GameObject LoadingImgae =  Instantiate(Loading, new Vector3(0f, 0f, 0f), Quaternion.identity, GameMG.Instance.Canvas.transform);
         RectTransform parentPos = GameMG.Instance.Canvas.GetComponent<RectTransform>();
         LoadingImgae.transform.position = parentPos.position;
+        Debug.Log("로딩이미지보여주기");
 
         List<string> loadKeyList = new List<string>();
         loadKeyList.Add("Loading_Door1");
         loadKeyList.Add("LoadingDoor2");
         loadKeyList.Add("Loading_Treasure");
-        StartCoroutine( LoadImageChange(loadKeyList, LoadingImgae));
-
-        //Canvas_.GetComponent<TestOnoff>().ShowImage(false);
+        StartCoroutine( LoadImageChange(loadKeyList, LoadingImgae, scenes_Stage));
 
     }
 
-    IEnumerator LoadImageChange(List<string> keylist,GameObject LoadingImgae)
+
+    //이미지 보여주고 씬 교체
+    IEnumerator LoadImageChange(List<string> keylist,GameObject LoadingImgae, Scenes_Stage scenes_Stage)
     {
 
         AddressablesLoadManager.Instance.MultiAsset_Load<Sprite>(keylist);
@@ -258,12 +290,21 @@ public class GameData_Load :Singleton<GameData_Load>
             yield return new WaitForSeconds(1f);
         }
 
-       GameObject delete= AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingImage");
-        AddressablesLoadManager.Instance.Delete_Object<GameObject>(delete);
+      // GameObject delete= AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingImage");
+        //AddressablesLoadManager.Instance.Delete_Object<GameObject>(delete);
         Destroy(LoadingImgae);
         StartCoroutine(AddressablesLoadManager.Instance.Delete_Object<Sprite>(keylist));
 
-        BoatScene_Data_Load();
+        switch (scenes_Stage)
+        {
+            case Scenes_Stage.Stage1:
+                BoatScene_Data_Load();
+                break;
+
+            case Scenes_Stage.Stage2:
+                StartCoroutine(Load_Boss());
+                break;
+        }
 
     }
     public void BoatScene_Data_Load()

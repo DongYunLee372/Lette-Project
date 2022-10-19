@@ -62,6 +62,7 @@ public class MainOption : MonoBehaviour
     IEnumerator UI()
     {
         yield return new WaitForSeconds(2f);
-        UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas); 
+        UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas);
+        GameMG.Instance.Loading_screen(false);
     }
 }

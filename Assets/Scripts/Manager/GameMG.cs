@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public enum Scenes_Stage
 {
     Loding=0,
+    start,
     Stage1,
     Stage2,
     Stage3,
     Boss,
+    restart_Loading,
     Menu,
     Stop
 };
