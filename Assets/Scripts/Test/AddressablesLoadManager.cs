@@ -1099,6 +1099,8 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = new SceneInstance();
                 GameMG.Instance.Loading_screen(true);
+               // StartCoroutine(setLoad(true));
+
                 SceneLoadCheck = true;
                 Debug.Log("씬언로드완료");
                 break;
@@ -1116,7 +1118,8 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = obj.Result;
-                GameMG.Instance.Loading_screen(false);
+                //GameMG.Instance.Loading_screen(false);
+              //  StartCoroutine(setLoad(false));
                 SceneLoadCheck = true;
                 Debug.Log("씬로드완료");
 
@@ -1129,5 +1132,11 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         }
     }
 
+    IEnumerator setLoad(bool flag)
+    {
+        yield return new WaitForSeconds(2f);
+        GameMG.Instance.Loading_screen(flag);
+
+    }
 
 }

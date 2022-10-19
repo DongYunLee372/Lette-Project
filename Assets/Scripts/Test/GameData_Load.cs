@@ -56,6 +56,7 @@ public class GameData_Load :Singleton<GameData_Load>
         if(find!=null)
         {
             find.SetActive(false);
+
         }
         //  TestMainLoad.Instance.
         //    var tempDataSave = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
@@ -356,6 +357,9 @@ public class GameData_Load :Singleton<GameData_Load>
                 DataLoad(tempsave);
                 Debug.Log("gpg2?");
                 AddressablesLoadManager.Instance.SceneLoadCheck = false;
+                yield return new WaitForSeconds(1f);
+                GameMG.Instance.Loading_screen(false);
+
                 yield break;
             }
             else
