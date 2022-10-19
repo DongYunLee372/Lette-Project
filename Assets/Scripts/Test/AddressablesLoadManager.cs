@@ -726,6 +726,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             Debug.Log("삭제 CreateObjectList : " + delete);
             Destroy(delete);
             Load_String_List.Remove(delete.ToString());
+            CreateObjectList.Remove(delete);
             result = true;
 
             //   return true;

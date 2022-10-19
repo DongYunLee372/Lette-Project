@@ -188,7 +188,8 @@ public class GameMG : Singleton<GameMG>
         }
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            AddressablesLoader.OnUnloadedAction("TestScenes");  //씬 언로드  어드레서블 적용
+            GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
+            //  AddressablesLoader.OnUnloadedAction("TestScenes");  //씬 언로드  어드레서블 적용
 
         }
 
