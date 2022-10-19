@@ -188,14 +188,19 @@ public class PlayableCharacter : MonoBehaviour
         //사망 애니메이션 출력하고 씬 재시작 함수 호출
         if(status.CurHP<=0)
         {
+            movecom.eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+                             new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+                             new KeyValuePair<string, AnimationEventSystem.endCallback>("_Dead", Restart));
             movecom.com.animator.Play("_Dead");    
+
         }
 
     }
 
-    public void Dead()
-    {
 
+    public void Restart(string _val)
+    {
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
     }
 
     public BaseStatus GetCharacterStatus()
