@@ -24,7 +24,8 @@ public class State_Die : State
         if (battle_character.phase_Effect != null && !first_Start)
         {
             // 캐릭터 데이터로 
-            // battle_character.animator.Play("Monster Recall");
+            battle_character.animator.Play("Death");
+            battle_character.real_AI.isPause = true;
 
             //StartCoroutine(death_Coroutine(battle_character.phase_Effect, battle_character.transform));
 
