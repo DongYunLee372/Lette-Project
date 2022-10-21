@@ -69,6 +69,13 @@ public class PlayableCharacter : MonoBehaviour
 
         status.Init(CharacterUIPanel);
         Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+        {
+            GameObject obj = new GameObject("playercanvas");
+            obj.AddComponent<Canvas>();
+            canvas = obj.GetComponent<Canvas>();
+        }
+
         CharacterUIPanel.transform.parent = canvas.transform;
         CharacterUIPanel.transform.localPosition = status.player_UIPos;
         
@@ -81,7 +88,7 @@ public class PlayableCharacter : MonoBehaviour
         else
             Debug.Log("character UI Create Fail");
 
-        StartCoroutine(MonsterSearchCoroutine());
+        //StartCoroutine(MonsterSearchCoroutine());
     }
 
     public void CeateUI(GameObject obj)
@@ -243,17 +250,20 @@ public class PlayableCharacter : MonoBehaviour
     public bool IsFocusingOn = false;
     public int CurFocusedIndex = -1;
     public Battle_Character_Info CurFocusedMonster;
+    public IEnumerator MonsterSearchCor = null;
 
+    public LayerMask Bosslayer;
 
     //일정 시간마다 화면에 있는 몬스터들을 확인해서 거리별로 리스트에 넣는다.
     public IEnumerator MonsterSearchCoroutine()
     {
         Battle_Character[] temp;
         List<Battle_Character_Info> tempViewMonster = new List<Battle_Character_Info>();
-
+        
         RaycastHit hit;
         while (true)
         {
+            Debug.Log("몬스터 탐지 시작");
             tempViewMonster.Clear();
 
             temp = FindObjectsOfType<Battle_Character>();
@@ -274,10 +284,13 @@ public class PlayableCharacter : MonoBehaviour
             for (int i = 0; i < tempViewMonster.Count; i++)
             {
                 Vector3 dir = tempViewMonster[i]._monster.gameObject.transform.position - transform.position;
-                if(Physics.Raycast(transform.position, dir, out hit))
+                if(Physics.Raycast(transform.position, dir, out hit,100.0f,Bosslayer))
                 {
-                    if(!hit.transform.CompareTag("Enemy"))
+                    //if(hit.transform.gameObject.layer)
+                    //if(!hit.transform.CompareTag("Enemy"))
+                    if(hit.collider==null)
                     {
+                        Debug.Log("몬스터 탐색 지워져버림");
                         tempViewMonster.RemoveAt(i);
                         //tempViewMonster[i]._isBlocked = true;
                         //tempViewMonster[i]._distance = 0;
@@ -285,6 +298,7 @@ public class PlayableCharacter : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("몬스터 탐색 안지워짐");
                         tempViewMonster[i]._distance = hit.distance;
                     }
                 }
@@ -318,6 +332,14 @@ public class PlayableCharacter : MonoBehaviour
 
     public void FocusTab()
     {
+        Debug.Log("탭 들어옴");
+        if(MonsterSearchCor!=null)
+            StopCoroutine(MonsterSearchCor);
+
+
+        MonsterSearchCor = MonsterSearchCoroutine();
+        StartCoroutine(MonsterSearchCor);
+
         if(!IsFocusingOn)
         {
             if (_monsterObject.Count > 0)
