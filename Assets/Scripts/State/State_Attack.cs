@@ -55,10 +55,12 @@ public class State_Attack : State
         }
 
         // 근접 공격 사거리 체크
-        if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk)
-                && !battle_character.isAttack_Run
-                && battle_character.normal_CoolTime.isCheck)
+        if (
+            (Vector3.Distance(battle_character.transform.position,
+                battle_character.cur_Target.transform.position) <= 3f/*battle_character.mon_Info.P_mon_CloseAtk*/)
+                &&
+                !battle_character.isAttack_Run
+                && battle_character.normal_CoolTime.isCheck) // bool 변수를 추가해야함 일반공격
         {
             judge_logic = Enemy_Attack_Logic.Melee_Attack;
             _State = this;
@@ -102,7 +104,13 @@ public class State_Attack : State
         int rand = Random.Range(0, count);
 
         battle_character.animator.animator.SetTrigger("Delay_Trg");
-        battle_character.animator.Play(battle_character.mon_normal_atak_group[rand].P_skill_Name_En);
+        if (count != 1)
+        {
+
+            battle_character.animator.Play(battle_character.mon_normal_atak_group[rand].P_skill_Name_En);
+        }
+        else
+            battle_character.animator.Play(battle_character.mon_normal_atak_group[rand].P_skill_Name_En);
     }
 
     public void Connect_Process(Battle_Character battle_character)

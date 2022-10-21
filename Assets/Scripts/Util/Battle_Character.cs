@@ -519,6 +519,12 @@ public class Battle_Character : MonoBehaviour
         isAttack_Run = false;
     }
 
+    public Vector3 Offset; // 타겟과 오프셋
+    public void BackWard_Offset(string name)
+    {
+        Offset = transform.position - cur_Target.transform.position;
+    }
+
     private void Start()
     {
         Initalize();
@@ -562,11 +568,11 @@ public class Battle_Character : MonoBehaviour
             long_CoolTime.isCheck = true;
         }
 
-        if (normal_CoolTime.check_Time > normal_CoolTime.next_Time)
-        {
-            normal_CoolTime.check_Time = 0f;
-            normal_CoolTime.isCheck = true;
-        }
+        //if (normal_CoolTime.check_Time > normal_CoolTime.next_Time)
+        //{
+        //    normal_CoolTime.check_Time = 0f;
+        //    normal_CoolTime.isCheck = true;
+        //}
     }
 
     private void Update()

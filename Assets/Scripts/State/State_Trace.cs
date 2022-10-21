@@ -12,18 +12,26 @@ public class State_Trace : State
 
     public override bool Judge(out State _State, Battle_Character battle_character)
     {
-        // 아래 부분들이 다 필요없고 최종 사거리만 계산해서 최종 사거리안에 진입했다면 Attack 스테이트로 돌리면 될듯
-        // 변수 추가 받은 후 수정
-        if (battle_character.mon_Info.P_mon_FarAtk != 0 && (Vector3.Distance(battle_character.transform.position,
-              battle_character.cur_Target.transform.position) >= battle_character.mon_Info.P_mon_FarAtk) &&
-              battle_character.long_CoolTime.isCheck
-              && battle_character.normal_CoolTime.isCheck) // 타겟을 공격할 수 있는 사거리 내 진입했다면
+        // 너무 가까우면 뒤로 점프하기 위함
+        if ((Vector3.Distance(battle_character.transform.position,
+                battle_character.cur_Target.transform.position) <= 0.5f) && battle_character.is_Backword)
         {
             _State = Trans_List[0];
             battle_character.real_AI.pre_State = this;
             return false;
         }
-        
+        // 근접 공격 사거리 체크
+        if ((Vector3.Distance(battle_character.transform.position,
+                battle_character.cur_Target.transform.position) <= 3f/*battle_character.mon_Info.P_mon_CloseAtk*/)
+                /*&& battle_character.normal_CoolTime.isCheck*/)
+        {
+            _State = Trans_List[1]; // state_round로 이동
+            Trans_List[1].State_Initialize(battle_character);
+            battle_character.real_AI.pre_State = this;
+            return false;
+        }
+
+        // 스킬 공격
         if ((Vector3.Distance(battle_character.transform.position,
                  battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1]))
                  &&
@@ -36,22 +44,15 @@ public class State_Trace : State
             battle_character.real_AI.pre_State = this;
             return false;
         }
-
-        // 근접 공격 사거리 체크
-        if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk)
-                && battle_character.normal_CoolTime.isCheck)
+        // 아래 부분들이 다 필요없고 최종 사거리만 계산해서 최종 사거리안에 진입했다면 Attack 스테이트로 돌리면 될듯
+        // 변수 추가 받은 후 수정
+        // 원거리 공격
+        if (battle_character.mon_Info.P_mon_FarAtk != 0 && (Vector3.Distance(battle_character.transform.position,
+              battle_character.cur_Target.transform.position) >= battle_character.mon_Info.P_mon_FarAtk) &&
+              battle_character.long_CoolTime.isCheck
+              && battle_character.normal_CoolTime.isCheck) // 타겟을 공격할 수 있는 사거리 내 진입했다면
         {
-            _State = Trans_List[0];
-            battle_character.real_AI.pre_State = this;
-            return false;
-        }
-
-        // 너무 가까우면 뒤로 점프하기 위함
-        if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= 0.5f) && battle_character.is_Backword)
-        {
-            _State = Trans_List[0];
+            _State = Trans_List[0]; //
             battle_character.real_AI.pre_State = this;
             return false;
         }
