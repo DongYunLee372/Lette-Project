@@ -991,7 +991,56 @@ MonoBehaviour:
   isHit: 0
   isAttack_Run: 0
   isDelay: 0
-  attack_Info: []
+  attack_Info:
+  - Name: DSwing
+    Movedis:
+    - 0
+    - 0
+    - 0
+    MoveTime:
+    - 0
+    - 0
+    - 0
+    effect:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    EffectStartTime:
+    - 0
+    - 0
+    - 0
+    effect_Pos:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    off_Mesh_Pos:
+    - {fileID: 0}
+    jump_Speed:
+    - 0
+    - 0
+    - 0
+    jump_Acc:
+    - 0
+    - 0
+    - 0
+    jump_Angular:
+    - 0
+    - 0
+    - 0
+    missile: {fileID: 0}
+    missile_Amount: 0
+    missile_Pos: {fileID: 0}
+    missile_Index: 0
+    spawn_Animation: 0
+    is_Normal_Attack: 1
+    normal_Last_Attack: 1
+    add_Time: 0
+    attack_Collider_Num: 0
+    pre_Delay: 0
+    pre_Delay_speed: 0
+    post_Delay: 0
+    post_Delay_speed: 0
+    after_skill_name: 
   damaged_Effect: {fileID: 152628, guid: 4e42a2081531c814fa4774bd0d6b45df, type: 3}
   phase_Effect: {fileID: 1436447386774278, guid: b36e5394bf3902b41877ecba9aa55b8d, type: 3}
   real_AI:
