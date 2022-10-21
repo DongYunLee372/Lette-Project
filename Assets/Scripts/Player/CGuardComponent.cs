@@ -40,7 +40,7 @@ public class CGuardComponent : BaseComponent
     }
 
 
-    //가드를 하면 시점이 캐릭터의 정면으로 고정 되어야 한다.
+    //포커싱 상태에서 가드를 하면 시점이 캐릭터의 정면으로 고정 되어야 한다.
     public void Guard()
     {
         if (movecom == null)
@@ -49,7 +49,7 @@ public class CGuardComponent : BaseComponent
         if (movecom.curval.IsGuard)
             return;
 
-        
+        movecom.LookAtToLookDir();
 
         movecom.curval.IsGuard = true;
 

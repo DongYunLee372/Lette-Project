@@ -864,6 +864,28 @@ public class CMoveComponent : BaseComponent
         com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
     }
 
+    //캐릭터가 해당 방향을 바라보도록 
+    public void LookAtBody(Vector3 lookdir)
+    {
+        Vector3 rot = Quaternion.LookRotation(lookdir, Vector3.up).eulerAngles;
+
+        Vector3 temp = com.TpCamRig.eulerAngles;
+
+        com.FpRoot.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
+    }
+
+    public void LookAtToLookDir()
+    {
+        Vector3 lookdir = com.TpCamRig.forward;
+
+        Vector3 rot = Quaternion.LookRotation(lookdir, Vector3.up).eulerAngles;
+
+        Vector3 temp = com.TpCamRig.eulerAngles;
+
+        com.FpRoot.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
+    }
+
+
     //줌인 
     public void ZoomIn(float scroll)
     {

@@ -284,11 +284,11 @@ public class PlayableCharacter : MonoBehaviour
             for (int i = 0; i < tempViewMonster.Count; i++)
             {
                 Vector3 dir = tempViewMonster[i]._monster.gameObject.transform.position - transform.position;
-                if(Physics.Raycast(transform.position, dir, out hit,100.0f,Bosslayer))
+                if (Physics.Raycast(transform.position, dir, out hit, 100.0f, Bosslayer))
                 {
                     //if(hit.transform.gameObject.layer)
                     //if(!hit.transform.CompareTag("Enemy"))
-                    if(hit.collider==null)
+                    if (hit.collider == null)
                     {
                         Debug.Log("몬스터 탐색 지워져버림");
                         tempViewMonster.RemoveAt(i);
