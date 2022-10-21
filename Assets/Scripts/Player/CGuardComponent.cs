@@ -49,7 +49,8 @@ public class CGuardComponent : BaseComponent
         if (movecom.curval.IsGuard)
             return;
 
-        movecom.LookAtToLookDir();
+        if(PlayableCharacter.Instance.IsFocusingOn)
+            movecom.LookAtToLookDir();
 
         movecom.curval.IsGuard = true;
 
