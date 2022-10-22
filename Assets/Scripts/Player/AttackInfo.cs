@@ -22,11 +22,21 @@ public class AttackInfo
     [SerializeField]
     public string aniclipName;
 
+    //해당 매니메이션 클립 이후 공격컴포넌트에서 이름을 이용해 실제 클립을 받아오는것이 필요
+    [Tooltip("해당 공격의 애니메이션 클립 이름")]
+    [SerializeField]
+    public string endAniclipName;
+
     //애니메이션 배속
     [Tooltip("해당 공격의 애니메이션 재생 속도")]
     [SerializeField]
     [Range(0.0f, 10.0f)]
     public float animationPlaySpeed;
+
+    [Tooltip("해당 공격의 애니메이션 클립 이름")]
+    [SerializeField]
+    [Range(0.0f, 10.0f)]
+    public float endanimationPlaySpeed;
 
     [Tooltip("선딜")]
     [SerializeField]

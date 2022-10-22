@@ -2247,6 +2247,10 @@ MonoBehaviour:
     _index: 0
     _isFocused: 0
     _isBlocked: 0
+  Bosslayer:
+    serializedVersion: 2
+    m_Bits: 0
+  OutoFoucusing: 0
 --- !u!114 &5912692896712387626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2404,7 +2408,9 @@ MonoBehaviour:
     attackName: 
     attackType: 
     aniclipName: 
+    endAniclipName: 
     animationPlaySpeed: 0
+    endanimationPlaySpeed: 0
     startDelay: 0
     recoveryDelay: 0
     bufferdInputTime_Start: 0
@@ -2426,7 +2432,9 @@ MonoBehaviour:
     attackName: Attack1
     attackType: Normal
     aniclipName: _Attack01_new
+    endAniclipName: _Attack01_Back
     animationPlaySpeed: 1.53
+    endanimationPlaySpeed: 2
     startDelay: 0.69
     recoveryDelay: 0.14
     bufferdInputTime_Start: 0.2
@@ -2445,7 +2453,9 @@ MonoBehaviour:
     attackName: Attack2
     attackType: Normal
     aniclipName: _Attack02_new
+    endAniclipName: _Attack02_Back
     animationPlaySpeed: 0.92
+    endanimationPlaySpeed: 2
     startDelay: 0.42
     recoveryDelay: 0.21
     bufferdInputTime_Start: 0.2
@@ -2464,7 +2474,9 @@ MonoBehaviour:
     attackName: Attack03
     attackType: Normal
     aniclipName: _Attack03_new
+    endAniclipName: _Attack03_Back
     animationPlaySpeed: 0.9
+    endanimationPlaySpeed: 2
     startDelay: 0
     recoveryDelay: 0.41
     bufferdInputTime_Start: 0.4
@@ -3133,17 +3145,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 R Finger21'\n\tTransform 'Bip001 R Finger02'\n\tTransform
-    'Bip001 R Clavicle'\n\tTransform 'Bip001 L Finger21'\n\tTransform 'Bip001 L Finger02'\n\tTransform
-    'Bip001 R Finger22'\n\tTransform 'Bip001 L Finger22'\n\tTransform 'Bip001 L Forearm'\n\tTransform
-    'Bip001 L Clavicle'\n\tTransform 'Bip001 R Forearm'\n\tand more ...\n\tFrom animation
-    clip '_Attack01'\n\tFrom animation clip '_Attack02'\n\tFrom animation clip '_Attack03'\n\tFrom
-    animation clip '_Damaged'\n\tFrom animation clip '_Damaged_KnockBack'\n\tFrom
-    animation clip '_Dash'\n\tFrom animation clip '_Guard'\n\tFrom animation clip
-    '_GuardStun'\n\tFrom animation clip '_Idle'\n\tFrom animation clip '_Rolling'\n\tand
-    more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -3159,7 +3161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ede2470329beb64fa2b88d185914813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips: []
 --- !u!114 &5912692897056710730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3174,12 +3175,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   m_clipsnum: 0
-  m_clips: []
   currentplayclipname: 
   prespeed: 0
   currentSpeed: 0
   currnetPlayTime: 0
   currentBlending: 0
+  m_tempclips: []
 --- !u!1 &5912692897059493259
 GameObject:
   m_ObjectHideFlags: 0

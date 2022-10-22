@@ -11,7 +11,7 @@ public class AnimationEventSystem : MonoBehaviour
 {
 	AnimationController animator;
 
-	public AnimationClip[] clips;
+	public Dictionary<string, AnimationClip> clips;
 	//public AnimationEvent[][] eventlist;
 	public List<AnimationEvent[]> eventlist = new List<AnimationEvent[]>();
 

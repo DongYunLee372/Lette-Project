@@ -125,8 +125,6 @@ public class CAttackComponent : BaseComponent
         Initsetting();
         AnimationEventsSetting();
         
-        //Dictionary<string, AttackInfo> attackinfos;
-        //DB.Instance.Load<AttackInfo>(out attackinfos);
     }
 
     void AnimationEventsSetting()
@@ -137,23 +135,12 @@ public class CAttackComponent : BaseComponent
             eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove),
                 new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
                 new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd));
+
+            //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+            //    new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+            //    new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].endAniclipName, AttackEnd));
+
         }
-
-
-        //foreach (var a in LoadedAttackInfoDic)
-        //{
-        //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(a.Value.aniclipName, AttackMove),
-        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(a.Value.aniclipName, AttackEnd));
-        //}
-
-        //for (int i = 0; i < LoadedAttackInfoDic.Count; i++)
-        //{
-        //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(attackinfos[i].aniclip.name, AttackMove),
-        //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-        //        new KeyValuePair<string, AnimationEventSystem.endCallback>(attackinfos[i].aniclip.name, AttackEnd));
-        //}
-
 
         //초기화 할때 각각의 스킬 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for (int i = 0; i < skillinfos.Length; i++)
@@ -178,32 +165,6 @@ public class CAttackComponent : BaseComponent
         //AttackInfoSetting(LoadedAttackInfoDic["2"], attackinfos[2]);
     }
 
-    //void AttackInfoSetting(AttackInfo load, /*AttackInfo_Ex myinfo*/)
-    //{
-    //    myinfo.AttackName = load.attackName;
-    //    myinfo.AttackNum = load.attackNum;
-    //    myinfo.AttackType = (CharEnumTypes.eAttackType)System.Enum.Parse(typeof(CharEnumTypes.eAttackType), load.attackType);
-
-    //    //myinfo.aniclip = 
-    //    myinfo.animationPlaySpeed = load.animationPlaySpeed;
-    //    myinfo.StartDelay = load.startDelay;
-    //    myinfo.RecoveryDelay = load.recoveryDelay;
-    //    myinfo.BufferdInputTime_Start = load.bufferdInputTime_Start;
-    //    myinfo.BufferdInputTime_End = load.BufferdInputTime_End;
-    //    myinfo.damage = load.damage;
-    //    myinfo.StaminaGaugeDown = load.StaminaGaugeDown;
-
-    //    //myinfo.Effect
-    //    myinfo.EffectStartTime = load.EffectStartTime;
-    //    //myinfo.EffectPosRot = load.EffectPosRot;
-    //    myinfo.EffectDestroyTime = load.EffectDestroyTime;
-
-    //    myinfo.movedis = load.movedis;
-    //    myinfo.movetime = load.movetime;
-
-    //    //myinfo.ProjectileObj = load.ProjectileObjName;
-    //    //myinfo.TargetObj = load.TargetObjName;
-    //}
 
     public void MonsterAttack(Collider collision)
     {
@@ -288,7 +249,7 @@ public class CAttackComponent : BaseComponent
         if (curval.IsAttacking && !IsLinkable)
         {
             int a = 0;
-            Debug.Log("공격나가버림");
+            Debug.Log("[Attack]공격나가버림");
             return;
         }
 
@@ -298,9 +259,7 @@ public class CAttackComponent : BaseComponent
         //이런식으로하면 실제로 다음공격이 실행될때 여기서 걸려버린다. -> 링크 공격이 실행되는 타이밍을 조절하는것으로 해결
         if (curval.IsAttacking && IsLinkable && /*NextAttackNum == -1*/NextAttack == false)
         {
-            Debug.Log("선입력들어옴");
-            //NextAttackNum = (CurAttackNum + 1) % attackinfos.Length;
-            //NextAttackInfo = attackinfos[NextAttackNum];
+            Debug.Log("[Attack]선입력들어옴");
 
             NextAttackNum = (CurAttackNum + 1) % AttackInfos.Count;
             NextAttackInfo = AttackInfos[NextAttackNum];
@@ -333,12 +292,11 @@ public class CAttackComponent : BaseComponent
         if (/*NextAttackNum == -1*/NextAttack == false)
         {
             //다음 동작으로 넘어가기 위한
-            if (/*tempval <= attackinfos[CurAttackNum].NextMovementTimeVal*/IsLinkable)
+            if (IsLinkable)
             {
                 Debug.Log("링크가능");
-                //CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/attackinfos.Length;
 
-                CurAttackNum = (CurAttackNum + 1) % /*(int)CharEnumTypes.eAniAttack.AttackMax*/AttackInfos.Count;
+                CurAttackNum = (CurAttackNum + 1) % AttackInfos.Count;
             }
             else
             {
@@ -347,39 +305,22 @@ public class CAttackComponent : BaseComponent
         }
         else//선입력정보가 있으면 해당 공격을 해주고 넘버를 올려준다.
         {
-            //CurAttackNum = NextAttackInfo.AttackNum;
-
             CurAttackNum = NextAttackInfo.attackNum;
         }
+
+        //선입력세팅을 위한 입력은 앞에서 리턴하기 때문에 여기서는 관련 변수들을 초기화 해준다.
         NextAttackInfo = null;
         NextAttackNum = -1;
         NextAttack = false;
 
-        //coroutine = Cor_TimeCounter(attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect);
-        //일정 시간 이후에
-
-        //if (attackinfos[CurAttackNum].Effect != null)
-        //{
-        //    coroutine = timer.Cor_TimeCounter<GameObject,Transform, float>
-        //    (attackinfos[CurAttackNum].EffectStartTime, CreateEffect, attackinfos[CurAttackNum].Effect, attackinfos[CurAttackNum].EffectPosRot, 1.5f);
-        //    StartCoroutine(coroutine);
-        //}
-
-        //if (LoadedAttackInfoDic[CurAttackNum.ToString()].EffectObj != null)
-        //{
-        //    coroutine = timer.Cor_TimeCounter<GameObject, Transform, float>
-        //    (LoadedAttackInfoDic[CurAttackNum.ToString()].EffectStartTime, CreateEffect, LoadedAttackInfoDic[CurAttackNum.ToString()].EffectObj, LoadedAttackInfoDic[CurAttackNum.ToString()].EffectPosRot, 1.5f);
-        //    StartCoroutine(coroutine);
-        //}
-
-
-        //IsLinkable = false;
+        //링크 가능 시간 체크
         Linkcoroutine = timer.Cor_TimeCounter(AttackInfos[CurAttackNum].bufferdInputTime_Start, ActiveLinkable);
         StartCoroutine(Linkcoroutine);
 
-        //Debug.Log($"{attackinfos[AttackNum].aniclip.name}애니메이션 {attackinfos[AttackNum].animationPlaySpeed}속도 록 실핼");
+        //애니메이션 실행
         animator.Play(AttackInfos[CurAttackNum].aniclipName, AttackInfos[CurAttackNum].animationPlaySpeed/*,0,attackinfos[CurAttackNum].StartDelay*/);
-
+        
+        //스테미나를 줄여준다.
         PlayableCharacter.Instance.status.StaminaDown(AttackInfos[CurAttackNum].StaminaGaugeDown);
 
     }
@@ -400,21 +341,10 @@ public class CAttackComponent : BaseComponent
     //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨
     public void AttackMove(string clipname)
     {
-        //for (int i = 0; i < attackinfos.Length; i++)
-        //{
-        //    if (attackinfos[i].aniclip.name == clipname)
-        //    {
-        //        //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
-        //        movecom.FowardDoMove(attackinfos[i].movedis, attackinfos[i].movetime);
-        //        return;
-        //    }
-        //}
-
         for (int i = 0; i < AttackInfos.Count; i++)
         {
             if (AttackInfos[i].aniclipName == clipname)
             {
-                //movecom.FowardDoMove(5, animator.GetClipLength(attackinfos[AttackNum].aniclip.name) / 2);
                 movecom.FowardDoMove(AttackInfos[i].movedis, AttackInfos[i].movetime);
                 return;
             }
@@ -434,81 +364,60 @@ public class CAttackComponent : BaseComponent
     //공격 이펙트를 생성
     public void CreateEffect(string adressableAdress,Transform posrot, float destroyTime)
     {
-
         effectobj = EffectManager.Instance.InstantiateEffect(adressableAdress, destroyTime);
         effectobj.transform.position = posrot.position;
         effectobj.transform.rotation = posrot.rotation;
         effectobj.transform.parent = posrot;
-
-        //copyobj.transform.TransformDirection(movecom.com.FpRoot.forward);
-        //Destroy(effectobj, 1.5f);
-        //effectobj = null;
     }
-
-
 
     //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
     public void AttackEnd(string s_val)
     {
-        //IsLinkable = false;
-        //Debug.Log($"공격 끝 들어옴 -> {s_val}");
         if (effectobj != null)
         {
-            //Debug.Log($"공격 끝 들어옴 -> {s_val}");
-            //effectobj.transform.parent = preparent;
             effectobj.transform.parent = effectparent;
         }
 
+        //공격이 끝난 후 일정 시간 동안 입력을 넣음으로써 연결 동작 실행 가능
         if (!IsLinkable)
         {
             ActiveLinkable();
         }
 
-        //Linkcoroutine = timer.Cor_TimeCounter(attackinfos[CurAttackNum].BufferdInputTime_End, DeActiveLinkable);
-        //StartCoroutine(Linkcoroutine);
-
+        //공격 끝 이후 연결동작 입력
         Linkcoroutine = timer.Cor_TimeCounter(AttackInfos[CurAttackNum].BufferdInputTime_End, DeActiveLinkable);
         StartCoroutine(Linkcoroutine);
 
-
-        //후딜레이 구현 필요 
-        //if (attackinfos[CurAttackNum].RecoveryDelay > 0.0f)
-        //{
-        //    //Debug.Log($"후딜레이 -> {attackinfos[CurAttackNum].RecoveryDelay}");
-
-        //}
-        //else
-        //{
-        //    ChangeState();
-        //}
-
+        //후딜레이 구현
         animator.Pause();
-        //StartCoroutine(timer.Cor_TimeCounter(attackinfos[CurAttackNum].RecoveryDelay, ChangeState));
-
         StartCoroutine(timer.Cor_TimeCounter(AttackInfos[CurAttackNum].recoveryDelay, ChangeState));
 
-        //timer.Cor_TimeCounter( ChangeState)
-        //StartCoroutine(timer.Cor_TimeCounter<AttackInfo>(attackinfos[CurAttackNum].RecoveryDelay, ChangeState))
+
     }
+    
 
     public void ChangeState()
     {
-        curval.IsAttacking = false;
-        //if (curval.IsAttacking == true)
-
-
         lastAttackTime = Time.time;
 
-        //if(Linkcoroutine!=null)
-        //{
-        //    StopCoroutine(Linkcoroutine);
-        //    Linkcoroutine = null;
-        //}
-
+        //마지막으로 공격을 끝내고 돌아가는데 다음 연결 동작정보가 있으면 연결동작을 실행하고 
         if (/*NextAttackNum != -1*/NextAttack == true)
         {
+            curval.IsAttacking = false;
             Attack();
         }
+        //없으면 복귀동작을 실행한다.
+        else
+        {
+            animator.Play(AttackInfos[CurAttackNum].endAniclipName, AttackInfos[CurAttackNum].endanimationPlaySpeed, 0, 0.2f, IsAttackingEnd);
+        }
+
+    }
+
+    public void IsAttackingEnd()
+    {
+        Debug.Log("[Attack] 공격 진짜 마지막 끝");
+        curval.IsAttacking = false;
     }
 
 
