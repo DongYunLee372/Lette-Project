@@ -14,13 +14,7 @@ using UnityEngine;
 public class CurState
 {
     //현재 상태가 outofstate일때
-    //
-
-    //public bool IsAttackAble()
-    //{
-
-    //}
-
+    
     public bool CheckRollingAble()
     {
         //이미 구르는 중이 아니고 땅에 있어야지 회피 가능
@@ -50,10 +44,12 @@ public class CurState
     public bool CheckStepAble()
     {
         CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        //
         if (IsFowordBlock)
         {
             return false;
         }
+        //
         if (IsStep && CurStepHeight<movecom.moveoption.StepHeight)
         {
             return true;

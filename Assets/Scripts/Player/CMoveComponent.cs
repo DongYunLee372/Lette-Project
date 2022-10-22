@@ -356,11 +356,6 @@ public class CMoveComponent : BaseComponent
     }
 
 
-    public void FowardMove(float distance)
-    {
-
-    }
-
     bool temptrigger = false;
 
     //움직임값을 계산해준다.
