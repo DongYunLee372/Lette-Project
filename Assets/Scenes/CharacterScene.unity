@@ -54590,38 +54590,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[0].endAniclipName
-      value: _Attack01_Back
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[1].endAniclipName
-      value: _Attack02_Back
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[2].endAniclipName
-      value: _Attack03_Back
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[0].endanimationPlaySpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[1].endanimationPlaySpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[2].endanimationPlaySpeed
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388563, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: effectmanager
       value: 
       objectReference: {fileID: 365250508}
-    - target: {fileID: 5912692897056710728, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: m_WarningMessage
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
 --- !u!1001 &7002675392045387070

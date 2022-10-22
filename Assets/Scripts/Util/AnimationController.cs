@@ -37,11 +37,13 @@ public class AnimationController : MonoBehaviour
             }
         }
         m_tempclips = animator.runtimeAnimatorController.animationClips;
+        
         //AnimationClip[] temp = animator.runtimeAnimatorController.animationClips;
         for (int i = 0; i < m_tempclips.Length; i++)
         {
             m_clips.Add(m_tempclips[i].name, m_tempclips[i]);
         }
+        
     }
 
 
@@ -118,14 +120,9 @@ public class AnimationController : MonoBehaviour
     public float GetClipLength(string pname)
     {
         float time = 0;
-        RuntimeAnimatorController ac = animator.runtimeAnimatorController;
-        foreach (var a in ac.animationClips)
-        {
-            if (a.name == pname)
-            {
-                time = a.length;
-            }
-        }
+
+        time = m_clips[pname].length;
+
         return time;
     }
 

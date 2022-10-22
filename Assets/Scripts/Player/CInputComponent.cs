@@ -34,7 +34,7 @@ public class CInputComponent : BaseComponent
 
         public KeyCode skill03 = KeyCode.Alpha3;
 
-        public KeyCode Tab = KeyCode.Tab;
+        public KeyCode Tab = KeyCode.Q;
     }
 
     [Header("Keys")]

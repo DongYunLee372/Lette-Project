@@ -278,19 +278,14 @@ public class CMoveComponent : BaseComponent
     public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration, Invoker invoker = null)
     {
         float runtime = 0.0f;
-        //Debug.DrawLine(start, dest, Color.green);
         teststart = start;
         testend = dest;
 
         Vector3 direction = dest - start;
 
-        //Move(direction * 2);
 
         while (true)
         {
-            //direction = dest - transform.position;
-            //direction = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * direction;//경사로에 의한 y축 이동방향
-            //dest = transform.position + direction;
 
             direction = dest - transform.position;
 
@@ -315,18 +310,9 @@ public class CMoveComponent : BaseComponent
             }
             runtime += Time.deltaTime;
 
-            //if (!curval.IsFowordBlock)
-            //    transform.position = Vector3.Lerp(start, dest, runtime / duration);
 
             if (!curval.IsFowordBlock)
                 Move(direction);
-
-            //if (!curval.IsFowordBlock)
-            //{
-            //    Vector3 temp = Vector3.Lerp(start, dest, runtime / duration);
-            //    //Move()
-            //}
-
 
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -605,21 +591,6 @@ public class CMoveComponent : BaseComponent
         curval.IsKnockBack = false;
     }
 
-    ////공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
-    //IEnumerator Cor_TimeCounter(float time, Invoker invoker)
-    //{
-    //    float starttime = Time.time;
-
-    //    while (true)
-    //    {
-    //        if ((Time.time - starttime) >= time)
-    //        {
-    //            invoker.Invoke("");
-    //            yield break;
-    //        }
-    //        yield return new WaitForSeconds(Time.deltaTime);
-    //    }
-    //}
 
     public void Damaged_Rolling(float damage,Vector3 hitpoint, float Groggy)
     {
@@ -646,12 +617,10 @@ public class CMoveComponent : BaseComponent
         if (Time.time - lastRollingTime <= moveoption.NextRollingTime) 
             return;
 
-
-        //if (PlayableCharacter.Instance.status.CurStamina - moveoption.RollingStaminaDown >= 0)
+        //스테미나가 0이 아니면 실행 가능
         if (PlayableCharacter.Instance.status.CurStamina > 0)
         {
             PlayableCharacter.Instance.status.StaminaDown(moveoption.RollingStaminaDown);
-            //PlayableCharacter.Instance.status.CurStamina = PlayableCharacter.Instance.status.CurStamina - moveoption.RollingStaminaDown;
         }
         else
         {
@@ -659,24 +628,14 @@ public class CMoveComponent : BaseComponent
         }
 
         curval.IsRolling = true;
-
-        
-        
-
-        //AnimationManager.Instance.Play(com.animator, "_Rolling");
-        //Debug.Log($"{AnimationManager.Instance.GetClipLength(com.animator,"_Rolling")}");
-
         com.animator.Play("_Rolling", moveoption.RollingClipPlaySpeed);
 
-        //FowardDoMove(10, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed);
         
         Vector3 tempmove = this.transform.position + com.FpRoot.forward * moveoption.RollingDistance;
 
         StartCoroutine(CorDoMove(this.transform.position, tempmove, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed -0.2f, RollingOver));
 
         Vector3 moveval = com.FpRoot.forward* moveoption.RollingDistance;
-
-        //StartCoroutine(CorDoDirectionMove(moveval, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed));
 
         RollingStartTime = Time.time;
     }
