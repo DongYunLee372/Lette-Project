@@ -256,6 +256,8 @@ public class PlayableCharacter : MonoBehaviour
 
     public LayerMask Bosslayer;
 
+    public bool OutoFoucusing = false;
+
     //일정 시간마다 화면에 있는 몬스터들을 확인해서 거리별로 리스트에 넣는다.
     public IEnumerator MonsterSearchCoroutine()
     {
@@ -265,7 +267,7 @@ public class PlayableCharacter : MonoBehaviour
         RaycastHit hit;
         while (true)
         {
-            Debug.Log("몬스터 탐지 시작");
+            Debug.Log("[focus]몬스터 탐지 시작");
             tempViewMonster.Clear();
 
             temp = FindObjectsOfType<Battle_Character>();
@@ -276,7 +278,7 @@ public class PlayableCharacter : MonoBehaviour
                 Vector3 screenPos = GetCamera().WorldToViewportPoint(temp[i].gameObject.transform.position);
                 if (screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1 && screenPos.z >= 0)
                 {
-                    Debug.Log(temp[i].gameObject.name + "화면에 탐지");
+                    Debug.Log(temp[i].gameObject.name + "[focus]화면에 탐지");
                     Battle_Character_Info info = new Battle_Character_Info(temp[i]);
                     tempViewMonster.Add(info);
                 }
@@ -292,7 +294,7 @@ public class PlayableCharacter : MonoBehaviour
                     //if(!hit.transform.CompareTag("Enemy"))
                     if (hit.collider == null)
                     {
-                        Debug.Log("몬스터 탐색 지워져버림");
+                        Debug.Log("[focus]몬스터 탐색 지워져버림");
                         tempViewMonster.RemoveAt(i);
                         //tempViewMonster[i]._isBlocked = true;
                         //tempViewMonster[i]._distance = 0;
@@ -300,7 +302,7 @@ public class PlayableCharacter : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("몬스터 탐색 안지워짐");
+                        Debug.Log("[focus]몬스터 탐색 안지워짐");
                         tempViewMonster[i]._distance = hit.distance;
                     }
                 }
@@ -309,18 +311,28 @@ public class PlayableCharacter : MonoBehaviour
             //거리에 따라 정렬
             _monsterObject = tempViewMonster.OrderBy(x => x._distance).ToList();
 
+            //
+            if(_monsterObject.Count<=0)
+            {
+                IsFocusingOn = false;
+                CurFocusedIndex = 0;
+                CurFocusedMonster = null;
+                yield break;
+            }
+
             //탕색과 정렬을 끝냈는데 현재 포커싱 중인 몬스터가 사라졌으면 포커싱을 끝내준다.
             if(IsFocusingOn)
             {
                 //_monsterObject.Find(x => x == CurFocusedMonster);
                 int index = _monsterObject.FindIndex(x => x == CurFocusedMonster);
                 //탐색을 완료 했는데 포커싱 중인 몬스터가 없어졌을때
-                if (index != -1)
+                if (index == -1)
                 {
-                    Debug.Log("탐색결과 몬스터 존재 X");
+                    Debug.Log("[focus]탐색결과 몬스터 존재 X");
                     IsFocusingOn = false;
                     CurFocusedIndex = 0;
                     CurFocusedMonster = null;
+                    yield break;
                 }
                 else
                 {
@@ -330,17 +342,21 @@ public class PlayableCharacter : MonoBehaviour
 
             yield return new WaitForSeconds(_monsterSearchTime);
         }
+
+        //MonsterSearchCor = null;
+          
     }
 
     public void FocusTab()
     {
-        Debug.Log("탭 들어옴");
-        if(MonsterSearchCor!=null)
-            StopCoroutine(MonsterSearchCor);
+        Debug.Log("[focus]탭 들어옴");
 
+        if(MonsterSearchCor==null)
+        {
+            MonsterSearchCor = MonsterSearchCoroutine();
+            StartCoroutine(MonsterSearchCor);
+        }
 
-        MonsterSearchCor = MonsterSearchCoroutine();
-        StartCoroutine(MonsterSearchCor);
 
         if(!IsFocusingOn)
         {
@@ -355,8 +371,18 @@ public class PlayableCharacter : MonoBehaviour
         }
         else
         {
+            if (CurFocusedIndex == _monsterObject.Count - 1)
+            {
+                Debug.Log("[focus]포커싱 꺼짐");
+                IsFocusingOn = false;
+                StopCoroutine(MonsterSearchCor);
+                MonsterSearchCor = null;
+            }
+                
             CurFocusedIndex = (CurFocusedIndex + 1) % _monsterObject.Count;
             CurFocusedMonster = _monsterObject[CurFocusedIndex];
+
+
         }
 
 
