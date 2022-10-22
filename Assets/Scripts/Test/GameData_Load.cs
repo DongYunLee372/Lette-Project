@@ -188,11 +188,21 @@ public class GameData_Load :Singleton<GameData_Load>
                         AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
                     }
                 }
+                else if(s.prefabsName== "Skeleton")
+                {
+                    GameObject Monster = new GameObject();
+                    Monster.transform.position = s.Position;
+                    Debug.Log("스켈레톤 생성");
+                   // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_S(/*몬스터 인덱스?? 이거 뭔지 모르겠다,*/ Monster.transform, s.prefabsName));
+
+                }
                 else
                 {
-                    Debug.Log("보스 캐릭터아닌 뭔가를 생성하러옴");
-                    AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+                    {
+                        Debug.Log("보스 캐릭터아닌 뭔가를 생성하러옴");
+                        AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
 
+                    }
                 }
                 Debug.Log("보는중 : " + s.Position);
             }
@@ -207,6 +217,14 @@ public class GameData_Load :Singleton<GameData_Load>
         {
             case Scenes_Stage.Stage1:
                 Canvas_.SetActive(true);
+                if(GameMG.Instance.scenes_Stage != Scenes_Stage.Loding)
+                {
+                    unloadBoatScene();
+                    skyboxMG.SkyBox_Setting("BoatScene");
+                    GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
+                    break;
+                }
+                StartCoroutine(CheckInputKey());
                 LoadingImageShow(Scenes_Stage.Stage1);
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
                // BoatScene_Data_Load();
@@ -218,14 +236,13 @@ public class GameData_Load :Singleton<GameData_Load>
                 LoadingImageShow(Scenes_Stage.Stage2);
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage2;
                 skyboxMG.SkyBox_Setting("Roomtest");
-              
+
                 //AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
-               
+
                 break;
 
-
-            case Scenes_Stage.Boss:
-
+            case Scenes_Stage.GameMenuEnd:
+                AllanloadScene();
                 break;
 
             case Scenes_Stage.restart_Loading:
@@ -244,6 +261,38 @@ public class GameData_Load :Singleton<GameData_Load>
 
                 break;
         }
+    }
+
+    void AllanloadScene()  //게임 종료
+    {
+        switch (GameMG.Instance.scenes_Stage)
+        {
+            case Scenes_Stage.Stage1:   //스테이지 1
+                EndunLoadBoatScene();
+                break;
+
+            case Scenes_Stage.Stage2:  //스테이지 2
+                EndunLoadBossScene();
+                break;
+        }
+    }
+
+    void EndunLoadBoatScene()
+    {
+        AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
+        var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
+                                                                           //몬스터 추가되면 삭제
+    }
+
+    void EndunLoadBossScene()
+    {
+        AddressablesLoadManager.Instance.OnUnloadedAction("Roomtest");  //언로드
+        var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
+        var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
+
     }
 
     void unloadBoatScene()
@@ -266,6 +315,24 @@ public class GameData_Load :Singleton<GameData_Load>
 
         LoadingImageShow(Scenes_Stage.Stage2);
 
+    }
+
+    IEnumerator CheckInputKey()
+    {
+        while(true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("코루틴에서 눌려 나");
+            }
+            if(Input.GetKeyDown(KeyCode.F5))
+            {
+                Debug.Log("코루틴 종료");
+                yield break;
+            }
+            yield return new WaitForFixedUpdate();
+          
+        }
     }
 
     //로딩 이미지 교체

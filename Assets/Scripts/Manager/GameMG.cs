@@ -12,6 +12,8 @@ public enum Scenes_Stage
     Stage3,
     Boss,
     restart_Loading,
+    Gameing_Restart,
+    GameMenuEnd,
     Menu,
     Stop
 };
@@ -191,6 +193,11 @@ public class GameMG : Singleton<GameMG>
             GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
             //  AddressablesLoader.OnUnloadedAction("TestScenes");  //씬 언로드  어드레서블 적용
 
+        }
+
+        if(Input.GetKeyDown(KeyCode.F2))
+        {
+            GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);  //게임종료에 넣기 (시작 화면 UI띄워주세여ㅜ)
         }
 
 
