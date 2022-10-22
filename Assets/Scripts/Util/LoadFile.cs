@@ -7,14 +7,14 @@ using System.Text.RegularExpressions;
 using System;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
+using UnityEditor;
 
 public class LoadFile : MySingleton<LoadFile>
 {
     static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
     static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
     static char[] TRIM_CHARS = { '\"' };
-    static string path = "Assets/Resources/SaveFile/";
+    static string path = "Assets/Resources/CSV/";
     //D:\TeamProjectHades\Hadas-Fiesta\Hadas-Fiesta\Assets\Resources\SaveFile
     public static void Read<T>(out Dictionary<string, T> Dic2) /*where T : abc*/
     {
@@ -64,27 +64,39 @@ public class LoadFile : MySingleton<LoadFile>
 
     }
 
-    public static void Save<T>(T m_class, string filename)
+   
+    public static void Save<T>(T m_class)
     {
+        
         FieldInfo[] Fieldlist = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-        string allPath = path + filename + ".csv";      
+        string allPath = path + m_class.GetType().Name + ".csv";      
         string delimiter = ",";
         List<int> a = new List<int>();
         StringBuilder sb = new StringBuilder();
-
+        Type type;
         //FileStream file = new FileStream(allPath, FileMode.Append, FileAccess.Write); //생성(이미 존재한다면 생성된 파일을 사용) , FileMode.Append로 데이터 추가시 덮어쓰지않고 아래로 추가되어서 데이터 삽입
         //StreamWriter outStream = new StreamWriter(file, Encoding.UTF8);
 
         StreamWriter outStream = System.IO.File.CreateText(allPath); //지정된 경로로 가서 filename에 맞는 파일 생성 이미 존재한다면 덮어쓰기하여 새롭게 생성 
 
         for (int i = 0; i < Fieldlist.Length; i++)
-        {                       
+        {
+            type = Fieldlist[i].FieldType;
+            Debug.Log(type);
             sb.AppendFormat("{0}{1}" ,Fieldlist[i].Name , delimiter); //필드에 저장된 값 가로로 Save 
+            //Debug.Log(Fieldlist[i].GetValue(m_class));
         }
-
-
+        outStream.WriteLine(sb);
+        sb.Clear();
+        for (int i = 0; i < Fieldlist.Length; i++)
+        {
+            sb.AppendFormat("{0}{1}",Fieldlist[i].GetValue(m_class).ToString(), delimiter);
+            //Debug.Log(Fieldlist[i].GetValue(m_class));
+        }
         
-        outStream.Write(sb); //StreamWriter에 저장된 값들 csv에 쓰기
+
+
+        outStream.WriteLine(sb); //StreamWriter에 저장된 값들 csv에 쓰기
         outStream.Close();
         
 
