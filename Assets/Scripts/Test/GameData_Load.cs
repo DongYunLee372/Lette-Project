@@ -409,6 +409,11 @@ public class GameData_Load :Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.Stage2:  //스테이지 2
+                LoadingText_Ins.transform.position = new Vector3(parentPos.position.x,parentPos.position.y-250,parentPos.position.z);
+                LoadingImgae.transform.position = new Vector3(parentPos.position.x, parentPos.position.y+ 150, parentPos.position.z);
+                RectTransform rect = LoadingImgae.GetComponent<RectTransform>();
+                rect.sizeDelta = new Vector2(800, 500);
+              //  LoadingImgae.GetComponent<RectTransform>().rect.width = 800;
 
                 AddressablesLoadManager.Instance.SingleAsset_Load<GameLoadingData>("LoadingData_Boss");
                 gameLoadingData = AddressablesLoadManager.Instance.FindLoadAsset<GameLoadingData>("LoadingData_Boss");
@@ -442,22 +447,40 @@ public class GameData_Load :Singleton<GameData_Load>
 
         foreach (var a in gameLoadingData.LoadingData)
         {
-            if(a.LoadImageNameList.Count!=0)
+            if(a.LoadImageNameList.Count != 0 && a.imgae_Name != "")
             {
-                foreach(var sc in a.LoadImageNameList)  //대사
+                string tempstring="";
+                foreach (var sc in a.LoadImageNameList)  //대사
                 {
-                    LoadingData temp=new LoadingData();
-                    temp.scripts = sc;
-                    loadingDatas.Add(temp);
-                }
-            }
+                    tempstring += sc;
+                    tempstring=tempstring+"\n";
 
-            if(a.imgae_Name!="")  //이미지 이름
-            {
+                }
                 LoadingData temp = new LoadingData();
+                temp.scripts = tempstring;
                 temp.ImageName = a.imgae_Name;
                 loadingDatas.Add(temp);
             }
+            else
+            {
+                if (a.LoadImageNameList.Count != 0)
+                {
+                    foreach (var sc in a.LoadImageNameList)  //대사
+                    {
+                        LoadingData temp = new LoadingData();
+                        temp.scripts = sc;
+                        loadingDatas.Add(temp);
+                    }
+                }
+
+                if (a.imgae_Name != "")  //이미지 이름
+                {
+                    LoadingData temp = new LoadingData();
+                    temp.ImageName = a.imgae_Name;
+                    loadingDatas.Add(temp);
+                }
+            }
+         
         }
 
         foreach(var i in loadingDatas)
@@ -501,7 +524,10 @@ public class GameData_Load :Singleton<GameData_Load>
                 color.a = 1;
                 LoadingImgae.GetComponent<Image>().color = color;
                 //   LoadingImgae.GetComponent<Image>().color = new Color(255, 255, 255, 1);
-                LoadingText_Ins.GetComponent<TextMeshProUGUI>().text ="";
+                if(temp[gameLoadingCount].scripts==null)
+                {
+                    LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = "";
+                }
 
                 Debug.Log("data출력이미지 " + temp[gameLoadingCount].ImageName);
 
@@ -514,9 +540,12 @@ public class GameData_Load :Singleton<GameData_Load>
             }
             if (temp[gameLoadingCount].scripts != null)
             {
-                  Color color = LoadingImgae.GetComponent<Image>().color;
-                  color.a = 0;
-                  LoadingImgae.GetComponent<Image>().color = color;
+                if(temp[gameLoadingCount].ImageName==null)
+                {
+                    Color color = LoadingImgae.GetComponent<Image>().color;
+                    color.a = 0;
+                    LoadingImgae.GetComponent<Image>().color = color;
+                }
                 // LoadingImgae.GetComponent<Image>().color = new Color(0, 0, 0, 0);
                  LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = temp[gameLoadingCount].scripts;
                   Debug.Log("data출력대사 " + temp[gameLoadingCount].scripts);
@@ -541,7 +570,8 @@ public class GameData_Load :Singleton<GameData_Load>
         {
 
             Destroy(LoadingImgae);
-           // LoadingImgae.SetActive(false);
+            LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = "";
+            // LoadingImgae.SetActive(false);
             StartCoroutine(AddressablesLoadManager.Instance.Delete_Object<Sprite>(deleteImageLisg));
 
             switch (GameMG.Instance.scenes_Stage)
