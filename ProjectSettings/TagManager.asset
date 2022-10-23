@@ -21,7 +21,7 @@ TagManager:
   - Minimap
   - Stairs
   - PostProcessing
-  - 
+  - Player
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 958901939
     locked: 0
