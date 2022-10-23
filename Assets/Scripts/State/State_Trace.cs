@@ -14,7 +14,7 @@ public class State_Trace : State
     {
         // 너무 가까우면 뒤로 점프하기 위함
         if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= 0.5f) && battle_character.is_Backword)
+                battle_character.cur_Target.transform.position) <= 1.0f) && battle_character.is_Backword)
         {
             _State = Trans_List[0];
             battle_character.real_AI.pre_State = this;
@@ -22,7 +22,7 @@ public class State_Trace : State
         }
         // 근접 공격 사거리 체크
         if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= 3f/*battle_character.mon_Info.P_mon_CloseAtk*/)
+                battle_character.cur_Target.transform.position) <= 5f/*battle_character.mon_Info.P_mon_CloseAtk*/)
                 /*&& battle_character.normal_CoolTime.isCheck*/)
         {
             _State = Trans_List[1]; // state_round로 이동
@@ -38,7 +38,7 @@ public class State_Trace : State
                  (Vector3.Distance(battle_character.transform.position,
                  battle_character.cur_Target.transform.position) >= int.Parse(special_Range[0]))
                 && battle_character.skill_CoolTime.isCheck
-                && battle_character.normal_CoolTime.isCheck) // 타겟을 공격할 수 있는 사거리 내 진입했다면
+                && battle_character.delay_CoolTime.isCheck) // 타겟을 공격할 수 있는 사거리 내 진입했다면
         {
             _State = Trans_List[0];
             battle_character.real_AI.pre_State = this;
@@ -50,7 +50,7 @@ public class State_Trace : State
         if (battle_character.mon_Info.P_mon_FarAtk != 0 && (Vector3.Distance(battle_character.transform.position,
               battle_character.cur_Target.transform.position) >= battle_character.mon_Info.P_mon_FarAtk) &&
               battle_character.long_CoolTime.isCheck
-              && battle_character.normal_CoolTime.isCheck) // 타겟을 공격할 수 있는 사거리 내 진입했다면
+              && battle_character.delay_CoolTime.isCheck) // 타겟을 공격할 수 있는 사거리 내 진입했다면
         {
             _State = Trans_List[0]; //
             battle_character.real_AI.pre_State = this;

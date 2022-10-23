@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class State_Round : State
 {
@@ -16,7 +17,7 @@ public class State_Round : State
     {
         // 근접 공격 사거리 체크
         if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) > 3f/*battle_character.mon_Info.P_mon_CloseAtk*/)
+                battle_character.cur_Target.transform.position) > 5f/*battle_character.mon_Info.P_mon_CloseAtk*/)
                 /*&& battle_character.normal_CoolTime.isCheck*/)
         {
             _State = Trans_List[0]; // state_trace로 이동
@@ -27,8 +28,16 @@ public class State_Round : State
         if (round_Check)
         {
             _State = Trans_List[1]; // state_attack으로 이동
+            round_Check = false;
+
+            battle_character.real_AI.navMesh.speed = battle_character.init_Speed;
+            battle_character.real_AI.navMesh.acceleration = 8f;
             // 노말 공격 선정하라는 bool 변수 켜줌
             battle_character.real_AI.pre_State = this;
+            battle_character.skill_CoolTime.isCheck = false;
+            battle_character.skill_CoolTime.check_Time = 0f;
+            battle_character.long_CoolTime.isCheck = false;
+            battle_character.long_CoolTime.check_Time = 0f;
             return false;
         }
 
@@ -39,8 +48,9 @@ public class State_Round : State
     public override void Run(Battle_Character battle_character)
     {
         battle_character.animator.Play("Walk");
-        battle_character.transform.LookAt(battle_character.cur_Target.transform);
+        //battle_character.transform.LookAt(battle_character.cur_Target.transform);
 
+        battle_character.gameObject.transform.DOLookAt(battle_character.cur_Target.transform.position, 0.5f);
         round_CheckTime += Time.deltaTime;
         if (round_CheckTime > round_nextTime)
         {
@@ -51,18 +61,13 @@ public class State_Round : State
         }
         else
         {
-            //battle_character.real_AI.navMesh.SetDestination(battle_character.cur_Target.transform.position + battle_character.Offset);
-
-            //battle_character.transform.RotateAround(battle_character.cur_Target.transform.position, Vector3.up, 50f * Time.deltaTime);
             deg += Time.deltaTime * 50f;
             if (deg < 360)
             {
                 var rad = Mathf.Deg2Rad * (deg);
-                var x = 2 * Mathf.Sin(rad);
-                var y = 2 * Mathf.Cos(rad);
+                var x = 4.5f * Mathf.Sin(rad);
+                var y = 4.5f * Mathf.Cos(rad);
                 battle_character.real_AI.navMesh.SetDestination(battle_character.cur_Target.transform.position + new Vector3(x, 0, y));
-               // YS[0].transform.position = transform.position + new Vector3(x, y);
-                //YS[0].transform.rotation = Quaternion.Euler(0, 0, deg * -1); //가운데를 바라보게 각도 조절
             }
             else
             {
@@ -76,5 +81,8 @@ public class State_Round : State
         round_CheckTime = 0.0f;
         round_nextTime = 4.0f;
         round_Check = false;
+
+        battle_character.real_AI.navMesh.speed = 1.5f;
+        battle_character.real_AI.navMesh.acceleration = 8f;
     }
 }

@@ -2,6 +2,7 @@ using Enemy_Enum;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /* 
 배틀 캐릭터에 일반 스킬 클래스나 특수한 스킬 클래스(스킬 클래스를 상속받은)를 인스턴싱 해준 후 인스턴싱 해준 클래스를 호출해서
@@ -15,8 +16,12 @@ public class Skill : MonoBehaviour
         battle_character.isAttack_Run = true;
         battle_character.stop_CoolTime.check_Time = 0f;
         battle_character.stop_CoolTime.isCheck = false;
-        battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+        // battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+        battle_character.gameObject.transform.DOLookAt(battle_character.cur_Target.transform.position, 0.5f);
         battle_character.animator.Play(skill_data.P_skill_Name_En);
+
+        battle_character.long_CoolTime.isCheck = false;
+        battle_character.long_CoolTime.check_Time = 0f;
 
         if (skill_data.P_skill_ThrowObj != 1 && skill_data.P_skill_DiffObj != 1)
         {

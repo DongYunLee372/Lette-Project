@@ -38874,6 +38874,7 @@ MonoBehaviour:
     isPause: 0
   is_Boss: 0
   is_Backword: 0
+  init_Speed: 2.5
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   Offset: {x: 0, y: 0, z: 0}
@@ -38893,6 +38894,10 @@ MonoBehaviour:
     check_Time: 0.5
     next_Time: 0
     isCheck: 1
+  delay_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
   testSkillName: 
 --- !u!4 &1726810992
 Transform:
@@ -49237,6 +49242,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: now_Skill_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_Target_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678077130435621547, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3977904520988986068, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
       propertyPath: m_Name
       value: boss (1) (3)

@@ -126225,7 +126225,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.73333335
+  - time: 0.3
     functionName: Animation_Middle
     data: SSwing
     objectReferenceParameter: {fileID: 0}

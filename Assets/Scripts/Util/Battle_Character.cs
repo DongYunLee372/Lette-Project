@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Global_Variable;
+using DG.Tweening;
 
 /*
 ex ) 원거리, 근거리 처럼 다른 스테이트 프로세스를 수행해야 한다면 
@@ -145,6 +146,7 @@ public class Battle_Character : MonoBehaviour
     public AI real_AI;
     public bool is_Boss = false; // 보스 몬스터 판별
     public bool is_Backword = false;
+    public float init_Speed = 2.5f;
 
     public void Stat_Initialize(MonsterInformation info, List<Mon_Normal_Atk_Group> p_mon_normal_atak_group, List<BossNomalSkill> p_BossNomalSkill, MonsterSkillInformation p_monsterSkillInformation, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
     {
@@ -270,7 +272,7 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
-                attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(true);
+                attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(false);
 
                 return;
             }
@@ -283,6 +285,8 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
+                real_AI.navMesh.SetDestination(transform.position);
+
                 Debug.Log("스팅 : " + attack_Info[i].Name + "시작");
                 if (real_AI.now_State.GetComponent<State_Attack>() != null)
                     real_AI.now_State.GetComponent<State_Attack>().attack_Info_Index = i;
@@ -299,7 +303,8 @@ public class Battle_Character : MonoBehaviour
                 }
 
                 // 타겟을 바라보고 애니메이션 재생
-                gameObject.transform.LookAt(cur_Target.transform);
+                //gameObject.transform.LookAt(cur_Target.transform);
+                gameObject.transform.DOLookAt(cur_Target.transform.position, 0.1f);
                 // 선딜이 있다면
                 if (attack_Info[i].pre_Delay != 0)
                 {
@@ -335,17 +340,24 @@ public class Battle_Character : MonoBehaviour
                 {
                     if (attack_Info[i].normal_Last_Attack)
                     {
-                        Debug.Log("워크크");
-                        animator.Play("Walk");
-                        if (attack_Info[i].add_Time == 0)
+                        Check_Reset();
+
+                        if (attack_Info[i].after_skill_name != "")
                         {
-                            attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(false);
-                            isAttack_Run = false;
+                            isAttack_Run = true;
+                            animator.Play(attack_Info[i].after_skill_name);
+                            Debug.Log("워크크" + attack_Info[i].after_skill_name);
                         }
-                        else if (attack_Info[i].add_Time != 0)
-                        {
-                            StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
-                        }
+                        //animator.Play("Walk");
+                        //if (attack_Info[i].add_Time == 0)
+                        //{
+                        //    attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(false);
+                        //    isAttack_Run = false;
+                        //}
+                        //else if (attack_Info[i].add_Time != 0)
+                        //{
+                        //    StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
+                        //}
 
                         normal_CoolTime.check_Time = 0f;
                         normal_CoolTime.isCheck = false;
@@ -473,7 +485,7 @@ public class Battle_Character : MonoBehaviour
             real_AI.navMesh.speed = attack_Info[info_num].jump_Speed[index];
             real_AI.navMesh.acceleration = attack_Info[info_num].jump_Acc[index];
 
-            StartCoroutine(nav_Coroutine(3.5f, 8f));
+            StartCoroutine(nav_Coroutine(init_Speed, 8f));
         }
 
         if (attack_Info[info_num].missile != null && attack_Info[info_num].missile_Index == index)
@@ -498,7 +510,7 @@ public class Battle_Character : MonoBehaviour
         }
     }
 
-    IEnumerator nav_Coroutine(float speed, float acc)
+    public IEnumerator nav_Coroutine(float speed, float acc)
     {
         yield return new WaitForSeconds(0.2f);
 
@@ -557,8 +569,21 @@ public class Battle_Character : MonoBehaviour
     public CoolTime skill_CoolTime;  // 스킬 쿨타임 
     public CoolTime long_CoolTime;  // 원거리 공격 쿨타임
     public CoolTime normal_CoolTime;  // 공격간 최소 쿨타임
+    public CoolTime delay_CoolTime;  // 공격간 최소 쿨타임
 
     public string testSkillName;
+
+    public void Check_Reset()
+    {
+        long_CoolTime.isCheck = false;
+        long_CoolTime.check_Time = 0f;
+
+        skill_CoolTime.isCheck = false;
+        skill_CoolTime.check_Time = 0f;
+
+        delay_CoolTime.isCheck = false;
+        delay_CoolTime.check_Time = 0f;
+    }
 
     void Time_Check()
     {
@@ -567,6 +592,7 @@ public class Battle_Character : MonoBehaviour
         skill_CoolTime.check_Time += Time.deltaTime;
         long_CoolTime.check_Time += Time.deltaTime;
         normal_CoolTime.check_Time += Time.deltaTime;
+        delay_CoolTime.check_Time += Time.deltaTime;
 
         if (stop_CoolTime.check_Time > stop_CoolTime.next_Time)
         {
@@ -588,6 +614,12 @@ public class Battle_Character : MonoBehaviour
             long_CoolTime.isCheck = true;
         }
 
+        if (delay_CoolTime.check_Time > delay_CoolTime.next_Time)
+        {
+            delay_CoolTime.check_Time = 0f;
+            delay_CoolTime.isCheck = true;
+        }
+
         //if (normal_CoolTime.check_Time > normal_CoolTime.next_Time)
         //{
         //    normal_CoolTime.check_Time = 0f;
@@ -602,7 +634,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("ㅇㅇ");
-            animator.Play("First_Atk");
+            animator.Play("Rush_Atk");
             animator.animator.SetTrigger("Delay_Trg");
         }
 

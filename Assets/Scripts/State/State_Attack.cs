@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using Enemy_Enum;
 
 public class State_Attack : State
@@ -57,7 +58,7 @@ public class State_Attack : State
         // 근접 공격 사거리 체크
         if (
             (Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= 3f/*battle_character.mon_Info.P_mon_CloseAtk*/)
+                battle_character.cur_Target.transform.position) <= 6f/*battle_character.mon_Info.P_mon_CloseAtk*/)
                 &&
                 !battle_character.isAttack_Run
                 && battle_character.normal_CoolTime.isCheck) // bool 변수를 추가해야함 일반공격
@@ -75,7 +76,7 @@ public class State_Attack : State
                battle_character.cur_Target.transform.position) >= int.Parse(special_Range[0]))
                &&
                !battle_character.isAttack_Run && battle_character.skill_CoolTime.isCheck
-               && battle_character.normal_CoolTime.isCheck)
+               && battle_character.delay_CoolTime.isCheck)
         {
             judge_logic = Enemy_Attack_Logic.Skill_Using;
             _State = this;
@@ -86,7 +87,7 @@ public class State_Attack : State
         if (battle_character.mon_Info.P_mon_FarAtk != 0 && (Vector3.Distance(battle_character.transform.position,
             battle_character.cur_Target.transform.position) >= battle_character.mon_Info.P_mon_FarAtk) &&
             battle_character.long_CoolTime.isCheck
-            && battle_character.normal_CoolTime.isCheck) // 원거리 공격
+            && battle_character.delay_CoolTime.isCheck) // 원거리 공격
         {
             judge_logic = Enemy_Attack_Logic.Long_Attack;
             _State = this;
@@ -144,7 +145,7 @@ public class State_Attack : State
                 battle_character.isAttack_Run = true;
                 battle_character.stop_CoolTime.check_Time = 0f;
                 battle_character.stop_CoolTime.isCheck = false;
-                battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+                battle_character.gameObject.transform.DOLookAt(battle_character.cur_Target.transform.position, 0.5f);
 
                 battle_character.animator.Play("BackWord_Jump");
                 break;
@@ -158,7 +159,8 @@ public class State_Attack : State
                 battle_character.attack_Type = Enemy_Attack_Type.Normal_Attack;
                 battle_character.stop_CoolTime.check_Time = 0f;
                 battle_character.stop_CoolTime.isCheck = false;
-                battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+                //battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+                battle_character.gameObject.transform.DOLookAt(battle_character.cur_Target.transform.position, 0.5f);
                 battle_character.isAttack_Run = true;
                 break;
             case Enemy_Attack_Logic.Long_Attack:
@@ -173,7 +175,8 @@ public class State_Attack : State
                 battle_character.long_CoolTime.check_Time = 0f;
                 battle_character.stop_CoolTime.isCheck = false;
                 battle_character.attack_Type = Enemy_Attack_Type.Normal_Attack;
-                battle_character.gameObject.transform.LookAt(battle_character.cur_Target.transform);
+
+                battle_character.gameObject.transform.DOLookAt(battle_character.cur_Target.transform.position, 0.5f);
                 battle_character.isAttack_Run = true;
                 battle_character.animator.Play("Long_Attack");
                 //GameObject missile
