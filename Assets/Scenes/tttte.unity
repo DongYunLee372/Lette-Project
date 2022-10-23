@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048a271b169e84c489b1699fc57caacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainlight: {fileID: 1862909377}
   Backgroundsound: 100
   Effectsound: 100
   Mousesensetive: 100
@@ -1128,6 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70fbbaa3e1d67a4cabb2906140b724b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transf: {fileID: 0}
 --- !u!4 &1813013069
 Transform:
   m_ObjectHideFlags: 0

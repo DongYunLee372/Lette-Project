@@ -10,6 +10,9 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
     public GameObject hpBar;
     public GameObject bosshpbar;
+
+    public List<GameObject> l_enemy;
+    public GameObject obj_boss;
     void Start()
     {
         //DataLoad_Save.Instance.Init();
@@ -58,7 +61,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         GameObject Monster = Instantiate(temp, trans);
      
         hpBar.GetComponent<EnemyHpbar>().SetHpBar(data.P_mon_MaxHP, Monster.transform, Monster.GetComponent<Battle_Character>());
-
+        l_enemy.Add(Monster);
         yield return null;
 
     }
@@ -99,7 +102,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
         GameObject b = Instantiate(temp, trans);
         bosshpbar.GetComponent<Bosshpbar>().SetHpbar(data.P_mon_MaxHP,data.P_mon_nameKor,b.GetComponent<Battle_Character>());
-        
+        obj_boss = b;
         yield return null;
 
     }
