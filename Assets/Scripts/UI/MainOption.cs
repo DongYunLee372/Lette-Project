@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class MainOption : MonoBehaviour
 {
+    public Light mainlight;
     public float Backgroundsound;
     public float Effectsound;
     public float Mousesensetive;
@@ -25,7 +26,7 @@ public class MainOption : MonoBehaviour
         {
             Ingame();
         }
-      
+        mainlight.GetComponent<Light>().shadowStrength = 1 - (Lightcontroll * 0.01f);
     }
 
     public void Ingame()
@@ -40,7 +41,6 @@ public class MainOption : MonoBehaviour
         }
         if(GameStart)
         {
-            
             if (UIManager.Instance.Findobjbool("IngameOption"))
             {
                 UIManager.Instance.Show("IngameOption");
@@ -52,7 +52,7 @@ public class MainOption : MonoBehaviour
                 ShowOption = true;
             }
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.None;         
         }
     }
     private void Start()

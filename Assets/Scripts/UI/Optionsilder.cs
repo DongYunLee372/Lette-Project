@@ -45,6 +45,7 @@ public class Optionsilder : MonoBehaviour
         if (myindex == 3)
         {
             mycanvas.GetComponent<MainOption>().Lightcontroll = val;
+            mycanvas.GetComponent<MainOption>().mainlight.GetComponent<Light>().shadowStrength = 1 - (val * 0.01f);
         }
     }
 
