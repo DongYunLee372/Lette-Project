@@ -275,6 +275,13 @@ public class CMoveComponent : BaseComponent
         StartCoroutine(CorDoMove(transform.position, dest, duratoin));
     }
 
+    public Camera GetCamera()
+    {
+        if (curval.IsFPP)
+            return com.FpCam.GetComponent<Camera>();
+        else
+            return com.TpCam.GetComponent<Camera>();
+    }
     public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration, Invoker invoker = null)
     {
         float runtime = 0.0f;
@@ -939,6 +946,12 @@ public class CMoveComponent : BaseComponent
         curval.IsFPP = !curval.IsFPP;
         com.FpCam.gameObject.SetActive(curval.IsFPP);
         com.TpCam.gameObject.SetActive(!curval.IsFPP);
+
+        if (curval.IsFPP)
+            startCameraPos = com.FpCam.position - Capsuletopcenter;
+        else
+            startCameraPos = com.TpCam.position - Capsuletopcenter;
+
     }
 
     public override void Awake()
@@ -954,6 +967,7 @@ public class CMoveComponent : BaseComponent
         HorVelocity();
         MoveCalculate();
         Focusing();
+        CameraCollision();
         //LookAtFoward();
         //달리는 중일떄 1초마다 스테미나를 줄여준다.
         if (curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)
@@ -969,6 +983,26 @@ public class CMoveComponent : BaseComponent
         }
     }
 
+    public bool CameraCollOn = false;
+    private Vector3 startCameraPos;//카메라가 캐릭터로부터 어느정도 거리에 떨어져 있는지
+    public void CameraCollision()
+    {
+        if(CameraCollOn)
+        {
+            Vector3 dir = (startCameraPos - Capsuletopcenter).normalized;
+            float distance = dir.magnitude;
+            Ray ray = new Ray(Capsuletopcenter, dir);
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit, distance))
+            {
+                GetCamera().transform.position = hit.point;
+            }
+
+        }
+
+        
+
+    }
 
     //public float testLookY;
     //public float testLookZ;
@@ -978,7 +1012,7 @@ public class CMoveComponent : BaseComponent
     //{
     //    //상대좌표
     //    Vector3 rot = Quaternion.LookRotation(com.TpCamRig.forward, -playerChestTr.right/*Vector3.up*/).eulerAngles;
-        
+
     //    testLookY = rot.y;
     //    testLookZ = rot.x;
     //    testaxisY = com.FpRoot.eulerAngles.y;
@@ -1008,9 +1042,9 @@ public class CMoveComponent : BaseComponent
     //    else
     //    {
     //        testLookY = rot.y - testaxisY;
-            
+
     //    }
-            
+
 
     //    if (testaxisZ == 0)
     //    {
@@ -1036,7 +1070,7 @@ public class CMoveComponent : BaseComponent
     //    else
     //    {
     //        testLookZ = rot.x - testaxisZ;
-            
+
     //    }
 
     //    if(testLookY>=130|| testLookY<=-93)

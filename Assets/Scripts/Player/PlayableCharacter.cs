@@ -120,11 +120,12 @@ public class PlayableCharacter : MonoBehaviour
     public Camera GetCamera()
     {
         CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        return movecom.GetCamera();
 
-        if (movecom.curval.IsFPP)
-            return movecom.com.FpCam.GetComponent<Camera>();
-        else
-            return movecom.com.TpCam.GetComponent<Camera>();
+        //if (movecom.curval.IsFPP)
+        //    return movecom.com.FpCam.GetComponent<Camera>();
+        //else
+        //    return movecom.com.TpCam.GetComponent<Camera>();
     }
 
     /*플레이어 캐릭터 상호작용 메소드*/
@@ -387,5 +388,7 @@ public class PlayableCharacter : MonoBehaviour
 
 
     }
+
+
 
 }
