@@ -14,13 +14,8 @@ namespace Global_Variable
         public const string CharacterUI = "PlayerUIPanel";
 
         // 몬스터들
-        public const string Slime = "Slime";
-        public const string Split_Slime = "Split Slime";
-        public const string BowMan = "BowMan";
-        public const string Front_Charger = "Front_Charger";
-        public const string Summoner = "Summoner";
-        public const string Skeleton_Warrior = "Skeleton_Warrior";
-        public const string High_Skeleton_Warrior = "High_Skeleton_Warrior";
+        
+        public const string Skeleton = "Skeleton";
         public const string Arthur = "Arthur";
 
         
