@@ -412,10 +412,10 @@ public class Battle_Character : MonoBehaviour
             {
                 Skill_Process(i, 2);
 
-                if (attack_Info[i].spawn_Animation)
-                {
-                    real_AI.isPause = false;
-                }
+                //if (attack_Info[i].spawn_Animation)
+                //{
+                //    real_AI.isPause = false;
+                //}
 
 
                 return;
