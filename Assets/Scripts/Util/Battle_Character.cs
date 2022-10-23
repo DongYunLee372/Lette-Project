@@ -168,7 +168,27 @@ public class Battle_Character : MonoBehaviour
         //Character_Name = info.P_mon_nameKor;
         //enemy_Type = (Enemy_Type)info.P_mon_Type;
     }
-
+    public void Stat_Initialize(MonsterInformation info, List<Mon_Normal_Atk_Group> p_mon_normal_atak_group, List<BossNomalSkill> p_BossNomalSkill, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
+    {
+        mon_normal_atak_group = p_mon_normal_atak_group;
+        mon_Normal_Attack_Info = p_BossNomalSkill;
+        mon_Info = info;
+        mon_Target_Info = target;
+        cur_HP = mon_Info.P_mon_MaxHP;
+        //        st = ScriptableObject.CreateInstance<MonsterInformation>();
+        //die_Delay = info.P_dieDelay;
+        //drop_Reward = info.P_drop_Reward;
+        //mon_attack_Power = info.P_mon_Atk;
+        //balance_gauge = info.P_mon_Balance;
+        //Armor = info.P_mon_Def;
+        //enemy_Grade = (Enemy_Grade)info.P_mon_Default;
+        //// index = int.Parse(info.P_mon_Index);
+        //Max_HP = info.P_mon_MaxHP;
+        //Cur_HP = info.P_mon_MaxHP;
+        //move_Speed = info.P_mon_moveSpeed;
+        //Character_Name = info.P_mon_nameKor;
+        //enemy_Type = (Enemy_Type)info.P_mon_Type;
+    }
     protected void Initalize()
     {
         return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
