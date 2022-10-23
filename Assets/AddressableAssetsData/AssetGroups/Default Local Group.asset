@@ -145,6 +145,46 @@ MonoBehaviour:
     m_Address: Skeleton_Knight
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: f1113decc288e33498af995eb5b8da18
+    m_Address: LoadingImage1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 619e7a645100f634289a23e7c61d6d70
+    m_Address: LoadingImgae6
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 285157e99accd60418fe09f61e2ceaa4
+    m_Address: LoadingImage8
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5790f982a4b5b37479c88675faeb27ad
+    m_Address: LoadingImage7
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7bf72f185bf722c46a8a7ad317b33a10
+    m_Address: LoadingImage5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 542f7c4bebb847847a8f7bf40195051d
+    m_Address: LoadingImage4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8e64826f0c046d54090208d8bd5a72e9
+    m_Address: LoadingImage3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 18fc3456084f2a4419c941e53e4a3710
+    m_Address: LoadingImage2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dfb0988ee23e47546a4371042470523b
+    m_Address: LoadingData_Start
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e62b833e49f63134cb15ef813f828f5e
+    m_Address: LoadingText
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

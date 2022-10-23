@@ -1118,6 +1118,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             case AsyncOperationStatus.Succeeded:
                 m_LoadedScene = obj.Result;
+
                 //GameMG.Instance.Loading_screen(false);
               //  StartCoroutine(setLoad(false));
                 SceneLoadCheck = true;
