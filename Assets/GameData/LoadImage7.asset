@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e64bf2d31a21c40b47cc699f78eb4d, type: 3}
   m_Name: LoadImage7
   m_EditorClassIdentifier: 
-  imgae_Name: 
-  LoadImageNameList: []
-  index: 0
-  SceneName: 0
+  imgae_Name: LoadingImage5
+  LoadImageNameList:
+  - "\uC778\uC801\uC774 \uB4DC\uBB38 \uC232\uC73C\uB85C \uB4E4\uC5B4\uC640 \uC9C0\uB3C4\uB3C4
+    \uC5C6\uC774 \uD0D0\uC0C9\uC744 \uD55C \uC9C0\uB3C4 \uC138\uC2DC\uAC04 "
+  index: 2
+  SceneName: 3

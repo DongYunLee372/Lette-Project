@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e64bf2d31a21c40b47cc699f78eb4d, type: 3}
   m_Name: LoadImage12
   m_EditorClassIdentifier: 
-  imgae_Name: 
-  LoadImageNameList: []
+  imgae_Name: LoadingImage7
+  LoadImageNameList:
+  - "\uCF85!"
   index: 0
-  SceneName: 0
+  SceneName: 3

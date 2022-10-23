@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: LoadImage9
   m_EditorClassIdentifier: 
   imgae_Name: 
-  LoadImageNameList: []
-  index: 0
-  SceneName: 0
+  LoadImageNameList:
+  - "\uC778\uC801\uC774 \uB4DC\uBB38 \uC232\uC73C\uB85C \uB4E4\uC5B4\uC640 \uD0D0\uC0C9\uC744
+    \uD55C \uC9C0\uB3C4 \uC138\uC2DC\uAC04 "
+  index: 4
+  SceneName: 3

@@ -185,6 +185,10 @@ MonoBehaviour:
     m_Address: LoadingText
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 074b2f3d490a6a141b4d60435dbf2d36
+    m_Address: LoadingData_Boss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
