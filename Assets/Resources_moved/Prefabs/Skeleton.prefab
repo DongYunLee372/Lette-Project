@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725230786603551695}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5.63, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.761242, y: 0.761242, z: 0.761242}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -424,7 +424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ede2470329beb64fa2b88d185914813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips: []
 --- !u!114 &7436980739119236520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,12 +438,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   m_clipsnum: 0
-  m_clips: []
   currentplayclipname: 
   prespeed: 0
   currentSpeed: 0
   currnetPlayTime: 0
   currentBlending: 0
+  m_tempclips: []
 --- !u!1 &1060876571909425633
 GameObject:
   m_ObjectHideFlags: 0

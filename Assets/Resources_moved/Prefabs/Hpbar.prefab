@@ -94,9 +94,10 @@ MonoBehaviour:
   enemyHpBarCanvas: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   enemyTr: {fileID: 0}
-  myhp: {fileID: 0}
+  myhp: {fileID: 8820582251102665192}
   Curhp: 0
   Maxhp: 0
   hpBarOffset: {x: -0.5, y: 2.4, z: 0}
   MyHpbar: {fileID: 0}
   battle_Character: {fileID: 0}
+  battle_character_obj: {fileID: 0}

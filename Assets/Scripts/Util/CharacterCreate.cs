@@ -36,28 +36,28 @@ public class CharacterCreate : Singleton<CharacterCreate>
     //    b.GetComponent<Battle_Character>().MyHpbar = b.GetComponent<Battle_Character>().MyHpbar.SetHpBar(data.P_mon_MaxHP, b.transform);
     //}
 
-    public IEnumerator CreateMonster_(EnumScp.MonsterIndex p_index, Transform trans,string name = "Skeleton_Knight")
+    public IEnumerator CreateMonster_(EnumScp.MonsterIndex p_index, Transform trans,string name = "Skeleton")
     {
         MonsterInformation data = ScriptableObject.CreateInstance<MonsterInformation>();
-    //    data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
+        MonsterTargetInformation target = ScriptableObject.CreateInstance<MonsterTargetInformation>();
+        //data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
+       // data =DataLoad_Save.Instance.Get_MonsterDB(Global_Variable.CharVar.Skeleton_Warrior);
 
-       // string tempName = "Skeleton_Knight";
+
+        List<BossNomalSkill> NomalSkills = new List<BossNomalSkill>();
+        List<Mon_Normal_Atk_Group> mon_Normal_Atk_Group = new List<Mon_Normal_Atk_Group>();
+        MonsterSkillInformation monsterSkillInformation = ScriptableObject.CreateInstance<MonsterSkillInformation>();
+
+        target = DataLoad_Save.Instance.Get_MonsterTargetDB(Global_Variable.CharVar.one33330211);
 
         //로드
         yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
 
         GameObject temp = AddressablesController.Instance.find_Asset_in_list(name);
-      //  temp.GetComponent<Battle_Character>().Stat_Initialize(data);
-        
+        temp.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, NomalSkills, monsterSkillInformation, target);
         GameObject Monster = Instantiate(temp, trans);
-
-
+     
         hpBar.GetComponent<EnemyHpbar>().SetHpBar(data.P_mon_MaxHP, Monster.transform, Monster.GetComponent<Battle_Character>());
-
-        //  obj_hp.GetComponent<EnemyHpbar>().battle_Character = b.GetComponent<Battle_Character>();
-        //  obj_hp.GetComponent<EnemyHpbar>().MyHpbar = obj_hp.GetComponent<EnemyHpbar>().SetHpBar(data.P_mon_MaxHP, b.transform);
-
-        //   b.GetComponent<Battle_Character>().MyHpbar = b.GetComponent<Battle_Character>().MyHpbar.SetHpBar(data.P_mon_MaxHP, b.transform);
 
         yield return null;
 
@@ -100,9 +100,6 @@ public class CharacterCreate : Singleton<CharacterCreate>
         GameObject b = Instantiate(temp, trans);
         bosshpbar.GetComponent<Bosshpbar>().SetHpbar(data.P_mon_MaxHP,data.P_mon_nameKor,b.GetComponent<Battle_Character>());
         
-        Debug.Log(data.P_mon_nameKor);
-        Debug.Log(data.P_mon_MaxHP);
-
         yield return null;
 
     }

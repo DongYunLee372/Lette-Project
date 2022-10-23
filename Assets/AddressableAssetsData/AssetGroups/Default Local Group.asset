@@ -141,6 +141,10 @@ MonoBehaviour:
     m_Address: Skeleton
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 691b2ca38e8422d4b9bde536b5547af9
+    m_Address: Skeleton_Knight
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

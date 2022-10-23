@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af30c117ed011144f8a4e9ab1e5c9402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Myobj: {fileID: 0}
   Bosshp: {fileID: 1090767268259147323}
   t_Bossname: {fileID: 5398937978614446712}
   Maxhp: 0
