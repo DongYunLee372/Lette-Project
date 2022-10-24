@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048a271b169e84c489b1699fc57caacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainlight: {fileID: 0}
+  mainlight: {fileID: 544114819}
   Backgroundsound: 100
   Effectsound: 100
   Mousesensetive: 100
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skybox_Mat:
-  - {fileID: 2100000, guid: 933e8af5c42e2b8489bf4743f0c18770, type: 2}
+  - {fileID: 2100000, guid: 400d8db5104338b428633f2079c1b88e, type: 2}
   - {fileID: 2100000, guid: cb0b68e1e2df54b41b55bcef0d22e621, type: 2}
 --- !u!4 &1421700982
 Transform:
