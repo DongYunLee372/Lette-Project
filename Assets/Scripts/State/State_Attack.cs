@@ -86,7 +86,9 @@ public class State_Attack : State
         }
 
         // 스킬
-        if ((Vector3.Distance(battle_character.transform.position,
+        if (int.Parse(special_Range[0]) != 0)
+        {
+            if ((Vector3.Distance(battle_character.transform.position,
                battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1]))
                &&
                (Vector3.Distance(battle_character.transform.position,
@@ -94,12 +96,12 @@ public class State_Attack : State
                &&
                !battle_character.isAttack_Run && battle_character.skill_CoolTime.isCheck
                && battle_character.delay_CoolTime.isCheck && special_Range[0] != special_Range[1])
-        {
-            judge_logic = Enemy_Attack_Logic.Skill_Using;
-            _State = this;
-            return true;
+            {
+                judge_logic = Enemy_Attack_Logic.Skill_Using;
+                _State = this;
+                return true;
+            }
         }
-
 
         if (battle_character.mon_Info.P_mon_FarAtk != 0 && (Vector3.Distance(battle_character.transform.position,
             battle_character.cur_Target.transform.position) >= battle_character.mon_Info.P_mon_FarAtk) &&
@@ -124,7 +126,6 @@ public class State_Attack : State
         battle_character.animator.animator.SetTrigger("Delay_Trg");
         if (count != 1)
         {
-
             battle_character.animator.Play(battle_character.mon_normal_atak_group[rand].P_skill_Name_En);
         }
         else
@@ -217,7 +218,7 @@ public class State_Attack : State
     {
         special_Range = battle_character.mon_Info.P_mon_SpecialAtk.Split(",");
 
-        Debug.Log("special = " + special_Range[0] + "," + special_Range[1]);
+        //Debug.Log("special = " + special_Range[0] + "," + special_Range[1]);
     }
 
 }

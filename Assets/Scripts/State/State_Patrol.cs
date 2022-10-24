@@ -32,8 +32,8 @@ public class State_Patrol : State
     {
         if (battle_character.eventsystem.clips.ContainsKey("Walk"))
             battle_character.animator.Play("Walk");
-        else
-            battle_character.animator.Play("Idle");
+       // else
+       //     battle_character.animator.Play("Idle");
 
         Vector3 charPos = new Vector3(battle_character.transform.position.x,
             0, battle_character.transform.position.z);

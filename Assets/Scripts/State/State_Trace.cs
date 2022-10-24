@@ -46,18 +46,20 @@ public class State_Trace : State
         }
 
         // 스킬 공격
-        if ((Vector3.Distance(battle_character.transform.position,
-                 battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1]))
-                 &&
-                 (Vector3.Distance(battle_character.transform.position,
-                 battle_character.cur_Target.transform.position) >= int.Parse(special_Range[0]))
-                && battle_character.skill_CoolTime.isCheck
-                && battle_character.delay_CoolTime.isCheck
-                && special_Range[0] != special_Range[1]) // 타겟을 공격할 수 있는 사거리 내 진입했다면
+        if (int.Parse(special_Range[0]) != 0)
         {
-            _State = Trans_List[0];
-            battle_character.real_AI.pre_State = this;
-            return false;
+            if ((Vector3.Distance(battle_character.transform.position,
+                     battle_character.cur_Target.transform.position) <= int.Parse(special_Range[1]))
+                     &&
+                     (Vector3.Distance(battle_character.transform.position,
+                     battle_character.cur_Target.transform.position) >= int.Parse(special_Range[0]))
+                    && battle_character.skill_CoolTime.isCheck
+                    && battle_character.delay_CoolTime.isCheck) // 타겟을 공격할 수 있는 사거리 내 진입했다면
+            {
+                _State = Trans_List[0];
+                battle_character.real_AI.pre_State = this;
+                return false;
+            }
         }
         // 아래 부분들이 다 필요없고 최종 사거리만 계산해서 최종 사거리안에 진입했다면 Attack 스테이트로 돌리면 될듯
         // 변수 추가 받은 후 수정
