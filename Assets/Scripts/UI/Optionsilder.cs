@@ -9,7 +9,7 @@ public class Optionsilder : MonoBehaviour
     public Slider slideBar;
     public Text my;
     [SerializeField]
-    private int val;
+    private float val;
 
     public int myindex;
     // Start is called before the first frame update
@@ -44,8 +44,15 @@ public class Optionsilder : MonoBehaviour
         }
         if (myindex == 3)
         {
+            Color a=new Color(0,0,0);
+            a.r = 0;
+            a.g = 0;
+            a.b = 0;
+            a.r= val *0.01f;
+            a.g = val * 0.01f;
+            a.b = val * 0.01f;
             mycanvas.GetComponent<MainOption>().Lightcontroll = val;
-            mycanvas.GetComponent<MainOption>().mainlight.GetComponent<Light>().shadowStrength = 1 - (val * 0.01f);
+            mycanvas.GetComponent<MainOption>().mainlight.GetComponent<Light>().color = a;
         }
     }
 

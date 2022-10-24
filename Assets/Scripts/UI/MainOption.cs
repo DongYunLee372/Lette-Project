@@ -94,12 +94,12 @@ public class MainOption : MonoBehaviour
         {
             Ingame();
         }
-        mainlight.GetComponent<Light>().shadowStrength = 1 - (Lightcontroll * 0.01f);
+      //  mainlight.GetComponent<Light>().shadowStrength = 1 - (Lightcontroll * 0.01f);
     }
 
     public void Ingame()
     {
-        if(ShowOption)
+        if (ShowOption)
         {
             UIManager.Instance.Hide("IngameOption");
             ShowOption = false;
