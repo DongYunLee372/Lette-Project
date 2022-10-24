@@ -740,7 +740,7 @@ public class CMoveComponent : BaseComponent
     public void RotateFP()
     {
         float xRotPrev = com.FpRoot.localEulerAngles.y;
-        float xRotNext = xRotPrev + MouseMove.x * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
+        float xRotNext = xRotPrev + MouseMove.x * Time.deltaTime * 50f * moveoption.RotMouseSpeed * ((moveoption.RightReverse) ? -1 : 1);
 
         //xnext = xRotNext;
         //if (xRotNext > 180f)
@@ -748,7 +748,7 @@ public class CMoveComponent : BaseComponent
 
         float yRotPrev = com.FpCamRig.localEulerAngles.x;
         testyRotPrev = yRotPrev;
-        float yRotNext = yRotPrev + MouseMove.y * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
+        float yRotNext = yRotPrev + MouseMove.y * Time.deltaTime * 50f * moveoption.RotMouseSpeed /** ((moveoption.RightReverse) ? -1 : 1)*/;
         testyRotNext = yRotNext;
 
         if (yRotNext >= 90)
@@ -770,13 +770,13 @@ public class CMoveComponent : BaseComponent
     public void RotateTP()
     {
         float xRotPrev = com.TpCamRig.localEulerAngles.y;
-        float xRotNext = xRotPrev + MouseMove.x * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
+        float xRotNext = xRotPrev + MouseMove.x * Time.deltaTime * 50f * moveoption.RotMouseSpeed * ((moveoption.RightReverse) ? -1 : 1);
 
         //if (xRotNext > 180f)
         //    xRotNext -= 360f;
 
         float yRotPrev = com.TpCamRig.localEulerAngles.x;
-        float yRotNext = yRotPrev + MouseMove.y * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
+        float yRotNext = yRotPrev + MouseMove.y * Time.deltaTime * 50f * moveoption.RotMouseSpeed /** ((moveoption.RightReverse) ? -1 : 1)*/;
 
         testyRotPrev = yRotPrev;
         testyRotNext = yRotNext;

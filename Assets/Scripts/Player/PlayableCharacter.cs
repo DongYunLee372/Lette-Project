@@ -27,6 +27,8 @@ public class PlayableCharacter : MonoBehaviour
     public string HitEffectAdressableName;
     public EffectManager effectmanager;
 
+    CMoveComponent movecom;
+
     /*싱글톤*/
     static PlayableCharacter _instance;
     public static PlayableCharacter Instance
@@ -48,6 +50,7 @@ public class PlayableCharacter : MonoBehaviour
     {
         //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
         //Debug.Log($"{CharacterDBInfo.P_player_HP}");
+        
 
         BaseComponent[] temp = GetComponentsInChildren<BaseComponent>();
         status = GetComponent<BaseStatus>();
@@ -55,14 +58,19 @@ public class PlayableCharacter : MonoBehaviour
 
         foreach (BaseComponent a in temp)
         {
-            if(a.gameObject.activeSelf)
+            if (a.gameObject.activeSelf)
                 components[(int)a.p_comtype] = a;
         }
 
+        movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
         //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
-        if(CharacterUIPanel==null)
-            AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(Global_Variable.CharVar.CharacterUI, false, true, CeateUI);
+        if (CharacterUIPanel == null)
+        {
+            //AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(Global_Variable.CharVar.CharacterUI, false, true, CeateUI);
+            CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+        }
+            
 
         status.Init(CharacterUIPanel);
         Canvas canvas = FindObjectOfType<Canvas>();
@@ -73,14 +81,45 @@ public class PlayableCharacter : MonoBehaviour
             canvas = obj.GetComponent<Canvas>();
         }
 
-        CharacterUIPanel.transform.parent = canvas.transform;
+        //CharacterUIPanel.transform.parent = canvas.transform;
         CharacterUIPanel.transform.localPosition = status.player_UIPos;
-        
+
 
         if (CharacterUIPanel == null)
         {
             Debug.Log("character UI Create Fail");
         }
+
+        GameObject tempui = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
+        MainOption mainoption = tempui.GetComponent<MainOption>();
+        mainoption.r_invoker = SetReverseMouseRot;
+        mainoption.a_invoker = SetOutoFocus;
+        mainoption.l_invoker = SetCameraColl;
+        mainoption.m_invoker = SetMouseSpeed;
+
+    }
+
+    public void SetOutoFocus(bool val)
+    {
+        OutoFocus = val;
+    }
+
+    public void SetMouseSpeed(float val)
+    {
+        //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        //0~100의 값을 0~5의 값으로 변환해서 넣어준다.
+        val = val * 5 * 0.01f;
+        movecom.moveoption.RotMouseSpeed = val;
+    }
+
+    public void SetReverseMouseRot(bool val)
+    {
+        movecom.moveoption.RightReverse = val;
+    }
+
+    public void SetCameraColl(bool val)
+    {
+        movecom.CameraCollOn = val;
     }
 
     public void CeateUI(GameObject obj)
@@ -106,7 +145,7 @@ public class PlayableCharacter : MonoBehaviour
 
     public Camera GetCamera()
     {
-        CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         return movecom.GetCamera();
     }
 
@@ -144,7 +183,7 @@ public class PlayableCharacter : MonoBehaviour
         //캐릭터가 회피중이지만 무적시간이 아닐때는 회피에 실패하고 데미지를 입는다.
         else if(state == CharacterStateMachine.eCharacterState.Rolling)
         {
-            CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+            //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
             if(!movecom.curval.IsNoDamage)
                 movecom.Damaged_Rolling(damage, hitpoint,Groggy);
@@ -165,7 +204,7 @@ public class PlayableCharacter : MonoBehaviour
     
     public void Damaged(float damage,Vector3 hitpoint, float Groggy)
     {
-        CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         EffectManager.Instance.InstantiateEffect(HitEffectAdressableName, hitpoint);
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;
@@ -226,6 +265,28 @@ public class PlayableCharacter : MonoBehaviour
         public bool _isBlocked;
     }
 
+    public bool _outoFocus = false;
+    public bool OutoFocus
+    {
+        get
+        {
+            return _outoFocus;
+        }
+        set
+        {
+            _outoFocus = value;
+            if (value)
+            {
+                if (MonsterSearchCor==null)
+                {
+                    MonsterSearchCor = MonsterSearchCoroutine();
+                    StartCoroutine(MonsterSearchCor);
+                }
+                FocusTab();
+            }
+
+        }
+    }
 
     public List<Battle_Character_Info> _monsterObject = new List<Battle_Character_Info>();
     public float _monsterSearchTime = 3.0f;
@@ -240,7 +301,7 @@ public class PlayableCharacter : MonoBehaviour
 
     public LayerMask Bosslayer;
 
-    public bool OutoFoucusing = false;
+    //public bool OutoFoucusing = false;
 
     //일정 시간마다 화면에 있는 몬스터들을 확인해서 거리별로 리스트에 넣는다.
     public IEnumerator MonsterSearchCoroutine()
@@ -307,11 +368,21 @@ public class PlayableCharacter : MonoBehaviour
             //탕색과 정렬을 끝냈는데 현재 포커싱 중인 몬스터가 사라졌으면 포커싱을 끝내준다.
             if(IsFocusingOn)
             {
-                //_monsterObject.Find(x => x == CurFocusedMonster);
                 int index = _monsterObject.FindIndex(x => x == CurFocusedMonster);
                 //탐색을 완료 했는데 포커싱 중인 몬스터가 없어졌을때
                 if (index == -1)
                 {
+                    //오토 포커싱 중이면 다른 몬스터가 있으면 그 몬스터로 포커싱을 옮겨주고
+                    //아무것도 없으면 그때 끝내준다.
+                    if(OutoFocus)
+                    {
+                        if(_monsterObject.Count>0)
+                        {
+                            CurFocusedIndex = 0;
+                            continue;
+                        }
+                    }
+
                     Debug.Log("[focus]탐색결과 몬스터 존재 X");
                     IsFocusingOn = false;
                     CurFocusedIndex = 0;
@@ -324,6 +395,9 @@ public class PlayableCharacter : MonoBehaviour
                 }
             }
 
+
+
+
             yield return new WaitForSeconds(_monsterSearchTime);
         }
 
@@ -333,7 +407,6 @@ public class PlayableCharacter : MonoBehaviour
 
     public void FocusTab()
     {
-        Debug.Log("[focus]탭 들어옴");
 
         if(MonsterSearchCor==null)
         {
@@ -355,13 +428,17 @@ public class PlayableCharacter : MonoBehaviour
         }
         else
         {
-            if (CurFocusedIndex == _monsterObject.Count - 1)
+            if(!OutoFocus)
             {
-                Debug.Log("[focus]포커싱 꺼짐");
-                IsFocusingOn = false;
-                StopCoroutine(MonsterSearchCor);
-                MonsterSearchCor = null;
+                if (CurFocusedIndex == _monsterObject.Count - 1)
+                {
+                    Debug.Log("[focus]포커싱 꺼짐");
+                    IsFocusingOn = false;
+                    StopCoroutine(MonsterSearchCor);
+                    MonsterSearchCor = null;
+                }
             }
+            
                 
             CurFocusedIndex = (CurFocusedIndex + 1) % _monsterObject.Count;
             CurFocusedMonster = _monsterObject[CurFocusedIndex];
