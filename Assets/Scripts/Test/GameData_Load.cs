@@ -163,7 +163,8 @@ public class GameData_Load :Singleton<GameData_Load>
         var boss= AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
         boss.SetActive(true);
 
-
+        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[1]);
+        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
 
     }
 
