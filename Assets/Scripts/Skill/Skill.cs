@@ -43,7 +43,8 @@ public class Skill : MonoBehaviour
 
         //if (skill_data.P_skill_DiffObj)
         //{
-        //    StartCoroutine(Spawn_Coroutine(skill_data));
+        //    StartCoroutine(
+        //    _Coroutine(skill_data));
         //}
 
         // 캐릭터 현재 마나 - 스킬의 마나
