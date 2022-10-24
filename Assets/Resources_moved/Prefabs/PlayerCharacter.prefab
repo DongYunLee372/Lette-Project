@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 3606693288689190363}
   - component: {fileID: 4909184825936415680}
   m_Layer: 13
-  m_Name: Camera
+  m_Name: CCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2458,6 +2458,7 @@ MonoBehaviour:
   HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
   HitEffectAdressableName: SwordHitRed
   effectmanager: {fileID: 0}
+  _outoFocus: 0
   _monsterObject: []
   _monsterSearchTime: 3
   CurMonsterIndex: 0
@@ -2472,7 +2473,6 @@ MonoBehaviour:
   Bosslayer:
     serializedVersion: 2
     m_Bits: 0
-  OutoFoucusing: 0
 --- !u!114 &5912692896712387626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2789,7 +2789,7 @@ MonoBehaviour:
     skill01: 49
     skill02: 50
     skill03: 51
-    Tab: 9
+    Tab: 113
   movecom: {fileID: 0}
   attackcom: {fileID: 0}
   guardcom: {fileID: 0}
