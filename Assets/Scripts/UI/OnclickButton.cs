@@ -100,17 +100,17 @@ public class OnclickButton : MonoBehaviour
     public void b_Reverse()
     {
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
-        canvas.GetComponent<MainOption>().Reversemouse = !canvas.GetComponent<MainOption>().Reversemouse; 
+        canvas.GetComponent<MainOption>()._reversemouse = !canvas.GetComponent<MainOption>()._reversemouse; 
     }
     public void b_Autoevade()
     {
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
-        canvas.GetComponent<MainOption>().Autoevade = !canvas.GetComponent<MainOption>().Autoevade;
+        canvas.GetComponent<MainOption>()._autoevad = !canvas.GetComponent<MainOption>()._autoevad;
     }
     public void b_Lookon()
     {
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
-        canvas.GetComponent<MainOption>().Lookon = !canvas.GetComponent<MainOption>().Lookon;
+        canvas.GetComponent<MainOption>()._lookon = !canvas.GetComponent<MainOption>()._lookon;
     }
     public void Optionokbutton()
     {

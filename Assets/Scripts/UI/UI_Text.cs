@@ -20,7 +20,7 @@ public class UI_Text : MonoBehaviour
     {
        if(myindex==0)
         {
-           if( Mycanvas.GetComponent<MainOption>().Reversemouse )
+           if( Mycanvas.GetComponent<MainOption>()._reversemouse )
             {
                 text.text = "켜기";
             }
@@ -31,7 +31,7 @@ public class UI_Text : MonoBehaviour
         }
         if (myindex == 1)
         {
-            if (Mycanvas.GetComponent<MainOption>().Autoevade)
+            if (Mycanvas.GetComponent<MainOption>()._autoevad)
             {
                 text.text = "켜기";
             }
@@ -42,7 +42,7 @@ public class UI_Text : MonoBehaviour
         }
         if (myindex == 2)
         {
-            if (Mycanvas.GetComponent<MainOption>().Lookon)
+            if (Mycanvas.GetComponent<MainOption>()._lookon)
             {
                 text.text = "켜기";
             }

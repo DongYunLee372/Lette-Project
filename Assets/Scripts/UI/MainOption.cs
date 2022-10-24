@@ -8,16 +8,77 @@ public class MainOption : MonoBehaviour
     public Light mainlight;
     public float Backgroundsound;
     public float Effectsound;
-    public float Mousesensetive;
     public float Lightcontroll;
 
-    public bool Reversemouse;
-    public bool Autoevade;
-    public bool Lookon;
+//    public bool Reversemouse;
 
     public bool GameStart;
     public bool ShowOption;
     public bool mainoption;
+
+    public delegate void Reversemouse(bool val);
+    public delegate void Autoevade(bool val);
+    public delegate void Lookon(bool val);
+    public delegate void Mousesensetive(float val);
+
+
+    public Reversemouse r_invoker;
+    public Autoevade a_invoker;
+    public Lookon l_invoker;
+    public Mousesensetive m_invoker;
+
+    public bool _reversemouse;
+    public bool _autoevad;
+    public bool _lookon;
+    public float _mousesensetive;
+    public bool ReverseMouse
+    {
+        get
+        {
+            return _reversemouse;
+        }
+        set
+        {
+            _reversemouse = value;
+            r_invoker(value);
+        }
+    }
+    public bool AutoeVade
+    {
+        get
+        {
+            return _autoevad;
+        }
+        set
+        {
+            _autoevad = value;
+            a_invoker(value);
+        }
+    }
+    public bool LooKon
+    {
+        get
+        {
+            return _lookon;
+        }
+        set
+        {
+            _lookon = value;
+            l_invoker(value);
+        }
+    }
+    public float MouseSensetive
+    {
+        get
+        {
+            return _mousesensetive;
+        }
+        set
+        {
+            _mousesensetive = value;
+            m_invoker(value);
+        }
+    }
     private void Update()
     {
         if (mainoption)

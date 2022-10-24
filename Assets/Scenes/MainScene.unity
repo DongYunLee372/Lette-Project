@@ -297,14 +297,14 @@ MonoBehaviour:
   mainlight: {fileID: 544114819}
   Backgroundsound: 100
   Effectsound: 100
-  Mousesensetive: 100
   Lightcontroll: 100
-  Reversemouse: 1
-  Autoevade: 1
-  Lookon: 1
   GameStart: 0
   ShowOption: 0
   mainoption: 0
+  _reversemouse: 0
+  _autoevad: 0
+  _lookon: 0
+  _mousesensetive: 0
 --- !u!114 &593052550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skybox_Mat:
-  - {fileID: 2100000, guid: 400d8db5104338b428633f2079c1b88e, type: 2}
+  - {fileID: 2100000, guid: 85bdd529a7fbcc344b810462de0c2b46, type: 2}
   - {fileID: 2100000, guid: cb0b68e1e2df54b41b55bcef0d22e621, type: 2}
 --- !u!4 &1421700982
 Transform:
