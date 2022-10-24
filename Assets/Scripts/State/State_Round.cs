@@ -47,9 +47,18 @@ public class State_Round : State
 
     public override void Run(Battle_Character battle_character)
     {
-        if (battle_character.eventsystem.clips.ContainsKey("Walk"))
-            battle_character.animator.Play("Walk");
-        else
+        bool fflag = false;
+        foreach(AnimationClip clip in battle_character.animator.m_tempclips)
+        {
+            if(clip.name == "Walk")
+            {
+                fflag = true;
+                battle_character.animator.Play("Walk");
+                break;
+            }
+        }
+
+        if(!fflag)
             battle_character.animator.Play("Idle");
 
         //battle_character.transform.LookAt(battle_character.cur_Target.transform);
