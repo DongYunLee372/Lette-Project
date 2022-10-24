@@ -11,6 +11,7 @@ public enum Scenes_Stage
     Stage2,
     Stage3,
     Boss,
+    BossEnd,
     restart_Loading,
     Gameing_Restart,
     GameMenuEnd,
@@ -179,15 +180,15 @@ public class GameMG : Singleton<GameMG>
         //Check_Timer();
 
        //임시로 씬 불러오기 로딩씬에서 사용(테스트)
-            if (Input.GetKeyDown(KeyCode.F2))
-            {
+          //  if (Input.GetKeyDown(KeyCode.F2))
+           // {
             //startGame("Lo");  //어드레서블 x
 
             // ScenesLoadMG.Instance.loadSubSceneFn("Load_test");
          //   AddressablesLoader.OnSceneAction("TestScenes");  //씬 로드 어드레서블
            // AddressablesLoader.OnSceneAction("Load_test");  //씬 로드 어드레서블
                                                             
-        }
+        //}
         if (Input.GetKeyDown(KeyCode.F1))
         {
             GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
@@ -199,6 +200,16 @@ public class GameMG : Singleton<GameMG>
         {
             GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);  //게임종료에 넣기 (시작 화면 UI띄워주세여ㅜ)
         }
+
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            GameData_Load.Instance.ChangeScene(Scenes_Stage.BossEnd);  //보스 엔드
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);  // 시작
+        }
+
 
 
     }

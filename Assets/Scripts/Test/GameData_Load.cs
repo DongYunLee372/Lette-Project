@@ -231,11 +231,11 @@ public class GameData_Load :Singleton<GameData_Load>
                 if(GameMG.Instance.scenes_Stage != Scenes_Stage.Loding)
                 {
                     unloadBoatScene();
-                    skyboxMG.SkyBox_Setting("BoatScene");
-                    GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
-                    break;
+                    //skyboxMG.SkyBox_Setting("BoatScene");
+                    //GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
+                   // break;
                 }
-                StartCoroutine(CheckInputKey());
+                //StartCoroutine(CheckInputKey());
                 ImageCheck = true;
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
                 LoadingImageShow(Scenes_Stage.Stage1);
@@ -257,6 +257,17 @@ public class GameData_Load :Singleton<GameData_Load>
 
                 //AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
 
+                break;
+
+            case Scenes_Stage.BossEnd:
+                charatcter = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+                if (charatcter != null)
+                {
+                    charatcter.SetActive(false);
+                }
+                ImageCheck = true;
+                GameMG.Instance.scenes_Stage = Scenes_Stage.BossEnd;
+                LoadingImageShow(Scenes_Stage.BossEnd);
                 break;
 
             case Scenes_Stage.GameMenuEnd:
@@ -306,6 +317,8 @@ public class GameData_Load :Singleton<GameData_Load>
         var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
                                                                            //몬스터 추가되면 삭제
+        var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
     }
     //보스 내리기
     void EndunLoadBossScene()
@@ -378,10 +391,13 @@ public class GameData_Load :Singleton<GameData_Load>
 
         if(LoadingImgae==null)
         {
-            LoadingImgae = new GameObject();
+           // LoadingImgae = new GameObject();
+            LoadingImgae = Instantiate(Loading, new Vector3(0f, 0f, 0f), Quaternion.identity, GameMG.Instance.Canvas.transform);
         }
-         LoadingImgae =  Instantiate(Loading, new Vector3(0f, 0f, 0f), Quaternion.identity, GameMG.Instance.Canvas.transform);
-         LoadingText_Ins = Instantiate(LoadingText, new Vector3(0f, 0f, 0f), Quaternion.identity, GameMG.Instance.Canvas.transform);
+        if(LoadingText_Ins==null)
+        {
+            LoadingText_Ins = Instantiate(LoadingText, new Vector3(0f, 0f, 0f), Quaternion.identity, GameMG.Instance.Canvas.transform);
+        }
 
         RectTransform parentPos = GameMG.Instance.Canvas.GetComponent<RectTransform>();
         LoadingImgae.transform.position = parentPos.position;
@@ -395,6 +411,10 @@ public class GameData_Load :Singleton<GameData_Load>
 
         LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = "";
         gameLoadingData = new GameLoadingData();
+        LoadingText_Ins.transform.position = new Vector3(parentPos.position.x, parentPos.position.y - 250, parentPos.position.z);
+        LoadingImgae.transform.position = new Vector3(parentPos.position.x, parentPos.position.y + 100, parentPos.position.z);
+        RectTransform rect = LoadingImgae.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(800, 500);
         switch (scenes_Stage)
         {
             case Scenes_Stage.Stage1: //스테이지 1
@@ -409,14 +429,21 @@ public class GameData_Load :Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.Stage2:  //스테이지 2
-                LoadingText_Ins.transform.position = new Vector3(parentPos.position.x,parentPos.position.y-250,parentPos.position.z);
-                LoadingImgae.transform.position = new Vector3(parentPos.position.x, parentPos.position.y+ 150, parentPos.position.z);
-                RectTransform rect = LoadingImgae.GetComponent<RectTransform>();
-                rect.sizeDelta = new Vector2(800, 500);
-              //  LoadingImgae.GetComponent<RectTransform>().rect.width = 800;
-
+             
                 AddressablesLoadManager.Instance.SingleAsset_Load<GameLoadingData>("LoadingData_Boss");
                 gameLoadingData = AddressablesLoadManager.Instance.FindLoadAsset<GameLoadingData>("LoadingData_Boss");
+                if (gameLoadingData == null)
+                {
+                    Debug.Log("확인차null");
+
+                }
+                Debug.Log("확인차" + gameLoadingData.LoadingData.Count);
+                break;
+
+            case Scenes_Stage.BossEnd:  //보스 잡고 완료했을 때
+
+                AddressablesLoadManager.Instance.SingleAsset_Load<GameLoadingData>("LoadingData_Ending");
+                gameLoadingData = AddressablesLoadManager.Instance.FindLoadAsset<GameLoadingData>("LoadingData_Ending");
                 if (gameLoadingData == null)
                 {
                     Debug.Log("확인차null");
@@ -432,6 +459,18 @@ public class GameData_Load :Singleton<GameData_Load>
         LoadingData_ListIN(out List<string> loadkey);
         AddressablesLoadManager.Instance.MultiAsset_Load<Sprite>(loadkey);
 
+        if(loadingDatas[0].ImageName!=null)
+        {
+            Color color2 = LoadingImgae.GetComponent<Image>().color;
+            color2.a = 1;
+            LoadingImgae.GetComponent<Image>().color = color2;
+            LoadingImgae.GetComponent<Image>().sprite = AddressablesLoadManager.Instance.FindLoadAsset<Sprite>(loadingDatas[0].ImageName);
+        }
+        if (loadingDatas[0].scripts!=null)
+        {
+            LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = loadingDatas[0].scripts;
+        }
+        gameLoadingCount = 1;
         // loadKeyList.Add("Loading_Door1");
         //  loadKeyList.Add("LoadingDoor2");
         //loadKeyList.Add("Loading_Treasure");
