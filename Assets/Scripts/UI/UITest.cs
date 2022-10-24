@@ -13,7 +13,7 @@ public class UITest : MonoBehaviour
         //transf.position = new Vector3(0.01f, 2.14f, -9f);
         //UIManager.Instance.Canvasoff(CANVAS_NUM.enemy_canvas);
         //UIManager.Instance.Canvasoff(CANVAS_NUM.start_canvas);
-        //UIManager.Instance.Canvasoff(CANVAS_NUM.player_cavas);
+        UIManager.Instance.Canvasoff(CANVAS_NUM.player_cavas);
     }
 
     // Update is called once per frame
