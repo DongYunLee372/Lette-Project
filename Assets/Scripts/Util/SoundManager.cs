@@ -16,40 +16,22 @@ public class SoundManager : Singleton<SoundManager>
     public float bgmSave;
     public float effectSave;
 
-    [SerializeField]
-    private Slider bgmSlider;
-
-    [SerializeField]
-    private Slider effectSlider;
+    public GameObject option;
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("bgmVolume"))
-        {
-            bgmSave = PlayerPrefs.GetFloat("bgmVolume");
+        option = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
 
-            bgmSource.volume = bgmSave;
-        }
-        if (PlayerPrefs.HasKey("effectVolume"))
-        {
-            effectSave = PlayerPrefs.GetFloat("effectVolume");
+        bgmSource.GetComponent<AudioSource>().volume = option.GetComponent<MainOption>().Backgroundsound * 0.01f;
+        effectSource.GetComponent<AudioSource>().volume = option.GetComponent<MainOption>().Effectsound * 0.01f;
 
-            effectSource.volume = effectSave;
-        }
+       
     }
 
     void Volume_Update()
     {
-        if (bgmSlider != null)
-        {
-            bgmSave = bgmSlider.value;
-            bgmSource.volume = bgmSave;
-        }
-        if (effectSlider != null)
-        {
-            effectSave = effectSlider.value;
-            effectSource.volume = effectSave;
-        }
+        bgmSource.GetComponent<AudioSource>().volume = option.GetComponent<MainOption>().Backgroundsound * 0.01f;
+        effectSource.GetComponent<AudioSource>().volume = option.GetComponent<MainOption>().Effectsound * 0.01f ;
     }
 
     public void Volume_Save()

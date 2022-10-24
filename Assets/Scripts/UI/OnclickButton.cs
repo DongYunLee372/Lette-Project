@@ -84,6 +84,7 @@ public class OnclickButton : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
+        SoundManager.Instance.bgmSource.Stop();
         Debug.Log("게임시작");
     }
 

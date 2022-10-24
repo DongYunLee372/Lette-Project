@@ -126,6 +126,8 @@ public class MainOption : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas);
+        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[0]);
+        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop=true;
         GameMG.Instance.Loading_screen(false);
     }
 }
