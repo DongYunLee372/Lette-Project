@@ -14,7 +14,7 @@ public class State_Patrol : State
         {
             for (int i = 0; i < cols.Length; i++)
             {
-                if(cols[i].CompareTag("Player"))
+                if (cols[i].CompareTag("Player"))
                 {
                     battle_character.cur_Target = cols[i].gameObject;
                     battle_character.real_AI.pre_State = this;
@@ -30,7 +30,10 @@ public class State_Patrol : State
 
     public override void Run(Battle_Character battle_character)
     {
-        battle_character.animator.Play("Walk");
+        if (battle_character.eventsystem.clips.ContainsKey("Walk"))
+            battle_character.animator.Play("Walk");
+        else
+            battle_character.animator.Play("Idle");
 
         Vector3 charPos = new Vector3(battle_character.transform.position.x,
             0, battle_character.transform.position.z);
@@ -57,8 +60,8 @@ public class State_Patrol : State
     {
         yield return new WaitForSeconds(1f);
 
-        int randX = Random.Range(-10, 10);
-        int randZ = Random.Range(-10, 10);
+        int randX = Random.Range(-5, 5);
+        int randZ = Random.Range(-5, 5);
 
         battle_character.destination_Pos = new Vector3(battle_character.return_Pos.x + randX, battle_character.return_Pos.y, battle_character.return_Pos.z + randZ);
 

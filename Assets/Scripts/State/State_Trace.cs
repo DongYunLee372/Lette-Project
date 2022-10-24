@@ -102,6 +102,8 @@ public class State_Trace : State
     {
         if (battle_character.eventsystem.clips.ContainsKey("Walk"))
             battle_character.animator.Play("Walk");
+        else
+            battle_character.animator.Play("Idle");
 
         battle_character.real_AI.navMesh.SetDestination(battle_character.cur_Target.transform.position);
     }
