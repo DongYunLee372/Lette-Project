@@ -275,8 +275,8 @@ public class GameData_Load :Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.GameMenuEnd:
-                UIManager.Instance.Canvasoff(CANVAS_NUM.player_cavas);
-                UIManager.Instance.Canvasoff(CANVAS_NUM.enemy_canvas);
+                //UIManager.Instance.Canvasoff(CANVAS_NUM.player_cavas);
+                //UIManager.Instance.Canvasoff(CANVAS_NUM.enemy_canvas);
                 AllanloadScene();
                 break;
 
