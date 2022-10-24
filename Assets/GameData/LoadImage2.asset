@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: LoadImage2
   m_EditorClassIdentifier: 
   imgae_Name: LoadingImage1
-  LoadImageNameList: []
+  LoadImageNameList:
+  - "\uBC30 \uC548\uC5D0\uC11C \uD734\uC2DD\uC744 \uCDE8\uD558\uB294 \u2018\uC5D0\uB9AC\uC2A4\u2019 "
+  - "\uC774\uC73D\uACE0 \uC18C\uB780\uC774 \uC77C\uC5B4\uB098 \uC77C\uC5B4\uB098\uAC8C
+    \uB41C\uB2E4."
   index: 2
   SceneName: 1

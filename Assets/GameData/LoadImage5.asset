@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LoadImage5
   m_EditorClassIdentifier: 
   imgae_Name: LoadingImage3
-  LoadImageNameList: []
+  LoadImageNameList:
+  - "\u201C\uC5D0... \uBB50\uC57C \uC774\uAC70\u201D "
   index: 5
   SceneName: 1

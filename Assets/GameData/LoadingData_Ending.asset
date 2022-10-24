@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a92ec0a4f7b0f459deee4e31b8b720, type: 3}
   m_Name: LoadingData_Ending
   m_EditorClassIdentifier: 
-  LoadingData: []
+  LoadingData:
+  - {fileID: 11400000, guid: a1dd8369321a1c948811bd4e72226cf0, type: 2}
+  - {fileID: 11400000, guid: 5bc2e316fc662b74699d0251c792c9c5, type: 2}
+  - {fileID: 11400000, guid: 6642429634c33994f86be75ea6b4e27f, type: 2}
+  - {fileID: 11400000, guid: f51f41ec69b2cda48883de4085a7862c, type: 2}
+  - {fileID: 11400000, guid: 844860cadeb7ffc449e90ecb7c75bdec, type: 2}

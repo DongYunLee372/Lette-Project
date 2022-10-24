@@ -15,5 +15,5 @@ MonoBehaviour:
   imgae_Name: LoadingImage7
   LoadImageNameList:
   - "\uCF85!"
-  index: 0
-  SceneName: 3
+  index: 3
+  SceneName: 5
