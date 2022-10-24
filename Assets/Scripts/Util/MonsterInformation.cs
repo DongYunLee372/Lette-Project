@@ -21,16 +21,16 @@ public class MonsterInformation : Data
     public string P_mon_nameKor { get { return mon_nameKor; } set { mon_nameKor = value; } }
 
     
-    [SerializeField]
-    private int mon_Default; //몬스터 등급
-    public int P_mon_Default { get { return mon_Default; } set { mon_Default = value; } }
+    //[SerializeField]
+    //private int mon_Default; //몬스터 등급
+    //public int P_mon_Default { get { return mon_Default; } set { mon_Default = value; } }
 
-    [SerializeField]
-    private int mon_Type; //몬스터 타입
-    public int P_mon_Type { get { return mon_Type; } set { mon_Type = value; } }
-    [SerializeField]
-    private int mon_Position; //몬스터 위치
-    public int P_mon_Position { get { return mon_Position; } set { mon_Position = value; } }
+    //[SerializeField]
+    //private int mon_Type; //몬스터 타입
+    //public int P_mon_Type { get { return mon_Type; } set { mon_Type = value; } }
+    //[SerializeField]
+    //private int mon_Position; //몬스터 위치
+    //public int P_mon_Position { get { return mon_Position; } set { mon_Position = value; } }
 
     [SerializeField]
     private int mon_MaxHP; //몬스터 체력
@@ -51,13 +51,19 @@ public class MonsterInformation : Data
     [SerializeField]
     private int mon_Balance; //몬스터 균형게이지
     public int P_mon_Balance { get { return mon_Balance; } set { mon_Balance = value; } }
+    
 
-
-    //mon_CloseAtk mon_FarAtk  mon_SpecialAtk mon_regenMP dieDelay drop_Reward
+    
 
     [SerializeField]
     private int mon_MaxMp; //몬스터 최대마나
     public int P_mon_MaxMp { get { return mon_MaxMp; } set { mon_MaxMp = value; } }
+
+    [SerializeField]
+    private int mon_detectionRange; 
+
+    public int P_mon_detectionRange { get { return mon_detectionRange; } set { mon_detectionRange = value; } }
+
 
     [SerializeField]
     private int mon_CloseAtk; //몬스터 마나 회복량
