@@ -98,7 +98,7 @@ public class OnclickButton : MonoBehaviour
 
     public void b_Restart() //재시작 
     {
-         
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
     }
 
     public void b_Exitgame() //종료 

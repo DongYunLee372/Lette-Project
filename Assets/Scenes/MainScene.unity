@@ -203,8 +203,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 979cea3f7d0a60e4b99468da709b76fd, type: 3}
   - {fileID: 8300000, guid: b6457c24c7d7c4040869241919fd6d3d, type: 3}
   Player_Audio:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 874152c63a891af429a54301d3955774, type: 3}
+  - {fileID: 8300000, guid: e9c2f425b71a93b4991da394ee4ba1af, type: 3}
+  - {fileID: 8300000, guid: 9e8edd470a403dd43ae3fb8ae7a7e834, type: 3}
   bgmSave: 0
   effectSave: 0
   option: {fileID: 0}
@@ -480,7 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas_: {fileID: 1772133562}
   mainlight: {fileID: 544114819}
-  Backgroundsound: 100
+  Backgroundsound: 10
   Effectsound: 100
   Lightcontroll: 100
   GameStart: 0
@@ -489,7 +490,7 @@ MonoBehaviour:
   _reversemouse: 0
   _autoevad: 0
   _lookon: 0
-  _mousesensetive: 0
+  _mousesensetive: 50
 --- !u!114 &593052550
 MonoBehaviour:
   m_ObjectHideFlags: 0

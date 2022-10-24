@@ -176,11 +176,11 @@ public class UIManager : Singleton<UIManager>
     {
         for (int i = 0; i < info.Count; i++)
         {
-                    Destroy(info[i].obj);
-                    info.Remove(info[i]);
-                    i = 0;
+            Destroy(info[i].obj);
+            info.Remove(info[i]);
+            i = 0;
             Debug.Log(info[i].obj.name);
-            continue;
+              continue;
         }
     }
     public void Canvasoff(CANVAS_NUM num)

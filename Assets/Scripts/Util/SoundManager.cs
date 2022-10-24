@@ -11,7 +11,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioClip HitAudio;
 
     public AudioClip[] Bgm; // 0 : 메인로비 , 1 : 보스전 음악 
-    public AudioClip[] Player_Audio; // 0 walk , 1 Hit
+    public AudioClip[] Player_Audio; // 0 walk , run, 1 Hit
 
     public float bgmSave;
     public float effectSave;
