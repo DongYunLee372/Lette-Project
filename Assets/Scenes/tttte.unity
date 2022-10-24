@@ -351,14 +351,14 @@ MonoBehaviour:
   mainlight: {fileID: 1862909377}
   Backgroundsound: 100
   Effectsound: 100
-  Mousesensetive: 100
   Lightcontroll: 100
-  Reversemouse: 1
-  Autoevade: 1
-  Lookon: 1
   GameStart: 0
   ShowOption: 0
   mainoption: 0
+  _reversemouse: 0
+  _autoevad: 0
+  _lookon: 0
+  _mousesensetive: 0
 --- !u!114 &550703636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,6 +1176,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 3039878299523158168, guid: a5dcc9ee26d52ef4bafda2e16bf1678e, type: 3}
   bosshpbar: {fileID: 1986811234096197644, guid: 82e50146481e6b440911b72b4be125dc, type: 3}
+  enemycount: 0
+  deadcount: 0
+  l_enemy: []
+  obj_boss: {fileID: 0}
 --- !u!4 &1841259910
 Transform:
   m_ObjectHideFlags: 0
@@ -1219,7 +1223,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30

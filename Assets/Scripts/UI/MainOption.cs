@@ -31,6 +31,7 @@ public class MainOption : MonoBehaviour
     public bool _autoevad;
     public bool _lookon;
     public float _mousesensetive;
+
     public bool ReverseMouse
     {
         get
@@ -79,6 +80,7 @@ public class MainOption : MonoBehaviour
             m_invoker(value);
         }
     }
+
     private void Update()
     {
         if (mainoption)
