@@ -218,6 +218,7 @@ public class Battle_Character : MonoBehaviour
         if (is_Boss)
         {
             real_AI.isPause = true;
+            animator.Pause();
             cur_Target = GameObject.FindGameObjectWithTag(CharVar.Player_Tag);
         }
     }
@@ -235,6 +236,11 @@ public class Battle_Character : MonoBehaviour
         //effectobj.transform.rotation = transform.rotation;
 
         //Destroy(effectobj, 0.25f);
+    }
+
+    public void Battle_Start()
+    {
+        animator.Resume();
     }
 
     public void Skill_Rand()
@@ -444,10 +450,10 @@ public class Battle_Character : MonoBehaviour
             {
                 Skill_Process(i, 2);
 
-                //if (attack_Info[i].spawn_Animation)
-                //{
-                //    real_AI.isPause = false;
-                //}
+                if (attack_Info[i].spawn_Animation)
+                {
+                    real_AI.isPause = false;
+                }
 
 
                 return;
@@ -648,6 +654,9 @@ public class Battle_Character : MonoBehaviour
             animator.Play("Rush_Atk");
             animator.animator.SetTrigger("Delay_Trg");
         }
+
+        if (Input.GetKeyDown(KeyCode.G))
+            Battle_Start();
 
         Time_Check();
 
