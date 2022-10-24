@@ -6,6 +6,8 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.UI;
 using TMPro;
+using Global_Variable;
+using Canvas_Enum;
 public class GameData_Load :Singleton<GameData_Load>
 {
     List<string> str=new List<string>();
@@ -198,6 +200,8 @@ public class GameData_Load :Singleton<GameData_Load>
                         Debug.Log("캐릭터 생성");
                         AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
                     }
+                    AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("Inven");
+                   UIManager.Instance.Prefabsload("Inven", CANVAS_NUM.player_cavas);
                 }
                 else if(s.prefabsName== "Skeleton")
                 {
@@ -271,6 +275,8 @@ public class GameData_Load :Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.GameMenuEnd:
+                UIManager.Instance.Canvasoff(CANVAS_NUM.player_cavas);
+                UIManager.Instance.Canvasoff(CANVAS_NUM.enemy_canvas);
                 AllanloadScene();
                 break;
 
@@ -630,6 +636,8 @@ public class GameData_Load :Singleton<GameData_Load>
             Debug.Log("나가ㅏㅏ");
             gameLoadingCount = 0;
             ImageCheck = false;
+            UIManager.Instance.Canvason(CANVAS_NUM.player_cavas);
+            UIManager.Instance.Canvason(CANVAS_NUM.enemy_canvas);
             return;
         }
 
