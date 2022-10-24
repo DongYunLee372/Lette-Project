@@ -48,6 +48,11 @@ public class CMoveComponent : BaseComponent
         [SerializeField]
         public float RotMouseSpeed = 10f;
         [SerializeField]
+        public bool RightReverse = false;
+
+
+
+        [SerializeField]
         [Range(0.0f,1.0f)]
         public float RotSpeed = 0.5f;
         [SerializeField]
@@ -728,17 +733,28 @@ public class CMoveComponent : BaseComponent
         }
     }
 
+    public float testyRotPrev;
+    public float testyRotNext;
+
     //1인칭일때회전 3인칭은 놔두고 1인칭 캐릭터만 회전시켜 준다.
     public void RotateFP()
     {
         float xRotPrev = com.FpRoot.localEulerAngles.y;
         float xRotNext = xRotPrev + MouseMove.x * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
+
         //xnext = xRotNext;
         //if (xRotNext > 180f)
         //    xRotNext -= 360f;
 
         float yRotPrev = com.FpCamRig.localEulerAngles.x;
+        testyRotPrev = yRotPrev;
         float yRotNext = yRotPrev + MouseMove.y * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
+        testyRotNext = yRotNext;
+
+        if (yRotNext >= 90)
+            yRotNext = yRotPrev;
+        if (yRotNext <= 10)
+            yRotNext = yRotPrev;
         //ynext = yRotNext;
 
 
@@ -762,17 +778,23 @@ public class CMoveComponent : BaseComponent
         float yRotPrev = com.TpCamRig.localEulerAngles.x;
         float yRotNext = yRotPrev + MouseMove.y * Time.deltaTime * 50f * moveoption.RotMouseSpeed;
 
+        testyRotPrev = yRotPrev;
+        testyRotNext = yRotNext;
 
+        //if (yRotNext >= 80)
+        //    yRotNext = yRotPrev;
+        //if (yRotNext <= 10)
+        //    yRotNext = yRotPrev;
 
         //TpCamRig.localEulerAngles = Vector3.up * xRotNext;
 
         //TpCamRig.localEulerAngles = Vector3.right * yRotNext;
-        
-
-        
 
 
-        
+
+
+
+
         if (yRotNext == 0 && xRotNext == 0)
             return;
 
@@ -948,9 +970,16 @@ public class CMoveComponent : BaseComponent
         com.TpCam.gameObject.SetActive(!curval.IsFPP);
 
         if (curval.IsFPP)
-            startCameraPos = com.FpCam.position - Capsuletopcenter;
+        {
+            startCamPos = com.FpCam.position - com.TpCamRig.position;
+            camDistance = startCamPos.magnitude;
+        }
         else
-            startCameraPos = com.TpCam.position - Capsuletopcenter;
+        {
+            startCamPos = com.TpCam.position - com.TpCamRig.position;
+            camDistance = startCamPos.magnitude;
+        }
+           
 
     }
 
@@ -984,23 +1013,45 @@ public class CMoveComponent : BaseComponent
     }
 
     public bool CameraCollOn = false;
-    private Vector3 startCameraPos;//카메라가 캐릭터로부터 어느정도 거리에 떨어져 있는지
+    public Vector3 startCamPos;//카메라가 캐릭터로부터 어느정도 거리에 떨어져 있는지 초기값
+    public float camDistance;
+
+
     public void CameraCollision()
     {
-        if(CameraCollOn)
+        Quaternion rot = Quaternion.LookRotation(com.TpCamRig.forward, Vector3.up);
+        Vector3 dir = (rot * startCamPos).normalized;
+        //Debug.DrawRay(Capsuletopcenter, dir);
+        Debug.DrawLine(com.TpCamRig.position, com.TpCamRig.position + (dir * camDistance));
+
+        if (CameraCollOn)
         {
-            Vector3 dir = (startCameraPos - Capsuletopcenter).normalized;
-            float distance = dir.magnitude;
+            //캐릭터에서 본래 카메라 위치 방향
+
+            //Vector3 dir = com.TpCamRig.up + (-com.TpCamRig.forward * startCamPos.magnitude);
+            
+            //float distance = dir.magnitude;
+
             Ray ray = new Ray(Capsuletopcenter, dir);
             RaycastHit hit;
-            if(Physics.Raycast(ray, out hit, distance))
+            if(Physics.Raycast(ray, out hit, camDistance))
             {
+                Debug.Log("카메라 충돌");
                 GetCamera().transform.position = hit.point;
+            }
+            else
+            {
+                GetCamera().transform.position = com.TpCamRig.position + (dir * camDistance);
             }
 
         }
-
         
+
+        //Vector3 rot = Quaternion.LookRotation(lookdir, Vector3.up).eulerAngles;
+
+        //Vector3 temp = com.TpCamRig.eulerAngles;
+
+        //com.FpRoot.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
 
     }
 

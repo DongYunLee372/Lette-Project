@@ -7291,6 +7291,7 @@ MonoBehaviour:
     isPause: 0
   is_Boss: 0
   is_Backword: 0
+  init_Speed: 2.5
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   Offset: {x: 0, y: 0, z: 0}
@@ -7307,6 +7308,14 @@ MonoBehaviour:
     next_Time: 0
     isCheck: 0
   normal_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
+  delay_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
+  real_Normal_CoolTime:
     check_Time: 0
     next_Time: 0
     isCheck: 0
@@ -13749,6 +13758,7 @@ MonoBehaviour:
     isPause: 0
   is_Boss: 0
   is_Backword: 0
+  init_Speed: 2.5
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   Offset: {x: 0, y: 0, z: 0}
@@ -13765,6 +13775,14 @@ MonoBehaviour:
     next_Time: 0
     isCheck: 0
   normal_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
+  delay_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
+  real_Normal_CoolTime:
     check_Time: 0
     next_Time: 0
     isCheck: 0
@@ -16804,6 +16822,7 @@ MonoBehaviour:
     isPause: 0
   is_Boss: 0
   is_Backword: 0
+  init_Speed: 2.5
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   Offset: {x: 0, y: 0, z: 0}
@@ -16820,6 +16839,14 @@ MonoBehaviour:
     next_Time: 0
     isCheck: 0
   normal_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
+  delay_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
+  real_Normal_CoolTime:
     check_Time: 0
     next_Time: 0
     isCheck: 0

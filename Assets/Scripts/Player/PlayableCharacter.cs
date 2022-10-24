@@ -60,12 +60,9 @@ public class PlayableCharacter : MonoBehaviour
         }
 
 
-        //CharacterInfoPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUIPanel, UIManager.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
-
         //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
         if(CharacterUIPanel==null)
             AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(Global_Variable.CharVar.CharacterUI, false, true, CeateUI);
-
 
         status.Init(CharacterUIPanel);
         Canvas canvas = FindObjectOfType<Canvas>();
@@ -80,15 +77,10 @@ public class PlayableCharacter : MonoBehaviour
         CharacterUIPanel.transform.localPosition = status.player_UIPos;
         
 
-        if (CharacterUIPanel != null)
+        if (CharacterUIPanel == null)
         {
-            
-            Debug.Log("UI 로드 성공");
-        }
-        else
             Debug.Log("character UI Create Fail");
-
-        //StartCoroutine(MonsterSearchCoroutine());
+        }
     }
 
     public void CeateUI(GameObject obj)
@@ -112,20 +104,10 @@ public class PlayableCharacter : MonoBehaviour
         components[(int)type].enabled = true;
     }
 
-    public void Init()
-    {
-
-    }
-
     public Camera GetCamera()
     {
         CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         return movecom.GetCamera();
-
-        //if (movecom.curval.IsFPP)
-        //    return movecom.com.FpCam.GetComponent<Camera>();
-        //else
-        //    return movecom.com.TpCam.GetComponent<Camera>();
     }
 
     /*플레이어 캐릭터 상호작용 메소드*/
@@ -200,6 +182,7 @@ public class PlayableCharacter : MonoBehaviour
             movecom.eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
                              new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
                              new KeyValuePair<string, AnimationEventSystem.endCallback>("_Dead", Restart));
+
             movecom.com.animator.Play("_Dead");    
 
         }
