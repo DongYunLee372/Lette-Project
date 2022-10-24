@@ -37,7 +37,7 @@ public class EnemyHpbar : MonoBehaviour
         rectHp = GetComponent<RectTransform>();
 
         //asd
-        main = PlayableCharacter.Instance.GetCamera();
+ 
 
 
 
@@ -45,7 +45,8 @@ public class EnemyHpbar : MonoBehaviour
 
     private void Update()
     {
-        if(battle_Character == null)
+        main = PlayableCharacter.Instance.GetCamera();
+        if (battle_Character == null)
         {
             Destroy(my);
         }

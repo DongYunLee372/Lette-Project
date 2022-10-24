@@ -69,6 +69,13 @@ public class OnclickButton : MonoBehaviour
      
         Updatetexts();
     }
+    public void OkButton()
+    {
+       
+        UIManager.Instance.Show(UIname.StartUI);
+        UIManager.Instance.Hide(UIname.MainOption);
+        
+    }
     public void Settingcountup()
     {
         compltesettingcount++;
@@ -81,8 +88,7 @@ public class OnclickButton : MonoBehaviour
         canvas.GetComponent<MainOption>().ShowOption = false;
         canvas.GetComponent<MainOption>().mainoption = false;
         UIManager.Instance.Hide(UIname.StartUI);
-        //UIManager.Instance.Canvason(CANVAS_NUM.player_cavas);
-        //UIManager.Instance.Canvason(CANVAS_NUM.enemy_canvas);
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);

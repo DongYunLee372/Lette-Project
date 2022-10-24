@@ -202,7 +202,9 @@ MonoBehaviour:
   Bgm:
   - {fileID: 8300000, guid: 979cea3f7d0a60e4b99468da709b76fd, type: 3}
   - {fileID: 8300000, guid: b6457c24c7d7c4040869241919fd6d3d, type: 3}
-  Player_Audio: []
+  Player_Audio:
+  - {fileID: 0}
+  - {fileID: 0}
   bgmSave: 0
   effectSave: 0
   option: {fileID: 0}
