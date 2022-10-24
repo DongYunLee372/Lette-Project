@@ -40,7 +40,7 @@ public class Optionsilder : MonoBehaviour
         }
         if (myindex == 2)
         {
-            mycanvas.GetComponent<MainOption>()._mousesensetive=val;
+            mycanvas.GetComponent<MainOption>().MouseSensetive=val;
         }
         if (myindex == 3)
         {
@@ -65,7 +65,7 @@ public class Optionsilder : MonoBehaviour
         }
         if (myindex == 2)
         {
-            slideBar.value = mycanvas.GetComponent<MainOption>()._mousesensetive * 0.01f;
+            slideBar.value = mycanvas.GetComponent<MainOption>().MouseSensetive * 0.01f;
             val = (int)(slideBar.value * 100);
             my.text = val.ToString();
         }
