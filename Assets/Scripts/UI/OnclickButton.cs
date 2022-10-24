@@ -73,7 +73,7 @@ public class OnclickButton : MonoBehaviour
         compltesettingcount++;
     }
     // Start is called before the first frame update
-    public void b_Gamestart()
+    public void b_Gamestart() //게임시작 
     {
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         canvas.GetComponent<MainOption>().GameStart = true;
@@ -86,15 +86,15 @@ public class OnclickButton : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
         SoundManager.Instance.bgmSource.Stop();
-        GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
+       // GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
     }
 
-    public void b_Restart()
+    public void b_Restart() //재시작 
     {
          
     }
 
-    public void b_Exitgame()
+    public void b_Exitgame() //종료 
     {
         GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
     }
@@ -114,17 +114,19 @@ public class OnclickButton : MonoBehaviour
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         canvas.GetComponent<MainOption>().LooKon = !canvas.GetComponent<MainOption>().LooKon;
     }
-    public void Optionokbutton()
+    public void Optionokbutton() //밖에있는 종료버튼 
     {
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
         UIManager.Instance.Show(UIname.StartUI);
         UIManager.Instance.Hide(UIname.MainOption);
         UIManager.Instance.Hide(UIname.IngameOption);
 
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[0]);
-        UIManager.Instance.RemoveAll(CANVAS_NUM.player_cavas);
-        UIManager.Instance.RemoveAll(CANVAS_NUM.enemy_canvas);
+ 
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         canvas.GetComponent<MainOption>().mainoption = true;
+
+    
         //Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
         //KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
         //SaveSystem.Save(character, "save_001");
