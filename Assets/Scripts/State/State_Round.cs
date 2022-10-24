@@ -47,7 +47,9 @@ public class State_Round : State
 
     public override void Run(Battle_Character battle_character)
     {
-        battle_character.animator.Play("Walk");
+        if (battle_character.eventsystem.clips.ContainsKey("Walk"))
+            battle_character.animator.Play("Walk");
+
         //battle_character.transform.LookAt(battle_character.cur_Target.transform);
 
         battle_character.gameObject.transform.DOLookAt(battle_character.cur_Target.transform.position, 0.5f);

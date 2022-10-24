@@ -196,7 +196,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725230786603551695}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.761242, y: 0.761242, z: 0.761242}
   m_ConstrainProportionsScale: 0
@@ -209,7 +209,7 @@ Transform:
   - {fileID: 7466594318322438757}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!95 &491420533911261573
 Animator:
   serializedVersion: 4
@@ -392,6 +392,7 @@ MonoBehaviour:
     isPause: 0
   is_Boss: 0
   is_Backword: 0
+  init_Speed: 2.5
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   Offset: {x: 0, y: 0, z: 0}
@@ -411,6 +412,14 @@ MonoBehaviour:
     check_Time: 0
     next_Time: 0.5
     isCheck: 1
+  delay_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
+  real_Normal_CoolTime:
+    check_Time: 0
+    next_Time: 0
+    isCheck: 0
   testSkillName: 
 --- !u!114 &645484043646585157
 MonoBehaviour:

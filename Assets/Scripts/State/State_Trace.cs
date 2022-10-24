@@ -21,14 +21,28 @@ public class State_Trace : State
             return false;
         }
         // 근접 공격 사거리 체크
-        if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= 5f/*battle_character.mon_Info.P_mon_CloseAtk*/)
-                /*&& battle_character.normal_CoolTime.isCheck*/)
+        if (Trans_List[1] != null) // Round 상태가 있는 경우
         {
-            _State = Trans_List[1]; // state_round로 이동
-            Trans_List[1].State_Initialize(battle_character);
-            battle_character.real_AI.pre_State = this;
-            return false;
+            if ((Vector3.Distance(battle_character.transform.position,
+                    battle_character.cur_Target.transform.position) <= 5f/*battle_character.mon_Info.P_mon_CloseAtk*/)
+                    /*&& battle_character.normal_CoolTime.isCheck*/)
+            {
+                _State = Trans_List[1]; // state_round로 이동
+                Trans_List[1].State_Initialize(battle_character);
+                battle_character.real_AI.pre_State = this;
+                return false;
+            }
+        }
+        else
+        {
+            if ((Vector3.Distance(battle_character.transform.position,
+                    battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk)
+                    && battle_character.real_Normal_CoolTime.isCheck)
+            {
+                _State = Trans_List[0]; // state_Attack 로 이동
+                battle_character.real_AI.pre_State = this;
+                return false;
+            }
         }
 
         // 스킬 공격
@@ -38,7 +52,8 @@ public class State_Trace : State
                  (Vector3.Distance(battle_character.transform.position,
                  battle_character.cur_Target.transform.position) >= int.Parse(special_Range[0]))
                 && battle_character.skill_CoolTime.isCheck
-                && battle_character.delay_CoolTime.isCheck) // 타겟을 공격할 수 있는 사거리 내 진입했다면
+                && battle_character.delay_CoolTime.isCheck
+                && special_Range[0] != special_Range[1]) // 타겟을 공격할 수 있는 사거리 내 진입했다면
         {
             _State = Trans_List[0];
             battle_character.real_AI.pre_State = this;
@@ -85,7 +100,9 @@ public class State_Trace : State
 
     public override void Run(Battle_Character battle_character)
     {
-        battle_character.animator.Play("Walk");
+        if (battle_character.eventsystem.clips.ContainsKey("Walk"))
+            battle_character.animator.Play("Walk");
+
         battle_character.real_AI.navMesh.SetDestination(battle_character.cur_Target.transform.position);
     }
 

@@ -56,16 +56,33 @@ public class State_Attack : State
         }
 
         // 근접 공격 사거리 체크
-        if (
-            (Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= 6f/*battle_character.mon_Info.P_mon_CloseAtk*/)
-                &&
-                !battle_character.isAttack_Run
-                && battle_character.normal_CoolTime.isCheck) // bool 변수를 추가해야함 일반공격
+        if (battle_character.is_Boss)
         {
-            judge_logic = Enemy_Attack_Logic.Melee_Attack;
-            _State = this;
-            return true;
+            if (
+                (Vector3.Distance(battle_character.transform.position,
+                    battle_character.cur_Target.transform.position) <= 6f/*battle_character.mon_Info.P_mon_CloseAtk*/)
+                    &&
+                    !battle_character.isAttack_Run
+                    && battle_character.normal_CoolTime.isCheck) // bool 변수를 추가해야함 일반공격
+            {
+                judge_logic = Enemy_Attack_Logic.Melee_Attack;
+                _State = this;
+                return true;
+            }
+        }
+        else
+        {
+            if (
+                (Vector3.Distance(battle_character.transform.position,
+                    battle_character.cur_Target.transform.position) <= battle_character.mon_Info.P_mon_CloseAtk)
+                    &&
+                    !battle_character.isAttack_Run
+                    && battle_character.real_Normal_CoolTime.isCheck) // bool 변수를 추가해야함 일반공격
+            {
+                judge_logic = Enemy_Attack_Logic.Melee_Attack;
+                _State = this;
+                return true;
+            }
         }
 
         // 스킬
@@ -76,7 +93,7 @@ public class State_Attack : State
                battle_character.cur_Target.transform.position) >= int.Parse(special_Range[0]))
                &&
                !battle_character.isAttack_Run && battle_character.skill_CoolTime.isCheck
-               && battle_character.delay_CoolTime.isCheck)
+               && battle_character.delay_CoolTime.isCheck && special_Range[0] != special_Range[1])
         {
             judge_logic = Enemy_Attack_Logic.Skill_Using;
             _State = this;

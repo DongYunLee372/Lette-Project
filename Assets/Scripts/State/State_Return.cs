@@ -25,7 +25,9 @@ public class State_Return : State
 
     public override void Run(Battle_Character battle_character)
     {
-        battle_character.animator.Play("Walk"); // 애니메이션 시스템을 통해 애니메이션 재생
+        if (battle_character.eventsystem.clips.ContainsKey("Walk"))
+            battle_character.animator.Play("Walk"); // 애니메이션 시스템을 통해 애니메이션 재생
+
         battle_character.real_AI.navMesh.SetDestination(battle_character.return_Pos);
     }
 }

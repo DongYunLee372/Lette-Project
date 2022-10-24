@@ -568,8 +568,9 @@ public class Battle_Character : MonoBehaviour
     public CoolTime stop_CoolTime;  // 정지 방지
     public CoolTime skill_CoolTime;  // 스킬 쿨타임 
     public CoolTime long_CoolTime;  // 원거리 공격 쿨타임
-    public CoolTime normal_CoolTime;  // 공격간 최소 쿨타임
+    public CoolTime normal_CoolTime;  // 탐색 후 공격간 최소 쿨타임
     public CoolTime delay_CoolTime;  // 공격간 최소 쿨타임
+    public CoolTime real_Normal_CoolTime;  // 일반 공격간 최소 쿨타임
 
     public string testSkillName;
 
@@ -583,6 +584,9 @@ public class Battle_Character : MonoBehaviour
 
         delay_CoolTime.isCheck = false;
         delay_CoolTime.check_Time = 0f;
+
+        real_Normal_CoolTime.isCheck = false;
+        real_Normal_CoolTime.check_Time = 0f;
     }
 
     void Time_Check()
@@ -593,6 +597,7 @@ public class Battle_Character : MonoBehaviour
         long_CoolTime.check_Time += Time.deltaTime;
         normal_CoolTime.check_Time += Time.deltaTime;
         delay_CoolTime.check_Time += Time.deltaTime;
+        real_Normal_CoolTime.check_Time += Time.deltaTime;
 
         if (stop_CoolTime.check_Time > stop_CoolTime.next_Time)
         {
@@ -618,6 +623,12 @@ public class Battle_Character : MonoBehaviour
         {
             delay_CoolTime.check_Time = 0f;
             delay_CoolTime.isCheck = true;
+        }
+
+        if (real_Normal_CoolTime.check_Time > real_Normal_CoolTime.next_Time)
+        {
+            real_Normal_CoolTime.check_Time = 0f;
+            real_Normal_CoolTime.isCheck = true;
         }
 
         //if (normal_CoolTime.check_Time > normal_CoolTime.next_Time)
