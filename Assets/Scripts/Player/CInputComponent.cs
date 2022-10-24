@@ -89,11 +89,11 @@ public class CInputComponent : BaseComponent
 
         //}
 
-        //GameObject a = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
-        //if (a.GetComponent<MainOption>().ShowOption)
-        //{
-        //    return;
-        //}
+        GameObject a = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
+        if (a.GetComponent<MainOption>().ShowOption)
+        {
+            return;
+        }
 
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));

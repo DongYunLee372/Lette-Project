@@ -93,8 +93,8 @@ public class PlayableCharacter : MonoBehaviour
         GameObject tempui = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
         MainOption mainoption = tempui.GetComponent<MainOption>();
         mainoption.r_invoker = SetReverseMouseRot;
-        mainoption.a_invoker = SetOutoFocus;
-        mainoption.l_invoker = SetCameraColl;
+        mainoption.a_invoker = SetCameraColl;
+        mainoption.l_invoker = SetOutoFocus;
         mainoption.m_invoker = SetMouseSpeed;
 
     }
@@ -381,13 +381,20 @@ public class PlayableCharacter : MonoBehaviour
                             CurFocusedIndex = 0;
                             continue;
                         }
+                        else
+                        {
+                            IsFocusingOn = false;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("[focus]탐색결과 몬스터 존재 X");
+                        IsFocusingOn = false;
+                        CurFocusedIndex = 0;
+                        CurFocusedMonster = null;
+                        yield break;
                     }
 
-                    Debug.Log("[focus]탐색결과 몬스터 존재 X");
-                    IsFocusingOn = false;
-                    CurFocusedIndex = 0;
-                    CurFocusedMonster = null;
-                    yield break;
                 }
                 else
                 {

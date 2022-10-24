@@ -875,11 +875,12 @@ public class CMoveComponent : BaseComponent
         if (scroll >=0)
             return;
         Camera curcam;
-        
+        Camera cCam = null;
 
         if(curval.IsFPP)
         {
             curcam = com.FpCam.GetComponent<Camera>();
+           
             if (curcam.fieldOfView <= moveoption.FPMaxZoomIn)
             {
                 curcam.fieldOfView = moveoption.FPMaxZoomIn;
@@ -892,10 +893,12 @@ public class CMoveComponent : BaseComponent
         else
         {
             curcam = com.TpCam.GetComponent<Camera>();
+            cCam = com.TpCam.Find("CCam").GetComponent<Camera>();
 
             if (curcam.fieldOfView <= moveoption.TPMaxZoomIn)
             {
                 curcam.fieldOfView = moveoption.TPMaxZoomIn;
+                cCam.fieldOfView = moveoption.TPMaxZoomIn;
                 return;
             }
 
@@ -905,7 +908,8 @@ public class CMoveComponent : BaseComponent
         scroll = scroll * moveoption.ScrollSpeed * Time.deltaTime;
 
         curcam.fieldOfView += scroll;
-
+        if (cCam != null)
+            cCam.fieldOfView += scroll;
     }
 
     //줌 아웃
@@ -915,9 +919,12 @@ public class CMoveComponent : BaseComponent
             return;
 
         Camera curcam;
+        Camera cCam = null;
+
         if (curval.IsFPP)
         {
             curcam = com.FpCam.GetComponent<Camera>();
+
             if (curcam.fieldOfView >= moveoption.FPMaxZoomOut)
             {
                 curcam.fieldOfView = moveoption.FPMaxZoomOut;
@@ -927,9 +934,12 @@ public class CMoveComponent : BaseComponent
         else
         {
             curcam = com.TpCam.GetComponent<Camera>();
+            cCam = com.TpCam.Find("CCam").GetComponent<Camera>();
+
             if (curcam.fieldOfView >= moveoption.TPMaxZoomOut)
             {
                 curcam.fieldOfView = moveoption.TPMaxZoomOut;
+                cCam.fieldOfView = moveoption.TPMaxZoomIn;
                 return;
             }
         }
@@ -937,7 +947,8 @@ public class CMoveComponent : BaseComponent
         scroll = scroll * moveoption.ScrollSpeed * Time.deltaTime;
 
         curcam.fieldOfView += scroll;
-
+        if(cCam!=null)
+            cCam.fieldOfView += scroll;
     }
 
     public void Focusing()
