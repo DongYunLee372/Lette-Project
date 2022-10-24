@@ -24,6 +24,7 @@ public class UIManager : Singleton<UIManager>
     //    enemy_canvas,
     //    start_canvas
     //}
+      
     public List<GameObject> Findobj_List(string path)
     {
         List<GameObject> test = new List<GameObject>();
@@ -171,21 +172,15 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public void RemoveAll(CANVAS_NUM canvasnum)
+    public void RemoveAll( )
     {
-        var temp = canvas[(int)canvasnum].GetComponentsInChildren<GameObject>();
         for (int i = 0; i < info.Count; i++)
         {
-            for(int j=0; j < temp.Length; j++)
-            {
-                if( temp[j] == info[i].obj )
-                {
                     Destroy(info[i].obj);
                     info.Remove(info[i]);
                     i = 0;
-                    continue;
-                }
-            }      
+            Debug.Log(info[i].obj.name);
+            continue;
         }
     }
     public void Canvasoff(CANVAS_NUM num)

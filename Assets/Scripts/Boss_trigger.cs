@@ -5,26 +5,24 @@ using UnityEngine;
 public class Boss_trigger : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public bool boosclear = false;
   
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if(boosclear)
         {
-            if (other.gameObject.transform.position.z > this.gameObject.transform.position.z)
+            this.gameObject.GetComponent<MeshCollider>().isTrigger = true;
+        }
+        if (!boosclear)
+        {
+            if (other.gameObject.tag == "Player")
             {
-                this.gameObject.GetComponent<MeshCollider>().isTrigger = false;
-                CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().real_AI.isPause = false;
+                if (other.gameObject.transform.position.z < this.gameObject.transform.position.z)
+                {
+                    this.gameObject.GetComponent<MeshCollider>().isTrigger = false;
+                    UIManager.Instance.Show("Boss_HP");
+                    CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().Battle_Start();
+                }
             }
         }
     }

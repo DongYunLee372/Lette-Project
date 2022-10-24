@@ -476,6 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048a271b169e84c489b1699fc57caacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas_: {fileID: 1772133562}
   mainlight: {fileID: 544114819}
   Backgroundsound: 100
   Effectsound: 100

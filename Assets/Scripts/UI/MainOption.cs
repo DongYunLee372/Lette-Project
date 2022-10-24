@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class MainOption : MonoBehaviour
 {
+
+    public GameObject Canvas_;
     public Light mainlight;
     public float Backgroundsound;
     public float Effectsound;
@@ -84,7 +86,10 @@ public class MainOption : MonoBehaviour
     private void Update()
     {
         if (mainoption)
+        {
+            Canvas_.GetComponent<TestOnoff>().ShowImage(false);
             return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Ingame();
@@ -125,6 +130,7 @@ public class MainOption : MonoBehaviour
     IEnumerator UI()
     {
         yield return new WaitForSeconds(2f);
+        UIManager.Instance.Remove("Inven");
         UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas);
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[0]);
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop=true;
