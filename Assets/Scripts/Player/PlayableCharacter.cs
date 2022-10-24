@@ -379,7 +379,7 @@ public class PlayableCharacter : MonoBehaviour
                         if(_monsterObject.Count>0)
                         {
                             CurFocusedIndex = 0;
-                            continue;
+                            yield return null;
                         }
                         else
                         {
