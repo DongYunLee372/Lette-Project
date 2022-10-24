@@ -248,6 +248,7 @@ public class GameData_Load :Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.Stage2:
+                UIManager.Instance.Hide("Boss_HP");
                 AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage2;
                 var charatcter = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
@@ -629,6 +630,7 @@ public class GameData_Load :Singleton<GameData_Load>
 
                 case Scenes_Stage.Stage2:
                     StartCoroutine(Load_Boss());
+                    UIManager.Instance.Hide("Boss_HP");
                     break;
             }
             //로딩
