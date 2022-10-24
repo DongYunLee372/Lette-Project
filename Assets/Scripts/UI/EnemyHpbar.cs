@@ -27,6 +27,8 @@ public class EnemyHpbar : MonoBehaviour
     public EnemyHpbar MyHpbar;
     public Battle_Character battle_Character;
     public GameObject battle_character_obj;
+
+    public GameObject my;
     void Start()
     {
         canvas = GetComponentInParent<Canvas>();
@@ -43,6 +45,10 @@ public class EnemyHpbar : MonoBehaviour
 
     private void Update()
     {
+        if(battle_Character == null)
+        {
+            Destroy(my);
+        }
         //main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
         var screenPos = main.WorldToScreenPoint(enemyTr.position + offset); // 몬스터의 월드 3d좌표를 스크린좌표로 변환
         if (screenPos.z < 0.0f)

@@ -80,12 +80,13 @@ public class OnclickButton : MonoBehaviour
         canvas.GetComponent<MainOption>().ShowOption = false;
         canvas.GetComponent<MainOption>().mainoption = false;
         UIManager.Instance.Hide(UIname.StartUI);
-
+        //UIManager.Instance.Canvason(CANVAS_NUM.player_cavas);
+        //UIManager.Instance.Canvason(CANVAS_NUM.enemy_canvas);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
         SoundManager.Instance.bgmSource.Stop();
-        Debug.Log("게임시작");
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
     }
 
     public void b_Restart()
@@ -95,7 +96,7 @@ public class OnclickButton : MonoBehaviour
 
     public void b_Exitgame()
     {
-
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
     }
 
     public void b_Reverse()
@@ -119,6 +120,9 @@ public class OnclickButton : MonoBehaviour
         UIManager.Instance.Hide(UIname.MainOption);
         UIManager.Instance.Hide(UIname.IngameOption);
 
+        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[0]);
+        UIManager.Instance.RemoveAll(CANVAS_NUM.player_cavas);
+        UIManager.Instance.RemoveAll(CANVAS_NUM.enemy_canvas);
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         canvas.GetComponent<MainOption>().mainoption = true;
         //Save_Optiondata character = new Save_Optiondata(KeySetting.keys[(KeyAction)0], KeySetting.keys[(KeyAction)1], KeySetting.keys[(KeyAction)2], KeySetting.keys[(KeyAction)3],
@@ -139,7 +143,6 @@ public class OnclickButton : MonoBehaviour
         UIManager.Instance.Hide(UIname.StartUI); //메인 UI는 HIDE시킨다 
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         canvas.GetComponent<MainOption>().GameStart = false;
-        canvas.GetComponent<MainOption>().mainoption = false;
         canvas.GetComponent<MainOption>().mainoption = true;
         buttoncheck = true;
     }

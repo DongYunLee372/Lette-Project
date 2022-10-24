@@ -101,3 +101,4 @@ MonoBehaviour:
   MyHpbar: {fileID: 0}
   battle_Character: {fileID: 0}
   battle_character_obj: {fileID: 0}
+  my: {fileID: 3039878299523158168}

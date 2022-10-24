@@ -170,6 +170,24 @@ public class UIManager : Singleton<UIManager>
             }
         }
     }
+
+    public void RemoveAll(CANVAS_NUM canvasnum)
+    {
+        var temp = canvas[(int)canvasnum].GetComponentsInChildren<GameObject>();
+        for (int i = 0; i < info.Count; i++)
+        {
+            for(int j=0; j < temp.Length; j++)
+            {
+                if( temp[j] == info[i].obj )
+                {
+                    Destroy(info[i].obj);
+                    info.Remove(info[i]);
+                    i = 0;
+                    continue;
+                }
+            }      
+        }
+    }
     public void Canvasoff(CANVAS_NUM num)
     {
         canvas[(int)num].SetActive(false);
@@ -194,10 +212,11 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Boss_HP"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("FriendPanel"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Hpbar"));
-     
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("PlayerUIPanel"));
         
+
     }
-    
+
     // Update is called once per frame
 
 }
