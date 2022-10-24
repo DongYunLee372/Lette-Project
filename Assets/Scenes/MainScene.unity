@@ -747,6 +747,7 @@ MonoBehaviour:
   skybox_Mat:
   - {fileID: 2100000, guid: 85bdd529a7fbcc344b810462de0c2b46, type: 2}
   - {fileID: 2100000, guid: cb0b68e1e2df54b41b55bcef0d22e621, type: 2}
+  - {fileID: 2100000, guid: 4c12da8dc5dced74e838120da11725a0, type: 2}
 --- !u!4 &1421700982
 Transform:
   m_ObjectHideFlags: 0
