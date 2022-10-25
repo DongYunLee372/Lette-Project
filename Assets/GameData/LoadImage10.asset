@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e64bf2d31a21c40b47cc699f78eb4d, type: 3}
   m_Name: LoadImage10
   m_EditorClassIdentifier: 
-  imgae_Name: Loading_Treasure_
+  imgae_Name: Loading_Treasure
   LoadImageNameList:
   - "\uC0C1\uC790\uC548\uC5D0 \uC788\uB294 \uB9CE\uC740 \uBCF4\uBB3C\uC740 \uC8FC\uBCC0\uC744
     \uBE5B\uB0BC\uC815\uB3C4\uB85C \uCC2C\uB780\uD558\uAC8C \uBE5B\uC744 \uB0B8\uB2E4."

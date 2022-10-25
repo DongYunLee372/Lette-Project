@@ -196,7 +196,7 @@ public class Battle_Character : MonoBehaviour
     {
         return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         destination_Pos = transform.position;
-
+        //SoundManager.Instance.
         //attack_Collider = GetComponentInChildren<Enemy_Weapon>()?.gameObject;
 
         animator = GetComponentInChildren<AnimationController>();
@@ -242,6 +242,18 @@ public class Battle_Character : MonoBehaviour
     public void Battle_Start()
     {
         animator.Resume();
+    }
+
+    public void Sound_Start(string soundname)
+    {
+        if(soundname == "Walk")
+        {
+
+        }
+        else if(soundname == "attack")
+        {
+
+        }
     }
 
     public void Skill_Rand()
