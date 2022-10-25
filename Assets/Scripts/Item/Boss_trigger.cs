@@ -6,6 +6,7 @@ public class Boss_trigger : MonoBehaviour
 {
     // Start is called before the first frame update
     public bool boosclear = false;
+    public Camera cutscene_camera;
 
     private void Update()
     {
@@ -32,6 +33,7 @@ public class Boss_trigger : MonoBehaviour
                     CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().Battle_Start();
                     SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[1]);
                     SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
+                    cutscene_camera.GetComponent<Cinema_Cam>().CamStart();
                     // Cinema_Cam.Instance.CamStart();
                 }
             }

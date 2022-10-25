@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boosclear: 0
+  cutscene_camera: {fileID: 1043330372}
 --- !u!64 &539029486
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -454,6 +455,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d631c8f32f94374b95283fd04161d26, type: 3}
+--- !u!20 &1043330372 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8220078707218391570, guid: 9d631c8f32f94374b95283fd04161d26, type: 3}
+  m_PrefabInstance: {fileID: 1043330371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1180432270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -578,6 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boosclear: 0
+  cutscene_camera: {fileID: 0}
 --- !u!64 &1345495823
 MeshCollider:
   m_ObjectHideFlags: 0
