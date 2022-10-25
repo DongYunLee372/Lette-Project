@@ -534,6 +534,10 @@ public class GameData_Load : Singleton<GameData_Load>
         }
         if (loadingDatas[0].scripts!=null)
         {
+            if(loadingDatas[0].ImageName==null)
+            {
+                LoadingText_Ins.transform.position = parentPos.transform.position;
+            }
             LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = loadingDatas[0].scripts;
         }
         gameLoadingCount = 1;
@@ -650,9 +654,15 @@ public class GameData_Load : Singleton<GameData_Load>
                     Color color = LoadingImgae.GetComponent<Image>().color;
                     color.a = 0;
                     LoadingImgae.GetComponent<Image>().color = color;
+                    LoadingText_Ins.transform.position = GameMG.Instance.Canvas.GetComponent<RectTransform>().position;
+                }
+                else
+                {
+                    RectTransform parentPos = GameMG.Instance.Canvas.GetComponent<RectTransform>();
+                    LoadingText_Ins.transform.position = new Vector3(parentPos.position.x, parentPos.position.y - 250, parentPos.position.z);
                 }
                 // LoadingImgae.GetComponent<Image>().color = new Color(0, 0, 0, 0);
-                 LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = temp[gameLoadingCount].scripts;
+                LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = temp[gameLoadingCount].scripts;
                   Debug.Log("data출력대사 " + temp[gameLoadingCount].scripts);
             }
             //  gameLoadingCount++;
