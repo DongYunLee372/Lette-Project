@@ -248,7 +248,7 @@ public class PlayableCharacter : MonoBehaviour
     public void Damaged(float damage,Vector3 hitpoint, float Groggy)
     {
         //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        EffectManager.Instance.InstantiateEffect(HitEffectAdressableName, hitpoint);
+        EffectManager.Instance.InstantiateEffect(HitEffect, hitpoint);
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;
         

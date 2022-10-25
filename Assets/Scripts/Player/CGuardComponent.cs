@@ -31,7 +31,7 @@ public class CGuardComponent : BaseComponent
     public IEnumerator stuncoroutine;
     public delegate void Invoker();
 
-    float hitangle;
+    public float hitangle;
 
     // Start is called before the first frame update
     void Start()
