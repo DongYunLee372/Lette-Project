@@ -168,7 +168,6 @@ public class CAttackComponent : BaseComponent
 
     public void MonsterAttack(Collider collision)
     {
-
         if (!curval.IsAttacking)
             return;
 
@@ -178,6 +177,10 @@ public class CAttackComponent : BaseComponent
             collision.GetComponent<Battle_Character>().Damaged((int)AttackInfos[CurAttackNum].damage, this.transform.position);
             //Debug.Log("공격 들어옴");
         }
+        //if(collision.gameObject.tag == "Box")
+        //{
+
+        //}
 
     }
 

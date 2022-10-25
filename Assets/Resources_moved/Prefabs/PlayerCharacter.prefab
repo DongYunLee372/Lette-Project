@@ -1267,7 +1267,7 @@ GameObject:
   - component: {fileID: 4676119379904186307}
   m_Layer: 13
   m_Name: Object003
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2764,6 +2764,7 @@ MonoBehaviour:
   GuardClip: {fileID: 7400000, guid: a2ce05986eb5d08499f73d9ba82bc759, type: 2}
   GuardEffect: {fileID: 167046, guid: 6062cf74dd326b146b31d28120ade333, type: 3}
   guardeffectpos: {fileID: 489346842}
+  GuardAngle: 0
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
@@ -2791,6 +2792,7 @@ MonoBehaviour:
     skill02: 50
     skill03: 51
     Tab: 113
+    Interaction: 101
   movecom: {fileID: 0}
   attackcom: {fileID: 0}
   guardcom: {fileID: 0}

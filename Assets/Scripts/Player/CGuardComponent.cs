@@ -20,6 +20,8 @@ public class CGuardComponent : BaseComponent
     public GameObject GuardEffect;
     public Transform guardeffectpos;
 
+    public float GuardAngle;
+
     [Header("============Cur Values============")]
     public int CurGuardGauge;
     public bool nowGuard;
@@ -126,9 +128,34 @@ public class CGuardComponent : BaseComponent
         //    PlayableCharacter.Instance.Damaged(damage, hitpoint);
         //}
 
-        //스테미나에 따라서
+        //피격위치가 캐릭터 정면 일정 각도 안에 있을때만 가드 성공
+        
+        
+        Vector3 front = movecom.com.FpRoot.forward;
+        front.y = 0;
+        front.Normalize();
 
-        PlayableCharacter.Instance.Damaged(damage, hitpoint,Groggy);
+        Vector3 hit = hitpoint.normalized;
+        hit.y = 0;
+        hit.Normalize();
+
+        float hitangle = Vector3.Angle(front, hit);
+
+
+
+
+        //스테미나에 따라서 가드 성공 실패 학인
+        if (PlayableCharacter.Instance.status.CurStamina>=10)
+        {
+            PlayableCharacter.Instance.status.StaminaDown(10);
+            GuardStun();
+        }
+        else
+        {
+            PlayableCharacter.Instance.Damaged(damage, hitpoint, Groggy);
+        }
+        
+        
     }
 
 
@@ -144,7 +171,7 @@ public class CGuardComponent : BaseComponent
 
     public void StunEnd()
     {
-        Debug.Log("스턴끝 들어옴");
+        //Debug.Log("스턴끝 들어옴");
         CharacterStateMachine.eCharacterState prestate = CharacterStateMachine.Instance.GetPreState();
         CharacterStateMachine.Instance.SetState(prestate);
         //if(prestate == CharacterStateMachine.eCharacterState.Guard)
