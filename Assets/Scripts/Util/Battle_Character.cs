@@ -310,7 +310,9 @@ public class Battle_Character : MonoBehaviour
 
                 // 타겟을 바라보고 애니메이션 재생
                 //gameObject.transform.LookAt(cur_Target.transform);
+
                 gameObject.transform.DOLookAt(cur_Target.transform.position, 0.1f);
+
                 // 선딜이 있다면
                 if (attack_Info[i].pre_Delay != 0)
                 {
@@ -491,7 +493,10 @@ public class Battle_Character : MonoBehaviour
             real_AI.navMesh.speed = attack_Info[info_num].jump_Speed[index];
             real_AI.navMesh.acceleration = attack_Info[info_num].jump_Acc[index];
 
-            StartCoroutine(nav_Coroutine(init_Speed, 8f));
+            if (attack_Info[info_num].jump_Angular[index] == -1)
+                StartCoroutine(nav_Coroutine(init_Speed, 8f, true));
+            else
+                StartCoroutine(nav_Coroutine(init_Speed, 8f, false));
         }
 
         if (attack_Info[info_num].missile != null && attack_Info[info_num].missile_Index == index)
@@ -516,16 +521,19 @@ public class Battle_Character : MonoBehaviour
         }
     }
 
-    public IEnumerator nav_Coroutine(float speed, float acc)
+    public IEnumerator nav_Coroutine(float speed, float acc, bool angle)
     {
         yield return new WaitForSeconds(0.2f);
 
         real_AI.navMesh.speed = speed;
         real_AI.navMesh.acceleration = acc;
 
-        yield return new WaitForSeconds(1.5f);
+        if (angle == true)
+        {
+            yield return new WaitForSeconds(1.5f);
 
-        real_AI.navMesh.angularSpeed = 120f;
+            real_AI.navMesh.angularSpeed = 120f;
+        }
     }
 
     IEnumerator eff_Coroutine(float sec, GameObject eff, Transform pos)
@@ -582,6 +590,9 @@ public class Battle_Character : MonoBehaviour
 
     public void Check_Reset()
     {
+        stop_CoolTime.isCheck = false;
+        stop_CoolTime.check_Time = 0f;
+
         long_CoolTime.isCheck = false;
         long_CoolTime.check_Time = 0f;
 
@@ -651,12 +662,14 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("ㅇㅇ");
-            animator.Play("Rush_Atk");
+            animator.Play("First_Atk");
             animator.animator.SetTrigger("Delay_Trg");
         }
 
         if (Input.GetKeyDown(KeyCode.G))
-            Battle_Start();
+        {
+            cur_HP -= 100;
+        }
 
         Time_Check();
 
