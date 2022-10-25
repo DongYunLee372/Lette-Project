@@ -87,8 +87,6 @@ public class PlayableCharacter : MonoBehaviour
         //    canvas = obj.GetComponent<Canvas>();
         //}
 
-        //CharacterUIPanel.transform.parent = canvas.transform;
-
         
         CharacterUIPanel.transform.localPosition = status.player_UIPos;
 
