@@ -44,15 +44,13 @@ public class PlayableCharacter : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-    }
 
-    /*초기화*/
-    private void Start()
-    {
-        //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
-        //Debug.Log($"{CharacterDBInfo.P_player_HP}");
         
 
+    }
+
+    public bool ComponentInit()
+    {
         BaseComponent[] temp = GetComponentsInChildren<BaseComponent>();
         status = GetComponent<BaseStatus>();
 
@@ -61,6 +59,29 @@ public class PlayableCharacter : MonoBehaviour
         {
             if (a.gameObject.activeSelf)
                 components[(int)a.p_comtype] = a;
+        }
+
+        if (components[1] == null)
+            return false;
+
+        return true;
+    }
+
+
+
+    /*초기화*/
+    private void Start()
+    {
+        //yield return new WaitForSeconds(0.01f);
+
+        //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
+        //Debug.Log($"{CharacterDBInfo.P_player_HP}");
+
+        ComponentInit();
+
+        if (components[1]==null)
+        {
+            int ddfe = 0;
         }
 
         movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
@@ -137,22 +158,40 @@ public class PlayableCharacter : MonoBehaviour
     /*MyComponent 관련 메소드*/
     public BaseComponent GetMyComponent(CharEnumTypes.eComponentTypes type)
     {
+        if(components[(int)type] ==null)
+        {
+            ComponentInit();
+        }
+
         return components[(int)type];
     }
 
     public void InActiveMyComponent(CharEnumTypes.eComponentTypes type)
     {
+        if (components[(int)type] == null)
+        {
+            ComponentInit();
+        }
+
         components[(int)type].enabled = false;
     }
 
     public void ActiveMyComponent(CharEnumTypes.eComponentTypes type)
     {
+        if (components[(int)type] == null)
+        {
+            ComponentInit();
+        }
+
         components[(int)type].enabled = true;
     }
 
     public Camera GetCamera()
     {
         //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        if(movecom==null)
+            movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+
         return movecom.GetCamera();
     }
 
@@ -319,7 +358,7 @@ public class PlayableCharacter : MonoBehaviour
         RaycastHit hit;
         while (true)
         {
-            Debug.Log("[focus]몬스터 탐지 시작");
+            //Debug.Log("[focus]몬스터 탐지 시작");
             tempViewMonster.Clear();
 
             temp = FindObjectsOfType<Battle_Character>();
@@ -330,7 +369,7 @@ public class PlayableCharacter : MonoBehaviour
                 Vector3 screenPos = GetCamera().WorldToViewportPoint(temp[i].gameObject.transform.position);
                 if (screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1 && screenPos.z >= 0)
                 {
-                    Debug.Log(temp[i].gameObject.name + "[focus]화면에 탐지");
+                    //Debug.Log(temp[i].gameObject.name + "[focus]화면에 탐지");
                     Battle_Character_Info info = new Battle_Character_Info(temp[i]);
                     tempViewMonster.Add(info);
                 }
@@ -346,7 +385,7 @@ public class PlayableCharacter : MonoBehaviour
                     //if(!hit.transform.CompareTag("Enemy"))
                     if (hit.collider == null)
                     {
-                        Debug.Log("[focus]몬스터 탐색 지워져버림");
+                        //Debug.Log("[focus]몬스터 탐색 지워져버림");
                         tempViewMonster.RemoveAt(i);
                         //tempViewMonster[i]._isBlocked = true;
                         //tempViewMonster[i]._distance = 0;
@@ -354,7 +393,7 @@ public class PlayableCharacter : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("[focus]몬스터 탐색 안지워짐");
+                        //Debug.Log("[focus]몬스터 탐색 안지워짐");
                         tempViewMonster[i]._distance = hit.distance;
                     }
                 }
@@ -395,7 +434,7 @@ public class PlayableCharacter : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("[focus]탐색결과 몬스터 존재 X");
+                        //Debug.Log("[focus]탐색결과 몬스터 존재 X");
                         IsFocusingOn = false;
                         CurFocusedIndex = 0;
                         CurFocusedMonster = null;
@@ -437,7 +476,7 @@ public class PlayableCharacter : MonoBehaviour
                 IsFocusingOn = true;
                 CurFocusedIndex = 0;
                 CurFocusedMonster = _monsterObject[0];
-                Debug.Log(CurFocusedMonster._monster.gameObject.name + "포커싱 시작");
+                //Debug.Log(CurFocusedMonster._monster.gameObject.name + "포커싱 시작");
             }
         }
         else
@@ -446,7 +485,7 @@ public class PlayableCharacter : MonoBehaviour
             {
                 if (CurFocusedIndex == _monsterObject.Count - 1)
                 {
-                    Debug.Log("[focus]포커싱 꺼짐");
+                    //Debug.Log("[focus]포커싱 꺼짐");
                     IsFocusingOn = false;
                     StopCoroutine(MonsterSearchCor);
                     MonsterSearchCor = null;

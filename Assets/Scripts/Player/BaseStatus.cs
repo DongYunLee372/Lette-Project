@@ -195,15 +195,16 @@ public class BaseStatus:MonoBehaviour
         set
         {
             curHP = value;
-            if (curHP > MaxHP)
+            if (curHP >= MaxHP)
             {
                 curHP = MaxHP;
             }
-            if (curHP < 0)
+            if (curHP <= 0)
             {
                 curHP = 0;
             }
-            uiPanel.HPBar.SetCurValue(value);
+
+            uiPanel.HPBar.SetCurValue(curHP);
         }
     }
 
@@ -262,11 +263,11 @@ public class BaseStatus:MonoBehaviour
 
 
             curGroggy = value;
-            if (curGroggy > MaxGroggy)
+            if (curGroggy >= MaxGroggy)
             {
                 curGroggy = MaxGroggy;
             }
-            if(curGroggy<0)
+            if (curGroggy <= 0)
             {
                 curGroggy = 0;
             }
@@ -364,11 +365,11 @@ public class BaseStatus:MonoBehaviour
             //값을 변경해주고
             curStamina = value;
 
-            if (curStamina > MaxStamina)
+            if (curStamina >= MaxStamina)
             {
                 curStamina = MaxStamina;
             }
-            if (curStamina < 0)
+            if (curStamina <= 0)
             {
                 curStamina = 0;
             }

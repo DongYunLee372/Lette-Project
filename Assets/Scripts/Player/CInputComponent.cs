@@ -6,8 +6,6 @@ using UnityEngine;
 /*유저의 입력을 처리한다.*/
 public class CInputComponent : BaseComponent
 {
-    
-
     //캐릭터의 모든 컴포넌트를 관리하기 쉽게 하기 위해 basecomponent를 상속받은 스크립트들을 componentmanager에서 관리한다.
     public override void InitComtype()
     {
@@ -78,6 +76,10 @@ public class CInputComponent : BaseComponent
 
         float v = 0;
         float h = 0;
+        if(movecom==null)
+        {
+            int abe = 0;
+        }
         movecom.curval.IsMoving = false;
 
 
