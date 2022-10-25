@@ -699,6 +699,11 @@ public class GameData_Load : Singleton<GameData_Load>
                     StartCoroutine(Load_Boss());
                     UIManager.Instance.Hide("Boss_HP");
                     break;
+
+                case Scenes_Stage.BossEnd:
+                    StartCoroutine( onLoadingScene());
+
+                    break;
             }
             //로딩
 
@@ -715,6 +720,15 @@ public class GameData_Load : Singleton<GameData_Load>
 
     }
 
+
+    IEnumerator onLoadingScene()
+    {
+        yield return new WaitForSeconds (2f);
+        UIManager.Instance.RemoveAll();
+        Canvas_.GetComponent<TestOnoff>().ShowImage(false);
+        UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
+
+    }
 
     //이미지 보여주고 씬 교체
     IEnumerator LoadImageChange(List<string> keylist,GameObject LoadingImgae, Scenes_Stage scenes_Stage)
