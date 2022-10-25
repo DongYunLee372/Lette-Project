@@ -152,6 +152,7 @@ public class CGuardComponent : BaseComponent
         }
         else
         {
+            PlayableCharacter.Instance.status.StaminaDown(10);
             PlayableCharacter.Instance.Damaged(damage, hitpoint, Groggy);
         }
         
