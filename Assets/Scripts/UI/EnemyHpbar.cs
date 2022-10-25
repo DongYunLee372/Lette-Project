@@ -45,7 +45,7 @@ public class EnemyHpbar : MonoBehaviour
 
     private void Update()
     {
-        if (battle_Character == null)
+        if (battle_Character == null || battle_Character.cur_HP <=0 )
         {
             Destroy(my);
         }
@@ -83,7 +83,7 @@ public class EnemyHpbar : MonoBehaviour
         var _hpbar = hpBar.GetComponent<EnemyHpbar>();
         //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = trans;
-        _hpbar.offset = new Vector3(0, 2.3f, 0); ;
+        _hpbar.offset = new Vector3(0, 1.7f, 0); ;
         _hpbar.Maxhp = 100;
         _hpbar.Curhp = HP;
         _hpbar.battle_Character = battle_obj;
