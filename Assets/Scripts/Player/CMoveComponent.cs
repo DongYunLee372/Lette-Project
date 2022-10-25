@@ -939,7 +939,7 @@ public class CMoveComponent : BaseComponent
             if (curcam.fieldOfView >= moveoption.TPMaxZoomOut)
             {
                 curcam.fieldOfView = moveoption.TPMaxZoomOut;
-                cCam.fieldOfView = moveoption.TPMaxZoomIn;
+                cCam.fieldOfView = moveoption.TPMaxZoomOut;
                 return;
             }
         }
