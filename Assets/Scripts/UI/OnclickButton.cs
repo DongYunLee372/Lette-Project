@@ -125,9 +125,11 @@ public class OnclickButton : MonoBehaviour
     {
         GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
         GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
-        UIManager.Instance.RemoveAll();
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.start_canvas);
+        UIManager.Instance.Remove(UIname.IngameOption);
+        UIManager.Instance.Remove(UIname.StartUI);
         canvas.GetComponent<MainOption>().StartCoroutine("UI");
-        //IEnumerator UI()
+
         //UIManager.Instance.Show(UIname.StartUI);
         //UIManager.Instance.Hide(UIname.MainOption);
         //UIManager.Instance.Hide(UIname.IngameOption);

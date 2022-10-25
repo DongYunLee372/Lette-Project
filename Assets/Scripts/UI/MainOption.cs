@@ -131,7 +131,15 @@ public class MainOption : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         UIManager.Instance.Remove("Inven");
-        UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas);
+        //  UIManager.Instance.Remove("Inven");
+        if (UIManager.Instance.Findobjbool("StartUI"))
+        {
+            UIManager.Instance.Show("StartUI");
+        }
+        else
+        {
+            UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas);
+        }
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[0]);
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop=true;
         GameMG.Instance.Loading_screen(false);

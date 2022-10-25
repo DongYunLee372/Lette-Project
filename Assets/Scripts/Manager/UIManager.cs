@@ -236,7 +236,13 @@ public class UIManager : Singleton<UIManager>
 
 
     }
-
+    private void Update()
+    {
+        for (int i = 0; i < info.Count; i++)
+        {
+            Debug.Log(info[i]);
+        }
+    }
     // Update is called once per frame
 
 }
