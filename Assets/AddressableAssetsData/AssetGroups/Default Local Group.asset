@@ -17,6 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8807c9aa6b2f42a4f96931cf55151df0
   m_SerializeEntries:
+  - m_GUID: 2cea6e09986925042bec2ee2d66b0608
+    m_Address: Loading_Treasure
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4acec5c51cc56bc4d9c940a3912830ed
+    m_Address: LoadingDoor2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f4cb12f6944347b48b7243939a666ee7
+    m_Address: Loading_Door1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: f1113decc288e33498af995eb5b8da18
     m_Address: LoadingImage1
     m_ReadOnly: 0
