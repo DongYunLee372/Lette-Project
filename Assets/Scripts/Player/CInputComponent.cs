@@ -37,6 +37,8 @@ public class CInputComponent : BaseComponent
         public KeyCode skill03 = KeyCode.Alpha3;
 
         public KeyCode Tab = KeyCode.Q;
+
+        public KeyCode Interaction = KeyCode.E;
     }
 
     [Header("Keys")]
@@ -260,6 +262,11 @@ public class CInputComponent : BaseComponent
             }
             //else movecom.curval.IsRunning = false;
 
+            //방어중이 아니고 회피중이 아닐때만 아이템 사용 가능
+            if(state != CharacterStateMachine.eCharacterState.Rolling)
+            {
+                PlayableCharacter.Instance.inventory.UseItem(EnumScp.Key.F1, 1);
+            }
 
 
             //이동값이 조금이라도 있으면 움직이는중으로 판단
