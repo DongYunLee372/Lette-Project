@@ -195,17 +195,17 @@ public class UIManager : Singleton<UIManager>
                 }
             } 
         }
+        
     }
-    public void RemoveAll( )
+    public void RemoveAll()
     {
         for (int i = 0; i < info.Count; i++)
-        {
-            Destroy(info[i].obj);
-            info.Remove(info[i]);
-            i = 0;
-            Debug.Log(info[i].obj.name);
-              continue;
+        {        
+                Destroy(info[i].obj);                  
+                //Debug.Log(child.name);
+            
         }
+        info.Clear();
     }
     public void Canvasoff(CANVAS_NUM num)
     {
@@ -240,7 +240,8 @@ public class UIManager : Singleton<UIManager>
     {
         for (int i = 0; i < info.Count; i++)
         {
-            Debug.Log(info[i]);
+            Debug.Log(info[i].obj);
+            Debug.Log(info.Count);
         }
     }
     // Update is called once per frame

@@ -21,7 +21,9 @@ public class UITest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
-            UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas); 
+          //  UIManager.Instance.test();
+           // UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
+          //  UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
             //UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
 
             //StartCoroutine(CharacterCreate.Instance.CreateMonster_(EnumScp.MonsterIndex.mon_01_01, transf));
