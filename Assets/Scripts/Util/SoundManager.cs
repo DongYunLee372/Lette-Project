@@ -10,8 +10,9 @@ public class SoundManager : Singleton<SoundManager>
 
     public AudioClip HitAudio;
 
-    public AudioClip[] Bgm; // 0 : 메인로비 , 1 : 보스전 음악 
+    public AudioClip[] Bgm; // 0 : 메인로비 , 1 : 보스전 음악  , 2: wave 파도소리
     public AudioClip[] Player_Audio; // 0 walk , run, 1 Hit
+    public AudioClip[] Boss_Audio; // 0 walk
 
     public float bgmSave;
     public float effectSave;
@@ -24,8 +25,6 @@ public class SoundManager : Singleton<SoundManager>
 
         bgmSource.GetComponent<AudioSource>().volume = option.GetComponent<MainOption>().Backgroundsound * 0.01f;
         effectSource.GetComponent<AudioSource>().volume = option.GetComponent<MainOption>().Effectsound * 0.01f;
-
-       
     }
 
     void Volume_Update()

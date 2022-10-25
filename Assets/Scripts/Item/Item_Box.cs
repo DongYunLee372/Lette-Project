@@ -9,6 +9,7 @@ public class Item_Box : MonoBehaviour
     public void Ending()
     {
         GameData_Load.Instance.ChangeScene(Scenes_Stage.BossEnd);
-       
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

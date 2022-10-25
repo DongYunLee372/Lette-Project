@@ -13,6 +13,7 @@ public class Boss_trigger : MonoBehaviour
         {
             boosclear = true;
             this.gameObject.GetComponent<MeshCollider>().isTrigger = true;
+            SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
         }
         else
             return;
@@ -29,7 +30,9 @@ public class Boss_trigger : MonoBehaviour
                     this.gameObject.GetComponent<MeshCollider>().isTrigger = false;
                     UIManager.Instance.Show("Boss_HP");
                     CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().Battle_Start();
-                   // Cinema_Cam.Instance.CamStart();
+                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[1]);
+                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
+                    // Cinema_Cam.Instance.CamStart();
                 }
             }
         }
