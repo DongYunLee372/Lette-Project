@@ -29,7 +29,7 @@ public class Boss_trigger : MonoBehaviour
                     this.gameObject.GetComponent<MeshCollider>().isTrigger = false;
                     UIManager.Instance.Show("Boss_HP");
                     CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().Battle_Start();
-                    Cinema_Cam.Instance.CamStart();
+                   // Cinema_Cam.Instance.CamStart();
                 }
             }
         }
