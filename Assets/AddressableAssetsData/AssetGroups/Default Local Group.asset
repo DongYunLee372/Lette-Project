@@ -15,8 +15,132 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: 8a5fd0f45b23d1643a3f4e18955d3e4d
+  m_GUID: 8807c9aa6b2f42a4f96931cf55151df0
   m_SerializeEntries:
+  - m_GUID: f1113decc288e33498af995eb5b8da18
+    m_Address: LoadingImage1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f1ad1e2213f043e419b0bc7bd899657d
+    m_Address: GameEndUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 831ad861e05a52143a27b9759886a44e
+    m_Address: 123
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a7d3d992b3b91584fbf783331cf06867
+    m_Address: Boss_HP_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e9bf9e01a8fa2a549b1dfd61d1a19c06
+    m_Address: Boss_HP_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f39d6e07d422dbc408da3a237d1f4a52
+    m_Address: Boss_HP_3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c697cf39c12967d478b302eced63b088
+    m_Address: Estus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9b6bf6a2a01d4ee4cb60118a7b3e0647
+    m_Address: Estus_Flask-removebg-preview
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 99aa9bf818145774887248250c7b5ffe
+    m_Address: Estus_Flask
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ef9adcb83ee8b4b4abcc14bab4cfe8ef
+    m_Address: hp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 555ed72dce2eb4f47b7078c21e3150de
+    m_Address: Loading_Background
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e81ee0bc4fc59e84a986d8c9f0902129
+    m_Address: LoadingImage
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 18fc3456084f2a4419c941e53e4a3710
+    m_Address: LoadingImage2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8e64826f0c046d54090208d8bd5a72e9
+    m_Address: LoadingImage3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 542f7c4bebb847847a8f7bf40195051d
+    m_Address: LoadingImage4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7bf72f185bf722c46a8a7ad317b33a10
+    m_Address: LoadingImage5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5790f982a4b5b37479c88675faeb27ad
+    m_Address: LoadingImage7
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 285157e99accd60418fe09f61e2ceaa4
+    m_Address: LoadingImage8
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 619e7a645100f634289a23e7c61d6d70
+    m_Address: LoadingImgae6
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e62b833e49f63134cb15ef813f828f5e
+    m_Address: LoadingText
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9e2e4f7dbe0df2a41809d781f37a0ab9
+    m_Address: menu_frame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 52080a7d057169d4da1933e6c4a51982
+    m_Address: Preferences_icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d78830cbc79147840883d0705d2e7ffb
+    m_Address: recovery
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b48e87d8be767e9489680fa682a9f6d4
+    m_Address: recovery_frame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 617dd5e9f9e709d49be3af5f3266d788
+    m_Address: rod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 97f1ccf31446f334bb3a1f30c0fb263d
+    m_Address: sound_frame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ec9d24828dddb004b8aa0114af583aca
+    m_Address: stamina
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f59d57c283489694a94d2f2080f15ec0
+    m_Address: switch
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8a0c2ade089d4c44fbdf861f7bcd7be6
+    m_Address: Eff7_Slash
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 63deea9db8ab27a45b7b53ac78c832cf
+    m_Address: SwordHitRed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 14f18984a3742944aabf5ed777a2fad3
+    m_Address: SwordHitRedLegacy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: b99e517c1360ec7498e618872fba26a9
     m_Address: Boss
     m_ReadOnly: 0
@@ -29,8 +153,28 @@ MonoBehaviour:
     m_Address: Boss_HP
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 910387f4fb8e80c419d0dc45a1cc4f4d
+    m_Address: Brazier
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 540a2e88dbef67c4f85cb779a44d1f2d
+    m_Address: ButtonListner
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9a8903811a1b8eb46b4a5d94d6eee272
+    m_Address: Dust
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: f2c73200962aea749bf4beaa8acf288a
-    m_Address: Enemy HpBar Slider
+    m_Address: AssetsEnemy HpBar SliderResources_moved/Prefabs/Enemy HpBar Slider.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f95e6b4d87912f4caa1a02676746b2a
+    m_Address: Estust
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6a3e79d549ed8fd4e90704bd1991a0ac
+    m_Address: Fog
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 16e50229ff23d7840b95134739f65244
@@ -41,151 +185,76 @@ MonoBehaviour:
     m_Address: Hpbar
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: e9289f49a91d21843baaa311416ffd7f
-    m_Address: PlayerCharacter
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: a62eff40c92cd01488863fa5149d79a1
-    m_Address: OptionSetting
+  - m_GUID: b2b3853493b9df04186df716e930fba1
+    m_Address: IngameOption
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: bf1dc5f18c9584f479a1439400583b7f
     m_Address: Inven
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: cc8884be57bcf624684c43620abc4fec
-    m_Address: StartUI
+  - m_GUID: cd50b0e4064e6e54c804fbde7eca98b8
+    m_Address: MainOption
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 26e13c7c8aacf0c41a5e02d292da3b74
-    m_Address: Roomtest
+  - m_GUID: a62eff40c92cd01488863fa5149d79a1
+    m_Address: OptionSetting
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: fa3ff36ead8f3bc4fa9358cfece333aa
-    m_Address: TestGameData
+  - m_GUID: e9289f49a91d21843baaa311416ffd7f
+    m_Address: PlayerCharacter
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: a73e9b11aa9476f42b16d5a4710e62be
     m_Address: PlayerUIPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5e452b9fd9cc1884ca2d1fe458df33d9
-    m_Address: UIBar
+  - m_GUID: 9f34ce56d0dbacb4fbe722cabb58ec95
+    m_Address: PostProcessing_Boat
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: df42f27fec159c34ba416df450d6358b
-    m_Address: susu
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 6f95e6b4d87912f4caa1a02676746b2a
-    m_Address: Estust
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 540a2e88dbef67c4f85cb779a44d1f2d
-    m_Address: ButtonListner
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: cfe9fa2a982a3704e96928504506f43e
-    m_Address: FloorTrab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 5fc360903cf4b8c49bda26506f29b020
-    m_Address: BoatScene
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 1b9d42fd839349e4eab508252b594625
-    m_Address: BoatData
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: fdebeacd25efa154d954ab3905e77e11
-    m_Address: testcube
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: e9aeb87fa1f7eaa44a9cb3ae107a1d4a
-    m_Address: Testcube2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 8a0c2ade089d4c44fbdf861f7bcd7be6
-    m_Address: Eff7_Slash
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: cd50b0e4064e6e54c804fbde7eca98b8
-    m_Address: MainOption
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: b2b3853493b9df04186df716e930fba1
-    m_Address: IngameOption
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-<<<<<<< HEAD
-  - m_GUID: 83edd557fe0d88044ac4cce2fd03e0d7
-    m_Address: Loading_Door1_
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 06c97c7f7a22eb14da9904e748584d2c
-    m_Address: Loading_Treasure_
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 8a6068772720013478c6bd36d1680874
-    m_Address: LoadingDoor2_
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-=======
->>>>>>> 84baee912567af982bee610576a394ae7005f8b0
-  - m_GUID: e81ee0bc4fc59e84a986d8c9f0902129
-    m_Address: LoadingImage
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 4889039938a567444827eafcfbc2b267
-    m_Address: SwordHitRed
+  - m_GUID: 07f251844457e2a428b832b354a15f56
+    m_Address: PostProcessing_Stage
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 5b1046b036fdcd8439b80722d3fc4520
     m_Address: Skeleton
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 691b2ca38e8422d4b9bde536b5547af9
-    m_Address: Skeleton_Knight
+  - m_GUID: 052d19923ca2a2240906b07b43731c27
+    m_Address: Skill01Effectpos
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: f1113decc288e33498af995eb5b8da18
-    m_Address: LoadingImage1
+  - m_GUID: cc8884be57bcf624684c43620abc4fec
+    m_Address: StartUI
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 619e7a645100f634289a23e7c61d6d70
-    m_Address: LoadingImgae6
+  - m_GUID: fdea3114f1d3440488e6199fb419840d
+    m_Address: Torch
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 285157e99accd60418fe09f61e2ceaa4
-    m_Address: LoadingImage8
+  - m_GUID: 5e452b9fd9cc1884ca2d1fe458df33d9
+    m_Address: UIBar
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5790f982a4b5b37479c88675faeb27ad
-    m_Address: LoadingImage7
+  - m_GUID: 13ab71a1a87696644915c5107039e51d
+    m_Address: BoatScene 1
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 7bf72f185bf722c46a8a7ad317b33a10
-    m_Address: LoadingImage5
+  - m_GUID: 5fc360903cf4b8c49bda26506f29b020
+    m_Address: BoatScene
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 542f7c4bebb847847a8f7bf40195051d
-    m_Address: LoadingImage4
+  - m_GUID: 26e13c7c8aacf0c41a5e02d292da3b74
+    m_Address: Roomtest
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 8e64826f0c046d54090208d8bd5a72e9
-    m_Address: LoadingImage3
+  - m_GUID: 9efca6b87f1cc7644b8f353580293741
+    m_Address: Loading_tip_deck
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 18fc3456084f2a4419c941e53e4a3710
-    m_Address: LoadingImage2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: dfb0988ee23e47546a4371042470523b
-    m_Address: LoadingData_Start
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: e62b833e49f63134cb15ef813f828f5e
-    m_Address: LoadingText
+  - m_GUID: 1b9d42fd839349e4eab508252b594625
+    m_Address: BoatData
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 074b2f3d490a6a141b4d60435dbf2d36
@@ -196,8 +265,12 @@ MonoBehaviour:
     m_Address: LoadingData_Ending
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: f1ad1e2213f043e419b0bc7bd899657d
-    m_Address: GameEndUI
+  - m_GUID: dfb0988ee23e47546a4371042470523b
+    m_Address: LoadingData_Start
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fa3ff36ead8f3bc4fa9358cfece333aa
+    m_Address: TestGameData
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
