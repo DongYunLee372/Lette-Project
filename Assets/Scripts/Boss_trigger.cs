@@ -9,19 +9,17 @@ public class Boss_trigger : MonoBehaviour
 
     private void Update()
     {
-        if (CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().cur_HP < 0)
+        if (CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().cur_HP <= 0)
         {
             boosclear = true;
+            this.gameObject.GetComponent<MeshCollider>().isTrigger = true;
         }
         else
             return;
     }
     private void OnTriggerExit(Collider other)
     {
-        if(boosclear)
-        {
-            this.gameObject.GetComponent<MeshCollider>().isTrigger = true;
-        }
+     
         if (!boosclear)
         {
             if (other.gameObject.tag == "Player")
