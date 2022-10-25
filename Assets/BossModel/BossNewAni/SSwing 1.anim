@@ -126239,6 +126239,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.2666667
+    functionName: Animation_Attack_Collider_Stop
+    data: SSwing
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.3333334
     functionName: Animation_Final
     data: SSwing

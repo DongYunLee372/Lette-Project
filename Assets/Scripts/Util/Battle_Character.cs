@@ -246,11 +246,11 @@ public class Battle_Character : MonoBehaviour
 
     public void Sound_Start(string soundname)
     {
-        if(soundname == "Walk")
+        if (soundname == "Walk")
         {
 
         }
-        else if(soundname == "attack")
+        else if (soundname == "attack")
         {
 
         }
@@ -365,9 +365,25 @@ public class Battle_Character : MonoBehaviour
 
                         if (attack_Info[i].after_skill_name != "")
                         {
-                            isAttack_Run = true;
-                            animator.Play(attack_Info[i].after_skill_name);
-                            Debug.Log("워크크" + attack_Info[i].after_skill_name);
+                            if ((Vector3.Distance(transform.position,
+                                cur_Target.transform.position) >= 5f))
+                            {
+                                if (attack_Info[i].add_Time == 0)
+                                {
+                                    attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(false);
+                                    isAttack_Run = false;
+                                }
+                                else if (attack_Info[i].add_Time != 0)
+                                {
+                                    StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
+                                }
+                            }
+                            else
+                            {
+                                isAttack_Run = true;
+                                animator.Play(attack_Info[i].after_skill_name);
+                                Debug.Log("워크크" + attack_Info[i].after_skill_name);
+                            }
                         }
                         //animator.Play("Walk");
                         //if (attack_Info[i].add_Time == 0)
@@ -529,7 +545,7 @@ public class Battle_Character : MonoBehaviour
                 missileobj.GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Long_Attack;
                 missileobj.GetComponent<Enemy_Weapon>().parent_character = this;
 
-                Destroy(missileobj, 5.0f);
+                //Destroy(missileobj, 5.0f);
             }
         }
     }
@@ -672,7 +688,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("ㅇㅇ");
-            animator.Play("First_Atk");
+            animator.Play("Foot_Attack");
             animator.animator.SetTrigger("Delay_Trg");
         }
 
