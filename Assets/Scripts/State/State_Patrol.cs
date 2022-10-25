@@ -71,10 +71,10 @@ public class State_Patrol : State
     {
         yield return new WaitForSeconds(1f);
 
-        int randX = Random.Range(-5, 5);
-        int randZ = Random.Range(-5, 5);
+        int randX = Random.Range(-1, 1);
+        int randZ = Random.Range(-1, 1);
 
-        battle_character.destination_Pos = new Vector3(battle_character.return_Pos.x + randX, battle_character.return_Pos.y, battle_character.return_Pos.z + randZ);
+        battle_character.destination_Pos = new Vector3(battle_character.return_Pos.x + randX, battle_character.transform.position.y, battle_character.return_Pos.z + randZ);
 
         battle_character.patrol_Start = false;
     }

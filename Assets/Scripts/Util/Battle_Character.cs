@@ -191,6 +191,7 @@ public class Battle_Character : MonoBehaviour
         //Character_Name = info.P_mon_nameKor;
         //enemy_Type = (Enemy_Type)info.P_mon_Type;
     }
+
     protected void Initalize()
     {
         return_Pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
