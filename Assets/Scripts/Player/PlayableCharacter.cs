@@ -44,9 +44,6 @@ public class PlayableCharacter : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-
-        
-
     }
 
     public bool ComponentInit()
