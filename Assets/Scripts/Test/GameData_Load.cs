@@ -189,8 +189,8 @@ public class GameData_Load : Singleton<GameData_Load>
                     // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
                     GameObject abc = new GameObject();
                     abc.transform.position = s.Position;
-
                     StartCoroutine(CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, abc.transform, s.prefabsName));
+                    Destroy(abc);
                 }
                 else if (s.prefabsName == "PlayerCharacter")
                 {
@@ -216,7 +216,8 @@ public class GameData_Load : Singleton<GameData_Load>
                     Debug.Log("스켈레톤 생성");
                     MonsterCount++;
                     StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName));
-
+                    //생성한 포지션 삭제
+                    Destroy(Monster);
                 }
                 else
                 {
@@ -255,11 +256,11 @@ public class GameData_Load : Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.Stage2:
+                SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
                 UIManager.Instance.Hide("Boss_HP");
                 AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
                                                                                  // EndunLoadBoatScene();
-                var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
-                AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
+                UnloadMonster_restart();
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage2;
                 var charatcter = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
                 if (charatcter != null)
@@ -275,6 +276,8 @@ public class GameData_Load : Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.BossEnd:
+                SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
+
                 charatcter = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
                 if (charatcter != null)
                 {
@@ -360,10 +363,17 @@ public class GameData_Load : Singleton<GameData_Load>
 
     void UnloadMonster_restart()
     {
-        for (int i = 0; i < MonsterCount; i++)
+        Debug.Log("스켈삭제호출");
+        for (int i = 0; i < MonsterDeadCount; i++)
         {
+            Debug.Log("스켈삭제");
             var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
-            AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //몬스터 삭제. 
+            Debug.Log("스켈레톤 삭제 시점" + temp1.name);
+            if (temp1 != null)
+            {
+                Debug.Log("스켈레톤삭제");
+                AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //몬스터 삭제. 
+            }
         }
     }
 
@@ -704,13 +714,11 @@ public class GameData_Load : Singleton<GameData_Load>
 
                 case Scenes_Stage.Stage2:
                     StartCoroutine(Load_Boss());
-                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
                     UIManager.Instance.Hide("Boss_HP");
                     break;
 
                 case Scenes_Stage.BossEnd:
                     StartCoroutine( onLoadingScene());
-                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
                     break;
             }
             //로딩
