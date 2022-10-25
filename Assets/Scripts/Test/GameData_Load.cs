@@ -364,6 +364,8 @@ public class GameData_Load : Singleton<GameData_Load>
         var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
                                                                            //몬스터 추가되면 삭제
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
         var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
     }
@@ -375,6 +377,9 @@ public class GameData_Load : Singleton<GameData_Load>
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
         var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
+
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
 
     }
 
@@ -397,6 +402,8 @@ public class GameData_Load : Singleton<GameData_Load>
         AddressablesLoadManager.Instance.OnUnloadedAction("Roomtest");  //언로드
         var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
         var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
 
