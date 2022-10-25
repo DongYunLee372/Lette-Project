@@ -45,11 +45,15 @@ public class EnemyHpbar : MonoBehaviour
 
     private void Update()
     {
-        main = PlayableCharacter.Instance.GetCamera();
         if (battle_Character == null)
         {
             Destroy(my);
         }
+        PlayableCharacter a= FindObjectOfType<PlayableCharacter>();
+        if (a == null)
+            return;
+        main = PlayableCharacter.Instance.GetCamera();     
+        
         //main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
         var screenPos = main.WorldToScreenPoint(enemyTr.position + offset); // 몬스터의 월드 3d좌표를 스크린좌표로 변환
         if (screenPos.z < 0.0f)

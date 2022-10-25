@@ -30,32 +30,32 @@ public class OnclickButton : MonoBehaviour
     private int key = -1;
     private void Awake()
     {
-        for(int i=0; i< (int)KeyAction.KEYCOUNT; i++)
-        {
-            s_defautkeys[i] = defaultkeys[i]; //전역 변수 사용
-        }
-        KeymapingCheck = false;
-        Save_Optiondata loadData = SaveSystem.Load("save_001"); //캐릭터 아이디로 변경.
-        if (loadData == null)                                      //캐릭터가 없다면 디폴트셋팅.  
-        {
-            KeymapingCheck = false;
-            for (int i = 0; i < (int)KeyAction.KEYCOUNT; i++)
-            {
-                Debug.Log(i);
-                KeySetting.keys.Add((KeyAction)i, defaultkeys[i]);
-            }
-        }
-        else
-        {
-            KeySetting.keys.Add((KeyAction.UP), loadData.up);
-            KeySetting.keys.Add((KeyAction.DOWN), loadData.down);
-            KeySetting.keys.Add((KeyAction.LEFT), loadData.left);
-            KeySetting.keys.Add((KeyAction.RIGHT), loadData.right);
-            KeySetting.keys.Add((KeyAction.ROOL), loadData.roll);
-            KeySetting.keys.Add((KeyAction.ATTACK), loadData.attack);
-            KeySetting.keys.Add((KeyAction.DEFENSE), loadData.defens);
-            Debug.Log("로드하기");
-        }
+        //for(int i=0; i< (int)KeyAction.KEYCOUNT; i++)
+        //{
+        //    s_defautkeys[i] = defaultkeys[i]; //전역 변수 사용
+        //}
+        //KeymapingCheck = false;
+        //Save_Optiondata loadData = SaveSystem.Load("save_001"); //캐릭터 아이디로 변경.
+        //if (loadData == null)                                      //캐릭터가 없다면 디폴트셋팅.  
+        //{
+        //    KeymapingCheck = false;
+        //    for (int i = 0; i < (int)KeyAction.KEYCOUNT; i++)
+        //    {
+        //        Debug.Log(i);
+        //        KeySetting.keys.Add((KeyAction)i, defaultkeys[i]);
+        //    }
+        //}
+        //else
+        //{
+        //    KeySetting.keys.Add((KeyAction.UP), loadData.up);
+        //    KeySetting.keys.Add((KeyAction.DOWN), loadData.down);
+        //    KeySetting.keys.Add((KeyAction.LEFT), loadData.left);
+        //    KeySetting.keys.Add((KeyAction.RIGHT), loadData.right);
+        //    KeySetting.keys.Add((KeyAction.ROOL), loadData.roll);
+        //    KeySetting.keys.Add((KeyAction.ATTACK), loadData.attack);
+        //    KeySetting.keys.Add((KeyAction.DEFENSE), loadData.defens);
+        //    Debug.Log("로드하기");
+        //}
     }
     public void DefaultSetting()
     {

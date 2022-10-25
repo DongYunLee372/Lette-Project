@@ -171,7 +171,31 @@ public class UIManager : Singleton<UIManager>
             }
         }
     }
-
+    public void CanvaschildRemove(CANVAS_NUM can)
+    {   
+        Transform[] allChildren = canvas[(int)can].GetComponentsInChildren<Transform>();
+        foreach (Transform child in allChildren)
+        {
+            // 자기 자신의 경우엔 무시 
+            // (게임오브젝트명이 다 다르다고 가정했을 때 통하는 코드)
+            if (child.name == transform.name)
+            {
+                return;
+            }
+            for (int i = 0; i < info.Count; i++)
+            {
+                if (child.name == info[i].obj.transform.name)
+                {
+                    Destroy(info[i].obj);
+                    info.Remove(info[i]);
+                    i = 0;
+                    Debug.Log(info[i].obj.name);
+                    continue;
+                    //Debug.Log(child.name);
+                }
+            } 
+        }
+    }
     public void RemoveAll( )
     {
         for (int i = 0; i < info.Count; i++)

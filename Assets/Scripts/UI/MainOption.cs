@@ -130,7 +130,7 @@ public class MainOption : MonoBehaviour
     IEnumerator UI()
     {
         yield return new WaitForSeconds(2f);
-        UIManager.Instance.Remove("Inven");
+       // UIManager.Instance.Remove("Inven");
         UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas);
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[0]);
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop=true;

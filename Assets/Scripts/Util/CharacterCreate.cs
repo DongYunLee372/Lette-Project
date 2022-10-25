@@ -10,15 +10,12 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
     public GameObject hpBar;
     public GameObject bosshpbar;
-    public int enemycount=0;
-    public int deadcount=0;
+
     public List<GameObject> l_enemy;
     public GameObject obj_boss;
     void Awake()
     {
         //DataLoad_Save.Instance.Init();
-        enemycount = 0;
-        deadcount = 0;
     }
    
     // Update is called once per frame
@@ -42,7 +39,6 @@ public class CharacterCreate : Singleton<CharacterCreate>
         MonsterTargetInformation target = ScriptableObject.CreateInstance<MonsterTargetInformation>();
         //data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
         data =DataLoad_Save.Instance.Get_MonsterDB(Global_Variable.CharVar.Skeleton);
-        enemycount++;
 
         List<BossNomalSkill> NomalSkills = new List<BossNomalSkill>();
         List<Mon_Normal_Atk_Group> mon_Normal_Atk_Group = new List<Mon_Normal_Atk_Group>();     
@@ -183,18 +179,10 @@ public class CharacterCreate : Singleton<CharacterCreate>
 
         hpBar.GetComponent<EnemyHpbar>().SetHpBar(data.P_mon_MaxHP, Monster.transform, Monster.GetComponent<Battle_Character>());
         l_enemy.Add(Monster);
-        enemycount++;
         yield return null;
 
     }
-    public void Deadcount()
-    {
-        deadcount++;
-        if (deadcount == enemycount)
-        {
-            return ;
-        }
-    }
+ 
     //IEnumerator setting()
     //{
     //    //find_Asset_in_list

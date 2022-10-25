@@ -6,7 +6,16 @@ public class Boss_trigger : MonoBehaviour
 {
     // Start is called before the first frame update
     public bool boosclear = false;
-  
+
+    private void Update()
+    {
+        if (CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().cur_HP < 0)
+        {
+            boosclear = true;
+        }
+        else
+            return;
+    }
     private void OnTriggerExit(Collider other)
     {
         if(boosclear)
