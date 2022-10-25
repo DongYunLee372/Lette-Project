@@ -31,6 +31,8 @@ public class CGuardComponent : BaseComponent
     public IEnumerator stuncoroutine;
     public delegate void Invoker();
 
+    float hitangle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -139,7 +141,7 @@ public class CGuardComponent : BaseComponent
         hit.y = 0;
         hit.Normalize();
 
-        float hitangle = Vector3.Angle(front, hit);
+        hitangle = Vector3.Angle(front, hit);
 
 
 
@@ -172,7 +174,6 @@ public class CGuardComponent : BaseComponent
 
     public void StunEnd()
     {
-        //Debug.Log("스턴끝 들어옴");
         CharacterStateMachine.eCharacterState prestate = CharacterStateMachine.Instance.GetPreState();
         CharacterStateMachine.Instance.SetState(prestate);
         //if(prestate == CharacterStateMachine.eCharacterState.Guard)
