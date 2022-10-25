@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 490268271508519192}
   - component: {fileID: 490268271508519193}
   - component: {fileID: 490268271508519198}
+  - component: {fileID: 582356702515116199}
   m_Layer: 0
   m_Name: Fog
   m_TagString: Untagged
@@ -4812,3 +4813,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &582356702515116199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490268271508519199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd07c61a9aa4f14495d323d89c7c05a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FogParticle: {fileID: 0}
