@@ -333,7 +333,13 @@ public class GameData_Load : Singleton<GameData_Load>
 
     public void MonsterDead()
     {
+        if(MonsterCount==0)
+        {
+
+        }
+
         MonsterCount--;
+       // StartCoroutine()
         if(MonsterCount<=0)
         {
             UnloadMonster();
@@ -377,7 +383,9 @@ public class GameData_Load : Singleton<GameData_Load>
         AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
         var temp=AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
-                                                                           //몬스터 추가되면 삭제
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
+        UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
+        //몬스터 추가되면 삭제
         var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
 
