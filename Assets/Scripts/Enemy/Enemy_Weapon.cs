@@ -24,7 +24,8 @@ public class Enemy_Weapon : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            Vector3 p = collider.ClosestPoint(transform.position);
+            Vector3 p = collider.ClosestPoint(collider.transform.position);
+
             switch (parent_character.attack_Type) // 공격 타입에 맞게 데미지를 입혀줌.
             {
                 case Enemy_Enum.Enemy_Attack_Type.Normal_Attack:
