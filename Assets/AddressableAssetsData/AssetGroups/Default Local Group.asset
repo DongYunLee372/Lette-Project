@@ -253,14 +253,6 @@ MonoBehaviour:
     m_Address: BoatScene 1
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5fc360903cf4b8c49bda26506f29b020
-    m_Address: BoatScene
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 26e13c7c8aacf0c41a5e02d292da3b74
-    m_Address: Roomtest
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 9efca6b87f1cc7644b8f353580293741
     m_Address: Loading_tip_deck
     m_ReadOnly: 0

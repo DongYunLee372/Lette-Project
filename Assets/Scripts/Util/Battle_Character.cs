@@ -589,9 +589,6 @@ public class Battle_Character : MonoBehaviour
         Initalize();
     }
 
-
-
-
     public CoolTime stop_CoolTime;  // 정지 방지
     public CoolTime skill_CoolTime;  // 스킬 쿨타임 
     public CoolTime long_CoolTime;  // 원거리 공격 쿨타임
