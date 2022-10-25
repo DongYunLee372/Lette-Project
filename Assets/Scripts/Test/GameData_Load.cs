@@ -167,8 +167,8 @@ public class GameData_Load : Singleton<GameData_Load>
         var boss = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
         boss.SetActive(true);
 
-        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[1]);
-        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
+        //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[1]);
+        //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
 
     }
 
@@ -358,6 +358,15 @@ public class GameData_Load : Singleton<GameData_Load>
         }
     }
 
+    void UnloadMonster_restart()
+    {
+        for (int i = 0; i < MonsterCount; i++)
+        {
+            var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
+            AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //몬스터 삭제. 
+        }
+    }
+
     //보트 씬 내리기
     void EndunLoadBoatScene()
     {
@@ -367,10 +376,9 @@ public class GameData_Load : Singleton<GameData_Load>
 
         UIManager.Instance.RemoveAll();
         //몬스터 추가되면 삭제
-       // UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
+        // UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
         //UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
-        var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
-        AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
+        UnloadMonster_restart();
     }
     //보스 내리기
     void EndunLoadBossScene()
@@ -397,8 +405,7 @@ public class GameData_Load : Singleton<GameData_Load>
         //  UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
         //UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
         //몬스터 추가되면 삭제
-        var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
-        AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
+        UnloadMonster_restart();
 
         LoadingImageShow(Scenes_Stage.Stage1);  //로딩 이미지
     }
@@ -480,7 +487,7 @@ public class GameData_Load : Singleton<GameData_Load>
         LoadingText_Ins.transform.position = new Vector3(parentPos.position.x, parentPos.position.y - 250, parentPos.position.z);
         LoadingImgae.transform.position = new Vector3(parentPos.position.x, parentPos.position.y + 100, parentPos.position.z);
         RectTransform rect = LoadingImgae.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(800, 500);
+       // rect.sizeDelta = new Vector2(800, 500);
         switch (scenes_Stage)
         {
             case Scenes_Stage.Stage1: //스테이지 1
@@ -697,12 +704,13 @@ public class GameData_Load : Singleton<GameData_Load>
 
                 case Scenes_Stage.Stage2:
                     StartCoroutine(Load_Boss());
+                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
                     UIManager.Instance.Hide("Boss_HP");
                     break;
 
                 case Scenes_Stage.BossEnd:
                     StartCoroutine( onLoadingScene());
-
+                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
                     break;
             }
             //로딩
@@ -731,37 +739,37 @@ public class GameData_Load : Singleton<GameData_Load>
     }
 
     //이미지 보여주고 씬 교체
-    IEnumerator LoadImageChange(List<string> keylist,GameObject LoadingImgae, Scenes_Stage scenes_Stage)
-    {
+    //IEnumerator LoadImageChange(List<string> keylist,GameObject LoadingImgae, Scenes_Stage scenes_Stage)
+    //{
 
-        LoadingImgae.GetComponent<Image>().color = new Color(255, 255, 255, 1);
+    //    LoadingImgae.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 
-        AddressablesLoadManager.Instance.MultiAsset_Load<Sprite>(keylist);
+    //    AddressablesLoadManager.Instance.MultiAsset_Load<Sprite>(keylist);
 
-        foreach(string s in keylist)
-        {
-            LoadingImgae.GetComponent<Image>().sprite = AddressablesLoadManager.Instance.FindLoadAsset<Sprite>(s);
-            Debug.Log("나도 확인" + s);
-            yield return new WaitForSeconds(1f);
-        }
+    //    foreach(string s in keylist)
+    //    {
+    //        LoadingImgae.GetComponent<Image>().sprite = AddressablesLoadManager.Instance.FindLoadAsset<Sprite>(s);
+    //        Debug.Log("나도 확인" + s);
+    //        yield return new WaitForSeconds(1f);
+    //    }
 
-      // GameObject delete= AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingImage");
-        //AddressablesLoadManager.Instance.Delete_Object<GameObject>(delete);
-        Destroy(LoadingImgae);
-        StartCoroutine(AddressablesLoadManager.Instance.Delete_Object<Sprite>(keylist));
+    //  // GameObject delete= AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingImage");
+    //    //AddressablesLoadManager.Instance.Delete_Object<GameObject>(delete);
+    //    Destroy(LoadingImgae);
+    //    StartCoroutine(AddressablesLoadManager.Instance.Delete_Object<Sprite>(keylist));
 
-        switch (scenes_Stage)
-        {
-            case Scenes_Stage.Stage1:
-                BoatScene_Data_Load();
-                break;
+    //    switch (scenes_Stage)
+    //    {
+    //        case Scenes_Stage.Stage1:
+    //            BoatScene_Data_Load();
+    //            break;
 
-            case Scenes_Stage.Stage2:
-                StartCoroutine(Load_Boss());
-                break;
-        }
+    //        case Scenes_Stage.Stage2:
+    //            StartCoroutine(Load_Boss());
+    //            break;
+    //    }
 
-    }
+    //}
     public void BoatScene_Data_Load()
     {
 
@@ -784,8 +792,7 @@ public class GameData_Load : Singleton<GameData_Load>
 
         StartCoroutine(CheckLoadScene(tempDataSave));
         AddressablesLoadManager.Instance.OnSceneAction("BoatScene");
-
-
+       
     }
 
     IEnumerator CheckLoadScene(GameSaveData tempsave)
@@ -799,6 +806,18 @@ public class GameData_Load : Singleton<GameData_Load>
                 Debug.Log("gpg2?");
                 AddressablesLoadManager.Instance.SceneLoadCheck = false;
                 yield return new WaitForSeconds(1f);
+
+                switch(GameMG.Instance.scenes_Stage)
+                {
+                    case Scenes_Stage.Stage1:
+                        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[2]);
+                        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
+                        break;
+                    case Scenes_Stage.Stage2:
+
+                        break;
+                }
+             
                 Canvas_.GetComponent<TestOnoff>().ShowImage(false);
 
                 //GameMG.Instance.Loading_screen(false);

@@ -15,3 +15,5 @@ MonoBehaviour:
   SaveDatas:
   - {fileID: 11400000, guid: b797ce8d6a030ab469eec410562f0117, type: 2}
   - {fileID: 11400000, guid: e1479768b70126947910ac20021bc70d, type: 2}
+  - {fileID: 11400000, guid: b00560d16faaff84e90c9bf95cff8e8f, type: 2}
+  - {fileID: 11400000, guid: 2cbbead36b4b713439410778043ebe1e, type: 2}
