@@ -313,6 +313,11 @@ public class GameData_Load : Singleton<GameData_Load>
         }
     }
 
+    void restartLoading_()
+    {
+
+    }
+
     void AllanloadScene()  //게임 종료
     {
         switch (GameMG.Instance.scenes_Stage)
@@ -325,11 +330,6 @@ public class GameData_Load : Singleton<GameData_Load>
                 EndunLoadBossScene();
                 break;
         }
-    }
-
-    void CreateMonster()
-    {
-
     }
 
     public void MonsterDead()
