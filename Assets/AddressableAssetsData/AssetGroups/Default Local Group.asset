@@ -117,16 +117,16 @@ MonoBehaviour:
     m_Address: IngameOption
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 41113e95c9f0a6f4c89518b4be1c8474
-    m_Address: Loading_Door1
+  - m_GUID: 83edd557fe0d88044ac4cce2fd03e0d7
+    m_Address: Loading_Door1_
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: dcc946c26e2424a4e8c3e9e62d13422e
-    m_Address: Loading_Treasure
+  - m_GUID: 06c97c7f7a22eb14da9904e748584d2c
+    m_Address: Loading_Treasure_
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 609a9cc83d3f42a4ca6516048c77a0e3
-    m_Address: LoadingDoor2
+  - m_GUID: 8a6068772720013478c6bd36d1680874
+    m_Address: LoadingDoor2_
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: e81ee0bc4fc59e84a986d8c9f0902129
