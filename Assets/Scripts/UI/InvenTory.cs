@@ -16,11 +16,14 @@ public class InvenTory : MySingleton<InvenTory>
     public GameObject Player;
     public void UseItem(EnumScp.Key key , int num) 
     {
-        if (slots[(int)key].MinusItem(1))
+        if (slots[(int)key].GetCount() >= 0)
         {
-            float tempHp = Player.GetComponent<PlayableCharacter>().CharacterUIPanel.HPBar.GetCurValue();
+            if (slots[(int)key].MinusItem(1))
+            {
+                float tempHp = Player.GetComponent<PlayableCharacter>().CharacterUIPanel.HPBar.GetCurValue();
 
-            Player.GetComponent<PlayableCharacter>().CharacterUIPanel.HPBar.SetCurValue(tempHp + 50);
+                Player.GetComponent<PlayableCharacter>().CharacterUIPanel.HPBar.SetCurValue(tempHp + 50);
+            }
         }
     }
     public void DropItem(Sprite image, int count, string dropitemname)

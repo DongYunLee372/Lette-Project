@@ -59,6 +59,10 @@ public class ItemSlot : MonoBehaviour
         ItemCountText.text = ItemCount.ToString();
     }
 
+    public int GetCount()
+    {
+        return ItemCount;
+    }
     
     // Start is called before the first frame update
     void Start()
