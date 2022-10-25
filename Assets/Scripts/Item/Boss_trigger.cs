@@ -31,8 +31,9 @@ public class Boss_trigger : MonoBehaviour
                     this.gameObject.GetComponent<MeshCollider>().isTrigger = false;
                     UIManager.Instance.Show("Boss_HP");
                     CharacterCreate.Instance.obj_boss.GetComponent<Battle_Character>().Battle_Start();
-                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[1]);
-                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
+                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().clip = SoundManager.Instance.Bgm[1];
+                    SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Play();
+                      SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
                     cutscene_camera.GetComponent<Cinema_Cam>().CamStart();
                     // Cinema_Cam.Instance.CamStart();
                 }
