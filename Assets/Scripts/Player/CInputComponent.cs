@@ -280,12 +280,31 @@ public class CInputComponent : BaseComponent
                 {
                     //com.animator.SetPlaySpeed(1f);
                     movecom.com.animator.Play("_Dash");
+                    AudioSource audio = SoundManager.Instance.effectSource.GetComponent<AudioSource>();
+
+                    if (!audio.isPlaying)
+                    {
+                        audio.loop = true;
+                        audio.pitch = 3.0f;
+                        SoundManager.Instance.effectSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Player_Audio[1]);
+                    }
+                        
+
 
                 }
                 else
                 {
                     //com.animator.SetPlaySpeed( 1f);
                     movecom.com.animator.Play("_Walk");
+                    AudioSource audio = SoundManager.Instance.effectSource.GetComponent<AudioSource>();
+
+                    if (!audio.isPlaying)
+                    {
+                        audio.loop = true;
+                        audio.pitch = 2.2f;
+                        SoundManager.Instance.effectSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Player_Audio[0]);
+                    }
+                        
                 }
             }
             else
