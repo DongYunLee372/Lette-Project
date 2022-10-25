@@ -16,6 +16,9 @@ public class InvenTory : MySingleton<InvenTory>
     public GameObject Player;
     public void UseItem(EnumScp.Key key , int num) 
     {
+        if (Player == null)
+            Player = PlayableCharacter.Instance.gameObject;
+
         if (slots[(int)key].GetCount() >= 0)
         {
             if (slots[(int)key].MinusItem(1))
