@@ -210,6 +210,13 @@ public class GameMG : Singleton<GameMG>
             GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);  // 시작
         }
 
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage2);
+            //  AddressablesLoader.OnUnloadedAction("TestScenes");  //씬 언로드  어드레서블 적용
+
+        }
+
 
 
     }
