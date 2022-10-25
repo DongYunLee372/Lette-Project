@@ -21,11 +21,11 @@ public class UITest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
-          //  UIManager.Instance.test();
-           // UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
-          //  UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
+            //  UIManager.Instance.test();
+            // UIManager.Instance.CanvaschildRemove(CANVAS_NUM.player_cavas);
+            //  UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
             //UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
-
+            SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
             //StartCoroutine(CharacterCreate.Instance.CreateMonster_(EnumScp.MonsterIndex.mon_01_01, transf));
             Debug.Log(transf);
             // UIManager.Instance.Prefabsload("OptionSetting", CANVAS_NUM.enemy_canvas);
