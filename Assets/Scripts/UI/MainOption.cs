@@ -79,7 +79,10 @@ public class MainOption : MonoBehaviour
         set
         {
             _mousesensetive = value;
-            m_invoker(value);
+            if (m_invoker != null)
+            {
+                m_invoker(value);
+            }
         }
     }
 
@@ -102,6 +105,7 @@ public class MainOption : MonoBehaviour
         if (ShowOption)
         {
             UIManager.Instance.Hide("IngameOption");
+            UIManager.Instance.Show("Inven");
             ShowOption = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -119,6 +123,7 @@ public class MainOption : MonoBehaviour
                 UIManager.Instance.Prefabsload("IngameOption", Canvas_Enum.CANVAS_NUM.start_canvas);
                 ShowOption = true;
             }
+            UIManager.Instance.Hide("Inven");
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;         
         }
@@ -129,9 +134,9 @@ public class MainOption : MonoBehaviour
     }
     IEnumerator UI()
     {
+        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
         yield return new WaitForSeconds(2f);
         UIManager.Instance.Remove("Inven");
-        //  UIManager.Instance.Remove("Inven");
         if (UIManager.Instance.Findobjbool("StartUI"))
         {
             UIManager.Instance.Show("StartUI");
