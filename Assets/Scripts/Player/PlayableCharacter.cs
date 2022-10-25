@@ -76,10 +76,6 @@ public class PlayableCharacter : MonoBehaviour
 
         ComponentInit();
 
-        if (components[1]==null)
-        {
-            int ddfe = 0;
-        }
 
         movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
@@ -122,6 +118,10 @@ public class PlayableCharacter : MonoBehaviour
         mainoption.m_invoker = SetMouseSpeed;
 
 
+        SetOutoFocus(mainoption.LooKon);
+        SetMouseSpeed(mainoption.MouseSensetive);
+        SetReverseMouseRot(mainoption.ReverseMouse);
+        SetCameraColl(mainoption.AutoeVade);
     }
 
     public void SetOutoFocus(bool val)

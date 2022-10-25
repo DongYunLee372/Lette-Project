@@ -20,7 +20,7 @@ public class CAttackComponent : BaseComponent
     public Transform effectparent;
     [HideInInspector]
     public WeaponCollider weaponcollider;
-    [HideInInspector]
+    //[HideInInspector]
     public string monstertag;
     [HideInInspector]
     public CorTimeCounter timer = new CorTimeCounter();
