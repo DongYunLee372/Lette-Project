@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8220078707218391569}
   - component: {fileID: 8220078707218391568}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: BossCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

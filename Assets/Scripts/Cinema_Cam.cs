@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cinema_Cam : Singleton<Cinema_Cam>
+public class Cinema_Cam : MonoBehaviour
 {
     public Camera cam;
     public float PosZ = 0f;
@@ -16,12 +16,14 @@ public class Cinema_Cam : Singleton<Cinema_Cam>
         cam = GetComponent<Camera>();
         v = cam.transform.position;
         v.z += 20f;
-        
+        cam.gameObject.SetActive(false);
     }
     public void CamStart()
     {
-        StartCoroutine(MoveCam());
+        cam.gameObject.SetActive(true);
         PlayableCharacter.Instance.gameObject.SetActive(false);
+        StartCoroutine(MoveCam());
+        
     }
     IEnumerator MoveCam()
     {
