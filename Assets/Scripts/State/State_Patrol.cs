@@ -41,8 +41,8 @@ public class State_Patrol : State
             }
         }
 
-        if (!fflag)
-            battle_character.animator.Play("Idle");
+        //if (!fflag)
+        //    battle_character.animator.Play("Idle");
         // else
         //     battle_character.animator.Play("Idle");
 
@@ -57,7 +57,7 @@ public class State_Patrol : State
             {
                 StartCoroutine(patrol_Think_Coroutine(battle_character));
                 battle_character.patrol_Start = true;
-
+                Debug.Log("우치ㅣ이칭");
                 //anim.SetBool("isWalk", false);
             }
         }
