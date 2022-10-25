@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BoatData1
   m_EditorClassIdentifier: 
   prefabsName: Skeleton
-  Position: {x: 0.01, y: 2.14, z: -20}
+  Position: {x: 0.01, y: 2.4, z: 2.4}

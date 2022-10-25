@@ -403,7 +403,7 @@ MonoBehaviour:
   - Skeleton
   Position_1:
   - {x: 0.01, y: 2.14, z: -10}
-  - {x: 0.01, y: 2.14, z: -20}
+  - {x: 0.01, y: 2.4, z: 2.4}
   SceneName: []
   LoadImageName:
   - 
@@ -489,6 +489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 0}
   bosshpbar: {fileID: 0}
+  l_enemy: []
+  obj_boss: {fileID: 0}
 --- !u!4 &2107403858
 Transform:
   m_ObjectHideFlags: 0

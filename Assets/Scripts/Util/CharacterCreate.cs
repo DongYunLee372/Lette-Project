@@ -173,9 +173,11 @@ public class CharacterCreate : Singleton<CharacterCreate>
         AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(name);
         GameObject temp = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
 
-       // GameObject temp = AddressablesController.Instance.find_Asset_in_list(name);
+       // GameObject b = AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>(name);
+        // GameObject temp = AddressablesController.Instance.find_Asset_in_list(name);
         temp.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, NomalSkills, target);
         GameObject Monster = AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>(name);//Instantiate(temp, trans);
+        Monster.transform.position = trans.position;
 
         hpBar.GetComponent<EnemyHpbar>().SetHpBar(data.P_mon_MaxHP, Monster.transform, Monster.GetComponent<Battle_Character>());
         l_enemy.Add(Monster);

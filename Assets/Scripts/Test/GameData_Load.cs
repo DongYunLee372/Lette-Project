@@ -212,6 +212,7 @@ public class GameData_Load : Singleton<GameData_Load>
                 {
                     GameObject Monster = new GameObject();
                     Monster.transform.position = s.Position;
+                    Debug.Log("스켈레톤 좌표 :" + s.Position);
                     Debug.Log("스켈레톤 생성");
                     MonsterCount++;
                     StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName));
