@@ -265,7 +265,8 @@ public class CInputComponent : BaseComponent
             //방어중이 아니고 회피중이 아닐때만 아이템 사용 가능
             if(state != CharacterStateMachine.eCharacterState.Rolling)
             {
-                PlayableCharacter.Instance.inventory.UseItem(EnumScp.Key.F1, 1);
+                if(Input.GetKey(_key.Interaction))
+                    PlayableCharacter.Instance.inventory.UseItem(EnumScp.Key.F1, 1);
             }
 
 
