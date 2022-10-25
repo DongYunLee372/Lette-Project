@@ -8,9 +8,10 @@ using UnityEngine.UI;
 using TMPro;
 using Global_Variable;
 using Canvas_Enum;
-public class GameData_Load :Singleton<GameData_Load>
+public class GameData_Load : Singleton<GameData_Load>
 {
-    List<string> str=new List<string>();
+    int MonsterDeadCount = 3;
+    List<string> str = new List<string>();
     public SkyboxManager skyboxMG;
     public GameObject Canvas_;
     public GameObject Im;
@@ -21,20 +22,23 @@ public class GameData_Load :Singleton<GameData_Load>
     GameObject LoadingText_Ins;  //텍스트
     List<LoadingData> loadingDatas = new List<LoadingData>();
     bool ImageCheck = false;
+
+
+    int MonsterCount = 0;
     void Start()
     {
 
-     
 
 
 
-    //    GameMG.Instance.startGame("Roomtest");
 
-      //  AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
+        //    GameMG.Instance.startGame("Roomtest");
+
+        //  AddressablesLoadManager.Instance.OnSceneAction("Roomtest");
 
         //GameMG.Instance.startGame("Roomtest");
-     //   TestPos_and_Load();
-      
+        //   TestPos_and_Load();
+
 
 
     }
@@ -46,7 +50,7 @@ public class GameData_Load :Singleton<GameData_Load>
     }
 
 
-   public void TestPos_and_Load(Action action=null)  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
+    public void TestPos_and_Load(Action action = null)  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
 
 
@@ -66,7 +70,7 @@ public class GameData_Load :Singleton<GameData_Load>
         // GameMG.Instance.startGame("Roomtest");
 
         var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
-        if(find!=null)
+        if (find != null)
         {
             find.SetActive(false);
 
@@ -80,7 +84,7 @@ public class GameData_Load :Singleton<GameData_Load>
 
         //  var tempDataSave = TestMainLoad.Instance.AssetLoad_("Assets/GameData/TestGameData.asset");
         //AssetDatabase.LoadAssetAtPath<GameSaveData>("Assets/GameData/TestGameData.asset");
-       
+
         //foreach (var s in tempDataSave.SaveDatas)
         //{
         //    Debug.Log("보는중 : " + s.prefabsName);
@@ -119,16 +123,16 @@ public class GameData_Load :Singleton<GameData_Load>
         //        Debug.Log("보는중 : " + s.Position);
         //    }
 
-         
+
         //}
 
-        if(action!=null)
+        if (action != null)
         {
-        action();
+            action();
         }
 
     }
-    
+
     void PlayerPos()
     {
 
@@ -136,31 +140,31 @@ public class GameData_Load :Singleton<GameData_Load>
 
         foreach (var a in tempDataSave.SaveDatas)
         {
-            if(a.prefabsName== "PlayerCharacter")
+            if (a.prefabsName == "PlayerCharacter")
             {
                 var find = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("PlayerCharacter");
                 if (find != null)
                 {
                     Debug.Log("캐릭터 위치이동");
-                  
+
                     find.transform.position = a.Position;
                 }
             }
         }
     }
 
-  
+
 
     IEnumerator Load_Boss()
     {
 
-      //  yield return new WaitForSeconds(2f);
+        //  yield return new WaitForSeconds(2f);
         TestPos_and_Load();
         yield return new WaitForSeconds(2.5f);
         PlayerPos();
-         var find=AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         find.SetActive(true);
-        var boss= AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
+        var boss = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
         boss.SetActive(true);
 
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[1]);
@@ -201,14 +205,15 @@ public class GameData_Load :Singleton<GameData_Load>
                         Debug.Log("캐릭터 생성");
                         AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
                     }
-                    AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("Inven");
-                   UIManager.Instance.Prefabsload("Inven", CANVAS_NUM.player_cavas);
+                   // AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("Inven");
+                    //UIManager.Instance.Prefabsload("Inven", CANVAS_NUM.player_cavas);
                 }
-                else if(s.prefabsName== "Skeleton")
+                else if (s.prefabsName == "Skeleton")
                 {
                     GameObject Monster = new GameObject();
                     Monster.transform.position = s.Position;
                     Debug.Log("스켈레톤 생성");
+                    MonsterCount++;
                     StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName));
 
                 }
@@ -233,24 +238,27 @@ public class GameData_Load :Singleton<GameData_Load>
         {
             case Scenes_Stage.Stage1:
                 Canvas_.SetActive(true);
-                if(GameMG.Instance.scenes_Stage != Scenes_Stage.Loding)
+                if (GameMG.Instance.scenes_Stage != Scenes_Stage.Loding)
                 {
                     unloadBoatScene();
                     //skyboxMG.SkyBox_Setting("BoatScene");
                     //GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
-                   // break;
+                    // break;
                 }
                 //StartCoroutine(CheckInputKey());
                 ImageCheck = true;
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
                 LoadingImageShow(Scenes_Stage.Stage1);
-               // BoatScene_Data_Load();
+                // BoatScene_Data_Load();
                 skyboxMG.SkyBox_Setting("BoatScene");
                 break;
 
             case Scenes_Stage.Stage2:
                 UIManager.Instance.Hide("Boss_HP");
                 AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
+                                                                                 // EndunLoadBoatScene();
+                var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
+                AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제. 
                 GameMG.Instance.scenes_Stage = Scenes_Stage.Stage2;
                 var charatcter = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
                 if (charatcter != null)
@@ -284,11 +292,11 @@ public class GameData_Load :Singleton<GameData_Load>
 
             case Scenes_Stage.restart_Loading:
                 {
-                    switch(GameMG.Instance.scenes_Stage)
+                    switch (GameMG.Instance.scenes_Stage)
                     {
                         case Scenes_Stage.Stage1:   //스테이지 1에서 죽었을때
                             ImageCheck = true;
-                             //LoadingImgae.SetActive(true);
+                            //LoadingImgae.SetActive(true);
 
                             unloadBoatScene();
                             break;
@@ -315,6 +323,31 @@ public class GameData_Load :Singleton<GameData_Load>
             case Scenes_Stage.Stage2:  //스테이지 2
                 EndunLoadBossScene();
                 break;
+        }
+    }
+
+    void CreateMonster()
+    {
+
+    }
+
+    public void MonsterDead()
+    {
+        MonsterCount--;
+        if(MonsterCount<=0)
+        {
+            UnloadMonster();
+        }
+    }
+
+    void UnloadMonster()
+    {
+        //삭제 전 
+         
+        for(int i=0; i<MonsterDeadCount; i++)
+        {
+            var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
+            AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //몬스터 삭제. 
         }
     }
 
