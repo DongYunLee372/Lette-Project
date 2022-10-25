@@ -2412,11 +2412,11 @@ MonoBehaviour:
   player_HP: 200
   player_Def: 10
   player_Stamina: 150
-  player_Stamina_Recovery_Time: 2
-  player_Stamina_Recovery_Val: 10
+  player_Stamina_Recovery_Time: 1
+  player_Stamina_Recovery_Val: 15
   player_Groggy: 100
-  player_Groggy_Recovery_Time: 2
-  player_Groggy_Recovery_Val: 10
+  player_Groggy_Recovery_Time: 1
+  player_Groggy_Recovery_Val: 15
   player_Stagger_Groggy: 30
   player_Down_Groggy: 80
   player_UIPos: {x: -787, y: -479}
@@ -2768,6 +2768,7 @@ MonoBehaviour:
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
+  hitangle: 0
 --- !u!114 &5912692896712387627
 MonoBehaviour:
   m_ObjectHideFlags: 0
