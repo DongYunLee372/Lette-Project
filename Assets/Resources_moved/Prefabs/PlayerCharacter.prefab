@@ -104,7 +104,7 @@ Camera:
   m_GameObject: {fileID: 379095525159976001}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -123,7 +123,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 1
+  m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 8192
@@ -206,7 +206,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 2
+  m_Depth: 3
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 32
@@ -463,10 +463,10 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8151
+    m_Bits: 16343
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2455,6 +2455,7 @@ MonoBehaviour:
   - {fileID: 0}
   status: {fileID: 0}
   CharacterUIPanel: {fileID: 0}
+  inventory: {fileID: 0}
   HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
   HitEffectAdressableName: SwordHitRed
   effectmanager: {fileID: 0}

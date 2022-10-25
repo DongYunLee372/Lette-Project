@@ -21,11 +21,13 @@ public class State_Die : State
     {
         // 사망 애니메이션 등 사망 시 부활하고 소환하는 등등의 효과(스킬)을 호출. 
         // 스킬 구조 구현 시 추가해줘야함.
-        if (battle_character.phase_Effect != null && !first_Start)
+        if (!first_Start)
         {
             // 캐릭터 데이터로 
+            battle_character.real_AI.navMesh.SetDestination(battle_character.transform.position);
             battle_character.animator.Play("Death");
             battle_character.real_AI.isPause = true;
+
 
             //StartCoroutine(death_Coroutine(battle_character.phase_Effect, battle_character.transform));
 

@@ -21,6 +21,7 @@ public class PlayableCharacter : MonoBehaviour
 
     [Header("================캐릭터 UI================")]
     public UICharacterInfoPanel CharacterUIPanel;
+    public InvenTory inventory;
 
     [Header("================피격 이펙트================")]
     public GameObject HitEffect;
@@ -67,21 +68,28 @@ public class PlayableCharacter : MonoBehaviour
         //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
         if (CharacterUIPanel == null)
         {
-            //AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(Global_Variable.CharVar.CharacterUI, false, true, CeateUI);
             CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
         }
-            
-
-        status.Init(CharacterUIPanel);
-        Canvas canvas = FindObjectOfType<Canvas>();
-        if (canvas == null)
+        if(inventory == null)
         {
-            GameObject obj = new GameObject("playercanvas");
-            obj.AddComponent<Canvas>();
-            canvas = obj.GetComponent<Canvas>();
+            GameObject obj = UIManager.Instance.Prefabsload("Inven", Canvas_Enum.CANVAS_NUM.player_cavas);
+            inventory = obj.GetComponent<InvenTory>();
         }
 
+        status.Init(CharacterUIPanel);
+
+        //Canvas canvas = FindObjectOfType<Canvas>("Playercanvas");
+        //Canvas canvas = GameObject.Find("Playercanvas");
+        //if (canvas == null)
+        //{
+        //    GameObject obj = new GameObject("playercanvas");
+        //    obj.AddComponent<Canvas>();
+        //    canvas = obj.GetComponent<Canvas>();
+        //}
+
         //CharacterUIPanel.transform.parent = canvas.transform;
+
+        
         CharacterUIPanel.transform.localPosition = status.player_UIPos;
 
 
@@ -96,6 +104,7 @@ public class PlayableCharacter : MonoBehaviour
         mainoption.a_invoker = SetCameraColl;
         mainoption.l_invoker = SetOutoFocus;
         mainoption.m_invoker = SetMouseSpeed;
+
 
     }
 
@@ -211,11 +220,11 @@ public class PlayableCharacter : MonoBehaviour
         
         status.GroggyUp(Groggy);
         status.CurHP -= finaldamage;
-
+        //SoundManager.Instance.effectSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Player_Audio[2]);
 
         //캐릭터 사망
         //사망 애니메이션 출력하고 씬 재시작 함수 호출
-        if(status.CurHP<=0)
+        if (status.CurHP<=0)
         {
             CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
             movecom.eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
