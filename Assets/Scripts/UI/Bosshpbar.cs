@@ -40,6 +40,7 @@ public class Bosshpbar : MonoBehaviour
         //_hpbar.Bosshp = _test;
         myhpbar = _hpbar;
 
+        UIManager.Instance.Hide("Boss_HP");
         return myhpbar;
     }
 
