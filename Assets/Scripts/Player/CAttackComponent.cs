@@ -424,10 +424,14 @@ public class CAttackComponent : BaseComponent
         curval.IsAttacking = false;
     }
 
+    
     public void Damaged_Attacking(float damage, Vector3 hitpoint, float Groggy)
     {
+        //넉백이나 넉 다운이 일어나지 않으면 공격이 끊기지 않도록
+        float nextGroggy = PlayableCharacter.Instance.status.CurGroggy + Groggy;
+        if(nextGroggy>=PlayableCharacter.Instance.status.player_Groggy||Groggy>=PlayableCharacter.Instance.status.player_Stagger_Groggy)
+            AttackCutOff();
 
-        AttackCutOff();
         PlayableCharacter.Instance.Damaged(damage, hitpoint, Groggy);
     }
 

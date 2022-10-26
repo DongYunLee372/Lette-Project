@@ -141,25 +141,63 @@ public class CGuardComponent : BaseComponent
         hit.y = 0;
         hit.Normalize();
 
-        hitangle = Vector3.Angle(front, hit);
+        hitangle = 180 - Mathf.Acos(Vector3.Dot(front, hit)) * 180.0f / 3.14f;
 
 
 
 
         //스테미나에 따라서 가드 성공 실패 학인
-        if (PlayableCharacter.Instance.status.CurStamina>=10)
+        if (PlayableCharacter.Instance.status.CurStamina >= 10 && hitangle <= GuardAngle) 
         {
             PlayableCharacter.Instance.status.StaminaDown(10);
             GuardStun();
         }
         else
         {
-            PlayableCharacter.Instance.status.StaminaDown(10);
+            //PlayableCharacter.Instance.status.StaminaDown(10);
             PlayableCharacter.Instance.Damaged(damage, hitpoint, Groggy);
         }
-        
-        
+
+
     }
+
+//    if (Time.time - LastDetestTime >= DetectTime)
+//        {
+//            LastDetestTime = Time.time;
+
+//            //탐지범위에 플레이어가 있는지 판단
+//            RaycastHit2D hit = Physics2D.CircleCast(transform.position, DetectRadius, new Vector2(0, 0), 0, PlayerLayer);
+
+//            if (hit.collider != null)
+//            {
+//                //플레이어가 판단되면 정면벡터와의 내적으로 각도를 구해서 정면이면 탐지
+//                direction = hit.transform.position - this.transform.position;
+//                direction.Normalize();
+
+//                DetectedAngle = Mathf.Acos(Vector3.Dot(WAYS[(int)Direction], direction)) * 180.0f / 3.14f;
+//                if (DetectedAngle <= DetectAngle)
+//                {
+//                    obj = hit.transform.gameObject;
+//                }
+//Debug.Log("플레이어 감지");
+//            }
+
+//            if (obj != null)
+//{
+//    if (state != MONSTERSTATE.ATTACK || state != MONSTERSTATE.WALKING)
+//    {
+//        sc_player = obj.GetComponentInChildren<Player>();
+//        NowDetected = true;
+//        MoveScript.MoveStart(transform.position, sc_player.transform.position);
+//    }
+
+//}
+//else
+//{
+//    sc_player = null;
+//    NowDetected = false;
+//}
+//        }
 
 
     //가드넉백상태는 outofcontrol 상태로 넘어가지 않고 가드중인 상태인 것으로 한다.

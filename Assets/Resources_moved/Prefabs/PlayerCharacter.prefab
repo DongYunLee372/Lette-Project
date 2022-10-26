@@ -2764,7 +2764,7 @@ MonoBehaviour:
   GuardClip: {fileID: 7400000, guid: a2ce05986eb5d08499f73d9ba82bc759, type: 2}
   GuardEffect: {fileID: 167046, guid: 6062cf74dd326b146b31d28120ade333, type: 3}
   guardeffectpos: {fileID: 489346842}
-  GuardAngle: 0
+  GuardAngle: 80
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
