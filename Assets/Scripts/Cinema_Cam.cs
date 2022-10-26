@@ -15,7 +15,7 @@ public class Cinema_Cam : MonoBehaviour
     {
         cam = GetComponent<Camera>();
         v = cam.transform.position;
-        v.z += 20f;
+        v.z -= 20f;
         cam.gameObject.SetActive(false);
         
 

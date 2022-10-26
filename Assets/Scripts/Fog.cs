@@ -9,6 +9,7 @@ public class Fog : MySingleton<Fog>
     {
         FogParticle = GetComponent<ParticleSystem>();
         //OffFog();
+        
     }
 
     public void OffFog()
