@@ -99,4 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   PosZ: 0
-  val: 3
+  val: 5.5

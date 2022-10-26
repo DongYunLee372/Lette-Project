@@ -9,7 +9,7 @@ public class Cinema_Cam : MonoBehaviour
     Vector3 velo = Vector3.zero;
     Vector3 v;
     float x;
-    public float val = 0.001f;
+    public float val = 100f;
     
     void Start()
     {
@@ -38,7 +38,7 @@ public class Cinema_Cam : MonoBehaviour
             cam.transform.position = Vector3.SmoothDamp(cam.transform.position, v, ref velo, val);
 
 
-            if (Time.time - x >= 4f)
+            if (Time.time - x >= 8.5f)
             {
                 cam.gameObject.SetActive(false);
                 break;
