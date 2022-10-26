@@ -31,6 +31,9 @@ public class SoundManager : Singleton<SoundManager>
     {
         bgmSource.GetComponent<AudioSource>().volume = option.GetComponent<MainOption>().Backgroundsound * 0.01f;
         effectSource.GetComponent<AudioSource>().volume = option.GetComponent<MainOption>().Effectsound * 0.01f ;
+        //effectSource.PlayClipAtPoint( effectSource.clip , new Vector3(5, 1, 2));
+
+
     }
 
     public void Volume_Save()

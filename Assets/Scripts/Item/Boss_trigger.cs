@@ -15,6 +15,7 @@ public class Boss_trigger : MonoBehaviour
             boosclear = true;
             this.gameObject.GetComponent<MeshCollider>().isTrigger = true;
             SoundManager.Instance.bgmSource.GetComponent<AudioSource>().Stop();
+            Destroy(this.gameObject);
         }
         else
             return;
