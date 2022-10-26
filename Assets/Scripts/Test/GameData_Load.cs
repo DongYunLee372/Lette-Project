@@ -405,10 +405,7 @@ public class GameData_Load : Singleton<GameData_Load>
 
         StartCoroutine(DeadMonster_delete(delete_monster));
 
-        if (MonsterCount == 0)
-        {
-            StartCoroutine(SceneChange());
-        }
+       
         // StartCoroutine()
         //if(MonsterCount<=0)
         //{
@@ -418,21 +415,20 @@ public class GameData_Load : Singleton<GameData_Load>
 
     IEnumerator SceneChange()
     {
-        yield return new WaitForSeconds(2f);
         Fog.Instance.OffFog();
         yield return new WaitForSeconds(2f);
         SkyboxManager.Instance.SkyBox_Change("FS003_Day_Cubemap");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(7f);
         GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage2);
     }
 
     IEnumerator DeadMonster_delete(GameObject delete)
     {
-        yield return new WaitForSeconds(2f);
-        Debug.Log("스켈레톤삭제하러왔는디반복할거야");
+        yield return new WaitForSeconds(3f);
+        Debug.Log("스켈레톤삭제하러왔는디반복할거야"+ MonsterDeadCount);
         for (int i = 0; i < MonsterDeadCount; i++)
         {
-            var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
+            var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>(delete);
             Debug.Log("스켈"+temp.name);
 
             if (temp == delete)
@@ -442,6 +438,11 @@ public class GameData_Load : Singleton<GameData_Load>
 
                 Debug.Log("몬스터 카운트" + MonsterCount);
                 MonsterCount--;
+
+                if (MonsterCount == 0)
+                {
+                    StartCoroutine(SceneChange());
+                }
                 break;
             }
         }

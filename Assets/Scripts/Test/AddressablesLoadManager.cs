@@ -874,6 +874,32 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         return findobj;
     }
 
+    public T Find_InstantiateObj<T>(T key)
+     where T : UnityEngine.Object
+    {
+        T findobj = default;
+        foreach (var t in CreateObjectList)
+        {
+            if (key == t)
+            {
+                Debug.Log(name + "CreateObjectList안에서 발견");
+                findobj = t as T;
+                return findobj;
+            }
+        }
+
+        foreach (var t in InstList)
+        {
+            if (key== t)
+            {
+                Debug.Log(name + "InstList 발견");
+                findobj = t as T;
+                return findobj;
+            }
+        }
+        return findobj;
+    }
+
     //IList 다 빠지면 핸들 해제 해줘야 함 
     public void OnRelease()
     {
