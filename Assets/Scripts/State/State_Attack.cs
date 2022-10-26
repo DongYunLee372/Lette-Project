@@ -47,13 +47,13 @@ public class State_Attack : State
         }
 
         // 너무 가까우면 뒤로 점프하기 위함
-        if ((Vector3.Distance(battle_character.transform.position,
-                battle_character.cur_Target.transform.position) <= 0.5f) && battle_character.is_Backword)
-        {
-            judge_logic = Enemy_Attack_Logic.BackWord_Jump;
-            _State = this;
-            return true;
-        }
+        //if ((Vector3.Distance(battle_character.transform.position,
+        //        battle_character.cur_Target.transform.position) <= 0.5f) && battle_character.is_Backword)
+        //{
+        //    judge_logic = Enemy_Attack_Logic.BackWord_Jump;
+        //    _State = this;
+        //    return true;
+        //}
 
         // 근접 공격 사거리 체크
         if (battle_character.is_Boss)
@@ -142,6 +142,7 @@ public class State_Attack : State
             {
                 battle_character.animator.Play(battle_character.
                     attack_Info[attack_Info_Index].after_skill_name);
+                Attack_Result = false;
                 Debug.Log("라스트 : 밀리 공격 : " + battle_character.
                     attack_Info[attack_Info_Index].after_skill_name);
 
@@ -185,7 +186,7 @@ public class State_Attack : State
             case Enemy_Attack_Logic.Long_Attack:
                 // 원거리라면 원거리 발사체 발사
 
-                Debug.Log("라스트 : 원거리 : ");
+                //Debug.Log("라스트 : 원거리 : ");
 
                 Attack_Result = false;
                 Result_return_Object = null;
@@ -210,7 +211,7 @@ public class State_Attack : State
                 battle_character.attack_Type = Enemy_Attack_Type.Skill_Attack;
                 battle_character.skill_handler.Skill_Run(battle_character, battle_character.now_Skill_Info);
 
-                Debug.Log("라스트 : 스킬 공격 : " + battle_character.now_Skill_Info.P_skill_Name_En);
+                //Debug.Log("라스트 : 스킬 공격 : " + battle_character.now_Skill_Info.P_skill_Name_En);
                 break;
         }
     }

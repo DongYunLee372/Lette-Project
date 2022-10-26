@@ -349,6 +349,24 @@ public class Battle_Character : MonoBehaviour
         animator.SetPlaySpeed(speed);
     }
 
+    public void Close_Out(string clipname) // 끝났는데 붙어있으면 떨어지기 
+    {
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                if ((Vector3.Distance(transform.position,
+                                cur_Target.transform.position) <= 1.5f)
+                                && real_AI.now_State.GetComponent<State_Attack>().Attack_Result == false)
+                {
+                    isAttack_Run = true;
+                    Debug.Log("클로즈아웃이다");
+                    animator.Play("BackWard_Jump");
+                }
+            }
+        }
+    }
+
     public void Animation_Final(string clipname)
     {
         for (int i = 0; i < attack_Info.Length; i++)
@@ -387,16 +405,6 @@ public class Battle_Character : MonoBehaviour
                                 Debug.Log("워크크" + attack_Info[i].after_skill_name);
                             }
                         }
-                        //animator.Play("Walk");
-                        //if (attack_Info[i].add_Time == 0)
-                        //{
-                        //    attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(false);
-                        //    isAttack_Run = false;
-                        //}
-                        //else if (attack_Info[i].add_Time != 0)
-                        //{
-                        //    StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
-                        //}
 
                         normal_CoolTime.check_Time = 0f;
                         normal_CoolTime.isCheck = false;
