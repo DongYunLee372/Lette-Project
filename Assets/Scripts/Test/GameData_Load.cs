@@ -497,8 +497,8 @@ public class GameData_Load : Singleton<GameData_Load>
     {
         Debug.Log("로딩재시작1");
         AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
-        //var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
-        //AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
+        var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
 
         UIManager.Instance.RemoveAll();
         //몬스터 추가되면 삭제
