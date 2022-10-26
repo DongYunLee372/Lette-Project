@@ -12,6 +12,7 @@ public class InvenTory : MySingleton<InvenTory>
     public ItemSlot[] slots;
 
     public Image Estus;
+    public Sprite estus;
 
     public PlayableCharacter Player;
     public void UseItem(EnumScp.Key key , int num) 
@@ -83,7 +84,7 @@ public class InvenTory : MySingleton<InvenTory>
     IEnumerator Cor_TimeCounter()
     {        
         yield return new WaitForSeconds(1f);
-        DropItem(Estus.sprite, 10, "Est");
+        DropItem(estus, 10, "Est");
     }
 
     void Update()
