@@ -28,7 +28,7 @@ public class State_Die : State
             battle_character.animator.Play("Death");
             battle_character.real_AI.isPause = true;
 
-            GameData_Load.Instance.MonsterDead(this.gameObject);
+            GameData_Load.Instance.MonsterDead(battle_character.gameObject);
 
             //StartCoroutine(death_Coroutine(battle_character.phase_Effect, battle_character.transform));
 
