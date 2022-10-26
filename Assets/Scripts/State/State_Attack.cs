@@ -80,6 +80,7 @@ public class State_Attack : State
                     && battle_character.real_Normal_CoolTime.isCheck) // bool 변수를 추가해야함 일반공격
             {
                 judge_logic = Enemy_Attack_Logic.Melee_Attack;
+                battle_character.real_AI.navMesh.SetDestination(battle_character.transform.position);
                 _State = this;
                 return true;
             }

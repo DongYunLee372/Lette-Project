@@ -49177,10 +49177,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
-    - target: {fileID: 477969802833557513, guid: 5b1046b036fdcd8439b80722d3fc4520, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1002551934922629811, guid: 5b1046b036fdcd8439b80722d3fc4520, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -49224,6 +49220,22 @@ PrefabInstance:
     - target: {fileID: 1002551934922629811, guid: 5b1046b036fdcd8439b80722d3fc4520, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720030637193671650, guid: 5b1046b036fdcd8439b80722d3fc4520, type: 3}
+      propertyPath: mon_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720030637193671650, guid: 5b1046b036fdcd8439b80722d3fc4520, type: 3}
+      propertyPath: mon_Target_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720030637193671650, guid: 5b1046b036fdcd8439b80722d3fc4520, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720030637193671650, guid: 5b1046b036fdcd8439b80722d3fc4520, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b1046b036fdcd8439b80722d3fc4520, type: 3}
