@@ -165,6 +165,7 @@ public class CAttackComponent : BaseComponent
         //AttackInfoSetting(LoadedAttackInfoDic["2"], attackinfos[2]);
     }
 
+    int LastMonsterID = -1;
 
     public void MonsterAttack(Collider collision)
     {
@@ -173,6 +174,12 @@ public class CAttackComponent : BaseComponent
 
         if (collision.gameObject.tag == monstertag)
         {
+            int nowMonsterID = collision.gameObject.GetInstanceID();
+            if(LastMonsterID == nowMonsterID)
+                return;
+
+            LastMonsterID = nowMonsterID;
+
             //collision.GetComponent<Battle_Character>().Damaged((int)attackinfos[CurAttackNum].damage, this.transform.position);
             collision.GetComponent<Battle_Character>().Damaged((int)AttackInfos[CurAttackNum].damage, this.transform.position);
             //Debug.Log("공격 들어옴");
@@ -244,6 +251,7 @@ public class CAttackComponent : BaseComponent
         //스테미나가 다 떨어졌으면 공격을 못한다.
         if (PlayableCharacter.Instance.status.CurStamina <= 0)
             return;
+
         //if (PlayableCharacter.Instance.status.CurStamina)
         //{
 
@@ -282,6 +290,8 @@ public class CAttackComponent : BaseComponent
                 return;
         }
 
+
+        //여기에서 진짜 공격 시작
         //공격중으로 바꿈
         if (curval.IsAttacking == false)
         {
@@ -382,6 +392,8 @@ public class CAttackComponent : BaseComponent
             effectobj.transform.parent = null;
         }
 
+        
+
         //공격이 끝난 후 일정 시간 동안 입력을 넣음으로써 연결 동작 실행 가능
         if (!IsLinkable)
         {
@@ -405,9 +417,11 @@ public class CAttackComponent : BaseComponent
         lastAttackTime = Time.time;
 
         //마지막으로 공격을 끝내고 돌아가는데 다음 연결 동작정보가 있으면 연결동작을 실행하고 
+        //링크 공격을 할때 방향키를 입력하고 있으면 해당 방향으로 공격할 수 있도록 하자
         if (/*NextAttackNum != -1*/NextAttack == true)
         {
             curval.IsAttacking = false;
+            LastMonsterID = -1;
             Attack();
         }
         //없으면 복귀동작을 실행한다.
@@ -422,6 +436,7 @@ public class CAttackComponent : BaseComponent
     {
         //Debug.Log("[Attack] 공격 진짜 마지막 끝");
         curval.IsAttacking = false;
+        LastMonsterID = -1;
     }
 
     

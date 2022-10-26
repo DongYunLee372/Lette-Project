@@ -165,16 +165,8 @@ MonoBehaviour:
     m_Address: Boss_HP
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 910387f4fb8e80c419d0dc45a1cc4f4d
-    m_Address: Brazier
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 540a2e88dbef67c4f85cb779a44d1f2d
     m_Address: ButtonListner
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 9a8903811a1b8eb46b4a5d94d6eee272
-    m_Address: Dust
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: f2c73200962aea749bf4beaa8acf288a
@@ -183,10 +175,6 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 6f95e6b4d87912f4caa1a02676746b2a
     m_Address: Estust
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 6a3e79d549ed8fd4e90704bd1991a0ac
-    m_Address: Fog
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 16e50229ff23d7840b95134739f65244
@@ -239,10 +227,6 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: cc8884be57bcf624684c43620abc4fec
     m_Address: StartUI
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: fdea3114f1d3440488e6199fb419840d
-    m_Address: Torch
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 5e452b9fd9cc1884ca2d1fe458df33d9

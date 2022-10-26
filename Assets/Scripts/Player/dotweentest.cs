@@ -28,6 +28,8 @@ public class dotweentest : MonoBehaviour
 
             sq.Start();
 
+            //Vector3 targetpos = transform.position + (-transform.right * speed * Time.deltaTime);
+
 
             //Dotween dotween = new Dotween();
             //dotween.SetEase(Dotween.Ease.easeInCubic);
