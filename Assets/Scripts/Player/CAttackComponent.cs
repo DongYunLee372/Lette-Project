@@ -117,10 +117,10 @@ public class CAttackComponent : BaseComponent
         weaponcollider = GetComponentInChildren<WeaponCollider>();
         weaponcollider?.SetCollitionFunction(MonsterAttack);
 
-        if (effectparent == null)
-        {
-            effectparent = new GameObject("EffectsContainer").transform;
-        }
+        //if (effectparent == null)
+        //{
+        //    effectparent = new GameObject("EffectsContainer").transform;
+        //}
 
         Initsetting();
         AnimationEventsSetting();
@@ -379,7 +379,7 @@ public class CAttackComponent : BaseComponent
     {
         if (effectobj != null)
         {
-            effectobj.transform.parent = effectparent;
+            effectobj.transform.parent = null;
         }
 
         //공격이 끝난 후 일정 시간 동안 입력을 넣음으로써 연결 동작 실행 가능
