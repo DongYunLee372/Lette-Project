@@ -43,7 +43,10 @@ public class MainOption : MonoBehaviour
         set
         {
             _reversemouse = value;
-            r_invoker(value);
+            if (r_invoker != null)
+            {
+                r_invoker(value);
+            }
         }
     }
     public bool AutoeVade
@@ -55,7 +58,10 @@ public class MainOption : MonoBehaviour
         set
         {
             _autoevad = value;
-            a_invoker(value);
+            if (a_invoker != null)
+            {
+                a_invoker(value);
+            }
         }
     }
     public bool LooKon
@@ -67,7 +73,10 @@ public class MainOption : MonoBehaviour
         set
         {
             _lookon = value;
-            l_invoker(value);
+            if (l_invoker != null)
+            {
+                l_invoker(value);
+            }
         }
     }
     public float MouseSensetive
@@ -145,7 +154,8 @@ public class MainOption : MonoBehaviour
         {
             UIManager.Instance.Prefabsload("StartUI", Canvas_Enum.CANVAS_NUM.start_canvas);
         }
-        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[0]);
+        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().clip=(SoundManager.Instance.Bgm[0]);
+        SoundManager.Instance.bgmSource.Play();
         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop=true;
         GameMG.Instance.Loading_screen(false);
     }
