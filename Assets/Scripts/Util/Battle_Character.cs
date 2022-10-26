@@ -248,7 +248,7 @@ public class Battle_Character : MonoBehaviour
     {
         if (soundname == "Walk")
         {
-
+            SoundManager.Instance.effectSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Boss_Audio[0]);
         }
         else if (soundname == "attack")
         {
