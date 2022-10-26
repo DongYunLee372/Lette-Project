@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a92ec0a4f7b0f459deee4e31b8b720, type: 3}
   m_Name: LoadingRestart
   m_EditorClassIdentifier: 
-  LoadingData: []
+  LoadingData:
+  - {fileID: 11400000, guid: dc190c104e624594d924ccf5b14f8e5d, type: 2}

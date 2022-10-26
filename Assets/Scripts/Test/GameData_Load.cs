@@ -392,21 +392,48 @@ public class GameData_Load : Singleton<GameData_Load>
                 EndunLoadBossScene();
                 break;
         }
+        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().clip = (SoundManager.Instance.Bgm[0]);
+        SoundManager.Instance.bgmSource.Play();
     }
 
-    public void MonsterDead()
+    public void MonsterDead(GameObject delete_monster)
     {
-        if(MonsterCount==0)
-        {
-
-        }
-
+        StartCoroutine(DeadMonster_delete(delete_monster));
         MonsterCount--;
+        if (MonsterCount==0)
+        {
+            StartCoroutine(SceneChange());
+        }
+      
        // StartCoroutine()
         if(MonsterCount<=0)
         {
             UnloadMonster();
         }
+    }
+
+    IEnumerator SceneChange()
+    {
+        yield return new WaitForSeconds(2f);
+        Fog.Instance.OffFog();
+        SkyboxManager.Instance.SkyBox_Change("FS003_Day_Cubemap");
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage2);
+    }
+
+    IEnumerator DeadMonster_delete(GameObject delete)
+    {
+        yield return new WaitForSeconds(2f);
+
+        for(int i=0; i<MonsterCount; i++)
+        {
+            var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton");
+            if(temp== delete)
+            {
+              AddressablesLoadManager.Instance.Delete_Object<GameObject>(delete);  //몬스터 삭제
+                break;
+            }
+        }
+
     }
 
     void UnloadMonster()
@@ -434,6 +461,8 @@ public class GameData_Load : Singleton<GameData_Load>
                 AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //몬스터 삭제. 
             }
         }
+
+        MonsterCount = 0;
     }
 
     //보트 씬 내리기
@@ -889,8 +918,10 @@ public class GameData_Load : Singleton<GameData_Load>
                 switch(GameMG.Instance.scenes_Stage)
                 {
                     case Scenes_Stage.Stage1:
-                        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[2]);
-                        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
+                        //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[2]);
+                        //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
+                        SoundManager.Instance.bgmSource.GetComponent<AudioSource>().clip = (SoundManager.Instance.Bgm[2]);
+                        SoundManager.Instance.bgmSource.Play();
                         break;
                     case Scenes_Stage.Stage2:
 
