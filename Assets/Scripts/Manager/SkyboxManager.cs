@@ -23,6 +23,7 @@ public class SkyboxManager : Singleton<SkyboxManager>
     {
         foreach (Material m in skybox_Mat)
         {
+            Debug.Log("m 네임 : " + m.name + "스카이박스 네임 : " + skybox_name);
             if (m.name == skybox_name)
                 RenderSettings.skybox = m;
         }
