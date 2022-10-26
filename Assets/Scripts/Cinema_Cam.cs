@@ -18,7 +18,7 @@ public class Cinema_Cam : MonoBehaviour
         v.z -= 20f;
         cam.gameObject.SetActive(false);
         
-        
+        //욜루
 
     }
     public void CamStart()
