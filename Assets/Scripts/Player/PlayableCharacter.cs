@@ -64,7 +64,7 @@ public class PlayableCharacter : MonoBehaviour
         return true;
     }
 
-
+    bool flag = false;
 
     /*초기화*/
     private void Start()
@@ -266,7 +266,7 @@ public class PlayableCharacter : MonoBehaviour
             //                 new KeyValuePair<string, AnimationEventSystem.endCallback>("_Dead", Restart));
 
             //movecom.com.animator.Play("_Dead");
-            movecom.com.animator.Play<string>("_Dead", Restart,"dlfjs", 1.0f, 0.0f, 0.2f );
+            movecom.com.animator.Play("_Dead", 1.0f, 0.0f, 0.2f, Restart);
 
 
 
