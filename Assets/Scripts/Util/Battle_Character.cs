@@ -232,6 +232,8 @@ public class Battle_Character : MonoBehaviour
 
         EffectManager.Instance.InstantiateEffect(damaged_Effect, point);
 
+        SoundManager.Instance.effectSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Player_Audio[2]);
+
         //GameObject effectobj = GameObject.Instantiate(damaged_Effect);
         //effectobj.transform.position = point;
         //effectobj.transform.rotation = transform.rotation;
