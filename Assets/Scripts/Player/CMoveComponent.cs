@@ -851,6 +851,7 @@ public class CMoveComponent : BaseComponent
     public void LookAtBody(Vector3 lookdir)
     {
         Vector3 rot = Quaternion.LookRotation(lookdir, Vector3.up).eulerAngles;
+        //Quaternion.AngleAxis
 
         Vector3 temp = com.TpCamRig.eulerAngles;
 

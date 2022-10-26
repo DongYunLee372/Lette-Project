@@ -165,6 +165,7 @@ public class CAttackComponent : BaseComponent
         //AttackInfoSetting(LoadedAttackInfoDic["2"], attackinfos[2]);
     }
 
+    int LastMonsterID = -1;
 
     public void MonsterAttack(Collider collision)
     {
@@ -173,6 +174,12 @@ public class CAttackComponent : BaseComponent
 
         if (collision.gameObject.tag == monstertag)
         {
+            int nowMonsterID = collision.gameObject.GetInstanceID();
+            if(LastMonsterID == nowMonsterID)
+                return;
+
+            LastMonsterID = nowMonsterID;
+
             //collision.GetComponent<Battle_Character>().Damaged((int)attackinfos[CurAttackNum].damage, this.transform.position);
             collision.GetComponent<Battle_Character>().Damaged((int)AttackInfos[CurAttackNum].damage, this.transform.position);
             //Debug.Log("공격 들어옴");
@@ -381,6 +388,8 @@ public class CAttackComponent : BaseComponent
         {
             effectobj.transform.parent = null;
         }
+
+        LastMonsterID = -1;
 
         //공격이 끝난 후 일정 시간 동안 입력을 넣음으로써 연결 동작 실행 가능
         if (!IsLinkable)
