@@ -2461,7 +2461,7 @@ MonoBehaviour:
   effectmanager: {fileID: 0}
   _outoFocus: 0
   _monsterObject: []
-  _monsterSearchTime: 3
+  _monsterSearchTime: 1.5
   CurMonsterIndex: 0
   IsFocusingOn: 0
   CurFocusedIndex: -1

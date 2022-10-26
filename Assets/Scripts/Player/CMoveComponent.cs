@@ -232,25 +232,25 @@ public class CMoveComponent : BaseComponent
         if (dir== Direction.Front)
         {
             tempdir = new Vector3(0, 0, 1);
-            Debug.Log("guardleft");
+            //Debug.Log("guardleft");
             com.animator.Play(moveoption.GuardFrontMoveClip, 1.5f);
         }
         else if(dir == Direction.Left)
         {
             tempdir = new Vector3(-1, 0, 0);
-            Debug.Log("guardleft");
+            //Debug.Log("guardleft");
             com.animator.Play(moveoption.GuardLeftMoveClip, 1.5f);
         }
         else if(dir == Direction.Right)
         {
             tempdir = new Vector3(1, 0, 0);
-            Debug.Log("guardright");
+            //Debug.Log("guardright");
             com.animator.Play(moveoption.GuardRightMoveClip, 1.5f);
         }
         else
         {
             tempdir = new Vector3(0, 0, -1);
-            Debug.Log("guardback");
+            //Debug.Log("guardback");
             com.animator.Play(moveoption.GuardBackMoveClip, 1.5f);
         }
         tempmove = com.TpCamRig.TransformDirection(tempdir);
@@ -466,7 +466,7 @@ public class CMoveComponent : BaseComponent
                 int a = 0;
             }
 
-            Debug.DrawLine(this.transform.position, this.transform.position + (curval.CurHorVelocity + curval.CurVirVelocity));
+            //Debug.DrawLine(this.transform.position, this.transform.position + (curval.CurHorVelocity + curval.CurVirVelocity));
             com.CharacterRig.velocity = curval.CurHorVelocity + curval.CurVirVelocity;
         }
         else
@@ -563,13 +563,13 @@ public class CMoveComponent : BaseComponent
         
         if (com.animator.GetPlaySpeed() != 0.0f)
         {
-            Debug.Log("멈춤");
+            //Debug.Log("멈춤");
             com.animator.Pause();
             StartCoroutine(timecounter.Cor_TimeCounter(moveoption.KnockDownTime, KnockDownPause));
         }
         else
         {
-            Debug.Log("다시시작");
+            //Debug.Log("다시시작");
             com.animator.Resume();
         }
 
@@ -577,7 +577,7 @@ public class CMoveComponent : BaseComponent
 
     public void KnockDownEnd(string s_val)
     {
-        Debug.Log($"{s_val} 들어옴");
+        //Debug.Log($"{s_val} 들어옴");
         curval.IsKnockDown = false;
     }
 
@@ -593,13 +593,13 @@ public class CMoveComponent : BaseComponent
 
         curval.IsKnockBack = true;
 
-        Debug.Log($"넉백실행");
+        //Debug.Log($"넉백실행");
         com.animator.Play(moveoption.KnockBackClip.name);
     }
 
     public void KnockBackEnd(string s_val)
     {
-        Debug.Log($"{s_val} 들어옴");
+        //Debug.Log($"{s_val} 들어옴");
         curval.IsKnockBack = false;
     }
 

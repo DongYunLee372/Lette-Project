@@ -253,7 +253,7 @@ public class CAttackComponent : BaseComponent
         if (curval.IsAttacking && !IsLinkable)
         {
             int a = 0;
-            Debug.Log("[Attack]공격나가버림");
+            //Debug.Log("[Attack]공격나가버림");
             return;
         }
 
@@ -263,7 +263,7 @@ public class CAttackComponent : BaseComponent
         //이런식으로하면 실제로 다음공격이 실행될때 여기서 걸려버린다. -> 링크 공격이 실행되는 타이밍을 조절하는것으로 해결
         if (curval.IsAttacking && IsLinkable && /*NextAttackNum == -1*/NextAttack == false)
         {
-            Debug.Log("[Attack]선입력들어옴");
+            //Debug.Log("[Attack]선입력들어옴");
 
             NextAttackNum = (CurAttackNum + 1) % AttackInfos.Count;
             NextAttackInfo = AttackInfos[NextAttackNum];
@@ -298,7 +298,7 @@ public class CAttackComponent : BaseComponent
             //다음 동작으로 넘어가기 위한
             if (IsLinkable)
             {
-                Debug.Log("링크가능");
+                //Debug.Log("링크가능");
 
                 CurAttackNum = (CurAttackNum + 1) % AttackInfos.Count;
             }
@@ -420,8 +420,15 @@ public class CAttackComponent : BaseComponent
 
     public void IsAttackingEnd()
     {
-        Debug.Log("[Attack] 공격 진짜 마지막 끝");
+        //Debug.Log("[Attack] 공격 진짜 마지막 끝");
         curval.IsAttacking = false;
+    }
+
+    public void Damaged_Attacking(float damage, Vector3 hitpoint, float Groggy)
+    {
+
+        AttackCutOff();
+        PlayableCharacter.Instance.Damaged(damage, hitpoint, Groggy);
     }
 
 

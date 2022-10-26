@@ -219,7 +219,7 @@ public class EffectManager : MySingleton<EffectManager>
 
         if (effect == null)
         {
-            Debug.Log($"{this.name} not exist effect");
+            //Debug.Log($"{this.name} not exist effect");
             return;
         }
 
