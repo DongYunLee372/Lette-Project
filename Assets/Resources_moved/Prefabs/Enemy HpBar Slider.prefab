@@ -26,6 +26,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3240428724719931150}
   m_Father: {fileID: 794537287076013126}
@@ -64,6 +65,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 794537287076013126}
   m_RootOrder: 0
@@ -139,6 +141,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4869178732357206361}
   m_RootOrder: 0
@@ -214,6 +217,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 298843755836986866}
   - {fileID: 4869178732357206361}
@@ -288,6 +292,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f0c37feef0c2742a9951c3b7e6a0fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  main: {fileID: 0}
   canvas: {fileID: 0}
+  enemyHpBarCanvas: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   enemyTr: {fileID: 0}
+  myhp: {fileID: 0}
+  Curhp: 0
+  Maxhp: 0
+  hpBarOffset: {x: 0.5, y: 3, z: 0}
+  MyHpbar: {fileID: 0}
+  battle_Character: {fileID: 0}
+  battle_character_obj: {fileID: 0}
+  my: {fileID: 0}

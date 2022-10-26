@@ -29,7 +29,7 @@ public class UITest : MonoBehaviour
             //  UIManager.Instance.CanvaschildRemove(CANVAS_NUM.enemy_canvas);
             //UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
             SoundManager.Instance.effectSource.PlayOneShot( SoundManager.Instance.Boss_Audio[0]);
-
+            
        
             //StartCoroutine(CharacterCreate.Instance.CreateMonster_(EnumScp.MonsterIndex.mon_01_01, transf));
             Debug.Log(transf);
