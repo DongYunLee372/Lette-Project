@@ -98,7 +98,13 @@ public class OnclickButton : MonoBehaviour
 
     public void b_Restart() //재시작 
     {
+        GameObject canvas = UIManager.Instance.Canvasreturn(CANVAS_NUM.start_canvas);
+        canvas.GetComponent<MainOption>().GameStart = true;
+        canvas.GetComponent<MainOption>().ShowOption = false;
+        canvas.GetComponent<MainOption>().mainoption = false;
         GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void b_Exitgame() //종료 
