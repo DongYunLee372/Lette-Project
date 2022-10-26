@@ -66,7 +66,7 @@ public class AnimationController : MonoBehaviour
         {
             float time = m_clips[pname].length;
             time = time / PlaySpeed;
-
+            time += 1.0f;
             StartCoroutine(timer.Cor_TimeCounter(time, invoker));
         }
 
@@ -97,7 +97,7 @@ public class AnimationController : MonoBehaviour
         {
             float time = m_clips[pname].length;
             time = time / PlaySpeed;
-
+            //time += 1.0f;
             StartCoroutine(timer.Cor_TimeCounter<T>(time, invoker, val));
         }
 

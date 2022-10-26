@@ -205,7 +205,7 @@ public class CAttackComponent : BaseComponent
             movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
-
+        
         //이미 공격중일떄는 스킬 사용이 불가능
         if (curval.IsAttacking)
             return;
@@ -252,10 +252,6 @@ public class CAttackComponent : BaseComponent
         if (PlayableCharacter.Instance.status.CurStamina <= 0)
             return;
 
-        //if (PlayableCharacter.Instance.status.CurStamina)
-        //{
-
-        //}
 
         //이미 공격 중이고 링크가 불가능하면 공격이 실행되지 않는다.
         if (curval.IsAttacking && !IsLinkable)
@@ -292,6 +288,10 @@ public class CAttackComponent : BaseComponent
 
 
         //여기에서 진짜 공격 시작
+        CInputComponent input = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.InputCom) as CInputComponent;
+        input.GetWASD();
+        movecom.LookAtBody2();
+
         //공격중으로 바꿈
         if (curval.IsAttacking == false)
         {

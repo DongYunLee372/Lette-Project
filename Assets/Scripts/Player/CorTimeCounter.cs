@@ -60,20 +60,36 @@ public class CorTimeCounter
         }
     }
 
-    
     public IEnumerator Cor_TimeCounter<T>(float time, TInvoker<T> invoker, T val)
     {
-        float starttime = Time.time;
+        float curtime = 0;
+        float lasttime = Time.time;
         while (true)
         {
-            if ((Time.time - starttime) >= time)
+            curtime += Time.time - lasttime;
+            if ((curtime) >= time)
             {
                 invoker?.Invoke(val);
                 yield break;
             }
+            lasttime = Time.time;
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
+    //public IEnumerator Cor_TimeCounter<T>(float time, TInvoker<T> invoker, T val)
+    //{
+    //    float starttime = Time.time;
+    //    //float lasttime = time.time;
+    //    while (true)
+    //    {
+    //        if ((Time.time - starttime) >= time)
+    //        {
+    //            invoker?.Invoke(val);
+    //            yield break;
+    //        }
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //}
 
     public IEnumerator Cor_TimeCounter<T1, T2>(float time, TInvoker<T1, T2> invoker, T1 val1, T2 val2)
     {

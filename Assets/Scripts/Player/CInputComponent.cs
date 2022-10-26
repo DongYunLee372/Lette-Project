@@ -54,6 +54,63 @@ public class CInputComponent : BaseComponent
 
 
     private GameObject canvas;
+    CharacterStateMachine.eCharacterState state;
+
+    public void GetWASD()
+    {
+        float v = 0;
+        float h = 0;
+        //wasd 처리
+        if (Input.GetKey(_key.foward))
+        {
+            v += 1.0f;
+            if (state == CharacterStateMachine.eCharacterState.Guard)
+            {
+                movecom.GuardMove(CMoveComponent.Direction.Front);
+                //return;
+            }
+
+
+        }
+        if (Input.GetKey(_key.back))
+        {
+            v -= 1.0f;
+            if (state == CharacterStateMachine.eCharacterState.Guard)
+            {
+                movecom.GuardMove(CMoveComponent.Direction.Back);
+                //return;
+            }
+
+
+
+        }
+        if (Input.GetKey(_key.left))
+        {
+            h -= 1.0f;
+            if (state == CharacterStateMachine.eCharacterState.Guard)
+            {
+                movecom.GuardMove(CMoveComponent.Direction.Left);
+                //return;
+            }
+
+
+
+        }
+        if (Input.GetKey(_key.right))
+        {
+            h += 1.0f;
+            if (state == CharacterStateMachine.eCharacterState.Guard)
+            {
+                movecom.GuardMove(CMoveComponent.Direction.Right);
+                //return;
+            }
+
+
+
+        }
+
+        movecom.MoveDir = new Vector3(h, 0, v);
+    }
 
     //키와 마우스 입력을 처리한다.
     void KeyInput()
@@ -71,11 +128,10 @@ public class CInputComponent : BaseComponent
 
         if (movecom == null)
             movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
+        state = CharacterStateMachine.Instance.GetState();
 
 
-        float v = 0;
-        float h = 0;
+        
         if(movecom==null)
         {
             int abe = 0;
@@ -183,75 +239,26 @@ public class CInputComponent : BaseComponent
             //스킬1번
             if (Input.GetKeyDown(_key.skill01))
             {
-                SkillAttack(0);
+                //SkillAttack(0);
                 return;
             }
 
             //스킬2번
             if (Input.GetKeyDown(_key.skill02))
             {
-                SkillAttack(1);
+                //SkillAttack(1);
                 return;
             }
 
             //스킬3번
             if (Input.GetKeyDown(_key.skill03))
             {
-                SkillAttack(2);
+                //SkillAttack(2);
                 return;
             }
         }
 
-        //wasd 처리
-        if (Input.GetKey(_key.foward))
-        {
-            v += 1.0f;
-            if (state == CharacterStateMachine.eCharacterState.Guard)
-            {
-                movecom.GuardMove(CMoveComponent.Direction.Front);
-                //return;
-            }
-
-
-        }
-        if (Input.GetKey(_key.back))
-        {
-            v -= 1.0f;
-            if (state == CharacterStateMachine.eCharacterState.Guard)
-            {
-                movecom.GuardMove(CMoveComponent.Direction.Back);
-                //return;
-            }
-
-
-
-        }
-        if (Input.GetKey(_key.left))
-        {
-            h -= 1.0f;
-            if (state == CharacterStateMachine.eCharacterState.Guard)
-            {
-                movecom.GuardMove(CMoveComponent.Direction.Left);
-                //return;
-            }
-
-
-
-        }
-        if (Input.GetKey(_key.right))
-        {
-            h += 1.0f;
-            if (state == CharacterStateMachine.eCharacterState.Guard)
-            {
-                movecom.GuardMove(CMoveComponent.Direction.Right);
-                //return;
-            }
-
-
-
-        }
-
-        movecom.MoveDir = new Vector3(h, 0, v);
+        GetWASD();
         movecom.curval.IsRunning = false;
 
         if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
@@ -382,38 +389,38 @@ public class CInputComponent : BaseComponent
             //movecom.KnockDown();
         }
 
-        //테스트
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            ResourceCreateDeleteManager.Instance.RegistPoolManager<dotweentest>("testcube");
-        }
+        ////테스트
+        //if (Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    ResourceCreateDeleteManager.Instance.RegistPoolManager<dotweentest>("testcube");
+        //}
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            testtestobj = ResourceCreateDeleteManager.Instance.InstantiateObj<dotweentest>("testcube");
-        }
+        //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    testtestobj = ResourceCreateDeleteManager.Instance.InstantiateObj<dotweentest>("testcube");
+        //}
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            testtestobj2 = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Testcube2");
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    testtestobj2 = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Testcube2");
+        //}
 
 
 
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            ResourceCreateDeleteManager.Instance.RegistPoolManager<GameObject>("Testcube2");
-        }
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    ResourceCreateDeleteManager.Instance.RegistPoolManager<GameObject>("Testcube2");
+        //}
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            ResourceCreateDeleteManager.Instance.DestroyObj<dotweentest>("testcube", testtestobj.gameObject);
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    ResourceCreateDeleteManager.Instance.DestroyObj<dotweentest>("testcube", testtestobj.gameObject);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>("Testcube2", testtestobj2);
-        }
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>("Testcube2", testtestobj2);
+        //}
 
 
 

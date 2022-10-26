@@ -858,6 +858,18 @@ public class CMoveComponent : BaseComponent
         com.FpRoot.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
     }
 
+    public void LookAtBody2()
+    {
+        Vector3 tempworldmove = com.TpCamRig.TransformDirection(MoveDir);
+
+        Vector3 rot = Quaternion.LookRotation(tempworldmove, Vector3.up).eulerAngles;
+        //Quaternion.AngleAxis
+
+        Vector3 temp = com.TpCamRig.eulerAngles;
+
+        com.FpRoot.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
+    }
+
     public void LookAtToLookDir()
     {
         Vector3 lookdir = com.TpCamRig.forward;

@@ -261,16 +261,24 @@ public class PlayableCharacter : MonoBehaviour
         if (status.CurHP<=0)
         {
             CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
-            movecom.eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-                             new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-                             new KeyValuePair<string, AnimationEventSystem.endCallback>("_Dead", Restart));
+            //movecom.eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+            //                 new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+            //                 new KeyValuePair<string, AnimationEventSystem.endCallback>("_Dead", Restart));
 
-            movecom.com.animator.Play("_Dead");    
+            //movecom.com.animator.Play("_Dead");
+            movecom.com.animator.Play<string>("_Dead", Restart,"dlfjs", 1.0f, 0.0f, 0.2f );
+
+
 
         }
 
     }
 
+    public void Restart()
+    {
+        CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
+    }
 
     public void Restart(string _val)
     {
