@@ -1127,7 +1127,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
                 GameMG.Instance.Loading_screen(true);
                // StartCoroutine(setLoad(true));
 
-                SceneLoadCheck = true;
+               // SceneLoadCheck = true;
                 Debug.Log("씬언로드완료");
                 break;
             case AsyncOperationStatus.Failed:
@@ -1148,6 +1148,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
                 //GameMG.Instance.Loading_screen(false);
               //  StartCoroutine(setLoad(false));
                 SceneLoadCheck = true;
+              // GameData_Load.Instance.DataLoad();
                 Debug.Log("씬로드완료");
 
                 break;

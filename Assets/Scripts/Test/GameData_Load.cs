@@ -299,9 +299,11 @@ public class GameData_Load : Singleton<GameData_Load>
                     switch (GameMG.Instance.scenes_Stage)
                     {
                         case Scenes_Stage.Stage1:   //스테이지 1에서 죽었을때
-                            //ImageCheck = true;
+                                                    //ImageCheck = true;
+                            Debug.Log("로딩재시작");
                             EndunLoadBoatScene();
                             StartCoroutine(restartLoading_());
+
                             //LoadingImgae.SetActive(true);
 
                             //unloadBoatScene(Scenes_Stage.restart_Loading);
@@ -322,9 +324,18 @@ public class GameData_Load : Singleton<GameData_Load>
         }
     }
 
+    //void check()
+    //{
+    //    Debug.Log("로딩재시작");
+    //    EndunLoadBoatScene();
+    //    StartCoroutine(restartLoading_());
+    //}
+
     IEnumerator restartLoading_()
     {
-
+        Debug.Log("로딩재시작3");
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("LoadingImage");
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("LoadingText");
         GameObject Loading = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingImage");
         GameObject LoadingText = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>("LoadingText");
         if (LoadingImgae == null)
@@ -345,10 +356,13 @@ public class GameData_Load : Singleton<GameData_Load>
 
         AddressablesLoadManager.Instance.SingleAsset_Load<GameLoadingData>("LoadingRestart");
         gameLoadingData = AddressablesLoadManager.Instance.FindLoadAsset<GameLoadingData>("LoadingRestart");
-
+        if(gameLoadingData==null)
+        {
+            Debug.Log("게임데이터null");
+        }
         LoadingData_ListIN(out List<string> loadkey);
-        AddressablesLoadManager.Instance.MultiAsset_Load<Sprite>(loadkey);
-
+         AddressablesLoadManager.Instance.MultiAsset_Load<Sprite>(loadkey);
+      
         LoadingImgae.GetComponent<Image>().sprite = AddressablesLoadManager.Instance.FindLoadAsset<Sprite>(loadingDatas[0].ImageName);
         LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = loadingDatas[0].scripts;
 
@@ -359,7 +373,8 @@ public class GameData_Load : Singleton<GameData_Load>
 
         //  LoadingText_Ins.GetComponent<TextMeshProUGUI>().text = "";
         // LoadingImgae.SetActive(false);
-        StartCoroutine(AddressablesLoadManager.Instance.Delete_Object<Sprite>(loadkey));
+        //  StartCoroutine(AddressablesLoadManager.Instance.Delete_Object<Sprite>(loadkey));
+        AddressablesLoadManager.Instance.Delete_Object<Sprite>(loadingDatas[0].ImageName);
 
         switch (GameMG.Instance.scenes_Stage)
         {
@@ -377,7 +392,7 @@ public class GameData_Load : Singleton<GameData_Load>
                 break;
         }
         //로딩
-
+        yield break;
     }
 
     void AllanloadScene()  //게임 종료
@@ -480,6 +495,7 @@ public class GameData_Load : Singleton<GameData_Load>
     //보트 씬 내리기
     void EndunLoadBoatScene()
     {
+        Debug.Log("로딩재시작1");
         AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
         var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
@@ -919,17 +935,21 @@ public class GameData_Load : Singleton<GameData_Load>
     {
         while (true)
         {
+            Debug.Log("씬로딩중??");
+
             if (AddressablesLoadManager.Instance.SceneLoadCheck == true)
             {
-                Debug.Log("gpg?");
+                Debug.Log("씬로딩끝??");
                 DataLoad(tempsave);
-                Debug.Log("gpg2?");
+                Debug.Log("캐릭로딩끝?");
                 AddressablesLoadManager.Instance.SceneLoadCheck = false;
                 yield return new WaitForSeconds(1f);
 
                 switch (GameMG.Instance.scenes_Stage)
                 {
                     case Scenes_Stage.Stage1:
+                        Debug.Log("bgm~~?");
+
                         //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[2]);
                         //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
                         SoundManager.Instance.bgmSource.GetComponent<AudioSource>().clip = (SoundManager.Instance.Bgm[2]);

@@ -249,10 +249,6 @@ MonoBehaviour:
     m_Address: UIBar
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 13ab71a1a87696644915c5107039e51d
-    m_Address: BoatScene 1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 9efca6b87f1cc7644b8f353580293741
     m_Address: Loading_tip_deck
     m_ReadOnly: 0
@@ -299,6 +295,14 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 78905dabd1e15854fbe40bf8cd43aae9
     m_Address: LoadingRestart
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5fc360903cf4b8c49bda26506f29b020
+    m_Address: BoatScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 26e13c7c8aacf0c41a5e02d292da3b74
+    m_Address: Roomtest
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
