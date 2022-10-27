@@ -2760,7 +2760,8 @@ MonoBehaviour:
   GuardStunTime: 0.2
   MaxGuardGauge: 0
   BalanceDecreaseVal: 10
-  GuardStunClip: {fileID: 7400000, guid: a9fa651f83be0e7448e1823843611419, type: 2}
+  GuardStunClip: {fileID: 7400000, guid: 0e4769155aaa97540a1d9737b3062084, type: 2}
+  GuardStunClipName: _GuardStun_Avatar
   GuardClip: {fileID: 7400000, guid: a2ce05986eb5d08499f73d9ba82bc759, type: 2}
   GuardEffect: {fileID: 167046, guid: 6062cf74dd326b146b31d28120ade333, type: 3}
   guardeffectpos: {fileID: 489346842}

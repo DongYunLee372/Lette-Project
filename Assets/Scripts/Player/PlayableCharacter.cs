@@ -261,11 +261,15 @@ public class PlayableCharacter : MonoBehaviour
         if (status.CurHP<=0)
         {
             CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
+
+            #region 현장보존
             //movecom.eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
             //                 new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
             //                 new KeyValuePair<string, AnimationEventSystem.endCallback>("_Dead", Restart));
 
             //movecom.com.animator.Play("_Dead");
+            #endregion
+
             movecom.com.animator.Play("_Dead", 1.0f, 0.0f, 0.2f, Restart);
 
 

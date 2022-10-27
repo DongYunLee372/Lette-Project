@@ -16,6 +16,7 @@ public class CGuardComponent : BaseComponent
     public int MaxGuardGauge;//
     public int BalanceDecreaseVal;
     public AnimationClip GuardStunClip;
+    public string GuardStunClipName;
     public AnimationClip GuardClip;
     public GameObject GuardEffect;
     public Transform guardeffectpos;
@@ -74,6 +75,9 @@ public class CGuardComponent : BaseComponent
     //
     public void GuardDown()
     {
+        if (movecom == null)
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+
         if (!movecom.curval.IsGuard)
             return;
 
@@ -204,9 +208,9 @@ public class CGuardComponent : BaseComponent
     public void GuardStun()
     {
         CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.GuardStun);
-        animator.Play(GuardStunClip.name,2.8f);
-        stuncoroutine = Cor_TimeCounter(GuardStunTime, StunEnd);
-        StartCoroutine(stuncoroutine);
+        animator.Play(GuardStunClipName, 2.0f, 0.0f, 0.2f, StunEnd);
+        //stuncoroutine = Cor_TimeCounter(GuardStunTime, StunEnd);
+        //StartCoroutine(stuncoroutine);
         // Cor_TimeCounter
     }
 

@@ -629,6 +629,8 @@ public class CMoveComponent : BaseComponent
         if (Time.time - lastRollingTime <= moveoption.NextRollingTime) 
             return;
 
+
+
         //스테미나가 0이 아니면 실행 가능
         if (PlayableCharacter.Instance.status.CurStamina > 0)
         {
@@ -639,6 +641,7 @@ public class CMoveComponent : BaseComponent
             return;
         }
 
+        Debug.Log("[Attack] 구리기 시작");   
         curval.IsRolling = true;
         com.animator.Play("_Rolling", moveoption.RollingClipPlaySpeed);
 
@@ -860,7 +863,11 @@ public class CMoveComponent : BaseComponent
 
     public void LookAtBody2()
     {
-        Vector3 tempworldmove = com.TpCamRig.TransformDirection(MoveDir);
+        Vector3 tempworldmove;
+        if (MoveDir != Vector3.zero)
+            tempworldmove = com.TpCamRig.TransformDirection(MoveDir);
+        else
+            tempworldmove = com.TpCamRig.forward;
 
         Vector3 rot = Quaternion.LookRotation(tempworldmove, Vector3.up).eulerAngles;
         //Quaternion.AngleAxis

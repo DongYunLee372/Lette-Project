@@ -420,6 +420,7 @@ public class CAttackComponent : BaseComponent
         //링크 공격을 할때 방향키를 입력하고 있으면 해당 방향으로 공격할 수 있도록 하자
         if (/*NextAttackNum != -1*/NextAttack == true)
         {
+            Debug.Log("[Attack]attackend");
             curval.IsAttacking = false;
             LastMonsterID = -1;
             Attack();
@@ -435,6 +436,7 @@ public class CAttackComponent : BaseComponent
     public void IsAttackingEnd()
     {
         //Debug.Log("[Attack] 공격 진짜 마지막 끝");
+        Debug.Log("[Attack]attackend");
         curval.IsAttacking = false;
         LastMonsterID = -1;
     }
