@@ -191,7 +191,7 @@ public class GameData_Load : Singleton<GameData_Load>
                     // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
                     GameObject abc = new GameObject();
                     abc.transform.position = s.Position;
-                    CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, abc.transform, s.prefabsName);
+                    StartCoroutine( CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, abc.transform, s.prefabsName));
                     Destroy(abc);
                 }
                 else if (s.prefabsName == "PlayerCharacter")
@@ -219,7 +219,7 @@ public class GameData_Load : Singleton<GameData_Load>
                     Debug.Log("스켈레톤 좌표 :" + s.Position);
                     Debug.Log("스켈레톤 생성");
                     MonsterCount++;
-                    CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName);
+                    StartCoroutine( CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName));
                     //생성한 포지션 삭제
                     Destroy(Monster);
                 }
