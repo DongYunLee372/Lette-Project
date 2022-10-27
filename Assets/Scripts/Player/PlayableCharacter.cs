@@ -301,23 +301,47 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     //적 탐색 & 포커싱 세팅
+    
+
+    enum eSearchPoint
+    {
+        Center,
+        Top,
+        Right,
+        Bottom,
+        Left,
+        SMax
+    }
+
     [System.Serializable]
     public class Battle_Character_Info
     {
-        public Battle_Character_Info(Battle_Character monster)
+        public Battle_Character_Info(GameObject monster, BoxCollider coll)
         {
             _monster = monster;
+            _coll = coll;
             _distance = 0;
             _index = -1;
             _isFocused = false;
             _isBlocked = false;
+            _searchPoint = new Vector3[5];
+            //피봇으로부터 얼마만큼 떨어져 있는지
+            Vector3 center = coll.center;
+            Vector3 size = coll.size;
+            _searchPoint[(int)eSearchPoint.Center] = center;
+            _searchPoint[(int)eSearchPoint.Top] = center + new Vector3(0, size.y/2, 0);
+            _searchPoint[(int)eSearchPoint.Right] = center + new Vector3(size.x/2, 0, 0);
+            _searchPoint[(int)eSearchPoint.Bottom] = center + new Vector3(0, -size.y / 2, 0);
+            _searchPoint[(int)eSearchPoint.Left] = center + new Vector3(-size.x / 2, 0, 0);
         }
 
-        public Battle_Character _monster;
+        public GameObject _monster;
+        public BoxCollider _coll;
         public float _distance;
         public int _index;
         public bool _isFocused;
         public bool _isBlocked;
+        public Vector3[] _searchPoint;
     }
 
     public bool _outoFocus = false;
@@ -348,64 +372,115 @@ public class PlayableCharacter : MonoBehaviour
     private float lastsearchTime;
 
     public int CurMonsterIndex = 0;
-
-    public bool IsFocusingOn = false;
+    private bool _isFocusingOn = false;
+    public bool IsFocusingOn
+    {
+        get
+        {
+            return _isFocusingOn;
+        }
+        set
+        {
+            _isFocusingOn = value;
+            if(value)
+            {
+                movecom.com.TpCam.parent = movecom.com.TpCamPos2;
+                movecom.com.TpCam.localPosition = Vector3.zero;
+                movecom.com.TpCam.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                movecom.com.TpCam.parent = movecom.com.TpCamPos;
+                movecom.com.TpCam.localPosition = Vector3.zero;
+                movecom.com.TpCam.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
+    }
     public int CurFocusedIndex = -1;
-    public Battle_Character_Info CurFocusedMonster;
+    public GameObject CurFocusedMonster;
     public IEnumerator MonsterSearchCor = null;
 
     public LayerMask Bosslayer;
 
+    //private Vector3[] searchPoint = new Vector3[5];
+
     //public bool OutoFoucusing = false;
 
+    public void DeleteSearchedMonster()
+    {
+
+    }
+
+
     //일정 시간마다 화면에 있는 몬스터들을 확인해서 거리별로 리스트에 넣는다.
+    //해당 몬스터의 콜라이더를 받아온다.
     public IEnumerator MonsterSearchCoroutine()
     {
-        Battle_Character[] temp;
+        GameObject[] temp;
         List<Battle_Character_Info> tempViewMonster = new List<Battle_Character_Info>();
-        
+        BoxCollider Coll;
         RaycastHit hit;
         while (true)
         {
             //Debug.Log("[focus]몬스터 탐지 시작");
             tempViewMonster.Clear();
 
-            temp = FindObjectsOfType<Battle_Character>();
+            temp = AddressablesLoadManager.Instance.ActiveObjectReturn<GameObject>().ToArray();
+            // = 
 
             //해당 몬스터가 카메라 안에 있는지 확인
             for (int i = 0; i < temp.Length; i++)
             {
-                Vector3 screenPos = GetCamera().WorldToViewportPoint(temp[i].gameObject.transform.position);
-                if (screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1 && screenPos.z >= 0)
+                if(temp[i].CompareTag("Enemy"))
                 {
-                    //Debug.Log(temp[i].gameObject.name + "[focus]화면에 탐지");
-                    Battle_Character_Info info = new Battle_Character_Info(temp[i]);
-                    tempViewMonster.Add(info);
+                    Coll = temp[i].GetComponent<BoxCollider>();
+                    Vector3 screenPos = GetCamera().WorldToViewportPoint(Coll.bounds.center);
+                    if (screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1 && screenPos.z >= 0)
+                    {
+                        //Debug.Log(temp[i].gameObject.name + "[focus]화면에 탐지");
+                        
+                        Battle_Character_Info info = new Battle_Character_Info(temp[i], Coll);
+                        tempViewMonster.Add(info);
+                    }
                 }
             }
 
-            //카메라 안에 있으면 해당 물체로 ray를 쏴서 장애물이 있는지과 거리를 확인한다.
-            for (int i = 0; i < tempViewMonster.Count; i++)
+            //카메라 안에 있으면 해당 물체로 ray를 쏴서 장애물이 있는지와 거리를 확인한다.
+            //Ray는 캐릭터에서 몬스터로 쏘는게 아니고 카메라에서 몬스터로 쏜다
+            //몬스터의 중심, 상,하,좌,우 이렇게 쏜다.
+            //몬스터의 중심 상하좌우의 스크린 포인트
+
+            for (int i = tempViewMonster.Count - 1; i >= 0; i--)
             {
-                Vector3 dir = tempViewMonster[i]._monster.gameObject.transform.position - transform.position;
-                if (Physics.Raycast(transform.position, dir, out hit, 100.0f, Bosslayer))
-                {
-                    //if(hit.transform.gameObject.layer)
-                    //if(!hit.transform.CompareTag("Enemy"))
-                    if (hit.collider == null)
-                    {
-                        //Debug.Log("[focus]몬스터 탐색 지워져버림");
-                        tempViewMonster.RemoveAt(i);
-                        //tempViewMonster[i]._isBlocked = true;
-                        //tempViewMonster[i]._distance = 0;
-                        continue;
-                    }
-                    else
-                    {
-                        //Debug.Log("[focus]몬스터 탐색 안지워짐");
-                        tempViewMonster[i]._distance = hit.distance;
-                    }
-                }
+                //for (int point = (int)eSearchPoint.Center; point < (int)eSearchPoint.SMax; point++)
+                //{
+                //    //카메라에서 몬스터 쪽으로 레이를 쏜다.
+                //    GameObject monster = tempViewMonster[i]._monster;
+                //    Vector3 dir = (monster.transform.position + tempViewMonster[i]._searchPoint[point]) - GetCamera().transform.position;
+
+                //    //레이캐스트 발사
+                //    if (Physics.Raycast(GetCamera().transform.position, dir, out hit, 100.0f, Bosslayer))
+                //    {
+                //        //if(hit.transform.gameObject.layer)
+                //        //if(!hit.transform.CompareTag("Enemy"))
+                //        if (hit.collider == null)
+                //        {
+                //            //Debug.Log("[focus]몬스터 탐색 지워져버림");
+                //            tempViewMonster.RemoveAt(i);
+                //            //tempViewMonster.
+                //            //tempViewMonster[i]._isBlocked = true;
+                //            //tempViewMonster[i]._distance = 0;
+                //            break;
+                //        }
+                //        else
+                //        {
+                //            //Debug.Log("[focus]몬스터 탐색 안지워짐");
+                //            tempViewMonster[i]._distance = hit.distance;
+                //        }
+                //    }
+                //}
+                GameObject monster = tempViewMonster[i]._monster;
+                tempViewMonster[i]._distance = (monster.transform.position - transform.position).magnitude;
             }
 
             //거리에 따라 정렬
@@ -417,13 +492,14 @@ public class PlayableCharacter : MonoBehaviour
                 IsFocusingOn = false;
                 CurFocusedIndex = 0;
                 CurFocusedMonster = null;
+                MonsterSearchCor = null;
                 yield break;
             }
 
             //탕색과 정렬을 끝냈는데 현재 포커싱 중인 몬스터가 사라졌으면 포커싱을 끝내준다.
             if(IsFocusingOn)
             {
-                int index = _monsterObject.FindIndex(x => x == CurFocusedMonster);
+                int index = _monsterObject.FindIndex(x => x._monster == CurFocusedMonster);
                 //탐색을 완료 했는데 포커싱 중인 몬스터가 없어졌을때
                 if (index == -1)
                 {
@@ -436,17 +512,19 @@ public class PlayableCharacter : MonoBehaviour
                             CurFocusedIndex = 0;
                             yield return null;
                         }
-                        else
+                        else//오토 포커싱 중인데 탐색 결과 
                         {
+                            Debug.Log("[focus] 오토포서싱 중일때 탐색결과 몬스터 존재 X");
                             IsFocusingOn = false;
                         }
                     }
                     else
                     {
-                        //Debug.Log("[focus]탐색결과 몬스터 존재 X");
+                        Debug.Log("[focus] 오토포커싱 아닐때 탐색결과 몬스터 존재 X");
                         IsFocusingOn = false;
                         CurFocusedIndex = 0;
                         CurFocusedMonster = null;
+                        MonsterSearchCor = null;
                         yield break;
                     }
 
@@ -484,7 +562,7 @@ public class PlayableCharacter : MonoBehaviour
                 
                 IsFocusingOn = true;
                 CurFocusedIndex = 0;
-                CurFocusedMonster = _monsterObject[0];
+                CurFocusedMonster = _monsterObject[0]._monster;
                 //Debug.Log(CurFocusedMonster._monster.gameObject.name + "포커싱 시작");
             }
         }
@@ -494,7 +572,7 @@ public class PlayableCharacter : MonoBehaviour
             {
                 if (CurFocusedIndex == _monsterObject.Count - 1)
                 {
-                    //Debug.Log("[focus]포커싱 꺼짐");
+                    Debug.Log("[focus]포커싱 눌러서 꺼짐");
                     IsFocusingOn = false;
                     StopCoroutine(MonsterSearchCor);
                     MonsterSearchCor = null;
@@ -503,7 +581,7 @@ public class PlayableCharacter : MonoBehaviour
             
                 
             CurFocusedIndex = (CurFocusedIndex + 1) % _monsterObject.Count;
-            CurFocusedMonster = _monsterObject[CurFocusedIndex];
+            CurFocusedMonster = _monsterObject[CurFocusedIndex]._monster;
 
 
         }

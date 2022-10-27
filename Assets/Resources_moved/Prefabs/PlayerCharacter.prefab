@@ -221,6 +221,38 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &4064735834397372521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7384424784316507759}
+  m_Layer: 13
+  m_Name: TpCamPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7384424784316507759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064735834397372521}
+  m_LocalRotation: {x: 0.17041081, y: -0, z: -0, w: 0.98537314}
+  m_LocalPosition: {x: 0, y: 0.84, z: -2.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5912692895305397014}
+  m_Father: {fileID: 5912692896105856778}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 19.623, y: 0, z: 0}
 --- !u!1 &5912692895156706169
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,14 +457,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692895305397013}
-  m_LocalRotation: {x: 0.17041081, y: -0, z: -0, w: 0.98537314}
-  m_LocalPosition: {x: 0, y: 0.84, z: -2.03}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7083721807181843236}
   - {fileID: 9078407603307313459}
-  m_Father: {fileID: 5912692896105856778}
+  m_Father: {fileID: 7384424784316507759}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 19.623, y: 0, z: 0}
 --- !u!20 &5912692895305397016
@@ -1583,7 +1615,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5912692895305397014}
+  - {fileID: 7384424784316507759}
+  - {fileID: 2504232069471025751}
   m_Father: {fileID: 5912692896712387631}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2410,13 +2443,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character_Name: Asha
   player_HP: 200
-  player_Def: 10
+  player_Def: 5
   player_Stamina: 150
   player_Stamina_Recovery_Time: 1
   player_Stamina_Recovery_Val: 15
   player_Groggy: 100
-  player_Groggy_Recovery_Time: 1
-  player_Groggy_Recovery_Val: 15
+  player_Groggy_Recovery_Time: 3
+  player_Groggy_Recovery_Val: 20
   player_Stagger_Groggy: 30
   player_Down_Groggy: 80
   player_UIPos: {x: -787, y: -479}
@@ -2465,12 +2498,7 @@ MonoBehaviour:
   CurMonsterIndex: 0
   IsFocusingOn: 0
   CurFocusedIndex: -1
-  CurFocusedMonster:
-    _monster: {fileID: 0}
-    _distance: 0
-    _index: 0
-    _isFocused: 0
-    _isBlocked: 0
+  CurFocusedMonster: {fileID: 0}
   Bosslayer:
     serializedVersion: 2
     m_Bits: 0
@@ -2495,6 +2523,8 @@ MonoBehaviour:
     CharacterRoot: {fileID: 5912692896712387631}
     TpCamRig: {fileID: 5912692896105856778}
     TpCam: {fileID: 5912692895305397014}
+    TpCamPos: {fileID: 7384424784316507759}
+    TpCamPos2: {fileID: 2504232069471025751}
     FpRoot: {fileID: 5912692895590823227}
     FpCamRig: {fileID: 5912692896576384674}
     FpCam: {fileID: 5912692896815848212}
@@ -2532,9 +2562,9 @@ MonoBehaviour:
   moveoption:
     RotMouseSpeed: 1
     RightReverse: 0
-    RotSpeed: 0.5
-    MoveSpeed: 130
-    RunSpeed: 420
+    RotSpeed: 0.55
+    MoveSpeed: 160
+    RunSpeed: 330
     MinAngle: 0
     MaxAngle: 0
     Gravity: 0
@@ -2551,10 +2581,10 @@ MonoBehaviour:
     StepCkeckDis: 0.4
     StepWeightVal: 20
     RollingClip: {fileID: 7400000, guid: 207adbd2d547d7f408adcac0b17f4e44, type: 2}
-    RollingClipPlaySpeed: 2.1
-    RollingDistance: 8
+    RollingClipPlaySpeed: 2.32
+    RollingDistance: 3.5
     RollingTime: 0
-    RollingFreeDamageTime: 0
+    RollingFreeDamageTime: 3
     NextRollingTime: 0.14
     RollingStaminaDown: 15
     KnockDownClip: {fileID: 7400000, guid: 0c62720761979084caafe70772d508f8, type: 2}
@@ -2565,7 +2595,7 @@ MonoBehaviour:
     GuardRightMoveClip: _Guard_RightMove
     GuardLeftMoveClip: _Guard_LeftMove
     GuardBackMoveClip: _Guard_BackMove
-    GuardMoveSpeed: 100
+    GuardMoveSpeed: 60
     FPMaxZoomIn: 60
     FPMaxZoomOut: 90
     TPMaxZoomIn: 30
@@ -2584,6 +2614,7 @@ MonoBehaviour:
   testyRotNext: 0
   CameraCollOn: 0
   startCamPos: {x: 0, y: 0, z: 0}
+  startCampos_Focusing: {x: 0, y: 0, z: 0}
   camDistance: 0
 --- !u!114 &5912692896712388560
 MonoBehaviour:
@@ -2674,7 +2705,7 @@ MonoBehaviour:
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
-    movedis: 4
+    movedis: 2.5
     movetime: 0.21
     ProjectileObjName: 
     TargetObjName: 
@@ -2683,7 +2714,7 @@ MonoBehaviour:
     attackType: Normal
     aniclipName: _Attack02_new
     endAniclipName: _Attack02_Back
-    animationPlaySpeed: 0.92
+    animationPlaySpeed: 1.3
     endanimationPlaySpeed: 2
     startDelay: 0.42
     recoveryDelay: 0.21
@@ -2695,7 +2726,7 @@ MonoBehaviour:
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
-    movedis: 4
+    movedis: 2.3
     movetime: 0.2
     ProjectileObjName: 
     TargetObjName: 
@@ -2704,7 +2735,7 @@ MonoBehaviour:
     attackType: Normal
     aniclipName: _Attack03_new
     endAniclipName: _Attack03_Back
-    animationPlaySpeed: 0.9
+    animationPlaySpeed: 1.5
     endanimationPlaySpeed: 2
     startDelay: 0
     recoveryDelay: 0.41
@@ -2716,7 +2747,7 @@ MonoBehaviour:
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
-    movedis: 4
+    movedis: 3.2
     movetime: 0.21
     ProjectileObjName: 
     TargetObjName: 
@@ -2756,7 +2787,7 @@ MonoBehaviour:
   movecom: {fileID: 0}
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
-  GuardTime: 60
+  GuardTime: 3
   GuardStunTime: 0.2
   MaxGuardGauge: 0
   BalanceDecreaseVal: 10
@@ -3772,6 +3803,37 @@ Transform:
   m_Father: {fileID: 5912692897056710727}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 89.999916, z: 0}
+--- !u!1 &9031617724265422234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2504232069471025751}
+  m_Layer: 13
+  m_Name: TPCamPos2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2504232069471025751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9031617724265422234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.024, z: -2.321}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5912692896105856778}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &699182094834610205
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,6 +29,8 @@ public class CMoveComponent : BaseComponent
 
         public Transform TpCamRig = null;
         public Transform TpCam = null;
+        public Transform TpCamPos = null;
+        public Transform TpCamPos2 = null;
 
         public Transform FpRoot = null;
         public Transform FpCamRig = null;
@@ -140,7 +142,7 @@ public class CMoveComponent : BaseComponent
     public Vector3 WorldMove = Vector3.zero;
     [HideInInspector]
     public float CurGravity;//현재 벨로시티의 y값
-    [HideInInspector]
+    //[HideInInspector]
     public Com com = new Com();
     //[HideInInspector]
     public CurState curval = new CurState();
@@ -838,16 +840,28 @@ public class CMoveComponent : BaseComponent
         com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
     }
 
-    //3인칭 카메라가 해당 방향을 바라보도록 회전
+    //3인칭 카메라가 해당 위치를 바라보도록 회전
     public void LookAt(Vector3 lookpos)
     {
-        Vector3 dir = lookpos-transform.position;
+        //com.TpCamRig.LookAt(lookpos);
 
+        Debug.DrawLine(com.TpCamRig.transform.position, lookpos);
+        //캐릭터 눈높이에서 
+        Vector3 dir = lookpos - com.TpCamRig.transform.position;
         Vector3 rot = Quaternion.LookRotation(dir, Vector3.up).eulerAngles;
-
-        Vector3 temp = com.TpCamRig.eulerAngles;
-
         com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
+
+
+        //Vector3 dir = (lookpos - GetCamera().transform.position).normalized;
+        //Debug.DrawLine(GetCamera().transform.position, lookpos);
+
+        //Vector3 rot = Quaternion.LookRotation(dir, Vector3.up).eulerAngles;
+
+
+
+        //Vector3 temp = com.TpCamRig.eulerAngles;
+
+        //com.TpCamRig.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
     }
 
     //캐릭터가 해당 방향을 바라보도록 
@@ -976,16 +990,28 @@ public class CMoveComponent : BaseComponent
         PlayableCharacter tempinstance = PlayableCharacter.Instance;
         if (tempinstance.IsFocusingOn)
         {
-            if(tempinstance._monsterObject.FindIndex(x=>x._monster == tempinstance.CurFocusedMonster._monster)!=-1)
+            int index = tempinstance._monsterObject.FindIndex(x => x._monster == tempinstance.CurFocusedMonster);
+            if (index != -1)
             {
-                LookAt(tempinstance.CurFocusedMonster._monster.gameObject.transform.position);
+
+                //Vector3 pos = tempinstance.CurFocusedMonster.transform.position + tempinstance._monsterObject[index]._searchPoint[0];
+                if(tempinstance.CurFocusedMonster!=null)
+                {
+                    //그냥 캐릭터 시점과 y 높이가 같도록
+                    Vector3 pos = tempinstance._monsterObject[index]._coll.bounds.center + new Vector3(0, tempinstance._monsterObject[index]._coll.bounds.extents.y, 0);
+                    pos.y = com.TpCamRig.position.y;
+                    
+                    LookAt(pos);
+                }
+                
             }
-            else
-            {
-                tempinstance.IsFocusingOn = false;
-                tempinstance.CurFocusedIndex = 0;
-                tempinstance.CurFocusedMonster = null;
-            }
+            //else
+            //{
+            //    Debug.Log("[focus]포커싱 중인 몬스터가 리스트에 없을때 꺼짐");
+            //    tempinstance.IsFocusingOn = false;
+            //    tempinstance.CurFocusedIndex = 0;
+            //    tempinstance.CurFocusedMonster = null;
+            //}
         }
     }
 
@@ -1003,12 +1029,15 @@ public class CMoveComponent : BaseComponent
         if (curval.IsFPP)
         {
             startCamPos = com.FpCam.position - com.TpCamRig.position;
+            
             camDistance = startCamPos.magnitude;
         }
         else
         {
             startCamPos = com.TpCam.position - com.TpCamRig.position;
+            startCampos_Focusing = com.TpCamPos2.position - com.TpCamRig.position;
             camDistance = startCamPos.magnitude;
+            camDistance_Focusing = startCampos_Focusing.magnitude;
         }
            
 
@@ -1045,13 +1074,15 @@ public class CMoveComponent : BaseComponent
 
     public bool CameraCollOn = false;
     public Vector3 startCamPos;//카메라가 캐릭터로부터 어느정도 거리에 떨어져 있는지 초기값
+    public Vector3 startCampos_Focusing;
     public float camDistance;
-
+    public float camDistance_Focusing;
 
     public void CameraCollision()
     {
         Quaternion rot = Quaternion.LookRotation(com.TpCamRig.forward, Vector3.up);
-        Vector3 dir = (rot * startCamPos).normalized;
+        Vector3 startpos = (PlayableCharacter.Instance.IsFocusingOn) ? startCampos_Focusing : startCamPos;
+        Vector3 dir = (rot * startpos).normalized;
         //Debug.DrawRay(Capsuletopcenter, dir);
         Debug.DrawLine(com.TpCamRig.position, com.TpCamRig.position + (dir * camDistance));
 
@@ -1076,7 +1107,15 @@ public class CMoveComponent : BaseComponent
             }
 
         }
-        
+        //else
+        //{
+        //    if (PlayableCharacter.Instance.IsFocusingOn)
+        //    {
+        //        GetCamera().transform.position = com.TpCamRig.position;
+
+        //    }
+                
+        //}
 
         //Vector3 rot = Quaternion.LookRotation(lookdir, Vector3.up).eulerAngles;
 
