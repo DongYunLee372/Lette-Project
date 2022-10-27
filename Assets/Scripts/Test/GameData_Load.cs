@@ -281,7 +281,8 @@ public class GameData_Load : Singleton<GameData_Load>
                 charatcter = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
                 if (charatcter != null)
                 {
-                    charatcter.SetActive(false);
+                    AddressablesLoadManager.Instance.Delete_Object<GameObject>(charatcter);
+                    //charatcter.SetActive(false);
                 }
                 ImageCheck = true;
                 GameMG.Instance.scenes_Stage = Scenes_Stage.BossEnd;
@@ -322,6 +323,11 @@ public class GameData_Load : Singleton<GameData_Load>
 
                 break;
         }
+    }
+
+   public void TestBossLoad()
+    {
+        StartCoroutine( Load_Boss());
     }
 
     //void check()
@@ -415,19 +421,24 @@ public class GameData_Load : Singleton<GameData_Load>
     {
         Debug.Log("몬스터 카운트" + MonsterCount);
 
-
+        if (delete_monster.layer==9)
+        { 
+            return;
+        }
 
 
         StartCoroutine(DeadMonster_delete(delete_monster));
 
-       
+
         // StartCoroutine()
         //if(MonsterCount<=0)
         //{
         //    UnloadMonster();
         //}
     }
+    
 
+    //안개 걷히기 스테이지 1 클리어 했을 때
     IEnumerator SceneChange()
     {
         Fog.Instance.OffFog();
@@ -847,6 +858,7 @@ public class GameData_Load : Singleton<GameData_Load>
 
                 case Scenes_Stage.BossEnd:
                     StartCoroutine(onLoadingScene());
+                    GameMG.Instance.scenes_Stage = Scenes_Stage.Stage1;
                     break;
             }
             //로딩
@@ -871,6 +883,17 @@ public class GameData_Load : Singleton<GameData_Load>
         UIManager.Instance.RemoveAll();
         Canvas_.GetComponent<TestOnoff>().ShowImage(false);
         UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
+        var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
+        if (temp1 != null)
+        {
+            AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제
+        }
+        var temp2 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        if (temp2 != null)
+        {
+            AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //캐릭터 삭제
+        }
+
 
     }
 
