@@ -147,6 +147,9 @@ public class OnclickButton : MonoBehaviour
         //KeySetting.keys[(KeyAction)4], KeySetting.keys[(KeyAction)5], KeySetting.keys[(KeyAction)6]);
         //SaveSystem.Save(character, "save_001");
         //buttoncheck = false;
+
+        //실행창 종료
+       // Application.Quit();
     }
     public void Option()
     {
