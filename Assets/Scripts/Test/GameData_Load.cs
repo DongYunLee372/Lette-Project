@@ -23,6 +23,8 @@ public class GameData_Load : Singleton<GameData_Load>
     List<LoadingData> loadingDatas = new List<LoadingData>();
     bool ImageCheck = false;
 
+    public List<GameObject> tempcheckList = new List<GameObject>(10);
+
 
     int MonsterCount = 0;
     void Start()
@@ -189,7 +191,7 @@ public class GameData_Load : Singleton<GameData_Load>
                     // StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_06_01, abc.transform, name));
                     GameObject abc = new GameObject();
                     abc.transform.position = s.Position;
-                    StartCoroutine(CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, abc.transform, s.prefabsName));
+                    CharacterCreate.Instance.CreateBossMonster_S(EnumScp.MonsterIndex.mon_06_01, abc.transform, s.prefabsName);
                     Destroy(abc);
                 }
                 else if (s.prefabsName == "PlayerCharacter")
@@ -203,7 +205,9 @@ public class GameData_Load : Singleton<GameData_Load>
                     else
                     {
                         Debug.Log("캐릭터 생성");
+
                         AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+                       
                     }
                     // AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>("Inven");
                     //UIManager.Instance.Prefabsload("Inven", CANVAS_NUM.player_cavas);
@@ -215,7 +219,7 @@ public class GameData_Load : Singleton<GameData_Load>
                     Debug.Log("스켈레톤 좌표 :" + s.Position);
                     Debug.Log("스켈레톤 생성");
                     MonsterCount++;
-                    StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName));
+                    CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName);
                     //생성한 포지션 삭제
                     Destroy(Monster);
                 }
@@ -253,6 +257,8 @@ public class GameData_Load : Singleton<GameData_Load>
                 LoadingImageShow(Scenes_Stage.Stage1);
                 // BoatScene_Data_Load();
                 skyboxMG.SkyBox_Setting("BoatScene");
+
+                //체크
                 break;
 
             case Scenes_Stage.Stage2:
@@ -270,6 +276,9 @@ public class GameData_Load : Singleton<GameData_Load>
                 ImageCheck = true;
                 LoadingImageShow(Scenes_Stage.Stage2);
                 skyboxMG.SkyBox_Setting("Roomtest");
+
+                //체크
+                checkList();
 
                 //AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");
 
@@ -579,6 +588,19 @@ public class GameData_Load : Singleton<GameData_Load>
             }
             yield return new WaitForFixedUpdate();
 
+        }
+    }
+
+    void checkList()
+    {
+
+        Debug.Log("checkList함수");
+        List<GameObject> templist = AddressablesLoadManager.Instance.ActiveObjectReturn<GameObject>();
+        Debug.Log("checkList함수반환받음");
+
+        foreach (var a in templist)
+        {
+            Debug.Log("나반환받은리스트" + a.name);
         }
     }
 
@@ -972,6 +994,7 @@ public class GameData_Load : Singleton<GameData_Load>
                 {
                     case Scenes_Stage.Stage1:
                         Debug.Log("bgm~~?");
+                        checkList();
 
                         //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[2]);
                         //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
@@ -979,6 +1002,7 @@ public class GameData_Load : Singleton<GameData_Load>
                         SoundManager.Instance.bgmSource.Play();
                         break;
                     case Scenes_Stage.Stage2:
+                        checkList();
 
                         break;
                 }

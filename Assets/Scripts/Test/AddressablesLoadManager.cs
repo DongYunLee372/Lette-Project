@@ -844,7 +844,6 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
         //그래도 널이면 없는것..
         return findobjList;
-
     }
 
     //핸들로 복사되어 생성된 객체를 저장해 놓은 리스트에서 찾기. ->저장하지 않은 객체들만 가능함. 또는 캐싱 없이 생성된 오브젝트만.
@@ -900,25 +899,22 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         return findobj;
     }
 
-    //IList 다 빠지면 핸들 해제 해줘야 함 
-    public void OnRelease()
+    public List<T> ActiveObjectReturn<T>()
+     where T : UnityEngine.Object
     {
-        Debug.Log("OnRelease실행");
+        List<T> gameObject_list = new List<T>();
+        Debug.Log("ActiveObjectReturn함수호출");
+        Debug.Log("CreateObjectList의 카운트" + CreateObjectList.Count);
+        foreach (var t in CreateObjectList)
+        {
+            Debug.Log("CreateObjectList에서 추가!"+t.name);
+            gameObject_list.Add(t as T);
+        }
+        Debug.Log("ActiveObjectReturn함수리턴");
 
-        //foreach (var t in handleIList)
-        //{
-        //   if(t.Result.Count==0)
-        //    {
-
-        //        Addressables.Release(t );
-        //        Debug.Log("핸들 삭제됌");
-
-        //    }
-        //    handleIList.Remove(t);
-
-        //    return;
-        //}
+        return gameObject_list;
     }
+
 
     //잠시 핸들 확인하려고 하는거 (요소 다 빠지는지 확인)
     public void tempListCheck()
