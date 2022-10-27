@@ -22,7 +22,7 @@ public class LoadFile : MySingleton<LoadFile>
         FieldInfo[] Fieldlist = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance| BindingFlags.Public);
 
         TextAsset data = Resources.Load("CSV/" + typeof(T).ToString()) as TextAsset;
-        Debug.Log(data.name);
+        //Debug.Log(data.name);
         
         var lines = Regex.Split(data.text, LINE_SPLIT_RE);
         if (lines.Length <= 1)
