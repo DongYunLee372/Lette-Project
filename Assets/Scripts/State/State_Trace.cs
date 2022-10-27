@@ -20,6 +20,7 @@ public class State_Trace : State
             battle_character.real_AI.pre_State = this;
             return false;
         }
+
         // 근접 공격 사거리 체크
         if (Trans_List[1] != null) // Round 상태가 있는 경우
         {

@@ -26915,7 +26915,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.3333334
+    m_StopTime: 1.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -126239,15 +126239,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2666667
-    functionName: Animation_Attack_Collider_Stop
+  - time: 1.3333334
+    functionName: Animation_Final
     data: SSwing
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.3333334
-    functionName: Animation_Final
+  - time: 1.4
+    functionName: Animation_Attack_Collider_Stop
     data: SSwing
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

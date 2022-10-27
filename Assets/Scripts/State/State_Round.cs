@@ -95,7 +95,7 @@ public class State_Round : State
         round_nextTime = 4.0f;
         round_Check = false;
 
-        battle_character.real_AI.navMesh.speed = 1.5f;
+        battle_character.real_AI.navMesh.speed = 1.1f;
         battle_character.real_AI.navMesh.acceleration = 8f;
     }
 }

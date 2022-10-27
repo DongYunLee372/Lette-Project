@@ -112862,7 +112862,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.2
-    functionName: Animation_Attack_Collider_Stop
+    functionName: Collider_All_false
     data: LRush
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

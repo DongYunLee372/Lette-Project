@@ -300,6 +300,21 @@ public class Battle_Character : MonoBehaviour
         }
     }
 
+    public void Collider_All_false(string clipname)
+    {
+        for (int i = 0; i < attack_Info.Length; i++)
+        {
+            if (attack_Info[i].Name == clipname)
+            {
+                attack_Collider[0].SetActive(false);
+                attack_Collider[1].SetActive(false);
+                attack_Collider[2].SetActive(false);
+
+                return;
+            }
+        }
+    }
+
     public void Animation_Awake(string clipname)
     {
         for (int i = 0; i < attack_Info.Length; i++)
@@ -494,6 +509,8 @@ public class Battle_Character : MonoBehaviour
                 if (attack_Info[i].spawn_Animation)
                 {
                     real_AI.isPause = false;
+
+                    Check_Reset();
                 }
 
 
@@ -698,7 +715,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("ㅇㅇ");
-            animator.Play("Foot_Attack");
+            animator.Play("Second_Atk");
             animator.animator.SetTrigger("Delay_Trg");
         }
 
