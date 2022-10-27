@@ -625,7 +625,9 @@ public class CMoveComponent : BaseComponent
         }
         else
         {
-            RollingOver();
+            float nextGroggy = PlayableCharacter.Instance.status.CurGroggy + Groggy;
+            if (nextGroggy >= PlayableCharacter.Instance.status.player_Groggy || Groggy >= PlayableCharacter.Instance.status.player_Stagger_Groggy)
+                RollingOver();
             PlayableCharacter.Instance.Damaged(damage, hitpoint,Groggy);
         }
     }
