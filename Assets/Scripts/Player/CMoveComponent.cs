@@ -101,11 +101,18 @@ public class CMoveComponent : BaseComponent
 
         public float RollingTime;
 
-        public float RollingFreeDamageTime;
+        [Header("무적 시작 시간")]
+        public float RollingNoDamageStartTime;
+        [Header("무적 유지 시간(회피동작이 끝나면 자동으로 끊김)")]
+        public float RollingNoDamageTime;
+
+        //public float RollingFreeDamageTime;
 
         public float NextRollingTime = 0.1f;
 
         public float RollingStaminaDown = 20.0f;
+
+        
 
         [Header("==================피격 관련 변수들==================")]
         public AnimationClip KnockDownClip;
@@ -172,6 +179,9 @@ public class CMoveComponent : BaseComponent
     [HideInInspector]
     public delegate void Invoker(string s_val);
 
+    private IEnumerator RollingNoDamageStartCor = null;
+    private IEnumerator RollingNoDamageEndCor = null;
+
     //[Header("============TestVals============")]
 
     //public Vector3 updown;
@@ -211,9 +221,9 @@ public class CMoveComponent : BaseComponent
                              new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
                              new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockBackClip.name, KnockBackEnd));
 
-        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(moveoption.RollingClip.name, ActivateNoDamage),
-                             new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.RollingClip.name, DeActivateNoDamage));
+        //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(moveoption.RollingClip.name, ActivateNoDamage),
+        //                     new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
+        //                     new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.RollingClip.name, DeActivateNoDamage));
 
 
         ChangePerspective();
@@ -615,6 +625,7 @@ public class CMoveComponent : BaseComponent
         }
         else
         {
+            RollingOver();
             PlayableCharacter.Instance.Damaged(damage, hitpoint,Groggy);
         }
     }
@@ -645,33 +656,56 @@ public class CMoveComponent : BaseComponent
 
         //Debug.Log("[Attack] 구리기 시작");   
         curval.IsRolling = true;
-        com.animator.Play("_Rolling", moveoption.RollingClipPlaySpeed);
+        com.animator.Play("_Rolling", moveoption.RollingClipPlaySpeed, 0.0f, 0.2f, RollingOver);
 
         
         Vector3 tempmove = this.transform.position + com.FpRoot.forward * moveoption.RollingDistance;
 
-        StartCoroutine(CorDoMove(this.transform.position, tempmove, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed -0.2f, RollingOver));
+        RollingNoDamageStartCor = timecounter.Cor_TimeCounter(moveoption.RollingNoDamageStartTime, ActivateNoDamage);
+        StartCoroutine(RollingNoDamageStartCor);
+        //StartCoroutine(CorDoMove(this.transform.position, tempmove, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed -0.2f, RollingOver));
 
         Vector3 moveval = com.FpRoot.forward* moveoption.RollingDistance;
 
         RollingStartTime = Time.time;
     }
 
-    public void RollingOver(string s)
+    public void RollingOver()
     {
         lastRollingTime = Time.time;
         curval.IsRolling = false;
+        curval.IsNoDamage = false;
+
+        if (RollingNoDamageStartCor != null)
+        {
+            StopCoroutine(RollingNoDamageStartCor);
+            RollingNoDamageStartCor = null;
+        }
+
+        if (RollingNoDamageEndCor!=null)
+        {
+            StopCoroutine(RollingNoDamageEndCor);
+            RollingNoDamageEndCor = null;
+        }
+            
     }
 
-    public void ActivateNoDamage(string s)
+    public void ActivateNoDamage()
     {
         //moveoption.NowIsNoDamege = true;
         curval.IsNoDamage = true;
+        RollingNoDamageStartCor = null;
+
+
+        RollingNoDamageEndCor = timecounter.Cor_TimeCounter(moveoption.RollingNoDamageTime, DeActivateNoDamage);
+        StartCoroutine(RollingNoDamageEndCor);
     }
 
-    public void DeActivateNoDamage(string s)
+    public void DeActivateNoDamage()
     {
         curval.IsNoDamage = false;
+        RollingNoDamageEndCor = null;
+
     }
 
     

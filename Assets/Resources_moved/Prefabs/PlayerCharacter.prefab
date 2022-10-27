@@ -2496,7 +2496,6 @@ MonoBehaviour:
   _monsterObject: []
   _monsterSearchTime: 1.5
   CurMonsterIndex: 0
-  IsFocusingOn: 0
   CurFocusedIndex: -1
   CurFocusedMonster: {fileID: 0}
   Bosslayer:
@@ -2584,7 +2583,8 @@ MonoBehaviour:
     RollingClipPlaySpeed: 2.32
     RollingDistance: 3.5
     RollingTime: 0
-    RollingFreeDamageTime: 3
+    RollingNoDamageStartTime: 0.1
+    RollingNoDamageTime: 2
     NextRollingTime: 0.14
     RollingStaminaDown: 15
     KnockDownClip: {fileID: 7400000, guid: 0c62720761979084caafe70772d508f8, type: 2}
@@ -2616,6 +2616,7 @@ MonoBehaviour:
   startCamPos: {x: 0, y: 0, z: 0}
   startCampos_Focusing: {x: 0, y: 0, z: 0}
   camDistance: 0
+  camDistance_Focusing: 0
 --- !u!114 &5912692896712388560
 MonoBehaviour:
   m_ObjectHideFlags: 0
