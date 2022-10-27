@@ -48,6 +48,9 @@ public class Enemy_Weapon : MonoBehaviour
 
                     attack.Attack_Result = true;
                     attack.Result_return_Object = this.gameObject;
+
+                    collider.gameObject.GetComponent<PlayableCharacter>().BeAttacked
+                       (parent_character.now_Skill_Info.P_skill_dmg, p, parent_character.cur_Groggy);
                 }
             }
 

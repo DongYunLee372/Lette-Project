@@ -394,6 +394,20 @@ public class Battle_Character : MonoBehaviour
 
                 if (attack_Info[i].is_Normal_Attack) // 일반 공격인 경우 
                 {
+                    if ((Vector3.Distance(transform.position,
+                                cur_Target.transform.position) >= 5f))
+                    {
+                        if (attack_Info[i].add_Time == 0)
+                        {
+                            attack_Collider[attack_Info[i].attack_Collider_Num].SetActive(false);
+                            isAttack_Run = false;
+                        }
+                        else if (attack_Info[i].add_Time != 0)
+                        {
+                            StartCoroutine(ani_Add_Time_Coroutine(attack_Info[i].add_Time, attack_Info[i].attack_Collider_Num));
+                        }
+                    }
+
                     if (attack_Info[i].normal_Last_Attack)
                     {
                         Check_Reset();
@@ -417,7 +431,6 @@ public class Battle_Character : MonoBehaviour
                             {
                                 isAttack_Run = true;
                                 animator.Play(attack_Info[i].after_skill_name);
-                                Debug.Log("워크크" + attack_Info[i].after_skill_name);
                             }
                         }
 
@@ -565,7 +578,7 @@ public class Battle_Character : MonoBehaviour
 
                 Vector3 dirVec = cur_Target.transform.position - missileobj.transform.position;
 
-                missileobj.GetComponent<Rigidbody>().AddForce(dirVec * 2.5f, ForceMode.Impulse);
+                missileobj.GetComponent<Rigidbody>().AddForce(dirVec * 1.5f, ForceMode.Impulse);
 
                 missileobj.transform.rotation = attack_Info[info_num].missile_Pos.rotation;
 
@@ -715,7 +728,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("ㅇㅇ");
-            animator.Play("Second_Atk");
+            animator.Play("First_Atk");
             animator.animator.SetTrigger("Delay_Trg");
         }
 

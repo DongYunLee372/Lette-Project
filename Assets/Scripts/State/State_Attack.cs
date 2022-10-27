@@ -125,6 +125,7 @@ public class State_Attack : State
         int rand = Random.Range(0, count);
 
         battle_character.animator.animator.SetTrigger("Delay_Trg");
+        
         if (count != 1)
         {
             battle_character.animator.Play(battle_character.mon_normal_atak_group[rand].P_skill_Name_En);
@@ -143,9 +144,6 @@ public class State_Attack : State
                 battle_character.animator.Play(battle_character.
                     attack_Info[attack_Info_Index].after_skill_name);
                 Attack_Result = false;
-                Debug.Log("라스트 : 밀리 공격 : " + battle_character.
-                    attack_Info[attack_Info_Index].after_skill_name);
-
             }
         }
     }
