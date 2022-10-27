@@ -146,9 +146,6 @@ public class CharacterCreate : Singleton<CharacterCreate>
         bosshpbar.GetComponent<Bosshpbar>().SetHpbar(data.P_mon_MaxHP, data.P_mon_nameKor, b.GetComponent<Battle_Character>());
         obj_boss = b;
         b.SetActive(false);
-        Debug.Log(data.P_mon_nameKor);
-        Debug.Log(data.P_mon_MaxHP);
-
         yield return null;
 
     }

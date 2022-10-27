@@ -21,7 +21,6 @@ public class Bosshpbar : MonoBehaviour
         if (Bosshp.fillAmount <= 0)
         {
             UIManager.Instance.Remove(Myobj);
-            Debug.Log("나죽음");
         }
     }
 

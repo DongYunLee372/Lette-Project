@@ -57,7 +57,6 @@ public class UIManager : Singleton<UIManager>
         {
             if (info[i].obj == obj && info[i].active)
             {
-                Debug.Log("삭제할게요");
                 return info[i].obj;
             }
         }
@@ -91,14 +90,12 @@ public class UIManager : Singleton<UIManager>
         }
         if (same)
         {
-            Debug.Log("이미있습니다");
         }
         else
         {
             UIInfo tmp = new UIInfo();
             GameObject obj = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
             //  AddressablesLoadManager.Instance.Load_Name<GameObject>(name);
-            Debug.Log(obj);
             tmp.obj = Instantiate(obj, canvas[(int)x].transform);
             tmp.obj.transform.SetParent(canvas[(int)x].transform);
             tmp.path = name;
@@ -120,7 +117,6 @@ public class UIManager : Singleton<UIManager>
         {
             if (info[i].path == path)
             {
-                Debug.Log(info[i].path);
                 info[i].obj.SetActive(true);
                 info[i].active = true;
 
@@ -137,7 +133,6 @@ public class UIManager : Singleton<UIManager>
         {
             if (info[i].path == path)
             {
-                Debug.Log(info[i].path);
                 info[i].obj.SetActive(false);
                 info[i].active = false;
             }
@@ -149,7 +144,6 @@ public class UIManager : Singleton<UIManager>
         {
             if (info[i].path == path && info[i].active == true)
             {
-                Debug.Log(info.Count);
                 Destroy(info[i].obj);
                 info.Remove(info[i]);
                 i = 0;
@@ -163,7 +157,6 @@ public class UIManager : Singleton<UIManager>
         {
             if (info[i].obj == obj && info[i].active == true)
             {
-                Debug.Log(info.Count);
                 Destroy(info[i].obj);
                 info.Remove(info[i]);
                 i = 0;
@@ -189,7 +182,6 @@ public class UIManager : Singleton<UIManager>
                     Destroy(info[i].obj);
                     info.Remove(info[i]);
                     i = 0;
-                    Debug.Log(info[i].obj.name);
                     continue;
                     //Debug.Log(child.name);
                 }
@@ -236,14 +228,7 @@ public class UIManager : Singleton<UIManager>
 
 
     }
-    private void Update()
-    {
-        for (int i = 0; i < info.Count; i++)
-        {
-            Debug.Log(info[i].obj);
-            Debug.Log(info.Count);
-        }
-    }
+
     // Update is called once per frame
 
 }
