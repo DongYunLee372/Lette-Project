@@ -643,7 +643,7 @@ public class CMoveComponent : BaseComponent
             return;
         }
 
-        Debug.Log("[Attack] 구리기 시작");   
+        //Debug.Log("[Attack] 구리기 시작");   
         curval.IsRolling = true;
         com.animator.Play("_Rolling", moveoption.RollingClipPlaySpeed);
 
@@ -845,7 +845,7 @@ public class CMoveComponent : BaseComponent
     {
         //com.TpCamRig.LookAt(lookpos);
 
-        Debug.DrawLine(com.TpCamRig.transform.position, lookpos);
+        //Debug.DrawLine(com.TpCamRig.transform.position, lookpos);
         //캐릭터 눈높이에서 
         Vector3 dir = lookpos - com.TpCamRig.transform.position;
         Vector3 rot = Quaternion.LookRotation(dir, Vector3.up).eulerAngles;
@@ -1084,7 +1084,7 @@ public class CMoveComponent : BaseComponent
         Vector3 startpos = (PlayableCharacter.Instance.IsFocusingOn) ? startCampos_Focusing : startCamPos;
         Vector3 dir = (rot * startpos).normalized;
         //Debug.DrawRay(Capsuletopcenter, dir);
-        Debug.DrawLine(com.TpCamRig.position, com.TpCamRig.position + (dir * camDistance));
+        //Debug.DrawLine(com.TpCamRig.position, com.TpCamRig.position + (dir * camDistance));
 
         if (CameraCollOn)
         {
@@ -1098,7 +1098,7 @@ public class CMoveComponent : BaseComponent
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit, camDistance))
             {
-                Debug.Log("카메라 충돌");
+                //Debug.Log("카메라 충돌");
                 GetCamera().transform.position = hit.point;
             }
             else

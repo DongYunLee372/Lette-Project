@@ -132,10 +132,7 @@ public class CInputComponent : BaseComponent
 
 
         
-        if(movecom==null)
-        {
-            int abe = 0;
-        }
+        
         movecom.curval.IsMoving = false;
 
 

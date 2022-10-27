@@ -105,10 +105,10 @@ public class PlayableCharacter : MonoBehaviour
         CharacterUIPanel.transform.localPosition = status.player_UIPos;
 
 
-        if (CharacterUIPanel == null)
-        {
-            Debug.Log("character UI Create Fail");
-        }
+        //if (CharacterUIPanel == null)
+        //{
+        //    Debug.Log("character UI Create Fail");
+        //}
 
         GameObject tempui = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
         MainOption mainoption = tempui.GetComponent<MainOption>();
@@ -514,13 +514,13 @@ public class PlayableCharacter : MonoBehaviour
                         }
                         else//오토 포커싱 중인데 탐색 결과 
                         {
-                            Debug.Log("[focus] 오토포서싱 중일때 탐색결과 몬스터 존재 X");
+                            //Debug.Log("[focus] 오토포서싱 중일때 탐색결과 몬스터 존재 X");
                             IsFocusingOn = false;
                         }
                     }
                     else
                     {
-                        Debug.Log("[focus] 오토포커싱 아닐때 탐색결과 몬스터 존재 X");
+                        //Debug.Log("[focus] 오토포커싱 아닐때 탐색결과 몬스터 존재 X");
                         IsFocusingOn = false;
                         CurFocusedIndex = 0;
                         CurFocusedMonster = null;
@@ -572,7 +572,7 @@ public class PlayableCharacter : MonoBehaviour
             {
                 if (CurFocusedIndex == _monsterObject.Count - 1)
                 {
-                    Debug.Log("[focus]포커싱 눌러서 꺼짐");
+                    //Debug.Log("[focus]포커싱 눌러서 꺼짐");
                     IsFocusingOn = false;
                     StopCoroutine(MonsterSearchCor);
                     MonsterSearchCor = null;

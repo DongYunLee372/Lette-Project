@@ -33,7 +33,7 @@ public class AnimationController : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
             if (animator == null)
             {
-                Debug.Log($"{gameObject.name} animator component 없음!");
+                //Debug.Log($"{gameObject.name} animator component 없음!");
             }
         }
         m_tempclips = animator.runtimeAnimatorController.animationClips;
