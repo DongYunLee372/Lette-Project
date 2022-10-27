@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8b45b7ff056834b9fca3b5983b857e, type: 3}
-  m_Name: TestGameData
+  m_Script: {fileID: 11500000, guid: 26d34ef56feb1124f8726ba09c4f5b7e, type: 3}
+  m_Name: BossRestartPlayer
   m_EditorClassIdentifier: 
-  SaveDatas:
-  - {fileID: 11400000, guid: f24b83b0513acec4b83e3382fc15a105, type: 2}
-  - {fileID: 11400000, guid: d7d669e088da75447b47f1de966b5d98, type: 2}
+  prefabsName: PlayerCharacter
+  Position: {x: 26, y: -23, z: 6}

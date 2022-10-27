@@ -52,7 +52,7 @@ public class GameData_Load : Singleton<GameData_Load>
     }
 
 
-    public void TestPos_and_Load(Action action = null)  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
+    public void TestPos_and_Load(bool restart=false)  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
 
 
@@ -65,12 +65,22 @@ public class GameData_Load : Singleton<GameData_Load>
         str.Add("OptionSetting");
 
         AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
-
-        AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("TestGameData");
-
-        var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
+        GameSaveData tempDataSave;
+        if (!restart)
+        {
+            AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("TestGameData");
+            tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
+        }
+        else
+        {
+            AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("BossRestartGameData");
+            tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("BossRestartGameData");
+        }
         // GameMG.Instance.startGame("Roomtest");
-
+        if(tempDataSave==null)
+        {
+            Debug.LogError("없어!!!!!!!!");
+        }
         var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
         if (find != null)
         {
@@ -126,19 +136,30 @@ public class GameData_Load : Singleton<GameData_Load>
         //    }
 
 
-        //}
-
-        if (action != null)
-        {
-            action();
-        }
-
+        
     }
 
-    void PlayerPos()
+    void PlayerPos(bool restart)
     {
 
-        var tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
+        GameSaveData tempDataSave;
+        if(restart)
+        {
+            Debug.Log("나는BossRestartGameData로드");
+
+            AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("BossRestartGameData");
+            tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("BossRestartGameData"); 
+        }
+        else
+        {
+            Debug.Log("나는TestGameData로드");
+            tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("TestGameData");
+        }
+        if(tempDataSave==null)
+        {
+            Debug.LogError("없어!!!!");
+            return;
+        }
 
         foreach (var a in tempDataSave.SaveDatas)
         {
@@ -157,17 +178,20 @@ public class GameData_Load : Singleton<GameData_Load>
 
 
 
-    IEnumerator Load_Boss()
+    IEnumerator Load_Boss(bool restart=false)
     {
 
         //  yield return new WaitForSeconds(2f);
-        TestPos_and_Load();
+        TestPos_and_Load(restart);
         yield return new WaitForSeconds(2.5f);
-        PlayerPos();
-        var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
-        find.SetActive(true);
-        var boss = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
-        boss.SetActive(true);
+        //PlayerPos(restart);
+
+        //잠시 주석 테스트
+        //var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+        //find.SetActive(true);
+
+        //var boss = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
+        //boss.SetActive(true);
 
         //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[1]);
         //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
@@ -398,7 +422,7 @@ public class GameData_Load : Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.Stage2:
-                StartCoroutine(Load_Boss());
+                StartCoroutine(Load_Boss(true));
                 UIManager.Instance.Hide("Boss_HP");
                 break;
 
@@ -994,7 +1018,8 @@ public class GameData_Load : Singleton<GameData_Load>
                 {
                     case Scenes_Stage.Stage1:
                         Debug.Log("bgm~~?");
-                        checkList();
+                        
+                        //checkList();
 
                         //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Bgm[2]);
                         //SoundManager.Instance.bgmSource.GetComponent<AudioSource>().loop = true;
@@ -1002,7 +1027,12 @@ public class GameData_Load : Singleton<GameData_Load>
                         SoundManager.Instance.bgmSource.Play();
                         break;
                     case Scenes_Stage.Stage2:
-                        checkList();
+                        // checkList();
+                        var find = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+                        find.SetActive(true);
+
+                        var boss = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Boss");
+                        boss.SetActive(true);
 
                         break;
                 }
