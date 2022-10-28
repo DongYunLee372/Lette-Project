@@ -75,21 +75,13 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         }
 
         Load_String_List.Add(label);  //로드되는 label
-
-        Debug.Log("생성전" + label);
-
-
-
              var locations = await Addressables.LoadResourceLocationsAsync(label).Task;
-            Debug.Log("생성가ㅣ져옴" + label);
-
-
+  
             foreach (var location in locations)
             {
                 var temp = await Addressables.InstantiateAsync(location).Task;
                 InstList.Add(temp as T);  //List에 저장 (생성된 오브젝트)
                 Load_String_List.Add(temp.ToString());  //로드되는 오브젝트 이름
-                Debug.Log("생성" + temp);
             }
      
         return;
@@ -115,11 +107,6 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
         InstList.Add(temp as T);
 
-        foreach (var t in InstList)
-        {
-            Debug.Log("List 리스트 들어감" + t);
-        }
-
         return temp as T;
     }
 
@@ -144,11 +131,6 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
         InstList.Add(go as T);
 
-        foreach (var t in InstList)
-        {
-            Debug.Log("List 리스트 들어감" + t);
-        }
-
         return;
     }
 
@@ -171,18 +153,10 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         //Task te = Addressables.LoadAssetAsync<T>(object_name).Task;
 
         var temp = await Addressables.LoadAssetAsync<T>(object_name).Task;
-        Debug.Log("가져옴" + temp);
-
+     
       
         AssetList.Add(temp as T);
-         
-        Debug.Log("저장기다림");
-
-        foreach (var t in AssetList)
-        {
-            Debug.Log("요소 출력: " + t);
-        }
-
+      
         return ; 
 
     }
@@ -201,20 +175,11 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         }
         Load_String_List.Add(object_name); //로드할때 쓰는 키 (중복 로딩 방지 위함)
 
-        Debug.Log("시작" + object_name);
-
-        //Task te = Addressables.LoadAssetAsync<T>(object_name).Task;
-
         var temp = Addressables.LoadAssetAsync<T>(object_name);
         T go = temp.WaitForCompletion();
 
-        Debug.Log("가져옴" + temp);
         AssetList.Add(go);
 
-        foreach (var t in AssetList)
-        {
-            Debug.Log("요소 출력: " + t);
-        }
         return;
     }
 
@@ -235,21 +200,18 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             else
             {
                 Load_String_List.Add(t); //로드되는 에셋 이름
-                Debug.Log("시작" + t);
+               
             }
 
             var temp = Addressables.LoadAssetAsync<T>(t);
             T go = temp.WaitForCompletion();
 
-            Debug.Log("가져옴" + go);
+         
             AssetList.Add(go);
 
         }
   
-        foreach (var t in AssetList)
-        {
-            Debug.Log("요소 출력: " + t);
-        }
+      
         return;
     }
 
@@ -309,16 +271,10 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             }
 
             var temp = await Addressables.LoadAssetAsync<T>(s).Task;
-            Debug.Log("가져옴" + temp.name);
-
+        
+    
             AssetList.Add(temp);
-            Debug.Log("저장" + temp);
-
-        }
-
-        foreach (var t in AssetList)
-        {
-            Debug.Log("요소 출력: " + t);
+         
         }
 
         return;
@@ -348,7 +304,6 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         if (!async)  //동기여부 false면 동기
         {
 
-            Debug.Log("시작하러 옴");
             if (caching)  //캐싱 여부 true 면 저장 (로드만 해오는거)
             {
                 InitAssets_name_sync<T>(label);  //단일 로드만 해옴 동기
@@ -366,8 +321,6 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
                 //동기니까 따로 필요 없음.
             }
           
-            Debug.Log("대기 끝");
-
         }
         else //async 동기 여부 true면 비동기
         {
@@ -399,14 +352,10 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
      where T : UnityEngine.Object
     {
         if (!async)  //false 기본값일때 동기로드
-        {
-
-            Debug.Log("시작하러 옴");
+        {     
             InitAssets_name_sync<T>(keyList);  //동기 멀티 로드
 
-            //동기 멀티 로드 생성 저장x
-
-            Debug.Log("대기 끝");
+            //동기 멀티 로드 생성 저장
 
         }
         else  //비동기 로드
@@ -517,7 +466,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             yield break;
         }
 
-        Debug.Log("load");
+    
         Load_String_List.Add(key);  //로드되는 label
         // AsyncOperationHandle<T> goHandle = Addressables.LoadAssetAsync<T>(key);
         AsyncOperationHandle<UnityEngine.Object> goHandle = Addressables.LoadAssetAsync<UnityEngine.Object>(key);
@@ -531,7 +480,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
             {
                 Complete(goHandle.Result as T);
             }
-            Debug.Log(goHandle.Result + "가져옴");
+      
             //T gameObject = temp.Result;
             handleList.Add(goHandle);
         }
@@ -543,17 +492,14 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
     {
 
-        Debug.Log("FindLoadAsset찾으러 들어옴");
-
         T findAsset = default;
 
         foreach (var t in InstList)
         {
-            Debug.Log("InstList : " + t);
-
+          
             if (key+Inst_String+ Load_String == t.ToString())
             {
-                Debug.Log("InstList 발견" + t);
+             
                 findAsset = t as T;
                 return findAsset;
             }
@@ -561,11 +507,10 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
         foreach (var t in AssetList)
         {
-            Debug.Log("List : " + t.name);
-
+           
             if (key == t.name)
             {
-                Debug.Log("List 발견" + t);
+               
                 findAsset = t as T;
                 return findAsset;
             }
@@ -573,11 +518,11 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
         foreach (var t in handleList)
         {
-            Debug.Log("handleList : " + t);
+         
 
             if (t.Result.name==key)
             {
-                Debug.Log("handleList 발견"+t.Result.name);
+              
 
                 //핸들말고 결과만
                 findAsset = t.Result as T;
@@ -645,16 +590,12 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
      where T : UnityEngine.Object
 
     {
-        Debug.Log("최초삭제호출");
-
-        
+     
              foreach (string key in deleteList)
              {
             yield return Delete_Object<T>(key);
              }
 
-
-        Debug.Log("최초삭제호출끝");
     }
 
     public bool Delete_Object_In_Handle<T>(T delete)
@@ -691,12 +632,11 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         //OnRelease();
         bool result = false;
 
-        Debug.Log("Delete_Object : " );
 
         //바로 생성된 객체들  확인 완
         if (InstList.Contains(delete))
         {
-            Debug.Log("삭제 InstList : " + delete);
+           
 
             Addressables.ReleaseInstance(delete as GameObject);
             //Addressables.Release(delete);
@@ -709,8 +649,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         //로드 확인 완
         if (AssetList.Contains(delete))
         {
-            Debug.Log("삭제 AssetList : " + delete);
-
+          
 
             //Addressables.ReleaseInstance(delete as GameObject);
             Addressables.Release(delete);
@@ -723,7 +662,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
         if (CreateObjectList.Contains(delete))
         {
-            Debug.Log("삭제 CreateObjectList : " + delete);
+     
             Destroy(delete);
             Load_String_List.Remove(delete.ToString());
             CreateObjectList.Remove(delete);
@@ -736,11 +675,11 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
 
         foreach (var t in handleList)
         {
-            Debug.Log("handleList : " + t);
+          
 
             if (t.Result== delete)
             {
-                Debug.Log("handleList 삭제" + t.Result.name);
+             
 
                 Addressables.Release(delete);
                 Load_String_List.Remove(delete.ToString());
@@ -776,7 +715,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         //        }
         //    }
         //}
-        Debug.Log("찾진 못했고 그냥 Destroy");
+       
         Destroy(delete);
         return false;
 
@@ -794,14 +733,14 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             return_obj=Instantiate(findobj, vec, Quaternion.identity);
             CreateObjectList.Add(return_obj); 
-            Debug.Log("핸들에서 복사 반환");
+ 
             return return_obj;
         }
         else
         {
             //만약 로드 된 핸들이 아니라면, 생성된 오브젝트들 검색하고 반환.
             findobj = Find_InstantiateObj<T>(key);
-            Debug.Log("생성된 오브젝트에서 복사 반환");
+       ;
             
         }
         //그래도 널이면 없는것..
@@ -823,7 +762,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
                 return_obj = Instantiate(findobj, vec, Quaternion.identity);
                 CreateObjectList.Add(return_obj);
                 findobjList.Add(return_obj);
-                Debug.Log("핸들에서 복사 반환");
+             
                
             }
             else
@@ -833,7 +772,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
                 if(findobj!=null)
                 {
                     findobjList.Add(return_obj);
-                    Debug.Log("생성된 오브젝트에서 복사 반환");
+                   
                 }
                 else
                 {
@@ -855,7 +794,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             if(key+Inst_String==t.name)
             {
-                Debug.Log(name + "CreateObjectList안에서 발견");
+            
                 findobj = t as T;
                 return findobj;
             }
@@ -865,7 +804,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             if (key + Inst_String+ Load_String == t.ToString())
             {
-                Debug.Log(name + "InstList 발견");
+           
                 findobj = t as T;
                 return findobj;
             }
@@ -881,7 +820,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             if (key == t)
             {
-                Debug.Log(name + "CreateObjectList안에서 발견");
+             
                 findobj = t as T;
                 return findobj;
             }
@@ -891,7 +830,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         {
             if (key== t)
             {
-                Debug.Log(name + "InstList 발견");
+               
                 findobj = t as T;
                 return findobj;
             }
@@ -903,14 +842,13 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
      where T : UnityEngine.Object
     {
         List<T> gameObject_list = new List<T>();
-        Debug.Log("ActiveObjectReturn함수호출");
-        Debug.Log("CreateObjectList의 카운트" + CreateObjectList.Count);
+ 
         foreach (var t in CreateObjectList)
         {
-            Debug.Log("CreateObjectList에서 추가!"+t.name);
+          
             gameObject_list.Add(t as T);
         }
-        Debug.Log("ActiveObjectReturn함수리턴");
+    
 
         return gameObject_list;
     }
@@ -920,7 +858,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
     public void tempListCheck()
     {
 
-        Debug.Log("Load_String_List조회");
+      
         foreach (var t in Load_String_List)
         {
             Debug.Log("Load_String_List : " + t);
@@ -1003,8 +941,6 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
     public IEnumerator Load_Name<T>(string name, Transform parent,Action<T> Complete=null)
         where T : UnityEngine.Object
     {
-
-        Debug.Log("로드" + name);
 
         if(Complete!=null)
         {
@@ -1098,7 +1034,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
         else
         {
             Addressables.UnloadSceneAsync(m_LoadedScene).Completed += OnSceneUnloaded;
-            Debug.Log("로드 실패");
+        
         }
     }
 
@@ -1124,7 +1060,7 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
                // StartCoroutine(setLoad(true));
 
                // SceneLoadCheck = true;
-                Debug.Log("씬언로드완료");
+               
                 break;
             case AsyncOperationStatus.Failed:
                 Debug.LogError("씬 언로드 실패: " /*+ addSceneReference.AssetGUID*/);
@@ -1145,8 +1081,6 @@ public class AddressablesLoadManager : Singleton<AddressablesLoadManager>
               //  StartCoroutine(setLoad(false));
                 SceneLoadCheck = true;
               // GameData_Load.Instance.DataLoad();
-                Debug.Log("씬로드완료");
-
                 break;
             case AsyncOperationStatus.Failed:
                 Debug.LogError("씬 로드 실패: " /*+ addSceneReference.AssetGUID*/);
