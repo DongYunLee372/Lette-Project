@@ -12,7 +12,6 @@ public class InteractiveObjManager : MySingleton<InteractiveObjManager>
     public void SetInteractiveObj(EnumScp.InteractiveIndex index, BaseInteractive obj) //플레이어와 상호작용 하는 obj의 정보를 딕셔너리에 저장
     {
         // InteractiveObjDic.Add(index, obj);
-        Debug.Log(index + " " + obj.name);
     }
 
     public List<BaseInteractive> GetInteractiveObj(string name) //obj 정보 리스트 리턴

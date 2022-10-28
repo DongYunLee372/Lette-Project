@@ -22,7 +22,6 @@ public class FloorTrab : BaseInteractive
     {
         
         TrabCollider = GetComponentInChildren<BoxCollider>();
-        Debug.Log(TrabCollider.name);
         coroutine = StartTrab();
         MoveSpeed = 10f;
 

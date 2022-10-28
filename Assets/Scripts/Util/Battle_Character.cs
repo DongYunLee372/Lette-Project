@@ -323,7 +323,6 @@ public class Battle_Character : MonoBehaviour
             {
                 real_AI.navMesh.SetDestination(transform.position);
 
-                Debug.Log("스팅 : " + attack_Info[i].Name + "시작");
                 if (real_AI.now_State.GetComponent<State_Attack>() != null)
                     real_AI.now_State.GetComponent<State_Attack>().attack_Info_Index = i;
 
@@ -375,7 +374,6 @@ public class Battle_Character : MonoBehaviour
                                 && real_AI.now_State.GetComponent<State_Attack>().Attack_Result == false)
                 {
                     isAttack_Run = true;
-                    Debug.Log("클로즈아웃이다");
                     animator.Play("BackWard_Jump");
                 }
             }
@@ -388,7 +386,6 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
-                Debug.Log("파이널 들어옴 " + clipname);
                 if (attack_Info[i].off_Mesh_Pos[0])
                     attack_Info[i].off_Mesh_Pos[0].localPosition = begin_Pos;
 
@@ -459,7 +456,6 @@ public class Battle_Character : MonoBehaviour
                 {
                     isDelay = true;
                     animator.Pause();
-                    Debug.Log("후딜있음 시작");
                     StartCoroutine(post_Delay_Coroutine(attack_Info[i].post_Delay));
                 }
 
@@ -473,8 +469,6 @@ public class Battle_Character : MonoBehaviour
     public IEnumerator post_Delay_Coroutine(float sec)
     {
         yield return new WaitForSeconds(sec);
-
-        Debug.Log("후딜있음 끝남");
         animator.Resume();
         animator.animator.SetTrigger("Delay_Trg");
         isDelay = false;
@@ -727,7 +721,6 @@ public class Battle_Character : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Debug.Log("ㅇㅇ");
             animator.Play("First_Atk");
             animator.animator.SetTrigger("Delay_Trg");
         }

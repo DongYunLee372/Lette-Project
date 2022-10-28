@@ -51,7 +51,6 @@ public class GameMG : Singleton<GameMG>
         if (time_current < time_Max)
         {
             // text_Timer.text = $"{time_current:N2}";
-            Debug.Log(time_current);
         }
         else if (!isEnded)
         {
@@ -62,7 +61,6 @@ public class GameMG : Singleton<GameMG>
 
     private void End_Timer()
     {
-        Debug.Log("End");
         time_current = time_Max;
         // text_Timer.text = $"{time_current:N2}";
         isEnded = true;
@@ -75,7 +73,6 @@ public class GameMG : Singleton<GameMG>
         time_current = 0;
         //  text_Timer.text = $"{time_current:N2}";
         isEnded = false;
-        Debug.Log("Start");
     }
 
     //게임 시작
@@ -105,7 +102,6 @@ public class GameMG : Singleton<GameMG>
     public void startGame(string SceneName, Vector3 PlayerPos)
     {
 
-        Debug.Log(SceneManager.GetActiveScene().name + " 씬 이름 ");
         GameObject PlayerInitPos = new GameObject();
         PlayerInitPos.transform.position = PlayerPos;
 
@@ -146,7 +142,6 @@ public class GameMG : Singleton<GameMG>
             yield return null;
         }
 
-        Debug.Log("끝");
     }
 
 

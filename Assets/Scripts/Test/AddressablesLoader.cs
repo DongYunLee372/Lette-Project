@@ -53,11 +53,9 @@ public static class AddressablesLoader
     public static async Task InitAssets_label<T>(string label, List<T> createdObjs)
         where T : UnityEngine.Object
     {
-        Debug.Log("생성전" + label);
 
 
         var locations = await Addressables.LoadResourceLocationsAsync(label).Task;
-        Debug.Log("생성가ㅣ져옴" + label);
 
 
         foreach (var location in locations)
@@ -66,7 +64,6 @@ public static class AddressablesLoader
              createdObjs.Add(temp);
              List.Add(temp);  //List에 저장 (생성된 오브젝트)
 
-            Debug.Log("생성" + label);
         }
     }
 
@@ -83,13 +80,11 @@ public static class AddressablesLoader
 
         foreach (var t in createdObjs)
         {
-            Debug.Log("createdObjs 리스트 들어감" + t);
         }
 
 
         foreach (var t in List)
         {
-            Debug.Log("List 리스트 들어감" + t);
         }
 
         return temp as T;
@@ -110,14 +105,11 @@ public static class AddressablesLoader
     {
         if(delete_Obj!=null)
         {
-            Debug.Log("객체 메모리 삭제 시도");
 
             if (!Addressables.ReleaseInstance(delete_Obj))
             {
-                Debug.Log("객체 메모리 삭제");
                 Addressables.ReleaseInstance(delete_Obj);
                 //Instantiate_Obj_List.Remove(delete_Obj);
-                Debug.Log("리스트 메모리 삭제");
             }
         }
         
@@ -128,7 +120,6 @@ public static class AddressablesLoader
         bool check = false;
 
 
-        Debug.Log("객체 메모리 삭제 시도 Delete_Object");
 
 
 
@@ -142,7 +133,6 @@ public static class AddressablesLoader
     public static void tempCheckList_delete(GameObject delete_Obj)
     {
 
-        Debug.Log("객체 메모리 삭제 시도 tempCheckList_delete");
 
         object[] tempArr = List.ToArray();
 
@@ -159,11 +149,9 @@ public static class AddressablesLoader
         //리스트 .......오류...
         if (AssetList.ContainsKey(delete_Obj.name))
         {
-            Debug.Log("삭제 in AssetList" + delete_Obj.name);
 
             var s = AssetList[delete_Obj.name];
            // Addressables.Release(s[0]);  //오류
-            Debug.Log("Release" + s[0]);
            s.Remove(s[0]);
 
             foreach (var tt in AssetList[delete_Obj.name])
@@ -172,7 +160,6 @@ public static class AddressablesLoader
 
                // Addressables.Release(tt);
              
-                Debug.Log("Release" + tt);
 
                 AssetList[delete_Obj.name].Remove(tt);
                 break;
@@ -187,12 +174,10 @@ public static class AddressablesLoader
             {
                 if (s == delete_Obj)
                 {
-                    Debug.Log("삭제하려고왔는뎅 handleIList");
                     tempsaveT = t;
                     List.Remove(t);
                     Addressables.Release(t);
 
-                    Debug.Log("삭제 완료");
                     return;
                 }
             }
@@ -202,11 +187,9 @@ public static class AddressablesLoader
 
         foreach (var t in handleIList)
         {
-            Debug.Log("삭제 됐나 조회중 : " + t);
 
             foreach (var s in t.Result)
             {
-                Debug.Log(s.name + "삭제됐나 조회중");
             }
         }
 
@@ -218,14 +201,12 @@ public static class AddressablesLoader
 
                 Addressables.ReleaseInstance((GameObject)t);
                  tempdeleteSave = (GameObject)t;
-                Debug.Log(tempdeleteSave + "tempdeleteSave 삭제");
 
                 // GameObject.Destroy(delete_Obj);
                 break;
 
             }
 
-            Debug.Log("List 조회 : " + t);
         }
 
         //IList핸들 리스트에서 삭제
@@ -234,12 +215,10 @@ public static class AddressablesLoader
 
         foreach (var t in List)
         {
-            Debug.Log("삭제 됐나 조회중 : " + t);
         }
 
 
         handleIList.Remove(tempsaveT);
-        Debug.Log("handleIList 삭제해씀");
 
 
     }
@@ -248,7 +227,6 @@ public static class AddressablesLoader
          where T : UnityEngine.Object
     {
        
-            Debug.Log("객체 메모리 삭제 시도 tempCheckList_delete");
 
           object[] tempArr = List.ToArray();
 
@@ -274,12 +252,10 @@ public static class AddressablesLoader
             {
                 if(s as T == delete_Obj)
                 {
-                    Debug.Log("삭제하려고왔는뎅 handleIList");
                     tempsaveT = t;
                     List.Remove(t);
                     Addressables.Release(t);
 
-                    Debug.Log("삭제 완료");
                     return;
                 }
             }
@@ -288,11 +264,9 @@ public static class AddressablesLoader
 
         foreach (var t in handleIList)
         {
-            Debug.Log("삭제 됐나 조회중 : "+ t);
 
             foreach (var s in t.Result)
             {
-                Debug.Log(s.name + "삭제됐나 조회중");
             }
         }
 
@@ -301,7 +275,6 @@ public static class AddressablesLoader
             //object에 저장할때
             if(t==delete_Obj as object)
             {
-                Debug.Log("삭제하려고왔는뎅");
               
                 Addressables.Release(t);
                 List.Remove(t);
@@ -310,13 +283,11 @@ public static class AddressablesLoader
 
             }
 
-            Debug.Log("List 조회 : " + t);
         }
 
         //IList핸들 리스트에서 삭제
 
        handleIList.Remove(tempsaveT);
-        Debug.Log("handleIList 삭제해씀");
 
 
     }
@@ -325,7 +296,6 @@ public static class AddressablesLoader
     {
         object findAsset=null;
 
-        Debug.Log("Find_Asset_In_AllList 진입");
 
         //if(List.Contains(FindObj))
         //{
@@ -341,7 +311,6 @@ public static class AddressablesLoader
             if( t==FindObj as object)
             {
                 findAsset = t;
-                Debug.Log("findAsset찾음 in List");
 
                 return findAsset;
             }
@@ -353,13 +322,11 @@ public static class AddressablesLoader
             if (t == FindObj as GameObject)
             {
                 findAsset = t;
-                Debug.Log("findAsset찾음 in Instantiate_Obj_List");
 
                 return findAsset;
             }
         }
 
-        Debug.Log("아무것도 못찾음");
 
         return findAsset;
     }
@@ -370,22 +337,18 @@ public static class AddressablesLoader
         object findAsset = null;
         string List_name = " (UnityEngine.GameObject)";  //string형이라 뒤에 이거 붙여야 ..
 
-        Debug.Log("Find_Asset_In_AllList 진입");
 
         foreach (var t in List)
         {
-            Debug.Log("List 요소 조회 : " + t);
             if (t.ToString() == FindObj+ List_name)
             {
                 findAsset = t;
-                Debug.Log("findAsset찾음 in List"+List_name);
 
                 return findAsset;
             }
             if(t.ToString()==FindObj)
             {
                 findAsset = t;
-                Debug.Log("findAsset찾음 in List (String)");
 
                 return findAsset;
             }
@@ -394,10 +357,8 @@ public static class AddressablesLoader
 
         if(AssetList.ContainsKey(FindObj))
         {
-            Debug.Log("AssetList에 있다");
             foreach(var t in AssetList[FindObj])
             {
-                Debug.Log("AssetList에"+t);
                 findAsset = t as GameObject;
                 GameObject tempobj = UnityEngine.Object.Instantiate((GameObject)findAsset, new Vector3(0f, 0f, 0f), Quaternion.identity);
                 return tempobj;
@@ -407,13 +368,11 @@ public static class AddressablesLoader
         //이 밑에 다른 리스트도 돌리기
         foreach (var t in Instantiate_Obj_List)
         {
-            Debug.Log("Instantiate_Obj_List 요소 조회 : " + t);
 
 
             if (t.name == FindObj)
             {
                 findAsset = t;
-                Debug.Log("findAsset찾음 in Instantiate_Obj_List");
 
                 return findAsset;
             }
@@ -421,12 +380,10 @@ public static class AddressablesLoader
 
         foreach(var t in handleList)
         {
-            Debug.Log("handleList 요소 조회 : " + t.Result.name);
 
             if (t.Result.name==FindObj)
             {
                 findAsset = t;
-                Debug.Log("findAsset찾음 in handleList");
 
                 return findAsset;
             }
@@ -437,19 +394,16 @@ public static class AddressablesLoader
 
             foreach (var s in t.Result)
             {
-                Debug.Log("handleIList 요소 조회 : " + s.name);
 
                 if (s.name == FindObj)
                 {
                     findAsset = s;
-                    Debug.Log("findAsset찾음 in handleIList");
 
                     return findAsset;
                 }
             }
         }
 
-        Debug.Log("아무것도 못찾음");
 
         return findAsset;
     }
@@ -460,16 +414,13 @@ public static class AddressablesLoader
     {
         //AsyncOperationHandle<T> operationHandle=
         //await Addressables.LoadAssetAsync<T>(object_name).Task;
-        Debug.Log("시작" + object_name);
 
         var temp = await Addressables.LoadAssetAsync<T>(object_name).Task;        
-        Debug.Log("가져옴" + object_name);
 
         List.Add(temp);
 
         foreach(var t in List)
         {
-            Debug.Log("요소 출력: "+t);
         }
 
     
@@ -564,12 +515,10 @@ public static class AddressablesLoader
     //객체 불러오기 (1개
     public static IEnumerator LoadGameObjectAndMaterial(string name)
     {
-        Debug.Log("LoadGameObjectAndMaterial호출");
 
 
         if (Load_String_List.Contains(name))
         {
-            Debug.Log("이미 로드된 파일입니다. 동일한 이름의 소스 이미 로드 요청되어있음.");
             yield return null;
         }
         else
@@ -581,7 +530,6 @@ public static class AddressablesLoader
         GameObject findGameobj= AddressablesController.Instance.find_Asset_in_list(name);
         if(findGameobj!=null)
         {
-            Debug.Log("이미 로드된 파일입니다.");
             yield return null;
         }
         else
@@ -595,7 +543,6 @@ public static class AddressablesLoader
                 tempobj.Add(gameObject);
                 List.Add(gameObject);
                // ListCount = tempobj.Count;
-                Debug.Log(gameObject.name + "로드");
 
                 //foreach (var obj in tempobj)
                 //{
@@ -605,7 +552,6 @@ public static class AddressablesLoader
                 foreach (var obj in List)
                 {
                     //	c++;
-                    Debug.Log(obj + "List 리스트확인");
                 }
                 //etc...
             }
@@ -630,12 +576,10 @@ public static class AddressablesLoader
     //델리게이트
     public static IEnumerator LoadGameObjectAndMaterial<T>(string name, Action<AsyncOperationHandle<T>> Complete)
     {
-        Debug.Log("LoadGameObjectAndMaterial호출");
 
 
         if (Load_String_List.Contains(name))
         {
-            Debug.Log("이미 로드된 파일입니다. 동일한 이름의 소스 이미 로드 요청되어있음.");
             yield return null;
         }
         else
@@ -647,7 +591,6 @@ public static class AddressablesLoader
         GameObject findGameobj = AddressablesController.Instance.find_Asset_in_list(name);
         if (findGameobj != null)
         {
-            Debug.Log("이미 로드된 파일입니다.");
             yield return null;
         }
         else
@@ -662,12 +605,10 @@ public static class AddressablesLoader
                 tempobj.Add(gameObject as GameObject);
                 List.Add(gameObject);
                 ListCount = tempobj.Count;
-                Debug.Log(gameObject + "로드");
 
                 foreach (var obj in tempobj)
                 {
                     //	c++;
-                    Debug.Log(obj.name + "리스트확인");
                 }
                 //etc...
             }
@@ -701,7 +642,6 @@ public static class AddressablesLoader
                 //잠시  object저장 되는지 확인
                
                 List.Add(obj);
-                Debug.Log(obj.name);
             });
         yield return handle;
         //handleList.Add(handle);
@@ -710,7 +650,6 @@ public static class AddressablesLoader
 
         foreach(var t in List)
         {
-            Debug.Log(t.ToString());
         }
     }
 
@@ -719,7 +658,6 @@ public static class AddressablesLoader
     {
         foreach(var temp in List)
         {
-            Debug.Log("tempCheckList : " + temp);
         }
     }
 
@@ -747,16 +685,13 @@ public static class AddressablesLoader
     //키 연관 저장, label사용 다수 로딩
     public static IEnumerator LoadAndAssociateResultWithKey(string Key)
     {
-        Debug.Log("시작");
         AsyncOperationHandle<IList<IResourceLocation>> locations = Addressables.LoadResourceLocationsAsync(Key);
         yield return locations;
-        Debug.Log("locations리턴");
 
         Dictionary<string, GameObject> associationDoesMatter = new Dictionary<string, GameObject>();
 
         foreach (IResourceLocation location in locations.Result)
         {
-            Debug.Log("foreach시작");
 
             AsyncOperationHandle<GameObject> handle =
                 Addressables.LoadAssetAsync<GameObject>(location);
@@ -768,9 +703,7 @@ public static class AddressablesLoader
                 {
                     if (associationDoesMatter.TryGetValue(location.PrimaryKey, out GameObject game))
                     {
-                        Debug.Log("primarykey : " + location.PrimaryKey);
 
-                        Debug.Log("objname : "+game.name);
                     }
 
                 }
@@ -798,7 +731,6 @@ public static class AddressablesLoader
                obj =>
                {
                 //Gets called for every loaded asset
-                Debug.Log(obj.name);
                }, Addressables.MergeMode.Union);
         yield return intersectionWithMultipleKeys;
         IList<GameObject> multipleKeyResult2 = intersectionWithMultipleKeys.Result;
@@ -909,7 +841,6 @@ public static class AddressablesLoader
         GameObject gameObject = obj.Result;
         tempobj.Add(gameObject);
 
-        Debug.Log(obj.Result.name + "어드레서블로드");
 
     }
 
@@ -920,7 +851,6 @@ public static class AddressablesLoader
         Addressables.LoadAssetAsync<GameObject>(object_name).Completed += (handle) =>
          {
              tempobj = handle.Result;
-             Debug.Log(tempobj.name + "에셋리턴");
          // return tempobj;
      };
 
@@ -928,7 +858,6 @@ public static class AddressablesLoader
         {
             return tempobj;
         }
-        Debug.Log("비어있음");
         return tempobj;
     }
 
@@ -943,7 +872,6 @@ public static class AddressablesLoader
         else
         {
             //Addressables.UnloadSceneAsync(m_LoadedScene).Completed += OnSceneUnloaded;
-            Debug.Log("로드 실패");
         }
     }
 
@@ -955,7 +883,6 @@ public static class AddressablesLoader
         }
        else
         {
-            Debug.Log("언로드 실패");
         }
     }
 
@@ -967,7 +894,6 @@ public static class AddressablesLoader
                 m_LoadedScene = new SceneInstance();
                 break;
             case AsyncOperationStatus.Failed:
-                Debug.LogError("씬 언로드 실패: " /*+ addSceneReference.AssetGUID*/);
                 break;
             default:
                 break;
@@ -982,7 +908,6 @@ public static class AddressablesLoader
                 m_LoadedScene = obj.Result;
                 break;
             case AsyncOperationStatus.Failed:
-                Debug.LogError("씬 로드 실패: " /*+ addSceneReference.AssetGUID*/);
                 break;
             default:
                 break;

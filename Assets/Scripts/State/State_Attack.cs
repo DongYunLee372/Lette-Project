@@ -184,7 +184,6 @@ public class State_Attack : State
             case Enemy_Attack_Logic.Long_Attack:
                 // 원거리라면 원거리 발사체 발사
 
-                //Debug.Log("라스트 : 원거리 : ");
 
                 Attack_Result = false;
                 Result_return_Object = null;
@@ -209,7 +208,6 @@ public class State_Attack : State
                 battle_character.attack_Type = Enemy_Attack_Type.Skill_Attack;
                 battle_character.skill_handler.Skill_Run(battle_character, battle_character.now_Skill_Info);
 
-                //Debug.Log("라스트 : 스킬 공격 : " + battle_character.now_Skill_Info.P_skill_Name_En);
                 break;
         }
     }
@@ -218,7 +216,6 @@ public class State_Attack : State
     {
         special_Range = battle_character.mon_Info.P_mon_SpecialAtk.Split(",");
 
-        //Debug.Log("special = " + special_Range[0] + "," + special_Range[1]);
     }
 
 }
