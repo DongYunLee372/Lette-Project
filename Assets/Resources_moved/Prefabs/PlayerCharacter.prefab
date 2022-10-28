@@ -2563,7 +2563,7 @@ MonoBehaviour:
     RightReverse: 0
     RotSpeed: 0.55
     MoveSpeed: 160
-    RunSpeed: 330
+    RunSpeed: 400
     MinAngle: 0
     MaxAngle: 0
     Gravity: 0
