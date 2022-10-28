@@ -408,6 +408,7 @@ public class CMoveComponent : BaseComponent
         WorldMove = com.TpCamRig.TransformDirection(MoveDir);
         WorldMove.y = 0;
         WorldMove = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * WorldMove;//경사로에 의한 y축 이동방향
+        WorldMove.Normalize();
 
         float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
         //float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina  > 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
