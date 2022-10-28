@@ -667,9 +667,11 @@ public class CMoveComponent : BaseComponent
         StartCoroutine(RollingNoDamageStartCor);
         //StartCoroutine(CorDoMove(this.transform.position, tempmove, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed -0.2f, RollingOver));
 
-        Vector3 moveval = com.FpRoot.forward* moveoption.RollingDistance;
+        Vector3 moveval = com.FpRoot.forward * moveoption.RollingDistance;
 
         RollingStartTime = Time.time;
+
+        Move(moveval);
     }
 
     public void RollingOver()
