@@ -5,7 +5,7 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 5
+    smallestOccluder: 1
     smallestHole: 0.25
     backfaceThreshold: 100
   m_SceneGUID: 00000000000000000000000000000000
@@ -1370,6 +1370,7 @@ MonoBehaviour:
   skyboxMG: {fileID: 1421700981}
   Canvas_: {fileID: 1772133562}
   Im: {fileID: 0}
+  tempcheckList: []
 --- !u!4 &1724488231
 Transform:
   m_ObjectHideFlags: 0
