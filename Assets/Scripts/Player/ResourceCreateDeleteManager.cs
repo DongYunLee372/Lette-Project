@@ -28,6 +28,7 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
 
         T resulttype = result.GetComponent<T>();
         Debug.Log("타입" + resulttype.GetType().ToString());
+
         if(poolManager.IsPooling(adressableName))//풀링을 하고 있는 객체면 풀링에서 꺼내서 주고
         {
             Debug.Log("풀링생성");
