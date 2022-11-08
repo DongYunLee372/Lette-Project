@@ -88,6 +88,8 @@ Shader "Custom/WaterShader"
             //물에의한 외곡, 림라이트, 잔물결 노말 등을 모두 종합해서 적용시켜 준다.
             o.Emission = lerp(grabtex, reflection, rim2) + (rim1 * _LightColor0);
 
+            //o.Emission = reflection + (rim1 * _LightColor0);
+            //o.Emission = grabtex;
 
             //o.Emission = reflection;
 

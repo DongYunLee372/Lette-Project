@@ -57,9 +57,11 @@ public class CheckAround : MonoBehaviour
         RaycastHit[] hits;
         curval.CurFowardSlopAngle = 0;
         curval.IsFowordBlock = false;
+
         //Vector3 temp = new Vector3(WorldMove.x, 0, WorldMove.z);
         //temp = com.FpRoot.forward /*+ Vector3.down*/;
         //NavMesh.Raycast()
+
         curval.IsStep = false;
 
 

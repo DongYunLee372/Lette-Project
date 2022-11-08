@@ -289,12 +289,12 @@ public class BaseStatus:MonoBehaviour
     {
         CurGroggy = CurGroggy + val;
 
-        Debug.Log("그로기 증가 현재 그로기 : " + CurGroggy);
+        //Debug.Log("그로기 증가 현재 그로기 : " + CurGroggy);
 
         //플레이어가 다운될정도의 그로기 값이 모이면 플레이어 다운
         if (CurGroggy>=player_Down_Groggy)
         {
-            Debug.Log("그로기 증가로 다운 실행");
+            //Debug.Log("그로기 증가로 다운 실행");
             CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             movecom.KnockDown();
             return true;
@@ -303,7 +303,7 @@ public class BaseStatus:MonoBehaviour
         //들어온 그로기 값이 경직에 빠지게 하는 그로기값이면 경직
         if (val>=player_Stagger_Groggy)
         {
-            Debug.Log("그로기 증가로 경직 실행");
+            //Debug.Log("그로기 증가로 경직 실행");
             CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             movecom.KnockBack();
 
@@ -418,7 +418,7 @@ public class BaseStatus:MonoBehaviour
 
     public void STMRecoveryStart()
     {
-        Debug.Log("Staminarecover 시작");
+        //Debug.Log("Staminarecover 시작");
         StopCoroutine(CorSTMCount);
         CorSTMCount = null;
 
@@ -428,7 +428,7 @@ public class BaseStatus:MonoBehaviour
 
     public void GroggyRecoveryStart()
     {
-        Debug.Log("그로기 회복 시작");
+        //Debug.Log("그로기 회복 시작");
         StopCoroutine(CorGroggyCount);
         CorGroggyCount = null;
 
@@ -441,11 +441,11 @@ public class BaseStatus:MonoBehaviour
 
         while(true)
         {
-            Debug.Log($"{val}회복");
+            //Debug.Log($"{val}회복");
 
             if (!_invoker(val))
             {
-                Debug.Log("회복 종료");
+                //Debug.Log("회복 종료");
                 yield break;
             }
                 
