@@ -731,6 +731,5 @@ public class Battle_Character : MonoBehaviour
         }
 
         Time_Check();
-
     }
 }
