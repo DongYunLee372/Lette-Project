@@ -5420,11 +5420,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 449776, guid: d3ce5fe83b1090246a3572735e3dd832, type: 3}
   m_PrefabInstance: {fileID: 206884038}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &206917988 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4761294746499471992, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
-  m_PrefabInstance: {fileID: 6119949420061767438}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &215944928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18238,11 +18233,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 404728, guid: 2f502f470bc99cf40a5d520810ab13c3, type: 3}
   m_PrefabInstance: {fileID: 762042937}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &764748423 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 730421125, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
-  m_PrefabInstance: {fileID: 6119949420061767438}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &768464950
 PrefabInstance:
@@ -46272,11 +46262,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 449776, guid: d3ce5fe83b1090246a3572735e3dd832, type: 3}
   m_PrefabInstance: {fileID: 2004801329}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2008087868 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3073431962554695218, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
-  m_PrefabInstance: {fileID: 6119949420061767438}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2012232972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49237,18 +49222,6 @@ PrefabInstance:
       propertyPath: real_AI.Init_State
       value: 
       objectReference: {fileID: 790691920}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Collider.Array.data[0]
-      value: 
-      objectReference: {fileID: 206917988}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Collider.Array.data[1]
-      value: 
-      objectReference: {fileID: 2008087868}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Collider.Array.data[2]
-      value: 
-      objectReference: {fileID: 764748423}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: attack_Info.Array.data[10].missile_Pos
       value: 

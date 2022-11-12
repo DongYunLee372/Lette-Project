@@ -857,12 +857,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   attack_Type: 0
-  attack_Logic: 0100
+  attack_Logic: 0101
   isHit: 0
   isAttack_Run: 0
   isDelay: 0
   attack_Info:
-  - Name: USwing
+  - Name: Skill_01
     Movedis:
     - 0
     - 0
