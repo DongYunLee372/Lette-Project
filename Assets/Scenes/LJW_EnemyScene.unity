@@ -49196,19 +49196,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 69429433}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[0].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: attack_Info.Array.data[1].off_Mesh_Pos.Array.data[0]
       value: 
       objectReference: {fileID: 177301731}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[2].off_Mesh_Pos.Array.data[0]
+      propertyPath: attack_Info.Array.data[4].off_Mesh_Pos.Array.data[0]
       value: 
       objectReference: {fileID: 177301731}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[4].off_Mesh_Pos.Array.data[0]
+      propertyPath: attack_Info.Array.data[6].off_Mesh_Pos.Array.data[0]
       value: 
       objectReference: {fileID: 177301731}
     - target: {fileID: 8666827946990782205, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
