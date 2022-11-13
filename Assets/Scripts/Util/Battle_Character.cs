@@ -146,7 +146,9 @@ public class Battle_Character : MonoBehaviour
     public AI real_AI;
     public bool is_Boss = false; // 보스 몬스터 판별
     public bool is_Backword = false;
+    public bool now_Backward = false;
     public float init_Speed = 2.5f;
+    public SkinnedMeshRenderer skinMesh;
 
     public void Stat_Initialize(MonsterInformation info, List<Mon_Normal_Atk_Group> p_mon_normal_atak_group, List<BossNomalSkill> p_BossNomalSkill, MonsterSkillInformation p_monsterSkillInformation, MonsterTargetInformation target) // 몬스터 생성 시 몬스터 정보 초기화
     {
@@ -546,7 +548,25 @@ public class Battle_Character : MonoBehaviour
         {
             attack_Info[info_num].off_Mesh_Pos[0].localPosition += new Vector3(0, 0, attack_Info[info_num].Movedis[index]);
 
-            real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
+            if (!now_Backward)
+            {
+                real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
+            }
+            else
+            {
+                if (real_AI.navMesh.CalculatePath(attack_Info[info_num].off_Mesh_Pos[0].position, new UnityEngine.AI.NavMeshPath()))
+                {
+                    skinMesh.enabled = false;
+                    real_AI.navMesh.enabled = false;
+                    gameObject.transform.position = attack_Info[info_num].off_Mesh_Pos[0].position;
+                    skinMesh.enabled = true;
+                    real_AI.navMesh.enabled = true;
+                }
+                else
+                {
+                    now_Backward = false;
+                }
+            }
 
             if (attack_Info[info_num].jump_Angular[index] == -1)
             {
@@ -567,7 +587,8 @@ public class Battle_Character : MonoBehaviour
             for (int i = 0; i < attack_Info[info_num].missile_Amount; i++)
             {
                 //GameObject missileobj = GameObject.Instantiate(attack_Info[info_num].missile);
-                GameObject missileobj = GameMG.Instance.Resource.Instantiate<GameObject>("Boss_Arrow");
+                string name = attack_Info[info_num].missile.name;
+                GameObject missileobj = GameMG.Instance.Resource.Instantiate<GameObject>(name);
                 missileobj.transform.position = attack_Info[info_num].missile_Pos.position;
 
                 Vector3 dirVec = cur_Target.transform.position - missileobj.transform.position;

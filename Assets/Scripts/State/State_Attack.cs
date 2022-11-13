@@ -164,7 +164,8 @@ public class State_Attack : State
                 battle_character.stop_CoolTime.check_Time = 0f;
                 battle_character.stop_CoolTime.isCheck = false;
                 battle_character.gameObject.transform.DOLookAt(battle_character.cur_Target.transform.position, 0.5f);
-
+                //battle_character.real_AI.navMesh.SetDestination
+                battle_character.now_Backward = true;
                 battle_character.animator.Play("BackWord_Jump");
                 break;
             case Enemy_Attack_Logic.Melee_Attack:
@@ -184,6 +185,7 @@ public class State_Attack : State
             case Enemy_Attack_Logic.Long_Attack:
                 // 원거리라면 원거리 발사체 발사
 
+                battle_character.animator.animator.SetTrigger("Delay_Trg");
 
                 Attack_Result = false;
                 Result_return_Object = null;

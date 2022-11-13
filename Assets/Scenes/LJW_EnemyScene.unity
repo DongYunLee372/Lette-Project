@@ -38951,7 +38951,9 @@ MonoBehaviour:
     isPause: 0
   is_Boss: 0
   is_Backword: 0
+  now_Backward: 0
   init_Speed: 2.5
+  skinMesh: {fileID: 0}
   begin_Pos: {x: 0, y: 0, z: 0}
   ani_Index: 0
   Offset: {x: 0, y: 0, z: 0}
@@ -48559,11 +48561,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 461420, guid: c4c867f83beeae549bdc784dca9b0798, type: 3}
   m_PrefabInstance: {fileID: 2108148545}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2114369664 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3295430894109007201, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
-  m_PrefabInstance: {fileID: 6119949420061767438}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2115144643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49223,10 +49220,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 790691920}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[10].missile_Pos
-      value: 
-      objectReference: {fileID: 2114369664}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: attack_Info.Array.data[0].off_Mesh_Pos.Array.data[0]
       value: 
       objectReference: {fileID: 177301731}
@@ -49239,39 +49232,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 177301731}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[3].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: attack_Info.Array.data[4].off_Mesh_Pos.Array.data[0]
       value: 
       objectReference: {fileID: 177301731}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: attack_Info.Array.data[5].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[6].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[7].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[8].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[9].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[10].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[11].off_Mesh_Pos.Array.data[0]
       value: 
       objectReference: {fileID: 333842623}
     - target: {fileID: 8666827946990782205, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
@@ -49292,7 +49257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8666827946991278813, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.95
       objectReference: {fileID: 0}
     - target: {fileID: 8666827946991278813, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: m_LocalRotation.w
