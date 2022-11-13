@@ -63,7 +63,7 @@ public class State_Attack : State
                     battle_character.cur_Target.transform.position) <= 6f/*battle_character.mon_Info.P_mon_CloseAtk*/)
                     &&
                     !battle_character.isAttack_Run
-                    && battle_character.normal_CoolTime.isCheck) // bool 변수를 추가해야함 일반공격
+                    && battle_character.real_Normal_CoolTime.isCheck) // bool 변수를 추가해야함 일반공격
             {
                 judge_logic = Enemy_Attack_Logic.Melee_Attack;
                 _State = this;
