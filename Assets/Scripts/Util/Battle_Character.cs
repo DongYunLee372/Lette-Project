@@ -34,6 +34,9 @@ public class Attack_Info // 스킬이나 공격info
     // 이펙트 있으면 이펙트 생성 위치
     public Transform[] effect_Pos;
 
+    // 이펙트 사라지는 시간
+    public float[] Effect_Destroy_Time;
+
     // 오프 메쉬 링크 위치
     public Transform[] off_Mesh_Pos;
 
@@ -389,8 +392,10 @@ public class Battle_Character : MonoBehaviour
             if (attack_Info[i].Name == clipname)
             {
                 if (attack_Info[i].off_Mesh_Pos[0])
+                {
+                    Debug.Log("여기");
                     attack_Info[i].off_Mesh_Pos[0].localPosition = begin_Pos;
-
+                }
                 if (attack_Info[i].is_Normal_Attack) // 일반 공격인 경우 
                 {
                     if ((Vector3.Distance(transform.position,
@@ -429,6 +434,7 @@ public class Battle_Character : MonoBehaviour
                             else
                             {
                                 isAttack_Run = true;
+                                now_Backward = true;
                                 animator.Play(attack_Info[i].after_skill_name);
                             }
                         }
@@ -461,7 +467,8 @@ public class Battle_Character : MonoBehaviour
                     StartCoroutine(post_Delay_Coroutine(attack_Info[i].post_Delay));
                 }
 
-                attack_Collider[attack_Info[i].attack_Collider_Num].GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Melee_Attack;
+                if (attack_Collider[attack_Info[i].attack_Collider_Num].GetComponent<Enemy_Weapon>())
+                    attack_Collider[attack_Info[i].attack_Collider_Num].GetComponent<Enemy_Weapon>().my_Logic = Enemy_Attack_Logic.Melee_Attack;
 
                 return;
             }
@@ -485,7 +492,9 @@ public class Battle_Character : MonoBehaviour
             {
                 ani_Index = i;
                 if (attack_Info[i].off_Mesh_Pos[0])
+                {
                     begin_Pos = attack_Info[i].off_Mesh_Pos[0].localPosition;
+                }
 
                 Skill_Process(i, 0);
 
@@ -540,7 +549,7 @@ public class Battle_Character : MonoBehaviour
             else
             {
                 EffectManager.Instance.InstantiateEffect(attack_Info[info_num].effect[index],
-                    attack_Info[info_num].effect_Pos[index].position);
+                    attack_Info[info_num].effect_Pos[index].position, attack_Info[info_num].Effect_Destroy_Time[index]);
             }
         }
 
@@ -550,17 +559,19 @@ public class Battle_Character : MonoBehaviour
 
             if (!now_Backward)
             {
+                Debug.Log("카카카카카");
                 real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
             }
             else
             {
                 if (real_AI.navMesh.CalculatePath(attack_Info[info_num].off_Mesh_Pos[0].position, new UnityEngine.AI.NavMeshPath()))
                 {
+                    Debug.Log("키키키키키");
                     skinMesh.enabled = false;
                     real_AI.navMesh.enabled = false;
                     gameObject.transform.position = attack_Info[info_num].off_Mesh_Pos[0].position;
-                    skinMesh.enabled = true;
-                    real_AI.navMesh.enabled = true;
+
+                    StartCoroutine(skinMesh_Coroutine(0.75f));
                 }
                 else
                 {
@@ -603,6 +614,14 @@ public class Battle_Character : MonoBehaviour
                 //Destroy(missileobj, 5.0f);
             }
         }
+    }
+
+    public IEnumerator skinMesh_Coroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        skinMesh.enabled = true;
+        real_AI.navMesh.enabled = true;
     }
 
     public IEnumerator nav_Coroutine(float speed, float acc, bool angle)

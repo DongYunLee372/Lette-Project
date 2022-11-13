@@ -23,7 +23,9 @@ public class State_Attack : State
             if (battle_character.stop_CoolTime.isCheck)
             {
                 if (battle_character.attack_Info[battle_character.ani_Index].off_Mesh_Pos[0])
+                {
                     battle_character.attack_Info[battle_character.ani_Index].off_Mesh_Pos[0].localPosition = battle_character.begin_Pos;
+                }
                 battle_character.isAttack_Run = false;
                 battle_character.real_AI.pre_State = this;
 
@@ -208,7 +210,7 @@ public class State_Attack : State
                 battle_character.skill_CoolTime.isCheck = false;
                 battle_character.skill_CoolTime.check_Time = 0f;
                 battle_character.attack_Type = Enemy_Attack_Type.Skill_Attack;
-                battle_character.skill_handler.Skill_Run(battle_character, battle_character.now_Skill_Info);
+                //battle_character.skill_handler.Skill_Run(battle_character, battle_character.now_Skill_Info);
 
                 break;
         }
