@@ -153,7 +153,7 @@ MonoBehaviour:
     m_Address: SwordHitRedLegacy
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: b99e517c1360ec7498e618872fba26a9
+  - m_GUID: a1fe4a2fbd2d4e44b98c58a3463c5cc3
     m_Address: Boss
     m_ReadOnly: 0
     m_SerializedLabels: []

@@ -7836,11 +7836,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 417952, guid: 33604d1ec5375e3488891483b470a427, type: 3}
   m_PrefabInstance: {fileID: 331961532}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &333842623 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1876547811660158610, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
-  m_PrefabInstance: {fileID: 6119949420061767438}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &339073681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18684,17 +18679,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 488452, guid: fbfaefed9c8de504992ea1e44db04aaf, type: 3}
   m_PrefabInstance: {fileID: 788019182}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &790691920 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8624342944388734537, guid: b99e517c1360ec7498e618872fba26a9, type: 3}
-  m_PrefabInstance: {fileID: 6119949420061767438}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e705ce5a771702d409652cac39d17d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &792807145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49208,17 +49192,57 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: skill_handler
       value: 
       objectReference: {fileID: 69429433}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: real_AI.now_State
+      propertyPath: now_Skill_Info
       value: 
-      objectReference: {fileID: 790691920}
+      objectReference: {fileID: 0}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: real_AI.Init_State
+      propertyPath: mon_Target_Info
       value: 
-      objectReference: {fileID: 790691920}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: attack_Info.Array.data[0].off_Mesh_Pos.Array.data[0]
       value: 
@@ -49235,10 +49259,6 @@ PrefabInstance:
       propertyPath: attack_Info.Array.data[4].off_Mesh_Pos.Array.data[0]
       value: 
       objectReference: {fileID: 177301731}
-    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
-      propertyPath: attack_Info.Array.data[5].off_Mesh_Pos.Array.data[0]
-      value: 
-      objectReference: {fileID: 333842623}
     - target: {fileID: 8666827946990782205, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: m_Name
       value: Hate Queen
