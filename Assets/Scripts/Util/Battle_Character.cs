@@ -311,9 +311,9 @@ public class Battle_Character : MonoBehaviour
         {
             if (attack_Info[i].Name == clipname)
             {
-                attack_Collider[0].SetActive(false);
-                attack_Collider[1].SetActive(false);
-                attack_Collider[2].SetActive(false);
+                attack_Collider[0]?.SetActive(false);
+                attack_Collider[1]?.SetActive(false);
+                attack_Collider[2]?.SetActive(false);
 
                 return;
             }
@@ -762,7 +762,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             now_Backward = true;
-            animator.Play("BackWard_Jump");
+            animator.Play("Skill_03");
             animator.animator.SetTrigger("Delay_Trg");
         }
 
