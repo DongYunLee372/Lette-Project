@@ -559,14 +559,12 @@ public class Battle_Character : MonoBehaviour
 
             if (!now_Backward)
             {
-                Debug.Log("카카카카카");
                 real_AI.navMesh.SetDestination(attack_Info[info_num].off_Mesh_Pos[0].position);
             }
             else
             {
                 if (real_AI.navMesh.CalculatePath(attack_Info[info_num].off_Mesh_Pos[0].position, new UnityEngine.AI.NavMeshPath()))
                 {
-                    Debug.Log("키키키키키");
                     skinMesh.enabled = false;
                     real_AI.navMesh.enabled = false;
                     gameObject.transform.position = attack_Info[info_num].off_Mesh_Pos[0].position;
