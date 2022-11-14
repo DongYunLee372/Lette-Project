@@ -84,6 +84,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - AnimationTransition
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 64777e7ac76449a4f8149891c8663069, type: 2}

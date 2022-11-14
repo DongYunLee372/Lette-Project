@@ -36494,6 +36494,9 @@ MonoBehaviour:
   currentBlending: 0
   perAnimator: {fileID: 0}
   m_tempclips: []
+  Transitions: []
+  TransitionLable:
+    m_LabelString: AnimationTransition
   flag: 0
 --- !u!114 &1367464340
 MonoBehaviour:

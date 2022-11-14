@@ -12,6 +12,7 @@ public class AnimationTest : MonoBehaviour
         animator = GetComponent<AnimationController>();
     }
 
+    bool flag = false;
     // Update is called once per frame
     void Update()
     {
@@ -20,5 +21,14 @@ public class AnimationTest : MonoBehaviour
             
             animator.Play(stateanimations);
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+
+            flag = !flag;
+            animator.SetBool("Run", flag);
+
+        }
+        
+
     }
 }

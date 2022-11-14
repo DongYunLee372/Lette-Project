@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 
 /*사용할 모든 클립들이 등록되어있는 animation controller 가 연결된 animator 가 필요
@@ -23,6 +25,11 @@ public class AnimationController : MonoBehaviour
 
     public Dictionary<string, AnimationClip> m_clips = new Dictionary<string, AnimationClip>();
     public AnimationClip[] m_tempclips;
+    public List<AnimationTransition> Transitions = new List<AnimationTransition>();
+
+    // 어드레서블의 Label을 얻어올 수 있는 필드.
+    public AssetLabelReference TransitionLable;
+    public IList<IResourceLocation> _locations;
 
     private CorTimeCounter timer = new CorTimeCounter();
 
@@ -43,8 +50,22 @@ public class AnimationController : MonoBehaviour
         {
             m_clips.Add(m_tempclips[i].name, m_tempclips[i]);
         }
-        
-        //System.Activator.CreateInstance
+
+
+        LinkTransition();
+    }
+
+    public void LinkTransition()
+    {
+        var ret = Addressables.LoadResourceLocationsAsync(TransitionLable.labelString);
+        _locations = ret.WaitForCompletion();
+
+        for (int i=0;i<_locations.Count;i++)
+        {
+            var temp = Addressables.LoadAssetAsync<AnimationTransition>(_locations[i]);
+            AnimationTransition result = temp.WaitForCompletion();
+            Transitions.Add(result);
+        }
     }
 
     public bool flag = false;
@@ -54,26 +75,13 @@ public class AnimationController : MonoBehaviour
         flag = true;
         perAnimator = animator.runtimeAnimatorController;
         animator.runtimeAnimatorController = aniGroup;
-
-        //sss = animator.GetAnimatorTransitionInfo(0);
-        
-        //Debug.Log($"{sss.fullPathHash}");
-        //animator.IsInTransition
-
-
-        //animator.HasState()
     }
 
-    private void Start()
-    {
-        
-    }
 
     private void Update()
     {
         if(flag)
         {
-            //if(animator.GetAnimatorTransitionInfo(0).IsName("end"))
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("end"))
             {
                 Debug.Log("끝들어옴");
@@ -102,7 +110,6 @@ public class AnimationController : MonoBehaviour
         {
             float time = m_clips[pname].length;
             time = time / PlaySpeed;
-            //time += 1.0f;
             StartCoroutine(timer.Cor_TimeCounter(time, invoker));
         }
 
@@ -113,6 +120,21 @@ public class AnimationController : MonoBehaviour
         currentplayclipname = pname;
 
         animator.CrossFade(pname, blendingtime);
+
+        //AnimationTransition transition = Transitions.Find(x => x.Clip_1.name == currentplayclipname);
+        //if (transition!=null)
+        //{
+        //    float time = m_clips[pname].length;
+        //    time = time / PlaySpeed;
+        //    time = time * transition.exitTime;
+
+        //    StartCoroutine(timer.Cor_TimeCounter<AnimationTransition>(time, Play, transition));
+        //}
+    }
+
+    public void Play(AnimationTransition _transition)
+    {
+        animator.CrossFade(_transition.Clip_2.name, _transition.normalizedTransitionDuration, 0, _transition.normalizedTimeOffset);
     }
 
     //클립이름, 재생속도 (기본이 1배속), 재생 시간 (재생시간이 0이면 계속 반복), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
@@ -144,6 +166,16 @@ public class AnimationController : MonoBehaviour
         currentplayclipname = pname;
 
         animator.CrossFade(pname, blendingtime);
+
+        //AnimationTransition transition = Transitions.Find(x => x.Clip_1.name == currentplayclipname);
+        //if (transition != null)
+        //{
+        //    float time = m_clips[pname].length;
+        //    time = time / PlaySpeed;
+        //    time = time * transition.exitTime;
+
+        //    StartCoroutine(timer.Cor_TimeCounter<AnimationTransition>(time, Play, transition));
+        //}
     }
 
 
@@ -214,4 +246,23 @@ public class AnimationController : MonoBehaviour
     }
 
 
+    public void SetInteger(string pname,int val)
+    {
+        animator.SetInteger(pname, val);
+    }
+
+    public void SetBool(string pname, bool val)
+    {
+        animator.SetBool(pname, val);
+    }
+
+    public void SetFloat(string pname, float val)
+    {
+        animator.SetFloat(pname, val);
+    }
+
+    public void SetTrigger(string pname)
+    {
+        animator.SetTrigger(pname);
+    }
 }

@@ -293,6 +293,16 @@ MonoBehaviour:
     m_Address: BossRestartGameData
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: fabaa9e759631544396ae7bc7389530e
+    m_Address: RunEnd_A_Transition
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AnimationTransition
+  - m_GUID: 0f84c922fbf9d8f42b24662c98e66dbe
+    m_Address: RunStart_A_Transition
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AnimationTransition
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
