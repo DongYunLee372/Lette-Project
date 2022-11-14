@@ -182,12 +182,6 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        //if (movecom.curval.IsRolling|| movecom.curval.IsSlip|| movecom.curval.IsAttacking||movecom.curval.IsGuard)//회피중, 떨어지는중, 공격하는 중에는 움직일 수는 없지만 마우스를 움직여 화면을 돌리는것은 가능
-        //{
-        //    movecom.curval.IsMoving = false;
-        //    return;
-        //}
-
 
 
         //왼쪽 마우스 클릭

@@ -8,8 +8,6 @@ using UnityEngine;
   Play(클립이름, 재생속도, 재생시간, 블렌딩속도) 함수를 이용해 재생*/
 public class AnimationController : MonoBehaviour
 {
-    //[Header("애니메이션들이 등록된 애니메이션 컨트롤러가 필요")]
-    //public AnimatorController anicontrol;
     [Header("확인용")]
     public Animator animator;
     public int m_clipsnum;
@@ -20,6 +18,8 @@ public class AnimationController : MonoBehaviour
     public float currnetPlayTime;
     public float currentBlending;
     public delegate void Invoker();
+
+    public RuntimeAnimatorController perAnimator;
 
     public Dictionary<string, AnimationClip> m_clips = new Dictionary<string, AnimationClip>();
     public AnimationClip[] m_tempclips;
@@ -44,8 +44,44 @@ public class AnimationController : MonoBehaviour
             m_clips.Add(m_tempclips[i].name, m_tempclips[i]);
         }
         
+        //System.Activator.CreateInstance
     }
 
+    public bool flag = false;
+    public AnimatorTransitionInfo sss;
+    public void Play(RuntimeAnimatorController aniGroup)
+    {
+        flag = true;
+        perAnimator = animator.runtimeAnimatorController;
+        animator.runtimeAnimatorController = aniGroup;
+
+        //sss = animator.GetAnimatorTransitionInfo(0);
+        
+        //Debug.Log($"{sss.fullPathHash}");
+        //animator.IsInTransition
+
+
+        //animator.HasState()
+    }
+
+    private void Start()
+    {
+        
+    }
+
+    private void Update()
+    {
+        if(flag)
+        {
+            //if(animator.GetAnimatorTransitionInfo(0).IsName("end"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("end"))
+            {
+                Debug.Log("끝들어옴");
+                animator.runtimeAnimatorController = perAnimator;
+            }
+
+        }
+    }
 
 
     //클립이름, 재생속도 (기본이 1배속), 재생 시간 (재생시간이 0이면 계속 반복), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
@@ -170,30 +206,12 @@ public class AnimationController : MonoBehaviour
         prespeed = 0;
     }
 
-    
-
-
-    ////공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
-    //IEnumerator Cor_TimeCounter(float time, Invoker invoker)
-    //{
-    //    float starttime = Time.time;
-
-    //    while (true)
-    //    {
-    //        if ((Time.time - starttime) >= time)
-    //        {
-    //            invoker.Invoke();
-    //            yield break;
-    //        }
-    //        yield return new WaitForSeconds(Time.deltaTime);
-    //    }
-    //}
-
 
     //현재 재생중인 클립인지 확인한다.
     public bool IsNowPlaying(string pname)
     {
         return (currentplayclipname == pname);
     }
+
 
 }

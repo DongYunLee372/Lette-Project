@@ -56,6 +56,9 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
     //
     public eCharacterState PreState;
 
+    public AnimationController animator;
+    public CMoveComponent movecom;
+
     //상태 변화에 따라 애니메이션을 바꿔준다.
     public void SetState(eCharacterState state)
     {
@@ -65,6 +68,11 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
             PreState = CurState;
             CurState = state;
         }
+    }
+
+    private void Start()
+    {
+        animator = GetComponentInChildren<AnimationController>();
     }
 
     ////이전 상태로 돌아간다.
@@ -90,6 +98,28 @@ public class CharacterStateMachine : MySingleton<CharacterStateMachine>
 
     private void Update()
     {
-        
+        if (movecom == null)
+            movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+
+        //if (CurState != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
+        //{
+        //    if (movecom.curval.IsMoving)
+        //    {
+        //        if (movecom.curval.IsRunning)
+        //            movecom.com.animator.Play("_Dash");
+        //        else
+        //            movecom.com.animator.Play("_Walk");
+        //    }
+        //    else
+        //    {
+        //        movecom.com.animator.Play("_Idle");
+        //    }
+        //}
+        //else
+        //{
+        //    //가드중이고 움직이는 중이 아닐때
+        //    if (!movecom.curval.IsMoving)
+        //        movecom.com.animator.Play("_Guard");
+        //}
     }
 }
