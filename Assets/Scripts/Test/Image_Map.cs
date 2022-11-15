@@ -36,8 +36,9 @@ public class Image_Map : MonoBehaviour, IPointerClickHandler
             Debug.Log("마우스 클릭 2" + mousepos);
 
             //  Vector3 tempPos = new Vector3(mousepos.x,mousepos.y,0) - camera.gameObject.transform.position;
-            Vector3 tempPos = new Vector3(mousepos.x, mousepos.y, 0);
-
+            //Vector3 tempPos = new Vector3(mousepos.x, mousepos.y, 0);
+            Vector3 tempPos = Camera.main.ScreenToViewportPoint(mousepos);
+          //  Debug.Log("스크린변환좌표" + tempPos);
             Vector3 returnPos = camera.GetComponent<RayScripts>().Ray(tempPos);
             if(returnPos != Vector3.zero)
             {
