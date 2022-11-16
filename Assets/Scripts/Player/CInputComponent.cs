@@ -287,7 +287,9 @@ public class CInputComponent : BaseComponent
                 if (movecom.curval.IsRunning)
                 {
                     //com.animator.SetPlaySpeed(1f);
-                    movecom.com.animator.Play("_Dash");
+                    //movecom.com.animator.Play("_Dash");
+                    movecom.com.animator.SetBool("Walk", false);
+                    movecom.com.animator.SetBool("Run", true);
                     //AudioSource audio = SoundManager.Instance.effectSource.GetComponent<AudioSource>();
 
                     //if (!audio.isPlaying)
@@ -297,13 +299,13 @@ public class CInputComponent : BaseComponent
                     //    SoundManager.Instance.effectSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Player_Audio[1]);
                     //}
                         
-
-
                 }
                 else
                 {
                     //com.animator.SetPlaySpeed( 1f);
-                    movecom.com.animator.Play("_Walk");
+                    movecom.com.animator.SetBool("Run", false);
+                    movecom.com.animator.SetBool("Walk", true);
+                    //movecom.com.animator.Play("_Walk");
 
                     //AudioSource audio = SoundManager.Instance.effectSource.GetComponent<AudioSource>();
 
@@ -318,6 +320,8 @@ public class CInputComponent : BaseComponent
             }
             else
             {
+                movecom.com.animator.SetBool("Run", false);
+                movecom.com.animator.SetBool("Walk", false);
                 movecom.com.animator.Play("_Idle");
             }
         }

@@ -60,6 +60,45 @@ public class AnimationEventSystem : MonoBehaviour
             EndEventInvokers.Add(end.Key, end.Value);
     }
 
+
+    public void AddEvent(KeyValuePair<string, beginCallback> begin,float begintime, KeyValuePair<string, midCallback> mid, float midtime, KeyValuePair<string, endCallback> end, float endtime)
+    {
+        AnimationEvent aevent;
+        if (begin.Key != null)
+        {
+            aevent = new AnimationEvent();
+            aevent.time = begintime;
+            aevent.functionName = "OnBeginEventString";
+            aevent.stringParameter = begin.Key;
+            animator.m_clips[begin.Key].AddEvent(aevent);
+
+            BeginEventInvokers.Add(begin.Key, begin.Value);
+        }
+
+        if (mid.Key != null)
+        {
+            aevent = new AnimationEvent();
+            aevent.time = midtime;
+            aevent.functionName = "OnMidEventString";
+            aevent.stringParameter = begin.Key;
+            animator.m_clips[begin.Key].AddEvent(aevent);
+
+            MidEventInvokers.Add(mid.Key, mid.Value);
+        }
+            
+        if (end.Key != null)
+        {
+            aevent = new AnimationEvent();
+            aevent.time = endtime;
+            aevent.functionName = "OnEndEventString";
+            aevent.stringParameter = begin.Key;
+            animator.m_clips[begin.Key].AddEvent(aevent);
+
+            EndEventInvokers.Add(end.Key, end.Value);
+        }
+        
+    }
+
     //public void AddTempletEvent(KeyValuePair<string, beginCallbackT<Object>> begin, KeyValuePair<string, midCallback> mid, KeyValuePair<string, endCallback> end)
     //{
     //    if (begin.Key != null)

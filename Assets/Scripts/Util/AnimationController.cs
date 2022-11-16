@@ -101,6 +101,19 @@ public class AnimationController : MonoBehaviour
             return;
         }
 
+        //애니메이션을 교체해야 하는데 이전 애니메이션에 연결정보가 있을때
+
+        //AnimationTransition transition = Transitions.Find(x => x.Clip_1.name == currentplayclipname);
+        //if (transition != null)
+        //{
+        //    float time = m_clips[pname].length;
+        //    time = time / PlaySpeed;
+        //    time = time * transition.exitTime;
+
+        //    StartCoroutine(timer.Cor_TimeCounter<AnimationTransition>(time, Play, transition));
+        //}
+
+
         if (PlayTime!=0)
         {
             StartCoroutine(timer.Cor_TimeCounter(PlayTime, Stop));
@@ -122,7 +135,7 @@ public class AnimationController : MonoBehaviour
         animator.CrossFade(pname, blendingtime);
 
         //AnimationTransition transition = Transitions.Find(x => x.Clip_1.name == currentplayclipname);
-        //if (transition!=null)
+        //if (transition != null)
         //{
         //    float time = m_clips[pname].length;
         //    time = time / PlaySpeed;
@@ -132,9 +145,32 @@ public class AnimationController : MonoBehaviour
         //}
     }
 
-    public void Play(AnimationTransition _transition)
+
+    private void Play(string clipname, float transitionDuration, int layer, float _normalizedTimeOffset)
     {
-        animator.CrossFade(_transition.Clip_2.name, _transition.normalizedTransitionDuration, 0, _transition.normalizedTimeOffset);
+        
+    }
+
+    private void Play(AnimationTransition.TransitionInfo _transition)
+    {
+        animator.CrossFade(_transition.TransClip.name, _transition.normalizedTransitionDuration, 0, _transition.normalizedTimeOffset);
+    }
+
+    private void Play(AnimationTransition animationTransition)
+    {
+        //시작
+
+        //중간
+        if(animationTransition.Clip.isLooping)
+        {
+            //animator.is
+        }
+        else
+        {
+
+        }
+
+        //끝
     }
 
     //클립이름, 재생속도 (기본이 1배속), 재생 시간 (재생시간이 0이면 계속 반복), 블렌딩 시간(다음 동작으로 넘어가는데 걸릴 시간) 
@@ -145,6 +181,22 @@ public class AnimationController : MonoBehaviour
         {
             return;
         }
+
+        //새로운 애니메이션으로 바꿔야 하는데 이전에 실행중 이였던 애니메이션에 엔딩동작이 있으면
+        //AnimationTransition transition = Transitions.Find(x => x.Clip.name == currentplayclipname);
+        //if (transition != null && transition.endTransition != null)
+        //{
+        //    float time = m_clips[pname].length;
+        //    time = time / PlaySpeed;
+        //    time = time * transition.endTransition.exitTime;
+
+        //    Play(transition.endTransition);
+
+        //    AnimationTransition.TransitionInfo info = new AnimationTransition.TransitionInfo(transition.endTransition);
+        //    info.TransClip = m_clips[currentplayclipname];
+
+        //    StartCoroutine(timer.Cor_TimeCounter<AnimationTransition.TransitionInfo>(time, Play, info));
+        //}
 
         if (PlayTime != 0)
         {
@@ -165,17 +217,29 @@ public class AnimationController : MonoBehaviour
 
         currentplayclipname = pname;
 
+
         animator.CrossFade(pname, blendingtime);
 
-        //AnimationTransition transition = Transitions.Find(x => x.Clip_1.name == currentplayclipname);
-        //if (transition != null)
+        ////시작동작이 있는지 확인하고 있으면 시작동작을 먼저 해준다.
+        //AnimationTransition transition = Transitions.Find(x => x.Clip.name == currentplayclipname);
+        //if (transition != null && transition.startTransition != null)
         //{
         //    float time = m_clips[pname].length;
         //    time = time / PlaySpeed;
-        //    time = time * transition.exitTime;
+        //    time = time * transition.startTransition.exitTime;
 
-        //    StartCoroutine(timer.Cor_TimeCounter<AnimationTransition>(time, Play, transition));
+        //    Play(transition.startTransition);
+
+        //    AnimationTransition.TransitionInfo info = new AnimationTransition.TransitionInfo(transition.startTransition);
+        //    info.TransClip = m_clips[currentplayclipname];
+
+        //    StartCoroutine(timer.Cor_TimeCounter<AnimationTransition.TransitionInfo>(time, Play, info));
         //}
+        //else
+        //{
+        //    animator.CrossFade(pname, blendingtime);
+        //}
+        
     }
 
 

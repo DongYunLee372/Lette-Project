@@ -5,17 +5,41 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AnimationTransition", menuName = "Scriptable Object/AnimationTransition", order = int.MaxValue)]
 public class AnimationTransition : ScriptableObject
 {
-    [Header("start")]
-    public AnimationClip Clip_1;
-    [Header("next")]
-    public AnimationClip Clip_2;
+    [System.Serializable]
+    public class TransitionInfo
+    {
+        public TransitionInfo(AnimationClip _clip, float _exitTime, float _duration, float _offset)
+        {
+            TransClip = _clip;
+            exitTime = _exitTime;
+            normalizedTransitionDuration = _duration;
+            normalizedTimeOffset = _offset;
+        }
 
-    [Header("클립 1에서 클립2로 넘어가는 시점 0~1값"),Range(0.0f,1.0f)]
-    public float exitTime;//클립 1에서 클립2로 넘어가는 시점 0~1값
+        public TransitionInfo(TransitionInfo _info)
+        {
+            TransClip = _info.TransClip;
+            exitTime = _info.exitTime;
+            normalizedTransitionDuration = _info.normalizedTransitionDuration;
+            normalizedTimeOffset = _info.normalizedTimeOffset;
+        }
 
-    [Header("블렌딩 되는 시간")]
-    public float normalizedTransitionDuration;//블렌딩 되는 기간
+        public AnimationClip TransClip;
 
-    [Header("두번째 클립이 실행되는 시점 0이면 처음부터 시작 1이면 끝"), Range(0.0f, 1.0f)]
-    public float normalizedTimeOffset;//두번째 클립이 실행되는 시점 0이면 처음부터 시작 1이면 끝
+        [Range(0.0f, 1.0f)]
+        public float exitTime;//클립 1에서 클립2로 넘어가는 시점 0~1값
+
+        public float normalizedTransitionDuration;//블렌딩 되는 기간
+
+        [Range(0.0f, 1.0f)]
+        public float normalizedTimeOffset;
+    }
+
+    [Header("주체가 되는 클립")]
+    public AnimationClip Clip;
+
+    public TransitionInfo startTransition;
+
+    public TransitionInfo endTransition;
+
 }

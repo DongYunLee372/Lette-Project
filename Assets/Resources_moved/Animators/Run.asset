@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee6f326cb3e94d741819b9ddcb81887e, type: 3}
+  m_Name: Run
+  m_EditorClassIdentifier: 
+  Clip: {fileID: 7400000, guid: 2c6bfc5e5202cb045bc20f193c2bfc3a, type: 2}
+  startTransition:
+    TransClip: {fileID: 7400000, guid: 390af37c1bbf4bb418dd024eb8e030eb, type: 2}
+    exitTime: 0.17383
+    normalizedTransitionDuration: 0.1456764
+    normalizedTimeOffset: 0
+  endTransition:
+    TransClip: {fileID: 7400000, guid: 519221a00d4cba7489a8002670ab3bdd, type: 2}
+    exitTime: 0
+    normalizedTransitionDuration: 0.25
+    normalizedTimeOffset: 0
