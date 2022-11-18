@@ -25399,6 +25399,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: paladin_j_nordstrom(1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100068, guid: 4d6ba5995ac3ab44a93d537e92592523, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400068, guid: 4d6ba5995ac3ab44a93d537e92592523, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -55313,6 +55317,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1033815873731019359, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712387625, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
@@ -55365,6 +55373,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712388562, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388563, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: effectmanager
       value: 
@@ -55385,6 +55397,10 @@ PrefabInstance:
     - target: {fileID: 6122638123877490705, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
       propertyPath: m_Name
       value: PaladinCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122638123877490705, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6898435199282657963, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
       propertyPath: m_RootOrder
@@ -55430,7 +55446,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6356429822294294489, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
 --- !u!1001 &6652061177120126926
 PrefabInstance:

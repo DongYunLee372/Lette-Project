@@ -8,8 +8,20 @@ using UnityEngine;
 //2. 플레이어 데이터를 받아와서 각각의 컴포넌트 들에게 각각 필요한 데이터들을 넘겨준다.
 public class PlayableCharacter : MonoBehaviour
 {
-    [Header("================UnityComponent================")]
-    public CharacterStateMachine statemachine;
+    public enum States
+    {
+        Idle,
+        Walk,
+        Move,
+        Attack,
+        Rolling,
+        Guard,
+        GuardStun,
+        OutOfControl,
+    }
+
+    //[Header("================UnityComponent================")]
+    //public CharacterStateMachine statemachine;
 
 
     [Header("================BaseComponent================")]
@@ -27,6 +39,10 @@ public class PlayableCharacter : MonoBehaviour
     public GameObject HitEffect;
     public string HitEffectAdressableName;
     public EffectManager effectmanager;
+
+    [Header("================StateMachine================")]
+    public MyStateMachine.StateMachine<States, MyStateMachine.Drive> fsm;
+    public States curState;
 
     CMoveComponent movecom;
 
@@ -73,6 +89,8 @@ public class PlayableCharacter : MonoBehaviour
 
         //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
         //Debug.Log($"{CharacterDBInfo.P_player_HP}");
+        fsm = new MyStateMachine.StateMachine<States, MyStateMachine.Drive>(this);
+        SetState(States.Idle);
 
         ComponentInit();
 
@@ -124,6 +142,23 @@ public class PlayableCharacter : MonoBehaviour
         SetMouseSpeed(mainoption.MouseSensetive);
         SetReverseMouseRot(mainoption.ReverseMouse);
         SetCameraColl(mainoption.AutoeVade);
+
+
+    }
+
+    private void Update()
+    {
+        curState = fsm.GetCurState();
+    }
+
+    public States GetState()
+    {
+        return fsm.GetCurState();
+    }
+
+    public void SetState(States state)
+    {
+        fsm.ChangeState(state);
     }
 
     public void SetOutoFocus(bool val)
@@ -201,14 +236,16 @@ public class PlayableCharacter : MonoBehaviour
       공격을 당했을때 공격을 당한 위치(충돌한 위치)도 함께 넘겨준다.(피격 이펙트를 출력하기 위해)*/
     public void BeAttacked(float damage, Vector3 hitpoint, float Groggy)
     {
-        CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
+        //CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
+
+        States state = fsm.GetCurState();
 
         //float Groggy = 0;
 
         //1. 무조건 공격이 성공하는 상태(Idle, Move, OutOfControl)
-        if (state == CharacterStateMachine.eCharacterState.Idle ||
-            state == CharacterStateMachine.eCharacterState.Move ||
-            state == CharacterStateMachine.eCharacterState.OutOfControl)
+        if (state == States.Idle ||
+            state == States.Move ||
+            state == States.OutOfControl)
         {
             Damaged(damage, hitpoint, Groggy);
         }
@@ -216,7 +253,7 @@ public class PlayableCharacter : MonoBehaviour
         //2. 가드중 
         //밸런스게이지가 충분이 남아 있으면 가드에 성공하고 밸런스 게이지를 감소 시킨다.
         //밸런스 게이지가 충분히 남아 있지 않으면 가드에 실패하고 데미지를 입는다.
-        else if(state == CharacterStateMachine.eCharacterState.Guard)
+        else if(state == States.Guard)
         {
             CGuardComponent guardcom = GetMyComponent(CharEnumTypes.eComponentTypes.GuardCom) as CGuardComponent;
 
@@ -226,7 +263,7 @@ public class PlayableCharacter : MonoBehaviour
         //3. 회피중
         //캐릭터가 회피중이고 무적시간일때는 공격 회피에 성공하고
         //캐릭터가 회피중이지만 무적시간이 아닐때는 회피에 실패하고 데미지를 입는다.
-        else if(state == CharacterStateMachine.eCharacterState.Rolling)
+        else if(state == States.Rolling)
         {
             //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
 
@@ -236,7 +273,7 @@ public class PlayableCharacter : MonoBehaviour
         }
 
         //4. 공격중
-        else if(state == CharacterStateMachine.eCharacterState.Attack)
+        else if(state == States.Attack)
         {
             //PlayerAttack attackcom = GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
             CAttackComponent attackcom = GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
@@ -262,7 +299,8 @@ public class PlayableCharacter : MonoBehaviour
         //사망 애니메이션 출력하고 씬 재시작 함수 호출
         if (status.CurHP<=0)
         {
-            CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
+            //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
+            SetState(States.OutOfControl);
 
             #region 현장보존
             //movecom.eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
@@ -282,13 +320,13 @@ public class PlayableCharacter : MonoBehaviour
 
     public void Restart()
     {
-        CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+        SetState(States.Idle);
         GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
     }
 
     public void Restart(string _val)
     {
-        CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+        SetState(States.Idle);
         GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
     }
 
@@ -591,6 +629,39 @@ public class PlayableCharacter : MonoBehaviour
 
     }
 
+    //public enum States
+    //{
+    //    Idle,
+    //    Walk,
+    //    Move,
+    //    Attack,
+    //    Rolling,
+    //    Guard,
+    //    GuardStun,
+    //    OutOfControl,
+    //}
 
+    #region StateMachine
+    public void Walk_Enter()
+    {
+
+    }
+
+    public void Walk_Exit()
+    {
+
+    }
+
+    public void Move_Enter()
+    {
+
+    }
+
+    public void Move_Exit()
+    {
+
+    }
+
+    #endregion
 
 }

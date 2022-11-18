@@ -207,7 +207,7 @@ public class CGuardComponent : BaseComponent
     //가드넉백상태는 outofcontrol 상태로 넘어가지 않고 가드중인 상태인 것으로 한다.
     public void GuardStun()
     {
-        CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.GuardStun);
+        PlayableCharacter.Instance.SetState(PlayableCharacter.States.GuardStun);
         animator.Play(GuardStunClipName, 2.0f, 0.0f, 0.2f, StunEnd);
         //stuncoroutine = Cor_TimeCounter(GuardStunTime, StunEnd);
         //StartCoroutine(stuncoroutine);
@@ -216,8 +216,8 @@ public class CGuardComponent : BaseComponent
 
     public void StunEnd()
     {
-        CharacterStateMachine.eCharacterState prestate = CharacterStateMachine.Instance.GetPreState();
-        CharacterStateMachine.Instance.SetState(prestate);
+        PlayableCharacter.States prestate = PlayableCharacter.Instance.GetState();
+        PlayableCharacter.Instance.SetState(prestate);
         //if(prestate == CharacterStateMachine.eCharacterState.Guard)
         //{
         //    movecom.com.animator.Play(GuardClip.name, 2.0f);

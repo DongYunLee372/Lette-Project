@@ -312,7 +312,7 @@ public class CMoveComponent : BaseComponent
 
             direction = dest - transform.position;
 
-            if (CharacterStateMachine.Instance.GetState()==CharacterStateMachine.eCharacterState.OutOfControl)
+            if (PlayableCharacter.Instance.GetState()== PlayableCharacter.States.OutOfControl)
             {
                 if (invoker != null)
                     invoker.Invoke("");

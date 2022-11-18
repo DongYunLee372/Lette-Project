@@ -129,7 +129,7 @@ public class CurState
         {
             isMoving = value;
             if (isMoving)
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Move);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Move);
             //else
             //    CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
         }
@@ -159,12 +159,12 @@ public class CurState
             isRolling = value;
             if (isRolling)
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Rolling);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Rolling);
             }
             else
             {
-                if(CharacterStateMachine.Instance.GetState()!= CharacterStateMachine.eCharacterState.OutOfControl)
-                    CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                if(PlayableCharacter.Instance.GetState()!= PlayableCharacter.States.OutOfControl)
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
             }
         }
     }
@@ -182,12 +182,12 @@ public class CurState
             isAttacking = value;
             if (isAttacking)
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Attack);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Attack);
             }
             else
             {
-                if (CharacterStateMachine.Instance.GetState() != CharacterStateMachine.eCharacterState.OutOfControl)
-                    CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                if (PlayableCharacter.Instance.GetState() != PlayableCharacter.States.OutOfControl)
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
             }
         }  
     }
@@ -202,12 +202,12 @@ public class CurState
 
             if (isGuard)
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Guard);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Guard);
                 //Debug.Log("guard들어옴");
             }
             else
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
                 //Debug.Log("guard나감");
             }
                 
@@ -226,11 +226,11 @@ public class CurState
 
             if (isKnockBack)
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.OutOfControl);
             }
             else
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
             }
         }
     }
@@ -245,11 +245,11 @@ public class CurState
 
             if (isKnockDown)
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.OutOfControl);
             }
             else
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
             }
         }
     }

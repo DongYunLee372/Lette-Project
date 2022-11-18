@@ -54,7 +54,9 @@ public class CInputComponent : BaseComponent
 
 
     private GameObject canvas;
-    CharacterStateMachine.eCharacterState state;
+
+    //CharacterStateMachine.eCharacterState state;
+    PlayableCharacter.States state;
 
     public void GetWASD()
     {
@@ -64,7 +66,7 @@ public class CInputComponent : BaseComponent
         if (Input.GetKey(_key.foward))
         {
             v += 1.0f;
-            if (state == CharacterStateMachine.eCharacterState.Guard)
+            if (state == PlayableCharacter.States.Guard)
             {
                 movecom.GuardMove(CMoveComponent.Direction.Front);
                 //return;
@@ -75,7 +77,7 @@ public class CInputComponent : BaseComponent
         if (Input.GetKey(_key.back))
         {
             v -= 1.0f;
-            if (state == CharacterStateMachine.eCharacterState.Guard)
+            if (state == PlayableCharacter.States.Guard)
             {
                 movecom.GuardMove(CMoveComponent.Direction.Back);
                 //return;
@@ -87,7 +89,7 @@ public class CInputComponent : BaseComponent
         if (Input.GetKey(_key.left))
         {
             h -= 1.0f;
-            if (state == CharacterStateMachine.eCharacterState.Guard)
+            if (state == PlayableCharacter.States.Guard)
             {
                 movecom.GuardMove(CMoveComponent.Direction.Left);
                 //return;
@@ -99,7 +101,7 @@ public class CInputComponent : BaseComponent
         if (Input.GetKey(_key.right))
         {
             h += 1.0f;
-            if (state == CharacterStateMachine.eCharacterState.Guard)
+            if (state == PlayableCharacter.States.Guard)
             {
                 movecom.GuardMove(CMoveComponent.Direction.Right);
                 //return;
@@ -128,7 +130,7 @@ public class CInputComponent : BaseComponent
 
         if (movecom == null)
             movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
-        state = CharacterStateMachine.Instance.GetState();
+        state = PlayableCharacter.Instance.GetState();
 
 
         
@@ -175,8 +177,8 @@ public class CInputComponent : BaseComponent
 
 
         if (/*state == CharacterStateMachine.eCharacterState.Attack||*/
-            state == CharacterStateMachine.eCharacterState.Rolling ||
-            state == CharacterStateMachine.eCharacterState.OutOfControl)
+            state == PlayableCharacter.States.Rolling ||
+            state == PlayableCharacter.States.OutOfControl)
         {
             //movecom.curval.IsMoving = false;
             return;
@@ -191,7 +193,7 @@ public class CInputComponent : BaseComponent
             return;
         }
 
-        if (state == CharacterStateMachine.eCharacterState.Attack)
+        if (state == PlayableCharacter.States.Attack)
             return;
 
         //오른쪽 마우스 클릭
@@ -208,7 +210,7 @@ public class CInputComponent : BaseComponent
         }
 
         if (/*state == CharacterStateMachine.eCharacterState.Guard||*/
-           state == CharacterStateMachine.eCharacterState.GuardStun)
+           state == PlayableCharacter.States.GuardStun)
         {
             //movecom.curval.IsMoving = false;
             return;
@@ -216,7 +218,7 @@ public class CInputComponent : BaseComponent
 
 
 
-        if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
+        if (state != PlayableCharacter.States.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
             //space 처리
             //구르기를 먼저 처리하고 움직임은 처리하지 않게 하기 위해서
@@ -252,7 +254,7 @@ public class CInputComponent : BaseComponent
         GetWASD();
         movecom.curval.IsRunning = false;
 
-        if (state != CharacterStateMachine.eCharacterState.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
+        if (state != PlayableCharacter.States.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
         {
             //left shift 처리
             if (Input.GetKey(_key.Run))
@@ -263,7 +265,7 @@ public class CInputComponent : BaseComponent
             //else movecom.curval.IsRunning = false;
 
             //방어중이 아니고 회피중이 아닐때만 아이템 사용 가능
-            if(state != CharacterStateMachine.eCharacterState.Rolling)
+            if(state != PlayableCharacter.States.Rolling)
             {
                 if(Input.GetKeyDown(_key.Interaction))
                     PlayableCharacter.Instance.inventory.UseItem(EnumScp.Key.F1, 1);
@@ -278,7 +280,7 @@ public class CInputComponent : BaseComponent
             }
             else
             {
-                CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
             }
 
 
