@@ -15,6 +15,8 @@ public class AnimationController : MonoBehaviour
     public int m_clipsnum;
     //public AnimationClip[] m_clips;
     public string currentplayclipname;
+    public string lastplayclipname;
+
     public float prespeed;
     public float currentSpeed;
     public float currnetPlayTime;
@@ -130,6 +132,7 @@ public class AnimationController : MonoBehaviour
 
         SetPlaySpeed(PlaySpeed);
 
+        lastplayclipname = currentplayclipname;
         currentplayclipname = pname;
 
         animator.CrossFade(pname, blendingtime);
@@ -215,6 +218,7 @@ public class AnimationController : MonoBehaviour
 
         SetPlaySpeed(PlaySpeed);
 
+        lastplayclipname = currentplayclipname;
         currentplayclipname = pname;
 
 

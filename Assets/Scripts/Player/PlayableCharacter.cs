@@ -12,7 +12,7 @@ public class PlayableCharacter : MonoBehaviour
     {
         Idle,
         Walk,
-        Move,
+        Run,
         Attack,
         Rolling,
         Guard,
@@ -45,6 +45,7 @@ public class PlayableCharacter : MonoBehaviour
     public States curState;
 
     CMoveComponent movecom;
+    AnimationController animator;
 
     /*싱글톤*/
     static PlayableCharacter _instance;
@@ -96,6 +97,7 @@ public class PlayableCharacter : MonoBehaviour
 
 
         movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+        animator = GetComponentInChildren<AnimationController>();
 
         //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
         if (CharacterUIPanel == null)
@@ -154,6 +156,11 @@ public class PlayableCharacter : MonoBehaviour
     public States GetState()
     {
         return fsm.GetCurState();
+    }
+
+    public States GetLastState()
+    {
+        return fsm.GetPreState();
     }
 
     public void SetState(States state)
@@ -244,7 +251,8 @@ public class PlayableCharacter : MonoBehaviour
 
         //1. 무조건 공격이 성공하는 상태(Idle, Move, OutOfControl)
         if (state == States.Idle ||
-            state == States.Move ||
+            state == States.Run ||
+            state == States.Walk ||
             state == States.OutOfControl)
         {
             Damaged(damage, hitpoint, Groggy);
@@ -641,27 +649,43 @@ public class PlayableCharacter : MonoBehaviour
     //    OutOfControl,
     //}
 
-    #region StateMachine
-    public void Walk_Enter()
-    {
+    //#region StateMachine
+    //public IEnumerator Walk_Enter()
+    //{
+    //    float len = animator.GetClipLength("walk_start_L");
+    //    animator.Play("walk_start_L");
+    //    Debug.Log("walk 사전동작 실행");
+    //    yield return new WaitForSeconds(len);
+    //    Debug.Log("walk 사전동작 끝 본 동작 실행");
+    //    animator.Play("strafe_walk_strafe_front");
+    //}
 
-    }
+    //public IEnumerator Walk_Exit()
+    //{
+    //    float len = animator.GetClipLength("walk_stop_L");
+    //    animator.Play("walk_stop_L");
+    //    Debug.Log("walk 끝동작 실행");
+    //    yield return new WaitForSeconds(len);
+    //}
 
-    public void Walk_Exit()
-    {
+    //public IEnumerator Run_Enter()
+    //{
+    //    float len = animator.GetClipLength("run_start_L");
+    //    animator.Play("run_start_L");
+    //    Debug.Log("run 사전동작 실행");
+    //    yield return new WaitForSeconds(len);
+    //    Debug.Log("run 사전동작 끝 본 동작 실행");
+    //    animator.Play("move_run_01");
+    //}
 
-    }
+    //public IEnumerator Run_Exit()
+    //{
+    //    float len = animator.GetClipLength("run_stop_L");
+    //    animator.Play("run_stop_L");
+    //    Debug.Log("run 끝동작 실행");
+    //    yield return new WaitForSeconds(len);
+    //}
 
-    public void Move_Enter()
-    {
-
-    }
-
-    public void Move_Exit()
-    {
-
-    }
-
-    #endregion
+    //#endregion
 
 }

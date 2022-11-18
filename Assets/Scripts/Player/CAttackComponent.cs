@@ -132,13 +132,13 @@ public class CAttackComponent : BaseComponent
         //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for (int i = 0; i < AttackInfos.Count; i++)
         {
-            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove),
-                new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-                new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd));
-
-            //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+            //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove),
             //    new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-            //    new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].endAniclipName, AttackEnd));
+            //    new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd));
+
+            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove),0.0f,
+                new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 1.0f,
+                new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd),1.2f);
 
         }
 
@@ -355,6 +355,8 @@ public class CAttackComponent : BaseComponent
     //공격중 움직임이 필요할때 애니메이션의 이벤트를 이용해서 호출됨
     public void AttackMove(string clipname)
     {
+
+        Debug.Log("공격 움직임");
         for (int i = 0; i < AttackInfos.Count; i++)
         {
             if (AttackInfos[i].aniclipName == clipname)
@@ -387,6 +389,8 @@ public class CAttackComponent : BaseComponent
     //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
     public void AttackEnd(string s_val)
     {
+        Debug.Log("공격 끝남");
+
         if (effectobj != null)
         {
             effectobj.transform.parent = null;

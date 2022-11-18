@@ -240,19 +240,19 @@ public class CMoveComponent : BaseComponent
     {
         Vector3 tempmove;
         Vector3 tempdir;
-        if (dir== Direction.Front)
+        if (dir == Direction.Front)
         {
             tempdir = new Vector3(0, 0, 1);
             //Debug.Log("guardleft");
             com.animator.Play(moveoption.GuardFrontMoveClip, 1.5f);
         }
-        else if(dir == Direction.Left)
+        else if (dir == Direction.Left)
         {
             tempdir = new Vector3(-1, 0, 0);
             //Debug.Log("guardleft");
             com.animator.Play(moveoption.GuardLeftMoveClip, 1.5f);
         }
-        else if(dir == Direction.Right)
+        else if (dir == Direction.Right)
         {
             tempdir = new Vector3(1, 0, 0);
             //Debug.Log("guardright");
@@ -427,6 +427,8 @@ public class CMoveComponent : BaseComponent
 
     Vector3 templastmovevec;
 
+    public Vector3 slopVector;
+
     //움직일 방향과 거리를 넣어주면 현재 지형에 따라서 움직여 준다.
     //기울어진 지형과 계단에서의 움직임 처리 제작 필요
     public void Move(Vector3 MoveVal)
@@ -453,30 +455,20 @@ public class CMoveComponent : BaseComponent
             //움직일 수 없는 각도의 경사로 위에 있을때 (미끌어질때)
             if (curval.IsSlip)
             {
+                //Debug.Log("미끌어짐");
                 //올라가던지 내려가던지 무조건 경사로의 아래 방향으로 경사로를 따라서 미끌어지도록
-                curval.CurHorVelocity = MoveVal;
+                curval.CurHorVelocity = Vector3.up;
 
-                //CurHorVelocity를 무조건 경사로 아래 방향으로 회전 시키고 
-                curval.CurHorVelocity *= -1;
+                slopVector = Quaternion.AngleAxis(-(curval.CurGroundSlopAngle+90), curval.CurGroundCross) * curval.CurHorVelocity;
+                curval.MoveAccel = moveoption.SlopAccel;
+                curval.CurHorVelocity = Quaternion.AngleAxis(-(curval.CurGroundSlopAngle + 90), curval.CurGroundCross) * curval.CurHorVelocity * curval.MoveAccel;
+                //moveoption.SlopAccel += 0.2f;
 
-                //CurVirVelocity를 가속도에 따라 증가시켜 준다. 
-                curval.CurVirVelocity = new Vector3(0, CurGravity + moveoption.SlopAccel, 0);//중력값과 경사로에서의 미끄러질때의 가속도값
-
-                
-
-
-                //Vector3 temp = -curval.CurGroundCross;
-                //CurHorVelocity = new Vector3(WorldMove.x, 0, WorldMove.z);
-                //temp = com.FpRoot.forward;
-                //curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//경사로에 의한 y축 이동방향
-                //curval.CurHorVelocity *= moveoption.MoveSpeed;
-                //curval.CurHorVelocity *= -1.0f;
-                //com.CharacterRig.velocity = new Vector3(CurHorVelocity.x, CurGravity, CurHorVelocity.z);
-                //com.CharacterRig.velocity = CurHorVelocity + CurVirVelocity;
             }
             //움직일 수 있는 경사로 움직일때
             else
             {
+                //Debug.Log("그냥 경사로");
                 //올라가는 중 일때는 경사로의 각도에 따라서 움직이는 속도가 느려지도록 하고
                 //내려가는 중 일때는 경사로의 각도에 따라서 움직이는 속도가 빨라지도록 한다.
                 curval.CurHorVelocity = MoveVal;
@@ -531,7 +523,6 @@ public class CMoveComponent : BaseComponent
         {
             //움직임을 현재 바닥 경사각의 -로 해서 회전을 시킴
         }
-
 
         curval.CurHorVelocity = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * curval.CurHorVelocity;//이럭식으로 벡터를 회전시킬 수 있다. 역은 성립하지 않는다.
 
@@ -1118,7 +1109,7 @@ public class CMoveComponent : BaseComponent
         Focusing();
         CameraCollision();
 
-        Debug.DrawRay(transform.position, templastmovevec, Color.blue);
+        //Debug.DrawRay(transform.position, templastmovevec, Color.blue);
 
         //LookAtFoward();
         //달리는 중일떄 1초마다 스테미나를 줄여준다.
@@ -1133,6 +1124,9 @@ public class CMoveComponent : BaseComponent
             }
             
         }
+
+        Debug.DrawRay(this.transform.position, curval.CurHorVelocity + curval.CurVirVelocity,Color.red);
+        Debug.DrawRay(this.transform.position, slopVector, Color.blue);
     }
 
     public bool CameraCollOn = false;

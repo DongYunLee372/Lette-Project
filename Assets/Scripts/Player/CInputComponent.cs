@@ -249,9 +249,10 @@ public class CInputComponent : BaseComponent
                 //SkillAttack(2);
                 return;
             }
+            GetWASD();
         }
 
-        GetWASD();
+        //
         movecom.curval.IsRunning = false;
 
         if (state != PlayableCharacter.States.Guard)//방어 중 일때는 해당 행동들을 할 수 없도록
@@ -289,9 +290,9 @@ public class CInputComponent : BaseComponent
                 if (movecom.curval.IsRunning)
                 {
                     //com.animator.SetPlaySpeed(1f);
-                    //movecom.com.animator.Play("_Dash");
-                    movecom.com.animator.SetBool("Walk", false);
-                    movecom.com.animator.SetBool("Run", true);
+                    movecom.com.animator.Play("move_run_01");
+                    //movecom.com.animator.SetBool("Walk", false);
+                    //movecom.com.animator.SetBool("Run", true);
                     //AudioSource audio = SoundManager.Instance.effectSource.GetComponent<AudioSource>();
 
                     //if (!audio.isPlaying)
@@ -305,9 +306,9 @@ public class CInputComponent : BaseComponent
                 else
                 {
                     //com.animator.SetPlaySpeed( 1f);
-                    movecom.com.animator.SetBool("Run", false);
-                    movecom.com.animator.SetBool("Walk", true);
-                    //movecom.com.animator.Play("_Walk");
+                    //movecom.com.animator.SetBool("Run", false);
+                    //movecom.com.animator.SetBool("Walk", true);
+                    movecom.com.animator.Play("strafe_walk_strafe_front");
 
                     //AudioSource audio = SoundManager.Instance.effectSource.GetComponent<AudioSource>();
 
@@ -322,16 +323,16 @@ public class CInputComponent : BaseComponent
             }
             else
             {
-                movecom.com.animator.SetBool("Run", false);
-                movecom.com.animator.SetBool("Walk", false);
-                movecom.com.animator.Play("_Idle");
+                //movecom.com.animator.SetBool("Run", false);
+                //movecom.com.animator.SetBool("Walk", false);
+                movecom.com.animator.Play("idle");
             }
         }
         else
         {
-            //가드중이고 움직이는 중이 아닐때
-            if (movecom.MoveDir.magnitude <= 0)
-                movecom.com.animator.Play("_Guard");
+            ////가드중이고 움직이는 중이 아닐때
+            //if (movecom.MoveDir.magnitude <= 0)
+            //    movecom.com.animator.Play("_Guard");
         }
     }
 

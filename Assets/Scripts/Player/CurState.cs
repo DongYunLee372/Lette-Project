@@ -128,16 +128,29 @@ public class CurState
         set
         {
             isMoving = value;
-            if (isMoving)
-                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Move);
+            if (isMoving && IsRunning)
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Run);
+            else if(isMoving&&!IsRunning)
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Walk);
             //else
             //    CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
         }
     }
     
     
-    
-    
+    //public bool IsSlip
+    //{
+    //    get
+    //    {
+            
+    //    }
+
+    //    set
+    //    {
+    //        isSlip = value;
+    //    }
+    //}
+
     //public bool IsAttacked { get => isAttacked; set => isAttacked = value; }
     //public bool IsOutofControl { 
     //    get

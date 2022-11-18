@@ -230,6 +230,8 @@ namespace MyStateMachine
                 throw new Exception("No state with the name " + newState.ToString() + " can be found. Please make sure you are called the correct type the statemachine was initialized with");
             }
 
+            if (queuedState != null)
+                return;
             //
             var nextState = states[newState];
 
@@ -279,10 +281,10 @@ namespace MyStateMachine
                         curState.EnterCall();
                     //체인지 이벤트
                 }
-
+                isInTransition = false;
             }
 
-            isInTransition = false;
+            
 
             //둘다 모두 일반함수일때는 실행시켜주고 상태를 바꿔준다.
 
@@ -363,7 +365,8 @@ namespace MyStateMachine
             }
             else
             {
-                curState.ExitCall();
+                if(curState.ExitCall!=null)
+                    curState.ExitCall();
             }
 
 
@@ -379,10 +382,11 @@ namespace MyStateMachine
             }
             else
             {
-                curState.EnterCall();
+                if (curState.EnterCall != null)
+                    curState.EnterCall();
             }
 
-
+            isInTransition = false;
         }
 
         //static void BindEventsInternal(StateMapping<TState, TDriver> targetState, Component component, MethodInfo method, string evtName)
@@ -442,6 +446,13 @@ namespace MyStateMachine
         {
             return curState.state;
         }
+
+        public TState GetPreState()
+        {
+            return lastState.state;
+        }
+
+
 
         public bool IsInTransition
         {

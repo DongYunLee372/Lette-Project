@@ -31,14 +31,20 @@ public class CGuardComponent : BaseComponent
     public IEnumerator guardcoroutine;
     public IEnumerator stuncoroutine;
     public delegate void Invoker();
-
+    public bool nowGuardStun;
+    
     public float hitangle;
 
+    private CorTimeCounter timer = new CorTimeCounter();
+    
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
+
+
+
         //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
         //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
         //        new KeyValuePair<string, AnimationEventSystem.endCallback>(GuardStunClip.name, AttackEnd));
@@ -65,14 +71,15 @@ public class CGuardComponent : BaseComponent
 
         if (guardcoroutine != null)
         {
-            StopCoroutine("Cor_TimeCounter");
+            StopCoroutine(guardcoroutine);
             guardcoroutine = null;
         }
-        guardcoroutine = Cor_TimeCounter(GuardTime, GuardDown);
+
+        guardcoroutine = timer.Cor_TimeCounter(GuardTime, GuardDown);
         StartCoroutine(guardcoroutine);
     }
 
-    //
+    //일정 시간 이후에 가드가 끝나야 할때
     public void GuardDown()
     {
         if (movecom == null)
@@ -99,25 +106,7 @@ public class CGuardComponent : BaseComponent
         //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Idle);
     }
 
-    //공격이 시작된지 일정 시간 뒤에 이펙트를 실행해야 할 때 사용
-    IEnumerator Cor_TimeCounter(float time, Invoker invoker)
-    {
-        //playingCor = true;
-        float starttime = Time.time;
-        //Debug.Log("다시시작");
-        while (true)
-        {
-            if ((Time.time - starttime) >= time)
-            {
-                //Debug.Log("시간다됨");
-                invoker.Invoke();
-                //guardcoroutine = null;
-                //playingCor = false;
-                yield break;
-            }
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
+    
 
 
     //가드중일때 데미지가 들어왔을때는 이쪽으로 들어온다.
@@ -148,16 +137,16 @@ public class CGuardComponent : BaseComponent
         hitangle = 180 - Mathf.Acos(Vector3.Dot(front, hit)) * 180.0f / 3.14f;
 
 
-
-
         //스테미나에 따라서 가드 성공 실패 학인
-        if (PlayableCharacter.Instance.status.CurStamina >= 10 && hitangle <= GuardAngle) 
+        if (PlayableCharacter.Instance.status.CurStamina >= 10 /*&& hitangle <= GuardAngle*/ && !nowGuardStun) 
         {
             PlayableCharacter.Instance.status.StaminaDown(10);
             GuardStun();
+            Debug.Log("가드 성공");
         }
         else
         {
+            Debug.Log("가드 실패");
             //PlayableCharacter.Instance.status.StaminaDown(10);
             PlayableCharacter.Instance.Damaged(damage, hitpoint, Groggy);
         }
@@ -204,20 +193,25 @@ public class CGuardComponent : BaseComponent
 //        }
 
 
-    //가드넉백상태는 outofcontrol 상태로 넘어가지 않고 가드중인 상태인 것으로 한다.
+    //가드넉백상태는 GuardStun 상태로 넘어간다.
     public void GuardStun()
     {
-        PlayableCharacter.Instance.SetState(PlayableCharacter.States.GuardStun);
-        animator.Play(GuardStunClipName, 2.0f, 0.0f, 0.2f, StunEnd);
-        //stuncoroutine = Cor_TimeCounter(GuardStunTime, StunEnd);
+        //PlayableCharacter.Instance.SetState(PlayableCharacter.States.GuardStun);
+        Debug.Log("가드 스턴 들어옴");
+        animator.Play(GuardStunClipName, 1.0f, 0.0f, 0.1f, StunEnd);
+        stuncoroutine = timer.Cor_TimeCounter(animator.GetClipLength(GuardStunClipName), StunEnd);
+        nowGuardStun = true;
         //StartCoroutine(stuncoroutine);
         // Cor_TimeCounter
     }
 
     public void StunEnd()
     {
-        PlayableCharacter.States prestate = PlayableCharacter.Instance.GetState();
-        PlayableCharacter.Instance.SetState(prestate);
+        Debug.Log("가드 스턴 끝 들어옴");
+        nowGuardStun = false;
+        movecom.com.animator.Play("Block_Loop", 2.0f);
+        //PlayableCharacter.States prestate = PlayableCharacter.Instance.GetLastState();
+        //PlayableCharacter.Instance.SetState(prestate);
         //if(prestate == CharacterStateMachine.eCharacterState.Guard)
         //{
         //    movecom.com.animator.Play(GuardClip.name, 2.0f);
