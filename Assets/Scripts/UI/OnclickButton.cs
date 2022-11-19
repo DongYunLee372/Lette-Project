@@ -94,7 +94,11 @@ public class OnclickButton : MonoBehaviour
         GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
         SoundManager.Instance.bgmSource.Stop();
 
-        UIManager.Instance.Prefabsload("Minimap", CANVAS_NUM.player_cavas);
+        if(!UIManager.Instance.Findobjbool("Minimap"))
+        {
+            UIManager.Instance.Prefabsload("Minimap", CANVAS_NUM.player_cavas);
+        }
+       
        // GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
     }
 
@@ -107,6 +111,10 @@ public class OnclickButton : MonoBehaviour
         GameData_Load.Instance.ChangeScene(Scenes_Stage.restart_Loading);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        if (!UIManager.Instance.Findobjbool("Minimap"))
+        {
+            UIManager.Instance.Prefabsload("Minimap", CANVAS_NUM.player_cavas);
+        }
     }
 
     public void b_Exitgame() //종료 

@@ -115,6 +115,7 @@ public class MainOption : MonoBehaviour
         {
             UIManager.Instance.Hide("IngameOption");
             UIManager.Instance.Show("Inven");
+            UIManager.Instance.Show("Minimap");
             ShowOption = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -132,6 +133,7 @@ public class MainOption : MonoBehaviour
                 UIManager.Instance.Prefabsload("IngameOption", Canvas_Enum.CANVAS_NUM.start_canvas);
                 ShowOption = true;
             }
+            UIManager.Instance.Hide("Minimap");
             UIManager.Instance.Hide("Inven");
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;         
