@@ -93,6 +93,8 @@ public class OnclickButton : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);
         SoundManager.Instance.bgmSource.Stop();
+
+        UIManager.Instance.Prefabsload("Minimap", CANVAS_NUM.player_cavas);
        // GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
     }
 

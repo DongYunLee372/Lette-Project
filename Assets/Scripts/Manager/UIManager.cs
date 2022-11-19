@@ -225,7 +225,7 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Hpbar"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("PlayerUIPanel"));
         StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Inven"));
-
+        StartCoroutine(AddressablesLoadManager.Instance.AsyncLoad_single<GameObject>("Minimap"));
 
     }
 
