@@ -793,7 +793,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8191408040989492200, guid: 540a2e88dbef67c4f85cb779a44d1f2d, type: 3}
         m_TargetAssemblyTypeName: OnclickButton, Assembly-CSharp
-        m_MethodName: Exitgame
+        m_MethodName: b_Exitgame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

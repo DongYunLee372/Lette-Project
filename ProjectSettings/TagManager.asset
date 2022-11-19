@@ -9,6 +9,8 @@ TagManager:
   - Fire
   - Weapon
   - Box
+  - FxTemporaire
+  - Effect
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - Player
   - TextUI
   - Unwalkable
-  - 
+  - Map
   - 
   - 
   - 

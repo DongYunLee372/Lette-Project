@@ -109,7 +109,8 @@ public class OnclickButton : MonoBehaviour
 
     public void b_Exitgame() //종료 
     {
-        GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
+        // GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);
+        Application.Quit();
     }
 
     public void b_Reverse()
