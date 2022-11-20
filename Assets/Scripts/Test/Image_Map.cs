@@ -62,7 +62,15 @@ public class Image_Map : MonoBehaviour, IPointerClickHandler
             Debug.Log("계산된 좌표 " + worldPos);
             Debug.Log("실제 타겟" + realWolrdPos);
 
-            MapManager.Instance.MoveUnit(realWolrdPos);
+            MapManager.Instance.MoveUnit(returnPos);
+
+            RawImage thisImage = null;
+            thisImage = this.GetComponent<RawImage>();
+            RectTransform rt = (RectTransform)thisImage.transform;
+            rt.sizeDelta = new Vector2(500 , 500);
+
+            flag = false;
+
         }
     }
 }
