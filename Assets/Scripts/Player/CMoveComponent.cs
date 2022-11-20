@@ -36,6 +36,7 @@ public class CMoveComponent : BaseComponent
         public Transform FpCamRig = null;
         public Transform FpCam = null;
 
+        public Transform CharacterTransform = null;
         public Rigidbody CharacterRig = null;
 
         public CapsuleCollider CapsuleCol = null;
@@ -212,13 +213,13 @@ public class CMoveComponent : BaseComponent
         if (playerChestTr == null)
             playerChestTr = com.animator.animator.GetBoneTransform(HumanBodyBones.Head);
 
-        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-                             new KeyValuePair<string, AnimationEventSystem.midCallback>(moveoption.KnockDownClip.name, KnockDownPause),
-                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockDownClip.name, KnockDownEnd));
+        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),0.0f,
+                             new KeyValuePair<string, AnimationEventSystem.midCallback>(moveoption.KnockDownClip.name, KnockDownPause),1.0f,
+                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockDownClip.name, KnockDownEnd),com.animator.GetClipLength(moveoption.KnockDownClip.name));
 
-        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-                             new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockBackClip.name, KnockBackEnd));
+        eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null), 0.0f,
+                             new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 1.0f,
+                             new KeyValuePair<string, AnimationEventSystem.endCallback>(moveoption.KnockBackClip.name, KnockBackEnd), com.animator.GetClipLength(moveoption.KnockBackClip.name));
 
         //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(moveoption.RollingClip.name, ActivateNoDamage),
         //                     new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
@@ -675,7 +676,7 @@ public class CMoveComponent : BaseComponent
 
         //Debug.Log("[Attack] 구리기 시작");   
         curval.IsRolling = true;
-        com.animator.Play("_Rolling", moveoption.RollingClipPlaySpeed, 0.0f, 0.2f, RollingOver);
+        com.animator.Play(moveoption.RollingClip.name, moveoption.RollingClipPlaySpeed, 0.0f, 0.2f, RollingOver);
 
         
         Vector3 tempmove = this.transform.position + com.FpRoot.forward * moveoption.RollingDistance;
@@ -1108,7 +1109,7 @@ public class CMoveComponent : BaseComponent
         MoveCalculate();
         Focusing();
         CameraCollision();
-
+        
         //Debug.DrawRay(transform.position, templastmovevec, Color.blue);
 
         //LookAtFoward();
@@ -1124,6 +1125,7 @@ public class CMoveComponent : BaseComponent
             }
             
         }
+        
 
         Debug.DrawRay(this.transform.position, curval.CurHorVelocity + curval.CurVirVelocity,Color.red);
         Debug.DrawRay(this.transform.position, slopVector, Color.blue);

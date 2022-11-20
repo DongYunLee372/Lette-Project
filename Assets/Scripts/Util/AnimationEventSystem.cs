@@ -23,8 +23,10 @@ public class AnimationEventSystem : MonoBehaviour
 	public Dictionary<string, midCallback> MidEventInvokers = new Dictionary<string, midCallback>();
 	public Dictionary<string, endCallback> EndEventInvokers = new Dictionary<string, endCallback>();
 
-	
-	public beginCallback _beginCallback;
+    
+
+
+    public beginCallback _beginCallback;
 	public midCallback _midCallback;
 	public endCallback _endCallback;
 
@@ -32,6 +34,10 @@ public class AnimationEventSystem : MonoBehaviour
     public delegate void midCallbackT<T>(T s_val);
     public delegate void endCallbackT<T>(T s_val);
 
+    public delegate void CallBackEvent(string s_val);
+    public CallBackEvent _Callback;
+
+    public Dictionary<string, List<CallBackEvent>>EventInvokers = new Dictionary<string, List<CallBackEvent>>();
 
     private void Start()
     {
@@ -64,11 +70,14 @@ public class AnimationEventSystem : MonoBehaviour
     public void AddEvent(KeyValuePair<string, beginCallback> begin,float begintime, KeyValuePair<string, midCallback> mid, float midtime, KeyValuePair<string, endCallback> end, float endtime)
     {
         AnimationEvent aevent;
+        
+
         if (begin.Key != null)
         {
+            float length = animator.m_clips[begin.Key].length;
             aevent = new AnimationEvent();
             aevent.time = begintime;
-            aevent.functionName = "OnBeginEventString";
+            aevent.functionName = "OnBeginEvent";
             aevent.stringParameter = begin.Key;
             animator.m_clips[begin.Key].AddEvent(aevent);
 
@@ -79,9 +88,9 @@ public class AnimationEventSystem : MonoBehaviour
         {
             aevent = new AnimationEvent();
             aevent.time = midtime;
-            aevent.functionName = "OnMidEventString";
-            aevent.stringParameter = begin.Key;
-            animator.m_clips[begin.Key].AddEvent(aevent);
+            aevent.functionName = "OnMidEvent";
+            aevent.stringParameter = mid.Key;
+            animator.m_clips[mid.Key].AddEvent(aevent);
 
             MidEventInvokers.Add(mid.Key, mid.Value);
         }
@@ -90,14 +99,42 @@ public class AnimationEventSystem : MonoBehaviour
         {
             aevent = new AnimationEvent();
             aevent.time = endtime;
-            aevent.functionName = "OnEndEventString";
-            aevent.stringParameter = begin.Key;
-            animator.m_clips[begin.Key].AddEvent(aevent);
+            aevent.functionName = "OnEndEvent";
+            aevent.stringParameter = end.Key;
+            animator.m_clips[end.Key].AddEvent(aevent);
 
             EndEventInvokers.Add(end.Key, end.Value);
         }
         
     }
+
+    public struct AnimationEventInfo
+    {
+        string _clipName;
+        AnimationEvent _event;
+    }
+
+    //public void AddEvent(string clipname, float time, CallBackEvent _event)
+    //{
+    //    AnimationEventInfo eventinfo = new AnimationEventInfo();
+    //    AnimationEvent aevent;
+    //    aevent = new AnimationEvent();
+    //    aevent.time = time;
+    //    aevent.functionName = "OnAnimationEvent";
+    //    aevent.stringParameter = clipname;
+
+    //    animator.m_clips[clipname].AddEvent(aevent);
+    //    //eventinfo
+
+    //    if (EventInvokers.ContainsKey(clipname))
+    //    {
+    //        EventInvokers[clipname].Add(_event);
+    //    }
+    //    List<CallBackEvent> list = new List<CallBackEvent>();
+
+    //    EventInvokers.Add(clipname,)
+    //}
+
 
     //public void AddTempletEvent(KeyValuePair<string, beginCallbackT<Object>> begin, KeyValuePair<string, midCallback> mid, KeyValuePair<string, endCallback> end)
     //{
@@ -109,38 +146,11 @@ public class AnimationEventSystem : MonoBehaviour
     //        EndEventInvokers.Add(end.Key, end.Value);
     //}
 
-    //Animation Event
-    public void OnBeginEventString(string s_val)
-	{
-		//_beginCallback?.Invoke(s_val);
-        
-            
-		if(BeginEventInvokers.TryGetValue(s_val,out _beginCallback))
-        {
-			_beginCallback.Invoke(s_val);
-            //_beginCallback.
-        }
-	}
+   
+    public void OnAnimationEvent(string s_val)
+    {
 
-	public void OnMidEventString(string s_val)
-	{
-		//_midCallback?.Invoke(s_val);
-		if (MidEventInvokers.TryGetValue(s_val, out _midCallback))
-		{
-			_midCallback.Invoke(s_val);
-		}
-	}
-
-	public void OnEndEventString(string s_val)
-	{
-		//_endCallback?.Invoke(s_val);
-		if (EndEventInvokers.TryGetValue(s_val, out _endCallback))
-		{
-			_endCallback.Invoke(s_val);
-		}
-	}
-
-
+    }
 
     public void OnBeginEvent(string s_val)
     {

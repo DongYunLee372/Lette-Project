@@ -12,7 +12,7 @@ public class CAttackComponent : BaseComponent
     [SerializeField]
     [HideInInspector]
     CurState curval;
-    [HideInInspector]
+    //[HideInInspector]
     public int CurAttackNum = 0;
     [HideInInspector]
     public CMoveComponent movecom;
@@ -24,11 +24,11 @@ public class CAttackComponent : BaseComponent
     public string monstertag;
     [HideInInspector]
     public CorTimeCounter timer = new CorTimeCounter();
-    [HideInInspector]
+    //[HideInInspector]
     public bool IsLinkable = false;
 
     // public AttackInfo_Ex NextAttackInfo = null;
-    [HideInInspector]
+    //[HideInInspector]
     public AttackInfo NextAttackInfo = null;
     [HideInInspector]
     public bool NextAttack = false;
@@ -104,10 +104,11 @@ public class CAttackComponent : BaseComponent
 
     //public bool IsTimeCounterActive = false;
     [HideInInspector]
-    public IEnumerator coroutine;
+    public IEnumerator Effectcoroutine;
     [HideInInspector]
     public IEnumerator Linkcoroutine;
-
+    [HideInInspector]
+    public IEnumerator Movecoroutine;
 
     void Start()
     {
@@ -115,13 +116,8 @@ public class CAttackComponent : BaseComponent
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
         weaponcollider = GetComponentInChildren<WeaponCollider>();
+
         weaponcollider?.SetCollitionFunction(MonsterAttack);
-
-        //if (effectparent == null)
-        //{
-        //    effectparent = new GameObject("EffectsContainer").transform;
-        //}
-
         Initsetting();
         AnimationEventsSetting();
         
@@ -132,13 +128,26 @@ public class CAttackComponent : BaseComponent
         //초기화 할때 각각의 공격 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for (int i = 0; i < AttackInfos.Count; i++)
         {
-            //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove),
-            //    new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-            //    new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd));
 
-            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove),0.0f,
-                new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 1.0f,
-                new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd),1.2f);
+            //if(AttackInfos[i].AttackEndTime != 0)
+            //{
+            //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove), 0.0f,
+            //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 0.0f,
+            //        new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd), AttackInfos[i].AttackEndTime);
+            //}
+            //else
+            //{
+            //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove), 0.0f,
+            //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 0.0f,
+            //        new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd), animator.GetClipLength(AttackInfos[i].aniclipName));
+            //}
+
+            if (AttackInfos[i].AttackEndTime != 0)
+            {
+                eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove), AttackInfos[i].movestarttime,
+                    new KeyValuePair<string, AnimationEventSystem.midCallback>(AttackInfos[i].aniclipName, AttackEnd), AttackInfos[i].AttackEndTime,
+                    new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, IsAttackingEnd), animator.GetClipLength(AttackInfos[i].aniclipName));
+            }
 
         }
 
@@ -166,6 +175,12 @@ public class CAttackComponent : BaseComponent
     }
 
     int LastMonsterID = -1;
+
+
+    public void AttackMidFunc(string val)
+    {
+
+    }
 
     public void MonsterAttack(Collider collision)
     {
@@ -219,14 +234,14 @@ public class CAttackComponent : BaseComponent
 
         if (skillinfos[skillnum].Effect != null)
         {
-            coroutine = timer.Cor_TimeCounter<string,Transform, float>
+            Effectcoroutine = timer.Cor_TimeCounter<string,Transform, float>
                 (skillinfos[skillnum].EffectStartTime, CreateEffect, skillinfos[skillnum].EffectAdressable, skillinfos[skillnum].EffectPosRot, 1.5f);
-            StartCoroutine(coroutine);
+            StartCoroutine(Effectcoroutine);
         }
 
         //EffectManager.Instance.SpawnEffectLooping(skillinfos[skillnum].Effect, this.transform.position, Quaternion.identity, 2, 10);
 
-        ColliderSpawnSystem.Instance.SpawnSphereCollider(transform.position, 10, 5, monstertag, MonsterAttack);
+        ColliderSpawnManager.Instance.SpawnSphereCollider(transform.position, 10, 5, monstertag, MonsterAttack);
 
 
         //StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
@@ -377,6 +392,21 @@ public class CAttackComponent : BaseComponent
 
     }
 
+    //일정 시간 뒤에 일정 시간 동안 일정 거리를 캐릭터의 정면 방향으로 이동할 때 사용
+    public void AttackMoveAtTime(float time, float distance, float duration)
+    {
+        if (Movecoroutine != null)
+            StopCoroutine(Movecoroutine);
+
+        Movecoroutine = timer.Cor_TimeCounter<float, float>(time, AttackMoveAtTime, distance, duration);
+        StartCoroutine(Movecoroutine);
+    }
+
+    public void AttackMoveAtTime(float distance, float duration)
+    {
+        movecom.FowardDoMove(distance, duration);
+    }
+
     //공격 이펙트를 생성
     public void CreateEffect(string adressableAdress,Transform posrot, float destroyTime)
     {
@@ -404,14 +434,18 @@ public class CAttackComponent : BaseComponent
             ActiveLinkable();
         }
 
+        if (Linkcoroutine != null)
+            StopCoroutine(Linkcoroutine);
+
         //공격 끝 이후 연결동작 입력
         Linkcoroutine = timer.Cor_TimeCounter(AttackInfos[CurAttackNum].BufferdInputTime_End, DeActiveLinkable);
         StartCoroutine(Linkcoroutine);
 
+
         //후딜레이 구현
         animator.Pause();
         StartCoroutine(timer.Cor_TimeCounter(AttackInfos[CurAttackNum].recoveryDelay, ChangeState));
-
+        
 
     }
     
@@ -429,17 +463,24 @@ public class CAttackComponent : BaseComponent
             LastMonsterID = -1;
             Attack();
         }
-        //없으면 복귀동작을 실행한다.
+        //없으면 현재 실행중인 애니메이션의 마지막에 
         else
         {
-            animator.Play(AttackInfos[CurAttackNum].endAniclipName, AttackInfos[CurAttackNum].endanimationPlaySpeed, 0, 0.2f, IsAttackingEnd);
+            animator.Resume();
+            AttackMoveAtTime(AttackInfos[CurAttackNum].endmovestarttime, AttackInfos[CurAttackNum].endmovedis, AttackInfos[CurAttackNum].endmovetime);
         }
+
+        //없으면 복귀동작을 실행한다.
+        //else
+        //{
+        //    animator.Play(AttackInfos[CurAttackNum].endAniclipName, AttackInfos[CurAttackNum].endanimationPlaySpeed, 0, 0.2f, IsAttackingEnd);
+        //}
 
     }
 
-    public void IsAttackingEnd()
+    public void IsAttackingEnd(string val)
     {
-        //Debug.Log("[Attack] 공격 진짜 마지막 끝");
+        Debug.Log("[Attack] 공격 진짜 마지막 끝");
         //Debug.Log("[Attack]attackend");
         curval.IsAttacking = false;
         LastMonsterID = -1;
@@ -461,15 +502,21 @@ public class CAttackComponent : BaseComponent
     public void AttackCutOff()
     {
         curval.IsAttacking = false;
-        if (coroutine != null)
+        if (Effectcoroutine != null)
         {
-            StopCoroutine(coroutine);
-            coroutine = null;
+            StopCoroutine(Effectcoroutine);
+            Effectcoroutine = null;
         }
         if(Linkcoroutine!=null)
         {
             StopCoroutine(Linkcoroutine);
             Linkcoroutine = null;
+            DeActiveLinkable();
+        }
+        if(Movecoroutine!=null)
+        {
+            StopCoroutine(Movecoroutine);
+            Movecoroutine = null;
         }
 
         curval.IsAttacking = false;

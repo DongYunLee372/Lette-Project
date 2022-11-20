@@ -23,9 +23,24 @@ public class AttackInfo
     public string aniclipName;
 
     //해당 매니메이션 클립 이후 공격컴포넌트에서 이름을 이용해 실제 클립을 받아오는것이 필요
-    [Tooltip("해당 공격의 애니메이션 클립 이름")]
+    [Tooltip("해당 공격의 복귀 애니메이션 클립 이름")]
     [SerializeField]
     public string endAniclipName;
+
+    //공격 중 움직일 거리
+    [Tooltip(" 복귀 애니메이션 움직임을 시작할 시간")]
+    [SerializeField]
+    public float endmovestarttime;
+
+    //공격 중 움직일 거리
+    [Tooltip(" 복귀 애니메이션 움직일 거리")]
+    [SerializeField]
+    public float endmovedis;
+
+    //움직일 시간
+    [Tooltip(" 복귀 애니메이션 움직일 시간")]
+    [SerializeField]
+    public float endmovetime;
 
     //애니메이션 배속
     [Tooltip("해당 공격의 애니메이션 재생 속도")]
@@ -33,7 +48,7 @@ public class AttackInfo
     [Range(0.0f, 10.0f)]
     public float animationPlaySpeed;
 
-    [Tooltip("해당 공격의 애니메이션 클립 이름")]
+    [Tooltip("해당 공격의 복귀 애니메이션 클립 이름")]
     [SerializeField]
     [Range(0.0f, 10.0f)]
     public float endanimationPlaySpeed;
@@ -88,6 +103,11 @@ public class AttackInfo
     public float EffectDestroyTime;
 
     //공격 중 움직일 거리
+    [Tooltip("공격할때 움직임을 시작할 시간")]
+    [SerializeField]
+    public float movestarttime;
+
+    //공격 중 움직일 거리
     [Tooltip("공격할때 움직일 거리")]
     [SerializeField]
     public float movedis;
@@ -104,6 +124,10 @@ public class AttackInfo
     [Tooltip("타겟팅공격일때 타겟오브젝트")]
     [SerializeField]
     public string TargetObjName;
+
+    [Tooltip("공격 끝 지점")]
+    [SerializeField]
+    public float AttackEndTime;
 
     ///////////////////////////////////////////////////////////////////////////////////////
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
+//using UnityEditor.Animations;
 
 /*사용할 모든 클립들이 등록되어있는 animation controller 가 연결된 animator 가 필요
   GetAnimationClips()를 이용하여 현재 등록된 클립들을 받아오든지, 직접 입력하던지 해서 재생을 원하는 클립의 이름을 알아와서
@@ -77,6 +78,11 @@ public class AnimationController : MonoBehaviour
         flag = true;
         perAnimator = animator.runtimeAnimatorController;
         animator.runtimeAnimatorController = aniGroup;
+        //StateMachineBehaviour machine;
+        //StateMachine mm;
+        //AnimatorState sss;
+        //AnimatorStateTransition[] transitions = sss.transitions;
+        //sss.AddTransition()
     }
 
 

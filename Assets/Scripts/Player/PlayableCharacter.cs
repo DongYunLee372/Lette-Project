@@ -39,6 +39,7 @@ public class PlayableCharacter : MonoBehaviour
     public GameObject HitEffect;
     public string HitEffectAdressableName;
     public EffectManager effectmanager;
+    public AnimationClip DeadAnimation;
 
     [Header("================StateMachine================")]
     public MyStateMachine.StateMachine<States, MyStateMachine.Drive> fsm;
@@ -145,6 +146,24 @@ public class PlayableCharacter : MonoBehaviour
         SetReverseMouseRot(mainoption.ReverseMouse);
         SetCameraColl(mainoption.AutoeVade);
 
+        //필요한 매니저들이 존재하는지 확인하고 없으면 만들어준다.
+        if(FindObjectOfType<ResourceCreateDeleteManager>()==null)
+        {
+            GameObject obj = new GameObject(typeof(ResourceCreateDeleteManager).Name);
+            obj.AddComponent<ResourceCreateDeleteManager>();
+        }
+
+        if(FindObjectOfType<EffectManager>()==null)
+        {
+            GameObject obj = new GameObject(typeof(EffectManager).Name);
+            obj.AddComponent<EffectManager>();
+        }
+
+        if (FindObjectOfType<ColliderSpawnManager>() == null)
+        {
+            GameObject obj = new GameObject(typeof(ColliderSpawnManager).Name);
+            obj.AddComponent<ColliderSpawnManager>();
+        }
 
     }
 
@@ -318,7 +337,7 @@ public class PlayableCharacter : MonoBehaviour
             //movecom.com.animator.Play("_Dead");
             #endregion
 
-            movecom.com.animator.Play("_Dead", 1.0f, 0.0f, 0.2f, Restart);
+            movecom.com.animator.Play(DeadAnimation.name, 1.0f, 0.0f, 0.2f, Restart);
 
 
 

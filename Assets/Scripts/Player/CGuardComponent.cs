@@ -141,6 +141,7 @@ public class CGuardComponent : BaseComponent
         if (PlayableCharacter.Instance.status.CurStamina >= 10 /*&& hitangle <= GuardAngle*/ && !nowGuardStun) 
         {
             PlayableCharacter.Instance.status.StaminaDown(10);
+            EffectManager.Instance.InstantiateEffect(GuardEffect, guardeffectpos.position, guardeffectpos.rotation);
             GuardStun();
             Debug.Log("가드 성공");
         }
