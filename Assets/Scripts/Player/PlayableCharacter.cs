@@ -172,6 +172,18 @@ public class PlayableCharacter : MonoBehaviour
         curState = fsm.GetCurState();
     }
 
+    //duration 시간동안 목표위치로 이동한다.
+    public void DoMove(Vector3 destpos, float duration)
+    {
+        movecom.DoMove(destpos, duration);
+    }
+
+    //Vector3 방향 * float 거리
+    public void Move(Vector3 moveVec)
+    {
+        movecom.Move(moveVec);
+    }
+
     public States GetState()
     {
         return fsm.GetCurState();
