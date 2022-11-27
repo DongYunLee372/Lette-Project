@@ -963,7 +963,7 @@ MonoBehaviour:
   bosshpbar: {fileID: 2388182015351633143, guid: 19df7f83c6a3aeb4abb68ed39a295f25, type: 3}
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
-  skill_handler: {fileID: 0}
+  skill_handler: {fileID: 8114003576691145069}
   char_Info: {fileID: 0}
   mon_Info: {fileID: 0}
   mon_Skill_Info:
@@ -1460,11 +1460,17 @@ MonoBehaviour:
   animator: {fileID: 0}
   m_clipsnum: 0
   currentplayclipname: 
+  lastplayclipname: 
   prespeed: 0
   currentSpeed: 0
   currnetPlayTime: 0
   currentBlending: 0
+  perAnimator: {fileID: 0}
   m_tempclips: []
+  Transitions: []
+  TransitionLable:
+    m_LabelString: 
+  flag: 0
 --- !u!114 &8114003576691145070
 MonoBehaviour:
   m_ObjectHideFlags: 0
