@@ -760,7 +760,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             now_Backward = true;
-            animator.Play("Skill_03");
+            animator.Play("BackWard_Jump");
             animator.animator.SetTrigger("Delay_Trg");
         }
 
