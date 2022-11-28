@@ -1,0 +1,8 @@
+Greetings user!
+
+- Zugrand_01 Scene have painted grass on terrain
+- Zugrand_02 Scene have static grass
+
+-Also you can put camera fly 1 and 2 on the scene, but before you need to disable Player
+
+For any info feel free to ask at zugzug.art@gmail.com

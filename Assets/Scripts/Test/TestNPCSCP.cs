@@ -12,6 +12,7 @@ public class TestNPCSCP : BaseInteractive
 
     public override int P_Instance { get => throw new System.NotImplementedException(); protected set => throw new System.NotImplementedException(); }
     public override InteractiveIndex P_interactive { get => throw new System.NotImplementedException(); protected set => throw new System.NotImplementedException(); }
+    public override bool P_IsInteractive { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     public override void Init()
     {

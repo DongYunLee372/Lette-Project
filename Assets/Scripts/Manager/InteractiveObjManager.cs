@@ -11,7 +11,18 @@ public class InteractiveObjManager : MySingleton<InteractiveObjManager>
     Dictionary<string, List<BaseInteractive>> InteractiveObjDic = new Dictionary<string, List<BaseInteractive>>();
     public void SetInteractiveObj(EnumScp.InteractiveIndex index, BaseInteractive obj) //플레이어와 상호작용 하는 obj의 정보를 딕셔너리에 저장
     {
-        // InteractiveObjDic.Add(index, obj);
+
+        if (InteractiveObjDic.ContainsKey(obj.name))
+        {
+            InteractiveObjDic[obj.name].Add(obj);
+        }
+        else
+        {
+            List<BaseInteractive> tempList = new List<BaseInteractive>();
+            tempList.Add(obj);
+            InteractiveObjDic.Add(obj.name, tempList);
+        }
+
     }
 
     public List<BaseInteractive> GetInteractiveObj(string name) //obj 정보 리스트 리턴
@@ -47,7 +58,7 @@ public class InteractiveObjManager : MySingleton<InteractiveObjManager>
     {
         List<BaseInteractive> temp;
         InteractiveObjDic.TryGetValue(type.ToString(), out temp);
-        
+
 
         for (int i = 0; i < temp.Count; i++)
         {
@@ -57,37 +68,37 @@ public class InteractiveObjManager : MySingleton<InteractiveObjManager>
                 InteractiveObjDic[temp[i].GetType().Name].Remove(temp[i]);
             }
         }
-        
+
     }
-    public void IsInteractiveObj(EnumScp.InteractiveIndex index)
+    public bool IsInteractiveObj<T>(T type, int id)
     {
+        List<BaseInteractive> temp;
+        InteractiveObjDic.TryGetValue(type.ToString(), out temp);
 
+        for (int i = 0; i < temp.Count; i++)
+        {
+            if (temp[i].GetInstanceID() == id)
+                return temp[i].P_IsInteractive;
+        }
+
+        return false;
     }
 
-    private void Awake()
+    private void Awake() //이미 씬에 존재하는 상호작용 오브젝트인 경우 미리 저장하여 관리함
     {
         BaseInteractive[] temp = FindObjectsOfType<BaseInteractive>();
-
         for (int i = 0; i < temp.Length; i++)
         {
-
             if (InteractiveObjDic.ContainsKey(temp[i].GetType().Name))
+            {
                 InteractiveObjDic[temp[i].GetType().Name].Add(temp[i]);
-            else 
+            }
+            else
             {
                 List<BaseInteractive> tempList = new List<BaseInteractive>();
                 tempList.Add(temp[i]);
                 InteractiveObjDic.Add(temp[i].GetType().Name, tempList);
             }
-
-            
         }
-
-        
-        //for (int i=0;i<3;i++)
-        //{
-        //    //InteractiveObjDic[temp[i].GetType().Name][i];
-        //    //Destroy(InteractiveObjDic[temp[i].GetType().Name][i].gameObject);
-        //}
     }
 }

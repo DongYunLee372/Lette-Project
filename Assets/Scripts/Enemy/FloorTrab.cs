@@ -2,7 +2,7 @@ using EnumScp;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class FloorTrab : BaseInteractive
 {
     public Collider TrabCollider = null;
@@ -18,37 +18,45 @@ public class FloorTrab : BaseInteractive
     public override int P_Instance { get { return Instance; } protected set { Instance = value; } }
     public override InteractiveIndex P_interactive { get { return interactive; } protected set { interactive = value; } }
 
+    public override bool P_IsInteractive { get { return IsInteractive; } set { IsInteractive = value; } }
+
     public override void Init()
     {
-        
+
         TrabCollider = GetComponentInChildren<BoxCollider>();
         coroutine = StartTrab();
         MoveSpeed = 10f;
 
         P_Instance = GetInstanceID();
         P_interactive = InteractiveIndex.Trab;
-
-        InteractiveObjManager.Instance.SetInteractiveObj(P_interactive, this);
+        P_IsInteractive = false;
+        //InteractiveObjManager.Instance.SetInteractiveObj(P_interactive, this); 이미 맵에 설치된 상호작용 오브젝트이기에 해줄 필요 없음
     }
 
     public IEnumerator StartTrab()
     {
-        IsInteractive = true;
-        Vector3 temppos = Spear.transform.position;
-        Vector3 dir = (Floor.transform.position - Spear.transform.position).normalized;
-        while (true)
-        {
-            if(Spear.transform.position.y >= Floor.transform.position.y)
-            {
-                break;
-            }
-            //temppos.y = MoveSpeed * Time.deltaTime;
-            Spear.transform.position += dir * MoveSpeed * Time.deltaTime;
-            yield return new WaitForSeconds(0.1f);
-        }
+        P_IsInteractive = true;
 
-        
-        IsInteractive = false;
+        Vector3 objective = Floor.transform.position + (Floor.transform.up * 10 * Time.deltaTime);
+        Spear.transform.DOMove(objective, 1f).SetEase(Ease.InOutBack);
+
+
+
+        //Vector3 temppos = Spear.transform.position;
+        //Vector3 dir = (Floor.transform.position - Spear.transform.position).normalized;
+        //while (true)
+        //{
+        //    if(Spear.transform.position.y >= Floor.transform.position.y)
+        //    {
+        //        break;
+        //    }
+        //    //temppos.y = MoveSpeed * Time.deltaTime;
+        //    Spear.transform.position += dir * MoveSpeed * Time.deltaTime;
+        //    yield return new WaitForSeconds(0.1f);
+        //}
+
+
+        P_IsInteractive = false;
         yield return null;
     }
 
@@ -60,8 +68,10 @@ public class FloorTrab : BaseInteractive
 
     public void OnTriggerEnter(Collider other)
     {
+
+
+
         Oninteractive();
-        //InteractiveObjManager.Instance.EndInteractiveObj(this.GetType().ToString());
     }
 
     public override void Awake()
@@ -69,13 +79,13 @@ public class FloorTrab : BaseInteractive
         base.Awake();
     }
 
-    
+
     void Start()
     {
-        
+
     }
 
-    
+
     void Update()
     {
 

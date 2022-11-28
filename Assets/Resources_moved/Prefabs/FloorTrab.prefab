@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3046466013062103434}
   - component: {fileID: 3046466013062103433}
   - component: {fileID: 3046466013062103432}
-  - component: {fileID: 3046466013062103439}
   - component: {fileID: 3046466013062103438}
+  - component: {fileID: 8018527234611319045}
   m_Layer: 0
   m_Name: FloorTrab
   m_TagString: Untagged
@@ -86,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3046466013062103439
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3046466013062103437}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &3046466013062103438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,12 +98,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b1a465dfd0cf04eacff5efaaa7ca39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactive: 2
   TrabCollider: {fileID: 0}
   IsInteractive: 0
   Spear: {fileID: 3046466013138020706}
   Floor: {fileID: 3046466013062103437}
   MoveSpeed: 0
+--- !u!65 &8018527234611319045
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046466013062103437}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 5.28, z: 10}
+  m_Center: {x: 0, y: 2.21, z: 0}
 --- !u!1 &3046466013138020706
 GameObject:
   m_ObjectHideFlags: 0
