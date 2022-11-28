@@ -2366,7 +2366,6 @@ GameObject:
   - component: {fileID: 5912692896712388560}
   - component: {fileID: 5912692896712388561}
   - component: {fileID: 5912692896712387627}
-  - component: {fileID: 5912692896712388562}
   m_Layer: 13
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -2471,7 +2470,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84300dc00f9cd2499d0a813ae0cb941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statemachine: {fileID: 0}
   components:
   - {fileID: 0}
   - {fileID: 0}
@@ -2484,6 +2482,8 @@ MonoBehaviour:
   HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
   HitEffectAdressableName: SwordHitRed
   effectmanager: {fileID: 0}
+  DeadAnimation: {fileID: 7400000, guid: d8aca7303c98fd248b66037e020435af, type: 3}
+  curState: 0
   _outoFocus: 0
   _monsterObject: []
   _monsterSearchTime: 1.5
@@ -2519,6 +2519,7 @@ MonoBehaviour:
     FpRoot: {fileID: 5912692895590823227}
     FpCamRig: {fileID: 5912692896576384674}
     FpCam: {fileID: 5912692896815848212}
+    CharacterTransform: {fileID: 707737433636210477}
     CharacterRig: {fileID: 0}
     CapsuleCol: {fileID: 0}
     animator: {fileID: 0}
@@ -2557,30 +2558,30 @@ MonoBehaviour:
     MoveSpeed: 160
     RunSpeed: 400
     MinAngle: 0
-    MaxAngle: 0
+    MaxAngle: 35
     Gravity: 0
     JumpPower: 120
     JumpcoolTime: 1
     GroundMask:
       serializedVersion: 2
       m_Bits: 64
-    MaxSlop: 70
+    MaxSlop: 35
     SlopAccel: 10
     MaxStep: 0
     RunningStaminaVal: 4
     StepHeight: 1
     StepCkeckDis: 0.4
     StepWeightVal: 20
-    RollingClip: {fileID: 7400000, guid: 207adbd2d547d7f408adcac0b17f4e44, type: 2}
-    RollingClipPlaySpeed: 2.32
-    RollingDistance: 5
+    RollingClip: {fileID: 7400000, guid: de01ef7c29e3c9b4aad09085a2dd2083, type: 3}
+    RollingClipPlaySpeed: 1.5
+    RollingDistance: 6
     RollingTime: 0
     RollingNoDamageStartTime: 0.1
     RollingNoDamageTime: 0.35
     NextRollingTime: 0.14
     RollingStaminaDown: 15
-    KnockDownClip: {fileID: 7400000, guid: 0c62720761979084caafe70772d508f8, type: 2}
-    KnockBackClip: {fileID: 7400000, guid: fb154bb004a47594ea4d6d9afb25d388, type: 2}
+    KnockDownClip: {fileID: 7400000, guid: cdf7d961d7f146d40bb128482d43854a, type: 3}
+    KnockBackClip: {fileID: 7400000, guid: d58d2e7029cbf0e4e8d87145820d4dc3, type: 3}
     KnockDownTime: 1
     KnockBackTime: 0
     GuardFrontMoveClip: _Guard_FowordMove
@@ -2602,6 +2603,7 @@ MonoBehaviour:
   playerChestTr: {fileID: 0}
   teststart: {x: 0, y: 0, z: 0}
   testend: {x: 0, y: 0, z: 0}
+  slopVector: {x: 0, y: 0, z: 0}
   testyRotPrev: 0
   testyRotNext: 0
   CameraCollOn: 0
@@ -2662,6 +2664,9 @@ MonoBehaviour:
     attackType: 
     aniclipName: 
     endAniclipName: 
+    endmovestarttime: 0
+    endmovedis: 0
+    endmovetime: 0
     animationPlaySpeed: 0
     endanimationPlaySpeed: 0
     startDelay: 0
@@ -2674,76 +2679,67 @@ MonoBehaviour:
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
+    movestarttime: 0
     movedis: 0
     movetime: 0
     ProjectileObjName: 
     TargetObjName: 
+    AttackEndTime: 0
   NextAttack: 0
   NextAttackNum: -1
   AttackInfos:
   - attackNum: 0
-    attackName: Attack1
+    attackName: combo_01_1
     attackType: Normal
-    aniclipName: _Attack01_new
-    endAniclipName: _Attack01_Back
-    animationPlaySpeed: 1.53
-    endanimationPlaySpeed: 2
+    aniclipName: R_Attack_08
+    endAniclipName: idle
+    endmovestarttime: 0
+    endmovedis: 0
+    endmovetime: 0
+    animationPlaySpeed: 1
+    endanimationPlaySpeed: 1
     startDelay: 0.69
-    recoveryDelay: 0.14
-    bufferdInputTime_Start: 0.2
-    BufferdInputTime_End: 0.2
+    recoveryDelay: 0.1
+    bufferdInputTime_Start: 0.1
+    BufferdInputTime_End: 0.1
     damage: 20
     StaminaGaugeDown: 5
     EffectName: 
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
+    movestarttime: 0.15
     movedis: 2.5
     movetime: 0.21
     ProjectileObjName: 
     TargetObjName: 
+    AttackEndTime: 0.5152439
   - attackNum: 1
-    attackName: Attack2
+    attackName: combo_01_2
     attackType: Normal
-    aniclipName: _Attack02_new
-    endAniclipName: _Attack02_Back
-    animationPlaySpeed: 1.3
-    endanimationPlaySpeed: 2
+    aniclipName: R_Attack_09
+    endAniclipName: idle
+    endmovestarttime: 0
+    endmovedis: 0
+    endmovetime: 0
+    animationPlaySpeed: 1
+    endanimationPlaySpeed: 1
     startDelay: 0.42
-    recoveryDelay: 0.21
-    bufferdInputTime_Start: 0.2
-    BufferdInputTime_End: 0.2
+    recoveryDelay: 0.1
+    bufferdInputTime_Start: 0.1
+    BufferdInputTime_End: 0.1
     damage: 20
     StaminaGaugeDown: 5
     EffectName: 
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
-    movedis: 2.3
-    movetime: 0.2
+    movestarttime: 0.12
+    movedis: 4
+    movetime: 0.3
     ProjectileObjName: 
     TargetObjName: 
-  - attackNum: 2
-    attackName: Attack03
-    attackType: Normal
-    aniclipName: _Attack03_new
-    endAniclipName: _Attack03_Back
-    animationPlaySpeed: 1.5
-    endanimationPlaySpeed: 2
-    startDelay: 0
-    recoveryDelay: 0.41
-    bufferdInputTime_Start: 0.4
-    BufferdInputTime_End: 0
-    damage: 30
-    StaminaGaugeDown: 10
-    EffectName: 
-    EffectStartTime: 0
-    effectPosRot: 
-    EffectDestroyTime: 0
-    movedis: 3.2
-    movetime: 0.21
-    ProjectileObjName: 
-    TargetObjName: 
+    AttackEndTime: 0.5987043
   skillinfos:
   - AttackType: 0
     SkillName: Skill01
@@ -2781,18 +2777,19 @@ MonoBehaviour:
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
   GuardTime: 3
-  GuardStunTime: 0.2
+  GuardStunTime: 1
   MaxGuardGauge: 0
   BalanceDecreaseVal: 10
-  GuardStunClip: {fileID: 7400000, guid: 0e4769155aaa97540a1d9737b3062084, type: 2}
-  GuardStunClipName: _GuardStun_Avatar
-  GuardClip: {fileID: 7400000, guid: a2ce05986eb5d08499f73d9ba82bc759, type: 2}
+  GuardStunClip: {fileID: 7400000, guid: 1945ab2942a247147bf4f2fa165b23f3, type: 3}
+  GuardStunClipName: Block_Guard
+  GuardClip: {fileID: 7400000, guid: 92cb0c5107444d14ba2079e20025004f, type: 3}
   GuardEffect: {fileID: 167046, guid: 6062cf74dd326b146b31d28120ade333, type: 3}
   guardeffectpos: {fileID: 489346842}
   GuardAngle: 80
   CurGuardGauge: 0
   nowGuard: 0
   GaugeDownInterval: 0
+  nowGuardStun: 0
   hitangle: 0
 --- !u!114 &5912692896712387627
 MonoBehaviour:
@@ -2824,23 +2821,6 @@ MonoBehaviour:
   guardcom: {fileID: 0}
   testtestobj: {fileID: 0}
   testtestobj2: {fileID: 0}
---- !u!114 &5912692896712388562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5912692896712387625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5b69a6adf6433e4e92be0c6e93cc370, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationBlendingTimeSets: []
-  CurState: 0
-  PreState: 0
-  animator: {fileID: 0}
-  movecom: {fileID: 0}
 --- !u!1 &5912692896735992643
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,6 +3416,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   m_clipsnum: 0
   currentplayclipname: 
+  lastplayclipname: 
   prespeed: 0
   currentSpeed: 0
   currnetPlayTime: 0
@@ -4312,6 +4293,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 674421290382581969, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 815769558103325623, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -4499,6 +4484,10 @@ PrefabInstance:
     - target: {fileID: 6347267527637177273, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356429822294294489, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6496918849406836486, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
       propertyPath: m_Layer
