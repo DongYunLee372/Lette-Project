@@ -55570,6 +55570,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 5912692896712387626, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
+      propertyPath: moveoption.RollingDistance
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712387627, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: testtestobj
       value: 

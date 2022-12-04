@@ -2,6 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//문제상황
+
+//1.Input에서 움직이고 있는지 아닌지를 판단하기 때문에 키 입력이 아니고 움직이고 싶을때 상태 변경이 안된다.
+
+//2. 그냥 Move에서 상태를 변경하려고 해도 Input 에서 Update로 지속적으로 값을 지정하고 있어서 불가능
+
+//3. 상태머신의 Update 처리 불가능 
+
+//해결방법
+//1. input에서 Update로 지속적으로 움직이는지 체크하지 않는다. 
+//   인풋의 상태 변경하는 부분을 Move부분으로 옮기려고 해도 인풋의 예외처리를 그대로 다 해줘야 한다. -> 의미가 없음 어짜피 Update에서 하는건 똑같기 때문에
+//   움직임 방식을 변경? Dotween 처럼 일정 시간동안 일정 거리를 움직이도록? -> 이렇게 변경해도 달라지는게 없음
+//   일단 움직이도록 하고 Velocity 값을 참조해서 변경? 변경하면서 관성 시스템도 같이 넣도록
+   
+//2. 상태가 변경되는것이 맞춰서 
+
+//3. 상태머신에서 Update함수들을 딕셔너릭로 가지고 있다가 실행시켜준다.
 
 /*유저의 입력을 처리한다.*/
 public class CInputComponent : BaseComponent
@@ -135,7 +152,7 @@ public class CInputComponent : BaseComponent
 
         
         
-        movecom.curval.IsMoving = false;
+        //movecom.curval.IsMoving = false;
 
 
         movecom.MouseMove = new Vector2(0, 0);//마우스 움직임
@@ -289,10 +306,9 @@ public class CInputComponent : BaseComponent
             {
                 if (movecom.curval.IsRunning)
                 {
-                    //com.animator.SetPlaySpeed(1f);
                     movecom.com.animator.Play("move_run_01");
-                    //movecom.com.animator.SetBool("Walk", false);
-                    //movecom.com.animator.SetBool("Run", true);
+
+
                     //AudioSource audio = SoundManager.Instance.effectSource.GetComponent<AudioSource>();
 
                     //if (!audio.isPlaying)
@@ -301,38 +317,21 @@ public class CInputComponent : BaseComponent
                     //    audio.pitch = 3.0f;
                     //    SoundManager.Instance.effectSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Player_Audio[1]);
                     //}
-                        
+
                 }
                 else
                 {
-                    //com.animator.SetPlaySpeed( 1f);
-                    //movecom.com.animator.SetBool("Run", false);
-                    //movecom.com.animator.SetBool("Walk", true);
                     movecom.com.animator.Play("strafe_walk_strafe_front");
 
                     //AudioSource audio = SoundManager.Instance.effectSource.GetComponent<AudioSource>();
 
-                    //if (!audio.isPlaying)
-                    //{
-                    //    audio.loop = true;
-                    //    audio.pitch = 2.2f;
-                    //    SoundManager.Instance.effectSource.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.Player_Audio[0]);
-                    //}
-                        
+
                 }
             }
             else
             {
-                //movecom.com.animator.SetBool("Run", false);
-                //movecom.com.animator.SetBool("Walk", false);
                 movecom.com.animator.Play("idle");
             }
-        }
-        else
-        {
-            ////가드중이고 움직이는 중이 아닐때
-            //if (movecom.MoveDir.magnitude <= 0)
-            //    movecom.com.animator.Play("_Guard");
         }
     }
 
@@ -421,7 +420,16 @@ public class CInputComponent : BaseComponent
         //    ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>("Testcube2", testtestobj2);
         //}
 
+        //이동 테스트
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            movecom.DoMove(this.transform.position + new Vector3(5.0f, 0.0f, 0.0f), 2.0f);
+        }
 
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            ResourceCreateDeleteManager.Instance.DestroyObj<dotweentest>("testcube", testtestobj.gameObject);
+        }
 
         //키 입력
         KeyInput();

@@ -266,9 +266,11 @@ public class CMoveComponent : BaseComponent
             com.animator.Play(moveoption.GuardBackMoveClip, 1.5f);
         }
         tempmove = com.TpCamRig.TransformDirection(tempdir);
-        tempmove = tempmove * moveoption.GuardMoveSpeed * Time.deltaTime;
+
+        //tempmove = tempmove * moveoption.GuardMoveSpeed * Time.deltaTime;
         tempmove.y = 0;
-        Move(tempmove);
+
+        Move(tempmove, moveoption.GuardMoveSpeed);
         //com.CharacterRig.velocity = new Vector3(tempmove.x, CurGravity, tempmove.z);
 
     }
@@ -278,10 +280,12 @@ public class CMoveComponent : BaseComponent
     {
         Vector3 startpos = this.transform.position;
         Vector3 directon = destpos - startpos;
+
         float speed = directon.magnitude / duration;
 
         StartCoroutine(CorDoMove(startpos, destpos, duration));
     }
+
 
     //duration 시간동안 목표위치로 이동한다.
     public void FowardDoMove(float distnace, float duratoin)
@@ -292,6 +296,7 @@ public class CMoveComponent : BaseComponent
         StartCoroutine(CorDoMove(transform.position, dest, duratoin));
     }
 
+
     public Camera GetCamera()
     {
         if (curval.IsFPP)
@@ -301,69 +306,146 @@ public class CMoveComponent : BaseComponent
     }
     public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration, Invoker invoker = null)
     {
-        float runtime = 0.0f;
+        //float runtime = 0.0f;
         teststart = start;
         testend = dest;
 
         Vector3 direction = dest - start;
+        float distance = direction.magnitude;
+        direction.Normalize();
 
+
+        float startTime = Time.time;
+        float lastTime = Time.time;
+        float curTime = 0.0f;
 
         while (true)
         {
+            //PlayableCharacter.Instance.SetState(PlayableCharacter.States.Walk);
 
-            direction = dest - transform.position;
+            Vector3 curdest = dest - transform.position;
+            
+
+
+            curTime += Time.time - lastTime;
 
             if (PlayableCharacter.Instance.GetState()== PlayableCharacter.States.OutOfControl)
             {
                 if (invoker != null)
                     invoker.Invoke("");
 
-                Move(new Vector3(0, 0, 0));
+                Move(new Vector3(0, 0, 0),0);
                 yield break;
             }
 
-            if(runtime>=duration)
+            if(curTime >= duration)
             {
                 //this.transform.position = dest;
                 if (invoker != null)
                     invoker.Invoke("");
 
-                Move(new Vector3(0, 0, 0));
+                Move(new Vector3(0, 0, 0), 0);
 
                 yield break;
             }
-            runtime += Time.deltaTime;
+            //runtime += Time.deltaTime;
 
-
+            Debug.Log($"{curdest.magnitude}");
             if (!curval.IsFowordBlock)
-                Move(direction);
+                Move(direction, curdest.magnitude);
 
+            lastTime = Time.time;
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
     }
+
+
+    //public IEnumerator CorDoMove(GameObject obj, Vector3 dest, float duration, CallBackEvent _event = null)
+    //{
+    //    float testtime = Time.time;
+    //    float startTime = Time.time;
+    //    float lastTime = 0;
+    //    float curtime = 0;
+    //    //float countVal = Time.deltaTime;
+    //    //목표시간까지의 움직여야 될 횟수
+    //    //float maxCount = duration / countVal;
+
+    //    //0~1까지의 값을 만든다고 할때 1회마다 증가할 값
+    //    //float addval = 1 / maxCount;
+
+    //    float curval = 0;
+    //    float count = 0;
+
+    //    Vector3 startpos = obj.transform.position;
+    //    //목표까지의 방향과 거리
+    //    Vector3 direction = dest - obj.transform.position;
+    //    float distance = direction.magnitude;
+    //    direction.Normalize();
+
+    //    Vector3 start = obj.transform.position;
+
+    //    lastTime = Time.time;
+    //    while (true)
+    //    {
+    //        count++;
+    //        if (count >= 10)
+    //        {
+    //            int a = 0;
+    //        }
+    //        //curtime += Time.deltaTime;
+    //        curtime += Time.time - lastTime;
+    //        //지정한 시간이 되면 끝난다.
+    //        if (curtime >= duration)
+    //        {
+    //            obj.transform.position = startpos + (direction * getEaseVal(1) * distance);
+    //            _event?.Invoke();
+    //            Debug.Log(Time.time - testtime + "초 걸림");
+    //            yield break;
+    //        }
+
+    //        if (curval > 1)
+    //        {
+    //            obj.transform.position = startpos + (direction * getEaseVal(1) * distance);
+    //            _event?.Invoke();
+    //            Debug.Log(Time.time - testtime + "초 걸림");
+    //            yield break;
+    //        }
+
+
+    //        obj.transform.position = startpos + (direction * getEaseVal(curval) * distance);
+    //        curval = curtime / duration;
+    //        lastTime = Time.time;
+    //        //curval += addval;
+    //        //count += countVal;
+
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+
+    //}
+
 
     //특정 시간동안 해당 방향과 속도로 움직인다.
-    public IEnumerator CorDoDirectionMove(Vector3 direction, float duration, Invoker invoker = null)
-    {
-        float runtime = 0.0f;
-        while (true)
-        {
+    //public IEnumerator CorDoDirectionMove(Vector3 direction, float duration, Invoker invoker = null)
+    //{
+    //    float runtime = 0.0f;
+    //    while (true)
+    //    {
 
-            if (runtime >= duration)
-            {
-                //this.transform.position = dest;
-                if (invoker != null)
-                    invoker.Invoke("");
-                yield break;
-            }
-            runtime += Time.deltaTime;
+    //        if (runtime >= duration)
+    //        {
+    //            //this.transform.position = dest;
+    //            if (invoker != null)
+    //                invoker.Invoke("");
+    //            yield break;
+    //        }
+    //        runtime += Time.deltaTime;
 
-            Move(direction);
+    //        Move(direction);
 
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //}
 
 
     bool temptrigger = false;
@@ -380,7 +462,7 @@ public class CMoveComponent : BaseComponent
         }
         if(MoveDir.sqrMagnitude<=0)
         {
-            Move(Vector3.zero);
+            Move(Vector3.zero, 0);
         }
         if(curval.IsGuard)
         {
@@ -390,24 +472,11 @@ public class CMoveComponent : BaseComponent
 
         MoveDir.Normalize();
 
-        if (MoveDir.sqrMagnitude <= 0)
-        {
-
-        }
-
-        if(curval.IsOnTheSlop)
-        {
-
-        }
-        else
-        {
-
-        }
 
         //y성분은 버린다.
         WorldMove = com.TpCamRig.TransformDirection(MoveDir);
         WorldMove.y = 0;
-        WorldMove = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * WorldMove;//경사로에 의한 y축 이동방향
+        
         WorldMove.Normalize();
 
         float speed = (curval.IsRunning && PlayableCharacter.Instance.status.CurStamina - moveoption.RunningStaminaVal >= 0) ? moveoption.RunSpeed : moveoption.MoveSpeed;
@@ -421,9 +490,9 @@ public class CMoveComponent : BaseComponent
         }
 
 
-        WorldMove = WorldMove * speed * Time.deltaTime;
+        //WorldMove = WorldMove * speed * Time.deltaTime;
 
-        Move(WorldMove);
+        Move(WorldMove, speed);
     }
 
     Vector3 templastmovevec;
@@ -432,7 +501,7 @@ public class CMoveComponent : BaseComponent
 
     //움직일 방향과 거리를 넣어주면 현재 지형에 따라서 움직여 준다.
     //기울어진 지형과 계단에서의 움직임 처리 제작 필요
-    public void Move(Vector3 MoveVal)
+    public void Move(Vector3 MoveVal , float speed)
     {
         //바닥이 있는지 없는지만 확인하고 바닥이 없을때만 내려간다.
         if(curval.CheckStepAble())
@@ -448,7 +517,8 @@ public class CMoveComponent : BaseComponent
                 CurStepWeight += MoveVal.magnitude;
             }
         }
-        
+
+        MoveVal = Quaternion.AngleAxis(-curval.CurGroundSlopAngle, curval.CurGroundCross) * MoveVal;//경사로에 의한 y축 이동방향
 
         //경사로에 있을때
         if (curval.IsOnTheSlop)
@@ -503,11 +573,9 @@ public class CMoveComponent : BaseComponent
         //경사로가 아닐때
         else
         {
-            
-            com.CharacterRig.velocity = new Vector3(MoveVal.x, CurGravity, MoveVal.z);
+            MoveDir = MoveVal * speed * Time.deltaTime;
+            com.CharacterRig.velocity = new Vector3(MoveDir.x, CurGravity, MoveDir.z);
         }
-        //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
-        //com.CharacterRig.velocity = new Vector3(WorldMove.x, CurGravity, WorldMove.z);
 
     }
 
@@ -683,13 +751,13 @@ public class CMoveComponent : BaseComponent
 
         RollingNoDamageStartCor = timecounter.Cor_TimeCounter(moveoption.RollingNoDamageStartTime, ActivateNoDamage);
         StartCoroutine(RollingNoDamageStartCor);
-        //StartCoroutine(CorDoMove(this.transform.position, tempmove, com.animator.GetClipLength("_Rolling") / moveoption.RollingClipPlaySpeed -0.2f, RollingOver));
-
-        Vector3 moveval = com.FpRoot.forward * moveoption.RollingDistance;
+        
+        //이거 살려야됨
+        //Vector3 moveval = com.FpRoot.forward * moveoption.RollingDistance;
 
         RollingStartTime = Time.time;
 
-        Move(moveval);
+        Move(com.FpRoot.forward, moveoption.RollingDistance);
     }
 
     public void RollingOver()
@@ -730,48 +798,48 @@ public class CMoveComponent : BaseComponent
 
     
 
-    IEnumerator Rolling_Coroutine(float time)
-    {
-        float temptime = time;
-        temptime /= moveoption.RollingClipPlaySpeed;
+    //IEnumerator Rolling_Coroutine(float time)
+    //{
+    //    float temptime = time;
+    //    temptime /= moveoption.RollingClipPlaySpeed;
 
-        float curtime = 0.0f;
+    //    float curtime = 0.0f;
 
-        //int tempval = (int)(temptime / 0.016f);
-        //Debug.Log($"{temptime}/{0.016} -> {tempval}회 반복");
+    //    //int tempval = (int)(temptime / 0.016f);
+    //    //Debug.Log($"{temptime}/{0.016} -> {tempval}회 반복");
 
-        int i = 0;
-        Vector3 tempmove = Vector3.zero;
-        tempmove = com.FpRoot.forward; 
-        tempmove *= moveoption.RollingDistance;
+    //    int i = 0;
+    //    Vector3 tempmove = Vector3.zero;
+    //    tempmove = com.FpRoot.forward; 
+    //    tempmove *= moveoption.RollingDistance;
 
-        //Vector3 dest = this.transform.position + tempmove; 
+    //    //Vector3 dest = this.transform.position + tempmove; 
 
-        while (true)
-        {
-            curtime += Time.deltaTime;
+    //    while (true)
+    //    {
+    //        curtime += Time.deltaTime;
 
-            if (curtime >= temptime)
-            {
-                curval.IsRolling = false;
-                yield break;
-            }
+    //        if (curtime >= temptime)
+    //        {
+    //            curval.IsRolling = false;
+    //            yield break;
+    //        }
 
 
-            //if (!curval.IsFowordBlock)
-            //    this.transform.position = Vector3.Lerp(this.transform.position, dest, Time.deltaTime);
+    //        //if (!curval.IsFowordBlock)
+    //        //    this.transform.position = Vector3.Lerp(this.transform.position, dest, Time.deltaTime);
 
-            if (!curval.IsFowordBlock)
-                Move(tempmove);
+    //        if (!curval.IsFowordBlock)
+    //            Move(tempmove);
 
-            //Vector3 temp = Vector3.Lerp(start, dest, runtime / duration);
+    //        //Vector3 temp = Vector3.Lerp(start, dest, runtime / duration);
 
-            //com.CharacterRig.velocity = new Vector3(tempmove.x, tempmove.y, tempmove.z);
+    //        //com.CharacterRig.velocity = new Vector3(tempmove.x, tempmove.y, tempmove.z);
 
-            //i++;
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
+    //        //i++;
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //}
 
     
     public void Rotation()
@@ -1109,10 +1177,26 @@ public class CMoveComponent : BaseComponent
         MoveCalculate();
         Focusing();
         CameraCollision();
-        
+
         //Debug.DrawRay(transform.position, templastmovevec, Color.blue);
 
         //LookAtFoward();
+        //이동값이 조금이라도 있으면 움직이는중으로 판단
+        //curval.IsMoving = false;
+        //if (MoveDir.magnitude > 0)
+        //{
+        //    curval.IsMoving = true;
+        //    //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Move);
+        //}
+        //else if(PlayableCharacter.Instance.GetState()!= PlayableCharacter.States.Attack||
+        //    PlayableCharacter.Instance.GetState() != PlayableCharacter.States.Guard||
+        //    PlayableCharacter.Instance.GetState() != PlayableCharacter.States.GuardStun||
+        //    PlayableCharacter.Instance.GetState() != PlayableCharacter.States.OutOfControl||
+        //    PlayableCharacter.Instance.GetState() != PlayableCharacter.States.Rolling)
+        //{
+        //    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+        //}
+
         //달리는 중일떄 1초마다 스테미나를 줄여준다.
         if (curval.IsMoving&&curval.IsRunning&& PlayableCharacter.Instance.status.CurStamina >= moveoption.RunningStaminaVal)
         {

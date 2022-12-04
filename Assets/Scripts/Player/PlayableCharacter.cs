@@ -179,9 +179,9 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     //Vector3 방향 * float 거리
-    public void Move(Vector3 moveVec)
+    public void Move(Vector3 moveVec,float speed)
     {
-        movecom.Move(moveVec);
+        movecom.Move(moveVec, speed);
     }
 
     public States GetState()
@@ -481,14 +481,6 @@ public class PlayableCharacter : MonoBehaviour
 
     public LayerMask Bosslayer;
 
-    //private Vector3[] searchPoint = new Vector3[5];
-
-    //public bool OutoFoucusing = false;
-
-    public void DeleteSearchedMonster()
-    {
-
-    }
 
 
     //일정 시간마다 화면에 있는 몬스터들을 확인해서 거리별로 리스트에 넣는다.
