@@ -946,7 +946,7 @@ GameObject:
   - component: {fileID: 1794376529}
   - component: {fileID: 1794376528}
   - component: {fileID: 1794376527}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Maker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

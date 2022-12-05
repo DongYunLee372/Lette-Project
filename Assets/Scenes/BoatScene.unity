@@ -1677,7 +1677,7 @@ GameObject:
   - component: {fileID: 756533765}
   - component: {fileID: 756533764}
   - component: {fileID: 756533763}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Maker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
