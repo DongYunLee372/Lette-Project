@@ -310,6 +310,10 @@ MonoBehaviour:
     m_Address: Minimap
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 3cb8b7f9c54b2e0469c3e2b41c662cf0
+    m_Address: Spider
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
