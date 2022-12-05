@@ -4,7 +4,7 @@ using UnityEngine;
 
 //문제상황
 
-//1.Input에서 움직이고 있는지 아닌지를 판단하기 때문에 키 입력이 아니고 움직이고 싶을때 상태 변경이 안된다.
+//1. Input에서 움직이고 있는지 아닌지를 판단하기 때문에 키 입력이 아니고 움직이고 싶을때 상태 변경이 안된다.
 
 //2. 그냥 Move에서 상태를 변경하려고 해도 Input 에서 Update로 지속적으로 값을 지정하고 있어서 불가능
 
@@ -152,7 +152,7 @@ public class CInputComponent : BaseComponent
 
         
         
-        //movecom.curval.IsMoving = false;
+        movecom.curval.IsMoving = false;
 
 
         movecom.MouseMove = new Vector2(0, 0);//마우스 움직임

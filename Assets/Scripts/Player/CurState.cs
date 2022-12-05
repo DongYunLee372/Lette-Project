@@ -110,6 +110,8 @@ public class CurState
     [SerializeField]
     public Vector3 CurGroundCross;
     [SerializeField]
+    public Vector3 CurGroundPoint;
+    [SerializeField]
     public Vector3 CurHorVelocity;
     [SerializeField]
     public Vector3 CurVirVelocity;

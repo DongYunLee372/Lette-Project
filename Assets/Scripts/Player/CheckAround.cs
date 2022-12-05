@@ -194,6 +194,7 @@ public class CheckAround : MonoBehaviour
                         Debug.DrawLine(Capsulebottomcenter, hit.point, Color.blue);
 
                         curval.IsGrounded = true;
+                        curval.CurGroundPoint = hit.point;
                         curval.CurGroundNomal = hit.normal;
                         curval.CurGroundSlopAngle = Vector3.Angle(hit.normal, Vector3.up);
 
