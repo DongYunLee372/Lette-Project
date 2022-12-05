@@ -155,7 +155,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         MonsterInformation data = ScriptableObject.CreateInstance<MonsterInformation>();
         MonsterTargetInformation target = ScriptableObject.CreateInstance<MonsterTargetInformation>();
         //data = DataLoad_Save.Instance.Get_MonsterDB(p_index);
-        data = DataLoad_Save.Instance.Get_MonsterDB(Global_Variable.CharVar.Skeleton);
+        data = DataLoad_Save.Instance.Get_MonsterDB(name);
 
 
         List<BossNomalSkill> NomalSkills = new List<BossNomalSkill>();
