@@ -42,7 +42,7 @@ public class UITest : MonoBehaviour
 
             //UIManager.Instance.Prefabsload("StartUI", CANVAS_NUM.start_canvas);
 
-            StartCoroutine(CharacterCreate.Instance.CreateBossMonster_(EnumScp.MonsterIndex.mon_01_01, transf));
+            StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, transf,"Spider"));
             Debug.Log(transf);
             // UIManager.Instance.Prefabsload("OptionSetting", CANVAS_NUM.enemy_canvas);
 
