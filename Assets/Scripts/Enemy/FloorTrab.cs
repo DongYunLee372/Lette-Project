@@ -11,6 +11,7 @@ public class FloorTrab : BaseInteractive
     public GameObject Floor = null;
     public IEnumerator coroutine = null;
     public float MoveSpeed = 0f;
+    public float TrabUp;
 
     private int Instance;
     private InteractiveIndex interactive;
@@ -37,9 +38,9 @@ public class FloorTrab : BaseInteractive
     {
         P_IsInteractive = true;
 
-        Vector3 objective = Floor.transform.position + (Floor.transform.up * 10 * Time.deltaTime);
+        Vector3 objective = Floor.transform.position + (Floor.transform.up * TrabUp * Time.deltaTime);
         Spear.transform.DOMove(objective, 1f).SetEase(Ease.InOutBack);
-
+        yield return new WaitForSeconds(1f);
 
 
         //Vector3 temppos = Spear.transform.position;
@@ -57,6 +58,15 @@ public class FloorTrab : BaseInteractive
 
 
         P_IsInteractive = false;
+        StartCoroutine(EndTrab());
+        yield return null;
+    }
+
+    public IEnumerator EndTrab()
+    {
+        yield return new WaitForSeconds(3f);
+        Vector3 objective = Floor.transform.position + (-Floor.transform.up * TrabUp * Time.deltaTime);
+        Spear.transform.DOMove(objective, 1f).SetEase(Ease.InOutBack);
         yield return null;
     }
 
@@ -68,7 +78,7 @@ public class FloorTrab : BaseInteractive
 
     public void OnTriggerEnter(Collider other)
     {
-
+        Debug.Log("d");
 
 
         Oninteractive();
