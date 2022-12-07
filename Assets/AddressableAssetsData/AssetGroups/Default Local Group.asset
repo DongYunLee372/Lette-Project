@@ -326,6 +326,18 @@ MonoBehaviour:
     m_Address: SphereColl
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5e28a61af45b2644ba6ff108d0f143e5
+    m_Address: ForestDemon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 45b361ccfa35a7243a7505f7100ce548
+    m_Address: ForestPlant
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 19025913ec7d5dc4392b158a8a99730a
+    m_Address: Skeleton_Warrior
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
