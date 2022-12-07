@@ -346,6 +346,14 @@ MonoBehaviour:
     m_Address: Tutorial
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: a6a0c9438a1e01842ad5ac2ed109fdfe
+    m_Address: Eff1_Left
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6ca21476c52d1054b8588cfe7b2b0208
+    m_Address: Eff1_Right
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
