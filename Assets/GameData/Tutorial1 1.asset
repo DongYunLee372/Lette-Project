@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tutorial1 1
   m_EditorClassIdentifier: 
   prefabsName: ForestDemon
-  Position: {x: 22, y: 16, z: -20}
+  Position: {x: 22, y: 11.51, z: -20}

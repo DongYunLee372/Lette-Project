@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tutorial3
   m_EditorClassIdentifier: 
   prefabsName: Skeleton_Warrior
-  Position: {x: 101, y: 28, z: -28}
+  Position: {x: 101, y: 10.49, z: -25.53}

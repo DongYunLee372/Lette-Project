@@ -1459,7 +1459,7 @@ GameObject:
   - component: {fileID: 4213838790597380734}
   - component: {fileID: 2612278271078612606}
   m_Layer: 0
-  m_Name: Forest Plant
+  m_Name: ForestPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
