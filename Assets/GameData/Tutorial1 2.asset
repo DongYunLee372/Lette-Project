@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tutorial1 2
   m_EditorClassIdentifier: 
   prefabsName: ForestPlant
-  Position: {x: 64, y: 10.56, z: 79}
+  Position: {x: 64, y: 10.3, z: 79}
