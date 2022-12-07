@@ -51,6 +51,24 @@ public class GameData_Load : Singleton<GameData_Load>
         public string ImageName;
     }
 
+    public void LoadTutorial()
+    {
+        str.Add("ForestDemon");
+        str.Add("ForestPlant");
+        str.Add("Skeleton_Warrior");
+
+        AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
+        GameSaveData tempDataSave;
+        tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("Tutorial");
+
+        Debug.Log("확인해야" + tempDataSave);
+
+        StartCoroutine(CheckLoadScene(tempDataSave));
+        AddressablesLoadManager.Instance.OnSceneAction("Forest");
+
+
+    }
+
 
     public void TestPos_and_Load(bool restart=false)  //기획자 인스펙터 창에서 수정한 값으로 생성하게 
     {
@@ -247,6 +265,7 @@ public class GameData_Load : Singleton<GameData_Load>
                 {
                  
                     AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+                    Debug.Log("나요");
 
                     //}
                 }
@@ -257,10 +276,20 @@ public class GameData_Load : Singleton<GameData_Load>
         }
     }
 
+   
     public void ChangeScene(Scenes_Stage num)
     {
         switch (num)
         {
+
+            case Scenes_Stage.tutorial:
+
+                LoadTutorial();
+                GameMG.Instance.scenes_Stage = Scenes_Stage.tutorial;
+                skyboxMG.SkyBox_Setting("BoatScene");
+
+                break;
+
             case Scenes_Stage.Stage1:
                 Canvas_.SetActive(true);
                 if (GameMG.Instance.scenes_Stage != Scenes_Stage.Loding)

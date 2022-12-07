@@ -7,6 +7,7 @@ public enum Scenes_Stage
 {
     Loding=0,
     start,
+    tutorial,
     Stage1,
     Stage2,
     Stage3,
@@ -202,7 +203,7 @@ public class GameMG : Singleton<GameMG>
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);  // 시작
+            GameData_Load.Instance.ChangeScene(Scenes_Stage.tutorial);  // 시작
         }
 
         if (Input.GetKeyDown(KeyCode.F6))
