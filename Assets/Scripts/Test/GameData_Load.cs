@@ -59,9 +59,10 @@ public class GameData_Load : Singleton<GameData_Load>
 
         AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
         GameSaveData tempDataSave;
+        AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("Tutorial");
         tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("Tutorial");
 
-        Debug.Log("확인해야" + tempDataSave);
+        Debug.Log("확인해야" + tempDataSave.name);
 
         StartCoroutine(CheckLoadScene(tempDataSave));
         AddressablesLoadManager.Instance.OnSceneAction("Forest");
@@ -263,8 +264,12 @@ public class GameData_Load : Singleton<GameData_Load>
                 }
                 else
                 {
-                 
-                    AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+                    GameObject Monster = new GameObject();
+                    Monster.transform.position = s.Position;
+                    StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName));
+
+                 //   AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+                    Destroy(Monster);
                     Debug.Log("나요");
 
                     //}
