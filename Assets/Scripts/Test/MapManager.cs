@@ -13,9 +13,12 @@ public class MapManager :Singleton<MapManager>
         GameObject temp2 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
 
 
-      //  Debug.Log("gkgk" + unit.transform.position);
-        if(temp2!=null)
-        PathRequestManager.RequestPath(temp2.transform.position, target, temp2.GetComponent<Unit>().OnPathFound);
+        //  Debug.Log("gkgk" + unit.transform.position);
+        if (temp2 != null)
+        {
+
+            PathRequestManager.RequestPath(temp2.transform.position, target, temp2.GetComponent<Unit>().OnPathFound);
+        }
 
         else
         {
