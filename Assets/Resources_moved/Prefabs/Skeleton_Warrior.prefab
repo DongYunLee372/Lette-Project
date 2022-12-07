@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 7850355576053025158}
   m_Layer: 0
   m_Name: Skeleton_Warrior
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -906,19 +906,12 @@ MonoBehaviour:
   mon_Target_Info: {fileID: 0}
   mon_Normal_Attack_Info:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   player_Aconstant: {fileID: 0}
   mon_Aconstant: {fileID: 0}
   mon_Attack_Info: []
   mon_normal_atak_group:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  cur_HP: 1000
+  cur_HP: 25
   cur_Groggy: 0
   return_Pos: {x: 0, y: 0, z: 0}
   destination_Pos: {x: 0, y: 0, z: 0}
@@ -927,7 +920,7 @@ MonoBehaviour:
   next_Skill: 0
   isReturn: 0
   attack_Collider:
-  - {fileID: 0}
+  - {fileID: 7790616365530346326}
   attack_Type: 0
   attack_Logic: 0100
   isHit: 0

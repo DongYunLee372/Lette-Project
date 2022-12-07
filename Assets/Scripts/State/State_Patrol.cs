@@ -6,8 +6,10 @@ public class State_Patrol : State
 {
     public override bool Judge(out State _State, Battle_Character battle_character)
     {
+        // Collider[] cols = new Collider[10];
         Collider[] cols = Physics.OverlapSphere(battle_character.transform.position,
-            battle_character.mon_Target_Info.P_mon_Range);
+                          battle_character.mon_Target_Info.P_mon_Range);
+
         //, 1 << 8); // 비트 연산자로 8번째 레이어
 
         if (cols.Length > 0)
@@ -70,8 +72,8 @@ public class State_Patrol : State
     {
         yield return new WaitForSeconds(1f);
 
-        int randX = Random.Range(-1, 1);
-        int randZ = Random.Range(-1, 1);
+        int randX = Random.Range(-5, 5);
+        int randZ = Random.Range(-5, 5);
 
         battle_character.destination_Pos = new Vector3(battle_character.return_Pos.x + randX, battle_character.transform.position.y, battle_character.return_Pos.z + randZ);
 

@@ -24956,11 +24956,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 419168, guid: a9c41660a8948154890e05e9b6a4026e, type: 3}
   m_PrefabInstance: {fileID: 1059009968}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1060117911 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 359611433, guid: 45b361ccfa35a7243a7505f7100ce548, type: 3}
-  m_PrefabInstance: {fileID: 7975342000206124156}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1064008043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50201,10 +50196,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 888570949, guid: 19025913ec7d5dc4392b158a8a99730a, type: 3}
-      propertyPath: attack_Collider.Array.data[0]
-      value: 
-      objectReference: {fileID: 1060117911}
     - target: {fileID: 5554430286976236268, guid: 19025913ec7d5dc4392b158a8a99730a, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -51164,6 +51155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Forest Demon
       objectReference: {fileID: 0}
+    - target: {fileID: 7046668787443182027, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 7046668787443414507, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -51217,6 +51212,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6171127743147455102, guid: 45b361ccfa35a7243a7505f7100ce548, type: 3}
+      propertyPath: mon_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171127743147455102, guid: 45b361ccfa35a7243a7505f7100ce548, type: 3}
+      propertyPath: mon_Target_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171127743147455102, guid: 45b361ccfa35a7243a7505f7100ce548, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171127743147455102, guid: 45b361ccfa35a7243a7505f7100ce548, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7975341999906277998, guid: 45b361ccfa35a7243a7505f7100ce548, type: 3}
       propertyPath: m_RootOrder
       value: 22
