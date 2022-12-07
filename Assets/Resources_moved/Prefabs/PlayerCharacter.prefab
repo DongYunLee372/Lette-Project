@@ -2341,14 +2341,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896680884494}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.313, y: 0.69, z: -0.039}
+  m_LocalRotation: {x: -0.15309404, y: 0.98821163, z: -0, w: 0}
+  m_LocalPosition: {x: 0.313, y: 1.159, z: 0.338}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5912692895590823227}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -17.613}
 --- !u!1 &5912692896712387625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,7 +2679,7 @@ MonoBehaviour:
     StaminaGaugeDown: 0
     EffectName: 
     EffectStartTime: 0
-    effectPosRot: 
+    effectPosRot: {fileID: 0}
     EffectDestroyTime: 0
     movestarttime: 0
     movedis: 0
@@ -2691,7 +2691,7 @@ MonoBehaviour:
   NextAttackNum: -1
   AttackInfos:
   - attackNum: 0
-    attackName: combo_01_1
+    attackName: R_Attack_08
     attackType: Normal
     aniclipName: R_Attack_08
     endAniclipName: idle
@@ -2706,9 +2706,9 @@ MonoBehaviour:
     BufferdInputTime_End: 0.1
     damage: 20
     StaminaGaugeDown: 5
-    EffectName: 
-    EffectStartTime: 0
-    effectPosRot: 
+    EffectName: Eff1_Left
+    EffectStartTime: 0.15
+    effectPosRot: {fileID: 5912692896680884495}
     EffectDestroyTime: 0
     movestarttime: 0.15
     movedis: 2.5
@@ -2717,7 +2717,7 @@ MonoBehaviour:
     TargetObjName: 
     AttackEndTime: 0.5152439
   - attackNum: 1
-    attackName: combo_01_2
+    attackName: R_Attack_09
     attackType: Normal
     aniclipName: R_Attack_09
     endAniclipName: idle
@@ -2729,12 +2729,12 @@ MonoBehaviour:
     startDelay: 0.42
     recoveryDelay: 0.1
     bufferdInputTime_Start: 0.1
-    BufferdInputTime_End: 0.1
+    BufferdInputTime_End: 0.2
     damage: 20
     StaminaGaugeDown: 5
-    EffectName: 
-    EffectStartTime: 0
-    effectPosRot: 
+    EffectName: Eff1_Right
+    EffectStartTime: 0.25
+    effectPosRot: {fileID: 5912692897135278756}
     EffectDestroyTime: 0
     movestarttime: 0.25
     movedis: 4
@@ -2743,7 +2743,7 @@ MonoBehaviour:
     TargetObjName: 
     AttackEndTime: 0.5987043
   - attackNum: 2
-    attackName: combo_01_3
+    attackName: R_Attack_01
     attackType: Normal
     aniclipName: R_Attack_01
     endAniclipName: idle
@@ -2754,13 +2754,13 @@ MonoBehaviour:
     endanimationPlaySpeed: 1
     startDelay: 0
     recoveryDelay: 0
-    bufferdInputTime_Start: 0
+    bufferdInputTime_Start: 0.2
     BufferdInputTime_End: 0
     damage: 30
     StaminaGaugeDown: 10
-    EffectName: 
-    EffectStartTime: 0
-    effectPosRot: 
+    EffectName: Eff1_Right
+    EffectStartTime: 0.07
+    effectPosRot: {fileID: 5912692896014484492}
     EffectDestroyTime: 0
     movestarttime: 0.07
     movedis: 3.2

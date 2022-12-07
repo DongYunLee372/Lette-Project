@@ -5182,11 +5182,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 412966, guid: f18318a9de51f9b4f993559b01c40e15, type: 3}
   m_PrefabInstance: {fileID: 645453348}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &239162790 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5912692896014484492, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-  m_PrefabInstance: {fileID: 5912692895341065680}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &240464956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32609,11 +32604,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1207179365 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5912692896680884495, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-  m_PrefabInstance: {fileID: 5912692895341065680}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1207863631 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 449776, guid: d3ce5fe83b1090246a3572735e3dd832, type: 3}
@@ -45515,11 +45505,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a02ef52db4e0054ea6bd466ed184af1, type: 3}
---- !u!4 &1744228366 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5912692897135278756, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-  m_PrefabInstance: {fileID: 5912692895341065680}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1749553458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56035,50 +56020,6 @@ PrefabInstance:
     - target: {fileID: 5912692896712387631, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[0].EffectName
-      value: Eff1_Left
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[0].attackName
-      value: R_Attack_08
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[1].EffectName
-      value: Eff1_Right
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[1].attackName
-      value: R_Attack_09
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[2].EffectName
-      value: Eff1_Left
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[2].attackName
-      value: R_Attack_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[0].effectPosRot
-      value: 
-      objectReference: {fileID: 1207179365}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[1].effectPosRot
-      value: 
-      objectReference: {fileID: 1744228366}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[2].effectPosRot
-      value: 
-      objectReference: {fileID: 239162790}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[1].BufferdInputTime_End
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: AttackInfos.Array.data[2].bufferdInputTime_Start
-      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388563, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: effectmanager
