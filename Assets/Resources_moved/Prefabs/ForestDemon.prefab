@@ -6496,7 +6496,7 @@ GameObject:
   - component: {fileID: 287267831308300719}
   m_Layer: 0
   m_Name: ForestDemon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6586,8 +6586,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9849389, y: 2.0908337, z: 1.237977}
-  m_Center: {x: 0.026155636, y: 1.2958723, z: 0.07093331}
+  m_Size: {x: 1.9849389, y: 2.3270729, z: 1.237977}
+  m_Center: {x: 0.026155636, y: 1.1777531, z: 0.07093331}
 --- !u!195 &1831567051547697333
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6645,19 +6645,12 @@ MonoBehaviour:
   mon_Target_Info: {fileID: 0}
   mon_Normal_Attack_Info:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   player_Aconstant: {fileID: 0}
   mon_Aconstant: {fileID: 0}
   mon_Attack_Info: []
   mon_normal_atak_group:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  cur_HP: 1000
+  cur_HP: 25
   cur_Groggy: 0
   return_Pos: {x: 0, y: 0, z: 0}
   destination_Pos: {x: 0, y: 0, z: 0}

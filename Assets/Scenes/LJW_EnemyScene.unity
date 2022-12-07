@@ -51151,13 +51151,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5462280620444917992, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
+      propertyPath: mon_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462280620444917992, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
+      propertyPath: mon_Target_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462280620444917992, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462280620444917992, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7046668787443182027, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
       propertyPath: m_Name
       value: Forest Demon
-      objectReference: {fileID: 0}
-    - target: {fileID: 7046668787443182027, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7046668787443414507, guid: 5e28a61af45b2644ba6ff108d0f143e5, type: 3}
       propertyPath: m_RootOrder

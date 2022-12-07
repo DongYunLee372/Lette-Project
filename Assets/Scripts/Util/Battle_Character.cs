@@ -227,6 +227,11 @@ public class Battle_Character : MonoBehaviour
             animator.Pause();
             cur_Target = GameObject.FindGameObjectWithTag(CharVar.Player_Tag);
         }
+        else
+        {
+            real_AI.navMesh.enabled = false;
+            real_AI.navMesh.enabled = true;
+        }
     }
 
 

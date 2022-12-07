@@ -65,6 +65,7 @@ public class State_Patrol : State
         else
         {
             battle_character.real_AI.navMesh.SetDestination(battle_character.destination_Pos);
+           // battle_character.real_AI.navMesh.SetDestination(battle_character.transform.position);
         }
     }
 
