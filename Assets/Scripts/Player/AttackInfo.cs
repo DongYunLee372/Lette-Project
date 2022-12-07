@@ -96,7 +96,7 @@ public class AttackInfo
     //공격 이펙트의 위치
     [Tooltip("공격 이펙트 생성 위치")]
     [SerializeField]
-    public string effectPosRot;
+    public Transform effectPosRot;
 
     [Tooltip("공격 이펙트 파괴 시간")]
     [SerializeField]

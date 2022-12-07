@@ -173,6 +173,12 @@ public class PlayableCharacter : MonoBehaviour
         curState = fsm.GetCurState();
     }
 
+    public void AutoMove(Vector3 destpos, CMoveComponent.ActionInvoker invoker = null)
+    {
+        movecom.AutoMove(destpos, invoker);
+    }
+
+
     //duration 시간동안 목표위치로 이동한다.
     public void DoMove(Vector3 destpos, float duration)
     {

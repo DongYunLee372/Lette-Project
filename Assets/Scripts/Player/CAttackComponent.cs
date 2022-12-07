@@ -529,9 +529,18 @@ public class CAttackComponent : BaseComponent
         Linkcoroutine = timer.Cor_TimeCounter(AttackInfos[CurAttackNum].bufferdInputTime_Start, ActiveLinkable);
         StartCoroutine(Linkcoroutine);
 
+
         //애니메이션 실행
         animator.Play(AttackInfos[CurAttackNum].aniclipName, AttackInfos[CurAttackNum].animationPlaySpeed/*,0,attackinfos[CurAttackNum].StartDelay*/);
-        
+
+        if (AttackInfos[CurAttackNum].EffectName != null)
+        {
+            Effectcoroutine = timer.Cor_TimeCounter<string, Transform, float>
+                (AttackInfos[CurAttackNum].EffectStartTime, CreateEffect, AttackInfos[CurAttackNum].EffectName, AttackInfos[CurAttackNum].effectPosRot, 1.5f);
+            StartCoroutine(Effectcoroutine);
+        }
+
+
         //스테미나를 줄여준다.
         PlayableCharacter.Instance.status.StaminaDown(AttackInfos[CurAttackNum].StaminaGaugeDown);
 

@@ -2546,6 +2546,7 @@ MonoBehaviour:
     CurFowardSlopAngle: 0
     CurGroundNomal: {x: 0, y: 0, z: 0}
     CurGroundCross: {x: 0, y: 0, z: 0}
+    CurGroundPoint: {x: 0, y: 0, z: 0}
     CurHorVelocity: {x: 0, y: 0, z: 0}
     CurVirVelocity: {x: 0, y: 0, z: 0}
     MoveAccel: 0
@@ -2555,8 +2556,8 @@ MonoBehaviour:
     RotMouseSpeed: 1
     RightReverse: 0
     RotSpeed: 0.55
-    MoveSpeed: 160
-    RunSpeed: 400
+    MoveSpeed: 200
+    RunSpeed: 500
     MinAngle: 0
     MaxAngle: 35
     Gravity: 0
@@ -2574,7 +2575,7 @@ MonoBehaviour:
     StepWeightVal: 20
     RollingClip: {fileID: 7400000, guid: de01ef7c29e3c9b4aad09085a2dd2083, type: 3}
     RollingClipPlaySpeed: 1.5
-    RollingDistance: 6
+    RollingDistance: 500
     RollingTime: 0
     RollingNoDamageStartTime: 0.1
     RollingNoDamageTime: 0.35
@@ -2647,6 +2648,7 @@ MonoBehaviour:
     CurFowardSlopAngle: 0
     CurGroundNomal: {x: 0, y: 0, z: 0}
     CurGroundCross: {x: 0, y: 0, z: 0}
+    CurGroundPoint: {x: 0, y: 0, z: 0}
     CurHorVelocity: {x: 0, y: 0, z: 0}
     CurVirVelocity: {x: 0, y: 0, z: 0}
     MoveAccel: 0
@@ -2734,27 +2736,55 @@ MonoBehaviour:
     EffectStartTime: 0
     effectPosRot: 
     EffectDestroyTime: 0
-    movestarttime: 0.12
+    movestarttime: 0.25
     movedis: 4
-    movetime: 0.3
+    movetime: 0.2
     ProjectileObjName: 
     TargetObjName: 
     AttackEndTime: 0.5987043
+  - attackNum: 2
+    attackName: combo_01_3
+    attackType: Normal
+    aniclipName: R_Attack_01
+    endAniclipName: idle
+    endmovestarttime: 0.1
+    endmovedis: 2
+    endmovetime: 0.2
+    animationPlaySpeed: 1
+    endanimationPlaySpeed: 1
+    startDelay: 0
+    recoveryDelay: 0
+    bufferdInputTime_Start: 0
+    BufferdInputTime_End: 0
+    damage: 30
+    StaminaGaugeDown: 10
+    EffectName: 
+    EffectStartTime: 0
+    effectPosRot: 
+    EffectDestroyTime: 0
+    movestarttime: 0.07
+    movedis: 3.2
+    movetime: 0.21
+    ProjectileObjName: 
+    TargetObjName: 
+    AttackEndTime: 0.7
   skillinfos:
-  - AttackType: 0
+  - AttackType: 2
     SkillName: Skill01
-    SkillNum: 0
-    aniclip: {fileID: 7400000, guid: a76d7c4bcbef6914d9ef750535f17a37, type: 2}
-    animationPlaySpeed: 1.8
+    aniclip: {fileID: 8349195267622309876, guid: 55a4eb8dfaf2436f86205feea2b4ed39, type: 3}
+    aniclipName: atk_sword08
+    animationPlaySpeed: 1
     StartDelay: 0
-    RecoveryDelay: 0
-    damage: 0
-    Effect: {fileID: 1648509489993130, guid: 8a0c2ade089d4c44fbdf861f7bcd7be6, type: 3}
-    EffectAdressable: Eff7_Slash
-    EffectStartTime: 0.8
+    RecoveryDelay: 2
+    damage: 30
+    Effect: {fileID: 1217668729914568, guid: 02f36df5dc2d4da4da06be6b63b1a7fc, type: 3}
+    EffectAdressable: Eff8
+    EffectStartTime: 0.1
     EffectPosRot: {fileID: 1121701717}
-    Movedis: 0
+    Movedis: 1
     MoveTime: 0
+    MoveStartTime: 0
+    AttackEndTime: 0
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
   effectobj: {fileID: 0}
@@ -4373,6 +4403,50 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 3282946258041562102, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.676
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282946258043855126, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3288942077037925843, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -4647,6 +4721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6356429822294294485, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
+    - {fileID: 5009187157146164021, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6f7fc31c7a352364c8ac64cb2946e505, type: 3}
 --- !u!4 &707737433636210477 stripped
 Transform:
