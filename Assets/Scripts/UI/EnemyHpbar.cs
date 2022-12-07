@@ -84,7 +84,7 @@ public class EnemyHpbar : MonoBehaviour
         //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = trans;
         _hpbar.offset = new Vector3(0, 1.7f, 0); ;
-        _hpbar.Maxhp = 100;
+        _hpbar.Maxhp = HP;
         _hpbar.Curhp = HP;
         _hpbar.battle_Character = battle_obj;
         var _test = hpBar.GetComponent<Image>();

@@ -169,7 +169,7 @@ public class CharacterCreate : Singleton<CharacterCreate>
         // yield return StartCoroutine(AddressablesLoader.LoadGameObjectAndMaterial(name));
         AddressablesLoadManager.Instance.SingleAsset_Load<GameObject>(name);
         GameObject temp = AddressablesLoadManager.Instance.FindLoadAsset<GameObject>(name);
-
+        Debug.Log(temp);
        // GameObject b = AddressablesLoadManager.Instance.Instantiate_LoadObject<GameObject>(name);
         // GameObject temp = AddressablesController.Instance.find_Asset_in_list(name);
         temp.GetComponent<Battle_Character>().Stat_Initialize(data, mon_Normal_Atk_Group, NomalSkills, target);
