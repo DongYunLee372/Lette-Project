@@ -440,7 +440,7 @@ public class CMoveComponent : BaseComponent
 
             //Debug.Log($"{curdest.magnitude}");
             if (!curval.IsFowordBlock)
-                Move(direction, moveoption.RunSpeed /** (curTime/duration)*/);
+                Move(direction, distance);
 
             lastTime = Time.time;
             yield return null;
@@ -964,7 +964,8 @@ public class CMoveComponent : BaseComponent
 
         RollingStartTime = Time.time;
 
-        Move(com.FpRoot.forward, moveoption.RollingDistance);
+        FowardDoMove(moveoption.RollingDistance, moveoption.RollingTime);
+        //Move(com.FpRoot.forward, moveoption.RollingDistance);
     }
 
     public void RollingOver()

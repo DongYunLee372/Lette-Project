@@ -2575,8 +2575,8 @@ MonoBehaviour:
     StepWeightVal: 20
     RollingClip: {fileID: 7400000, guid: de01ef7c29e3c9b4aad09085a2dd2083, type: 3}
     RollingClipPlaySpeed: 1.5
-    RollingDistance: 500
-    RollingTime: 0
+    RollingDistance: 600
+    RollingTime: 0.3
     RollingNoDamageStartTime: 0.1
     RollingNoDamageTime: 0.35
     NextRollingTime: 0.14
@@ -3020,7 +3020,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5912692896815848212}
   - component: {fileID: 5912692896815848214}
-  - component: {fileID: 5912692896815848213}
   m_Layer: 13
   m_Name: FPCam
   m_TagString: Untagged
@@ -3086,14 +3085,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5912692896815848213
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5912692896815848211}
-  m_Enabled: 1
 --- !u!1 &5912692896874364103
 GameObject:
   m_ObjectHideFlags: 0
