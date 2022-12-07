@@ -278,6 +278,11 @@ public class Battle_Character : MonoBehaviour
     public Vector3 begin_Pos = new Vector3();
     public int ani_Index; // 애니메이션 어택인포 인덱스
 
+    public void Spider_Spawn_Skill()
+    {
+        StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, transform, "Spider"));
+        StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, transform, "Spider"));
+    }
 
     public void Animation_Attack(string clipname)
     {
@@ -760,7 +765,7 @@ public class Battle_Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             now_Backward = true;
-            animator.Play("BackWard_Jump");
+            animator.Play("Second_Atk");
             animator.animator.SetTrigger("Delay_Trg");
         }
 
