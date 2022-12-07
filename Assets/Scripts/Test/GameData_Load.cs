@@ -53,11 +53,11 @@ public class GameData_Load : Singleton<GameData_Load>
 
     public void LoadTutorial()
     {
-        str.Add("ForestDemon");
-        str.Add("ForestPlant");
-        str.Add("Skeleton_Warrior");
+        //str.Add("ForestDemon");
+        //str.Add("ForestPlant");
+        //str.Add("Skeleton_Warrior");
 
-        AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
+        //AddressablesLoadManager.Instance.MultiAsset_Load<GameObject>(str);
         GameSaveData tempDataSave;
         AddressablesLoadManager.Instance.SingleAsset_Load<GameSaveData>("Tutorial");
         tempDataSave = AddressablesLoadManager.Instance.FindLoadAsset<GameSaveData>("Tutorial");
@@ -560,6 +560,12 @@ public class GameData_Load : Singleton<GameData_Load>
 
         MonsterCount = 0;
     }
+
+    void UnloadTutorial()
+    {
+
+    }
+
 
     //보트 씬 내리기
     void EndunLoadBoatScene()
