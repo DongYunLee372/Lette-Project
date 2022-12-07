@@ -9,7 +9,18 @@ public class MapManager :Singleton<MapManager>
   
     public void MoveUnit(Vector3 target)
     {
-        Debug.Log("gkgk" + unit.transform.position);
-        PathRequestManager.RequestPath(unit.transform.position, target, unit.GetComponent<Unit>().OnPathFound);
+
+        GameObject temp2 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+
+
+      //  Debug.Log("gkgk" + unit.transform.position);
+        if(temp2!=null)
+        PathRequestManager.RequestPath(temp2.transform.position, target, temp2.GetComponent<Unit>().OnPathFound);
+
+        else
+        {
+            PathRequestManager.RequestPath(unit.transform.position, target, unit.GetComponent<Unit>().OnPathFound);
+
+        }
     }
 }
