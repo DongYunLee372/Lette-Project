@@ -314,6 +314,18 @@ MonoBehaviour:
     m_Address: Spider
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 02f36df5dc2d4da4da06be6b63b1a7fc
+    m_Address: Eff8
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ee916e3756aa61a479b65260c592a31e
+    m_Address: BoxColl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b4db3adc6d6e8f740bdc985ad4338617
+    m_Address: SphereColl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

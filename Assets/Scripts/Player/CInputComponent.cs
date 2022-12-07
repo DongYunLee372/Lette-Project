@@ -171,6 +171,8 @@ public class CInputComponent : BaseComponent
             return;
         }
 
+        //만약 AutoMove 상태에서 어떠한 키라도 입력되면 Automove에서 변경
+
 
         movecom.MouseMove = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
         float scroll = Input.GetAxis("Mouse ScrollWheel") * -1;
@@ -206,6 +208,9 @@ public class CInputComponent : BaseComponent
         //왼쪽 마우스 클릭
         if (Input.GetMouseButtonDown(0))
         {
+            if (state == PlayableCharacter.States.AutoMove)
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
             LeftMouseDown();
             return;
         }
@@ -216,12 +221,18 @@ public class CInputComponent : BaseComponent
         //오른쪽 마우스 클릭
         if (Input.GetMouseButtonDown(1))
         {
+            if (state == PlayableCharacter.States.AutoMove)
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
             RightMouseDown();
             return;
         }
 
         if (Input.GetMouseButtonUp(1))
         {
+            if (state == PlayableCharacter.States.AutoMove)
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
             RightMouseUp();
             return;
         }
@@ -241,6 +252,9 @@ public class CInputComponent : BaseComponent
             //구르기를 먼저 처리하고 움직임은 처리하지 않게 하기 위해서
             if (Input.GetKeyDown(_key.Rolling))
             {
+                if (state == PlayableCharacter.States.AutoMove)
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
                 if (PlayableCharacter.Instance.status.CurStamina > 0)
                     movecom.Rolling();
                 return;
@@ -249,13 +263,19 @@ public class CInputComponent : BaseComponent
             //스킬1번
             if (Input.GetKeyDown(_key.skill01))
             {
-                //SkillAttack(0);
+                if (state == PlayableCharacter.States.AutoMove)
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
+                SkillAttack(0);
                 return;
             }
 
             //스킬2번
             if (Input.GetKeyDown(_key.skill02))
             {
+                if (state == PlayableCharacter.States.AutoMove)
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
                 //SkillAttack(1);
                 return;
             }
@@ -263,6 +283,9 @@ public class CInputComponent : BaseComponent
             //스킬3번
             if (Input.GetKeyDown(_key.skill03))
             {
+                if (state == PlayableCharacter.States.AutoMove)
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
                 //SkillAttack(2);
                 return;
             }
@@ -277,6 +300,9 @@ public class CInputComponent : BaseComponent
             //left shift 처리
             if (Input.GetKey(_key.Run))
             {
+                if (state == PlayableCharacter.States.AutoMove)
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
                 if (PlayableCharacter.Instance.status.CurStamina >= movecom.moveoption.RunningStaminaVal)
                     movecom.curval.IsRunning = true;
             }
@@ -285,7 +311,10 @@ public class CInputComponent : BaseComponent
             //방어중이 아니고 회피중이 아닐때만 아이템 사용 가능
             if(state != PlayableCharacter.States.Rolling)
             {
-                if(Input.GetKeyDown(_key.Interaction))
+                //if (state == PlayableCharacter.States.AutoMove)
+                //    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
+                if (Input.GetKeyDown(_key.Interaction))
                     PlayableCharacter.Instance.inventory.UseItem(EnumScp.Key.F1, 1);
             }
 
@@ -293,12 +322,28 @@ public class CInputComponent : BaseComponent
             //이동값이 조금이라도 있으면 움직이는중으로 판단
             if (movecom.MoveDir.magnitude > 0)
             {
-                movecom.curval.IsMoving = true;
+                if (state == PlayableCharacter.States.AutoMove)
+                {
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+                }
+                else
+                {
+                    movecom.curval.IsMoving = true;
+                }
+                    
+
+                
                 //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.Move);
             }
             else
             {
-                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+                
+                if (state != PlayableCharacter.States.AutoMove)
+                {
+                    //Debug.Log("여기서 잡힘");
+                    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+                }
+                
             }
 
 
@@ -327,6 +372,10 @@ public class CInputComponent : BaseComponent
 
 
                 }
+            }
+            else if(PlayableCharacter.Instance.GetState() == PlayableCharacter.States.AutoMove)
+            {
+                movecom.com.animator.Play("move_run_01");
             }
             else
             {
@@ -370,6 +419,11 @@ public class CInputComponent : BaseComponent
 
     public dotweentest testtestobj;
     public GameObject testtestobj2;
+
+    public void TestEnd()
+    {
+        Debug.Log("도착");
+    }
 
     void Update()
     {
@@ -423,8 +477,10 @@ public class CInputComponent : BaseComponent
         //이동 테스트
         if (Input.GetKeyDown(KeyCode.V))
         {
-            movecom.DoMove(this.transform.position + new Vector3(5.0f, 0.0f, 0.0f), 2.0f);
+            movecom.AutoMove(this.transform.position + new Vector3(5.0f, 0.0f, 0.0f), TestEnd);
         }
+
+       
 
         if (Input.GetKeyDown(KeyCode.B))
         {

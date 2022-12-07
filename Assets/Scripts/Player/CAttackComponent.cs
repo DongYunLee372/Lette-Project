@@ -38,6 +38,188 @@ public class CAttackComponent : BaseComponent
 
     public List<AttackInfo> AttackInfos;
 
+    //public class AttackInfo
+    //{
+    //    [Tooltip("공격번호")]
+    //    [SerializeField]
+    //    public int attackNum;
+
+    //    [Tooltip("공격이름")]
+    //    [SerializeField]
+    //    public string attackName;
+
+    //    [Tooltip("해당 공격의 타입을 설정한다 (노말, 광역, 투사체, 타겟팅)")]
+    //    [SerializeField]
+    //    public string attackType;
+
+    //    //해당 매니메이션 클립 이후 공격컴포넌트에서 이름을 이용해 실제 클립을 받아오는것이 필요
+    //    [Tooltip("해당 공격의 애니메이션 클립 이름")]
+    //    [SerializeField]
+    //    public string aniclipName;
+
+    //    //해당 매니메이션 클립 이후 공격컴포넌트에서 이름을 이용해 실제 클립을 받아오는것이 필요
+    //    [Tooltip("해당 공격의 복귀 애니메이션 클립 이름")]
+    //    [SerializeField]
+    //    public string endAniclipName;
+
+    //    //공격 중 움직일 거리
+    //    [Tooltip(" 복귀 애니메이션 움직임을 시작할 시간")]
+    //    [SerializeField]
+    //    public float endmovestarttime;
+
+    //    //공격 중 움직일 거리
+    //    [Tooltip(" 복귀 애니메이션 움직일 거리")]
+    //    [SerializeField]
+    //    public float endmovedis;
+
+    //    //움직일 시간
+    //    [Tooltip(" 복귀 애니메이션 움직일 시간")]
+    //    [SerializeField]
+    //    public float endmovetime;
+
+    //    //애니메이션 배속
+    //    [Tooltip("해당 공격의 애니메이션 재생 속도")]
+    //    [SerializeField]
+    //    [Range(0.0f, 10.0f)]
+    //    public float animationPlaySpeed;
+
+    //    [Tooltip("해당 공격의 복귀 애니메이션 클립 이름")]
+    //    [SerializeField]
+    //    [Range(0.0f, 10.0f)]
+    //    public float endanimationPlaySpeed;
+
+    //    [Tooltip("선딜")]
+    //    [SerializeField]
+    //    [Range(0.0f, 10.0f)]
+    //    public float startDelay;
+
+    //    //후딜레이
+    //    [Tooltip("후딜")]
+    //    [Range(0.0f, 10.0f)]
+    //    [SerializeField]
+    //    public float recoveryDelay;
+
+    //    [Tooltip("다음 동작으로 넘어갈 수 있는 시간")]
+    //    [SerializeField]
+    //    public float bufferdInputTime_Start;
+
+    //    //다음동작으로 넘어가기 위한 시간
+    //    //해당동작이 끝나고 해당 시간 안에 Attack()함수가 호출되어야지 다음동작으로 넘어간다.
+    //    [Tooltip("연속동작이 있을때 다음 동작으로 들어가기 위한 입력 시간")]
+    //    [SerializeField]
+    //    public float BufferdInputTime_End;
+
+    //    //데미지
+    //    [Tooltip("공격 데미지")]
+    //    [SerializeField]
+    //    public float damage;
+
+    //    [Tooltip("공격시 줄어들 스테미나 게이지")]
+    //    [SerializeField]
+    //    public float StaminaGaugeDown;
+
+    //    //공격 이펙트
+    //    [Tooltip("공격 이펙트")]
+    //    [SerializeField]
+    //    public string EffectName;
+
+    //    //이펙트 생성 타이밍
+    //    [Tooltip("공격 이펙트 생성 타이밍")]
+    //    [SerializeField]
+    //    public float EffectStartTime;
+
+    //    //공격 이펙트의 위치
+    //    [Tooltip("공격 이펙트 생성 위치")]
+    //    [SerializeField]
+    //    public string effectPosRot;
+
+    //    [Tooltip("공격 이펙트 파괴 시간")]
+    //    [SerializeField]
+    //    public float EffectDestroyTime;
+
+    //    //공격 중 움직일 거리
+    //    [Tooltip("공격할때 움직임을 시작할 시간")]
+    //    [SerializeField]
+    //    public float movestarttime;
+
+    //    //공격 중 움직일 거리
+    //    [Tooltip("공격할때 움직일 거리")]
+    //    [SerializeField]
+    //    public float movedis;
+
+    //    //움직일 시간
+    //    [Tooltip("공격할때 움직일 시간")]
+    //    [SerializeField]
+    //    public float movetime;
+
+    //    [Tooltip("투사체가 있는 공격일때 투사체의 게임 오브젝트")]
+    //    [SerializeField]
+    //    public string ProjectileObjName;
+
+    //    [Tooltip("타겟팅공격일때 타겟오브젝트")]
+    //    [SerializeField]
+    //    public string TargetObjName;
+
+    //    [Tooltip("공격 끝 지점")]
+    //    [SerializeField]
+    //    public float AttackEndTime;
+
+    //    ///////////////////////////////////////////////////////////////////////////////////////
+
+    //    private AnimationClip aniClip;
+
+    //    public AnimationClip AniClip
+    //    {
+    //        get
+    //        {
+    //            if (aniClip == null)
+    //                Resources.Load("AnimationClips/PlayableCharacter/" + aniclipName);
+    //            return aniClip;
+    //        }
+    //    }
+
+    //    //private Vector3 EffectPosRot
+
+    //    private GameObject effectObj;
+
+    //    public GameObject EffectObj
+    //    {
+    //        get
+    //        {
+    //            if (effectObj == null)
+    //                Resources.Load("Prefabs/PlayerEffects/" + EffectName);
+    //            return effectObj;
+    //        }
+    //    }
+
+    //    private GameObject projectileObj;
+
+    //    public GameObject ProjectileObj
+    //    {
+    //        get
+    //        {
+    //            if (projectileObj == null)
+    //                Resources.Load("Prefabs/PlayerEffects/" + ProjectileObjName);
+    //            return projectileObj;
+    //        }
+    //    }
+
+    //    //private Transform EffectPosRot;
+
+    //    //public GameObject PEffectPosRot
+    //    //{
+    //    //    get
+    //    //    {
+    //    //        if (projectileObj == null)
+    //    //            Resources.Load("Prefabs/PlayerEffects/" + ProjectileObjName);
+    //    //        return projectileObj;
+    //    //    }
+    //    //}
+
+    //}
+
+
+
     //스킬도 여기서 한번에 처리
     [System.Serializable]
     public class SkillInfo
@@ -48,11 +230,10 @@ public class CAttackComponent : BaseComponent
         [Tooltip("스킬이름")]
         public string SkillName;
 
-        [Tooltip("스킬번호")]
-        public int SkillNum;
-
         //스킬 애니메이션
         public AnimationClip aniclip;
+
+        public string aniclipName;
 
         //스킬 애니메이션 재생속도
         public float animationPlaySpeed;
@@ -85,6 +266,12 @@ public class CAttackComponent : BaseComponent
 
         //움직일 시간
         public float MoveTime;
+
+        //움직임 시작 시간
+        public float MoveStartTime;
+
+        //공격 끝 시간
+        public float AttackEndTime;
 
     }
 
@@ -129,18 +316,6 @@ public class CAttackComponent : BaseComponent
         for (int i = 0; i < AttackInfos.Count; i++)
         {
 
-            //if(AttackInfos[i].AttackEndTime != 0)
-            //{
-            //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove), 0.0f,
-            //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 0.0f,
-            //        new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd), AttackInfos[i].AttackEndTime);
-            //}
-            //else
-            //{
-            //    eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(AttackInfos[i].aniclipName, AttackMove), 0.0f,
-            //        new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null), 0.0f,
-            //        new KeyValuePair<string, AnimationEventSystem.endCallback>(AttackInfos[i].aniclipName, AttackEnd), animator.GetClipLength(AttackInfos[i].aniclipName));
-            //}
 
             if (AttackInfos[i].AttackEndTime != 0)
             {
@@ -154,9 +329,16 @@ public class CAttackComponent : BaseComponent
         //초기화 할때 각각의 스킬 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for (int i = 0; i < skillinfos.Length; i++)
         {
-            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-                new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
-                new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
+            //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
+            //    new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
+            //    new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
+
+
+
+            eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(skillinfos[i].aniclipName, AttackMove), skillinfos[i].MoveStartTime,
+                   new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclipName, SkillAttackEnd), skillinfos[i].AttackEndTime,
+                   new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclipName, IsAttackingEnd), animator.GetClipLength(skillinfos[i].aniclipName));
+
         }
     }
 
@@ -220,7 +402,10 @@ public class CAttackComponent : BaseComponent
             movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
             curval = movecom.curval;
         }
-        
+
+        if (PlayableCharacter.Instance.GetState() == PlayableCharacter.States.OutOfControl)
+            return;
+
         //이미 공격중일떄는 스킬 사용이 불가능
         if (curval.IsAttacking)
             return;
@@ -234,17 +419,15 @@ public class CAttackComponent : BaseComponent
 
         if (skillinfos[skillnum].Effect != null)
         {
-            Effectcoroutine = timer.Cor_TimeCounter<string,Transform, float>
+            Effectcoroutine = timer.Cor_TimeCounter<string, Transform, float>
                 (skillinfos[skillnum].EffectStartTime, CreateEffect, skillinfos[skillnum].EffectAdressable, skillinfos[skillnum].EffectPosRot, 1.5f);
             StartCoroutine(Effectcoroutine);
         }
 
         //EffectManager.Instance.SpawnEffectLooping(skillinfos[skillnum].Effect, this.transform.position, Quaternion.identity, 2, 10);
 
-        ColliderSpawnManager.Instance.SpawnSphereCollider(transform.position, 10, 5, monstertag, MonsterAttack);
+        
 
-
-        //StartCoroutine(Cor_TimeCounter(skillinfos[skillnum].EffectStartTime, CreateEffect));
         animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
     }
 
@@ -408,25 +591,29 @@ public class CAttackComponent : BaseComponent
     }
 
     //공격 이펙트를 생성
-    public void CreateEffect(string adressableAdress,Transform posrot, float destroyTime)
+    public void CreateEffect(string adressableAdress, Transform posrot, float destroyTime)
     {
         effectobj = EffectManager.Instance.InstantiateEffect(adressableAdress, destroyTime);
+        
+
         effectobj.transform.position = posrot.position;
         effectobj.transform.rotation = posrot.rotation;
+        effectobj.transform.localScale = posrot.localScale;
+
         effectobj.transform.parent = posrot;
+
+        ColliderSpawnManager.Instance.SpawnSphereCollider(effectobj.transform, 10, 5, monstertag, MonsterAttack);
     }
 
     //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
     public void AttackEnd(string s_val)
     {
-        Debug.Log("공격 끝남");
+        //Debug.Log("공격 끝남");
 
         if (effectobj != null)
         {
             effectobj.transform.parent = null;
         }
-
-        
 
         //공격이 끝난 후 일정 시간 동안 입력을 넣음으로써 연결 동작 실행 가능
         if (!IsLinkable)
@@ -448,7 +635,39 @@ public class CAttackComponent : BaseComponent
         
 
     }
-    
+
+
+    //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
+    public void SkillAttackEnd(string s_val)
+    {
+        //Debug.Log("공격 끝남");
+
+        if (effectobj != null)
+        {
+            effectobj.transform.parent = null;
+        }
+
+        //공격이 끝난 후 일정 시간 동안 입력을 넣음으로써 연결 동작 실행 가능
+        //if (!IsLinkable)
+        //{
+        //    ActiveLinkable();
+        //}
+
+        //if (Linkcoroutine != null)
+        //    StopCoroutine(Linkcoroutine);
+
+        ////공격 끝 이후 연결동작 입력
+        //Linkcoroutine = timer.Cor_TimeCounter(AttackInfos[CurAttackNum].BufferdInputTime_End, DeActiveLinkable);
+        //StartCoroutine(Linkcoroutine);
+
+
+        //후딜레이 구현
+        animator.Pause();
+        StartCoroutine(timer.Cor_TimeCounter(AttackInfos[CurAttackNum].recoveryDelay, ChangeState));
+
+
+    }
+
 
     public void ChangeState()
     {

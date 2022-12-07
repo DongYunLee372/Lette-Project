@@ -17,7 +17,7 @@ public class BoxColl : Colliders
     public override void VirtualStart()
     {
         base.VirtualStart();
-        colltype = CharEnumTypes.eCollType.Box;
+        colltype = CharEnumTypes.eCollType.BoxColl;
         Mycollider = GetComponent<BoxCollider>();
     }
 

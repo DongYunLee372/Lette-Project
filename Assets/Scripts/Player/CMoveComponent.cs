@@ -178,6 +178,8 @@ public class CMoveComponent : BaseComponent
 
     [HideInInspector]
     public delegate void Invoker(string s_val);
+    [HideInInspector]
+    public delegate void ActionInvoker();
 
     private IEnumerator RollingNoDamageStartCor = null;
     private IEnumerator RollingNoDamageEndCor = null;
@@ -275,16 +277,28 @@ public class CMoveComponent : BaseComponent
 
     }
 
-    //duration 시간동안 목표위치로 이동한다.
-    public void DoMove(Vector3 destpos, float duration)
+    ////duration 시간동안 목표위치로 이동한다.
+    //public void DoMove(Vector3 destpos, float duration)
+    //{
+    //    Vector3 startpos = this.transform.position;
+    //    Vector3 directon = destpos - startpos;
+
+    //    float speed = directon.magnitude / duration;
+
+    //    StartCoroutine(CorDoMove(startpos, destpos, duration));
+    //}
+
+    public void AutoMove(Vector3 destpos, ActionInvoker invoker = null)
     {
         Vector3 startpos = this.transform.position;
         Vector3 directon = destpos - startpos;
 
-        float speed = directon.magnitude / duration;
+        //float speed = directon.magnitude / duration;
+        PlayableCharacter.Instance.SetState(PlayableCharacter.States.AutoMove);
 
-        StartCoroutine(CorDoMove(startpos, destpos, duration));
+        StartCoroutine(CorDoMove(destpos, invoker));
     }
+
 
     //해당 지점으로 이동한다.
     public void DoMoveDir(Vector3 dest, Invoker invoker = null)
@@ -316,7 +330,7 @@ public class CMoveComponent : BaseComponent
     }
 
     //걷기면 걷기, 달리기면 달리기 둘 중에 선택해서 움직이고 
-    public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration, Invoker invoker = null)
+    public IEnumerator CorDoMove(Vector3 start, Vector3 dest, Invoker invoker = null)
     {
         //float runtime = 0.0f;
         teststart = start;
@@ -350,16 +364,18 @@ public class CMoveComponent : BaseComponent
                 yield break;
             }
 
-            if(curTime >= duration)
-            {
-                //this.transform.position = dest;
-                if (invoker != null)
-                    invoker.Invoke("");
 
-                Move(new Vector3(0, 0, 0), 0);
 
-                yield break;
-            }
+            //if(curTime >= duration)
+            //{
+            //    //this.transform.position = dest;
+            //    if (invoker != null)
+            //        invoker.Invoke("");
+
+            //    Move(new Vector3(0, 0, 0), 0);
+
+            //    yield break;
+            //}
             //runtime += Time.deltaTime;
 
             //Debug.Log($"{curdest.magnitude}");
@@ -367,16 +383,20 @@ public class CMoveComponent : BaseComponent
                 Move(direction, moveoption.RunSpeed /** (curTime/duration)*/);
 
             lastTime = Time.time;
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
         }
 
     }
 
-
-    //해당 방향으로 해당 시간동안 이동한다.
-    public IEnumerator CorDoMove(Vector3 direction, float duration, Invoker invoker = null)
+    //걷기면 걷기, 달리기면 달리기 둘 중에 선택해서 움직이고 
+    public IEnumerator CorDoMove(Vector3 start, Vector3 dest, float duration, Invoker invoker = null)
     {
-        //float distance = direction.magnitude;
+        //float runtime = 0.0f;
+        teststart = start;
+        testend = dest;
+
+        Vector3 direction = dest - start;
+        float distance = direction.magnitude;
         direction.Normalize();
 
 
@@ -388,7 +408,7 @@ public class CMoveComponent : BaseComponent
         {
             //PlayableCharacter.Instance.SetState(PlayableCharacter.States.Walk);
 
-            //Vector3 curdest = dest - transform.position;
+            Vector3 curdest = dest - transform.position;
 
 
 
@@ -403,6 +423,8 @@ public class CMoveComponent : BaseComponent
                 yield break;
             }
 
+
+
             if (curTime >= duration)
             {
                 //this.transform.position = dest;
@@ -413,6 +435,7 @@ public class CMoveComponent : BaseComponent
 
                 yield break;
             }
+
             //runtime += Time.deltaTime;
 
             //Debug.Log($"{curdest.magnitude}");
@@ -420,7 +443,76 @@ public class CMoveComponent : BaseComponent
                 Move(direction, moveoption.RunSpeed /** (curTime/duration)*/);
 
             lastTime = Time.time;
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
+        }
+
+    }
+
+
+
+    //목적지까지 이동
+    public IEnumerator CorDoMove(Vector3 dest, ActionInvoker invoker = null)
+    {
+        //float distance = direction.magnitude;
+        //direction.Normalize();
+
+
+        float startTime = Time.time;
+        float lastTime = Time.time;
+        float curTime = 0.0f;
+
+        Vector3 curDirection = dest - transform.position;
+        LookAtBody(curDirection);
+
+        while (true)
+        {
+            //PlayableCharacter.Instance.SetState(PlayableCharacter.States.Walk);
+
+            curDirection = dest - transform.position;
+
+
+            curTime += Time.time - lastTime;
+
+            if (PlayableCharacter.Instance.GetState() == PlayableCharacter.States.OutOfControl||
+                PlayableCharacter.Instance.GetState() != PlayableCharacter.States.AutoMove)
+            {
+                //if (invoker != null)
+                //    invoker.Invoke();
+
+                Move(new Vector3(0, 0, 0), 0);
+                yield break;
+            }
+
+            //if (curTime >= duration)
+            //{
+            //    //this.transform.position = dest;
+            //    if (invoker != null)
+            //        invoker.Invoke("");
+
+            //    Move(new Vector3(0, 0, 0), 0);
+
+            //    yield break;
+            //}
+            //runtime += Time.deltaTime;
+
+            if (curDirection.magnitude <= 0.1f)
+            {
+                if (invoker != null)
+                    invoker.Invoke();
+
+                Move(new Vector3(0, 0, 0), 0);
+
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
+                yield break;
+            }
+
+
+            if (!curval.IsFowordBlock)
+                Move(curDirection.normalized, moveoption.RunSpeed /** (curTime/duration)*/);
+
+            lastTime = Time.time;
+            yield return null;
         }
 
     }
@@ -687,8 +779,8 @@ public class CMoveComponent : BaseComponent
         //경사로가 아닐때
         else
         {
-            MoveDir = MoveVal * speed * Time.deltaTime;
-            com.CharacterRig.velocity = new Vector3(MoveDir.x, CurGravity, MoveDir.z);
+            MoveVal = MoveVal * speed * Time.deltaTime;
+            com.CharacterRig.velocity = new Vector3(MoveVal.x, CurGravity, MoveVal.z);
             //transform.position += new Vector3(MoveDir.x, CurGravity, MoveDir.z);
         }
 

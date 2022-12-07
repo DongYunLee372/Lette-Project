@@ -18,6 +18,7 @@ public class PlayableCharacter : MonoBehaviour
         Guard,
         GuardStun,
         OutOfControl,
+        AutoMove,
     }
 
     //[Header("================UnityComponent================")]
@@ -175,7 +176,7 @@ public class PlayableCharacter : MonoBehaviour
     //duration 시간동안 목표위치로 이동한다.
     public void DoMove(Vector3 destpos, float duration)
     {
-        movecom.DoMove(destpos, duration);
+        //movecom.DoMove(destpos, duration);
     }
 
     //Vector3 방향 * float 거리

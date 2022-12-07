@@ -16,7 +16,7 @@ public class SphereColl : Colliders
     public override void VirtualStart()
     {
         base.VirtualStart();
-        colltype = CharEnumTypes.eCollType.Sphere;
+        colltype = CharEnumTypes.eCollType.SphereColl;
         Mycollider = GetComponent<SphereCollider>();
     }
 

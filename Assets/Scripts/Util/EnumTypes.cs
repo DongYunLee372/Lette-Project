@@ -8,8 +8,8 @@ namespace CharEnumTypes
 {
     public enum eCollType
     {
-        Sphere,
-        Box,
+        SphereColl,
+        BoxColl,
         collMax
     }
     public enum eAttackType

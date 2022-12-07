@@ -126,16 +126,16 @@ public class EffectManager : MySingleton<EffectManager>
         GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
         copy.transform.parent = null;
         CurEffects.Add(copy.GetInstanceID(), copy);
-        //return copy;
+        return copy;
 
-        return null;
+        //return null;
     }
 
     //사라질 시간
     public GameObject InstantiateEffect(string adressableAdress, float DestroyTime)
     {
         GameObject copy = InstantiateEffect(adressableAdress);
-        copy.transform.parent = null;
+        //copy.transform.parent = null;
         //CurEffects.Add(copy.GetInstanceID(), copy);
         cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
         StartCoroutine(cor);

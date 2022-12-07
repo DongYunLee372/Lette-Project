@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 
 //작업할것
@@ -26,7 +27,7 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         //GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
 
         //copycoll = GameObject.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Box]);
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Box].name);
+        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.BoxColl].name);
 
 
         //copycoll.GetComponent<GameObject>().SetActive(true);
@@ -47,7 +48,7 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
     {
         Colliders copycoll = null;
 
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Sphere].name);
+        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
         //copycoll = GameObject.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Sphere]);
         //copycoll.GetComponent<GameObject>().SetActive(true);
         copycoll.gameObject.transform.position = pos;
@@ -69,7 +70,7 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         Colliders copycoll = null;
         //colltype = type;
 
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Box].name);
+        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.BoxColl].name);
         //copycoll.GetComponent<GameObject>().SetActive(true);
         copycoll.gameObject.transform.position = pos;
         copycoll.targetTag = targetLayer;
@@ -88,7 +89,7 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
     {
         Colliders copycoll = null;
 
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Sphere].name);
+        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
         //copycoll.GetComponent<GameObject>().SetActive(true);
         copycoll.gameObject.transform.position = pos;
         copycoll.targetTag = targetLayer;
@@ -104,6 +105,26 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         return copycoll;
     }
 
+    public Colliders SpawnSphereCollider(Transform parent, float radius, float SpawnTime, string targetLayer, Colliders.CollFunction func)
+    {
+        Colliders copycoll = null;
+
+        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+        //copycoll.GetComponent<GameObject>().SetActive(true);
+        copycoll.gameObject.transform.parent = parent;
+        copycoll.gameObject.transform.localPosition = Vector3.zero;
+        copycoll.targetTag = targetLayer;
+        copycoll.SetCollitionFunction(func, null, null);
+        copycoll.SetRadious(radius);
+
+        SpawnedCollList.Add(copycoll);
+
+
+        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, GameObject.Destroy, copycoll.gameObject));
+
+
+        return copycoll;
+    }
 
 
     public void SetSize(Colliders coll, Vector3 size)
@@ -140,10 +161,13 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
     {
         for (CharEnumTypes.eCollType i = 0; i < CharEnumTypes.eCollType.collMax; i++)
         {
-            collprefabs[(int)i] = Resources.Load<Colliders>("Prefabs/" + i.ToString() + "Coll");
+            //collprefabs[(int)i] = Resources.Load<Colliders>("Prefabs/" + i.ToString() + "Coll");
+            var temp = Addressables.LoadAssetAsync<GameObject>(i.ToString());
+            GameObject result = temp.WaitForCompletion();
+            collprefabs[(int)i] = result.GetComponent<Colliders>();
         }
 
-
+        
 
     }
 }
