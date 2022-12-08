@@ -301,7 +301,7 @@ public class InventoryUI : MonoBehaviour
         //}
     }
 
-    private void TryUseItem(int index)
+    public void TryUseItem(int index)
     {
         Debug.Log("TryUseItem");
         _inventory.Use(index);

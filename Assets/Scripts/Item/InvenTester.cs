@@ -39,13 +39,13 @@ public class InvenTester : MonoBehaviour
         _equipmentUIPos = _equipmentUI.transform.position;
         _skillPanelUIPos = _skillPanelUI.transform.position;
 
-        _inventoryUI.transform.position = new Vector2(5000, 5000);
-        _equipmentUI.transform.position = new Vector2(5000, 5000);
-        _skillPanelUI.transform.position = new Vector2(5000, 5000);
+        //_inventoryUI.transform.position = new Vector2(5000, 5000);
+        //_equipmentUI.transform.position = new Vector2(5000, 5000);
+        //_skillPanelUI.transform.position = new Vector2(5000, 5000);
 
-        invenb = false;
-        eqb = false;
-        skillb = false;
+        invenb = true;
+        eqb = true;
+        skillb = true;
     }
 
     public void SetTestWeaponInven()
@@ -59,6 +59,10 @@ public class InvenTester : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            _inventoryUI.TryUseItem(0);
+        }
         if(Input.GetKeyDown(KeyCode.N))
         {
             
@@ -68,11 +72,17 @@ public class InvenTester : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.M))
-        {           
-            if(!invenb)
+        {
+            if (!invenb)
+            {
+                invenb = true;
                 _inventoryUI.transform.position = invenUIPos;
+            }
             else
-            _inventoryUI.transform.position = new Vector2(5000, 5000);
+            {
+                invenb = false;
+                _inventoryUI.transform.position = new Vector2(5000, 5000);
+            }
 
             
         }
@@ -82,20 +92,32 @@ public class InvenTester : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            if (!invenb)
-                _equipmentUI.transform.position = invenUIPos;
+            if (!eqb)
+            {
+                eqb = true;
+                _equipmentUI.transform.position = _equipmentUIPos;
+            }
             else
+            {
+                eqb = false;
                 _equipmentUI.transform.position = new Vector2(5000, 5000);
+            }
 
             
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (!invenb)
+            if (!skillb)
+            {
+                skillb = true;
                 _skillPanelUI.transform.position = _skillPanelUIPos;
+            }
             else
+            {
+                skillb = false;
                 _skillPanelUI.transform.position = new Vector2(5000, 5000);
+            }
         }
     }
 }
