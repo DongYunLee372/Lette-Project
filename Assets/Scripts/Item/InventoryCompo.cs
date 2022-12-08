@@ -32,11 +32,14 @@ public class InventoryCompo : MonoBehaviour
     {
         _items = new Item2[_maxCapacity];
         Capacity = _initalCapacity;
-        _inventoryUI.SetInventoryReference(this);
+        
     }
+
+   
 
     private void Start()
     {
+        
         UpdateAccessibleStatesAll();
     }
     

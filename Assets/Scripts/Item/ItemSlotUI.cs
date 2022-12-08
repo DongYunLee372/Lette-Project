@@ -103,20 +103,12 @@ public class ItemSlotUI : MonoBehaviour
         _iconRect.offsetMin = Vector2.one * (_padding);
         _iconRect.offsetMax = Vector2.one * (-_padding);
 
-        // 아이콘과 하이라이트 크기가 동일하도록
-        //_highlightRect.pivot = _iconRect.pivot;
-        //_highlightRect.anchorMin = _iconRect.anchorMin;
-        //_highlightRect.anchorMax = _iconRect.anchorMax;
-        //_highlightRect.offsetMin = _iconRect.offsetMin;
-        //_highlightRect.offsetMax = _iconRect.offsetMax;
-
         // 2. Image
         _iconImage.raycastTarget = false;
-        //_highlightImage.raycastTarget = false;
-
+        
         // 3. Deactivate Icon
         HideIcon();
-        //_highlightGo.SetActive(false);
+        
     }
     /// <summary> 슬롯 자체의 활성화/비활성화 여부 설정 </summary>
     public void SetSlotAccessibleState(bool value)

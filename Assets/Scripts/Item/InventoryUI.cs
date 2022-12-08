@@ -52,6 +52,7 @@ public class InventoryUI : MonoBehaviour
     private Vector3 _beginDragCursorPos; // 드래그 시작 시 커서 위치
     private int _beginDragSlotSiblingIndex;
 
+    [SerializeField]
     private  InventoryCompo _inventory;
 
     //지정된 개수만큼 슬롯 영역 내 슬롯들 생성
@@ -95,7 +96,11 @@ public class InventoryUI : MonoBehaviour
         }
 
         if (_slotUiPrefab.scene.rootCount != 0)
+        {
             Destroy(_slotUiPrefab);
+            Debug.Log(_slotUiPrefab.scene.rootCount);
+        }
+            
 
 
         RectTransform CloneSlot()
@@ -117,17 +122,18 @@ public class InventoryUI : MonoBehaviour
         _event = new PointerEventData(EventSystem.current);
         _raylist = new List<RaycastResult>(10);
 
-        
-
     }
     // 무언가를 클릭했을때 그곳으로 레이캐스트를 발사해서 어떤 ui인지 컴포넌트로 파악하여
     // 반환해 접근할 수 있게끔 함 
 
     private T RaycastGetComponent<T>() where T : Component
     {
-        _raylist.Clear(); // 레이캐스트 결과를 담을 리스트를 초기화
-        gr.Raycast(_event, _raylist); 
-
+        // 레이캐스트 결과를 담을 리스트를 초기화
+        _raylist.Clear();
+        
+        gr.Raycast(_event, _raylist);
+        
+        Debug.Log(_raylist.Count);
         //만일 아무런 ui도 없다면
         if (_raylist.Count == 0)
             return null;
@@ -171,18 +177,19 @@ public class InventoryUI : MonoBehaviour
             
             ItemSlotUI slot = RaycastGetComponent<ItemSlotUI>();
             
-            Debug.Log(_event.position);
-            Debug.Log(slot);
-            Debug.Log(slot.HasItem);
-            Debug.Log(slot.IsAccessible);
+            //Debug.Log(_event.position);
+            //Debug.Log(slot);
+            //Debug.Log(slot.HasItem);
+            //Debug.Log(slot.IsAccessible);
 
             if (slot != null && slot.HasItem && slot.IsAccessible)
             {
-                Debug.Log("사용");
+                //Debug.Log("사용");
                 TryUseItem(slot.Index);
             }
             else Debug.Log("뭐지");
         }
+       
     }
 
     private void OnpointerDrag()
@@ -248,7 +255,7 @@ public class InventoryUI : MonoBehaviour
             //    }
             //}
 
-            //// 1. 개수 나누기
+            // 1. 개수 나누기
             //if (isSeparation)
             //    TrySeparateAmount(_beginDragSlot.Index, endDragSlot.Index, currentAmount);
             //// 2. 교환 또는 이동
@@ -285,9 +292,7 @@ public class InventoryUI : MonoBehaviour
     }
 
     private void TryUseItem(int index)
-    {
-        
-
+    {        
         _inventory.Use(index);
     }
 
@@ -340,24 +345,11 @@ public class InventoryUI : MonoBehaviour
     // 슬롯에서 아이템 아이콘 제거, 개수 텍스트 숨기기 
     public void RemoveItem(int index)
     {
-       // EditorLog($"Remove Item : Slot [{index}]");
-
         _slotUIList[index].RemoveItem();
     }
 
-    public void testme()
-    {
-        TryGetComponent(out gr);
-        if (gr == null)
-            gr = gameObject.AddComponent<GraphicRaycaster>();
-
-        // Graphic Raycaster
-        _event = new PointerEventData(EventSystem.current);
-        _raylist = new List<RaycastResult>(10);
-
-        Debug.Log("이거");
-    }
-
+    
+    
     private void Awake()
     {
         Init();
@@ -366,14 +358,9 @@ public class InventoryUI : MonoBehaviour
         //StartCoroutine(qwe());
     }
 
-    //IEnumerator qwe()
-    //{
-    //    yield return new WaitForSeconds(3f);
-    //    gameObject.SetActive(false);
-    //}
-
     private void Update()
     {
+        
         _event.position = Input.mousePosition;
         OnPointerDown();
         OnpointerDrag();

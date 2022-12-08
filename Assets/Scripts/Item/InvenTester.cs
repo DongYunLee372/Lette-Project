@@ -47,16 +47,24 @@ public class InvenTester : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
+            //_inventoryUI.Set();
+            Debug.Log("M");
             if (_inventoryUI.gameObject.activeSelf == true)
             {
+                //_inventoryUI.enabled = false;
                 _inventoryUI.gameObject.SetActive(false);
-                UIManager.Instance.CursorOff();
+                //_inventoryUI.Setoff();
+
+                //UIManager.Instance.CursorOff();
+                Debug.Log("false");
             }
             else
-            { 
+            {
                 _inventoryUI.gameObject.SetActive(true);
-                //_inventoryUI.testme();
-                UIManager.Instance.CursorOn();
+                //_inventory.ang();
+                //_inventoryUI.Seton();
+                Debug.Log("true");
+                // UIManager.Instance.CursorOn();
             }
         }
 
@@ -65,12 +73,12 @@ public class InvenTester : MonoBehaviour
             if (_equipmentUI.gameObject.activeSelf == true)
             {
                 _equipmentUI.gameObject.SetActive(false);
-                UIManager.Instance.CursorOff();
+                //UIManager.Instance.CursorOff();
             }
             else
             {
                 _equipmentUI.gameObject.SetActive(true);
-                UIManager.Instance.CursorOn();
+                //UIManager.Instance.CursorOn();
             }
         }
 
@@ -79,12 +87,12 @@ public class InvenTester : MonoBehaviour
             if (_skillPanelUI.gameObject.activeSelf == true)
             { 
                 _skillPanelUI.gameObject.SetActive(false);
-                UIManager.Instance.CursorOff();
+                //UIManager.Instance.CursorOff();
             }
             else 
             {
                 _skillPanelUI.gameObject.SetActive(true);
-                UIManager.Instance.CursorOn();
+               // UIManager.Instance.CursorOn();
             }
         }
     }
