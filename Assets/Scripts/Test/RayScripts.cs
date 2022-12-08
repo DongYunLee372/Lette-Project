@@ -22,7 +22,7 @@ public class RayScripts : MonoBehaviour
 
 
         Debug.Log("ray");
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000f))
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, 10000f))
         {
             // Vector3 position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z);
             //Vector3 position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z);
@@ -31,7 +31,7 @@ public class RayScripts : MonoBehaviour
 
             Debug.Log("pos 반환" + position);
 
-            MeshCube.position = position;
+            //MeshCube.position = position;
             return position;
         }
         return Vector3.zero;
