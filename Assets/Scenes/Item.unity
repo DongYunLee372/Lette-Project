@@ -1041,7 +1041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3517668970596649488, guid: 6440d2cea16f5584c8ae413efd1e0469, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3517668970596649489, guid: 6440d2cea16f5584c8ae413efd1e0469, type: 3}
       propertyPath: m_Pivot.x

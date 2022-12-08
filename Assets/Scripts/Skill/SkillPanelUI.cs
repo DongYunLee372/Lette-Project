@@ -26,14 +26,9 @@ public class SkillPanelUI : MonoBehaviour
     {
         _playerSkillSlotList.Add(slot);
     }
-    private void Start()
+    private void Awake()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            _slotUIList = GetComponentsInChildren<SkillSlot>();            
-            _slotUIList[i].SetSlot(_skilldataList[i].Icon);
-            _slotUIList[i].Index = i;
-        }
+        
 
         TryGetComponent(out gr);
         if (gr == null)
@@ -42,6 +37,17 @@ public class SkillPanelUI : MonoBehaviour
         // Graphic Raycaster
         _event = new PointerEventData(EventSystem.current);
         _raylist = new List<RaycastResult>(10);
+    }
+    private void Start()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            _slotUIList = GetComponentsInChildren<SkillSlot>();
+            _slotUIList[i].SetSlot(_skilldataList[i].Icon);
+            _slotUIList[i].Index = i;
+        }
+       // _playerSkillSlotList[0].SetPlayerSkillSlotOn(_skilldataList[0]);
+
     }
 
     private T RaycastGetComponent<T>() where T : Component
