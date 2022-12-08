@@ -21,6 +21,27 @@ public class WeaponCollider : Colliders
     //}
     public float HitAngle = 180.0f;
 
+    public override void VirtualStart()
+    {
+        base.VirtualStart();
+        colltype = CharEnumTypes.eCollType.SphereColl;
+        Mycollider = GetComponent<SphereCollider>();
+        targetTag = "Enemy";
+    }
+
+    public SphereCollider GetCollider()
+    {
+        return Mycollider as SphereCollider;
+    }
+
+    public override void SetRadious(float radius)
+    {
+        SphereCollider col = Mycollider as SphereCollider;
+        col.radius = radius;
+
+    }
+
+
 
     private void Awake()
     {
@@ -117,25 +138,7 @@ public class WeaponCollider : Colliders
     }
 
 
-    public override void VirtualStart()
-    {
-        base.VirtualStart();
-        colltype = CharEnumTypes.eCollType.BoxColl;
-        Mycollider = GetComponent<SphereCollider>();
-        targetTag = "Enemy";
-    }
-
-    public SphereCollider GetCollider()
-    {
-        return Mycollider as SphereCollider;
-    }
-
-    public override void SetRadious(float radius)
-    {
-        SphereCollider col = Mycollider as SphereCollider;
-        col.radius = radius;
-
-    }
+    
 
 
 

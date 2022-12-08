@@ -58,9 +58,9 @@ public class Colliders : MonoBehaviour
     }
     public virtual void VirtualStart()
     {
-        _EnterFunction = null;
-        _OuterFunction = null;
-        _StayFunction = null;
+        //_EnterFunction = null;
+        //_OuterFunction = null;
+        //_StayFunction = null;
         targetLayer = -1;
         targetTag = null;
         //Start();

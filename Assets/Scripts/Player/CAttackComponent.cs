@@ -121,8 +121,8 @@ public class CAttackComponent : BaseComponent
 
         animator = GetComponentInChildren<AnimationController>();
         eventsystem = GetComponentInChildren<AnimationEventSystem>();
-        weaponcollider = GetComponentInChildren<WeaponCollider>();
 
+        weaponcollider = GetComponentInChildren<WeaponCollider>();
         weaponcollider?.SetCollitionFunction(null, null, MonsterAttack);
 
         Initsetting();

@@ -2350,7 +2350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912692896680884494}
   m_LocalRotation: {x: -0.15309404, y: 0.98821163, z: -0, w: 0}
-  m_LocalPosition: {x: 0.313, y: 1.159, z: 0.338}
+  m_LocalPosition: {x: 0, y: 1.159, z: 0.338}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2584,7 +2584,7 @@ MonoBehaviour:
     StepWeightVal: 20
     RollingClip: {fileID: 7400000, guid: de01ef7c29e3c9b4aad09085a2dd2083, type: 3}
     RollingClipPlaySpeed: 1.5
-    RollingDistance: 600
+    RollingDistance: 10
     RollingTime: 0.3
     RollingNoDamageStartTime: 0.1
     RollingNoDamageTime: 0.35
@@ -3954,6 +3954,10 @@ PrefabInstance:
     - target: {fileID: 4758049569133498026, guid: c18f6c843c8b61c4bb060987abc71043, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430669500959522312, guid: c18f6c843c8b61c4bb060987abc71043, type: 3}
+      propertyPath: HitAngle
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7430669500959522312, guid: c18f6c843c8b61c4bb060987abc71043, type: 3}
       propertyPath: targetTag

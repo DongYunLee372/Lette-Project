@@ -56050,14 +56050,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5403580659904746904, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: HitAngle
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896680884495, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712387625, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
