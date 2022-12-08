@@ -1488,6 +1488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerSkillSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 3517668970596649488, guid: 6440d2cea16f5584c8ae413efd1e0469, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3517668970596649489, guid: 6440d2cea16f5584c8ae413efd1e0469, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1986,6 +1990,10 @@ PrefabInstance:
     - target: {fileID: 3475655827592290098, guid: a67eecf4f0212a846be3f50f2ebfd209, type: 3}
       propertyPath: m_Name
       value: InventoryUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475655827592290098, guid: a67eecf4f0212a846be3f50f2ebfd209, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a67eecf4f0212a846be3f50f2ebfd209, type: 3}
@@ -3064,6 +3072,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillUI
       objectReference: {fileID: 0}
+    - target: {fileID: 25931720579179849, guid: 72ef6837aaf53b04291801c6ccc67234, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 25931720579179853, guid: 72ef6837aaf53b04291801c6ccc67234, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3388,6 +3400,10 @@ PrefabInstance:
     - target: {fileID: 7520531573912724292, guid: 9891a95b62dbead4b81502edf9955d2d, type: 3}
       propertyPath: m_Name
       value: InvenTory2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520531573912724292, guid: 9891a95b62dbead4b81502edf9955d2d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7520531573912724294, guid: 9891a95b62dbead4b81502edf9955d2d, type: 3}
       propertyPath: m_RootOrder
@@ -3871,6 +3887,10 @@ PrefabInstance:
     - target: {fileID: 5138357409415669127, guid: 810ea798b5ea3064e880c3e34f19a91a, type: 3}
       propertyPath: m_Name
       value: equipmentUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138357409415669127, guid: 810ea798b5ea3064e880c3e34f19a91a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5138357409415669240, guid: 810ea798b5ea3064e880c3e34f19a91a, type: 3}
       propertyPath: m_Pivot.x
@@ -4741,6 +4761,10 @@ PrefabInstance:
     - target: {fileID: 7758681116821377200, guid: b2d824546f1702140936afef64c57b8d, type: 3}
       propertyPath: m_Name
       value: CheatInven
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758681116821377200, guid: b2d824546f1702140936afef64c57b8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7758681116821377201, guid: b2d824546f1702140936afef64c57b8d, type: 3}
       propertyPath: _inventory

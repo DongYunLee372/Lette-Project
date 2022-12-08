@@ -485,7 +485,7 @@ MonoBehaviour:
   Canvas_: {fileID: 1772133562}
   mainlight: {fileID: 544114819}
   Backgroundsound: 10
-  Effectsound: 100
+  Effectsound: 5
   Lightcontroll: 100
   GameStart: 0
   ShowOption: 0
