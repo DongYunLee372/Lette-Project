@@ -475,17 +475,17 @@ public class CInputComponent : BaseComponent
         //}
 
         //이동 테스트
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            movecom.AutoMove(this.transform.position + new Vector3(5.0f, 0.0f, 0.0f), TestEnd);
-        }
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    movecom.AutoMove(this.transform.position + new Vector3(0.0f, 0.0f, 5.0f), TestEnd);
+        //}
 
        
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            ResourceCreateDeleteManager.Instance.DestroyObj<dotweentest>("testcube", testtestobj.gameObject);
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    ResourceCreateDeleteManager.Instance.DestroyObj<dotweentest>("testcube", testtestobj.gameObject);
+        //}
 
         //키 입력
         KeyInput();

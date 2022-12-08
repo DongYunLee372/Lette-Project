@@ -461,15 +461,24 @@ public class CMoveComponent : BaseComponent
         float lastTime = Time.time;
         float curTime = 0.0f;
 
-        Vector3 curDirection = dest - transform.position;
+        Vector3 curPosition = transform.position;
+        curPosition.y = 0;
+        dest.y = 0;
+
+        Vector3 curDirection = dest - curPosition;
+
+        
+
         LookAtBody(curDirection);
 
         while (true)
         {
             //PlayableCharacter.Instance.SetState(PlayableCharacter.States.Walk);
+            curPosition = transform.position;
+            curPosition.y = 0;
 
-            curDirection = dest - transform.position;
-
+            curDirection = dest - curPosition;
+            
 
             curTime += Time.time - lastTime;
 
