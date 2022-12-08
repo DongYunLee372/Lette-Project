@@ -55,6 +55,7 @@ public class InvenTester : MonoBehaviour
             else
             { 
                 _inventoryUI.gameObject.SetActive(true);
+                //_inventoryUI.testme();
                 UIManager.Instance.CursorOn();
             }
         }

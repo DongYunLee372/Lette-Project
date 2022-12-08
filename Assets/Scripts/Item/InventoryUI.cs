@@ -38,8 +38,11 @@ public class InventoryUI : MonoBehaviour
 
     //Graphic Raycaster는 캔버스 안을 검색하는 Raycaster
     //EventSystem 이벤트를 검출하는 수단으로 사용
+    [SerializeField]
     private GraphicRaycaster gr;
+    [SerializeField]
     private PointerEventData _event;
+    [SerializeField]
     private List<RaycastResult> _raylist; //레이캐스트 결과를 담을 리스트
     [SerializeField]
     private ItemSlotUI _beginDragSlot; //드래그 시작 슬롯
@@ -168,6 +171,11 @@ public class InventoryUI : MonoBehaviour
             
             ItemSlotUI slot = RaycastGetComponent<ItemSlotUI>();
             
+            Debug.Log(_event.position);
+            Debug.Log(slot);
+            Debug.Log(slot.HasItem);
+            Debug.Log(slot.IsAccessible);
+
             if (slot != null && slot.HasItem && slot.IsAccessible)
             {
                 Debug.Log("사용");
@@ -337,13 +345,32 @@ public class InventoryUI : MonoBehaviour
         _slotUIList[index].RemoveItem();
     }
 
+    public void testme()
+    {
+        TryGetComponent(out gr);
+        if (gr == null)
+            gr = gameObject.AddComponent<GraphicRaycaster>();
+
+        // Graphic Raycaster
+        _event = new PointerEventData(EventSystem.current);
+        _raylist = new List<RaycastResult>(10);
+
+        Debug.Log("이거");
+    }
 
     private void Awake()
     {
         Init();
         InitSlots();
         //gameObject.SetActive(false);
+        //StartCoroutine(qwe());
     }
+
+    //IEnumerator qwe()
+    //{
+    //    yield return new WaitForSeconds(3f);
+    //    gameObject.SetActive(false);
+    //}
 
     private void Update()
     {
