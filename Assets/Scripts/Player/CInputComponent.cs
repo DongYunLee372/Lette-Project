@@ -314,8 +314,9 @@ public class CInputComponent : BaseComponent
                 //if (state == PlayableCharacter.States.AutoMove)
                 //    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
 
-                if (Input.GetKeyDown(_key.Interaction))
-                    PlayableCharacter.Instance.inventory.UseItem(EnumScp.Key.F1, 1);
+                //if (Input.GetKeyDown(_key.Interaction))
+                //    PlayableCharacter.Instance.inventory.UseItem(EnumScp.Key.F1, 1);
+
             }
 
 

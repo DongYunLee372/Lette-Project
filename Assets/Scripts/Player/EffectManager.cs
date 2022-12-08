@@ -126,10 +126,11 @@ public class EffectManager : MySingleton<EffectManager>
         //GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
         GameObject copy = GameMG.Instance.Resource.Instantiate<GameObject>(adressableAdress);
         copy.transform.parent = null;
-        CurEffects.Add(copy.GetInstanceID(), copy);
-        return copy;
 
-        //return null;
+
+
+        //CurEffects.Add(copy.GetInstanceID(), copy);
+        return copy;
     }
 
     //사라질 시간

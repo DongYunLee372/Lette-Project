@@ -35,7 +35,7 @@ public class PlayableCharacter : MonoBehaviour
 
     [Header("================캐릭터 UI================")]
     public UICharacterInfoPanel CharacterUIPanel;
-    public InvenTory inventory;
+    //public InvenTory inventory;
 
     [Header("================피격 이펙트================")]
     public GameObject HitEffect;
@@ -89,6 +89,25 @@ public class PlayableCharacter : MonoBehaviour
     /*초기화*/
     private void Start()
     {
+        //필요한 매니저들이 존재하는지 확인하고 없으면 만들어준다.
+        if (FindObjectOfType<ResourceCreateDeleteManager>() == null)
+        {
+            GameObject obj = new GameObject(typeof(ResourceCreateDeleteManager).Name);
+            obj.AddComponent<ResourceCreateDeleteManager>();
+        }
+
+        if (FindObjectOfType<EffectManager>() == null)
+        {
+            GameObject obj = new GameObject(typeof(EffectManager).Name);
+            obj.AddComponent<EffectManager>();
+        }
+
+        if (FindObjectOfType<ColliderSpawnManager>() == null)
+        {
+            GameObject obj = new GameObject(typeof(ColliderSpawnManager).Name);
+            obj.AddComponent<ColliderSpawnManager>();
+        }
+
         //yield return new WaitForSeconds(0.01f);
 
         //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
@@ -102,26 +121,31 @@ public class PlayableCharacter : MonoBehaviour
         movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         animator = GetComponentInChildren<AnimationController>();
 
+        
+
+
         //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
         if (CharacterUIPanel == null)
         {
-            if(UIManager.Instance==null)
+            if(UIManager.Instance!=null)
                 CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
-            //else
-            //    CharacterUIPanel = GameMG.Instance.Resource.Instantiate<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
+            else
+                CharacterUIPanel = GameMG.Instance.Resource.Instantiate<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
+
             //CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
         }
-        if(inventory == null)
-        {
-            GameObject obj = null;
-            if (UIManager.Instance == null)
-                obj = UIManager.Instance.Prefabsload("Inven", Canvas_Enum.CANVAS_NUM.player_cavas);
-            //else
-            //    obj = GameMG.Instance.Resource.Instantiate<GameObject>("Inven");
-            //obj = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Inven");
 
-            inventory = obj.GetComponent<InvenTory>();
-        }
+        //if(inventory == null)
+        //{
+        //    GameObject obj = null;
+        //    if (UIManager.Instance == null)
+        //        obj = UIManager.Instance.Prefabsload("Inven", Canvas_Enum.CANVAS_NUM.player_cavas);
+        //    //else
+        //    //    obj = GameMG.Instance.Resource.Instantiate<GameObject>("Inven");
+        //    //obj = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Inven");
+
+        //    inventory = obj.GetComponent<InvenTory>();
+        //}
 
         status.Init(CharacterUIPanel);
 
@@ -156,24 +180,7 @@ public class PlayableCharacter : MonoBehaviour
         SetReverseMouseRot(mainoption.ReverseMouse);
         SetCameraColl(mainoption.AutoeVade);
 
-        //필요한 매니저들이 존재하는지 확인하고 없으면 만들어준다.
-        if(FindObjectOfType<ResourceCreateDeleteManager>()==null)
-        {
-            GameObject obj = new GameObject(typeof(ResourceCreateDeleteManager).Name);
-            obj.AddComponent<ResourceCreateDeleteManager>();
-        }
-
-        if(FindObjectOfType<EffectManager>()==null)
-        {
-            GameObject obj = new GameObject(typeof(EffectManager).Name);
-            obj.AddComponent<EffectManager>();
-        }
-
-        if (FindObjectOfType<ColliderSpawnManager>() == null)
-        {
-            GameObject obj = new GameObject(typeof(ColliderSpawnManager).Name);
-            obj.AddComponent<ColliderSpawnManager>();
-        }
+        
 
     }
 

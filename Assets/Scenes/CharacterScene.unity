@@ -20418,11 +20418,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1b739f336a20ed488fdb90b9a64faa0, type: 3}
---- !u!4 &828059795 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1121701717, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-  m_PrefabInstance: {fileID: 5912692895341065680}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &828462060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56266,62 +56261,6 @@ PrefabInstance:
       propertyPath: testGameObject
       value: 
       objectReference: {fileID: 1267565097}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: testGroundlayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].Effect
-      value: 
-      objectReference: {fileID: 1217668729914568, guid: 02f36df5dc2d4da4da06be6b63b1a7fc, type: 3}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].damage
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].Movedis
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].aniclip
-      value: 
-      objectReference: {fileID: 8349195267622309876, guid: 55a4eb8dfaf2436f86205feea2b4ed39, type: 3}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].SkillName
-      value: Skill01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].AttackType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].aniclipName
-      value: atk_sword08
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].EffectPosRot
-      value: 
-      objectReference: {fileID: 828059795}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].RecoveryDelay
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].EffectStartTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].EffectAdressable
-      value: Eff8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].animationPlaySpeed
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388563, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: effectmanager
       value: 

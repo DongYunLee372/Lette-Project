@@ -1393,6 +1393,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   Mycollider: {fileID: 0}
+  stayCollTime: 0
   HitAngle: 80
 --- !u!1 &5912692895944495214
 GameObject:
@@ -2487,7 +2488,6 @@ MonoBehaviour:
   - {fileID: 0}
   status: {fileID: 0}
   CharacterUIPanel: {fileID: 0}
-  inventory: {fileID: 0}
   HitEffect: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
   HitEffectAdressableName: SwordHitRed
   effectmanager: {fileID: 0}
@@ -2579,7 +2579,7 @@ MonoBehaviour:
     SlopAccel: 10
     MaxStep: 0
     RunningStaminaVal: 4
-    StepHeight: 1
+    StepHeight: 5
     StepCkeckDis: 0.4
     StepWeightVal: 20
     RollingClip: {fileID: 7400000, guid: de01ef7c29e3c9b4aad09085a2dd2083, type: 3}
@@ -2777,6 +2777,7 @@ MonoBehaviour:
     ProjectileObjName: 
     TargetObjName: 
     AttackEndTime: 0.7
+  SkillPreviewPlane: {fileID: 0}
   skillinfos:
   - AttackType: 2
     SkillName: Skill01
@@ -2794,11 +2795,32 @@ MonoBehaviour:
     MoveTime: 0
     MoveStartTime: 0
     AttackEndTime: 0
+  - AttackType: 1
+    SkillName: Skill01
+    aniclip: {fileID: 7400000, guid: 89e6aa6ab9e3ef24f9fd03b8bb455111, type: 2}
+    aniclipName: atk_energy01
+    animationPlaySpeed: 1
+    StartDelay: 0
+    RecoveryDelay: 2
+    damage: 30
+    Effect: {fileID: 1217668729914568, guid: 02f36df5dc2d4da4da06be6b63b1a7fc, type: 3}
+    EffectAdressable: Eff8
+    EffectStartTime: 0.1
+    EffectPosRot: {fileID: 1121701717}
+    Movedis: 1
+    MoveTime: 0
+    MoveStartTime: 0
+    AttackEndTime: 0
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
   effectobj: {fileID: 0}
   preparent: {fileID: 0}
   lastAttackTime: 0
+  testbool: 0
+  testGameObject: {fileID: 0}
+  testGroundlayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &5912692896712388561
 MonoBehaviour:
   m_ObjectHideFlags: 0

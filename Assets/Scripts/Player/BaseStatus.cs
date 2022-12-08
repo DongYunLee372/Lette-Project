@@ -120,7 +120,7 @@ public class BaseStatus:MonoBehaviour
 
     [SerializeField]
     //private DataLoad_Save DBController;
-    private UICharacterInfoPanel uiPanel;
+    public UICharacterInfoPanel uiPanel;
 
     CorTimeCounter timecounter = new CorTimeCounter();
     delegate bool invoker(float val);

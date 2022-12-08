@@ -617,15 +617,16 @@ public class CAttackComponent : BaseComponent
             if (hit.collider != null)
             {
                 if (SkillPreviewPlane == null)
-                    GameMG.Instance.Resource.Instantiate<GameObject>("SkillPreviewPlane");
-                //SkillPreviewPlane = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("SkillPreviewPlane");
+                    //GameMG.Instance.Resource.Instantiate<GameObject>("SkillPreviewPlane");
+                SkillPreviewPlane = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("SkillPreviewPlane");
 
                 SkillPreviewPlane.transform.position = hit.point + new Vector3(0, 0.2f, 0);
 
                 //해당 상태에서 마우스 좌클릭을 누르면 
                 if(Input.GetMouseButtonDown(0))
                 {
-
+                    //해당 위치에 이펙트 생성
+                    //GameMG.Instance.Resource.Instantiate<GameObject>("SkillPreviewPlane");
                 }
 
 
