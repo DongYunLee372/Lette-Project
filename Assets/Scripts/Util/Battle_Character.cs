@@ -541,7 +541,6 @@ public class Battle_Character : MonoBehaviour
                     Check_Reset();
                 }
 
-
                 return;
             }
         }
