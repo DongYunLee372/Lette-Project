@@ -113,7 +113,9 @@ public class InventoryUI : MonoBehaviour
         // Graphic Raycaster
         _event = new PointerEventData(EventSystem.current);
         _raylist = new List<RaycastResult>(10);
+
         
+
     }
     // 무언가를 클릭했을때 그곳으로 레이캐스트를 발사해서 어떤 ui인지 컴포넌트로 파악하여
     // 반환해 접근할 수 있게끔 함 
@@ -165,12 +167,13 @@ public class InventoryUI : MonoBehaviour
         {
             
             ItemSlotUI slot = RaycastGetComponent<ItemSlotUI>();
-
+            
             if (slot != null && slot.HasItem && slot.IsAccessible)
             {
                 Debug.Log("사용");
                 TryUseItem(slot.Index);
             }
+            else Debug.Log("뭐지");
         }
     }
 
@@ -339,6 +342,7 @@ public class InventoryUI : MonoBehaviour
     {
         Init();
         InitSlots();
+        //gameObject.SetActive(false);
     }
 
     private void Update()

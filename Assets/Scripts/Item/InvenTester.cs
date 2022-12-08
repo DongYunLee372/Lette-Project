@@ -20,9 +20,9 @@ public class InvenTester : MonoBehaviour
         //        _inventory.Add(_itemDataArray[i], 3);
         //    }
         //}
-        _inventoryUI.gameObject.SetActive(false);
-        _equipmentUI.gameObject.SetActive(false);
-        _skillPanelUI.gameObject.SetActive(false);
+        //_inventoryUI.gameObject.SetActive(false);
+        //_equipmentUI.gameObject.SetActive(false);
+        //_skillPanelUI.gameObject.SetActive(false);
     }
 
     public void SetTestWeaponInven()
@@ -49,12 +49,12 @@ public class InvenTester : MonoBehaviour
             if (_inventoryUI.gameObject.activeSelf == true)
             {
                 _inventoryUI.gameObject.SetActive(false);
-                UIManager.Instance.CursorOff();
+                //UIManager.Instance.CursorOff();
             }
             else
             { 
                 _inventoryUI.gameObject.SetActive(true);
-                UIManager.Instance.CursorOn();
+                //UIManager.Instance.CursorOn();
             }
         }
 
@@ -63,12 +63,12 @@ public class InvenTester : MonoBehaviour
             if (_equipmentUI.gameObject.activeSelf == true)
             {
                 _equipmentUI.gameObject.SetActive(false);
-                UIManager.Instance.CursorOff();
+                //UIManager.Instance.CursorOff();
             }
             else
             {
                 _equipmentUI.gameObject.SetActive(true);
-                UIManager.Instance.CursorOn();
+                //UIManager.Instance.CursorOn();
             }
         }
 
@@ -77,12 +77,12 @@ public class InvenTester : MonoBehaviour
             if (_skillPanelUI.gameObject.activeSelf == true)
             { 
                 _skillPanelUI.gameObject.SetActive(false);
-                UIManager.Instance.CursorOff();
+                //UIManager.Instance.CursorOff();
             }
             else 
             {
                 _skillPanelUI.gameObject.SetActive(true);
-                UIManager.Instance.CursorOn();
+                //UIManager.Instance.CursorOn();
             }
         }
     }

@@ -52,11 +52,11 @@ public class EquipmentUI : MonoBehaviour
         return _raylist[0].gameObject.GetComponent<T>(); //가장 앞의 ui의 컴포넌트 반환
     }
     private void OnPointerDown()
-    {      
+    {
         if (Input.GetMouseButtonDown(1))
         {
             EquipmentSlot slot = RaycastGetComponent<EquipmentSlot>();
-            
+
 
             if (slot != null && slot.HasItem)
             {
@@ -79,7 +79,7 @@ public class EquipmentUI : MonoBehaviour
         //Debug.Log(Player.name);
 
         //Player.status.HPUp(50);
-
+        Debug.Log("d");
         _slotUIList[0].SetSlot(Itemdata.Data.Icon , Itemdata);
 
 

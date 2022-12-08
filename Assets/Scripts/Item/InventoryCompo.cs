@@ -230,7 +230,7 @@ public class InventoryCompo : MonoBehaviour
     }
     public int Add(ItemData itemData, int amount = 1)
     {
-        Debug.Log("Add");
+        //Debug.Log("Add");
         int index;
 
         // 1. 수량이 있는 아이템
@@ -322,7 +322,7 @@ public class InventoryCompo : MonoBehaviour
 
                 // 아이템을 생성하여 슬롯에 추가
                 _items[index] = itemData.CreateItem();
-                Debug.Log(_items[index].Data.Name);
+                //Debug.Log(_items[index].Data.Name);
                 temp = _items[index];
                 UpdateSlot(index);
             }
