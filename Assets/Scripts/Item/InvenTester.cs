@@ -7,6 +7,7 @@ public class InvenTester : MonoBehaviour
     public InventoryCompo _inventory;
     public InventoryUI _inventoryUI;
     public EquipmentUI _equipmentUI;
+    public SkillPanelUI _skillPanelUI;
 
     public ItemData[] _itemDataArray;
     // Start is called before the first frame update
@@ -50,6 +51,13 @@ public class InvenTester : MonoBehaviour
             if (_equipmentUI.gameObject.activeSelf == true)
                 _equipmentUI.gameObject.SetActive(false);
             else _equipmentUI.gameObject.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (_skillPanelUI.gameObject.activeSelf == true)
+                _skillPanelUI.gameObject.SetActive(false);
+            else _skillPanelUI.gameObject.SetActive(true);
         }
     }
 }
