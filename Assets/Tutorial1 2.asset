@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d34ef56feb1124f8726ba09c4f5b7e, type: 3}
   m_Name: Tutorial1 2
   m_EditorClassIdentifier: 
-  prefabsName: ForestPlant
-  Position: {x: 60, y: 10.3, z: 85}
+  prefabsName: ForestDemon
+  Position: {x: 15, y: 11.29, z: -15}

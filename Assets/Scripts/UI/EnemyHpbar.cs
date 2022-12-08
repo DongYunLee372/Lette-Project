@@ -44,14 +44,20 @@ public class EnemyHpbar : MonoBehaviour
         {
             Destroy(my);
         }
-        PlayableCharacter a= FindObjectOfType<PlayableCharacter>();
-        if (a == null)
-            return;
         if (battle_Character.cur_Target != null)
         {
             myhp.enabled = true;
             Backgroundmyhp.enabled = true;
         }
+        else
+        {
+            myhp.enabled = false;
+            Backgroundmyhp.enabled = false;
+        }
+        PlayableCharacter a= FindObjectOfType<PlayableCharacter>();
+        if (a == null)
+            return;
+        
         main = PlayableCharacter.Instance.GetCamera();     
         
         //main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
@@ -91,8 +97,7 @@ public class EnemyHpbar : MonoBehaviour
         _hpbar.myhp = _test;
         MyHpbar = _hpbar;
 
-        myhp.enabled = false;
-        Backgroundmyhp.enabled = false;
+     
        // Destroyo(battle_Character);
        //  Debug.Log(battle_Character.name);
        // Debug.Log(this.gameObject.name);
