@@ -49238,6 +49238,54 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: now_Skill_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Target_Info
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_normal_atak_group.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
+      propertyPath: mon_Normal_Attack_Info.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114003576691145072, guid: a1fe4a2fbd2d4e44b98c58a3463c5cc3, type: 3}
       propertyPath: attack_Info.Array.data[4].off_Mesh_Pos.Array.data[0]
       value: 
       objectReference: {fileID: 177301731}
