@@ -197,7 +197,7 @@ public class GameMG : Singleton<GameMG>
             GameData_Load.Instance.ChangeScene(Scenes_Stage.GameMenuEnd);  //게임종료에 넣기 (시작 화면 UI띄워주세여ㅜ)
         }
 
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F9))
         {
             GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);  //보스 엔드
         }
