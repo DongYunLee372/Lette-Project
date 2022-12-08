@@ -1832,7 +1832,7 @@ MonoBehaviour:
     pre_Delay_speed: 0
     post_Delay: 0
     post_Delay_speed: 0
-    after_skill_name: 0
+    after_skill_name: Idle
   damaged_Effect: {fileID: 152628, guid: 4e42a2081531c814fa4774bd0d6b45df, type: 3}
   phase_Effect: {fileID: 1436447386774278, guid: b36e5394bf3902b41877ecba9aa55b8d, type: 3}
   real_AI:
