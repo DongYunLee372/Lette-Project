@@ -19,6 +19,7 @@ public class PlayableCharacter : MonoBehaviour
         GuardStun,
         OutOfControl,
         AutoMove,
+        AreaOfEffect,
     }
 
     //[Header("================UnityComponent================")]
@@ -105,12 +106,12 @@ public class PlayableCharacter : MonoBehaviour
         if (CharacterUIPanel == null)
         {
             CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
-            CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
+            //CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
         }
         if(inventory == null)
         {
             GameObject obj = UIManager.Instance.Prefabsload("Inven", Canvas_Enum.CANVAS_NUM.player_cavas);
-            obj = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Inven");
+            //obj = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Inven");
             inventory = obj.GetComponent<InvenTory>();
         }
 

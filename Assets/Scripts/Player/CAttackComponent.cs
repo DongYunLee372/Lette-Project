@@ -171,7 +171,8 @@ public class CAttackComponent : BaseComponent
         //AttackInfoSetting(LoadedAttackInfoDic["2"], attackinfos[2]);
     }
 
-    int LastMonsterID = -1;
+    //int LastMonsterID = -1;
+    List<int> LastMonsterIDList = new List<int>();
 
 
     public void AttackMidFunc(string val)
@@ -184,15 +185,15 @@ public class CAttackComponent : BaseComponent
         if (!curval.IsAttacking)
             return;
 
-        
-        
         if (collision.gameObject.tag == monstertag)
         {
             int nowMonsterID = collision.gameObject.GetInstanceID();
-            if(LastMonsterID == nowMonsterID)
+            
+            if(LastMonsterIDList.Contains(nowMonsterID))
                 return;
 
-            LastMonsterID = nowMonsterID;
+            LastMonsterIDList.Add(nowMonsterID);
+
             Debug.Log("몬스터 어택 들어옴");
             //collision.GetComponent<Battle_Character>().Damaged((int)attackinfos[CurAttackNum].damage, this.transform.position);
             collision.GetComponent<Battle_Character>().Damaged((int)AttackInfos[CurAttackNum].damage, this.transform.position);
@@ -514,7 +515,8 @@ public class CAttackComponent : BaseComponent
         {
             //Debug.Log("[Attack]attackend");
             curval.IsAttacking = false;
-            LastMonsterID = -1;
+            //LastMonsterID = -1;
+            LastMonsterIDList.Clear();
             Attack();
         }
         //없으면 현재 실행중인 애니메이션의 마지막에 
@@ -537,7 +539,7 @@ public class CAttackComponent : BaseComponent
         Debug.Log("[Attack] 공격 진짜 마지막 끝");
         //Debug.Log("[Attack]attackend");
         curval.IsAttacking = false;
-        LastMonsterID = -1;
+        LastMonsterIDList.Clear();
     }
 
     
