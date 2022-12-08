@@ -40,7 +40,7 @@ public class InvenTester : MonoBehaviour
         _skillPanelUIPos = _skillPanelUI.transform.position;
 
         //_inventoryUI.transform.position = new Vector2(5000, 5000);
-        //_equipmentUI.transform.position = new Vector2(5000, 5000);
+       // _equipmentUI.transform.position = new Vector2(5000, 5000);
         //_skillPanelUI.transform.position = new Vector2(5000, 5000);
 
         invenb = true;
