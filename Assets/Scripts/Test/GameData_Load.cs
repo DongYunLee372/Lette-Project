@@ -64,8 +64,8 @@ public class GameData_Load : Singleton<GameData_Load>
 
         Debug.Log("확인해야" + tempDataSave.name);
 
-        StartCoroutine(CheckLoadScene(tempDataSave));
         AddressablesLoadManager.Instance.OnSceneAction("Forest");
+        StartCoroutine(CheckLoadScene(tempDataSave));
 
 
     }
@@ -267,8 +267,9 @@ public class GameData_Load : Singleton<GameData_Load>
                     GameObject Monster = new GameObject();
                     Monster.transform.position = s.Position;
                     StartCoroutine(CharacterCreate.Instance.CreateMonster_S(EnumScp.MonsterIndex.mon_01_01, Monster.transform, s.prefabsName));
+                    MonsterCount++;
 
-                 //   AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
+                    //   AddressablesLoadManager.Instance.SingleLoad_Instantiate<GameObject>(s.prefabsName, s.Position);
                     Destroy(Monster);
                     Debug.Log("나요");
 
@@ -296,8 +297,11 @@ public class GameData_Load : Singleton<GameData_Load>
                 break;
 
             case Scenes_Stage.Stage1:
+
+                EndUnloadTutorial();
+
                 Canvas_.SetActive(true);
-                if (GameMG.Instance.scenes_Stage != Scenes_Stage.Loding)
+                if (GameMG.Instance.scenes_Stage != Scenes_Stage.Loding || GameMG.Instance.scenes_Stage != Scenes_Stage.tutorial)
                 {
                     unloadBoatScene(Scenes_Stage.Stage1);
                     //skyboxMG.SkyBox_Setting("BoatScene");
@@ -358,6 +362,14 @@ public class GameData_Load : Singleton<GameData_Load>
                 {
                     switch (GameMG.Instance.scenes_Stage)
                     {
+                        case Scenes_Stage.tutorial:
+
+                            EndUnloadTutorial();
+                            LoadTutorial();
+
+
+                            break;
+
                         case Scenes_Stage.Stage1:   //스테이지 1에서 죽었을때
                                                     //ImageCheck = true;
                            
@@ -561,9 +573,55 @@ public class GameData_Load : Singleton<GameData_Load>
         MonsterCount = 0;
     }
 
-    void UnloadTutorial()
+    void UnloadMonster_Tutorial()
     {
+        for (int i = 0; i < 3; i++)
+        {
+            //Debug.Log("스켈삭제");
+            var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("Skeleton_Warrior");
+            // Debug.Log("스켈레톤 삭제 시점" + temp1.name);
+            if (temp1 != null)
+            {
 
+                AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //몬스터 삭제. 
+            }
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            //Debug.Log("스켈삭제");
+            var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("ForestPlant");
+            // Debug.Log("스켈레톤 삭제 시점" + temp1.name);
+            if (temp1 != null)
+            {
+
+                AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //몬스터 삭제. 
+            }
+
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            //Debug.Log("스켈삭제");
+            var temp1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("ForestDemon");
+            // Debug.Log("스켈레톤 삭제 시점" + temp1.name);
+            if (temp1 != null)
+            {
+                AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp1);  //몬스터 삭제. 
+            }
+
+        }
+
+        MonsterCount = 0;
+    }
+
+    void EndUnloadTutorial()
+    {
+        AddressablesLoadManager.Instance.OnUnloadedAction("BoatScene");  //언로드
+       // var temp = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+       // AddressablesLoadManager.Instance.Delete_Object<GameObject>(temp);  //캐릭터 삭제. 
+
+        UnloadMonster_Tutorial();
     }
 
 
@@ -1005,6 +1063,13 @@ public class GameData_Load : Singleton<GameData_Load>
 
                 switch (GameMG.Instance.scenes_Stage)
                 {
+                    case Scenes_Stage.tutorial:
+                        {
+                            //var find1 = AddressablesLoadManager.Instance.Find_InstantiateObj<GameObject>("PlayerCharacter");
+                            //find1.SetActive(true);
+                        }
+                        break;
+
                     case Scenes_Stage.Stage1:
                         //checkList();
 

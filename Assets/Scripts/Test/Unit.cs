@@ -22,30 +22,38 @@ public class Unit : MonoBehaviour
         }
     }
 
+    bool moveEndCheck=true;
     IEnumerator FollowPath()
     {
         Vector3 currentWaypoint = path[0];
         while (true)
         {
-            if (transform.position == currentWaypoint)  
+            if (moveEndCheck)
             {
-                targetIndex++;  
-                if (targetIndex >= path.Length)  
+                moveEndCheck = false;
+
+                if (transform.position == currentWaypoint)
                 {
-                    targetIndex = 0;
-                    yield break;
+                    targetIndex++;
+                    if (targetIndex >= path.Length)
+                    {
+                        targetIndex = 0;
+                        yield break;
+                    }
+                    currentWaypoint = path[targetIndex];
                 }
-                currentWaypoint = path[targetIndex];  
+                //  transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+
+                PlayableCharacter.Instance.AutoMove(currentWaypoint,MoveEnd);
             }
-          //  transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-
-            PlayableCharacter.Instance.AutoMove(currentWaypoint);
-
             yield return null;
         }
     }
+    public void MoveEnd()
+    {
+        moveEndCheck = true;
+    }
 
-  
     public void OnDrawGizmos()
     {
         if (path != null)
