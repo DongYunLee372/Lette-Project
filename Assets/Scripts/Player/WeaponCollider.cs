@@ -57,18 +57,19 @@ public class WeaponCollider : Colliders
     {
         if(PlayableCharacter.Instance.curState == PlayableCharacter.States.Attack)
         {
-            if (other.transform.gameObject.tag == (targetTag))
+            if (other.transform.gameObject.tag == (targetTag) || other.transform.gameObject.tag == "Box")
             {
                 CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
+
                 Vector3 front = movecom.com.FpRoot.forward;
                 front.y = 0;
                 front.Normalize();
 
-                Vector3 hit = other.transform.position.normalized;
+                Vector3 hit = other.transform.position;
                 hit.y = 0;
                 hit.Normalize();
 
-                float hitangle = 180 - Mathf.Acos(Vector3.Dot(front, hit)) * 180.0f / 3.14f;
+                float hitangle = /*180 - */Mathf.Acos(Vector3.Dot(front, hit)) * 180.0f / 3.14f;
 
                 if (hitangle <= HitAngle)
                 {
@@ -84,18 +85,18 @@ public class WeaponCollider : Colliders
     {
         if (PlayableCharacter.Instance.curState == PlayableCharacter.States.Attack)
         {
-            if (other.transform.gameObject.tag == (targetTag))
+            if (other.transform.gameObject.tag == (targetTag) || other.transform.gameObject.tag == "Box")
             {
                 CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
                 Vector3 front = movecom.com.FpRoot.forward;
                 front.y = 0;
                 front.Normalize();
 
-                Vector3 hit = other.transform.position.normalized;
+                Vector3 hit = other.transform.position;
                 hit.y = 0;
                 hit.Normalize();
 
-                float hitangle = 180 - Mathf.Acos(Vector3.Dot(front, hit)) * 180.0f / 3.14f;
+                float hitangle = /*180 - */Mathf.Acos(Vector3.Dot(front, hit)) * 180.0f / 3.14f;
 
                 if (hitangle <= HitAngle)
                 {
@@ -112,18 +113,19 @@ public class WeaponCollider : Colliders
         //Debug.Log($"WeaponCol {other.gameObject.name} 탐지중");
         if (PlayableCharacter.Instance.curState == PlayableCharacter.States.Attack)
         {
-            if (other.transform.gameObject.tag == (targetTag))
+            if (other.transform.gameObject.tag == (targetTag) || other.transform.gameObject.tag == "Box")
             {
                 CMoveComponent movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
                 Vector3 front = movecom.com.FpRoot.forward;
                 front.y = 0;
                 front.Normalize();
 
-                Vector3 hit = other.transform.position.normalized;
+                Vector3 hit = other.transform.position;
                 hit.y = 0;
                 hit.Normalize();
 
-                float hitangle = 180 - Mathf.Acos(Vector3.Dot(front, hit)) * 180.0f / 3.14f;
+                float hitangle = /*180 - */Mathf.Acos(Vector3.Dot(front, hit)) * 180.0f / 3.14f;
+                Debug.Log($"공격 앵글 {hitangle}");
 
                 if (hitangle <= HitAngle)
                 {

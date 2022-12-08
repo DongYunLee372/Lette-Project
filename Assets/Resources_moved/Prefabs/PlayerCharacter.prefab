@@ -2575,7 +2575,7 @@ MonoBehaviour:
     GroundMask:
       serializedVersion: 2
       m_Bits: 64
-    MaxSlop: 35
+    MaxSlop: 60
     SlopAccel: 10
     MaxStep: 0
     RunningStaminaVal: 4
@@ -3971,7 +3971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4758049569133498026, guid: c18f6c843c8b61c4bb060987abc71043, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4758049569133498026, guid: c18f6c843c8b61c4bb060987abc71043, type: 3}
       propertyPath: m_IsTrigger
@@ -3979,7 +3979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7430669500959522312, guid: c18f6c843c8b61c4bb060987abc71043, type: 3}
       propertyPath: HitAngle
-      value: 200
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7430669500959522312, guid: c18f6c843c8b61c4bb060987abc71043, type: 3}
       propertyPath: targetTag

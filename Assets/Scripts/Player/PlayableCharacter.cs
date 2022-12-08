@@ -112,6 +112,7 @@ public class PlayableCharacter : MonoBehaviour
 
         //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
         //Debug.Log($"{CharacterDBInfo.P_player_HP}");
+
         fsm = new MyStateMachine.StateMachine<States, MyStateMachine.Drive>(this);
         SetState(States.Idle);
 
@@ -127,7 +128,7 @@ public class PlayableCharacter : MonoBehaviour
         //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
         if (CharacterUIPanel == null)
         {
-            if(UIManager.Instance!=null)
+            if (UIManager.Instance != null)
                 CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
             else
                 CharacterUIPanel = GameMG.Instance.Resource.Instantiate<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
