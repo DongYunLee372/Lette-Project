@@ -199,7 +199,7 @@ public class GameMG : Singleton<GameMG>
 
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            GameData_Load.Instance.ChangeScene(Scenes_Stage.BossEnd);  //보스 엔드
+            GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage1);  //보스 엔드
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
