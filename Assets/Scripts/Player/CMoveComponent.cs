@@ -498,11 +498,10 @@ public class CMoveComponent : BaseComponent
 
             if (curTime >= maxTime)
             {
-                //this.transform.position = dest;
-                //if (invoker != null)
-                //    invoker.Invoke("");
-
                 PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
+                if (invoker != null)
+                    invoker.Invoke();
 
                 Move(new Vector3(0, 0, 0), 0);
 
@@ -512,12 +511,12 @@ public class CMoveComponent : BaseComponent
 
             if (curDirection.magnitude <= 0.1f)
             {
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+
                 if (invoker != null)
                     invoker.Invoke();
 
                 Move(new Vector3(0, 0, 0), 0);
-
-                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
 
                 yield break;
             }
