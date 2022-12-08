@@ -455,7 +455,7 @@ public class CMoveComponent : BaseComponent
 
 
     //목적지까지 이동
-    public IEnumerator CorDoMove(Vector3 dest,float maxTime, ActionInvoker invoker = null)
+    public IEnumerator CorDoMove(Vector3 dest, float maxTime, ActionInvoker invoker = null)
     {
         //float distance = direction.magnitude;
         //direction.Normalize();
@@ -501,6 +501,8 @@ public class CMoveComponent : BaseComponent
                 //this.transform.position = dest;
                 //if (invoker != null)
                 //    invoker.Invoke("");
+
+                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
 
                 Move(new Vector3(0, 0, 0), 0);
 
