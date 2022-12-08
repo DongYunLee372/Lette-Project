@@ -581,7 +581,7 @@ public class Battle_Character : MonoBehaviour
                     if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z),
                         new Vector3(attack_Info[info_num].off_Mesh_Pos[0].position.x, 0, attack_Info[info_num].off_Mesh_Pos[0].position.z)) <= 4f)
                     {
-                        gameObject.transform.position = new Vector3(transform.position.x + 2, 0, transform.position.z + 2);
+                        gameObject.transform.position = new Vector3(transform.position.x + 2, transform.position.y, transform.position.z + 2);
                     }
                     else
                         gameObject.transform.position = attack_Info[info_num].off_Mesh_Pos[0].position;
