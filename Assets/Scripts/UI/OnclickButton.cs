@@ -91,7 +91,7 @@ public class OnclickButton : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        GameData_Load.Instance.ChangeScene(Scenes_Stage.Stage2);
+        GameData_Load.Instance.ChangeScene(Scenes_Stage.tutorial);
         SoundManager.Instance.bgmSource.Stop();
 
         if(!UIManager.Instance.Findobjbool("Minimap"))
