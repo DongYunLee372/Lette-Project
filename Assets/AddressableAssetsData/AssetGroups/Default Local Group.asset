@@ -281,14 +281,6 @@ MonoBehaviour:
     m_Address: LoadingRestart
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5fc360903cf4b8c49bda26506f29b020
-    m_Address: BoatScene
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 26e13c7c8aacf0c41a5e02d292da3b74
-    m_Address: Roomtest
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 21b350ed9742ba141941a01b85b59daa
     m_Address: BossRestartGameData
     m_ReadOnly: 0
@@ -336,10 +328,6 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 19025913ec7d5dc4392b158a8a99730a
     m_Address: Skeleton_Warrior
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: f804b6d81de4fc440bf71fd908dfaaa6
-    m_Address: Forest
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 4187ffc6f29ae4947b47ae09bbb3c73b
