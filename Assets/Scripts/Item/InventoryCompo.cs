@@ -7,6 +7,12 @@ public class InventoryCompo : MonoBehaviour
     /// <summary> 아이템 수용 한도 </summary>
     public int Capacity { get; private set; }
 
+    [SerializeField]
+    private EquipmentUI _equipmentUI;
+
+    [SerializeField]
+    public Item2 temp;
+
     // 초기 수용 한도
     [SerializeField, Range(8, 64)]
     private int _initalCapacity = 32;
@@ -36,11 +42,20 @@ public class InventoryCompo : MonoBehaviour
     
     public void Use(int index)
     {
+        
         if (_items[index] == null) return;
 
         // 사용 가능한 아이템인 경우
         if (_items[index] is IUsableItem uItem)
         {
+
+            if (_items[index] is EquipmentItem eItem)
+            {
+                _equipmentUI.ItemMounting(uItem.E_Use() , _items[index]);
+                _inventoryUI.RemoveItem(index);
+                return;
+            }
+            
             // 아이템 사용
             bool succeeded = uItem.Use();
 
@@ -159,7 +174,7 @@ public class InventoryCompo : MonoBehaviour
     }
     public void UpdateSlot(int index)
     {
-        Debug.Log("Add UpdateSlot2");
+        
         if (!IsValidIndex(index)) return;
 
         Item2 item = _items[index];
@@ -268,7 +283,7 @@ public class InventoryCompo : MonoBehaviour
                         // 남은 개수 계산
                         amount = (amount > ciData.MaxAmount) ? (amount - ciData.MaxAmount) : 0;
 
-                        Debug.Log("Add UpdateSlot");
+                        //Debug.Log("Add UpdateSlot");
                         UpdateSlot(index);
                     }
                 }
@@ -285,6 +300,7 @@ public class InventoryCompo : MonoBehaviour
                 {
                     // 아이템을 생성하여 슬롯에 추가
                     _items[index] = itemData.CreateItem();
+                   
                     amount = 0;
 
                     UpdateSlot(index);
@@ -306,7 +322,8 @@ public class InventoryCompo : MonoBehaviour
 
                 // 아이템을 생성하여 슬롯에 추가
                 _items[index] = itemData.CreateItem();
-
+                Debug.Log(_items[index].Data.Name);
+                temp = _items[index];
                 UpdateSlot(index);
             }
         }

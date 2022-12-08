@@ -32,7 +32,7 @@ public class InventoryUI : MonoBehaviour
     private RectTransform _contentAreaRT; //슬롯들이 위치할 영역
     [SerializeField]
     private GameObject _slotUiPrefab; //슬롯 원본 프리팹
-
+    [SerializeField]
     private List<ItemSlotUI> _slotUIList = new List<ItemSlotUI>();
     // ************************************************************** //
 
@@ -137,13 +137,13 @@ public class InventoryUI : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("다운");
+            //Debug.Log("다운");
             _beginDragSlot = RaycastGetComponent<ItemSlotUI>();
 
             //아이템을 가진 슬롯만 가능
             if (_beginDragSlot != null && _beginDragSlot.HasItem)
             {
-                Debug.Log("합격");
+                //Debug.Log("합격");
                 // 첫 클릭 슬롯 트랜스 폼
                 _beginDragSlotIconTransform = _beginDragSlot.IconRect.transform;
                 // 첫 클릭 슬롯 위치
@@ -219,23 +219,23 @@ public class InventoryUI : MonoBehaviour
             // 1) 마우스 클릭 떼는 순간 좌측 Ctrl 또는 Shift 키 유지
             // 2) begin : 셀 수 있는 아이템 / end : 비어있는 슬롯
             // 3) begin 아이템의 수량 > 1
-            bool isSeparatable =
-                (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift)) &&
-                (_inventory.IsCountableItem(_beginDragSlot.Index) && !_inventory.HasItem(endDragSlot.Index));
+            //bool isSeparatable =
+            //    (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift)) &&
+            //    (_inventory.IsCountableItem(_beginDragSlot.Index) && !_inventory.HasItem(endDragSlot.Index));
 
-            // true : 수량 나누기, false : 교환 또는 이동
-            bool isSeparation = false;
-            int currentAmount = 0;
+            //// true : 수량 나누기, false : 교환 또는 이동
+            //bool isSeparation = false;
+            //int currentAmount = 0;
 
-            // 현재 개수 확인
-            if (isSeparatable)
-            {
-                currentAmount = _inventory.GetCurrentAmount(_beginDragSlot.Index);
-                if (currentAmount > 1)
-                {
-                    isSeparation = true;
-                }
-            }
+            //// 현재 개수 확인
+            //if (isSeparatable)
+            //{
+            //    currentAmount = _inventory.GetCurrentAmount(_beginDragSlot.Index);
+            //    if (currentAmount > 1)
+            //    {
+            //        isSeparation = true;
+            //    }
+            //}
 
             //// 1. 개수 나누기
             //if (isSeparation)
@@ -307,7 +307,7 @@ public class InventoryUI : MonoBehaviour
     public void SetItemIcon(int index, Sprite icon)
     {
         //EditorLog($"Set Item Icon : Slot [{index}]");
-        Debug.Log("SetItemIcon");
+        //Debug.Log("SetItemIcon");
         _slotUIList[index].SetItem(icon);
     }
 

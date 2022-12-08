@@ -181,7 +181,7 @@ public class ItemSlotUI : MonoBehaviour
     {
         if (itemSprite != null)
         {
-            Debug.Log("SetItem");
+            //Debug.Log("SetItem");
             _iconImage.sprite = itemSprite;
             ShowIcon();
         }

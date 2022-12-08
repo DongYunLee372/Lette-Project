@@ -11,6 +11,7 @@ public class WeaponItemData : EquipmentItemData
 
     public override Item2 CreateItem()
     {
+        
         return new WeaponItem(this);
     }
 

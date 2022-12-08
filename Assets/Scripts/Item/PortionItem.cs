@@ -8,14 +8,14 @@ public class PortionItem : CountableItem ,IUsableItem
     public PlayableCharacter Player;
     public bool Use()
     {
-        
+        Debug.Log("포션");
         Amount--;
-        if (Player == null)
-            Player = PlayableCharacter.Instance;
+        //if (Player == null)
+        //    Player = PlayableCharacter.Instance;
 
-        Debug.Log(Player.name);
+        //Debug.Log(Player.name);
 
-        Player.status.HPUp(50);
+        //Player.status.HPUp(50);
         return true;
     }
 
@@ -24,5 +24,8 @@ public class PortionItem : CountableItem ,IUsableItem
         return new PortionItem(CountableData as PortionItemData, amount);
     }
 
-    
+    public int E_Use()
+    {
+        return 1;
+    }
 }

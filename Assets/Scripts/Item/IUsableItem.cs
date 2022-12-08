@@ -6,4 +6,6 @@ public interface IUsableItem
 {
     // 아이템 사용하기(사용 성공 여부 리턴) 
     bool Use();
+    int E_Use();
+    
 }

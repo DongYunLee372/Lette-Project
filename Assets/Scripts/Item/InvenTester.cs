@@ -21,13 +21,21 @@ public class InvenTester : MonoBehaviour
         //}
     }
 
-    // Update is called once per frame
+    public void SetTestWeaponInven()
+    {
+        _inventory.Add(_itemDataArray[0], 5);
+        _inventory.Add(_itemDataArray[1], 1);
+        _inventory.Add(_itemDataArray[2], 1);
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.N))
         {
+            
             for(int i=0;i<_itemDataArray.Length;i++)
             _inventory.Add(_itemDataArray[i], 3);
+            
         }
 
         if (Input.GetKeyDown(KeyCode.M))

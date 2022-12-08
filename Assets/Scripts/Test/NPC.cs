@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class NPC : BaseInteractive
 {
+    [SerializeField]
+    public InvenTester _inventester;
+    [SerializeField]
+    public GameObject cheatinven;
+
 
     [SerializeField]
     TEST_ScriptableOBJ NPC_Infor;
@@ -22,6 +27,7 @@ public class NPC : BaseInteractive
     public override void Init()
     {
         P_interactive = EnumScp.InteractiveIndex.TestNPC_Sangmin;
+        _inventester = cheatinven.GetComponent<InvenTester>();
     }
 
     public override void Oninteractive()
@@ -36,7 +42,7 @@ public class NPC : BaseInteractive
             npc_panel.SetActive(true);
             Panel_Text = npc_panel.GetComponentInChildren<Text>();
             Panel_Text.text = NPC_Infor.P_NPC_Text;
-
+            _inventester.SetTestWeaponInven();
         }
     }
     public void OnTriggerExit(Collider other)
