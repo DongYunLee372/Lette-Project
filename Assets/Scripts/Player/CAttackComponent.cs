@@ -149,11 +149,6 @@ public class CAttackComponent : BaseComponent
         //초기화 할때 각각의 스킬 애니메이션의 이벤트들과 실행시킬 함수를 연결시켜 준다.
         for (int i = 0; i < skillinfos.Length; i++)
         {
-            //eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-            //    new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclip.name, AttackMove),
-            //    new KeyValuePair<string, AnimationEventSystem.endCallback>(skillinfos[i].aniclip.name, AttackEnd));
-
-
 
             eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(skillinfos[i].aniclipName, AttackMove), skillinfos[i].MoveStartTime,
                    new KeyValuePair<string, AnimationEventSystem.midCallback>(skillinfos[i].aniclipName, SkillAttackEnd), skillinfos[i].AttackEndTime,
@@ -239,18 +234,27 @@ public class CAttackComponent : BaseComponent
             curval.IsAttacking = true;
         }
 
-        if (skillinfos[skillnum].Effect != null)
+
+        if(skillinfos[skillnum].AttackType == CharEnumTypes.eAttackType.AreaOfEffect)
         {
-            Effectcoroutine = timer.Cor_TimeCounter<string, Transform, float>
-                (skillinfos[skillnum].EffectStartTime, CreateEffect, skillinfos[skillnum].EffectAdressable, skillinfos[skillnum].EffectPosRot, 1.5f);
-            StartCoroutine(Effectcoroutine);
+
+        }
+        else
+        {
+            if (skillinfos[skillnum].Effect != null)
+            {
+                Effectcoroutine = timer.Cor_TimeCounter<string, Transform, float>
+                    (skillinfos[skillnum].EffectStartTime, CreateEffect, skillinfos[skillnum].EffectAdressable, skillinfos[skillnum].EffectPosRot, 1.5f);
+                StartCoroutine(Effectcoroutine);
+            }
+
+            //EffectManager.Instance.SpawnEffectLooping(skillinfos[skillnum].Effect, this.transform.position, Quaternion.identity, 2, 10);
+
+            animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
         }
 
-        //EffectManager.Instance.SpawnEffectLooping(skillinfos[skillnum].Effect, this.transform.position, Quaternion.identity, 2, 10);
 
         
-
-        animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
     }
 
 

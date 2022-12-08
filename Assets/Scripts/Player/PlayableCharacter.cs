@@ -104,13 +104,13 @@ public class PlayableCharacter : MonoBehaviour
         //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
         if (CharacterUIPanel == null)
         {
-            //CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+            CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
             CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
         }
         if(inventory == null)
         {
-            //GameObject obj = UIManager.Instance.Prefabsload("Inven", Canvas_Enum.CANVAS_NUM.player_cavas);
-            GameObject obj = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Inven");
+            GameObject obj = UIManager.Instance.Prefabsload("Inven", Canvas_Enum.CANVAS_NUM.player_cavas);
+            obj = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Inven");
             inventory = obj.GetComponent<InvenTory>();
         }
 
