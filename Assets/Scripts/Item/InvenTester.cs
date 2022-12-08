@@ -9,6 +9,16 @@ public class InvenTester : MonoBehaviour
     public EquipmentUI _equipmentUI;
     public SkillPanelUI _skillPanelUI;
 
+
+    public Vector2 invenUIPos;
+    public bool invenb;
+
+    public Vector2 _equipmentUIPos;
+    public bool eqb;
+
+    public Vector2 _skillPanelUIPos;
+    public bool skillb;
+
     public ItemData[] _itemDataArray;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +34,18 @@ public class InvenTester : MonoBehaviour
         //_inventoryUI.gameObject.SetActive(false);
         //_equipmentUI.gameObject.SetActive(false);
         //_skillPanelUI.gameObject.SetActive(false);
+
+        invenUIPos = _inventoryUI.transform.position;
+        _equipmentUIPos = _equipmentUI.transform.position;
+        _skillPanelUIPos = _skillPanelUI.transform.position;
+
+        _inventoryUI.transform.position = new Vector2(5000, 5000);
+        _equipmentUI.transform.position = new Vector2(5000, 5000);
+        _skillPanelUI.transform.position = new Vector2(5000, 5000);
+
+        invenb = false;
+        eqb = false;
+        skillb = false;
     }
 
     public void SetTestWeaponInven()
@@ -46,41 +68,34 @@ public class InvenTester : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.M))
-        {
-            //_inventoryUI.Set();
-            Debug.Log("M");
-            if (_inventoryUI.gameObject.activeSelf == true)
-            {                
-                _inventoryUI.gameObject.SetActive(false);              
-            }
+        {           
+            if(!invenb)
+                _inventoryUI.transform.position = invenUIPos;
             else
-            {
-                _inventoryUI.gameObject.SetActive(true);                
-            }
-        }
+            _inventoryUI.transform.position = new Vector2(5000, 5000);
 
+            
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {            
+            
+        }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            if (_equipmentUI.gameObject.activeSelf == true)
-            {
-                _equipmentUI.gameObject.SetActive(false);                
-            }
+            if (!invenb)
+                _equipmentUI.transform.position = invenUIPos;
             else
-            {
-                _equipmentUI.gameObject.SetActive(true);               
-            }
+                _equipmentUI.transform.position = new Vector2(5000, 5000);
+
+            
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (_skillPanelUI.gameObject.activeSelf == true)
-            { 
-                _skillPanelUI.gameObject.SetActive(false);                
-            }
-            else 
-            {
-                _skillPanelUI.gameObject.SetActive(true);               
-            }
+            if (!invenb)
+                _skillPanelUI.transform.position = _skillPanelUIPos;
+            else
+                _skillPanelUI.transform.position = new Vector2(5000, 5000);
         }
     }
 }
