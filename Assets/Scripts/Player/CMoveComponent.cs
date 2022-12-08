@@ -288,6 +288,8 @@ public class CMoveComponent : BaseComponent
     //    StartCoroutine(CorDoMove(startpos, destpos, duration));
     //}
 
+    IEnumerator automovestopcor = null;
+
     public void AutoMove(Vector3 destpos, float moveTime, ActionInvoker invoker = null)
     {
         Vector3 startpos = this.transform.position;
@@ -297,8 +299,20 @@ public class CMoveComponent : BaseComponent
         PlayableCharacter.Instance.SetState(PlayableCharacter.States.AutoMove);
 
         StartCoroutine(CorDoMove(destpos,moveTime, invoker));
+        automovestopcor = timecounter.Cor_TimeCounter(moveTime, AutoMoveStop);
+        StartCoroutine(automovestopcor);
     }
 
+
+    public void AutoMoveStop()
+    {
+        PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+        if (automovestopcor != null)
+        {
+            StopCoroutine(automovestopcor);
+            automovestopcor = null;
+        }
+    }
 
     //해당 지점으로 이동한다.
     public void DoMoveDir(Vector3 dest, Invoker invoker = null)
@@ -491,22 +505,28 @@ public class CMoveComponent : BaseComponent
             {
                 //if (invoker != null)
                 //    invoker.Invoke();
+                if (automovestopcor != null)
+                {
+                    StopCoroutine(automovestopcor);
+                    automovestopcor = null;
+                }
+                    
 
                 Move(new Vector3(0, 0, 0), 0);
                 yield break;
             }
 
-            if (curTime >= maxTime)
-            {
-                PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
+            //if (curTime >= maxTime)
+            //{
+            //    PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
 
-                if (invoker != null)
-                    invoker.Invoke();
+            //    if (invoker != null)
+            //        invoker.Invoke();
 
-                Move(new Vector3(0, 0, 0), 0);
+            //    Move(new Vector3(0, 0, 0), 0);
 
-                yield break;
-            }
+            //    yield break;
+            //}
             //runtime += Time.deltaTime;
 
             if (curDirection.magnitude <= 0.1f)
@@ -515,6 +535,12 @@ public class CMoveComponent : BaseComponent
 
                 if (invoker != null)
                     invoker.Invoke();
+
+                if (automovestopcor != null)
+                {
+                    StopCoroutine(automovestopcor);
+                    automovestopcor = null;
+                }
 
                 Move(new Vector3(0, 0, 0), 0);
 

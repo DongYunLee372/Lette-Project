@@ -475,12 +475,12 @@ public class CInputComponent : BaseComponent
         //}
 
         //이동 테스트
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    movecom.AutoMove(this.transform.position + new Vector3(0.0f, 0.0f, 5.0f), TestEnd);
-        //}
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            movecom.AutoMove(this.transform.position + new Vector3(0.0f, 0.0f, 500.0f),2, TestEnd);
+        }
 
-       
+
 
         //if (Input.GetKeyDown(KeyCode.B))
         //{

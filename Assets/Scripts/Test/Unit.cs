@@ -44,7 +44,7 @@ public class Unit : MonoBehaviour
                 }
                 //  transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
 
-                PlayableCharacter.Instance.AutoMove(currentWaypoint,MoveEnd);
+                //PlayableCharacter.Instance.AutoMove(currentWaypoint,MoveEnd);
             }
             yield return null;
         }
