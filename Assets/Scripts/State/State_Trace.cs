@@ -117,7 +117,8 @@ public class State_Trace : State
         if (!fflag)
             battle_character.animator.Play("Idle");
 
-        battle_character.real_AI.navMesh.SetDestination(battle_character.cur_Target.transform.position);
+        if (battle_character.real_AI.navMesh.enabled)
+            battle_character.real_AI.navMesh.SetDestination(battle_character.cur_Target.transform.position);
     }
 
     public override void State_Initialize(Battle_Character battle_character)

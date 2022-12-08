@@ -1,7 +1,7 @@
 mon_nameEng,Number,mon_Index,mon_nameKor,mon_MaxHP,mon_Atk,mon_Def,mon_moveSpeed,mon_Balance,mon_maxMP,mon_detectionRange,mon_CloseAtk,mon_FarAtk,mon_SpecialAtk,mon_regenMP,dieDelay,drop_Reward
 Arthur,1,mon_06_01,아서,1000,40,10,3,200,100,15,2,8,"3,7",10,1,0
 Skeleton,2,mon_01_01,스켈레톤,100,30,3,3,100,10,10,2,0,0,5,1,0
-Spider,3,mon_02_01,거미,25,5,1,20,100,200,300,10,10,2,0,0,5,1,0
+Spider,3,mon_02_01,거미,10,5,3,10,100,10,100,2,0,0,5,1,0
 ForestDemon,4,mon_03_01,데몬골렘,200,30,3,3,100,10,30,1,0,0,5,1,0
 ForestPlant,5,mon_04_01,네펜데스,200,30,3,3,100,10,30,1,0,0,5,1,0
 Skeleton_Warrior,6,mon_05_01,스켈레톤워리어,25,10,3,1,100,10,20,1,0,0,5,1,0

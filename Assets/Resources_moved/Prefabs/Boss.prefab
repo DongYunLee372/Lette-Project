@@ -1001,6 +1001,7 @@ MonoBehaviour:
   attack_Collider:
   - {fileID: 3200017971700673947}
   - {fileID: 7377149866813902293}
+  - {fileID: 7377149866813902293}
   attack_Type: 0
   attack_Logic: 0101
   isHit: 0

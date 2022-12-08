@@ -577,7 +577,14 @@ public class Battle_Character : MonoBehaviour
                 {
                     skinMesh.enabled = false;
                     real_AI.navMesh.enabled = false;
-                    gameObject.transform.position = attack_Info[info_num].off_Mesh_Pos[0].position;
+
+                    if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z),
+                        new Vector3(attack_Info[info_num].off_Mesh_Pos[0].position.x, 0, attack_Info[info_num].off_Mesh_Pos[0].position.z)) <= 4f)
+                    {
+                        gameObject.transform.position = new Vector3(transform.position.x + 2, 0, transform.position.z + 2);
+                    }
+                    else
+                        gameObject.transform.position = attack_Info[info_num].off_Mesh_Pos[0].position;
 
                     StartCoroutine(skinMesh_Coroutine(0.75f));
                 }
