@@ -173,9 +173,9 @@ public class PlayableCharacter : MonoBehaviour
         curState = fsm.GetCurState();
     }
 
-    public void AutoMove(Vector3 destpos, CMoveComponent.ActionInvoker invoker = null)
+    public void AutoMove(Vector3 destpos, float moveTime, CMoveComponent.ActionInvoker invoker = null)
     {
-        movecom.AutoMove(destpos, invoker);
+        movecom.AutoMove(destpos, moveTime, invoker);
     }
 
 

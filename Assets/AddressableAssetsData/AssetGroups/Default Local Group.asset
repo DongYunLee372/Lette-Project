@@ -354,6 +354,10 @@ MonoBehaviour:
     m_Address: Eff1_Right
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: c18f6c843c8b61c4bb060987abc71043
+    m_Address: WeaponColl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

@@ -190,7 +190,7 @@ public class CAttackComponent : BaseComponent
             return;
 
         
-
+        
         if (collision.gameObject.tag == monstertag)
         {
             int nowMonsterID = collision.gameObject.GetInstanceID();
@@ -198,7 +198,7 @@ public class CAttackComponent : BaseComponent
                 return;
 
             LastMonsterID = nowMonsterID;
-            //Debug.Log("몬스터 어택 들어옴");
+            Debug.Log("몬스터 어택 들어옴");
             //collision.GetComponent<Battle_Character>().Damaged((int)attackinfos[CurAttackNum].damage, this.transform.position);
             collision.GetComponent<Battle_Character>().Damaged((int)AttackInfos[CurAttackNum].damage, this.transform.position);
             //Debug.Log("공격 들어옴");
@@ -385,12 +385,12 @@ public class CAttackComponent : BaseComponent
     public void AttackMove(string clipname)
     {
 
-        Debug.Log("공격 움직임");
+        Debug.Log($"공격 움직임 {clipname}");
         for (int i = 0; i < AttackInfos.Count; i++)
         {
             if (AttackInfos[i].aniclipName == clipname)
             {
-                movecom.FowardDoMove(AttackInfos[i].movedis, AttackInfos[i].movetime);
+                movecom?.FowardDoMove(AttackInfos[i].movedis, AttackInfos[i].movetime);
                 return;
             }
         }
@@ -399,7 +399,7 @@ public class CAttackComponent : BaseComponent
         {
             if (skillinfos[i].aniclip.name == clipname)
             {
-                movecom.FowardDoMove(skillinfos[i].Movedis, skillinfos[i].MoveTime);
+                movecom?.FowardDoMove(skillinfos[i].Movedis, skillinfos[i].MoveTime);
                 return;
             }
         }

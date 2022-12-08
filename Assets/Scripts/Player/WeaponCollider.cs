@@ -88,7 +88,7 @@ public class WeaponCollider : Colliders
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log($"WeaponCol {other.gameObject.name} 탐지중");
+        //Debug.Log($"WeaponCol {other.gameObject.name} 탐지중");
         if (PlayableCharacter.Instance.curState == PlayableCharacter.States.Attack)
         {
             if (other.transform.gameObject.tag == (targetTag))

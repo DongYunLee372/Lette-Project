@@ -288,7 +288,7 @@ public class CMoveComponent : BaseComponent
     //    StartCoroutine(CorDoMove(startpos, destpos, duration));
     //}
 
-    public void AutoMove(Vector3 destpos, ActionInvoker invoker = null)
+    public void AutoMove(Vector3 destpos, float moveTime, ActionInvoker invoker = null)
     {
         Vector3 startpos = this.transform.position;
         Vector3 directon = destpos - startpos;
@@ -296,7 +296,7 @@ public class CMoveComponent : BaseComponent
         //float speed = directon.magnitude / duration;
         PlayableCharacter.Instance.SetState(PlayableCharacter.States.AutoMove);
 
-        StartCoroutine(CorDoMove(destpos, invoker));
+        StartCoroutine(CorDoMove(destpos,moveTime, invoker));
     }
 
 
@@ -419,6 +419,8 @@ public class CMoveComponent : BaseComponent
                 if (invoker != null)
                     invoker.Invoke("");
 
+                //Debug.Log("공격 움직임 종료");
+
                 Move(new Vector3(0, 0, 0), 0);
                 yield break;
             }
@@ -431,6 +433,8 @@ public class CMoveComponent : BaseComponent
                 if (invoker != null)
                     invoker.Invoke("");
 
+                //Debug.Log("공격 움직임 종료");
+
                 Move(new Vector3(0, 0, 0), 0);
 
                 yield break;
@@ -440,7 +444,7 @@ public class CMoveComponent : BaseComponent
 
             //Debug.Log($"{curdest.magnitude}");
             if (!curval.IsFowordBlock)
-                Move(direction, distance);
+                Move(direction, distance*100);
 
             lastTime = Time.time;
             yield return null;
@@ -451,7 +455,7 @@ public class CMoveComponent : BaseComponent
 
 
     //목적지까지 이동
-    public IEnumerator CorDoMove(Vector3 dest, ActionInvoker invoker = null)
+    public IEnumerator CorDoMove(Vector3 dest,float maxTime, ActionInvoker invoker = null)
     {
         //float distance = direction.magnitude;
         //direction.Normalize();
@@ -492,16 +496,16 @@ public class CMoveComponent : BaseComponent
                 yield break;
             }
 
-            //if (curTime >= duration)
-            //{
-            //    //this.transform.position = dest;
-            //    if (invoker != null)
-            //        invoker.Invoke("");
+            if (curTime >= maxTime)
+            {
+                //this.transform.position = dest;
+                //if (invoker != null)
+                //    invoker.Invoke("");
 
-            //    Move(new Vector3(0, 0, 0), 0);
+                Move(new Vector3(0, 0, 0), 0);
 
-            //    yield break;
-            //}
+                yield break;
+            }
             //runtime += Time.deltaTime;
 
             if (curDirection.magnitude <= 0.1f)
