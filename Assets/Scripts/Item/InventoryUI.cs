@@ -138,7 +138,17 @@ public class InventoryUI : MonoBehaviour
         if (_raylist.Count == 0)
             return null;
 
-        return _raylist[0].gameObject.GetComponent<T>(); //가장 앞의 ui의 컴포넌트 반환
+        for(int i=0;i<_raylist.Count;i++)
+        {
+            if(_raylist[i].gameObject.GetComponent<T>())
+            {
+                Debug.Log("오");
+                return _raylist[0].gameObject.GetComponent<T>();
+            }
+                
+        }
+
+        return null; //가장 앞의 ui의 컴포넌트 반환
     }
 
     // 인벤토리 내 슬롯 아이템의 드래그 클릭등을 UnityEngine.EventSystems 안의
@@ -292,7 +302,8 @@ public class InventoryUI : MonoBehaviour
     }
 
     private void TryUseItem(int index)
-    {        
+    {
+        Debug.Log("TryUseItem");
         _inventory.Use(index);
     }
 

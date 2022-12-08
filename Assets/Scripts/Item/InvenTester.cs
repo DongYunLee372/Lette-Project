@@ -50,21 +50,12 @@ public class InvenTester : MonoBehaviour
             //_inventoryUI.Set();
             Debug.Log("M");
             if (_inventoryUI.gameObject.activeSelf == true)
-            {
-                //_inventoryUI.enabled = false;
-                _inventoryUI.gameObject.SetActive(false);
-                //_inventoryUI.Setoff();
-
-                //UIManager.Instance.CursorOff();
-                Debug.Log("false");
+            {                
+                _inventoryUI.gameObject.SetActive(false);              
             }
             else
             {
-                _inventoryUI.gameObject.SetActive(true);
-                //_inventory.ang();
-                //_inventoryUI.Seton();
-                Debug.Log("true");
-                // UIManager.Instance.CursorOn();
+                _inventoryUI.gameObject.SetActive(true);                
             }
         }
 
@@ -72,13 +63,11 @@ public class InvenTester : MonoBehaviour
         {
             if (_equipmentUI.gameObject.activeSelf == true)
             {
-                _equipmentUI.gameObject.SetActive(false);
-                //UIManager.Instance.CursorOff();
+                _equipmentUI.gameObject.SetActive(false);                
             }
             else
             {
-                _equipmentUI.gameObject.SetActive(true);
-                //UIManager.Instance.CursorOn();
+                _equipmentUI.gameObject.SetActive(true);               
             }
         }
 
@@ -86,13 +75,11 @@ public class InvenTester : MonoBehaviour
         {
             if (_skillPanelUI.gameObject.activeSelf == true)
             { 
-                _skillPanelUI.gameObject.SetActive(false);
-                //UIManager.Instance.CursorOff();
+                _skillPanelUI.gameObject.SetActive(false);                
             }
             else 
             {
-                _skillPanelUI.gameObject.SetActive(true);
-               // UIManager.Instance.CursorOn();
+                _skillPanelUI.gameObject.SetActive(true);               
             }
         }
     }

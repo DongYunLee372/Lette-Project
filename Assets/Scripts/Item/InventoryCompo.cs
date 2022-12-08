@@ -32,7 +32,7 @@ public class InventoryCompo : MonoBehaviour
     {
         _items = new Item2[_maxCapacity];
         Capacity = _initalCapacity;
-        
+        _inventoryUI.SetInventoryReference(this);
     }
 
    
@@ -44,16 +44,17 @@ public class InventoryCompo : MonoBehaviour
     }
     
     public void Use(int index)
-    {
-        
+    {        
         if (_items[index] == null) return;
 
+        Debug.Log("Use");
         // 사용 가능한 아이템인 경우
         if (_items[index] is IUsableItem uItem)
         {
 
             if (_items[index] is EquipmentItem eItem)
             {
+                Debug.Log("Use");
                 _equipmentUI.ItemMounting(uItem.E_Use() , _items[index]);
                 _inventoryUI.RemoveItem(index);
                 return;
