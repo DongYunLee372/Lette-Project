@@ -61,8 +61,8 @@ public class Colliders : MonoBehaviour
         //_EnterFunction = null;
         //_OuterFunction = null;
         //_StayFunction = null;
-        targetLayer = -1;
-        targetTag = null;
+        //targetLayer = -1;
+        //targetTag = null;
         //Start();
     }
 
