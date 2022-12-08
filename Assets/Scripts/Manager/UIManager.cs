@@ -123,15 +123,38 @@ public class UIManager : Singleton<UIManager>
                 check = true;
             }
         }
-
         if (!check)
             Debug.Log("실패");
+    }
+
+    public void Show(GameObject path)
+    {
+        for (int i = 0; i < info.Count; i++)
+        {
+            if (info[i].obj == path)
+            {
+                info[i].obj.SetActive(true);
+                info[i].active = true;
+            }
+        }
     }
     public void Hide(string path)
     {
         for (int i = 0; i < info.Count; i++)
         {
             if (info[i].path == path)
+            {
+                info[i].obj.SetActive(false);
+                info[i].active = false;
+            }
+        }
+    }
+
+    public void Hide(GameObject path)
+    {
+        for (int i = 0; i < info.Count; i++)
+        {
+            if (info[i].obj == path)
             {
                 info[i].obj.SetActive(false);
                 info[i].active = false;
@@ -187,7 +210,6 @@ public class UIManager : Singleton<UIManager>
                 }
             } 
         }
-        
     }
     public void RemoveAll()
     {
@@ -195,7 +217,6 @@ public class UIManager : Singleton<UIManager>
         {        
                 Destroy(info[i].obj);                  
                 //Debug.Log(child.name);
-            
         }
         info.Clear();
     }

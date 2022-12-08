@@ -19,7 +19,7 @@ public class EnemyHpbar : MonoBehaviour
     public Transform enemyTr; //적 캐릭터의 위치
     
     public Image myhp;
-
+    public Image Backgroundmyhp;
     public float Curhp;
     public float Maxhp;
 
@@ -35,12 +35,7 @@ public class EnemyHpbar : MonoBehaviour
         uiCamera = canvas.worldCamera;
         rectParent = canvas.GetComponent<RectTransform>();
         rectHp = GetComponent<RectTransform>();
-
         //asd
- 
-
-
-
     }
 
     private void Update()
@@ -52,6 +47,11 @@ public class EnemyHpbar : MonoBehaviour
         PlayableCharacter a= FindObjectOfType<PlayableCharacter>();
         if (a == null)
             return;
+        if (battle_Character.cur_Target != null)
+        {
+            myhp.enabled = true;
+            Backgroundmyhp.enabled = true;
+        }
         main = PlayableCharacter.Instance.GetCamera();     
         
         //main = CameraManager.Instance.Playercamera.GetComponent<Camera>();
@@ -79,8 +79,8 @@ public class EnemyHpbar : MonoBehaviour
     public EnemyHpbar SetHpBar(float HP, Transform trans , Battle_Character battle_obj)
     {
         GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", CANVAS_NUM.enemy_canvas);
-    
-        var _hpbar = hpBar.GetComponent<EnemyHpbar>();
+        my = hpBar;
+            var _hpbar = hpBar.GetComponent<EnemyHpbar>();
         //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = trans;
         _hpbar.offset = new Vector3(0, 1.7f, 0); ;
@@ -91,8 +91,10 @@ public class EnemyHpbar : MonoBehaviour
         _hpbar.myhp = _test;
         MyHpbar = _hpbar;
 
+        myhp.enabled = false;
+        Backgroundmyhp.enabled = false;
        // Destroyo(battle_Character);
-      //  Debug.Log(battle_Character.name);
+       //  Debug.Log(battle_Character.name);
        // Debug.Log(this.gameObject.name);
         return MyHpbar;
     }
