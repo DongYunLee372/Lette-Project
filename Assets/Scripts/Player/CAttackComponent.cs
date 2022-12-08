@@ -37,7 +37,7 @@ public class CAttackComponent : BaseComponent
 
 
     public List<AttackInfo> AttackInfos;
-
+    public GameObject SkillPreviewPlane = null;
 
     //스킬도 여기서 한번에 처리
     [System.Serializable]
@@ -115,6 +115,16 @@ public class CAttackComponent : BaseComponent
     public IEnumerator Linkcoroutine;
     [HideInInspector]
     public IEnumerator Movecoroutine;
+
+    [System.Serializable]
+    public class AreaInfo
+    {
+        public GameObject AreaObj;
+        public string AreaObjName;
+        public float DamageLoopTime;
+        public float DestroyTime;
+    }
+
 
     void Start()
     {
@@ -194,9 +204,10 @@ public class CAttackComponent : BaseComponent
 
             LastMonsterIDList.Add(nowMonsterID);
 
-            Debug.Log("몬스터 어택 들어옴");
+            //Debug.Log("몬스터 어택 들어옴");
             //collision.GetComponent<Battle_Character>().Damaged((int)attackinfos[CurAttackNum].damage, this.transform.position);
-            collision.GetComponent<Battle_Character>().Damaged((int)AttackInfos[CurAttackNum].damage, this.transform.position);
+            if(collision.GetComponent<Battle_Character>()!=null)
+                collision.GetComponent<Battle_Character>().Damaged((int)AttackInfos[CurAttackNum].damage, this.transform.position);
             //Debug.Log("공격 들어옴");
         }
 
@@ -207,7 +218,9 @@ public class CAttackComponent : BaseComponent
 
     }
 
-
+    public bool testbool = false;
+    public GameObject testGameObject;
+    public LayerMask testGroundlayer;
 
     //스킬을 재생해준다.
     public void SkillAttack(int skillnum)
@@ -238,10 +251,14 @@ public class CAttackComponent : BaseComponent
 
         if(skillinfos[skillnum].AttackType == CharEnumTypes.eAttackType.AreaOfEffect)
         {
-
+            Debug.Log("장판스킬");
+            //PlayableCharacter.Instance.SetState(PlayableCharacter.States.AreaOfEffect);
+            IsAttackingEnd("");
+            testbool = true;
         }
         else
         {
+            Debug.Log("일반스킬");
             if (skillinfos[skillnum].Effect != null)
             {
                 Effectcoroutine = timer.Cor_TimeCounter<string, Transform, float>
@@ -587,4 +604,40 @@ public class CAttackComponent : BaseComponent
         p_comtype = CharEnumTypes.eComponentTypes.AttackCom;
     }
 
+
+    private void Update()
+    {
+        if(testbool)
+        {
+            Ray ray = PlayableCharacter.Instance.GetCamera().ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            RaycastHit hit;
+            Physics.Raycast(ray,out hit, 100, testGroundlayer);
+
+
+            if (hit.collider != null)
+            {
+                if (SkillPreviewPlane == null)
+                    GameMG.Instance.Resource.Instantiate<GameObject>("SkillPreviewPlane");
+                //SkillPreviewPlane = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("SkillPreviewPlane");
+
+                SkillPreviewPlane.transform.position = hit.point + new Vector3(0, 0.2f, 0);
+
+                //해당 상태에서 마우스 좌클릭을 누르면 
+                if(Input.GetMouseButtonDown(0))
+                {
+
+                }
+
+
+            }
+            
+
+
+
+
+
+        }
+
+
+    }
 }

@@ -15,6 +15,8 @@ public class Colliders : MonoBehaviour
 
     public Collider Mycollider;
 
+    public float stayCollTime;
+
     public virtual void SetCollitionFunction(CollFunction _enterfunction, CollFunction _outerfunction, CollFunction _stayfunction)
     {
         _EnterFunction = _enterfunction;

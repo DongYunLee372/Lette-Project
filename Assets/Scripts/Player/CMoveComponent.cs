@@ -755,6 +755,12 @@ public class CMoveComponent : BaseComponent
         }
     }
 
+    //정면이 계단인지 확인하고 계단이면 넘어간다.
+    public void StepCheck()
+    {
+
+    }
+
 
     //움직일 방향과 거리를 넣어주면 현재 지형에 따라서 움직여 준다.
     //기울어진 지형과 계단에서의 움직임 처리 제작 필요

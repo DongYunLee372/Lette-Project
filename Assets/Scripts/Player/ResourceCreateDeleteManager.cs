@@ -20,13 +20,10 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
 
     public T InstantiateObj<T>(string adressableName) where T:class
     {
-        //어드레서블로
-        //var temp = Addressables.InstantiateAsync(adressableName);
-        //var result = temp.WaitForCompletion();
-
         //일단 해당
         var temp = Addressables.LoadAssetAsync<GameObject>(adressableName);
         GameObject result = temp.WaitForCompletion();
+
         if(result==null)
         {
             Debug.LogError("어드레서블 로드 오류" + adressableName + "존재하지 않음");
@@ -41,7 +38,7 @@ public class ResourceCreateDeleteManager : Singleton<ResourceCreateDeleteManager
             Debug.Log("풀링생성");
             return poolManager.GetObject<T>(adressableName);
         }
-        else
+        else//아니면 그냥 생성해준다.
         {
             Debug.Log("그냥 생성");
             temp = Addressables.InstantiateAsync(adressableName);

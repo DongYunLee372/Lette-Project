@@ -123,7 +123,8 @@ public class EffectManager : MySingleton<EffectManager>
     public GameObject InstantiateEffect(string adressableAdress)
     {
         //GameObject copy = GameObject.Instantiate(effect);
-        GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
+        //GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
+        GameObject copy = GameMG.Instance.Resource.Instantiate<GameObject>(adressableAdress);
         copy.transform.parent = null;
         CurEffects.Add(copy.GetInstanceID(), copy);
         return copy;
@@ -228,7 +229,8 @@ public class EffectManager : MySingleton<EffectManager>
 
     public void DestroyEffect(string adressableAdress, GameObject obj)
     {
-        ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>(adressableAdress, obj);
+        //ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>(adressableAdress, obj);
+        GameMG.Instance.Resource.Destroy<GameObject>(obj);
     }
 
     public void DoMove(GameObject effect, Vector3 dest, float duration, MyDotween.Dotween.Ease ease = MyDotween.Dotween.Ease.Linear)
@@ -249,6 +251,7 @@ public class EffectManager : MySingleton<EffectManager>
     public GameObject InstantiateEffect(GameObject effect)
     {
         GameObject copy = GameObject.Instantiate(effect);
+        
         //GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
         copy.transform.parent = null;
         CurEffects.Add(copy.GetInstanceID(), copy);

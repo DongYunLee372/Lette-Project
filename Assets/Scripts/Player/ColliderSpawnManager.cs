@@ -27,8 +27,8 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         //GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
 
         //copycoll = GameObject.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Box]);
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.BoxColl].name);
-
+        //copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.BoxColl].name);
+        copycoll = GameMG.Instance.Resource.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.BoxColl].name);
 
         //copycoll.GetComponent<GameObject>().SetActive(true);
         copycoll.gameObject.transform.position = pos;
@@ -38,7 +38,7 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         SpawnedCollList.Add(copycoll);
 
 
-        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, GameObject.Destroy, copycoll.gameObject));
+        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, CollDestroy, copycoll.gameObject));
 
 
         return copycoll;
@@ -48,7 +48,8 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
     {
         Colliders copycoll = null;
 
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+        //copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+        copycoll = GameMG.Instance.Resource.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
         //copycoll = GameObject.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.Sphere]);
         //copycoll.GetComponent<GameObject>().SetActive(true);
         copycoll.gameObject.transform.position = pos;
@@ -59,7 +60,7 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         SpawnedCollList.Add(copycoll);
 
 
-        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, GameObject.Destroy, copycoll.gameObject));
+        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, CollDestroy, copycoll.gameObject));
 
 
         return copycoll;
@@ -70,7 +71,9 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         Colliders copycoll = null;
         //colltype = type;
 
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.BoxColl].name);
+        //copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.BoxColl].name);
+        copycoll = GameMG.Instance.Resource.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.BoxColl].name);
+
         //copycoll.GetComponent<GameObject>().SetActive(true);
         copycoll.gameObject.transform.position = pos;
         copycoll.targetTag = targetLayer;
@@ -79,7 +82,7 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         SpawnedCollList.Add(copycoll);
 
 
-        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, GameObject.Destroy, copycoll.gameObject));
+        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, CollDestroy, copycoll.gameObject));
 
 
         return copycoll;
@@ -89,7 +92,10 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
     {
         Colliders copycoll = null;
 
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+        //copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+        copycoll = GameMG.Instance.Resource.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+
+
         //copycoll.GetComponent<GameObject>().SetActive(true);
         copycoll.gameObject.transform.position = pos;
         copycoll.targetTag = targetLayer;
@@ -99,7 +105,7 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         SpawnedCollList.Add(copycoll);
 
 
-        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, GameObject.Destroy, copycoll.gameObject));
+        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, CollDestroy, copycoll.gameObject));
 
 
         return copycoll;
@@ -109,7 +115,9 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
     {
         Colliders copycoll = null;
 
-        copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+        //copycoll = ResourceCreateDeleteManager.Instance.InstantiateObj<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+        copycoll = GameMG.Instance.Resource.Instantiate<Colliders>(collprefabs[(int)CharEnumTypes.eCollType.SphereColl].name);
+
         //copycoll.GetComponent<GameObject>().SetActive(true);
         copycoll.gameObject.transform.parent = parent;
         copycoll.gameObject.transform.localPosition = Vector3.zero;
@@ -120,12 +128,16 @@ public class ColliderSpawnManager : Singleton<ColliderSpawnManager>
         SpawnedCollList.Add(copycoll);
 
 
-        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, GameObject.Destroy, copycoll.gameObject));
+        StartCoroutine(timer.Cor_TimeCounter<GameObject>(SpawnTime, CollDestroy, copycoll.gameObject));
 
 
         return copycoll;
     }
 
+    public void CollDestroy(GameObject obj)
+    {
+        GameMG.Instance.Resource.Destroy<GameObject>(obj);
+    }
 
     public void SetSize(Colliders coll, Vector3 size)
     {

@@ -276,7 +276,7 @@ public class CInputComponent : BaseComponent
                 if (state == PlayableCharacter.States.AutoMove)
                     PlayableCharacter.Instance.SetState(PlayableCharacter.States.Idle);
 
-                //SkillAttack(1);
+                SkillAttack(1);
                 return;
             }
 
@@ -414,7 +414,7 @@ public class CInputComponent : BaseComponent
             attackcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
         //attackcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
 
-        attackcom.SkillAttack(0);
+        attackcom.SkillAttack(num);
     }
 
     public dotweentest testtestobj;
