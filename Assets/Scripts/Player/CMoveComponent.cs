@@ -715,6 +715,7 @@ public class CMoveComponent : BaseComponent
         }
     }
 
+
     //움직일 방향과 거리를 넣어주면 현재 지형에 따라서 움직여 준다.
     //기울어진 지형과 계단에서의 움직임 처리 제작 필요
     public void Move(Vector3 MoveVal , float speed)

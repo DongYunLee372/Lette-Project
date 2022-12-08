@@ -15,7 +15,7 @@ public class Colliders : MonoBehaviour
 
     public Collider Mycollider;
 
-    public void SetCollitionFunction(CollFunction _enterfunction, CollFunction _outerfunction, CollFunction _stayfunction)
+    public virtual void SetCollitionFunction(CollFunction _enterfunction, CollFunction _outerfunction, CollFunction _stayfunction)
     {
         _EnterFunction = _enterfunction;
         _OuterFunction = _outerfunction;
@@ -24,17 +24,20 @@ public class Colliders : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        _EnterFunction?.Invoke(other);
+        if(other.transform.gameObject.tag == (targetTag))
+            _EnterFunction?.Invoke(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _OuterFunction?.Invoke(other);
+        if (other.transform.gameObject.tag == (targetTag))
+            _OuterFunction?.Invoke(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        _StayFunction?.Invoke(other);        
+        if (other.transform.gameObject.tag == (targetTag))
+            _StayFunction?.Invoke(other);        
     }
     public void SetActive(bool t)
     {

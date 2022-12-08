@@ -10,6 +10,7 @@ namespace CharEnumTypes
     {
         SphereColl,
         BoxColl,
+        WeaponColl,
         collMax
     }
     public enum eAttackType
