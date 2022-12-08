@@ -6,7 +6,24 @@ public class MapManager :Singleton<MapManager>
 {
   
     public GameObject unit;
-  
+    public GameObject Map;
+    bool flag = false;
+
+    private void Start()
+    {
+        Map.SetActive(flag);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            flag = !flag;
+
+            if(Map!=null)
+            Map.SetActive(flag);
+        }
+
+    }
     public void MoveUnit(Vector3 target)
     {
 
