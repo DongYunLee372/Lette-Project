@@ -27,6 +27,10 @@ public class InvenTester : MonoBehaviour
         _inventory.Add(_itemDataArray[0], 5);
         _inventory.Add(_itemDataArray[1], 1);
         _inventory.Add(_itemDataArray[2], 1);
+
+        _inventoryUI.gameObject.SetActive(false);
+        _equipmentUI.gameObject.SetActive(false);
+        _skillPanelUI.gameObject.SetActive(false);
     }
 
     void Update()
