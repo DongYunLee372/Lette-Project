@@ -71,14 +71,20 @@ public class AnimationEventSystem : MonoBehaviour
     {
         AnimationEvent aevent;
         
+        if(animator==null)
+            animator = GetComponent<AnimationController>();
 
         if (begin.Key != null)
         {
-            float length = animator.m_clips[begin.Key].length;
+            //float length = animator.m_clips[begin.Key].length;
             aevent = new AnimationEvent();
             aevent.time = begintime;
             aevent.functionName = "OnBeginEvent";
             aevent.stringParameter = begin.Key;
+            if (!animator.m_clips.ContainsKey(begin.Key))
+            {
+                Debug.Log($"AnimationEventSystem 오류 키값이 존재하기 않음 {begin.Key}");
+            }
             animator.m_clips[begin.Key].AddEvent(aevent);
 
             BeginEventInvokers.Add(begin.Key, begin.Value);
@@ -90,6 +96,11 @@ public class AnimationEventSystem : MonoBehaviour
             aevent.time = midtime;
             aevent.functionName = "OnMidEvent";
             aevent.stringParameter = mid.Key;
+
+            if(!animator.m_clips.ContainsKey(mid.Key))
+            {
+                Debug.Log($"AnimationEventSystem 오류 키값이 존재하기 않음 {mid.Key}");
+            }
             animator.m_clips[mid.Key].AddEvent(aevent);
 
             MidEventInvokers.Add(mid.Key, mid.Value);
@@ -101,6 +112,10 @@ public class AnimationEventSystem : MonoBehaviour
             aevent.time = endtime;
             aevent.functionName = "OnEndEvent";
             aevent.stringParameter = end.Key;
+            if (!animator.m_clips.ContainsKey(end.Key))
+            {
+                Debug.Log($"AnimationEventSystem 오류 키값이 존재하기 않음 {end.Key}");
+            }
             animator.m_clips[end.Key].AddEvent(aevent);
 
             EndEventInvokers.Add(end.Key, end.Value);
