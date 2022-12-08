@@ -20,6 +20,9 @@ public class InvenTester : MonoBehaviour
         //        _inventory.Add(_itemDataArray[i], 3);
         //    }
         //}
+        _inventoryUI.gameObject.SetActive(false);
+        _equipmentUI.gameObject.SetActive(false);
+        _skillPanelUI.gameObject.SetActive(false);
     }
 
     public void SetTestWeaponInven()
@@ -28,9 +31,7 @@ public class InvenTester : MonoBehaviour
         _inventory.Add(_itemDataArray[1], 1);
         _inventory.Add(_itemDataArray[2], 1);
 
-        _inventoryUI.gameObject.SetActive(false);
-        _equipmentUI.gameObject.SetActive(false);
-        _skillPanelUI.gameObject.SetActive(false);
+      
     }
 
     void Update()
@@ -46,22 +47,43 @@ public class InvenTester : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             if (_inventoryUI.gameObject.activeSelf == true)
+            {
                 _inventoryUI.gameObject.SetActive(false);
-            else _inventoryUI.gameObject.SetActive(true);
+                UIManager.Instance.CursorOff();
+            }
+            else
+            { 
+                _inventoryUI.gameObject.SetActive(true);
+                UIManager.Instance.CursorOn();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (_equipmentUI.gameObject.activeSelf == true)
+            {
                 _equipmentUI.gameObject.SetActive(false);
-            else _equipmentUI.gameObject.SetActive(true);
+                UIManager.Instance.CursorOff();
+            }
+            else
+            {
+                _equipmentUI.gameObject.SetActive(true);
+                UIManager.Instance.CursorOn();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
             if (_skillPanelUI.gameObject.activeSelf == true)
+            { 
                 _skillPanelUI.gameObject.SetActive(false);
-            else _skillPanelUI.gameObject.SetActive(true);
+                UIManager.Instance.CursorOff();
+            }
+            else 
+            {
+                _skillPanelUI.gameObject.SetActive(true);
+                UIManager.Instance.CursorOn();
+            }
         }
     }
 }

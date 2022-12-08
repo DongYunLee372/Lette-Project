@@ -127,6 +127,16 @@ public class UIManager : Singleton<UIManager>
             Debug.Log("실패");
     }
 
+    public void CursorOn()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    public void CursorOff()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     public void Show(GameObject path)
     {
         for (int i = 0; i < info.Count; i++)

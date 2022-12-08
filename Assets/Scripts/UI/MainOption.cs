@@ -117,8 +117,7 @@ public class MainOption : MonoBehaviour
             UIManager.Instance.Show("Inven");
             UIManager.Instance.Show("Minimap");
             ShowOption = false;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+           UIManager.Instance.CursorOff();
             return;
         }
         if(GameStart)
@@ -135,8 +134,7 @@ public class MainOption : MonoBehaviour
             }
             UIManager.Instance.Hide("Minimap");
             UIManager.Instance.Hide("Inven");
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;         
+            UIManager.Instance.CursorOn();
         }
     }
     private void Start()
