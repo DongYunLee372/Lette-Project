@@ -26,9 +26,8 @@ public class EnemyHpbar : MonoBehaviour
     public Vector3 hpBarOffset = new Vector3(0.5f, 3f, 0);
     public EnemyHpbar MyHpbar;
     public Battle_Character battle_Character;
-    public GameObject battle_character_obj;
 
-    public GameObject my;
+    public GameObject hpBar;
     void Start()
     {
         canvas = GetComponentInParent<Canvas>();
@@ -42,18 +41,15 @@ public class EnemyHpbar : MonoBehaviour
     {
         if (battle_Character == null || battle_Character.cur_HP <=0 )
         {
-            Destroy(my);
+            //    Destroy(hpBar);
+            Destroy(this.gameObject);
         }
-        if (battle_Character.cur_Target != null)
+        else if (battle_Character.cur_Target != null)
         {
             myhp.enabled = true;
             Backgroundmyhp.enabled = true;
         }
-        else
-        {
-            myhp.enabled = false;
-            Backgroundmyhp.enabled = false;
-        }
+     
         PlayableCharacter a= FindObjectOfType<PlayableCharacter>();
         if (a == null)
             return;
@@ -84,9 +80,9 @@ public class EnemyHpbar : MonoBehaviour
 
     public EnemyHpbar SetHpBar(float HP, Transform trans , Battle_Character battle_obj)
     {
-        GameObject hpBar = UIManager.Instance.Prefabsload("Hpbar", CANVAS_NUM.enemy_canvas);
-        my = hpBar;
-            var _hpbar = hpBar.GetComponent<EnemyHpbar>();
+         hpBar = UIManager.Instance.Prefabsload("Hpbar", CANVAS_NUM.enemy_canvas);
+       // my = hpBar;
+        var _hpbar = hpBar.GetComponent<EnemyHpbar>();
         //  hpBar.transform.SetParent(enemyHpBarCanvas.transform);
         _hpbar.enemyTr = trans;
         _hpbar.offset = new Vector3(0, 1.7f, 0); ;
@@ -97,10 +93,11 @@ public class EnemyHpbar : MonoBehaviour
         _hpbar.myhp = _test;
         MyHpbar = _hpbar;
 
-     
-       // Destroyo(battle_Character);
-       //  Debug.Log(battle_Character.name);
-       // Debug.Log(this.gameObject.name);
+        myhp.enabled = false;
+        Backgroundmyhp.enabled = false;
+        // Destroyo(battle_Character);
+        //  Debug.Log(battle_Character.name);
+        // Debug.Log(this.gameObject.name);
         return MyHpbar;
     }
 }
