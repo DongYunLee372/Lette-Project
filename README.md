@@ -1,3 +1,3 @@
-# Hadas-Fiesta
+# Lette-Project
 
-Hadas Fiesta 팀 프로젝트입니다.
+Lette-Project 팀 프로젝트입니다.
