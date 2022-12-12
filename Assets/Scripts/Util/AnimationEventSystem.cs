@@ -23,9 +23,6 @@ public class AnimationEventSystem : MonoBehaviour
 	public Dictionary<string, midCallback> MidEventInvokers = new Dictionary<string, midCallback>();
 	public Dictionary<string, endCallback> EndEventInvokers = new Dictionary<string, endCallback>();
 
-    
-
-
     public beginCallback _beginCallback;
 	public midCallback _midCallback;
 	public endCallback _endCallback;
@@ -45,17 +42,7 @@ public class AnimationEventSystem : MonoBehaviour
 		clips = animator.GetAnimationClips();
 	}
 
-    //애니메이션이벤트에 함수를 등록 하려면 해당 이벤트를 가지고 있는 애니메이션클립의 이름을 같이 넣어 준다.
-    //  public void AddEvent(beginCallback begin, midCallback mid, endCallback end)
-    //  {
-    //if(begin != null)
-    //	_beginCallback += begin;
-    //if (mid != null)
-    //	_midCallback += mid;
-    //if (end != null)
-    //	_endCallback += end;
-    //  }
-
+    
     public void AddEvent(KeyValuePair<string, beginCallback> begin, KeyValuePair<string, midCallback> mid, KeyValuePair<string, endCallback> end)
     {
         if (begin.Key != null)
@@ -67,6 +54,8 @@ public class AnimationEventSystem : MonoBehaviour
     }
 
 
+
+    //각각의 애니메이션에 실행시킬 이벤트들을 넣어준다.
     public void AddEvent(KeyValuePair<string, beginCallback> begin,float begintime, KeyValuePair<string, midCallback> mid, float midtime, KeyValuePair<string, endCallback> end, float endtime)
     {
         AnimationEvent aevent;
@@ -76,7 +65,6 @@ public class AnimationEventSystem : MonoBehaviour
 
         if (begin.Key != null)
         {
-            //float length = animator.m_clips[begin.Key].length;
             aevent = new AnimationEvent();
             aevent.time = begintime;
             aevent.functionName = "OnBeginEvent";

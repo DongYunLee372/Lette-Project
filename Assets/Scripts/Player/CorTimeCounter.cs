@@ -16,6 +16,27 @@ public class CorTimeCounter
     public delegate void TInvoker<T>(T val);
     public delegate void TInvoker<T1, T2>(T1 val1, T2 val2);
     public delegate void TInvoker<T1, T2, T3>(T1 val1, T2 val2, T3 val3);
+
+    public IEnumerator Cor_TimeCounter<T>(float time, TInvoker<T> invoker, T val)
+    {
+        float curtime = 0;
+        float lasttime = Time.time;
+        while (true)
+        {
+            curtime += Time.time - lasttime;
+            if ((curtime) >= time)
+            {
+                invoker?.Invoke(val);
+                yield break;
+            }
+            lasttime = Time.time;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+
+
+
     public IEnumerator Cor_TimeCounter(float time, Invoker invoker)
     {
         float starttime = Time.time;
@@ -60,22 +81,7 @@ public class CorTimeCounter
         }
     }
 
-    public IEnumerator Cor_TimeCounter<T>(float time, TInvoker<T> invoker, T val)
-    {
-        float curtime = 0;
-        float lasttime = Time.time;
-        while (true)
-        {
-            curtime += Time.time - lasttime;
-            if ((curtime) >= time)
-            {
-                invoker?.Invoke(val);
-                yield break;
-            }
-            lasttime = Time.time;
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
+    
     //public IEnumerator Cor_TimeCounter<T>(float time, TInvoker<T> invoker, T val)
     //{
     //    float starttime = Time.time;
