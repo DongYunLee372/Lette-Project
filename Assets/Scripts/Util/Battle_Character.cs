@@ -251,6 +251,7 @@ public class Battle_Character : MonoBehaviour
         //Destroy(effectobj, 0.25f);
     }
 
+
     public void Battle_Start()
     {
         animator.Resume();
