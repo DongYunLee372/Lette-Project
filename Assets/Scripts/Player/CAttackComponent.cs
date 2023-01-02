@@ -218,16 +218,15 @@ public class CAttackComponent : BaseComponent
 
     }
 
-    public bool testbool = false;
+    public bool IsPrevAreaOfEffect = false;
+    public SkillInfo PrevAreaOfEffectInfo = null;
+
     public GameObject testGameObject;
     public LayerMask testGroundlayer;
 
     //스킬을 재생해준다.
-    public void SkillAttack(int skillnum)
+    public void SkillAttack(SkillInfo skillinfo)
     {
-        if (skillnum < 0 || skillnum > skillinfos.Length)
-            return;
-
         if (movecom == null)
         {
             movecom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
@@ -249,36 +248,65 @@ public class CAttackComponent : BaseComponent
         }
 
 
-        if(skillinfos[skillnum].AttackType == CharEnumTypes.eAttackType.AreaOfEffect)
+        if(skillinfo.AttackType == CharEnumTypes.eAttackType.AreaOfEffect)
         {
-            Debug.Log("장판스킬");
-            //PlayableCharacter.Instance.SetState(PlayableCharacter.States.AreaOfEffect);
-            IsAttackingEnd("");
-            testbool = true;
+            if(IsPrevAreaOfEffect == false)
+            {
+                Debug.Log("장판스킬");
+                //PlayableCharacter.Instance.SetState(PlayableCharacter.States.AreaOfEffect);
+                PrevAreaOfEffectInfo = skillinfo;
+                IsAttackingEnd("");
+                IsPrevAreaOfEffect = true;
+            }
+            else
+            {
+                //장판 소환
+
+
+
+                IsAttackingEnd("");
+                IsPrevAreaOfEffect = false;
+            }
+            
+        }
+        else if(skillinfo.AttackType == CharEnumTypes.eAttackType.Projectile)
+        {
+            //투사체 소환
+
         }
         else
         {
             Debug.Log("일반스킬");
-            if (skillinfos[skillnum].Effect != null)
+            if (skillinfo.Effect != null)
             {
                 Effectcoroutine = timer.Cor_TimeCounter<string, Transform, float>
-                    (skillinfos[skillnum].EffectStartTime, CreateEffect, skillinfos[skillnum].EffectAdressable, skillinfos[skillnum].EffectPosRot, 1.5f);
+                    (skillinfo.EffectStartTime, CreateEffect, skillinfo.EffectAdressable, skillinfo.EffectPosRot, 1.5f);
                 StartCoroutine(Effectcoroutine);
             }
 
             //EffectManager.Instance.SpawnEffectLooping(skillinfos[skillnum].Effect, this.transform.position, Quaternion.identity, 2, 10);
 
-            animator.Play(skillinfos[skillnum].aniclip.name, skillinfos[skillnum].animationPlaySpeed);
+            animator.Play(skillinfo.aniclip.name, skillinfo.animationPlaySpeed);
         }
 
 
         
     }
 
+    public void NormalAttack(AttackInfo attackinfo)
+    {
+
+    }
 
     //공격 함수
     public void Attack()
     {
+        if(IsPrevAreaOfEffect)
+        {
+            SkillAttack(PrevAreaOfEffectInfo);
+            return;
+        }
+
         //필요한 컴포넌트를 받아온다.
         if (movecom == null)
         {
@@ -607,7 +635,7 @@ public class CAttackComponent : BaseComponent
 
     private void Update()
     {
-        if(testbool)
+        if(IsPrevAreaOfEffect)
         {
             Ray ray = PlayableCharacter.Instance.GetCamera().ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
             RaycastHit hit;
@@ -631,12 +659,17 @@ public class CAttackComponent : BaseComponent
 
 
             }
+
+        }
+        else
+        {
+            if (SkillPreviewPlane != null)
+            {
+                ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>("SkillPreviewPlane", SkillPreviewPlane);
+                SkillPreviewPlane = null;
+            }
+                
             
-
-
-
-
-
         }
 
 

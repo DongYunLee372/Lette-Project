@@ -346,6 +346,10 @@ MonoBehaviour:
     m_Address: WeaponColl
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 08a0ab868038ac547bc8beb06751db6a
+    m_Address: SkillPreviewPlane
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:

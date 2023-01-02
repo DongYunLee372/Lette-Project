@@ -415,7 +415,7 @@ public class CInputComponent : BaseComponent
             attackcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as CAttackComponent;
         //attackcom = PlayableCharacter.Instance.GetMyComponent(CharEnumTypes.eComponentTypes.AttackCom) as PlayerAttack;
 
-        attackcom.SkillAttack(num);
+        attackcom.SkillAttack(attackcom.skillinfos[num]);
     }
 
     public dotweentest testtestobj;
