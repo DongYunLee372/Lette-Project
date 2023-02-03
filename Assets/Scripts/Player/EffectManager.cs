@@ -123,8 +123,8 @@ public class EffectManager : MySingleton<EffectManager>
     public GameObject InstantiateEffect(string adressableAdress)
     {
         //GameObject copy = GameObject.Instantiate(effect);
-        //GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
-        GameObject copy = GameMG.Instance.Resource.Instantiate<GameObject>(adressableAdress);
+        GameObject copy = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(adressableAdress);
+        //GameObject copy = GameMG.Instance.Resource.Instantiate<GameObject>(adressableAdress);
         copy.transform.parent = null;
 
 
@@ -164,6 +164,18 @@ public class EffectManager : MySingleton<EffectManager>
         StartCoroutine(cor);
         return copy;
     }
+
+    ////몇초뒤에 생성될 것인지, 위치, 회전, 파괴시간
+    //public GameObject InstantiateEffect( string adressableAdress, Vector3 pos, Quaternion rotation, float SpawnTime = 0.0f, float DestroyTime = 1.0f)
+    //{
+    //    GameObject copy = InstantiateEffect(adressableAdress);
+    //    copy.transform.position = pos;
+    //    copy.transform.rotation = rotation;
+    //    cor = timer.Cor_TimeCounter<string, GameObject>(DestroyTime, DestroyEffect, adressableAdress, copy);
+    //    StartCoroutine(cor);
+    //    return copy;
+    //}
+
 
     //transform, 파괴시간
     public GameObject InstantiateEffect(string adressableAdress, Transform posrot, float DestroyTime = 1.0f)

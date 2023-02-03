@@ -92,6 +92,20 @@ public class CAttackComponent : BaseComponent
         //공격 끝 시간
         public float AttackEndTime;
 
+        [Tooltip("투사체가 있는 공격일때 투사체의 게임 오브젝트")]
+        [SerializeField]
+        public string ProjectileObjName;
+
+        [Tooltip("타겟팅공격일때 타겟오브젝트")]
+        [SerializeField]
+        public string TargetObjName;
+
+        [Tooltip("타겟팅공격일때 타겟오브젝트")]
+        [SerializeField]
+        public string AreaObjName;
+
+
+        public float AreaObjLifeTime;
     }
 
     public SkillInfo[] skillinfos;
@@ -262,9 +276,16 @@ public class CAttackComponent : BaseComponent
             {
                 //장판 소환
 
+                //ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>(skillinfo.AreaObjName);
 
+                animator.Play(skillinfo.aniclip.name, skillinfo.animationPlaySpeed);
 
-                IsAttackingEnd("");
+                Effectcoroutine = timer.Cor_TimeCounter<string, Vector3, float>
+                    (animator.GetClipLength(skillinfo.aniclip.name), CreateEffect, skillinfo.AreaObjName, SkillPreviewPlane.transform.position, skillinfo.AreaObjLifeTime);
+                StartCoroutine(Effectcoroutine);
+
+                //SkillPreviewPlane
+                //IsAttackingEnd("");
                 IsPrevAreaOfEffect = false;
             }
             
@@ -485,6 +506,18 @@ public class CAttackComponent : BaseComponent
 
         ColliderSpawnManager.Instance.SpawnSphereCollider(effectobj.transform, 10, 5, monstertag, MonsterAttack);
     }
+
+    //공격 이펙트를 생성
+    public void CreateEffect(string adressableAdress, Vector3 pos, float destroyTime)
+    {
+        effectobj = EffectManager.Instance.InstantiateEffect(adressableAdress, destroyTime);
+
+        effectobj.transform.position = pos;
+
+        ColliderSpawnManager.Instance.SpawnSphereCollider(effectobj.transform, 10, 5, monstertag, MonsterAttack);
+    }
+
+
 
     //공격애니메이션이 끝나면 해당 함수가 들어온다 공격 애니메이션의 이벤트를 통해 호출됨
     public void AttackEnd(string s_val)

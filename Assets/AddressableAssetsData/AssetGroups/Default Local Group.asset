@@ -350,6 +350,10 @@ MonoBehaviour:
     m_Address: SkillPreviewPlane
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 8e6ea88d207a90c40bf4d680909a27f5
+    m_Address: Flaming
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 003d5bb4252c8ac4688402a1493995dd, type: 2}
   m_SchemaSet:
