@@ -22,9 +22,6 @@ public class PlayableCharacter : MonoBehaviour
         AreaOfEffect,
     }
 
-    //[Header("================UnityComponent================")]
-    //public CharacterStateMachine statemachine;
-
 
     [Header("================BaseComponent================")]
     public BaseComponent[] components = new BaseComponent[(int)CharEnumTypes.eComponentTypes.comMax];
@@ -32,10 +29,8 @@ public class PlayableCharacter : MonoBehaviour
     [SerializeField]
     public BaseStatus status;
 
-
     [Header("================캐릭터 UI================")]
     public UICharacterInfoPanel CharacterUIPanel;
-    //public InvenTory inventory;
 
     [Header("================피격 이펙트================")]
     public GameObject HitEffect;
@@ -108,24 +103,17 @@ public class PlayableCharacter : MonoBehaviour
             obj.AddComponent<ColliderSpawnManager>();
         }
 
-        //yield return new WaitForSeconds(0.01f);
-
-        //CharacterDBInfo = DataLoad_Save.Instance.Get_PlayerDB(Global_Variable.CharVar.Asha);
-        //Debug.Log($"{CharacterDBInfo.P_player_HP}");
-
+        //FSM 생성 & 초기화
         fsm = new MyStateMachine.StateMachine<States, MyStateMachine.Drive>(this);
         SetState(States.Idle);
 
+        //캐릭터에서 사용하는 컴포넌트들 초기화
         ComponentInit();
-
-
         movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         animator = GetComponentInChildren<AnimationController>();
 
-        
 
-
-        //만약 연결되어 있는 UI가 없는 경우 UI객체를 로드해서 생성시켜 준다.
+        //UI가 존재하지 않는 경우 UI객체를 로드해서 생성시켜 준다.
         if (CharacterUIPanel == null)
         {
             //if (UIManager.Instance != null)
@@ -133,68 +121,49 @@ public class PlayableCharacter : MonoBehaviour
             //else
             //    CharacterUIPanel = GameMG.Instance.Resource.Instantiate<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
 
-            CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
+            if(UIManager.Instance==null)
+                CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
+            else
+                CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+
+            //CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
         }
 
-        //if(inventory == null)
-        //{
-        //    GameObject obj = null;
-        //    if (UIManager.Instance == null)
-        //        obj = UIManager.Instance.Prefabsload("Inven", Canvas_Enum.CANVAS_NUM.player_cavas);
-        //    //else
-        //    //    obj = GameMG.Instance.Resource.Instantiate<GameObject>("Inven");
-        //    //obj = ResourceCreateDeleteManager.Instance.InstantiateObj<GameObject>("Inven");
 
-        //    inventory = obj.GetComponent<InvenTory>();
-        //}
-
+        //UI 연동 부분
         status.Init(CharacterUIPanel);
 
-        //Canvas canvas = FindObjectOfType<Canvas>("Playercanvas");
-        //Canvas canvas = GameObject.Find("Playercanvas");
-        //if (canvas == null)
-        //{
-        //    GameObject obj = new GameObject("playercanvas");
-        //    obj.AddComponent<Canvas>();
-        //    canvas = obj.GetComponent<Canvas>();
-        //}
-
         
+
         CharacterUIPanel.transform.localPosition = status.player_UIPos;
 
+        if(UIManager.Instance!=null)
+        {
+            GameObject tempui = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
+            MainOption mainoption = tempui.GetComponent<MainOption>();
+            mainoption.r_invoker = SetReverseMouseRot;
+            mainoption.a_invoker = SetCameraColl;
+            mainoption.l_invoker = SetOutoFocus;
+            mainoption.m_invoker = SetMouseSpeed;
 
-        //if (CharacterUIPanel == null)
-        //{
-        //    Debug.Log("character UI Create Fail");
-        //}
-
-        GameObject tempui = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
-        MainOption mainoption = tempui.GetComponent<MainOption>();
-        mainoption.r_invoker = SetReverseMouseRot;
-        mainoption.a_invoker = SetCameraColl;
-        mainoption.l_invoker = SetOutoFocus;
-        mainoption.m_invoker = SetMouseSpeed;
-
-
-        SetOutoFocus(mainoption.LooKon);
-        SetMouseSpeed(mainoption.MouseSensetive);
-        SetReverseMouseRot(mainoption.ReverseMouse);
-        SetCameraColl(mainoption.AutoeVade);
-
-        
-
+            SetOutoFocus(mainoption.LooKon);
+            SetMouseSpeed(mainoption.MouseSensetive);
+            SetReverseMouseRot(mainoption.ReverseMouse);
+            SetCameraColl(mainoption.AutoeVade);
+        }
     }
 
+    //업데이트
     private void Update()
     {
         curState = fsm.GetCurState();
     }
 
+    //자동 이동
     public void AutoMove(Vector3 destpos, float moveTime, CMoveComponent.ActionInvoker invoker = null)
     {
         movecom.AutoMove(destpos, moveTime, invoker);
     }
-
 
     //duration 시간동안 목표위치로 이동한다.
     public void DoMove(Vector3 destpos, float duration)
@@ -208,44 +177,51 @@ public class PlayableCharacter : MonoBehaviour
         movecom.Move(moveVec, speed);
     }
 
+    //FSM 현재 상태 리턴
     public States GetState()
     {
         return fsm.GetCurState();
     }
 
+    //FSM 이전 상태 리턴
     public States GetLastState()
     {
         return fsm.GetPreState();
     }
 
+    //FSM 상태 변경
     public void SetState(States state)
     {
         fsm.ChangeState(state);
     }
 
+    //자동 포커싱 ON/OFF
     public void SetOutoFocus(bool val)
     {
         OutoFocus = val;
     }
 
+    //마우스 감도 설정
     public void SetMouseSpeed(float val)
     {
-        //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         //0~100의 값을 0~5의 값으로 변환해서 넣어준다.
         val = val * 5 * 0.01f;
         movecom.moveoption.RotMouseSpeed = val;
     }
 
+    //마우스 반전 ON/OFF
     public void SetReverseMouseRot(bool val)
     {
         movecom.moveoption.RightReverse = val;
     }
 
+    //카메라 벽 통과 방지 ON/OFF
     public void SetCameraColl(bool val)
     {
         movecom.CameraCollOn = val;
     }
 
+    //UI 생성
     public void CeateUI(GameObject obj)
     {
         CharacterUIPanel = GameObject.Instantiate(obj).GetComponent<UICharacterInfoPanel>();
@@ -262,6 +238,7 @@ public class PlayableCharacter : MonoBehaviour
         return components[(int)type];
     }
 
+    //해당 컴포넌트를 비활성화 시켜준다.
     public void InActiveMyComponent(CharEnumTypes.eComponentTypes type)
     {
         if (components[(int)type] == null)
@@ -272,6 +249,7 @@ public class PlayableCharacter : MonoBehaviour
         components[(int)type].enabled = false;
     }
 
+    //해당 컴포넌트를 활성화 시켜준다.
     public void ActiveMyComponent(CharEnumTypes.eComponentTypes type)
     {
         if (components[(int)type] == null)
@@ -282,6 +260,7 @@ public class PlayableCharacter : MonoBehaviour
         components[(int)type].enabled = true;
     }
 
+    //캐릭터의 시점 1인칭 3인칭 에따라 현재 활성화 되어있는 메인 카메라를 리턴해준다.
     public Camera GetCamera()
     {
         //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
@@ -298,11 +277,9 @@ public class PlayableCharacter : MonoBehaviour
       공격을 당했을때 공격을 당한 위치(충돌한 위치)도 함께 넘겨준다.(피격 이펙트를 출력하기 위해)*/
     public void BeAttacked(float damage, Vector3 hitpoint, float Groggy)
     {
-        //CharacterStateMachine.eCharacterState state = CharacterStateMachine.Instance.GetState();
 
         States state = fsm.GetCurState();
 
-        //float Groggy = 0;
 
         //1. 무조건 공격이 성공하는 상태(Idle, Move, OutOfControl)
         if (state == States.Idle ||
@@ -349,7 +326,6 @@ public class PlayableCharacter : MonoBehaviour
     
     public void Damaged(float damage,Vector3 hitpoint, float Groggy)
     {
-        //CMoveComponent movecom = GetMyComponent(CharEnumTypes.eComponentTypes.MoveCom) as CMoveComponent;
         EffectManager.Instance.InstantiateEffect(HitEffect, hitpoint);
         //최종 데미지 = 상대방 데미지 - 나의 현재 방어막
         float finaldamage = damage - status.Defense;
@@ -362,21 +338,9 @@ public class PlayableCharacter : MonoBehaviour
         //사망 애니메이션 출력하고 씬 재시작 함수 호출
         if (status.CurHP<=0)
         {
-            //CharacterStateMachine.Instance.SetState(CharacterStateMachine.eCharacterState.OutOfControl);
             SetState(States.OutOfControl);
 
-            #region 현장보존
-            //movecom.eventsystem.AddEvent(new KeyValuePair<string, AnimationEventSystem.beginCallback>(null, null),
-            //                 new KeyValuePair<string, AnimationEventSystem.midCallback>(null, null),
-            //                 new KeyValuePair<string, AnimationEventSystem.endCallback>("_Dead", Restart));
-
-            //movecom.com.animator.Play("_Dead");
-            #endregion
-
             movecom.com.animator.Play(DeadAnimation.name, 1.0f, 0.0f, 0.2f, Restart);
-
-
-
         }
 
     }
@@ -398,14 +362,14 @@ public class PlayableCharacter : MonoBehaviour
         return status;
     }
     
+    //경험치 획득
     public void GetExp(int exp)
     {
         status.CurExp += exp;
     }
 
+    #region OutoFocusing
     //적 탐색 & 포커싱 세팅
-    
-
     enum eSearchPoint
     {
         Center,
@@ -683,7 +647,7 @@ public class PlayableCharacter : MonoBehaviour
 
 
     }
-
+    #endregion
     //public enum States
     //{
     //    Idle,

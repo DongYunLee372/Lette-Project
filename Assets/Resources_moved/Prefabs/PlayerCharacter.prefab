@@ -2779,7 +2779,7 @@ MonoBehaviour:
     AttackEndTime: 0.7
   SkillPreviewPlane: {fileID: 0}
   skillinfos:
-  - AttackType: 2
+  - AttackType: 0
     SkillName: Skill01
     aniclip: {fileID: 8349195267622309876, guid: 55a4eb8dfaf2436f86205feea2b4ed39, type: 3}
     aniclipName: atk_sword08
@@ -2795,10 +2795,14 @@ MonoBehaviour:
     MoveTime: 0
     MoveStartTime: 0
     AttackEndTime: 0
+    ProjectileObjName: 
+    TargetObjName: 
+    AreaObjName: 
+    AreaObjLifeTime: 0
   - AttackType: 1
     SkillName: Skill01
-    aniclip: {fileID: 7400000, guid: 89e6aa6ab9e3ef24f9fd03b8bb455111, type: 2}
-    aniclipName: atk_energy01
+    aniclip: {fileID: 7400000, guid: 4b50c31dd5491274eb152eb523d84bd5, type: 2}
+    aniclipName: atk_energy03
     animationPlaySpeed: 1
     StartDelay: 0
     RecoveryDelay: 2
@@ -2811,12 +2815,37 @@ MonoBehaviour:
     MoveTime: 0
     MoveStartTime: 0
     AttackEndTime: 0
+    ProjectileObjName: 
+    TargetObjName: 
+    AreaObjName: Flaming
+    AreaObjLifeTime: 3.5
   animator: {fileID: 0}
   eventsystem: {fileID: 0}
   effectobj: {fileID: 0}
   preparent: {fileID: 0}
   lastAttackTime: 0
-  testbool: 0
+  IsPrevAreaOfEffect: 0
+  PrevAreaOfEffectInfo:
+    AttackType: 0
+    SkillName: 
+    aniclip: {fileID: 0}
+    aniclipName: 
+    animationPlaySpeed: 0
+    StartDelay: 0
+    RecoveryDelay: 0
+    damage: 0
+    Effect: {fileID: 0}
+    EffectAdressable: 
+    EffectStartTime: 0
+    EffectPosRot: {fileID: 0}
+    Movedis: 0
+    MoveTime: 0
+    MoveStartTime: 0
+    AttackEndTime: 0
+    ProjectileObjName: 
+    TargetObjName: 
+    AreaObjName: 
+    AreaObjLifeTime: 0
   testGameObject: {fileID: 0}
   testGroundlayer:
     serializedVersion: 2

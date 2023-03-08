@@ -94,10 +94,6 @@ public class BaseStatus:MonoBehaviour
     public float Damage;//공격력
     [SerializeField]
     public float Defense;//방어력
-    //[SerializeField]
-    //private float maxBalance;
-    //[SerializeField]
-    //private float curBalance;
     [SerializeField]
     private float maxMP;
     [SerializeField]
@@ -114,8 +110,6 @@ public class BaseStatus:MonoBehaviour
 
 
     [SerializeField]
-    //public CharacterInformation DBInfo;
-
     public Dictionary<string, CharacterInformation> CharacterDBInfoDic;
 
     [SerializeField]
@@ -142,9 +136,8 @@ public class BaseStatus:MonoBehaviour
         Defense = player_Def;
         MaxGroggy = player_Groggy;
         CurGroggy = 0;
-
-
         //CurLevel = 1;
+
     }
 
     //public int CurLevel
@@ -178,6 +171,7 @@ public class BaseStatus:MonoBehaviour
     //        }
     //    }
     //}
+
     public float MaxHP
     {
         get => maxHP;
@@ -234,8 +228,6 @@ public class BaseStatus:MonoBehaviour
         set
         {
             maxGroggy = value;
-            //uiPanel.HPBar.SetMaxValue(value);
-            //CurGroggy = maxGroggy;
         }
     }
 
@@ -406,11 +398,6 @@ public class BaseStatus:MonoBehaviour
         }
         return true;
     }
-
-
-
-
-
     
 
 
@@ -454,135 +441,5 @@ public class BaseStatus:MonoBehaviour
         }
     }
 
-    //public void MPRecoveryStart()
-    //{
-    //    Debug.Log("MPrecover 시작");
-    //    StopCoroutine(CorMPCount);
-    //    CorMPCount = null;
-
-    //    CorMPRecover = Recovery(MPUp,DBInfo.);
-    //    StartCoroutine(CorMPRecover);
-    //}
-
-
-    //public float MaxMP 
-    //{ 
-    //    get => maxMP;
-    //    set
-    //    {
-    //        maxMP = value;
-    //        uiPanel.MPBar.SetMaxValue(value);
-    //        CurMP = maxMP;
-    //    }
-    //}
-    //public float CurMP 
-    //{ 
-    //    get => curMP;
-    //    set
-    //    {
-    //        if(value> curMP)
-    //        {
-    //            if (CorMPCount != null)
-    //            {
-    //                StopCoroutine(CorMPCount);
-    //                CorMPCount = null;
-    //            }
-    //            if (CorMPRecover != null)
-    //            {
-    //                StopCoroutine(CorMPRecover);
-    //                CorMPRecover = null;
-    //            }
-    //        }
-
-    //        curMP = value;
-    //        if(curMP>=MaxMP)
-    //        {
-    //            curMP = MaxMP;
-    //        }
-    //        uiPanel.MPBar.SetCurValue(curMP);
-
-    //        if (curMP != MaxMP && CorMPCount == null)
-    //        {
-    //            CorMPCount = timecounter.Cor_TimeCounter(3.0f, MPRecoveryStart);
-    //            StartCoroutine(CorMPCount);
-    //        }
-    //    }
-
-    //}
-
-    //public bool MPUp(float val)
-    //{
-    //    CurMP = CurMP + val;
-    //    if (CurMP >= MaxMP)
-    //    {
-    //        return false;
-    //    }
-    //    return true;
-    //}
-
-    //public void BALRecoveryStart()
-    //{
-    //    Debug.Log("Balancerecover 시작");
-    //    StopCoroutine(CorBALCount);
-    //    CorBALCount = null;
-
-    //    CorBALRecover = Recovery(BalanceUp);
-    //    StartCoroutine(CorBALRecover);
-    //}
-
-    //public float MaxBalance 
-    //{ 
-    //    get => maxBalance;
-    //    set
-    //    {
-    //        maxBalance = value;
-    //        uiPanel.Balancebar.SetMaxValue(value);
-    //        CurBalance = maxBalance;
-    //    }
-    //}
-    //public float CurBalance 
-    //{ 
-    //    get => curBalance;
-    //    set
-    //    {
-    //        if (value > curBalance)
-    //        {
-    //            if (CorBALCount != null)
-    //            {
-    //                StopCoroutine(CorBALCount);
-    //                CorBALCount = null;
-    //            }
-    //            if (CorBALRecover != null)
-    //            {
-    //                StopCoroutine(CorBALRecover);
-    //                CorBALRecover = null;
-    //            }
-    //        }
-
-
-    //        curBalance = value;
-    //        if(curBalance>MaxBalance)
-    //        {
-    //            curBalance = MaxBalance;
-    //        }
-    //        uiPanel.Balancebar.SetCurValue(curBalance);
-
-    //        if (curBalance != MaxBalance && CorBALCount == null)
-    //        {
-    //            CorBALCount = timecounter.Cor_TimeCounter(3.0f, BALRecoveryStart);
-    //            StartCoroutine(CorBALCount);
-    //        }
-    //    }
-
-    //}
-
-    //public bool BalanceUp(float val)
-    //{
-    //    CurBalance = CurBalance + val;
-    //    if(CurBalance==MaxBalance)
-    //    {
-    //        return false;
-    //    }
-    //    return true;
-    //}
+    
 }

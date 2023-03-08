@@ -165,11 +165,15 @@ public class CInputComponent : BaseComponent
 
         //}
 
-        GameObject a = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
-        if (a.GetComponent<MainOption>().ShowOption)
+        if(UIManager.Instance!=null)
         {
-            return;
+            GameObject a = UIManager.Instance.Canvasreturn(Canvas_Enum.CANVAS_NUM.start_canvas);
+            if (a.GetComponent<MainOption>().ShowOption)
+            {
+                return;
+            }
         }
+        
 
         //만약 AutoMove 상태에서 어떠한 키라도 입력되면 Automove에서 변경
 

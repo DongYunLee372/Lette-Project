@@ -9077,7 +9077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &380773681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56261,26 +56261,6 @@ PrefabInstance:
       propertyPath: testGameObject
       value: 
       objectReference: {fileID: 1267565097}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].aniclip
-      value: 
-      objectReference: {fileID: 7400000, guid: 4b50c31dd5491274eb152eb523d84bd5, type: 2}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[0].AttackType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].AreaObjName
-      value: Flaming
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].aniclipName
-      value: atk_energy03
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912692896712388560, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
-      propertyPath: skillinfos.Array.data[1].AreaObjLifeTime
-      value: 3.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5912692896712388563, guid: e9289f49a91d21843baaa311416ffd7f, type: 3}
       propertyPath: effectmanager
       value: 

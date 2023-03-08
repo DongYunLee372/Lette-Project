@@ -242,8 +242,8 @@ public class EffectManager : MySingleton<EffectManager>
 
     public void DestroyEffect(string adressableAdress, GameObject obj)
     {
-        //ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>(adressableAdress, obj);
-        GameMG.Instance.Resource.Destroy<GameObject>(obj);
+        ResourceCreateDeleteManager.Instance.DestroyObj<GameObject>(adressableAdress, obj);
+        //GameMG.Instance.Resource.Destroy<GameObject>(obj);
     }
 
     public void DoMove(GameObject effect, Vector3 dest, float duration, MyDotween.Dotween.Ease ease = MyDotween.Dotween.Ease.Linear)
