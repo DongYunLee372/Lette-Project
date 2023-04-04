@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class camtemp : MonoBehaviour
+public abstract class camtemp : MonoBehaviour
 {
+
+    public abstract void teest();
+
     // Start is called before the first frame update
     void Start()
     {
