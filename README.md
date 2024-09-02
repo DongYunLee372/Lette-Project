@@ -11,4 +11,7 @@
 - 맡은 역할 : 팀장
 - 담당 업무 : (클라이언트) 보스 및 몬스터 AI, Game Manager
 
+![image](https://github.com/user-attachments/assets/466b91ef-483f-4354-bb7a-35d9731d7875)
+
+
 트레일러 영상 : https://www.youtube.com/watch?v=UyMILsihX0g
