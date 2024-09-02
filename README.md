@@ -1,6 +1,7 @@
 # Lette-Project
 
-언어 : Unity(C#)
+- 언어 : Unity(C#)
+
 개발 인원 : 프로그래머 4명
 기획 3명
 그래픽 5명
