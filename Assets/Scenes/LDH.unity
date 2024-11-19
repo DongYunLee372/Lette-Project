@@ -1512,6 +1512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c425a6c256cd794792a8d5ff770485e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boosclear: 0
+  cutscene_camera: {fileID: 0}
 --- !u!1 &1406600667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,17 +1734,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048a271b169e84c489b1699fc57caacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas_: {fileID: 0}
   mainlight: {fileID: 0}
   Backgroundsound: 100
   Effectsound: 100
-  Mousesensetive: 100
   Lightcontroll: 100
-  Reversemouse: 1
-  Autoevade: 1
-  Lookon: 1
   GameStart: 0
   ShowOption: 0
   mainoption: 0
+  _reversemouse: 0
+  _autoevad: 0
+  _lookon: 0
+  _mousesensetive: 0
 --- !u!1 &1587642483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,7 +1965,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703150953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1287.0596, y: 553.38, z: 987.39795}
+  m_LocalPosition: {x: 25.28, y: -21.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
